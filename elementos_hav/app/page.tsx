@@ -8,6 +8,7 @@ import ToggleButton from "./components/ToggleButton"
 import SelectedStar from "./components/IconsTSX/SelectedStar"
 import NotSelectedStar from "./components/IconsTSX/NotSelectedStar"
 import StarFavorite from "./components/StarFavorite"
+import Title from "./components/Title"
 
 export default function Home() {
   return (
@@ -15,6 +16,9 @@ export default function Home() {
       <SelectedStar width={54} height={54} color={"#001111"}/>
       <NotSelectedStar width={54} height={54} color={"#001111"}/>
       <DocumentIcon width={211} height={211} color={"#501010"}/>
+      <Title size="small" tag="h1" text="titulo"/>
+      <Title size="large" tag="h2" text="titulo"/>
+
       <Button size="small" text="adnasidunasd"/>
       <Button size="medium" text="acesse o chat"/>
       <Button size="large" text="acesse o chat"/>
