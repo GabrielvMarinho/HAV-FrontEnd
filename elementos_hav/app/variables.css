@@ -1,0 +1,38 @@
+
+:root{
+    --bg-color: #F2EBE3;
+    --logo-gradient: linear-gradient(to right, #D6808E, #FFE1E6);
+
+    
+    --border-box: 5px;
+    /*CORES*/
+    --form-and-button-height: 36;
+    --button-color: #B23F52;
+    --button-color-hover: #F2EBE3;
+    --text-white: #F9F9F9;
+    --text-light-red: #CD6778;
+
+    /*CONFIGURAÇÕES GLOBAIS*/
+    --text-xxs: 10px;
+    --text-xs: 12px;
+    --text-s: 14px;
+    --text-sm: 16px;
+    --text-m: 18px;
+    --text-ml: 20px;
+    --text-l: 24px;
+    --text-xl: 32px;
+    --text-xxl: 40px;
+
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body{
+    background-color: var(--bg-color);
+}
