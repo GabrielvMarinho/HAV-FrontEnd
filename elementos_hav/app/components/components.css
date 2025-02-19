@@ -83,10 +83,14 @@
     width: 490px;
 }
 
-
+.title{
+    width: fit-content;
+    gap: 2px;
+}
 .titleLine{
     width: 75px;
     height: 3px;
+    margin-inline: auto;
     background-color: var(--box-red-pink);
 }
 .smallTitle{
