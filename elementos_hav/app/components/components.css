@@ -101,3 +101,10 @@
     font-size: var(--text-xl);
     font-weight: 900;
 }
+
+
+
+
+.tableListData{
+    width: 65vw;
+}
