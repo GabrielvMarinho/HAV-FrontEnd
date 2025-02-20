@@ -59,7 +59,21 @@
     text-align: left;
     border-radius: var(--border-box);
     color: var(--text-light-red);
-
+}
+.inputDropdown{
+    padding: 10px;
+    padding-inline: 15px;
+    text-align: left;
+    border-radius: var(--border-box);
+    color: var(--text-light-red);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("/Icons/ArrowIcon.svg");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 8px);
+    background-size: 16px; 
+    border: 1px var(--button-color) solid;
 }
 
 .input::placeholder{
@@ -69,17 +83,30 @@
 }
 
 .smallInput{
-    width: 150px;
+    width: 120px;
 }
 .mediumInput{
-    width: 200px;
+    width: 170px;
 }
 .largeInput{
-    width: 320px;
+    width: 290px;
 }
 .extraLargeInput{
-    width: 490px;
+    width: 460px;
 }
+
+
+.smallInputDropdown{
+    width: 120px;
+}
+.smallInputDropdown{
+    width: 170px;
+}
+.smallInputDropdown{
+    width: 290px;
+}
+
+
 
 .title{
     width: fit-content;
@@ -151,6 +178,30 @@
 }
 
 
+.filterSide{
+    background-color: var(--box-red-pink);
+    padding: 25px;
+    width: fit-content;
+    border-radius: var(--xborder-box);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
 
+
+
+.buttonBusca{
+    padding: 15px;
+    background-color: var(--box-white);
+    width: fit-content;
+    height: 35px;
+    margin-top: 10px;
+    margin-inline: auto;
+    border-radius: var(--xborder-box);
+}
+.buttonBusca:hover {
+    filter: brightness(0.9)
+
+}
 

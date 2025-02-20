@@ -7,8 +7,9 @@ export default function Dropdown(props: {options :[string, string][]}){
     const [option, setOption] = useState("");
     return(
         <div>
-            <h1>{option}</h1>
             <select className="dropDown" onChange={(e) => {setOption(e.target.value)}}>
+                <option className="optionDropDown" value="" disabled selected>Selecione Algo</option>
+
                 {props.options.map(option =>
                     <option className="optionDropDown" value = {option[0].toUpperCase()} key={option[1].toUpperCase()}>{option[1].toUpperCase()}</option> 
                 )}

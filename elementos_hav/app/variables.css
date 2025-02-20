@@ -3,13 +3,15 @@
     --bg-color: #F2EBE3;
     --logo-gradient: linear-gradient(to right, #D6808E, #FFE1E6);
 
-    
+    --xborder-box: 15px;
     --border-box: 5px;
     --border-button: 100px;
     /*CORES*/
     --form-and-button-height: 36;
     --button-color: #B23F52;
     --box-red-pink: #B23F52;
+    --box-white: #F9F9F9;
+    --box-dark-red: #421820;
     --button-color-hover: #F2EBE3;
     --text-white: #F9F9F9;
     --text-black: #0F0F0F;

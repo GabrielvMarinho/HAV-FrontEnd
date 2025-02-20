@@ -9,11 +9,13 @@ import NotSelectedStar from "./components/IconsTSX/NotSelectedStar"
 import StarFavorite from "./components/StarFavorite"
 import Title from "./components/Title"
 import TableList from "./components/TableList";
-import NavBarAdm from "./components/NavBarAdm";
+import Filter from "./components/Filter";
+import InputDropdown from "./components/InputDrodown";
+import NavBarAdm from "./components/NavBarAdm"
 
 export default function Home() {
   return (
-    <div>
+    <>
       <SelectedStar width={54} height={54} color={"#001111"}/>
       <NotSelectedStar width={54} height={54} color={"#001111"}/>
       <DocumentIcon width={211} height={211} color={"#501010"}/>
@@ -22,20 +24,31 @@ export default function Home() {
       <Button size="small" text="adnasidunasd"/>
       <Button size="medium" text="acesse o chat"/>
       <Button size="large" text="acesse o chat"/>
-      <TableList size="large" titles={["finalidade", "tipo imóvel",  "email", "proprietário", "id imóvel"]} 
-      data={[["COMPRA", "APARTAMENTO", "asdaoid@gmail.com", "Bianca Isabela Vaz", "391471"], 
-      ["COMPRA ", "APARTAMENTO", "efvvv@gmail.com", "Bianca Isabela Vaz", "391471"]]}/>
+      <TableList size="large" titles={["finalidade", "tipo imóvel",  "email", "proprietário"]} 
+      data={[["COMPRA", "APARTAMENTO", "asdaoid@gmail.com", "Bianca Isabela Vaz"], 
+      ["COMPRA ", "APARTAMENTO", "efvvv@gmail.com", "Bianca Isabela Vaz"]]}/>
+      <Filter size="medium" 
+      inputs={[<InputText size="medium" text="Nome" placeholder="ex: Bianca" id="nome"/>,
+      <InputText size="medium" text="Email" placeholder="joao@gmail.com" id="email"/>,
+      <InputText size="medium" text="Telefone" placeholder="ex: 672983579" id="telefone"/>,
+      <InputText size="medium" text="CPF" placeholder="ex: 67298357955" id="cpf"/>,
+      <InputDropdown size="medium" text="Status" id="status" 
+      options={[['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}/>]}/>
+      
+      
 
       <StarFavorite width={211} height={211} color={"#501010"} selected={true}/>
       <Dropdown options={[['sssssss', "Mais Próximo"], ["bia", 'Preço Mais Alto']]}/>
-      <InputText size="small" text="texto" placeholder="hint"/>
-      <InputText size="medium" text="texto" placeholder="hint"/>
-      <InputText size="large" text="texto" placeholder="hint"/>
-      <InputText size="extraLarge" text="texto" placeholder="hint"/>
+      <InputText id="email" size="small" text="texto" placeholder="hint"/>
+      <InputText id="email" size="medium" text="texto" placeholder="hint"/>
+      <InputText id="email" size="large" text="texto" placeholder="hint"/>
+      <InputText id="email" size="extraLarge" text="texto" placeholder="hint"/>
       <NavBarAdm/>
+      
+      <InputText size="small" text="CPF" placeholder="hint" id="email"/>
       <ArrowIcon width={111} height={111} color={"#501010"}/>
 
-      </div>
+      </>
       );
 
 }
