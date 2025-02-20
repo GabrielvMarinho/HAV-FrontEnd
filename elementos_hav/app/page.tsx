@@ -21,7 +21,9 @@ export default function Home() {
       <Button size="small" text="adnasidunasd"/>
       <Button size="medium" text="acesse o chat"/>
       <Button size="large" text="acesse o chat"/>
-      <TableList size="large" titles={["asd", "asd", "asdddd"]} data={[["asd", "sd", "ddd"], ["teste ", "teste", "ddd"]]}/>
+      <TableList size="large" titles={["finalidade", "tipo imóvel",  "email", "proprietário", "id imóvel"]} 
+      data={[["COMPRA", "APARTAMENTO", "asdaoid@gmail.com", "Bianca Isabela Vaz", "391471"], 
+      ["COMPRA ", "APARTAMENTO", "efvvv@gmail.com", "Bianca Isabela Vaz", "391471"]]}/>
 
       <StarFavorite width={211} height={211} color={"#501010"} selected={true}/>
       <Dropdown options={[['sssssss', "Mais Próximo"], ["bia", 'Preço Mais Alto']]}/>

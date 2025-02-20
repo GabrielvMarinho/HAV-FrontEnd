@@ -11,6 +11,9 @@
     --box-red-pink: #B23F52;
     --button-color-hover: #F2EBE3;
     --text-white: #F9F9F9;
+    --text-black: #0F0F0F;
+    --text-black-50: #0f0f0f7c;
+    --text-dark-red: #421820;
     --text-light-red: #CD6778;
 
     /*CONFIGURAÇÕES GLOBAIS*/
@@ -36,4 +39,6 @@
 
 body{
     background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
 }
