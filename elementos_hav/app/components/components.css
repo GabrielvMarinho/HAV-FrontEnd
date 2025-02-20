@@ -1,6 +1,5 @@
 @import "../variables.css";
 
-
 .button{
     border-radius: 100px;
     background-color: var(--button-color);
@@ -47,8 +46,7 @@
     border: 1px var(--button-color) solid;
 }
 .optionDropDown{
-    text-align: left;
-    
+    text-align: left
 }
 
 .label{
@@ -102,10 +100,6 @@
     font-size: var(--text-xl);
     font-weight: 900;
 }
-
-
-
-
 .tableListData{
     width: 65vw;
 }
@@ -131,7 +125,30 @@
     font-weight: 500;
     
 }
+.boxNavBarAdm {
+    width: 170px;
+    height: 38px;
+    border: none;
+    cursor: pointer;
+    background-color: white; /* Cor padrão */
+    transition: background-color 0.3s ease;
+    color: var(--button-color);
+    font-size: var(--text-sm);
+    font-weight: 600;
+}
 
+.boxNavBarAdm.selected {
+    background-color: var(--button-color);
+    color: var(--text-white);
+}
+
+.boxNavBarAdmLeftCorner {
+    border-radius: var(--border-button) 0 0 var(--border-button);
+}
+
+.boxNavBarAdmRightCorner {
+    border-radius: 0 var(--border-button) var(--border-button) 0;
+}
 
 
 

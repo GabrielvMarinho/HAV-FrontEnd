@@ -8,6 +8,4 @@ export default function InputText(props: {size :string, text:string, placeholder
             <input type="text" className={props.size+'Input input'} placeholder={props.placeholder}></input>
         </div>
     );
-
-
 }

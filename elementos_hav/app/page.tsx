@@ -1,4 +1,3 @@
-
 import DocumentIcon from "./components/IconsTSX/DocumentIcon"
 import Button from "./components/Button";
 import Dropdown from "./components/Dropdown";
@@ -10,6 +9,8 @@ import NotSelectedStar from "./components/IconsTSX/NotSelectedStar"
 import StarFavorite from "./components/StarFavorite"
 import Title from "./components/Title"
 import TableList from "./components/TableList";
+import NavBarAdm from "./components/NavBarAdm";
+
 export default function Home() {
   return (
     <div>
@@ -31,7 +32,7 @@ export default function Home() {
       <InputText size="medium" text="texto" placeholder="hint"/>
       <InputText size="large" text="texto" placeholder="hint"/>
       <InputText size="extraLarge" text="texto" placeholder="hint"/>
-
+      <NavBarAdm/>
       <ArrowIcon width={111} height={111} color={"#501010"}/>
 
       </div>

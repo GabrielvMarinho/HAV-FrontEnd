@@ -5,6 +5,7 @@
 
     
     --border-box: 5px;
+    --border-button: 100px;
     /*CORES*/
     --form-and-button-height: 36;
     --button-color: #B23F52;
@@ -28,7 +29,6 @@
     --text-xxl: 40px;
 
 }
-
 
 *{
     padding: 0;
