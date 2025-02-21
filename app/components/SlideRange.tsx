@@ -1,23 +1,28 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import InputText from './InputText';
-const PriceRangeSlider = () => {
-  const [minPrice, setMinPrice] = useState(2500);
-  const [maxPrice, setMaxPrice] = useState(7500);
-  const [rangeProgress, setRangeProgress] = useState({ left: 0, right: 100 });
 
-  const priceGap = 1000;
+const PriceRangeSlider = (props: {min :number, max :number, step :number}) => {
+  const [minPrice, setMinPrice] = useState(props.min);
+  const [maxPrice, setMaxPrice] = useState(props.max);
+  const [rangeProgress, setRangeProgress] = useState({ left: props.min, right: props.max });
+
+  const priceGap = props.max*0.1;
 
   useEffect(() => {
+    const range = props.max - props.min
     // Update range progress based on price input values
-    const minPercent = (minPrice / 10000) * 100;
-    const maxPercent = (maxPrice / 10000) * 100;
+    const minPercent = (((minPrice - props.min)*100)/range);
+    const maxPercent = (((maxPrice - props.min)*100)/range);
     setRangeProgress({
+      
       left: minPercent,
       right: 100 - maxPercent,
+      
     });
-  }, [minPrice, maxPrice]);
 
+  }, [minPrice, maxPrice]);
+  
   const handlePriceInputChange = (e) => {
     const value = parseInt(e.target.value);
     if (e.target.className === 'input-min' && value <= maxPrice - priceGap) {
@@ -38,22 +43,14 @@ const PriceRangeSlider = () => {
 
   return (
     <div className="boxRangeFilter">
-      <div className="price-input">
-        <div className="field">
-          <span>Min</span>
-          <input
-            type="number"
-            value={minPrice}
-            onChange={handlePriceInputChange}
-          />
+      <div className="priceBox">
+        <div>
+          <h3 style={{textAlign:"left"}}>Min</h3>
+          <p>R${minPrice.toLocaleString('en-US').replace(/,/g, '.')}</p>
         </div>
-        <div className="field">
-          <span>Max</span>
-          <input
-            type="number"
-            value={maxPrice}
-            onChange={handlePriceInputChange}
-          />
+        <div>
+          <h3 style={{textAlign:"right"}}>Max</h3>
+          <p>R${maxPrice.toLocaleString('en-US').replace(/,/g, '.')}</p>
         </div>
       </div>
       <div className="slider">
@@ -63,19 +60,19 @@ const PriceRangeSlider = () => {
         <input
           type="range"
           className="range-min"
-          min="0"
-          max="10000"
+          min={props.min}
+          max={props.max}
           value={minPrice}
-          step="100"
+          step={props.step}
           onInput={handleRangeInputChange}
         />
         <input
           type="range"
           className="range-max"
-          min="0"
-          max="10000"
+          min={props.min}
+          max={props.max}
           value={maxPrice}
-          step="100"
+          step={props.step}
           onInput={handleRangeInputChange}
         />
       </div>

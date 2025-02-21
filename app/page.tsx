@@ -17,7 +17,6 @@ import SlideRange from "./components/SlideRange"
 export default function Home() {
   return (
     <>
-      <SlideRange min={0} max={190} step={1}/>
 
       <SelectedStar width={54} height={54} color={"#001111"}/>
       <NotSelectedStar width={54} height={54} color={"#001111"}/>
@@ -36,7 +35,8 @@ export default function Home() {
       <InputText size="medium" text="Telefone" placeholder="ex: 672983579" id="telefone"/>,
       <InputText size="medium" text="CPF" placeholder="ex: 67298357955" id="cpf"/>,
       <InputDropdown size="medium" text="Status" id="status" 
-      options={[['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}/>]}/>
+      options={[['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}/>,
+      <SlideRange min={50000} max={2000000} step={10000}/>]}/>
       
       <StarFavorite width={211} height={211} color={"#501010"} selected={true}/>
       <Dropdown options={[['sssssss', "Mais Próximo"], ["bia", 'Preço Mais Alto']]}/>
