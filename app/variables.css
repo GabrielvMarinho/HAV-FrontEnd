@@ -29,7 +29,6 @@
     --text-l: 24px;
     --text-xl: 32px;
     --text-xxl: 40px;
-
 }
 
 *{
@@ -41,6 +40,5 @@
 
 body{
     background-color: var(--bg-color);
-    display: flex;
     justify-content: center;
 }
