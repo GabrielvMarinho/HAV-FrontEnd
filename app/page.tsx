@@ -12,7 +12,8 @@ import TableList from "./components/TableList";
 import Filter from "./components/Filter";
 import InputDropdown from "./components/InputDrodown";
 import NavBarAdm from "./components/NavBarAdm"
-import SeachBar from "./components/SearchBar";
+import SearchBarDesktop from "./components/SearchBarDesktop";
+import SearchBarMobile from "./components/SearchBarMobile";
 
 export default function Home() {
   return (
@@ -35,8 +36,8 @@ export default function Home() {
       <InputText size="medium" text="CPF" placeholder="ex: 67298357955" id="cpf"/>,
       <InputDropdown size="medium" text="Status" id="status" 
       options={[['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}/>]}/>
-      <SeachBar/>   
-
+      <SearchBarDesktop/>   
+      <SearchBarMobile/>
       <StarFavorite width={211} height={211} color={"#501010"} selected={true}/>
       <Dropdown options={[['sssssss', "Mais Próximo"], ["bia", 'Preço Mais Alto']]}/>
       <InputText id="email" size="small" text="texto" placeholder="hint"/>
