@@ -13,6 +13,8 @@ import Filter from "./components/Filter";
 import InputDropdown from "./components/InputDrodown";
 import NavBarAdm from "./components/NavBarAdm"
 import SlideRange from "./components/SlideRange"
+import SearchBarDesktop from "./components/SearchBarDesktop";
+import SearchBarMobile from "./components/SearchBarMobile";
 
 export default function Home() {
   return (
@@ -36,8 +38,11 @@ export default function Home() {
       <InputText size="medium" text="CPF" placeholder="ex: 67298357955" id="cpf"/>,
       <InputDropdown size="medium" text="Status" id="status" 
       options={[['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}/>,
-      <SlideRange min={50000} max={2000000} step={10000}/>]}/>
       
+      <SlideRange min={50000} max={2000000} step={10000}/>]}/>
+
+      <SearchBarDesktop/>   
+      <SearchBarMobile/>
       <StarFavorite width={211} height={211} color={"#501010"} selected={true}/>
       <Dropdown options={[['sssssss', "Mais Próximo"], ["bia", 'Preço Mais Alto']]}/>
       <InputText id="email" size="small" text="texto" placeholder="hint"/>

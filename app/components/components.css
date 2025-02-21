@@ -176,8 +176,6 @@
 .boxNavBarAdmRightCorner {
     border-radius: 0 var(--border-button) var(--border-button) 0;
 }
-
-
 .filterSide{
     background-color: var(--box-red-pink);
     padding: 25px;
@@ -187,22 +185,50 @@
     flex-direction: column;
     gap: 15px;
 }
-
-
-
-
-.buttonBusca{
-    padding: 15px;
+.searchInput, .searchInputMobile{
+    background-color: var(--box-red-pink);
+    color: var(--text-white);
+    border-radius: 5px;
+    outline: none;
+}
+.searchInput{
+    width: 736px;
+    height: 51px;
+}
+.searchInputMobile{
+    height: var(--form-and-button-height);
+    width: 212px;
+}
+.searchInput::placeholder, .searchInputMobile::placeholder{
+    color: var(--text-white);
+    opacity: 0.6;
+    font-weight: 500;
+    font-size: var(--text-s);
+}
+.buttonBuscaClaro{
     background-color: var(--box-white);
     width: fit-content;
+    padding: 15px;
     height: 35px;
     margin-top: 10px;
     margin-inline: auto;
     border-radius: var(--xborder-box);
 }
+.buttonBuscaEscuro, .buttonBuscaEscuroMobile{
+    background-color: var(--box-red-pink);
+    border-radius: 15px;
+}
+.buttonBuscaEscuro{
+    width: 82px;
+    height: 76px;
+}
+.buttonBuscaEscuroMobile{
+    width: 70px;
+    height: 65px;
+}
+
 .buttonBusca:hover {
     filter: brightness(0.9)
-
 }
 
 
