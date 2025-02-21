@@ -1,7 +1,8 @@
 "use client"
 import { useState } from "react";
-import SelectedStar from "./IconsTSX/SelectedStar";
-import NotSelectedStar from "./IconsTSX/NotSelectedStar";
+import SelectedStar from "../IconsTSX/SelectedStar";
+import NotSelectedStar from "../IconsTSX/NotSelectedStar";
+import './css/style.css';
 
 export default function StarFavorite(props: {selected :boolean, width :number, height :number, color :string}){
     

@@ -1,0 +1,28 @@
+@import "../../../variables.css";
+
+
+
+.boxNavBarAdm {
+    width: 170px;
+    height: 38px;
+    border: none;
+    cursor: pointer;
+    background-color: white; /* Cor padrão */
+    transition: background-color 0.3s ease;
+    color: var(--button-color);
+    font-size: var(--text-sm);
+    font-weight: 600;
+}
+
+.boxNavBarAdm.selected {
+    background-color: var(--button-color);
+    color: var(--text-white);
+}
+
+.boxNavBarAdmLeftCorner {
+    border-radius: var(--border-button) 0 0 var(--border-button);
+}
+
+.boxNavBarAdmRightCorner {
+    border-radius: 0 var(--border-button) var(--border-button) 0;
+}

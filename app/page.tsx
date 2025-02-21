@@ -1,19 +1,18 @@
 import DocumentIcon from "./components/IconsTSX/DocumentIcon"
-import Button from "./components/Button";
-import Dropdown from "./components/Dropdown";
+import Button from "./components/Inputs/Button";
+import Dropdown from "./components/Inputs/Dropdown";
 import ArrowIcon from "./components/IconsTSX/ArrowIcon";
-import InputText from "./components/InputText"
-import ToggleButton from "./components/ToggleButton"
+import InputText from "./components/Inputs/InputText"
 import SelectedStar from "./components/IconsTSX/SelectedStar"
 import NotSelectedStar from "./components/IconsTSX/NotSelectedStar"
-import StarFavorite from "./components/StarFavorite"
-import Title from "./components/Title"
-import TableList from "./components/TableList";
-import Filter from "./components/Filter";
-import InputDropdown from "./components/InputDrodown";
-import NavBarAdm from "./components/NavBarAdm"
-import SlideRange from "./components/SlideRange"
-import SearchBarDesktop from "./components/SearchBarDesktop";
+import StarFavorite from "./components/Inputs/StarFavorite"
+import Title from "./components/NonInteractable/Title"
+import TableList from "./components/Information/TableList";
+import Filter from "./components/Filters/Filter";
+import InputDropdown from "./components/Inputs/InputDrodown";
+import NavBarAdm from "./components/Header/NavBarAdm"
+import SlideRange from "./components/Filters/SlideRange"
+import SearchBarDesktop from "./components/Filters/SearchBarDesktop";
 
 export default function Home() {
   return (

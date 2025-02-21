@@ -1,6 +1,6 @@
-import "./components.css"
-import "../variables.css"
-import SearchIcon from "./IconsTSX/SearchIcon";
+import "../../variables.css"
+import SearchIcon from "../IconsTSX/SearchIcon";
+import './css/style.css';
 
 export default function SearchBarDesktop(props: {placeholder :string}) {
     return (

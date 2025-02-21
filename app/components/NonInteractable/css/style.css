@@ -1,0 +1,21 @@
+@import "../../../variables.css";
+
+.title{
+    width: fit-content;
+    gap: 2px;
+    color: var(--text-dark-red);
+}
+.titleLine{
+    width: 75px;
+    height: 3px;
+    margin-inline: auto;
+    background-color: var(--box-red-pink);
+}
+.smallTitle{
+    font-size: var(--text-ml);
+    font-weight: 900;
+}
+.largeTitle{
+    font-size: var(--text-xl);
+    font-weight: 900;
+}

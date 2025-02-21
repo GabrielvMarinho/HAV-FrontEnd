@@ -1,7 +1,7 @@
 
 "use client"
 import { useState } from 'react';
-import './components.css';
+import './css/style.css';
 
 export default function InputDropdown(props: {options :[string, string][], size :string, text:string, id :string}){
     const [option, setOption] = useState("");

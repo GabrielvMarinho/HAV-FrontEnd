@@ -1,4 +1,4 @@
-import './components.css';
+import './css/style.css';
 
 export default function Button(props: {size: string; text:string}){
     return (

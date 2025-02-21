@@ -1,6 +1,6 @@
 "use client"
 import { useState } from 'react';
-import './components.css';
+import './css/style.css';
 
 //the parameters represent the content and the string that will be passed to the api
 export default function Dropdown(props: {options :[string, string][]}){
