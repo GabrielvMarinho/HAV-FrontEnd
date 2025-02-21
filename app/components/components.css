@@ -192,9 +192,18 @@
     outline: none;
 }
 .searchInput{
-    width: 736px;
-    height: 51px;
+    padding: 16px;
+    padding-inline: 25px;
+    width: 50vw;
 }
+@media (width<var(--breakpoint-mobile)){
+    .searchInput{
+        padding: 12px;
+        padding-inline: 15px;
+        width: 60vw;
+    }
+}
+
 .searchInputMobile{
     height: var(--form-and-button-height);
     width: 212px;
