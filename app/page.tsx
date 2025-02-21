@@ -14,6 +14,7 @@ import InputDropdown from "./components/InputDrodown";
 import NavBarAdm from "./components/NavBarAdm"
 import SearchBarDesktop from "./components/SearchBarDesktop";
 import SearchBarMobile from "./components/SearchBarMobile";
+import Footer from "./components/Footer";
 
 export default function Home() {
   return (
@@ -45,10 +46,10 @@ export default function Home() {
       <InputText id="email" size="large" text="texto" placeholder="hint"/>
       <InputText id="email" size="extraLarge" text="texto" placeholder="hint"/>
       <NavBarAdm/>
-      
       <InputText size="small" text="CPF" placeholder="hint" id="email"/>
       <ArrowIcon width={111} height={111} color={"#501010"}/>
-
+      <Footer/>
+      
       </>
       );
 
