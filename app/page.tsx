@@ -12,10 +12,13 @@ import TableList from "./components/TableList";
 import Filter from "./components/Filter";
 import InputDropdown from "./components/InputDrodown";
 import NavBarAdm from "./components/NavBarAdm"
+import SlideRange from "./components/SlideRange"
 
 export default function Home() {
   return (
     <>
+      <SlideRange min={0} max={190} step={1}/>
+
       <SelectedStar width={54} height={54} color={"#001111"}/>
       <NotSelectedStar width={54} height={54} color={"#001111"}/>
       <DocumentIcon width={211} height={211} color={"#501010"}/>
@@ -35,8 +38,6 @@ export default function Home() {
       <InputDropdown size="medium" text="Status" id="status" 
       options={[['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}/>]}/>
       
-      
-
       <StarFavorite width={211} height={211} color={"#501010"} selected={true}/>
       <Dropdown options={[['sssssss', "Mais Próximo"], ["bia", 'Preço Mais Alto']]}/>
       <InputText id="email" size="small" text="texto" placeholder="hint"/>
