@@ -13,7 +13,7 @@ import InputDropdown from "./components/Inputs/InputDrodown";
 import NavBarAdm from "./components/Header/NavBarAdm"
 import SlideRange from "./components/Filters/SlideRange"
 import SearchBarDesktop from "./components/Filters/SearchBarDesktop";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer/Footer";
 
 export default function Home() {
   return (
