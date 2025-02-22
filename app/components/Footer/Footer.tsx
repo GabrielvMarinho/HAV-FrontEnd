@@ -2,6 +2,7 @@ import LightBulb from "../IconsTSX/LightBulb";
 import Sobre from "../IconsTSX/Sobre";
 import Folder from "../IconsTSX/Folder";
 import Link from "next/link";
+//adicionar agora as classes no style
 
 export default function Footer() {
     return (
