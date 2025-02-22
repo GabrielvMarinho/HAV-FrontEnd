@@ -1,0 +1,27 @@
+@import "../../../variables.css";
+
+.tableListData{
+    width: 65vw;
+}
+
+.tableListData tr{
+    display: flex;
+}
+.tableListData th, .tableListData td{
+    text-align: left;
+    flex: 1;
+}
+.tableListData th{
+    font-size: var(--text-ml);
+    color: var(--text-dark-red);
+    font-weight: 700;
+}
+.tableListData td{
+    padding-top: 20px;
+    margin-top: 20px;
+    border-top: 1px solid var(--text-black-50);
+    font-size: var(--text-sm);
+    color: var(--text-black);
+    font-weight: 500;
+    
+}

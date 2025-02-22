@@ -1,4 +1,6 @@
-import Icon from "../IconInterface"
+
+import Icon from "./IconInterface"
+import './css/style.css';
 
 export default function ArrowIcon({ width, height, color }: Icon) {
     return (

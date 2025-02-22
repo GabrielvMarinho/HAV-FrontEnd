@@ -1,6 +1,6 @@
 "use client"
+import './css/style.css';
 
-import './components.css';
 
 export default function InputText(props: {size :string, text:string, placeholder :string, id :string}){
     return(

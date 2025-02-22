@@ -6,10 +6,15 @@
     --xborder-box: 15px;
     --border-box: 5px;
     --border-button: 100px;
+
+
+    --breakpoint-mobile: 992px;
     /*CORES*/
     --button-color: #B23F52;
     --box-red-pink: #B23F52;
     --box-white: #F9F9F9;
+    --box-yello-light: #F2EBE3;
+
     --box-dark-red: #421820;
     --box-mid-dark-red: #81303D;
     --button-color-hover: #F2EBE3;

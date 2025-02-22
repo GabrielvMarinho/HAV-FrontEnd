@@ -1,7 +1,7 @@
 "use client";
 
-import "./components.css";
 import { useState } from "react";
+import './css/style.css';
 
 export default function NavBarAdm() {
     const [selectedOption, setSelectedOption] = useState("CORRETOR");

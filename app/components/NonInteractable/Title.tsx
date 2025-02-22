@@ -1,4 +1,4 @@
-import './components.css';
+import './css/style.css';
 
 
 export default function Title(props: {size :string, tag :string, text :string}){

@@ -1,4 +1,5 @@
-import Icon from "../IconInterface"
+import Icon from "./IconInterface"
+import './css/style.css';
 
 export default function DocumentIcon({width, height, color}:Icon){
     return(

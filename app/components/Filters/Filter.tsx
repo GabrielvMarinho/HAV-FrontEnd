@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
-import InputText from "./InputText"
-import SearchIcon from "./IconsTSX/SearchIcon";
-import "../variables.css"
-import './components.css';
+import SearchIcon from "../IconsTSX/SearchIcon";
+import "../../variables.css"
+import './css/style.css';
+
 
 export default function Filter(props: {size :string, inputs :ReactNode[]}){
     return(
