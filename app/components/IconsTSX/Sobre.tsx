@@ -1,4 +1,4 @@
-import Icon from "../IconInterface";
+import Icon from "./IconInterface";
 
 export default function Sobre({width, height, color}: Icon) {
     return (

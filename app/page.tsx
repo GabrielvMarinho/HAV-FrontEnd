@@ -48,7 +48,7 @@ export default function Home() {
       <NavBarAdm/>
       <InputText size="small" text="CPF" placeholder="hint" id="email"/>
       <ArrowIcon width={111} height={111} color={"#501010"}/>
-      <Footer/>
+      <Footer width={25} height={25} color=""/>
       
       </>
       );

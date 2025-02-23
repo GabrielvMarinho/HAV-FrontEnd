@@ -1,1 +1,50 @@
 @import "../../../variables.css";
+
+.footerEditor{
+    background-color: var(--box-mid-dark-red);
+    width: 100%;
+    height: 373px;
+    display: flex;
+    flex-direction: row;
+    color: var(--text-white);
+    align-items: center;
+    justify-content: space-around;
+}
+.firstArticle-footer, .thirdArticle-footer{
+    display: flex;
+    flex-direction: column;
+    order: 1;
+    gap: 55px;
+}
+.secondArticle-footer{
+    order: 2;
+}
+.thirdArticle-footer{
+    order: 3;
+}
+.contentFooter{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.titleContent-footer{
+    font-weight: 700;
+    font-size: var(--text-ml);
+}
+.iconInfos{
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    opacity: 0.6;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    align-items: center;
+}
+.socialMedia{
+    width: 35px;
+    height: 35px;
+    background-color: var(--box-dark-red);
+    border-radius: 5px;
+}
+
