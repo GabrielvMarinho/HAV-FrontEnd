@@ -47,7 +47,13 @@ export default function Footer(props: { width: number, height: number, color: st
                     </div>
                 </section>
                 <section className="contentFooter">
-                    
+                    <p className="titleContent-footer">Receba Notificações</p>
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                        <div style={{ display: "flex", flexDirection: "row", backgroundColor: "var(--box-dark-red-option)", borderRadius: "5px", alignItems: "center", gap: "11px"}}>
+                            <Envelope width={props.width} height={props.height} color=""></Envelope>
+                            <p style={{opacity: "0.6"}}>Digite seu email</p>
+                        </div>
+                    </div>
                 </section>
             </article>
         </footer>
