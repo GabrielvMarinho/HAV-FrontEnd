@@ -9,22 +9,9 @@
     margin-inline: auto;
     border-radius: var(--xborder-box);
 }
-.buttonBuscaEscuro, .buttonBuscaEscuroMobile{
-    background-color: var(--box-red-pink);
-    border-radius: 15px;
-}
-.buttonBuscaEscuro{
-    width: 82px;
-    height: 76px;
-}
-.buttonBuscaEscuroMobile{
-    width: 70px;
-    height: 65px;
-}
 
-.buttonBusca:hover, .buttonBuscaClaro:hover {
-    filter: brightness(0.9)
-}
+
+
 
 .dropDown{
     color: var(--button-color);
@@ -140,9 +127,6 @@
     padding-inline: 25px;
 }
 
-.largeButton:hover, .mediumButton:hover, .smallButton:hover{
-    filter: brightness(1.1)
-}
 
 
 

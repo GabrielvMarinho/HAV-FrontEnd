@@ -64,7 +64,14 @@
   }
   
 
-
+  .buttonBuscaEscuro{
+    background-color: var(--box-red-pink);
+    border-radius: var(--xborder-box);
+    width: 82px;
+    height: 76px;
+  }
+  
+  
   .searchInput::placeholder{
     color: var(--text-white);
     opacity: 0.6;

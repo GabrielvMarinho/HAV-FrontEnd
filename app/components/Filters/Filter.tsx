@@ -11,7 +11,7 @@ export default function Filter(props: {size :string, inputs :ReactNode[]}){
             <>{input}</>
           )
             }
-            <div className="buttonBuscaClaro">
+            <div className="buttonBuscaClaro lightHover">
                 <SearchIcon height={35} width={35} color={"var(--box-red-pink)"}/>
             </div>
         </div>

@@ -45,3 +45,10 @@ body{
     background-color: var(--bg-color);
     justify-content: center;
 }
+
+.lightHover:hover{
+    filter: brightness(0.9);
+}
+.darkHover:hover{
+    filter: brightness(1.1);
+}
