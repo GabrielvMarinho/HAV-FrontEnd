@@ -14,6 +14,7 @@ import NavBarAdm from "./components/Header/NavBarAdm"
 import SlideRange from "./components/Filters/SlideRange"
 import SearchBarDesktop from "./components/Filters/SearchBarDesktop";
 import Footer from "./components/Footer/Footer";
+import InputTextFooter from "./components/Inputs/InputTextFooter";
 
 export default function Home() {
   return (
@@ -48,8 +49,8 @@ export default function Home() {
       <NavBarAdm/>
       <InputText size="small" text="CPF" placeholder="hint" id="email"/>
       <ArrowIcon width={111} height={111} color={"#501010"}/>
+      <InputTextFooter size="small" placeholder="Digite seu E-mail" id="email"/>
       <Footer width={25} height={25} color=""/>
-      
       </>
       );
 

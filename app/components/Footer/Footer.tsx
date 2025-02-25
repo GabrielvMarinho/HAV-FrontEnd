@@ -6,6 +6,9 @@ import Link from "next/link";
 import ChamadaTelefonica from "../IconsTSX/ChamadaTelefonica";
 import Envelope from "../IconsTSX/Envelope";
 import "./css/style.css"
+import Button from "../Inputs/Button";
+import InputTextFooter from "../Inputs/InputTextFooter";
+import InputText from "../Inputs/InputText";
 
 export default function Footer(props: { width: number, height: number, color: string }) {
     return (
@@ -33,6 +36,7 @@ export default function Footer(props: { width: number, height: number, color: st
             </article>
             <article className="secondArticle-footer">
                 <HavLogo width={150} height={150} color={props.color}></HavLogo>
+               
             </article>
             <article className="thirdArticle-footer">
                 <section className="contentFooter">
@@ -48,12 +52,8 @@ export default function Footer(props: { width: number, height: number, color: st
                 </section>
                 <section className="contentFooter">
                     <p className="titleContent-footer">Receba Notificações</p>
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                        <div style={{ display: "flex", flexDirection: "row", backgroundColor: "var(--box-dark-red-option)", borderRadius: "5px", alignItems: "center", gap: "11px"}}>
-                            <Envelope width={props.width} height={props.height} color=""></Envelope>
-                            <p style={{opacity: "0.6"}}>Digite seu email</p>
-                        </div>
-                    </div>
+                    <InputText id="email" size="medium" text="" placeholder="Digite seu E-mail"></InputText>
+                    <Button size="small" text="Inscrever-se"></Button>
                 </section>
             </article>
         </footer>

@@ -18,6 +18,10 @@
 }
 .secondArticle-footer{
     order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
 }
 .thirdArticle-footer{
     order: 3;
@@ -47,4 +51,22 @@
     background-color: var(--box-dark-red);
     border-radius: 5px;
 }
-
+@media(max-width: 992px){
+    .footerEditor{
+        flex-direction: column;
+        height: 829px;
+        align-items: flex-start;
+    }
+    .firstArticle-footer{
+        order: 2;
+    }
+    .secondArticle-footer{
+        order: 1;
+    }
+    .firstArticle-footer, .secondArticle-footer, .thirdArticle-footer{
+        margin-left: 32px;
+    }
+    .secondArticle-footer{
+        align-self: center;
+    }
+}

@@ -48,16 +48,6 @@
 .optionDropDown{
     text-align: left
 }
-
-
-
-
-
-
-
-
-
-
 .inputDropdown{
     padding: 10px;
     padding-inline: 15px;
@@ -103,7 +93,6 @@
 .smallInputDropdown{
     width: 290px;
 }
-
 .input{
     padding: 10px;
     padding-inline: 15px;
@@ -111,13 +100,6 @@
     border-radius: var(--border-box);
     color: var(--text-light-red);
 }
-
-
-
-
-
-
-
 .button{
     border-radius: 100px;
     background-color: var(--button-color);
@@ -187,11 +169,17 @@
 .secondArticleFooter{
 
 }
-
-
-
-
 .label{
     font-size: var(--text-s);
     color: var(--text-white)
 }
+.divInputFooter input::placeholder{
+    color: var(--text-white);
+    opacity: 0.6;
+}
+.divInputFooter input {
+    animation: none !important;
+    transition: none !important;
+    outline: none !important;
+    border: none;
+  }
