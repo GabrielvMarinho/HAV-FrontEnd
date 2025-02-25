@@ -13,6 +13,7 @@ import InputDropdown from "./components/Inputs/InputDrodown";
 import NavBarAdm from "./components/Header/NavBarAdm"
 import SlideRange from "./components/Filters/SlideRange"
 import SearchBarDesktop from "./components/Filters/SearchBarDesktop";
+import Modal from "./components/Modal/Modal";
 
 export default function Home() {
   
@@ -27,6 +28,10 @@ export default function Home() {
       <Button size="small" text="adnasidunasd"/>
       <Button size="medium" text="acesse o chat"/>
       <Button size="large" text="acesse o chat"/>
+
+      <Modal id = "x" trigger={
+              <Button size="large" text="abrir modal"/>
+      }></Modal>
       <TableList size="large" titles={["finalidade", "tipo imóvel",  "email", "proprietário"]} 
       data={[["COMPRA", "APARTAMENTO", "asdaoid@gmail.com", "Bianca Isabela Vaz"], 
       ["COMPRA ", "APARTAMENTO", "efvvv@gmail.com", "Bianca Isabela Vaz"]]}/>

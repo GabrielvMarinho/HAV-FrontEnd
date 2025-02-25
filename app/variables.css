@@ -31,6 +31,8 @@
     --text-black-50: #0f0f0f7c;
     --text-dark-red: #421820;
     --text-light-red: #CD6778;
+    --modal-red: #AC3434;
+
 }
 [data-theme="darkPallete"]{
     --bg-color: #421820;
