@@ -15,6 +15,7 @@ import SlideRange from "./components/Filters/SlideRange"
 import SearchBarDesktop from "./components/Filters/SearchBarDesktop";
 
 export default function Home() {
+  
   return (
     <>
 
