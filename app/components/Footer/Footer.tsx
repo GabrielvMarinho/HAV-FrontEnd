@@ -2,6 +2,7 @@ import LightBulb from "../IconsTSX/LightBulb";
 import Sobre from "../IconsTSX/Sobre";
 import Folder from "../IconsTSX/Folder";
 import HavLogo from "../IconsTSX/HavLogo";
+import HavLogoMobile from "../IconsTSX/HavLogoMobile";
 import Link from "next/link";
 import ChamadaTelefonica from "../IconsTSX/ChamadaTelefonica";
 import Envelope from "../IconsTSX/Envelope";
@@ -36,7 +37,10 @@ export default function Footer(props: { width: number, height: number, color: st
             </article>
             <article className="secondArticle-footer">
                 <HavLogo width={150} height={150} color={props.color}></HavLogo>
-               
+               <p style={{fontSize: "var(--text-ml)", opacity: "0.6"}}>Todos os direitos reservados por HAV Imobiliária </p>
+            </article>
+            <article className="secondArticleMobile-footer">
+                <HavLogoMobile width={150} height={150} color={props.color}></HavLogoMobile>
             </article>
             <article className="thirdArticle-footer">
                 <section className="contentFooter">

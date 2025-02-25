@@ -1,5 +1,4 @@
 import Icon from "./IconInterface"
-import './css/style.css';
 
 export default function HavLogo({ width, height, color }: Icon) {
     return (
