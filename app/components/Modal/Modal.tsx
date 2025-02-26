@@ -11,6 +11,7 @@ export default function Modal(props:{trigger :ReactNode, id :string}){
     return (
         <>   
         <div onClick={() =>setStatus(true)}>{props.trigger}</div>
+        
         {status &&
         <div className={"overlay"}>
             <div id={props.id} className={"modal"} >

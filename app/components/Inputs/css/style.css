@@ -129,9 +129,11 @@
 
 
 .selectBox{
-    padding: 21px;
+    padding: 10px;
     border: 1px var(--text-black) solid;
     border-radius: var(--border-box);
+    height: 0;
+    width: 0;
 }
 .selectedBox{
     background-color: #000;

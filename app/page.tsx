@@ -31,7 +31,7 @@ export default function Home() {
       <Button size="small" text="adnasidunasd"/>
       <Button size="medium" text="acesse o chat"/>
       <Button size="large" text="acesse o chat"/>
-      <SelectBox/>
+      <SelectBox dataType={"data-select-box-table-list"}/>
       <Modal id = "x" trigger={
               <Button size="large" text="abrir modal"/>
       }></Modal>

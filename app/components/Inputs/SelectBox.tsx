@@ -1,10 +1,10 @@
 "use client"
 import { useState } from "react"
 
-export default function SelectBox(){
+export default function SelectBox(props :{dataType :string}){
     var [state, setState] = useState(false)
     return (
-        <button  className={`selectBox ${state?"selectedBox":"notSelectedBox"}`}  onClick={() => setState(!state)}>
+        <button  datatype={props.dataType} className={`selectBox ${state?"selectedBox":"notSelectedBox"}`}  onClick={() => setState(!state)}>
             
         </button>
     )
