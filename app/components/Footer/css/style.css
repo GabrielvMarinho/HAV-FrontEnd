@@ -43,7 +43,6 @@
     display: flex;
     gap: 10px;
     flex-direction: row;
-    opacity: 0.6;
     font-size: var(--text-sm);
     font-weight: 600;
     align-items: center;
