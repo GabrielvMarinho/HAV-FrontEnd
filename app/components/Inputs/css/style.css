@@ -178,3 +178,45 @@
     outline: none !important;
     border: none;
   }
+
+  .ActionButton {
+    width: 45px;
+    height: 45px;
+    background-color: var(--box-red-pink);
+    border-radius: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.actionButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.ActionButton svg {
+    width: 25px !important;
+    height: 25px !important;
+}
+
+.graphicButton {
+    background-color: var(--box-red-pink);
+}
+
+.addButton {
+    background-color: var(--box-red-pink);
+}
+
+.editButton {
+    background-color: var(--box-dark-red-option);
+}
+
+.deleteButton {
+    background-color: var(--box-dark-red-option);
+}
+
+.archiveButton {
+    background-color: var(--box-dark-red-option);
+}

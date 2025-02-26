@@ -1,5 +1,5 @@
 import Sobre from "../IconsTSX/Sobre";
-import Folder from "../IconsTSX/Folder";
+import Folder from "../IconsTSX/File";
 import HavLogo from "../IconsTSX/HavLogo";
 import HavLogoMobile from "../IconsTSX/HavLogoMobile";
 import Link from "next/link";
