@@ -1,1 +1,78 @@
 @import "../../../variables.css";
+
+.footerEditor{
+    background-color: var(--box-mid-dark-red);
+    width: 100%;
+    height: 373px;
+    display: flex;
+    flex-direction: row;
+    color: var(--text-white);
+    align-items: center;
+    justify-content: space-around;
+}
+.firstArticle-footer, .thirdArticle-footer{
+    display: flex;
+    flex-direction: column;
+    order: 1;
+    gap: 55px;
+}
+.secondArticle-footer{
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+}
+.secondArticleMobile-footer{
+    display: none;
+}
+.thirdArticle-footer{
+    order: 3;
+}
+.contentFooter{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.titleContent-footer{
+    font-weight: 700;
+    font-size: var(--text-ml);
+}
+.iconInfos{
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    align-items: center;
+}
+.socialMedia{
+    width: 35px;
+    height: 35px;
+    background-color: var(--box-dark-red);
+    border-radius: 5px;
+}
+@media(max-width: 992px){
+    .footerEditor{
+        flex-direction: column;
+        height: 829px;
+        align-items: flex-start;
+    }
+    .firstArticle-footer{
+        order: 2;
+    }
+    .secondArticle-footer{
+        order: 1;
+    }
+    .firstArticle-footer, .secondArticle-footer, .thirdArticle-footer{
+        padding-left: 32px;
+    }
+    .secondArticle-footer{
+        display: none;
+    }
+    .secondArticleMobile-footer{
+        display: flex;
+        align-self: center;
+    }
+}

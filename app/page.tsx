@@ -16,6 +16,8 @@ import SearchBarDesktop from "./components/Filters/SearchBarDesktop";
 import Modal from "./components/Modal/Modal";
 import SelectBox from "./components/Inputs/SelectBox";
 
+import Footer from "./components/Footer/FooterEditor";
+import InputTextFooter from "./components/Inputs/InputTextFooter";
 
 export default function Home() {
   
@@ -54,10 +56,10 @@ export default function Home() {
       <InputText id="email" size="large" text="texto" placeholder="hint"/>
       <InputText id="email" size="extraLarge" text="texto" placeholder="hint"/>
       <NavBarAdm/>
-      
       <InputText size="small" text="CPF" placeholder="hint" id="email"/>
       <ArrowIcon width={111} height={111} color={"#501010"}/>
-
+      <InputTextFooter size="small" placeholder="Digite seu E-mail" id="email"/>
+      <Footer width={25} height={25} color=""/>
       </>
       );
 
