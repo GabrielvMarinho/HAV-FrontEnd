@@ -4,6 +4,7 @@
     width: fit-content;
     gap: 2px;
     color: var(--text-dark-red);
+    margin-bottom: var(--big-component-distance);
 }
 .titleLine{
     width: 75px;

@@ -24,6 +24,12 @@
     display: flex;
     align-items: center;
 }
+.tableListData thead tr{
+    padding: 0px;
+    padding-bottom: 22px;
+    display: flex;
+    align-items: center;
+}
 .tableListData th, .tableListData td{
     text-align: left;
     flex: 1;

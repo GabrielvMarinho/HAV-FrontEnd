@@ -26,3 +26,13 @@
 .boxNavBarAdmRightCorner {
     border-radius: 0 var(--border-button) var(--border-button) 0;
 }
+
+
+.headerOptionContainer{
+    position: relative;
+}
+.boxHeaderOption{
+    
+    position: absolute;
+}
+
