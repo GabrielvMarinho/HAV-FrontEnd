@@ -12,7 +12,7 @@ import InputText from "../Inputs/InputText";
 
 export default function Footer(props: { width: number, height: number, color: string }) {
     return (
-        <footer className="footerEditor" >
+        <footer className="footer" >
             <article className="firstArticle-footer">
                 <section className="contentFooter">
                     <p className="titleContent-footer">Páginas de apoio</p>

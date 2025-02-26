@@ -1,6 +1,6 @@
 @import "../../../variables.css";
 
-.footerEditor{
+.footer{
     background-color: var(--box-mid-dark-red);
     width: 100%;
     height: 373px;
