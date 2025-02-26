@@ -1,6 +1,16 @@
+import { Montserrat } from 'next/font/google';
+
+const montserrat = Montserrat({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin-ext'],
+  variable: "--font-montserrat"
+});
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
+
   children: React.ReactNode;
 }>) {
 
@@ -8,8 +18,7 @@ export default function RootLayout({
   var theme = "lightPallete";
   
   return (
-    
-    <html lang="en" data-theme={theme}>
+    <html lang="en" className={`${montserrat.variable}`}>
       <body>
         {children}
       </body>

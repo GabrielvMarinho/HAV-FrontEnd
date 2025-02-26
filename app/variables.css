@@ -8,6 +8,22 @@
     --breakpoint-mobile: 992px;
     --big-component-distance: 60px;
 
+    --breakpoint-mobile: 992px;
+    /*CORES*/
+    --button-color: #B23F52;
+    --box-red-pink: #B23F52;
+    --box-white: #F9F9F9;
+    --box-yello-light: #F2EBE3;
+    --box-dark-red-option: #89565D;
+    --box-dark-red: #421820;
+    --box-mid-dark-red: #81303D;
+    --button-color-hover: #F2EBE3;
+    --text-white: #F9F9F9;
+    --text-black: #0F0F0F;
+    --text-black-50: #0f0f0f7c;
+    --text-dark-red: #421820;
+    --text-light-red: #CD6778;
+
     /*CONFIGURAÇÕES GLOBAIS*/
     --text-xxs: 10px;
     --text-xs: 12px;
@@ -53,6 +69,7 @@
     margin: 0;
     border: 0;
     font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
 }
 
 body{
