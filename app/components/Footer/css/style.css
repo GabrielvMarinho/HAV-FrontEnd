@@ -46,6 +46,7 @@
     font-size: var(--text-sm);
     font-weight: 600;
     align-items: center;
+    opacity: 0.6;
 }
 .socialMedia{
     width: 35px;
@@ -54,7 +55,7 @@
     border-radius: 5px;
 }
 @media(max-width: 992px){
-    .footerEditor{
+    .footer{
         flex-direction: column;
         height: 829px;
         align-items: flex-start;

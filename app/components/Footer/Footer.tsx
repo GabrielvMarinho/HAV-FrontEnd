@@ -1,4 +1,4 @@
-import LightBulb from "../IconsTSX/LightBulb";
+import Help from "../IconsTSX/Help";
 import Sobre from "../IconsTSX/Sobre";
 import Folder from "../IconsTSX/Folder";
 import HavLogo from "../IconsTSX/HavLogo";
@@ -18,7 +18,10 @@ export default function Footer(props: { width: number, height: number, color: st
                 <section className="contentFooter">
                     <p className="titleContent-footer">Páginas de apoio</p>
                     <div className="iconInfos">
-                        <LightBulb width={props.width} height={props.height} color={props.color}></LightBulb>
+                        <Help width={props.width} height={props.height} color={props.color}></Help>
+                        <Link style={{ color: "var(--text-white)", opacity: "0.6"}} href={"/"}>FAQ</Link>
+                    </div>
+                    <div className="iconInfos">
                         <Sobre width={props.width} height={props.height} color={props.color}></Sobre>
                         <Link style={{ color: "var(--text-white)", opacity: "0.6"}} href={"/"}>Sobre nós</Link>
                     </div>
