@@ -128,7 +128,17 @@
 }
 
 
-
+.selectBox{
+    padding: 21px;
+    border: 1px var(--text-black) solid;
+    border-radius: var(--border-box);
+}
+.selectedBox{
+    background-color: #000;
+}
+.notSelectedBox{
+    background-color: transparent;
+}
 
 .label{
     font-size: var(--text-s);

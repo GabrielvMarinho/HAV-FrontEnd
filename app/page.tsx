@@ -14,6 +14,8 @@ import NavBarAdm from "./components/Header/NavBarAdm"
 import SlideRange from "./components/Filters/SlideRange"
 import SearchBarDesktop from "./components/Filters/SearchBarDesktop";
 import Modal from "./components/Modal/Modal";
+import SelectBox from "./components/Inputs/SelectBox";
+
 
 export default function Home() {
   
@@ -29,7 +31,7 @@ export default function Home() {
       <Button size="small" text="adnasidunasd"/>
       <Button size="medium" text="acesse o chat"/>
       <Button size="large" text="acesse o chat"/>
-
+      <SelectBox/>
       <Modal id = "x" trigger={
               <Button size="large" text="abrir modal"/>
       }></Modal>
