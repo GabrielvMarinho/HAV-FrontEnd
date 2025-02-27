@@ -7,13 +7,18 @@ import SlideRange from "../components/Filters/SlideRange";
 import InputDropdown from "../components/Inputs/InputDrodown";
 import HeaderOptions from "../components/Header/HeaderOptions";
 import Cellphone from "../components/IconsTSX/CellPhone";
+import Link from "next/link";
 
 export default function page(){
     return (
         <>
-        <HeaderOptions title={"opriont"} optionsIcons = {[<Cellphone width={15} height={15} color={"var(--text-white)"}/>,
-    <Cellphone width={15} height={15} color={"var(--text-white)"}/>,
-    <Cellphone width={15} height={15} color={"var(--text-white)"}/>] }options={["asd", "asd", "asd"]}/>
+        <HeaderOptions optionsLinks={[
+            "/imóveis",
+            "/oi",
+            "/thchau"
+        ]}title={"Gestão"} optionsIcons = {[<Cellphone width={15} height={15} color={"var(--text-white)"}/>,
+        <Cellphone width={15} height={15} color={"var(--text-white)"}/>,
+        <Cellphone width={15} height={15} color={"var(--text-white)"}/>] }options={["imóveis", "Agendamentos", "asd"]}/>
 
         <div style={{marginTop:"80px"}}></div>
         <Title tag="h1" text="Imóveis"/>
