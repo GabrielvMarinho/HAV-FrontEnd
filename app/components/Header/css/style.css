@@ -1,7 +1,5 @@
 @import "../../../variables.css";
 
-
-
 .boxNavBarAdm {
     width: 170px;
     height: 38px;
@@ -27,6 +25,45 @@
     border-radius: 0 var(--border-button) var(--border-button) 0;
 }
 
+.headerContainer {
+    background-color: var(--box-mid-dark-red);
+    border-radius: 30px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    width: 100%;
+    max-width: 1070px;
+    height: 50px;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.headerDesktop {
+    flex-grow: 1;
+}
+
+.headerMobile {
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 992px) {
+    .headerDesktop {
+        opacity: 0;
+        pointer-events: none; 
+    }
+
+    .headerMobile {
+        opacity: 1;
+        pointer-events: all;
+        width: 359px;
+    }
 
 .headerOptionContainer{
     position: relative;
@@ -73,7 +110,7 @@
     
 }
 
-
 .rotateIcon{
     rotate: 180deg;
+}
 }

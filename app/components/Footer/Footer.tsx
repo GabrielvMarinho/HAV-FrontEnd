@@ -1,3 +1,4 @@
+import Help from "../IconsTSX/Help";
 import Sobre from "../IconsTSX/Sobre";
 import Folder from "../IconsTSX/File";
 import HavLogo from "../IconsTSX/HavLogo";
@@ -7,7 +8,6 @@ import ChamadaTelefonica from "../IconsTSX/CellPhone";
 import Envelope from "../IconsTSX/Envelope";
 import "./css/style.css"
 import Button from "../Inputs/Button";
-// import InputTextFooter from "../Inputs/InputTextFooter";
 import InputText from "../Inputs/InputText";
 
 export default function Footer(props: { width: number, height: number, color: string }) {
@@ -16,6 +16,10 @@ export default function Footer(props: { width: number, height: number, color: st
             <article className="firstArticle-footer">
                 <section className="contentFooter">
                     <p className="titleContent-footer">Páginas de apoio</p>
+                    <div className="iconInfos">
+                        <Help width={props.width} height={props.height} color={props.color}></Help>
+                        <Link style={{ color: "var(--text-white)", opacity: "0.6"}} href={"/"}>FAQ</Link>
+                    </div>
                     <div className="iconInfos">
                         <Sobre width={props.width} height={props.height} color={props.color}></Sobre>
                         <Link style={{ color: "var(--text-white)", opacity: "0.6"}} href={"/"}>Sobre nós</Link>
@@ -56,7 +60,7 @@ export default function Footer(props: { width: number, height: number, color: st
                 <section className="contentFooter">
                     <p className="titleContent-footer">Receba Notificações</p>
                     <InputText id="email" size="medium" text="" placeholder="Digite seu E-mail"></InputText>
-                    <Button size="small" text="Inscrever-se"></Button>
+                    <Button size="small" text="Inscrever-se" func={()=>("")}></Button>
                 </section>
             </article>
         </footer>
