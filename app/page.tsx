@@ -18,11 +18,11 @@ import SearchBarDesktop from "./components/Filters/SearchBar";
 import Modal from "./components/Modal/Modal";
 import SelectBox from "./components/Inputs/SelectBox";
 import Link from "next/link";
-
 import ActionButton from "./components/Inputs/ActionButton";
-
 import Footer from "./components/Footer/Footer";
 import HeaderAdm from "./components/Header/HeaderAdm";
+import Cellphone from "./components/IconsTSX/CellPhone";
+import HeaderOptions from "./components/Header/HeaderOptions";
 
 export default function Home() {
   const checkSelects = function(){
@@ -32,7 +32,27 @@ export default function Home() {
   }
   return (
     <>
-      <HeaderAdm width={25.9} height={25.4} color=""/>
+      <HeaderAdm dropdownLinks={[
+      
+        <HeaderOptions optionsLinks={[
+          "/imóveis",
+          "/oi",
+          "/thchau"
+        ]}title={"Área do Admin"} optionsIcons = 
+        {[<Cellphone width={15} height={15} color={"var(--text-white)"}/>,
+          <Cellphone width={15} height={15} color={"var(--text-white)"}/>,
+          <Cellphone width={15} height={15} color={"var(--text-white)"}/>]}
+          options={["Usuários", "Imóveis"]}/>,
+        
+      <HeaderOptions optionsLinks={[
+      "/imóveis",
+      "/oi",
+      ]}title={"Gestão"} optionsIcons = {[<Cellphone width={15} height={15} color={"var(--text-white)"}/>,
+      <Cellphone width={15} height={15} color={"var(--text-white)"}/>
+          ]}options={["Usuários", "Imóveis"]}/>
+
+      
+      ]}options={["asd", "asdas", "asddd"]}optionsLinks={["/xxx", "/asdma", "/asdasd"]}width={25.9} height={25.4} color=""/>
       <Link href="/Imoveis">clique aqui</Link>
       <SelectedStar width={54} height={54} color={"#001111"}/>
       <NotSelectedStar width={54} height={54} color={"#001111"}/>

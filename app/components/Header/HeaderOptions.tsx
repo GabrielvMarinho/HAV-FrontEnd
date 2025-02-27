@@ -10,23 +10,27 @@ export default function HeaderOptions(props :{options :string[], optionsLinks :s
     
     return (
         <div className="headerOptionContainer">
-            <div className="headerOptionContainerTitle"style={{display: "flex", gap: "10px"}}>
+            <div className="headerOptionContainerTitle"style={{display: "flex", gap: "5px"}}>
 
                 <button onClick={() => setState(!state)}>{props.title}</button>
-                <div onClick={() => setState(!state)} className={state?"rotateIcon":""}>
+                <button onClick={() => setState(!state)} className={state?"rotateIcon":""}>
                     <ArrowIcon width={12} height={12} color={'var(--text-white)'}></ArrowIcon>
-                </div>
+                </button>
             </div>
+            {state &&
             <div className="boxHeaderOption">
-                {state && props.options.map((option, index) =>
+                {
+                 props.options.map((option, index) =>
             
                     <div className="iconPlusTextHeaderOption"style={{display: "flex", gap: "5px"}}>
                         {props.optionsIcons[index]}
                         <Link href={props.optionsLinks[index]} className='headerOptionContainerOption'>{option}</Link>
 
                     </div>
-                )}
+                 )}
             </div>
+            }
+
         </div>
     )
 }

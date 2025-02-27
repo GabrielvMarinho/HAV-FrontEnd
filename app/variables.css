@@ -75,10 +75,11 @@
 
 body{
     background-color: var(--bg-color);
-    justify-content: center;
     display: flex;
-    flex-direction: column;
+    justify-content: start;
     align-items: center;
+    flex-direction: column;
+    gap: 0px;
 }
 
 .lightHover:hover{
@@ -86,4 +87,9 @@ body{
 }
 .darkHover:hover{
     filter: brightness(1.1);
+}
+a{
+    text-decoration: none;
+    color: var(--text-white);
+    height: fit-content;
 }

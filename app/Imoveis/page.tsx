@@ -12,15 +12,8 @@ import Link from "next/link";
 export default function page(){
     return (
         <>
-        <HeaderOptions optionsLinks={[
-            "/imóveis",
-            "/oi",
-            "/thchau"
-        ]}title={"Gestão"} optionsIcons = {[<Cellphone width={15} height={15} color={"var(--text-white)"}/>,
-        <Cellphone width={15} height={15} color={"var(--text-white)"}/>,
-        <Cellphone width={15} height={15} color={"var(--text-white)"}/>] }options={["imóveis", "Agendamentos", "asd"]}/>
-
-        <div style={{marginTop:"80px"}}></div>
+        
+        
         <Title tag="h1" text="Imóveis"/>
         <SearchBar placeholder="Busca:"/>   
         <div style={{display:"flex", width:"95%", gap: "20px"}}>
