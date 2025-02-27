@@ -1,11 +1,9 @@
 import "./css/style.css"
 import TapeRetangleCardImovel from "../IconsTSX/TapeRetangleCardImovel";
 import TapeTopCardImovel from "../IconsTSX/TapeTopCardImovel";
-import { useState } from "react";
+import { text } from "stream/consumers";
 
-export default function TapeCardImovel() {
-    const [condition, setCondition] = useState("Promoção");
-
+export default function TapeCardImovel(props: {text :string}) {
     return (
         <div style={{ display: "flex", flexDirection: "column" }}>
             <TapeTopCardImovel width={12} height={12} color="" />
@@ -18,11 +16,8 @@ export default function TapeCardImovel() {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    cursor: "pointer"
-                }}
-                onClick={() => setCondition(prompt("Digite a nova condição:") || condition)}
-            >
-                <p style={{color: "var(--text-white)"}}>{condition}</p>
+                }}>
+                <p style={{color: "var(--text-white)"}}>{props.text}</p>
             </div>
         </div>
     );
