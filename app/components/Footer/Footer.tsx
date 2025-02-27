@@ -8,7 +8,6 @@ import ChamadaTelefonica from "../IconsTSX/CellPhone";
 import Envelope from "../IconsTSX/Envelope";
 import "./css/style.css"
 import Button from "../Inputs/Button";
-// import InputTextFooter from "../Inputs/InputTextFooter";
 import InputText from "../Inputs/InputText";
 
 export default function Footer(props: { width: number, height: number, color: string }) {
@@ -61,7 +60,7 @@ export default function Footer(props: { width: number, height: number, color: st
                 <section className="contentFooter">
                     <p className="titleContent-footer">Receba Notificações</p>
                     <InputText id="email" size="medium" text="" placeholder="Digite seu E-mail"></InputText>
-                    <Button size="small" text="Inscrever-se"></Button>
+                    <Button size="small" text="Inscrever-se" func={()=>("")}></Button>
                 </section>
             </article>
         </footer>

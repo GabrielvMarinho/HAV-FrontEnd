@@ -4,7 +4,7 @@ import TableList from "../components/Information/TableList";
 import InputText from "../components/Inputs/InputText";
 import Filter from "../components/Filters/Filter";
 import SlideRange from "../components/Filters/SlideRange";
-import InputDropdown from "../components/Inputs/InputDrodown";
+import InputDropdown from "../components/Inputs/InputDropdown";
 import HeaderOptions from "../components/Header/HeaderOptions";
 import Cellphone from "../components/IconsTSX/CellPhone";
 

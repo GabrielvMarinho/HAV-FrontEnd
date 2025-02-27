@@ -11,7 +11,7 @@ import StarFavorite from "./components/Inputs/StarFavorite"
 import Title from "./components/NonInteractable/Title"
 import TableList from "./components/Information/TableList";
 import Filter from "./components/Filters/Filter";
-import InputDropdown from "./components/Inputs/InputDrodown";
+import InputDropdown from "./components/Inputs/InputDropdown";
 import NavBarAdm from "./components/Header/NavBarAdm"
 import SlideRange from "./components/Filters/SlideRange"
 import SearchBarDesktop from "./components/Filters/SearchBar";
@@ -22,7 +22,6 @@ import Link from "next/link";
 import ActionButton from "./components/Inputs/ActionButton";
 
 import Footer from "./components/Footer/Footer";
-import InputTextFooter from "./components/Inputs/InputTextFooter";
 import HeaderAdm from "./components/Header/HeaderAdm";
 
 export default function Home() {
@@ -75,7 +74,6 @@ export default function Home() {
       <NavBarAdm/>
       <InputText size="small" text="CPF" placeholder="hint" id="email"/>
       <ArrowIcon width={111} height={111} color={"#501010"}/>
-      <InputTextFooter size="small" placeholder="Digite seu E-mail" id="email"/>
       <ActionButton width={25} height={25} color="" context="admin"/>
       <Footer width={25} height={25} color=""/>
       </>
