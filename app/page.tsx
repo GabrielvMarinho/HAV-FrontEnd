@@ -15,11 +15,12 @@ import SlideRange from "./components/Filters/SlideRange"
 import SearchBarDesktop from "./components/Filters/SearchBarDesktop";
 import Footer from "./components/Footer/Footer";
 import InputTextFooter from "./components/Inputs/InputTextFooter";
+import HeaderAdm from "./components/Header/HeaderAdm";
 
 export default function Home() {
   return (
     <>
-
+      <HeaderAdm width={25.9} height={25.4} color=""/>
       <SelectedStar width={54} height={54} color={"#001111"}/>
       <NotSelectedStar width={54} height={54} color={"#001111"}/>
       <DocumentIcon width={211} height={211} color={"#501010"}/>
