@@ -22,7 +22,8 @@ import ActionButton from "./components/Inputs/ActionButton";
 import Footer from "./components/Footer/Footer";
 import HeaderAdm from "./components/Header/HeaderAdm";
 import TapeCardImovel from "./components/Information/TapeCardImovel";
-
+import StatusCardImovel from "./components/Information/CategoryCardImovel";
+import RetangleStatusImovel from "./components/Information/RetangleStatusImovel";
 export default function Home() {
       const checkSelects = function () {
             var itens = document.body.querySelectorAll("[datatype='data-select-box-table-list'].selectedBox");
@@ -68,7 +69,9 @@ export default function Home() {
                   <InputText size="small" text="CPF" placeholder="hint" id="email" />
                   <ArrowIcon width={111} height={111} color={"#501010"} />
                   <ActionButton width={25} height={25} color="" context="admin" />
-                  <TapeCardImovel/>
+                  <TapeCardImovel text="Promoção"/>
+                  <StatusCardImovel text="Venda"/>
+                  <RetangleStatusImovel text="Promoção"/>
                   <Footer width={25} height={25} color="" />
             </>
       );
