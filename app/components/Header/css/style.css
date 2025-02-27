@@ -31,8 +31,48 @@
 .headerOptionContainer{
     position: relative;
 }
-.boxHeaderOption{
+.headerOptionContainer div{
+    background-color: var(--box-mid-dark-red);
     
-    position: absolute;
+}
+.headerOptionContainer :last-child{
+    border-bottom-right-radius: var(--border-box);
+    border-bottom-left-radius: var(--border-box);
+
+}
+.headerOptionContainer .boxHeaderOption{
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.headerOptionContainerTitle{
+    padding: 8px;
+    padding-bottom: 12px;
+    padding-inline: 10px;
+}
+.iconPlusTextHeaderOption{
+    padding-bottom: 8px;
+    padding-inline: 10px;
+
 }
 
+.headerOptionContainer button{
+    font-size: var(--text-s);
+    color: var(--text-white);
+    background-color: var(--box-mid-dark-red);
+
+}
+.boxHeaderOption{
+
+    background-color: var(--box-mid-dark-red);
+    position: absolute;
+    
+}
+
+
+.rotateIcon{
+    rotate: 180deg;
+}

@@ -6,17 +6,23 @@ import '../.././variables.css';
 
 export default function HeaderOptions(props :{options :string[], optionsIcons :ReactNode[], title :string}){
     const [state, setState] = useState(true);
-    function hi(){
-        console.log(state)
-    }
+    
     return (
         <div className="headerOptionContainer">
-            <button onClick={() => setState(!state)}>{props.title}</button>
-            <ArrowIcon width={10} height={10} color={var(--text-white)}></ArrowIcon>
+            <div className="headerOptionContainerTitle"style={{display: "flex", gap: "5px"}}>
+
+                <button onClick={() => setState(!state)}>{props.title}</button>
+                <div onClick={() => setState(!state)} className={state?"rotateIcon":""}>
+                    <ArrowIcon width={10} height={10} color={'var(--text-white)'}></ArrowIcon>
+                </div>
+            </div>
             <div className="boxHeaderOption">
-                {state && props.options.map(option =>
-                
-                    <button className='headerOptionContainerOption'>{option}</button>
+                {state && props.options.map((option, index) =>
+            
+                    <div className="iconPlusTextHeaderOption"style={{display: "flex", gap: "5px"}}>
+                        {props.optionsIcons[index]}
+                        <button className='headerOptionContainerOption'>{option}</button>
+                    </div>
                 )}
             </div>
         </div>

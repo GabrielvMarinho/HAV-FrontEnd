@@ -6,11 +6,14 @@ import Filter from "../components/Filters/Filter";
 import SlideRange from "../components/Filters/SlideRange";
 import InputDropdown from "../components/Inputs/InputDrodown";
 import HeaderOptions from "../components/Header/HeaderOptions";
+import Cellphone from "../components/IconsTSX/CellPhone";
 
 export default function page(){
     return (
         <>
-        <HeaderOptions title={"opriont"}options={["asd", "asd", "asd"]}/>
+        <HeaderOptions title={"opriont"} optionsIcons = {[<Cellphone width={15} height={15} color={"var(--text-white)"}/>,
+    <Cellphone width={15} height={15} color={"var(--text-white)"}/>,
+    <Cellphone width={15} height={15} color={"var(--text-white)"}/>] }options={["asd", "asd", "asd"]}/>
 
         <div style={{marginTop:"80px"}}></div>
         <Title tag="h1" text="Imóveis"/>

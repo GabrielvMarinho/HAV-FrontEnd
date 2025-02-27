@@ -3,7 +3,7 @@ import Folder from "../IconsTSX/File";
 import HavLogo from "../IconsTSX/HavLogo";
 import HavLogoMobile from "../IconsTSX/HavLogoMobile";
 import Link from "next/link";
-import ChamadaTelefonica from "../IconsTSX/ChamadaTelefonica";
+import ChamadaTelefonica from "../IconsTSX/CellPhone";
 import Envelope from "../IconsTSX/Envelope";
 import "./css/style.css"
 import Button from "../Inputs/Button";
