@@ -24,6 +24,7 @@ import HeaderAdm from "./components/Header/HeaderAdm";
 import TapeCardImovel from "./components/Information/TapeCardImovel";
 import StatusCardImovel from "./components/Information/CategoryCardImovel";
 import RetangleStatusImovel from "./components/Information/RetangleStatusImovel";
+import ButtonComprarAlugar from "./components/Inputs/ButtonComprarAlugar";
 export default function Home() {
       const checkSelects = function () {
             var itens = document.body.querySelectorAll("[datatype='data-select-box-table-list'].selectedBox");
@@ -72,6 +73,7 @@ export default function Home() {
                   <TapeCardImovel text="Promoção"/>
                   <StatusCardImovel text="Venda"/>
                   <RetangleStatusImovel text="Promoção"/>
+                  <ButtonComprarAlugar/>
                   <Footer width={25} height={25} color="" />
             </>
       );
