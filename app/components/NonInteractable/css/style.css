@@ -4,6 +4,7 @@
     width: fit-content;
     gap: 2px;
     color: var(--text-dark-red);
+    margin-bottom: var(--big-component-distance);
 }
 .titleLine{
     width: 75px;
@@ -11,11 +12,13 @@
     margin-inline: auto;
     background-color: var(--box-red-pink);
 }
-.smallTitle{
-    font-size: var(--text-ml);
-    font-weight: 900;
-}
-.largeTitle{
+
+.sizeTitle{
     font-size: var(--text-xl);
     font-weight: 900;
+}
+@media (width < 992px) {
+    .sizeTitle{
+        font-size: var(--text-ml);
+    }
 }

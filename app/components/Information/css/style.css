@@ -3,9 +3,32 @@
 .tableListData{
     width: 65vw;
 }
+.tableListLine{
+    width: 66vw;
+    opacity: 0.5;
+    background-color: var(--text-black);
+    height: 1px;
 
+}
+.marginSelectBox{
+    margin-inline: 15px;
+    margin-right: 25px;
+
+}
+.tableListLineHide{
+    padding: 10px;
+}
 .tableListData tr{
+    padding-top: 22px;
+    padding-bottom: 22px;
     display: flex;
+    align-items: center;
+}
+.tableListData thead tr{
+    padding: 0px;
+    padding-bottom: 22px;
+    display: flex;
+    align-items: center;
 }
 .tableListData th, .tableListData td{
     text-align: left;
@@ -17,9 +40,7 @@
     font-weight: 700;
 }
 .tableListData td{
-    padding-top: 20px;
-    margin-top: 20px;
-    border-top: 1px solid var(--text-black-50);
+    height: fit-content;
     font-size: var(--text-sm);
     color: var(--text-black);
     font-weight: 500;

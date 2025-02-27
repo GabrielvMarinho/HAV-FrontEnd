@@ -1,11 +1,13 @@
 import './css/style.css';
-
+import SelectBox from '../Inputs/SelectBox';
 
 export default function TableList(props: {size :string, titles :string[], data :string[][]}){
     return (
         <table className="tableListData">
             <thead>
                     <tr>
+                    <div className='tableListLineHide marginSelectBox'></div>
+
                         {props.titles.map( text => 
                                 <th>{text.toLocaleUpperCase()}</th>
                             )}
@@ -14,13 +16,20 @@ export default function TableList(props: {size :string, titles :string[], data :
             </thead>
             
             <tbody>
+
                 {props.data.map( texts =>
-                    <tr>
-                        {texts.map( text =>
-                            <td>{text}</td>
-                        )}
-                        
-                    </tr>
+                    <>
+                        <div className='tableListLine'></div>
+
+                        <tr className="tableRows">
+                            <div className='marginSelectBox'><SelectBox dataType='data-select-box-table-list'/></div>
+                            {texts.map( text =>
+                                <td>{text}</td>
+                            )}
+                            
+                            
+                        </tr>
+                    </>
                 )}
             
             </tbody>

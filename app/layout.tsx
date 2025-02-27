@@ -13,6 +13,10 @@ export default function RootLayout({
 
   children: React.ReactNode;
 }>) {
+
+  
+  var theme = "lightPallete";
+  
   return (
     <html lang="en" className={`${montserrat.variable}`}>
       <body>

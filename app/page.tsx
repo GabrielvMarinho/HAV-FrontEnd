@@ -1,3 +1,5 @@
+"use client"
+
 import DocumentIcon from "./components/IconsTSX/DocumentIcon"
 import Button from "./components/Inputs/Button";
 import Dropdown from "./components/Inputs/Dropdown";
@@ -12,26 +14,49 @@ import Filter from "./components/Filters/Filter";
 import InputDropdown from "./components/Inputs/InputDrodown";
 import NavBarAdm from "./components/Header/NavBarAdm"
 import SlideRange from "./components/Filters/SlideRange"
-import SearchBarDesktop from "./components/Filters/SearchBarDesktop";
+import SearchBarDesktop from "./components/Filters/SearchBar";
+import Modal from "./components/Modal/Modal";
+import SelectBox from "./components/Inputs/SelectBox";
+import Link from "next/link";
+
+import ActionButton from "./components/Inputs/ActionButton";
+
 import Footer from "./components/Footer/Footer";
 import InputTextFooter from "./components/Inputs/InputTextFooter";
 import HeaderAdm from "./components/Header/HeaderAdm";
 
 export default function Home() {
+  const checkSelects = function(){
+    var itens = document.body.querySelectorAll("[datatype='data-select-box-table-list'].selectedBox");
+    
+    console.log(itens)
+  }
   return (
     <>
       <HeaderAdm width={25.9} height={25.4} color=""/>
+      <Link href="/Imoveis">clique aqui</Link>
       <SelectedStar width={54} height={54} color={"#001111"}/>
       <NotSelectedStar width={54} height={54} color={"#001111"}/>
       <DocumentIcon width={211} height={211} color={"#501010"}/>
-      <Title size="small" tag="h1" text="titulo"/>
-      <Title size="large" tag="h2" text="titulo"/>
-      <Button size="small" text="adnasidunasd"/>
-      <Button size="medium" text="acesse o chat"/>
-      <Button size="large" text="acesse o chat"/>
+      <Title tag="h1" text="titulo"/>
+
+      <Title tag="h2" text="titulo"/>
+      <Button func={checkSelects} size="small" text="adnasidunasd"/>
+      <Button func={checkSelects} size="medium" text="acesse o chat"/>
+      <Button func={checkSelects} size="large" text="acesse o chat"/>
+      <Modal id = "x" trigger={
+              <Button func={checkSelects} size="large" text="abrir modal"/>
+      }></Modal>
+
+      
       <TableList size="large" titles={["finalidade", "tipo imóvel",  "email", "proprietário"]} 
       data={[["COMPRA", "APARTAMENTO", "asdaoid@gmail.com", "Bianca Isabela Vaz"], 
       ["COMPRA ", "APARTAMENTO", "efvvv@gmail.com", "Bianca Isabela Vaz"]]}/>
+      
+        
+      
+      <Button func={checkSelects} size="large" text="mostrar todas as selectbox da pagina"/>
+
       <Filter size="medium" 
       inputs={[<InputText size="medium" text="Nome" placeholder="ex: Bianca" id="nome"/>,
       <InputText size="medium" text="Email" placeholder="joao@gmail.com" id="email"/>,
@@ -51,6 +76,7 @@ export default function Home() {
       <InputText size="small" text="CPF" placeholder="hint" id="email"/>
       <ArrowIcon width={111} height={111} color={"#501010"}/>
       <InputTextFooter size="small" placeholder="Digite seu E-mail" id="email"/>
+      <ActionButton width={25} height={25} color="" context="admin"/>
       <Footer width={25} height={25} color=""/>
       </>
       );
