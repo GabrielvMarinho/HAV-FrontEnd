@@ -79,7 +79,7 @@ export default function Home() {
                         <ButtonComprarAlugar />
                         <CardImovel bairro="Bairro Czerniewicz" cidade="Jaraguá do Sul"
                               valor="r$999.00" infoParcela="/mês" quantQuartos={1} quantSala={1} quantBanheiros={2} informationStatus="Lançamento"
-                              category="compra"/>
+                              category="Venda"/>
                   </div>
                   <Footer width={25} height={25} color="" />
             </>
