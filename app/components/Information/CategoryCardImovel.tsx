@@ -10,8 +10,9 @@ export default function CategoryCardImovel(props: {text: string}){
         width: "102px", 
         height: "23px", 
         borderRadius: "30px", 
-        backgroundColor: backgroundColor}}>
-            <p style={{color: "var(--text-white)"}}>{props.text}</p>
+        backgroundColor: backgroundColor, 
+        fontSize: "var(--text-xs)"}}>
+            <p style={{color: "var(--text-white)"}}>{props.text.toUpperCase()}</p>
         </div>  
     );
 }

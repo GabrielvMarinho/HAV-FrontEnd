@@ -43,16 +43,16 @@ export default function Home() {
                   <Title tag="h1" text="titulo" />
 
                   <Title tag="h2" text="titulo" />
-                  <Button func={checkSelects} size="small" text="adnasidunasd" backgroundColor="" color=""/>
-                  <Button func={checkSelects} size="medium" text="acesse o chat" backgroundColor="" color=""/>
-                  <Button func={checkSelects} size="large" text="acesse o chat" backgroundColor="" color=""/>
+                  <Button func={checkSelects} size="small" text="adnasidunasd" backgroundColor="" color="" hover="darkHover" />
+                  <Button func={checkSelects} size="medium" text="acesse o chat" backgroundColor="" color="" hover="darkHover" />
+                  <Button func={checkSelects} size="large" text="acesse o chat" backgroundColor="" color="" hover="darkHover" />
                   <Modal id="x" trigger={
-                        <Button func={checkSelects} size="large" text="abrir modal" backgroundColor="" color=""/>
+                        <Button func={checkSelects} size="large" text="abrir modal" backgroundColor="" color="" hover="darkHover" />
                   }></Modal>
                   <TableList size="large" titles={["finalidade", "tipo imóvel", "email", "proprietário"]}
                         data={[["COMPRA", "APARTAMENTO", "asdaoid@gmail.com", "Bianca Isabela Vaz"],
                         ["COMPRA ", "APARTAMENTO", "efvvv@gmail.com", "Bianca Isabela Vaz"]]} />
-                  <Button func={checkSelects} size="large" text="mostrar todas as selectbox da pagina" backgroundColor="" color=""/>
+                  <Button func={checkSelects} size="large" text="mostrar todas as selectbox da pagina" backgroundColor="" color="" hover="darkHover" />
                   <Filter size="medium"
                         inputs={[<InputText size="medium" text="Nome" placeholder="ex: Bianca" id="nome" />,
                         <InputText size="medium" text="Email" placeholder="joao@gmail.com" id="email" />,
@@ -72,12 +72,15 @@ export default function Home() {
                   <InputText size="small" text="CPF" placeholder="hint" id="email" />
                   <ArrowIcon width={111} height={111} color={"#501010"} />
                   <ActionButton width={25} height={25} color="" context="admin" />
-                  <TapeCardImovel text="Promoção"/>
-                  <StatusCardImovel text="Venda"/>
-                  <RetangleStatusImovel text="Promoção"/>
-                  <ButtonComprarAlugar/>
-                  <CardImovel bairro="Bairro Czerniewicz" cidade="Jaraguá do Sul" 
-                  valor="r$999.00" infoParcela="/mês" quantQuartos={1} quantSala={1} quantBanheiros={2}/>
+                  <div style={{marginBottom: "60px"}}>
+                        <TapeCardImovel text="Promoção" />
+                        <StatusCardImovel text="Venda" />
+                        <RetangleStatusImovel text="Promoção" />
+                        <ButtonComprarAlugar />
+                        <CardImovel bairro="Bairro Czerniewicz" cidade="Jaraguá do Sul"
+                              valor="r$999.00" infoParcela="/mês" quantQuartos={1} quantSala={1} quantBanheiros={2} informationStatus="Lançamento"
+                              category="compra"/>
+                  </div>
                   <Footer width={25} height={25} color="" />
             </>
       );
