@@ -1,7 +1,16 @@
 import './css/style.css';
 import SelectBox from '../Inputs/SelectBox';
 
-export default function TableList(props: {size :string, titles :string[], data :string[][]}){
+export default function TableList(props: {size :string, titles :string[], data :any[]}){
+    console.log("data", props.data);
+
+    // {props.data.map( texts =>        
+    //             {texts.map( text =>
+    //                 console.log({text})
+    //             )}
+                
+                
+    // )}
     return (
         <table className="tableListData">
             <thead>
@@ -16,9 +25,9 @@ export default function TableList(props: {size :string, titles :string[], data :
             </thead>
             
             <tbody>
-
                 {props.data.map( texts =>
                     <>
+                    
                         <div className='tableListLine'></div>
 
                         <tr className="tableRows">
