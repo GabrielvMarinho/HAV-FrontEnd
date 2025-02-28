@@ -36,7 +36,8 @@ export default function Home() {
       return (
             <>
                   <HeaderAdm width={25.9} height={25.4} color="" />
-                  <Link href="/Imoveis">clique aqui</Link>
+                  <Link href="/Imoveis">Imóveis</Link>
+                  <Link href="/RelatorioEAnalise">Relatório de analise</Link>
                   <SelectedStar width={54} height={54} color={"#001111"} />
                   <NotSelectedStar width={54} height={54} color={"#001111"} />
                   <DocumentIcon width={211} height={211} color={"#501010"} />
@@ -86,4 +87,3 @@ export default function Home() {
       );
 
 }
-

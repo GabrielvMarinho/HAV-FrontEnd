@@ -1,6 +1,7 @@
 import HavLogo from "../IconsTSX/HavLogo";
 import Language from "../IconsTSX/Language";
 import Hamburger from "../IconsTSX/Hamburguer";
+import "./css/style.css"
 
 export default function HeaderAdm(props: { width: number; height: number; color: string }) {
     return (

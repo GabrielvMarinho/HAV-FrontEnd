@@ -4,10 +4,10 @@ import { useState } from "react";
 import './css/style.css';
 
 export default function NavBarAdm() {
-    const [selectedOption, setSelectedOption] = useState("CORRETOR");
-    const options = ["ADMINISTRADOR", "EDITOR", "CORRETOR", "USUÁRIO", "PROPRIETÁRIO"];
+    const [selectedOption, setSelectedOption] = useState("IMÓVEL");
+    const options = ["CORRETOR", "USUÁRIO", "IMÓVEL"];
     return (
-        <div style={{ display: "flex", flexDirection: "row", marginBottom: "var(--big-component-distance)"}}>
+        <div style={{ display: "flex", flexDirection: "row", marginBottom: "var(--big-component-distance)" }}>
             {options.map((option, index) => (
                 <button
                     key={option}
