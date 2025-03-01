@@ -2,15 +2,8 @@ import './css/style.css';
 import SelectBox from '../Inputs/SelectBox';
 
 export default function TableList(props: {size :string, titles :string[], data :any[]}){
-    console.log("data", props.data);
 
-    // {props.data.map( texts =>        
-    //             {texts.map( text =>
-    //                 console.log({text})
-    //             )}
-                
-                
-    // )}
+    
     return (
         <table className="tableListData">
             <thead>
@@ -25,17 +18,16 @@ export default function TableList(props: {size :string, titles :string[], data :
             </thead>
             
             <tbody>
-                {props.data.map( texts =>
+                {props.data && props.data.map( obj =>
                     <>
                     
                         <div className='tableListLine'></div>
 
                         <tr className="tableRows">
                             <div className='marginSelectBox'><SelectBox dataType='data-select-box-table-list'/></div>
-                            {texts.map( text =>
-                                <td>{text}</td>
+                            {Object.values(obj).map( (value, index) =>
+                                <td>{value}</td>
                             )}
-                            
                             
                         </tr>
                     </>

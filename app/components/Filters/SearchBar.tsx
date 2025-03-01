@@ -4,21 +4,6 @@ import './css/style.css';
 
 export default async function SearchBarDesktop(props: {placeholder :string}) {
 
-    const url = "http://localhost:9090/property";
-    const response = await fetch(url);
-    const data = await response.json();
-    var properties: string[][] = [];
-    data.content.map((property: any) => {
-        properties.push([
-            property.id.toString(), 
-            property.title, 
-            property.price.toString(), 
-            property.purpose, 
-            property.propertyCategory
-        ]);
-        
-        console.log(properties)
-    });
 
 
     return (

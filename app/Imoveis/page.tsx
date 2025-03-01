@@ -10,62 +10,71 @@ import HeaderOptions from "../components/Header/HeaderOptions";
 import Cellphone from "../components/IconsTSX/CellPhone";
 import Link from "next/link";
 import SearchIcon from "../components/IconsTSX/SearchIcon"
+import { useRouter } from "next/navigation";
 
 interface Property {
     id: string;
     title: string;
     price: string;
-    property_type: string;
+    propertyCategory: string;
     purpose: string;
 }
-
 async function fetchImoveis(): Promise<Property[]> {
     const url = "http://localhost:9090/property";
     const response = await fetch(url);
-    const data: Property[] = await response.json();
+    const data = await response.json();
     console.log(data)
-    // data.content.map((property: any) => {
-    //     properties.push([
-    //         property.id.toString(), 
-    //         property.title, 
-    //         property.price.toString(), 
-    //         property.purpose, 
-    //         property.propertyCategory
-    //     ]);
-        
-    //     console.log(properties)
-    // });
+    const properties: Property[] = data.content.map((item) => ({
+        id: item.id,
+        name: item.title,
+        price: item.price,
+        propertyCategory: item.propertyCategory,
+        purpose: item.purpose
 
-    // return properties;
-    return data
+      }));
+      return properties
 }
 
 
 
 export default async function page(){
+    
     const properties = await fetchImoveis(); // Buscando os dados da API
 
     
-
-
+    const inputs = [
+        {size: "medium", text: "Nome", placeholder: "ex: Bianca", id: "nome",},
+        {size: "medium", text: "Email", placeholder: "joao@gmail.com", id: "email",},
+        {size: "medium", text: "Telefone", placeholder: "ex: 672983579", id: "telefone",},
+        {size: "medium", text: "CPF", placeholder: "ex: 67298357955", id: "cpf",},
+      ];
+    const InputDropdown = [
+        {size: "medium", text: "Status", id: "status",
+        options: [['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}
+    ] 
+    const priceRanges = [
+        {key: "preco",
+        min: 50000,
+        max: 2000000,
+        step: 10000, 
+        id: "priceRanger"}
+    ]
+    
     return (
         <>
         
         
-
+        
         <Title tag="h1" text="Imóveis"/>
         <SearchBar placeholder="Busca:"/>   
         <div style={{display:"flex", width:"95%", gap: "20px"}}>
-            <Filter size="medium" 
-            inputs={[<InputText size="medium" text="Nome" placeholder="ex: Bianca" id="nome"/>,
-            <InputText size="medium" text="Email" placeholder="joao@gmail.com" id="email"/>,
-            <InputText size="medium" text="Telefone" placeholder="ex: 672983579" id="telefone"/>,
-            <InputText size="medium" text="CPF" placeholder="ex: 67298357955" id="cpf"/>,
-            <InputDropdown size="medium" text="Status" id="status" 
-            options={[['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}/>,
-            <SlideRange key="preco" min={50000} max={2000000} step={10000} />
-                ]} 
-                search={<SearchIcon height={35} width={35} color={"var(--box-red-pink)"}/>} />
+            <Filter 
+            size="medium" 
+            inputs={inputs}
+            inputsDropdown={InputDropdown}
+            inputPriceRanges={priceRanges}
+            />
+                 
 
             <TableList size="large" titles={["id imóvel", "proprietário",  "tipo imóvel", "categoria", "status"]} 
             data={properties}/>

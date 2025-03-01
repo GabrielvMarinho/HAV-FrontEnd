@@ -3,13 +3,12 @@
 import { useState } from 'react';
 import './css/style.css';
 
-export default function InputDropdown(props: {options :[string, string][], size :string, text:string, id :string}){
-    const [option, setOption] = useState("");
+export default function InputDropdown(props: {options :[string, string][], size :string, text:string, id :string, onChange :any}){
 
     return(
         <div style={{display: "flex", flexDirection: "column", gap:"8px"}}>
             <label className="label">{props.text}</label>
-            <select className={props.size+"InputDropdown inputDropdown"} onChange={(e) => {setOption(e.target.value)}}>
+            <select id = {props.id} className={props.size+"InputDropdown inputDropdown"} onChange={props.onChange}>
 
                 <option value="" disabled selected>Selecione Algo</option>
 
