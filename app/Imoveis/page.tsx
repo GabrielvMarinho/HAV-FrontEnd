@@ -43,17 +43,18 @@ export default async function page(){
 
     
     const inputs = [
-        {size: "medium", text: "Nome", placeholder: "ex: Bianca", id: "nome",},
-        {size: "medium", text: "Email", placeholder: "joao@gmail.com", id: "email",},
-        {size: "medium", text: "Telefone", placeholder: "ex: 672983579", id: "telefone",},
-        {size: "medium", text: "CPF", placeholder: "ex: 67298357955", id: "cpf",},
+        {name: "nome", size: "medium", text: "Nome", placeholder: "ex: Bianca", id: "nome",},
+        {name: "email", size: "medium", text: "Email", placeholder: "joao@gmail.com", id: "email",},
+        {name: "telefone", size: "medium", text: "Telefone", placeholder: "ex: 672983579", id: "telefone",},
+        {name: "cpf", size: "medium", text: "CPF", placeholder: "ex: 67298357955", id: "cpf",},
       ];
     const InputDropdown = [
-        {size: "medium", text: "Status", id: "status",
+        {name: "status", size: "medium", text: "Status", id: "status",
         options: [['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}
     ] 
     const priceRanges = [
-        {key: "preco",
+        {name: "preco",
+        key: "preco",
         min: 50000,
         max: 2000000,
         step: 10000, 
@@ -74,8 +75,6 @@ export default async function page(){
             inputsDropdown={InputDropdown}
             inputPriceRanges={priceRanges}
             />
-                 
-
             <TableList size="large" titles={["id imóvel", "proprietário",  "tipo imóvel", "categoria", "status"]} 
             data={properties}/>
         </div>

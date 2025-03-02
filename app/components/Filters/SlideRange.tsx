@@ -61,6 +61,7 @@ const PriceRangeSlider = (props: {min :number, max :number, step :number, id :nu
         </div>
         <div className="range-input">
           <input
+            name="min"
             type="range"
             className="range-min"
             min={props.min}
@@ -70,6 +71,7 @@ const PriceRangeSlider = (props: {min :number, max :number, step :number, id :nu
             onInput={handleRangeInputChange}
           />
           <input
+            name="max"
             type="range"
             className="range-max"
             min={props.min}

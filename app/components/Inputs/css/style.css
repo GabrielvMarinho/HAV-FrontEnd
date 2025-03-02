@@ -3,8 +3,8 @@
 .buttonBuscaClaro{
     background-color: var(--box-white);
     width: fit-content;
+    height: fit-content;
     padding: 15px;
-    height: 35px;
     margin-top: 10px;
     margin-inline: auto;
     border-radius: var(--xborder-box);

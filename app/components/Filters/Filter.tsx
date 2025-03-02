@@ -12,17 +12,10 @@ import { useRouter, usePathname } from "next/navigation";
 
 export default function Filter(props: {size :string, inputs :any[], inputsDropdown :any[], inputPriceRanges :any[]}){
     
-    const router = useRouter();
 
     
-    const pathname = usePathname(); // Obtém a URL atual sem os parâmetros
 
-    
-    
-    const fetchUrl = function(){
-        router.push(`${pathname}/Result?min=${priceRange.min}&max=${priceRange.max}`);    
-    }
-    
+
     
     
     const allInputs = [props.inputs, props.inputsDropdown];
@@ -37,7 +30,6 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
 
     const handlePriceChange = (min: number, max: number) => {
         setPriceRange({ min, max });
-        
     };
 
     const handleChange = (e) => {
@@ -56,31 +48,32 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
        */
     
     return(
-        <div className="filterSide">
+        <form action="/Imoveis" className="filterSide">
             
             {props.inputs.map((input) => (
                 input &&
                 <InputText
+                    name = {input.name}
                     size={input.size}
                     placeholder={input.placeholder}
                     text={input.text}
                     id={input.id}
-                    onChange={handleChange}
                 />
             ))}
             {props.inputsDropdown.map((input) => (
                 input &&
                 <InputDropdown
-                options={input.options}
+                    name = {input.name}
+                    options={input.options}
                     size={input.size}
                     text={input.text}
                     id={input.id}
-                    onChange={handleChange}
                 />
             ))}
             {props.inputPriceRanges.map((input) => (
                 input &&
                 <PriceRangeSlider
+                    name = {input.name}
                     min={input.min}
                     max={input.max}
                     step={input.step}
@@ -88,9 +81,9 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
                     onChange={handlePriceChange}
                 />
             ))}
-            <div onClick={fetchUrl} className="buttonBuscaClaro lightHover">
+            <button type="submit" className="buttonBuscaClaro lightHover">
                 <SearchIcon height={35} width={35} color={"var(--box-red-pink)"}/>
-            </div>
-        </div>
+            </button>
+        </form>
     );
 }
