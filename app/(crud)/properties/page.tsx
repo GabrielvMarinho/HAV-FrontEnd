@@ -1,15 +1,15 @@
 
-import Title from "../components/NonInteractable/Title";
-import SearchBar from "../components/Filters/SearchBar";
-import TableList from "../components/Information/TableList";
-import InputText from "../components/Inputs/InputText";
-import Filter from "../components/Filters/Filter";
-import SlideRange from "../components/Filters/SlideRange";
-import InputDropdown from "../components/Inputs/InputDropdown";
-import HeaderOptions from "../components/Header/HeaderOptions";
-import Cellphone from "../components/IconsTSX/CellPhone";
+import Title from "../../components/NonInteractable/Title";
+import SearchBar from "../../components/Filters/SearchBar";
+import TableList from "../../components/Information/TableList";
+import InputText from "../../components/Inputs/InputText";
+import Filter from "../../components/Filters/Filter";
+import SlideRange from "../../components/Filters/SlideRange";
+import InputDropdown from "../../components/Inputs/InputDropdown";
+import HeaderOptions from "../../components/Header/HeaderOptions";
+import Cellphone from "../../components/IconsTSX/CellPhone";
 import Link from "next/link";
-import SearchIcon from "../components/IconsTSX/SearchIcon"
+import SearchIcon from "../../components/IconsTSX/SearchIcon"
 import { useRouter } from "next/navigation";
 
 interface Property {
@@ -49,7 +49,7 @@ export default async function page(){
         {name: "cpf", size: "medium", text: "CPF", placeholder: "ex: 67298357955", id: "cpf",},
       ];
     const InputDropdown = [
-        {name: "status", size: "medium", text: "Status", id: "status",
+        {name: "Status", size: "medium", text: "Status", id: "status",
         options: [['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}
     ] 
     const priceRanges = [

@@ -6,7 +6,7 @@ import './css/style.css';
 export default function InputDropdown(props: {name :string; options :[string, string][], size :string, text:string, id :string}){
 
     return(
-        <div style={{display: "flex", flexDirection: "column", gap:"8px"}}>
+        <div style={{width: "fit-content", display: "flex", flexDirection: "column", gap:"8px"}}>
             <label className="label">{props.text}</label>
             <select name={props.name} id = {props.id} className={props.size+"InputDropdown inputDropdown"}>
 

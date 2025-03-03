@@ -10,7 +10,7 @@ import InputDropdown from "../Inputs/InputDropdown";
 import PriceRangeSlider from "./SlideRange";
 import { useRouter, usePathname } from "next/navigation";
 
-export default function Filter(props: {size :string, inputs :any[], inputsDropdown :any[], inputPriceRanges :any[]}){
+export default function Filter(props: {size :string, inputs :any[], inputsDropdown :any[], inputPriceRanges :any[] | null}){
     
 
     
@@ -26,9 +26,12 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
     }, {})
     );
 
-    const [priceRange, setPriceRange] = useState({ min: props.inputPriceRanges[0].min, max: props.inputPriceRanges[0].max });
+    
+    const [priceRange, setPriceRange] = useState({ min: props.inputPriceRanges?.[0]?.min ?? 0, max: props.inputPriceRanges?.[0]?.max });
+    
 
     const handlePriceChange = (min: number, max: number) => {
+        if(!props.inputPriceRanges) return 
         setPriceRange({ min, max });
     };
 

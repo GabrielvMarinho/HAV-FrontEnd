@@ -5,6 +5,7 @@ import { ReactNode, useState } from "react";
 import '../.././variables.css';
 import Link from 'next/link';
 
+
 export default function HeaderOptions(props :{options :string[], optionsLinks :string[], optionsIcons :ReactNode[], title :string}){
     const [state, setState] = useState(false);
     
