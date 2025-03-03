@@ -1,9 +1,9 @@
 import { Montserrat } from 'next/font/google';
 
-import HeaderAdm from "./components/Header/HeaderAdm";
-import HeaderOptions from "./components/Header/HeaderOptions";
-import Cellphone from "./components/IconsTSX/CellPhone"
-import Footer from './components/Footer/Footer';
+import HeaderAdm from "../components/Header/HeaderAdm";
+import HeaderOptions from "../components/Header/HeaderOptions";
+import Cellphone from "../components/IconsTSX/CellPhone"
+import Footer from '../components/Footer/Footer';
 
 const montserrat = Montserrat({
   weight: ['400', '500', '600', '700'],
@@ -12,12 +12,7 @@ const montserrat = Montserrat({
 });
 
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
 
   
   var theme = "lightPallete";
@@ -46,7 +41,6 @@ export default function RootLayout({
           ]}options={["asd", "asdas", "asddd"]}optionsLinks={["/xxx", "/asdma", "/asdasd"]}width={25} height={25} color=""/>
               
         {children}
-          <Footer></Footer>
       </body>
     </html>
   );

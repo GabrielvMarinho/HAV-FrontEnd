@@ -1,8 +1,14 @@
 @import "../../../variables.css";
 
 .boxNavBarAdm {
-    width: 170px;
-    height: 38px;
+    
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    font-size: var(--text-sm);
+    width: clamp(170px, 10vw, 200px);
+    height: clamp(30px, 2.5vw, 40px);
     border: none;
     cursor: pointer;
     background-color: white; /* Cor padrão */
@@ -36,6 +42,9 @@
     font-size: var(--text-s);
     display: flex;
     align-items: center;
+}
+.navBarAdm{
+    margin-bottom: 60px;
 }
 .headerContainer {
     background-color: var(--box-mid-dark-red);

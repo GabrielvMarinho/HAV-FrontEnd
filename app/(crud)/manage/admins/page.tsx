@@ -13,35 +13,14 @@ import SearchIcon from "../../../components/IconsTSX/SearchIcon"
 import { useRouter } from "next/navigation";
 import ActionButtons, { ActionButton } from "@/app/components/Inputs/ActionButton";
 import "../../../pageStructure.css"
+import NavBarAdm from "@/app/components/Header/NavBarAdm";
 
-interface Property {
-    id: string;
-    title: string;
-    price: string;
-    propertyCategory: string;
-    purpose: string;
-}
-async function fetchImoveis(): Promise<Property[]> {
-    const url = "http://localhost:9090/property";
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data)
-    const properties: Property[] = data.content.map((item) => ({
-        id: item.id,
-        name: item.title,
-        price: item.price,
-        propertyCategory: item.propertyCategory,
-        purpose: item.purpose
-
-      }));
-      return properties
-}
 
 
 
 export default async function page(){
     
-    const properties = await fetchImoveis(); // Buscando os dados da API
+    //const properties = await fetchImoveis(); // Buscando os dados da API
 
     
     const inputs = [
@@ -51,7 +30,7 @@ export default async function page(){
         {name: "cpf", size: "medium", text: "CPF", placeholder: "ex: 67298357955", id: "cpf",},
       ];
     const inputDropdown = [
-        {name: "Objetivo", size: "medium", text: "Status", id: "status",
+        {name: "Objetivo", size: "large", text: "Status", id: "status",
         options: [['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}
     ] 
     
@@ -61,16 +40,17 @@ export default async function page(){
         
         
         <Title tag="h1" text="Proprietários"/>
+        <NavBarAdm/>
         <SearchBar placeholder="Busca:"/>   
         <div className="containerFilterListAction">
             <Filter 
             size="medium" 
             inputs={inputs}
-            inputsDropdown={InputDropdown}
+            inputsDropdown={inputDropdown}
             inputPriceRanges={[]}
             />
-            <TableList size="large" titles={["cpf", "nome",  "email", "n. imóveis", "objetivo"]} 
-            data={properties}/>
+            <TableList size="large" titles={["cpf", "nome",  "email", "telefone", "status"]} 
+            data={[]}/>
             <ActionButtons context="admin"/>
         </div>
         
