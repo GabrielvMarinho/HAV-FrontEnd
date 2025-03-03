@@ -60,7 +60,7 @@ export default function Footer(props: { width: number, height: number, color: st
                 <section className="contentFooter">
                     <p className="titleContent-footer">Receba Notificações</p>
                     <InputText id="email" size="medium" text="" placeholder="Digite seu E-mail"></InputText>
-                    <Button size="small" text="Inscrever-se" func={()=>("")}></Button>
+                    <Button size="small" text="Inscrever-se" func={()=>("")} backgroundColor="" color="" hover="darkHover"></Button>
                 </section>
             </article>
         </footer>
