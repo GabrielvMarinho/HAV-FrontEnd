@@ -30,7 +30,9 @@ export default function Home() {
     
     console.log(itens)
   }
-  
+  const xx = function(){
+    console.log("esperando confirmação")
+  }
   return (
     <>
       <HeaderAdm dropdownLinks={[
@@ -52,14 +54,15 @@ export default function Home() {
       <Cellphone width={15} height={15} color={"var(--text-white)"}/>
           ]}options={["Usuários", "Imóveis"]}/>
 
-      
       ]}options={["asd", "asdas", "asddd"]}optionsLinks={["/xxx", "/asdma", "/asdasd"]}width={25.9} height={25.4} color=""/>
       <Link href="/Imoveis">clique aqui</Link>
       <SelectedStar width={54} height={54} color={"#001111"}/>
       <NotSelectedStar width={54} height={54} color={"#001111"}/>
       <DocumentIcon width={211} height={211} color={"#501010"}/>
       <Title tag="h1" text="titulo"/>
-      
+
+
+
       </>
   )
 

@@ -4,14 +4,31 @@ import "./css/style.css"
 import InputDropdown from "../Inputs/InputDropdown";
 import InputText from "../Inputs/InputText";
 import Button from "../Inputs/Button";
-
+import Modal from "../Modal/Modal";
+import { useState } from "react";
 export default function FormOwner(){
 
-    const addOwner = function(e: React.FormEvent<HTMLFormElement>){
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [pendingFormData, setPendingFormData] = useState<FormData | null>(null);
+
+
+    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const formData = new FormData(e.currentTarget as HTMLFormElement);
-        console.log(formData.get("nome_completo"))
+        console.log("asdasd")
+        const formData = new FormData(e.currentTarget);
+        setPendingFormData(formData); // Armazena os dados temporariamente
+        setIsModalOpen(true); // Abre o modal
+        console.log(isModalOpen)
+      };
+      
+    const addOwner = async function(){
+        if (!pendingFormData) return;
+
+        const formData = pendingFormData;
+        const formObject = Object.fromEntries(formData.entries());
+        console.log(formObject)
+        
     }
 
     const inputs = [
@@ -63,7 +80,7 @@ export default function FormOwner(){
     ];
 
     return (
-        <form className="ownerForm" onSubmit={addOwner}>
+        <form className="ownerForm"  onSubmit={handleFormSubmit}>
             <p>DADOS</p>
             <div className="ownerFormInputs">
             {inputs.map((input) => (
@@ -88,6 +105,7 @@ export default function FormOwner(){
                 ))}
                 </div>
                 <Button size={"small"} text="Confirmar"></Button>
+                <Modal id = "idModal" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onConfirm={addOwner}></Modal>
         </form>
     )
 }
