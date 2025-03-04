@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "chart.js": "^4.4.8",
     "json": "^11.0.0",
     "next": "15.1.7",
     "package": "^1.0.1",
