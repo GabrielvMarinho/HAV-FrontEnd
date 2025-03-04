@@ -11,8 +11,7 @@ export default function FormOwner(){
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<FormData | null>(null);
-
-
+    
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log("asdasd")

@@ -17,28 +17,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   
   var theme = "lightPallete";
   
-  
+
   return (
     <html lang="en" className={`${montserrat.variable}`}>
       
       <body>
-          <HeaderAdm dropdownLinks={[
-          <HeaderOptions optionsLinks={[                                                      
-              "/imóveis",
-              "/oi",
-              "/thchau"
-            ]}title={"Área do Admin"} optionsIcons = 
-            {[<Cellphone width={15} height={15} color={"var(--text-white)"}/>,
-              <Cellphone width={15} height={15} color={"var(--text-white)"}/>,
-              <Cellphone width={15} height={15} color={"var(--text-white)"}/>]}
-              options={["Usuários", "Imóveis"]}/>,
-          <HeaderOptions optionsLinks={[
-          "/imóveis",
-          "/oi",
-          ]}title={"Gestão"} optionsIcons = {[<Cellphone width={15} height={15} color={"var(--text-white)"}/>,
-          <Cellphone width={15} height={15} color={"var(--text-white)"}/>
-              ]}options={["Usuários", "Imóveis"]}/>
-          ]}options={["asd", "asdas", "asddd"]}optionsLinks={["/xxx", "/asdma", "/asdasd"]}width={25} height={25} color=""/>
+          <HeaderAdm/>
               
         {children}
       </body>
