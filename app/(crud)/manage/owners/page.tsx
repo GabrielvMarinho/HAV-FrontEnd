@@ -51,7 +51,34 @@ export default async function page(){
             inputPriceRanges={[]}
             />
             <TableList size="large" titles={["cpf", "nome",  "email", "n. imóveis", "objetivo"]} 
-            data={[]}/>
+            data={[
+                {
+                    "id": "333",
+                  "cpf": "123.456.789-00",
+                  "nome": "João Silva",
+                  "email": "joao@.com",
+                  "n. imóveis": 2,
+                  "objetivo": "Investimento"
+                },
+                {
+                    "id": "566",
+
+                  "cpf": "987.654.321-00",
+                  "nome": "Maria Oliveira",
+                  "email": "maria@.com",
+                  "n. imóveis": 1,
+                  "objetivo": "Moradia"
+                },
+                {
+                    "id": "769",
+
+                  "cpf": "456.123.789-00",
+                  "nome": "Carlos Santos",
+                  "email": "carlos@.com",
+                  "n. imóveis": 3,
+                  "objetivo": "Aluguel"
+                }
+              ]}/>
             <ActionButtons context="admin"/>
         </div>
         
