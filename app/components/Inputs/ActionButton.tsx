@@ -1,42 +1,53 @@
-import { useState } from 'react';
+"use client"
 import './css/style.css';
 import MoreSignal from '../IconsTSX/MoreSignal';
 import Pencil from '../IconsTSX/Pencil';
 import Trashcan from '../IconsTSX/Trashcan';
 import Folder from '../IconsTSX/Folder';
 import Graphic from '../IconsTSX/Graphic';
-import ArrowBack from '../IconsTSX/ArrowBack'; // Importando o novo ícone
+import { useRouter } from "next/navigation";
 
-export function ActionButton(props: { className: string; Icon: any; width: number; height: number; color: string; onClick?: () => void }) {
+// Componente ActionButton
+export function ActionButton(props: { className: string; Icon: any; onClick: any}) {
     return (
-        <div className={`ActionButton ${props.className}`} onClick={props.onClick}>
+        <div onClick={props.onClick} className={`ActionButton ${props.className}`}>
             <props.Icon
-                width={props.width}
-                height={props.height}
-                color={props.color} // Passando a cor diretamente para o ícone
-                style={{ width: props.width, height: props.height }}
+                width={45}
+                height={45}
             />
         </div>
     );
 }
 
-export default function ActionButtons(props: { width: number; height: number; color: string; context: 'editor' | 'admin' }) {
-    const [isArchiving, setIsArchiving] = useState(false); // Apenas alternando entre os ícones
+// Componente ActionButtons
+export default function ActionButtons(props: { context: 'editor' | 'admin' }) {
+    const router = useRouter();
 
-    const toggleArchive = () => {
-        setIsArchiving(prevState => !prevState); // Alterna entre verdadeiro e falso
-    };
-
+    const editFunction = function(){
+        router.push(`${window.location.pathname}/edit`);
+    }
+    const addFunction = function(){
+        router.push(`${window.location.pathname}/add`);
+    }
+    const deleteFunction = function(){
+        router.push(`${window.location.pathname}/delete`);
+    }
+    const archiveFunction = function(){
+        router.push(`${window.location.pathname}/archive`);
+    }
+    const graphFunction = function(){
+        router.push(`${window.location.pathname}/graphs`);
+    }
     return (
         <div className="actionButtons">
             {props.context === 'admin' && (
-                <ActionButton className="graphicButton darkHover" Icon={Graphic} width={props.width} height={props.height} color={props.color} />
+                <ActionButton onClick={graphFunction} className="graphicButton darkHover" Icon={Graphic}  />
             )}
-            <ActionButton className="addButton darkHover" Icon={MoreSignal} width={props.width} height={props.height} color={props.color} />
-            <ActionButton className="editButton darkHover" Icon={Pencil} width={props.width} height={props.height} color={props.color} />
-            <ActionButton className="deleteButton darkHover" Icon={Trashcan} width={props.width} height={props.height} color={props.color} />
-
-            <ActionButton className="archiveButton darkHover" Icon={isArchiving ? ArrowBack : Folder} width={props.width} height={props.height} color={props.color} onClick={toggleArchive}/>
+            {/* Botões para Editor e Admin */}
+            <ActionButton onClick={addFunction} className="addButton darkHover" Icon={MoreSignal} />
+            <ActionButton onClick={editFunction} className="editButton darkHover" Icon={Pencil}  />
+            <ActionButton onClick={deleteFunction} className="deleteButton darkHover" Icon={Trashcan} />
+            <ActionButton onClick={archiveFunction} className="archiveButton darkHover" Icon={Folder}  />
         </div>
     );
 }

@@ -2,14 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import './css/style.css';
 
-const PriceRangeSlider = (props: {min :number, max :number, step :number}) => {
+const PriceRangeSlider = (props: {min :number, max :number, step :number, id :number, onChange: (min: number, max: number) =>void}) => {
+
   const [minPrice, setMinPrice] = useState(props.min);
   const [maxPrice, setMaxPrice] = useState(props.max);
   const [rangeProgress, setRangeProgress] = useState({ left: props.min, right: props.max });
 
   const priceGap = props.max*0.1;
 
+  
+
   useEffect(() => {
+    
     const range = props.max - props.min
     // Update range progress based on price input values
     const minPercent = (((minPrice - props.min)*100)/range);
@@ -21,16 +25,13 @@ const PriceRangeSlider = (props: {min :number, max :number, step :number}) => {
       
     });
 
+
+    //atualiza para o componente que ele esta
+  if (minPrice !== props.min || maxPrice !== props.max) {
+    props.onChange(minPrice, maxPrice);
+  }
   }, [minPrice, maxPrice]);
   
-  const handlePriceInputChange = (e) => {
-    const value = parseInt(e.target.value);
-    if (e.target.className === 'input-min' && value <= maxPrice - priceGap) {
-      setMinPrice(value);
-    } else if (e.target.className === 'input-max' && value >= minPrice + priceGap) {
-      setMaxPrice(value);
-    }
-  };
 
   const handleRangeInputChange = (e) => {
     const value = parseInt(e.target.value);
@@ -60,6 +61,7 @@ const PriceRangeSlider = (props: {min :number, max :number, step :number}) => {
         </div>
         <div className="range-input">
           <input
+            name="min"
             type="range"
             className="range-min"
             min={props.min}
@@ -69,6 +71,7 @@ const PriceRangeSlider = (props: {min :number, max :number, step :number}) => {
             onInput={handleRangeInputChange}
           />
           <input
+            name="max"
             type="range"
             className="range-max"
             min={props.min}

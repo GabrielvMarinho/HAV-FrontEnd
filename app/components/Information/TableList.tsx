@@ -1,7 +1,15 @@
+"use client"
 import './css/style.css';
-import SelectBox from '../Inputs/SelectBox';
+import { useState } from 'react';
 
-export default function TableList(props: {size :string, titles :string[], data :string[][]}){
+export default function TableList(props: {size :string, titles :string[], data :any[]}){
+    const [selected, setSelected] = useState<string[]>([]);
+
+    const handleSelect = (option: string) =>{
+        console.log(option)
+        setSelected((prev :string[]) =>
+            prev.includes(option) ? prev.filter((item) => item !== option) : [...prev, option])
+    }
     return (
         <table className="tableListData">
             <thead>
@@ -16,17 +24,24 @@ export default function TableList(props: {size :string, titles :string[], data :
             </thead>
             
             <tbody>
-
-                {props.data.map( texts =>
+                {props.data && props.data.map((obj, index) =>
                     <>
+                    
                         <div className='tableListLine'></div>
 
                         <tr className="tableRows">
-                            <div className='marginSelectBox'><SelectBox dataType='data-select-box-table-list'/></div>
-                            {texts.map( text =>
-                                <td>{text}</td>
+                            <div className='marginSelectBox'>
+
+                            <input
+                                type="checkbox"
+                                checked={selected.includes(obj.id)}
+                                onChange={() => handleSelect(obj.id)}
+                            />
+
+                            </div>
+                            {props.titles.map( name => 
+                                <td>{obj[name]}</td>
                             )}
-                            
                             
                         </tr>
                     </>

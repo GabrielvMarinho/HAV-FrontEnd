@@ -1,0 +1,11 @@
+.ownerForm{
+    
+    padding: 10px;
+    background-color: aqua;
+    width: 1000px;
+}
+.ownerFormInputs{
+    width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+}

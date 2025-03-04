@@ -2,7 +2,8 @@
 
 .title{
     width: fit-content;
-    gap: 6px;
+    font-weight: 900;
+    gap: 2px;
     color: var(--text-dark-red);
     margin-bottom: var(--big-component-distance);
 }

@@ -2,7 +2,6 @@ import Icon from "./IconInterface";
 
 export default function Hamburger({ width, height, color }: Icon) {
     return (
-        <div>
             <svg width={width} height={height} viewBox="0 0 101 71" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="Group">
                     <path id="Vector" d="M96.152 30.9854H4.84776C2.44653 30.9854 0.5 32.9319 0.5 35.3331C0.5 37.7343 2.44653 39.6809 4.84776 39.6809H96.152C98.5533 39.6809 100.5 37.7343 100.5 35.3331C100.5 32.9319 98.5533 30.9854 96.152 30.9854Z" fill="#F2EBE3" />
@@ -11,6 +10,5 @@ export default function Hamburger({ width, height, color }: Icon) {
                 </g>
             </svg>
 
-        </div>
     );
 }

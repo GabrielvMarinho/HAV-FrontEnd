@@ -35,7 +35,7 @@
     flex: 1;
 }
 .tableListData th{
-    font-size: var(--text-ml);
+    font-size: var(--text-sl);
     color: var(--text-dark-red);
     font-weight: 700;
 }

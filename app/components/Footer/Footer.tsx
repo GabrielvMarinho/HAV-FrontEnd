@@ -1,3 +1,4 @@
+"use client"
 import Help from "../IconsTSX/Help";
 import Sobre from "../IconsTSX/Sobre";
 import Folder from "../IconsTSX/File";
@@ -9,23 +10,33 @@ import Envelope from "../IconsTSX/Envelope";
 import "./css/style.css"
 import Button from "../Inputs/Button";
 import InputText from "../Inputs/InputText";
+import "../../variables.css"
+export default function Footer() {
+    //funcão para mandar o email para receber notificação
 
-export default function Footer(props: { width: number, height: number, color: string }) {
+    //não finalizado
+    const sendEmail = function(e: React.FormEvent<HTMLFormElement>){
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget as HTMLFormElement);
+        console.log("email enviado para notificações", formData.get("emailFooter"))
+    }   
+
+
     return (
         <footer className="footer" >
             <article className="firstArticle-footer">
                 <section className="contentFooter">
                     <p className="titleContent-footer">Páginas de apoio</p>
                     <div className="iconInfos">
-                        <Help width={props.width} height={props.height} color={props.color}></Help>
+                        <Help width={25} height={25} color={"var(--icon-footer-color)"}></Help>
                         <Link style={{ color: "var(--text-white)", opacity: "0.6"}} href={"/"}>FAQ</Link>
                     </div>
                     <div className="iconInfos">
-                        <Sobre width={props.width} height={props.height} color={props.color}></Sobre>
+                        <Sobre width={25} height={25} color={"var(--icon-footer-color)"}></Sobre>
                         <Link style={{ color: "var(--text-white)", opacity: "0.6"}} href={"/"}>Sobre nós</Link>
                     </div>
                     <div className="iconInfos">
-                        <Folder width={props.width} height={props.height} color={props.color}></Folder>
+                        <Folder width={25} height={25} color={"var(--icon-footer-color)"}></Folder>
                         <Link style={{ color: "var(--text-white)", opacity: "0.6"}} href={"/"}>Política de privacidade</Link>
                     </div>
                 </section>
@@ -39,28 +50,30 @@ export default function Footer(props: { width: number, height: number, color: st
                 </section>
             </article>
             <article className="secondArticle-footer">
-                <HavLogo width={150} height={150} color={props.color}></HavLogo>
+                <HavLogo width={150} height={150} color={"var(--icon-footer-color)"}></HavLogo>
                <p style={{fontSize: "var(--text-ml)", opacity: "0.6"}}>Todos os direitos reservados por HAV Imobiliária </p>
             </article>
             <article className="secondArticleMobile-footer">
-                <HavLogoMobile width={150} height={150} color={props.color}></HavLogoMobile>
+                <HavLogoMobile width={150} height={150} color={"var(--icon-footer-color)"}></HavLogoMobile>
             </article>
             <article className="thirdArticle-footer">
                 <section className="contentFooter">
                     <p className="titleContent-footer">Contato</p>
                     <div className="iconInfos">
-                        <ChamadaTelefonica width={props.width} height={props.height} color={props.color}></ChamadaTelefonica>
+                        <ChamadaTelefonica width={25} height={25} color={"var(--icon-footer-color)"}></ChamadaTelefonica>
                         <p style={{opacity: "0.6"}}>Telefone 47 99999-9999</p>
                     </div>
                     <div className="iconInfos">
-                        <Envelope width={props.width} height={props.height} color=""></Envelope>
+                        <Envelope width={25} height={25} color=""></Envelope>
                         <p style={{opacity: "0.6"}}>E-mail havimob@gmail.com</p>
                     </div>
                 </section>
                 <section className="contentFooter">
                     <p className="titleContent-footer">Receba Notificações</p>
-                    <InputText id="email" size="medium" text="" placeholder="Digite seu E-mail"></InputText>
-                    <Button size="small" text="Inscrever-se" func={()=>("")} backgroundColor="" color="" hover="darkHover"></Button>
+                    <form onSubmit={sendEmail}>
+                        <InputText name= "emailFooter" id="email" size="medium" text="" placeholder="Digite seu E-mail"></InputText>
+                        <Button size="small" text="Inscrever-se"></Button>
+                    </form>
                 </section>
             </article>
         </footer>
