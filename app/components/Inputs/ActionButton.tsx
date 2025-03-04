@@ -20,7 +20,7 @@ export function ActionButton(props: { className: string; Icon: any; onClick: any
 }
 
 // Componente ActionButtons
-export default function ActionButtons(props: { context: 'editor' | 'admin' }) {
+export default function ActionButtons(props: { selected: number; context: 'editor' | 'admin' }) {
     const router = useRouter();
 
     const editFunction = function(){
@@ -45,9 +45,9 @@ export default function ActionButtons(props: { context: 'editor' | 'admin' }) {
             )}
             {/* Botões para Editor e Admin */}
             <ActionButton onClick={addFunction} className="addButton darkHover" Icon={MoreSignal} />
-            <ActionButton onClick={editFunction} className="editButton darkHover" Icon={Pencil}  />
-            <ActionButton onClick={deleteFunction} className="deleteButton darkHover" Icon={Trashcan} />
-            <ActionButton onClick={archiveFunction} className="archiveButton darkHover" Icon={Folder}  />
+            <ActionButton onClick={props.selected==1?editFunction:""} className={`${props.selected==1?"darkHover":"nonClickableButton"} editButton `} Icon={Pencil}  />
+            <ActionButton onClick={props.selected>0?deleteFunction:""} className={`${props.selected>0?"darkHover":"nonClickableButton"} deleteButton `} Icon={Trashcan} />
+            <ActionButton onClick={props.selected>0?archiveFunction:""} className={`${props.selected>0?"darkHover":"nonClickableButton"} archiveButton `} Icon={Folder}  />
         </div>
     );
 }

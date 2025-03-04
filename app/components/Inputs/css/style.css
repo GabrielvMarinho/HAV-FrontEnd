@@ -255,3 +255,8 @@
 .rotatedIcon {
     rotate: 180deg;
 }
+
+
+.nonClickableButton{
+    opacity: 0.6;
+}

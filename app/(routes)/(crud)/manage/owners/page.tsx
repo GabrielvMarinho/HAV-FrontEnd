@@ -1,18 +1,10 @@
 
-import Title from "../../../components/NonInteractable/Title";
-import SearchBar from "../../../components/Filters/SearchBar";
-import TableList from "../../../components/Information/TableList";
-import InputText from "../../../components/Inputs/InputText";
-import Filter from "../../../components/Filters/Filter";
-import SlideRange from "../../../components/Filters/SlideRange";
-import InputDropdown from "../../../components/Inputs/InputDropdown";
-import HeaderOptions from "../../../components/Header/HeaderOptions";
-import Cellphone from "../../../components/IconsTSX/CellPhone";
-import Link from "next/link";
-import SearchIcon from "../../../components/IconsTSX/SearchIcon"
-import { useRouter } from "next/navigation";
+import Title from "../../../../components/NonInteractable/Title";
+import SearchBar from "../../../../components/Filters/SearchBar";
+import TableList from "../../../../components/Information/TableList";
+import Filter from "../../..//../components/Filters/Filter";
 import ActionButtons, { ActionButton } from "@/app/components/Inputs/ActionButton";
-import "../../../pageStructure.css"
+import "@/app/pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 
 
@@ -34,6 +26,7 @@ export default async function page(){
         options: [['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}
     ] 
     
+    
     return (
         <>
         
@@ -49,9 +42,35 @@ export default async function page(){
             inputsDropdown={inputDropdown}
             inputPriceRanges={[]}
             />
-            <TableList size="large" titles={["cpf", "nome",  "email", "telefone", "status"]} 
-            data={[]}/>
-            <ActionButtons context="admin"/>
+            <TableList size="large" titles={["cpf", "nome",  "email", "n. imóveis", "objetivo"]} 
+            data={[
+                {
+                    "id": "333",
+                  "cpf": "123.456.789-00",
+                  "nome": "João Silva",
+                  "email": "joao@.com",
+                  "n. imóveis": 2,
+                  "objetivo": "Investimento"
+                },
+                {
+                    "id": "566",
+
+                  "cpf": "987.654.321-00",
+                  "nome": "Maria Oliveira",
+                  "email": "maria@.com",
+                  "n. imóveis": 1,
+                  "objetivo": "Moradia"
+                },
+                {
+                    "id": "769",
+
+                  "cpf": "456.123.789-00",
+                  "nome": "Carlos Santos",
+                  "email": "carlos@.com",
+                  "n. imóveis": 3,
+                  "objetivo": "Aluguel"
+                }
+              ]}/>
         </div>
         
         </>

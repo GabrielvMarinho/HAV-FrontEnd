@@ -1,19 +1,11 @@
-
-import Title from "../../../components/NonInteractable/Title";
-import SearchBar from "../../../components/Filters/SearchBar";
-import TableList from "../../../components/Information/TableList";
-import InputText from "../../../components/Inputs/InputText";
-import Filter from "../../../components/Filters/Filter";
-import SlideRange from "../../../components/Filters/SlideRange";
-import InputDropdown from "../../../components/Inputs/InputDropdown";
-import HeaderOptions from "../../../components/Header/HeaderOptions";
-import Cellphone from "../../../components/IconsTSX/CellPhone";
-import Link from "next/link";
-import SearchIcon from "../../../components/IconsTSX/SearchIcon"
-import { useRouter } from "next/navigation";
 import ActionButtons, { ActionButton } from "@/app/components/Inputs/ActionButton";
-import "../../../pageStructure.css"
+import "../../../../pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
+import Title from "@/app/components/NonInteractable/Title";
+import SearchBar from "@/app/components/Filters/SearchBar";
+import Filter from "@/app/components/Filters/Filter";
+import TableList from "@/app/components/Information/TableList";
+
 
 
 

@@ -4,7 +4,7 @@ import './css/style.css';
 import Button from "../Inputs/Button";
 
 export default function Modal(props :{isOpen :boolean; id :string, onClose :() => void, onConfirm :() => void}){
-
+    
     if(!props.isOpen) return null
 
    

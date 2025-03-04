@@ -1,16 +1,36 @@
 "use client"
+import ActionButtons from '../Inputs/ActionButton';
 import './css/style.css';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function TableList(props: {size :string, titles :string[], data :any[]}){
-    const [selected, setSelected] = useState<string[]>([]);
+
+
+
+
+
+    const [selected, setSelected] = useState<string[]>([]);  // Initialize with an empty array
+
+      
+    
+
+
+    
+    
 
     const handleSelect = (option: string) =>{
         console.log(option)
+
         setSelected((prev :string[]) =>
             prev.includes(option) ? prev.filter((item) => item !== option) : [...prev, option])
+
     }
+    
+    console.log("seu storage______________", sessionStorage.getItem('selectedManage'))
+
     return (
+        <>
         <table className="tableListData">
             <thead>
                     <tr>
@@ -50,6 +70,10 @@ export default function TableList(props: {size :string, titles :string[], data :
             </tbody>
             
         </table>
+
+        <ActionButtons selected={selected.length} context='admin'></ActionButtons>
+        </>
+
         
     );
 }
