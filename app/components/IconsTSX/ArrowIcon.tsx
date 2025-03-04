@@ -1,4 +1,3 @@
-
 import Icon from "./IconInterface"
 import './css/style.css';
 

@@ -7,17 +7,35 @@
     color: var(--text-dark-red);
     margin-bottom: var(--big-component-distance);
 }
-.titleLine{
+.titleLine, .subtitleLine{
     width: 75px;
     height: 3px;
     margin-inline: auto;
     background-color: var(--box-red-pink);
 }
-
 .sizeTitle{
     font-size: var(--text-xl);
     font-weight: 900;
 }
+
+.subtitle{
+    width: fit-content;
+    color: var(--text-dark-red);
+    gap: 6px;
+}
+.sizesubtitle{
+    font-size: var(--text-l);
+    color: var(--text-dark-red);
+}
+
+.exportdatas{
+    color: var(--text-dark-red);
+    font-size: var(--text-sm);
+    opacity: 0.6;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
 @media (width < 992px) {
     .sizeTitle{
         font-size: var(--text-ml);

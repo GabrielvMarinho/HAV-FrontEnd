@@ -185,20 +185,21 @@
     background-color: var(--box-red-pink);
     border-radius: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.ActionButton svg {
+    width: 60%;
+    height: 60%;
+    
 }
 
 .actionButtons {
     display: flex;
     flex-direction: column;
     gap: 40px;
-}
-
-.ActionButton svg {
-    width: 25px !important;
-    height: 25px !important;
 }
 
 .graphicButton {
@@ -219,4 +220,38 @@
 
 .archiveButton {
     background-color: var(--box-dark-red-option);
+}
+.containerComprarAlugar {
+    display: flex;
+    flex-direction: row;
+}
+
+.buttonComprarAlugar {
+    width: 100px;
+    height: 37.353px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--box-dark-red-option);
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+    color: var(--bg-color);
+    opacity: 0.6;
+}
+
+.buttonComprarAlugar.selected {
+    background-color: var(--text-white); 
+    color: var(--box-mid-dark-red);
+    font-size: var(--text-s);
+    opacity: 1;
+}
+
+.content {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.rotatedIcon {
+    rotate: 180deg;
 }

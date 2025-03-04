@@ -1,0 +1,32 @@
+.bairro{
+    font-weight: 700;
+}
+.valorImovel{
+    font-weight: 800;
+}
+.bairro, .valorImovel{
+    letter-spacing: 1.05px;
+    text-transform: uppercase;
+    font-size: 15px;
+}
+.cidade{
+    font-size: var(--text-xs);
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 0.77px;
+}
+.infoParcela{
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+}
+.infoImovel{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.6;
+}
+.infoQuantity{
+    font-size: 13px;
+    font-weight: 700;
+}

@@ -40,8 +40,6 @@ export default function ActionButtons(props: { context: 'editor' | 'admin' }) {
     }
     return (
         <div className="actionButtons">
-            {/* Botão extra para Admin */}
-            {/*<ActionButtons width={25} height={25} color="#000" isAdmin={true} /> */}
             {props.context === 'admin' && (
                 <ActionButton onClick={graphFunction} className="graphicButton darkHover" Icon={Graphic}  />
             )}

@@ -103,11 +103,8 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    align-items: center;
 }
-
-
-
-
 @media (width< 992px){
     .searchInput{
         padding: 12px;
