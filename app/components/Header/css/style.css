@@ -35,6 +35,8 @@
     display: flex;
     gap: 20px;
 }
+.headerOptionContainerTitleButton{
+}
 .headerOptionContainerOption{
     font-size: var(--text-s);
 }

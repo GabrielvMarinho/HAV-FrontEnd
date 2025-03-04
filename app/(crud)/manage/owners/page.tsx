@@ -34,6 +34,7 @@ export default async function page(){
         options: [['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}
     ] 
     
+    
     return (
         <>
         

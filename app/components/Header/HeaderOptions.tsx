@@ -13,7 +13,7 @@ export default function HeaderOptions(props :{options :string[], optionsLinks :s
         <div className="headerOptionContainer">
             <div className="headerOptionContainerTitle"style={{display: "flex", gap: "5px"}}>
 
-                <button onClick={() => setState(!state)}>{props.title}</button>
+                <button className="headerOptionContainerTitleButton"onClick={() => setState(!state)}>{props.title}</button>
                 <button onClick={() => setState(!state)} className={state?"rotateIcon":""}>
                     <ArrowIcon width={12} height={12} color={'var(--text-white)'}></ArrowIcon>
                 </button>
