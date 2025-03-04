@@ -8,7 +8,7 @@ export default function RelatorioEAnalise() {
 
     return (
         <>
-            <HeaderAdm width={25.9} height={25.4} color="" />
+            <HeaderAdm/>
             <Title tag="h1" text="Estatísticas e análises" />
             <NavBarEstatisticaEAnalise />
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "490px" }}>

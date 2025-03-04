@@ -1,11 +1,24 @@
-.ownerForm{
-    
+@import "../../../variables.css";
+
+.ownerForm {
     padding: 10px;
-    background-color: aqua;
-    width: 1000px;
+    background-color: var(--box-red-pink);
+    border-radius: var(--border-box);
+    width: 1060px;
+    height: 669px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 }
-.ownerFormInputs{
-    width: 500px;
+
+.InputArticle {
     display: flex;
     flex-wrap: wrap;
+}
+
+.imgPerson {
+    width: 390px;
+    height: 390px;
+    border-radius: 1.864px;
+    background-color: white;
 }

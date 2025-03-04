@@ -6,12 +6,14 @@ import InputText from "../Inputs/InputText";
 import Button from "../Inputs/Button";
 import Modal from "../Modal/Modal";
 import { useState } from "react";
-export default function FormOwner(){
+import Title from "../NonInteractable/Title";
+import ButtonOpenClosed from "../Inputs/ButtonOpenClosed";
 
+export default function FormOwner() {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<FormData | null>(null);
-    
+
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log("asdasd")
@@ -19,15 +21,14 @@ export default function FormOwner(){
         setPendingFormData(formData); // Armazena os dados temporariamente
         setIsModalOpen(true); // Abre o modal
         console.log(isModalOpen)
-      };
-      
-    const addOwner = async function(){
+    };
+
+    const addOwner = async function () {
         if (!pendingFormData) return;
 
         const formData = pendingFormData;
         const formObject = Object.fromEntries(formData.entries());
         console.log(formObject)
-        
     }
 
     const inputs = [
@@ -43,10 +44,10 @@ export default function FormOwner(){
         { name: "complemento", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
     ];
     const inputDropdown = [
-        { 
-            name: "estado", 
-            size: "medium", 
-            text: "Estado", 
+        {
+            name: "estado",
+            size: "medium",
+            text: "Estado",
             id: "estado",
             options: [
                 ["sc", "Santa Catarina"],
@@ -54,10 +55,10 @@ export default function FormOwner(){
                 ["rs", "Rio Grande do Sul"]
             ]
         },
-        { 
-            name: "cidade", 
-            size: "medium", 
-            text: "Cidade", 
+        {
+            name: "cidade",
+            size: "medium",
+            text: "Cidade",
             id: "cidade",
             options: [
                 ["jaragua_do_sul", "Jaraguá do Sul"],
@@ -65,10 +66,10 @@ export default function FormOwner(){
                 ["joinville", "Joinville"]
             ]
         },
-        { 
-            name: "bairro", 
-            size: "medium", 
-            text: "Bairro", 
+        {
+            name: "bairro",
+            size: "medium",
+            text: "Bairro",
             id: "bairro",
             options: [
                 ["centro", "Centro"],
@@ -79,32 +80,44 @@ export default function FormOwner(){
     ];
 
     return (
-        <form className="ownerForm"  onSubmit={handleFormSubmit}>
-            <p>DADOS</p>
-            <div className="ownerFormInputs">
-            {inputs.map((input) => (
-                    input &&
-                    <InputText
-                        name = {input.name}
-                        size={input.size}
-                        placeholder={input.placeholder}
-                        text={input.text}
-                        id={input.id}
-                    />
-                ))}
-                {inputDropdown.map((input) => (
-                    input &&
-                    <InputDropdown
-                        name = {input.name}
-                        size={input.size}
-                        text={input.text}
-                        id={input.id}
-                        options={input.options}
-                    />
-                ))}
-                </div>
-                <Button size={"small"} text="Confirmar"></Button>
-                <Modal id = "idModal" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onConfirm={addOwner}></Modal>
-        </form>
+        <>
+            <Title text="cadastrar imóvel" tag="h1" />
+            <form className="ownerForm" onSubmit={handleFormSubmit}>
+                <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+                    <div className="imgPerson"></div>
+                    <p style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text-white)" }}>SATUS CONTA</p>
+                    <ButtonOpenClosed />
+                </section>
+                <article >
+                    <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)" }}>DADOS</p>
+                    <div className="InputArticle ">
+                        {inputs.map((input) => (
+                            input &&
+                            <InputText
+                                name={input.name}
+                                size={input.size}
+                                placeholder={input.placeholder}
+                                text={input.text}
+                                id={input.id}
+                            />
+                        ))}
+                        {inputDropdown.map((input) => (
+                            input &&
+                            <InputDropdown
+                                name={input.name}
+                                size={input.size}
+                                text={input.text}
+                                id={input.id}
+                                options={input.options}
+                            />
+                        ))}
+                    </div>
+
+                    <Button size={"small"} text="Confirmar"></Button>
+                </article>
+                <Modal id="idModal" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onConfirm={addOwner}></Modal>
+            </form>
+          
+        </>
     )
 }
