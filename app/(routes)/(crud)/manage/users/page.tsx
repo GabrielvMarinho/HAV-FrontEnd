@@ -43,7 +43,6 @@ export default async function page(){
             />
             <TableList size="large" titles={["cpf", "nome",  "email", "telefone", "status"]} 
             data={[]}/>
-            <ActionButtons context="admin"/>
         </div>
         
         </>

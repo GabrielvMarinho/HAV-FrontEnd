@@ -1,5 +1,5 @@
 import ActionButtons, { ActionButton } from "@/app/components/Inputs/ActionButton";
-import "../../../pageStructure.css"
+import "../../../../pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import Title from "@/app/components/NonInteractable/Title";
 import SearchBar from "@/app/components/Filters/SearchBar";
