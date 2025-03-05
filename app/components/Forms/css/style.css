@@ -9,16 +9,32 @@
     display: flex;
     align-items: center;
     flex-direction: row;
+    gap: 30px;
+    justify-content: center;
 }
 
 .InputArticle {
     display: flex;
     flex-wrap: wrap;
+    width: 500px;
+    gap: 15px;
 }
 
 .imgPerson {
     width: 390px;
     height: 390px;
     border-radius: 1.864px;
-    background-color: white;
+    background-color: black;
+}
+
+.articleDataForm{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.divButtonsAceptCancelForms{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 96px 0 0 220px;
 }

@@ -65,7 +65,7 @@ export default function CardImovel(props: {
                 </div>
                 <div style={{ width: "235px", height: "1px", backgroundColor: "var(--text-white)", opacity: "0.20", margin: "11px auto" }} />
                 <article style={{ display: "flex", flexDirection: "row", margin: "17px 0 0 17.47px", gap: "55px", alignItems: "center" }}>
-                    <Button size="small" text="saiba mais" func={() => ("")} backgroundColor="var(--text-white)" color="var(--box-red-pink)" hover="lightHover"></Button>
+                    <Button size="small" text="saiba mais" background="var(--text-white)" color="var(--box-red-pink)" hover="lightHover"></Button>
                     <div style={{ display: "flex", flexDirection: "row", gap: "7.92px", opacity: 0.6, alignItems: "center" }}>
                         <StarFavorite width={27} height={27} color="#FFFF" selected={false} />
                         <MarcadorDeMapa width={22} height={22} color="" />

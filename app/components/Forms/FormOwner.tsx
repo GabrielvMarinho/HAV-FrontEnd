@@ -9,6 +9,9 @@ import { useState } from "react";
 import Title from "../NonInteractable/Title";
 import ButtonOpenClosed from "../Inputs/ButtonOpenClosed";
 import CardImovel from "../Cards/CardImovel";
+import ToggleButton from "../Inputs/ToggleButton";
+import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
+import { Fleur_De_Leah } from "next/font/google";
 
 export default function FormOwner() {
 
@@ -85,12 +88,17 @@ export default function FormOwner() {
             <Title text="cadastrar imóvel" tag="h1" />
             <form className="ownerForm" onSubmit={handleFormSubmit}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-                    <div className="imgPerson"></div>
+                    <div className="imgPerson">
+                        <ButtonUploadPhoto/>
+                        </div>   
                     <p style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text-white)" }}>STATUS CONTA</p>
                     <ButtonOpenClosed />
-                </section>
-                <article >
-                    <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)" }}>DADOS</p>
+                </section>  
+                <article className="articleDataForm">
+                    <div style={{display: "flex", flexDirection: "column", gap: "25px", alignItems: "center"}}>
+                        <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)"}}>DADOS</p>
+                        <ToggleButton/>
+                    </div>
                     <div className="InputArticle ">
                         {inputs.map((input) => (
                             input &&
@@ -112,13 +120,14 @@ export default function FormOwner() {
                                 options={input.options}
                             />
                         ))}
-                    </div>''
+                    </div>
+                    <div className="divButtonsAceptCancelForms">
+                        <Button size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)" background="var(--text-white)" />
+                        <Button size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
+                    </div>
                 </article>
-                <Button size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)" background="var(--text-white)"/>
-                <Button size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)"/>
                 <Modal id="idModal" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onConfirm={addOwner}></Modal>
             </form>
-          
         </>
     )
 }

@@ -255,3 +255,39 @@
 .rotatedIcon {
     rotate: 180deg;
 }
+
+.toggleContainer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+  
+.toggleButton {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--text-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.toggleButton input {
+    display: none;
+}
+
+.toggleButton.active {
+background-color: var(--text-white);
+}
+
+.buttonUploadPhoto{
+    width: 30px;
+    height: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--text-white);
+    border-radius: 999px;
+}  
+  
