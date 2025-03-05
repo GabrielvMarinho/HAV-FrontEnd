@@ -8,6 +8,7 @@ import Modal from "../Modal/Modal";
 import { useState } from "react";
 import Title from "../NonInteractable/Title";
 import ButtonOpenClosed from "../Inputs/ButtonOpenClosed";
+import CardImovel from "../Cards/CardImovel";
 
 export default function FormOwner() {
 
@@ -85,7 +86,7 @@ export default function FormOwner() {
             <form className="ownerForm" onSubmit={handleFormSubmit}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson"></div>
-                    <p style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text-white)" }}>SATUS CONTA</p>
+                    <p style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text-white)" }}>STATUS CONTA</p>
                     <ButtonOpenClosed />
                 </section>
                 <article >
@@ -111,10 +112,10 @@ export default function FormOwner() {
                                 options={input.options}
                             />
                         ))}
-                    </div>
-
-                    <Button size={"small"} text="Confirmar"></Button>
+                    </div>''
                 </article>
+                <Button size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)" background="var(--text-white)"/>
+                <Button size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)"/>
                 <Modal id="idModal" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onConfirm={addOwner}></Modal>
             </form>
           
