@@ -203,22 +203,32 @@
 }
 
 .graphicButton {
+    transition: 0.5s ease;  
+
     background-color: var(--box-red-pink);
 }
 
 .addButton {
+    transition: 0.5s ease;  
+
     background-color: var(--box-red-pink);
 }
 
 .editButton {
+    transition: 0.5s ease;  
+
     background-color: var(--box-dark-red-option);
 }
 
 .deleteButton {
+    transition: 0.5s ease;  
+
     background-color: var(--box-dark-red-option);
 }
 
 .archiveButton {
+    transition: 0.5s ease;  
+
     background-color: var(--box-dark-red-option);
 }
 .containerComprarAlugar {
@@ -258,5 +268,8 @@
 
 
 .nonClickableButton{
+    
+    transition: 0.5s ease;  
+
     opacity: 0.6;
 }

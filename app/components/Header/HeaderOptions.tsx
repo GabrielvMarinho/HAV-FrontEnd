@@ -17,23 +17,22 @@ export default function HeaderOptions(props :{close :() => void; isOpen: boolean
             <div className="headerOptionContainerTitle"style={{display: "flex", gap: "5px"}}>
 
                 <button className="headerOptionContainerTitleButton">{props.title}</button>
-                <button className={"rotateIcon"}>
+                <button className={props.isOpen?"":"rotateIcon"}>
                     <ArrowIcon width={12} height={12} color={'var(--text-white)'}></ArrowIcon>
                 </button>
             </div>
-            {props.isOpen &&
-            <div className="boxHeaderOption">
+            <div className={props.isOpen?" boxHeaderOption":" hideBoxHeaderOption boxHeaderOption"}>
                 {
                  props.options.map((option, index) =>
             
-                    <div className="iconPlusTextHeaderOption"style={{display: "flex", gap: "5px"}}>
+                    <div className={"iconPlusTextHeaderOption"} style={{display: "flex", gap: "5px"}}>
                         {props.optionsIcons[index]}
                         <Link href={props.optionsLinks[index]} className='headerOptionContainerOption'>{option}</Link>
 
                     </div>
                  )}
             </div>
-            }
+            
 
         </div>
     )

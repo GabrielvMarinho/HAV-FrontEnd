@@ -3,18 +3,18 @@ import Title from "../../../../components/NonInteractable/Title";
 import SearchBar from "../../../../components/Filters/SearchBar";
 import TableList from "../../../../components/Information/TableList";
 import Filter from "../../..//../components/Filters/Filter";
-import ActionButtons, { ActionButton } from "@/app/components/Inputs/ActionButton";
 import "@/app/pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 
 
 
 
-export default async function page(){
-    
-    //const properties = await fetchImoveis(); // Buscando os dados da API
+export default async function Page({searchParams}: {searchParams: { nome?: string; cpf?: string }}) {
+  const { nome, cpf } = searchParams;
 
-    
+  console.log("Nome:", nome);
+  console.log("CPF:", cpf);
+
     const inputs = [
         {name: "nome", size: "medium", text: "Nome", placeholder: "ex: Bianca", id: "nome",},
         {name: "email", size: "medium", text: "Email", placeholder: "joao@gmail.com", id: "email",},

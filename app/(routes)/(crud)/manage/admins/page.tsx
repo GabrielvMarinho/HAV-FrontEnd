@@ -1,7 +1,7 @@
 
 
 import { useRouter } from "next/navigation";
-import ActionButtons, { ActionButton } from "@/app/components/Inputs/ActionButton";
+import ActionButtons from "@/app/components/Inputs/ActionButton";
 import "../../../../pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import Title from "@/app/components/NonInteractable/Title";
