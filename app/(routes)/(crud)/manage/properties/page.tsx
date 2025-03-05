@@ -72,7 +72,30 @@ export default async function page(){
             inputPriceRanges={priceRanges}
             />
             <TableList size="large" titles={["id imóvel", "proprietário",  "tipo imóvel", "categoria", "status"]} 
-            data={properties}/>
+            data={[[
+                {
+                  "id imóvel": "333",
+                  "proprietário": "João Silva",
+                  "tipo imóvel": "Investimento",
+                  "categoria": "Moradia",
+                  "status": "Ativo"
+                },
+                {
+                  "id imóvel": "566",
+                  "proprietário": "Maria Oliveira",
+                  "tipo imóvel": "Moradia",
+                  "categoria": "Residencial",
+                  "status": "Ativo"
+                },
+                {
+                  "id imóvel": "769",
+                  "proprietário": "Carlos Santos",
+                  "tipo imóvel": "Aluguel",
+                  "categoria": "Comercial",
+                  "status": "Inativo"
+                }
+              ]
+              ]}/>
         </div>
         
         </>
