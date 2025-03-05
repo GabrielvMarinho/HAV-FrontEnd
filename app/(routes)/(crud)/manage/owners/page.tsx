@@ -42,10 +42,10 @@ export default async function page(){
             inputsDropdown={inputDropdown}
             inputPriceRanges={[]}
             />
-            <TableList size="large" titles={["cpf", "nome",  "email", "n. imóveis", "objetivo"]} 
+            <TableList context="admin" size="large" titles={["cpf", "nome",  "email", "n. imóveis", "objetivo"]} 
             data={[
                 {
-                    "id": "333",
+                    "id": 333,
                   "cpf": "123.456.789-00",
                   "nome": "João Silva",
                   "email": "joao@.com",
@@ -53,7 +53,7 @@ export default async function page(){
                   "objetivo": "Investimento"
                 },
                 {
-                    "id": "566",
+                    "id": 566,
 
                   "cpf": "987.654.321-00",
                   "nome": "Maria Oliveira",
@@ -62,7 +62,7 @@ export default async function page(){
                   "objetivo": "Moradia"
                 },
                 {
-                    "id": "769",
+                    "id": 769,
 
                   "cpf": "456.123.789-00",
                   "nome": "Carlos Santos",

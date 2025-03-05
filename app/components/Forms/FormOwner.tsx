@@ -104,7 +104,7 @@ export default function FormOwner(){
                 ))}
                 </div>
                 <Button size={"small"} text="Confirmar"></Button>
-                <Modal id = "idModal" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onConfirm={addOwner}></Modal>
+                <Modal content={<div>asd</div>} id = "ownerModal" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onConfirm={addOwner}></Modal>
         </form>
     )
 }

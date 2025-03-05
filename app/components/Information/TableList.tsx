@@ -1,12 +1,52 @@
 "use client"
-import ActionButtons from '../Inputs/ActionButton';
+import ActionButton from '../Inputs/ActionButton';
 import './css/style.css';
 import { useState, useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
+import { useRouter } from "next/navigation";
+import MoreSignal from '../IconsTSX/MoreSignal';
+import Trashcan from '../IconsTSX/Trashcan';
+import Pencil from '../IconsTSX/Pencil';
+import Graphic from '../IconsTSX/Graphic';
+import Folder from '../IconsTSX/Graphic';
+import Modal from '../Modal/Modal';
 
-export default function TableList(props: {size :string, titles :string[], data :any[]}){
 
+export default function TableList(props: {context :string; size :string, titles :string[], data :any[]}){
 
+    //ACTION BUTTON RELATED
+    const router = useRouter();
+
+    //EDIT RELATED
+    const editFunction = function(){
+        router.push(`${window.location.pathname}/edit`);
+    }
+
+    //ADD RELATED
+    const addFunction = function(){
+        router.push(`${window.location.pathname}/add`);
+    }
+
+    //DELETE RELATED
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const openDeleteModal = function(){
+        setIsDeleteModalOpen(true)
+    }
+    const deleteEntitiesFunction = function(){
+        console.log("deletaar", localStorage.getItem("selectedManage"))
+    }
+
+    //ARCHIVES RELATED
+    const archiveFunction = function(){
+        router.push(`${window.location.pathname}/archive`);
+    }
+
+    //GRAPHS RELATED
+    const graphFunction = function(){
+        router.push(`${window.location.pathname}/graphs`);
+    }
+
+    //RESETING THE LOCAL STORAGE
     const pathname = usePathname();
     //tem que chamar antes para ele não salvar acidentalmente no state antes de 
     //deletar pois o useefect carrega dps do usestate
@@ -15,10 +55,13 @@ export default function TableList(props: {size :string, titles :string[], data :
         localStorage.removeItem('selectedManage');
     }
 
+    
+
+
+
+
 
     localStorage.setItem('previousPathname', pathname);
-
-
         useEffect(() =>{
             console.log("lets go")
             localStorage.removeItem('selectedManage')
@@ -90,7 +133,19 @@ export default function TableList(props: {size :string, titles :string[], data :
             
         </table>
 
-        <ActionButtons selected={selected.length} context='admin'></ActionButtons>
+        <div className="actionButtons">
+            {props.context === 'admin' && (
+                <ActionButton onClick={graphFunction} className="graphicButton darkHover" Icon={Graphic}  />
+            )}
+            {/* Botões para Editor e Admin */}
+            <ActionButton onClick={addFunction} className="addButton darkHover" Icon={MoreSignal} />
+            <ActionButton onClick={selected.length==1?editFunction:""} className={`${selected.length==1?"darkHover":"nonClickableButton"} editButton `} Icon={Pencil}  />
+            <ActionButton onClick={selected.length>0?openDeleteModal:""} className={`${selected.length>0?"darkHover":"nonClickableButton"} deleteButton `} Icon={Trashcan} />
+            <ActionButton onClick={selected.length>0?archiveFunction:""} className={`${selected.length>0?"darkHover":"nonClickableButton"} archiveButton `} Icon={Folder}  />
+            
+            <Modal content={<div>delete modal</div>} id = "deleteModal" isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onConfirm={deleteEntitiesFunction}></Modal>
+
+        </div>
         </>
 
         

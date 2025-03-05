@@ -41,7 +41,7 @@ export default async function page(){
             inputsDropdown={inputDropdown}
             inputPriceRanges={[]}
             />
-            <TableList size="large" titles={["cpf", "nome",  "email", "telefone", "status"]} 
+            <TableList context="admin" size="large" titles={["cpf", "nome",  "email", "telefone", "status"]} 
             data={[{
                 "id":23123,
               "cpf": "123.456.789-00",

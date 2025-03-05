@@ -71,7 +71,7 @@ export default async function page(){
             inputsDropdown={InputDropdown}
             inputPriceRanges={priceRanges}
             />
-            <TableList size="large" titles={["id imóvel", "proprietário",  "tipo imóvel", "categoria", "status"]} 
+            <TableList context="admin" size="large" titles={["id imóvel", "proprietário",  "tipo imóvel", "categoria", "status"]} 
             data={[[
                 {
                   "id imóvel": "333",
