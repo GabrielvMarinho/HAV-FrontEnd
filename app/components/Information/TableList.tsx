@@ -67,7 +67,7 @@ export default function TableList(props: {size :string, titles :string[], data :
                     
                         <div className='tableListLine'></div>
 
-                        <tr className="tableRows">
+                        <tr className={selected.includes(obj.id)?"selectedRow tableRows":"tableRows"}>
                             <div className='marginSelectBox'>
 
                             <input
@@ -79,7 +79,7 @@ export default function TableList(props: {size :string, titles :string[], data :
 
                             </div>
                             {props.titles.map( name => 
-                                <td>{obj[name]}</td>
+                                <td >{obj[name]}</td>
                             )}
                             
                         </tr>
