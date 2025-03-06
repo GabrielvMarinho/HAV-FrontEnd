@@ -6,6 +6,7 @@ import Trashcan from '../IconsTSX/Trashcan';
 import Folder from '../IconsTSX/Folder';
 import Graphic from '../IconsTSX/Graphic';
 import { useRouter } from "next/navigation";
+import { color } from 'chart.js/helpers';
 
 // Componente ActionButton
 export function ActionButton(props: { className: string; Icon: any; onClick: any}) {

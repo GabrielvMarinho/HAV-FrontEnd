@@ -8,10 +8,8 @@ import Modal from "../Modal/Modal";
 import { useState } from "react";
 import Title from "../NonInteractable/Title";
 import ButtonOpenClosed from "../Inputs/ButtonOpenClosed";
-import CardImovel from "../Cards/CardImovel";
 import ToggleButton from "../Inputs/ToggleButton";
 import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
-import { Fleur_De_Leah } from "next/font/google";
 
 export default function FormOwner() {
 
@@ -89,15 +87,15 @@ export default function FormOwner() {
             <form className="ownerForm" onSubmit={handleFormSubmit}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
-                        <ButtonUploadPhoto/>
-                        </div>   
+                        <ButtonUploadPhoto />
+                    </div>
                     <p style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text-white)" }}>STATUS CONTA</p>
                     <ButtonOpenClosed />
-                </section>  
+                </section>
                 <article className="articleDataForm">
-                    <div style={{display: "flex", flexDirection: "column", gap: "25px", alignItems: "center"}}>
-                        <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)"}}>DADOS</p>
-                        <ToggleButton/>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "25px", alignItems: "center" }}>
+                        <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)" }}>DADOS</p>
+                        <ToggleButton />
                     </div>
                     <div className="InputArticle ">
                         {inputs.map((input) => (
