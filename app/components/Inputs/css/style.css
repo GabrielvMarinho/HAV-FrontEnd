@@ -193,7 +193,7 @@
 .ActionButton svg {
     width: 60%;
     height: 60%;
-    
+    fill: var(--text-white);
 }
 
 .actionButtons {
