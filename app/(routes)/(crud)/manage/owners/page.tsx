@@ -10,10 +10,13 @@ import NavBarAdm from "@/app/components/Header/NavBarAdm";
 
 
 export default async function Page({searchParams}: {searchParams: { nome?: string; cpf?: string }}) {
-  const { nome, cpf } = searchParams;
 
-  console.log("Nome:", nome);
-  console.log("CPF:", cpf);
+  
+    const { nome, cpf } = searchParams;
+
+
+    console.log("Nome:", nome);
+    console.log("CPF:", cpf);
 
     const inputs = [
         {name: "nome", size: "medium", text: "Nome", placeholder: "ex: Bianca", id: "nome",},
@@ -22,6 +25,8 @@ export default async function Page({searchParams}: {searchParams: { nome?: strin
         {name: "cpf", size: "medium", text: "CPF", placeholder: "ex: 67298357955", id: "cpf",},
       ];
     const inputDropdown = [
+        {name: "Objetivo", size: "large", text: "Status", id: "status",
+        options: [['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}, 
         {name: "Objetivo", size: "large", text: "Status", id: "status",
         options: [['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}
     ] 

@@ -8,7 +8,7 @@ import MoreSignal from '../IconsTSX/MoreSignal';
 import Trashcan from '../IconsTSX/Trashcan';
 import Pencil from '../IconsTSX/Pencil';
 import Graphic from '../IconsTSX/Graphic';
-import Folder from '../IconsTSX/Graphic';
+import Folder from '../IconsTSX/Folder';
 import Modal from '../Modal/Modal';
 
 
