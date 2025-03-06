@@ -13,7 +13,7 @@
     justify-content: center;
 }
 
-.InputArticle {
+.inputArticleDesktop {
     display: flex;
     flex-wrap: wrap;
     width: 500px;
@@ -42,6 +42,46 @@
     margin: 96px 0 0 220px;
 }
 
-.cu{
-    background-color: wheat;
+.inputArticleMobile{
+    display: none;
+}
+
+@media(max-width: 992px){
+
+    .ownerForm{
+        width: 305px;
+        height: 1450px;
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .inputArticleDesktop{
+        display: none;
+    }
+
+    .inputArticleMobile{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 500px;
+        align-items: center;
+        gap: 10px;
+    }
+    .imgPerson {
+        width: 210px;
+        height: 209px;
+        border-radius: 1.864px;
+        background-color: black;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
+    .divButtonsAceptCancelForms{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+
 }

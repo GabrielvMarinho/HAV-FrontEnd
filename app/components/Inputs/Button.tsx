@@ -6,7 +6,7 @@ export default function Button(props: {size: string; text:string; hover :string;
         <button 
             type="submit" 
             className={`${props.size}Button button ${props.hover}`}
-            style={{ color: props.color, backgroundColor: props.background }}
+            style={{color: props.color, backgroundColor: props.background }}
         >
             {props.text.toUpperCase()}
         </button>

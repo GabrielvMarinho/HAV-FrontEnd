@@ -10,6 +10,7 @@ import Title from "../NonInteractable/Title";
 import ButtonOpenClosed from "../Inputs/ButtonOpenClosed";
 import ToggleButton from "../Inputs/ToggleButton";
 import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
+import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
 
 export default function FormOwner() {
 
@@ -33,7 +34,7 @@ export default function FormOwner() {
         console.log(formObject)
     }
 
-    const inputs = [
+    const inputsDesktop = [
         { name: "nome_completo", size: "large", text: "Nome Completo", placeholder: "ex: Kauani da Silva", id: "nome_completo" },
         { name: "cpf", size: "small", text: "CPF", placeholder: "ex: 123.123.123-00", id: "cpf" },
         { name: "data_nascimento", size: "small", text: "Data Nascimento", placeholder: "dd/mm/aa", id: "data_nascimento" },
@@ -45,6 +46,19 @@ export default function FormOwner() {
         { name: "numero", size: "small", text: "Número", placeholder: "1002", id: "numero" },
         { name: "complemento", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
     ];
+
+    const inputsMobile = [
+        { name: "nome_completo", size: "medium", text: "Nome Completo", placeholder: "ex: Kauani da Silva", id: "nome_completo" },
+        { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: 123.123.123-00", id: "cpf" },
+        { name: "data_nascimento", size: "small", text: "Data Nascimento", placeholder: "dd/mm/aa", id: "data_nascimento" },
+        { name: "email", size: "small", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
+        { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
+        { name: "rua", size: "medium", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
+        { name: "telefone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
+        { name: "celular", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
+        { name: "numero", size: "small", text: "Número", placeholder: "1002", id: "numero" },
+        { name: "complemento", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
+    ]
     const inputDropdown = [
         {
             name: "estado",
@@ -97,8 +111,8 @@ export default function FormOwner() {
                         <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)" }}>DADOS</p>
                         <ToggleButton />
                     </div>
-                    <div className="InputArticle ">
-                        {inputs.map((input) => (
+                    <div className="inputArticleDesktop ">
+                        {inputsDesktop.map((input) => (
                             input &&
                             <InputText
                                 name={input.name}
@@ -119,9 +133,31 @@ export default function FormOwner() {
                             />
                         ))}
                     </div>
+                    <div className="inputArticleMobile">
+                    {inputsMobile.map((input) => (
+                            input &&
+                            <InputText
+                                name={input.name}
+                                size={input.size}
+                                placeholder={input.placeholder}
+                                text={input.text}
+                                id={input.id}
+                        />
+                        ))}
+                        {inputDropdown.map((input) => (
+                            input &&
+                            <InputDropdown
+                                name={input.name}
+                                size={input.size}
+                                text={input.text}
+                                id={input.id}
+                                options={input.options}
+                            />
+                        ))}
+                    </div>  
                     <div className="divButtonsAceptCancelForms">
                         <Button size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)" background="var(--text-white)" />
-                        <Button size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
+                        <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)"/>
                     </div>
                 </article>
                 <Modal id="idModal" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onConfirm={addOwner}></Modal>
