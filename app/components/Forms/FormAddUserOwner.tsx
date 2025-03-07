@@ -6,8 +6,8 @@ import InputText from "../Inputs/InputText";
 import Button from "../Inputs/Button";
 import Modal from "../Modal/Modal";
 import { useState } from "react";
-import ButtonOpenClosed from "../Inputs/ButtonOpenClosed";
 import ToggleButton from "../Inputs/ToggleButton";
+import RadioButton from "../Inputs/RadioButton";
 import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
 import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
 
@@ -19,13 +19,13 @@ export default function FormAddUserOwner() {
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget as HTMLFormElement);
-        
+
         const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
         console.log("Formulário enviado:", formObject);
-        setPendingFormData(formObject); 
+        setPendingFormData(formObject);
         setIsModalOpen(true);
     };
-    
+
 
     const addOwner = async function () {
         if (!pendingFormData) return;
@@ -104,12 +104,12 @@ export default function FormAddUserOwner() {
                         <ButtonUploadPhoto />
                     </div>
                     <p style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text-white)" }}>STATUS CONTA</p>
-                    <ButtonOpenClosed />
+                    <ToggleButton />
                 </section>
                 <article className="articleDataForm">
                     <div style={{ display: "flex", flexDirection: "column", gap: "25px", alignItems: "center" }}>
                         <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)" }}>DADOS</p>
-                        <ToggleButton />
+                        <RadioButton />
                     </div>
                     <div className="inputArticleDesktop ">
                         {inputsDesktop.map((input) => (

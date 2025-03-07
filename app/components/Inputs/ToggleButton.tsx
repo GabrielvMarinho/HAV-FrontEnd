@@ -1,31 +1,37 @@
+"use client";
+
 import { useState } from "react";
-import "./css/style.css"; 
 
 export default function ToggleButton() {
-  const [selected, setSelected] = useState("pf");
+  const [isOn, setIsOn] = useState(false);
 
   return (
-    <div className="toggleContainer">
-      <label className={`toggleButton ${selected === "pf" ? "active" : ""}`}>
-        <input
-          type="radio"
-          name="tipo"
-          value="pf"
-          checked={selected === "pf"}
-          onChange={() => setSelected("pf")}
-        />
-      </label>
-      <p style={{color: "var(--text-white"}}>Pessoa Física</p>
-      <label className={`toggleButton ${selected === "pj" ? "active" : ""}`}>
-        <input
-          type="radio"
-          name="tipo"
-          value="pj"
-          checked={selected === "pj"}
-          onChange={() => setSelected("pj")}
-        />
-      </label>
-      <p style={{color: "var(--text-white"}}>Pessoa jurídica</p>
-    </div>
+    <button type="button"
+      onClick={() => setIsOn(!isOn)}
+      style={{
+        width: "75px",
+        height: "30px",
+        display: "flex",
+        alignItems: "center",
+        padding: "4px",
+        borderRadius: "9999px",
+        backgroundColor: isOn ? "#21a14b" : "#f60203",
+        transition: "all 0.3s ease-in-out",
+        border: "none",
+        cursor: "pointer",
+      }}
+    >
+      <div
+        style={{
+          width: "24px",
+          height: "24px",
+          backgroundColor: "#ffffff",
+          borderRadius: "50%",
+          transition: "all 0.3s ease-in-out",
+          transform: isOn ? "translateX(0)" : "translateX(-43px)",
+          marginLeft: "auto",
+        }}
+      />
+    </button>
   );
 }
