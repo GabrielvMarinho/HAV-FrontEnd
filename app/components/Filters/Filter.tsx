@@ -14,7 +14,7 @@ import ButtonComprarAlugar from "../Inputs/ButtonComprarAlugar";
 export default function Filter(props: {size :string, inputs :any[], inputsDropdown :any[], inputPriceRanges :any[] | null}){
     
 
-    
+    console.log(props.inputPriceRanges)
 
 
     
@@ -33,19 +33,11 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
 
     const handlePriceChange = (min: number, max: number) => {
         if(!props.inputPriceRanges) return 
+        if(max==2000000) max = 100000000
+        console.log(max)
         setPriceRange({ min, max });
     };
 
-    const handleChange = (e) => {
-        console.log(e.target.value)
-
-        setFilterData((prev) => ({
-          ...prev,
-          [e.target.id]: e.target.value, // Works for all input types
-        }));
-        console.log(filterData)
-      };
-      
 
 
       const pathname = usePathname()
@@ -83,6 +75,7 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
                     step={input.step}
                     id={input.id}
                     onChange={handlePriceChange}
+                    
                 />
             ))}
             <button type="submit" className="buttonBuscaClaro lightHover">

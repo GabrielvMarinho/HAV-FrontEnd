@@ -90,7 +90,9 @@
     padding-inline: 25px;
     width: 50vw;
 }
-
+.priceBox div p{
+  font-size: var(--text-s);
+}
 .searchBar{
   margin-bottom: var(--big-component-distance);
 }
