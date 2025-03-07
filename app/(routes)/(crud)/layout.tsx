@@ -1,9 +1,9 @@
 import { Montserrat } from 'next/font/google';
 
-import HeaderAdm from "../components/Header/HeaderAdm";
-import HeaderOptions from "../components/Header/HeaderOptions";
-import Cellphone from "../components/IconsTSX/CellPhone"
-import Footer from '../components/Footer/Footer';
+import HeaderAdm from "../../components/Header/HeaderAdm";
+import HeaderOptions from "../../components/Header/HeaderOptions";
+import Cellphone from "../../components/IconsTSX/CellPhone"
+import Footer from '../../components/Footer/Footer';
 
 const montserrat = Montserrat({
   weight: ['400', '500', '600', '700'],

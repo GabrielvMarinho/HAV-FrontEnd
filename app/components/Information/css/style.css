@@ -19,6 +19,8 @@
     padding: 10px;
 }
 .tableListData tr{
+    transition: 0.5s ease;  
+
     padding-top: 22px;
     padding-bottom: 22px;
     display: flex;
@@ -33,6 +35,26 @@
 .tableListData th, .tableListData td{
     text-align: left;
     flex: 1;
+}
+.checkbox{
+    all: unset;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    padding: 0;
+    border: 0;
+    margin: 0;
+    outline: 1px var(--text-black) solid;
+    border-radius: var(--border-box);
+}
+.checkbox:checked{
+    background-color: var(--dark-blue);
+    outline: 1px var(--text-black) solid;
+
+}
+.selectedRow{
+    transition: 0.5s ease;  
+    background-color: var(--light-blue);
 }
 .tableListData th{
     font-size: var(--text-sl);

@@ -1,19 +1,13 @@
 
-import Title from "../../../components/NonInteractable/Title";
-import SearchBar from "../../../components/Filters/SearchBar";
-import TableList from "../../../components/Information/TableList";
-import InputText from "../../../components/Inputs/InputText";
-import Filter from "../../../components/Filters/Filter";
-import SlideRange from "../../../components/Filters/SlideRange";
-import InputDropdown from "../../../components/Inputs/InputDropdown";
-import HeaderOptions from "../../../components/Header/HeaderOptions";
-import Cellphone from "../../../components/IconsTSX/CellPhone";
-import Link from "next/link";
-import SearchIcon from "../../../components/IconsTSX/SearchIcon"
+
 import { useRouter } from "next/navigation";
-import ActionButtons, { ActionButton } from "@/app/components/Inputs/ActionButton";
-import "../../../pageStructure.css"
+import ActionButtons from "@/app/components/Inputs/ActionButton";
+import "../../../../pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
+import Title from "@/app/components/NonInteractable/Title";
+import SearchBar from "@/app/components/Filters/SearchBar";
+import Filter from "@/app/components/Filters/Filter";
+import TableList from "@/app/components/Information/TableList";
 
 
 
@@ -49,9 +43,32 @@ export default async function page(){
             inputsDropdown={inputDropdown}
             inputPriceRanges={[]}
             />
-            <TableList size="large" titles={["cpf", "nome",  "email", "telefone", "status"]} 
-            data={[]}/>
-            <ActionButtons context="admin"/>
+            <TableList context="admin" size="large" titles={["cpf", "nome",  "email", "telefone", "status"]} 
+            data={[{
+                "id":23123,
+              "cpf": "123.456.789-00",
+              "nome": "João Silva",
+              "email": "joao@.com",
+              "telefone": "123123123",
+              "status": "Investidor"
+            },
+            {
+                "id":234,
+
+              "cpf": "987.654.321-00",
+              "nome": "Maria Oliveira",
+              "email": "maria@.com",
+              "telefone": "123123123",
+              "status": "Ativo"
+            },
+            {
+                "id":436,
+              "cpf": "456.123.789-00",
+              "nome": "Carlos Santos",
+              "email": "carlos@.com",
+              "telefone": "234234",
+              "status": "Investidor"
+            }]}/>
         </div>
         
         </>

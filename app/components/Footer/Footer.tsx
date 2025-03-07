@@ -71,7 +71,7 @@ export default function Footer() {
                 <section className="contentFooter">
                     <p className="titleContent-footer">Receba Notificações</p>
                     <form onSubmit={sendEmail}>
-                        <InputText name= "emailFooter" id="email" size="medium" text="" placeholder="Digite seu E-mail"></InputText>
+                        <InputText name="emailFooter" id="email" size="medium" text="" placeholder="Digite seu E-mail"></InputText>
                         <Button size="small" text="Inscrever-se"></Button>
                     </form>
                 </section>

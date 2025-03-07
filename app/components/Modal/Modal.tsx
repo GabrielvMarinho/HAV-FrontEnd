@@ -2,9 +2,10 @@
 import { ReactNode, useState } from "react";
 import './css/style.css';
 import Button from "../Inputs/Button";
+import { Content } from "next/font/google";
 
-export default function Modal(props :{isOpen :boolean; id :string, onClose :() => void, onConfirm :() => void}){
-
+export default function Modal(props :{content :ReactNode; isOpen :boolean; id :string, onClose :() => void, onConfirm :() => void}){
+    
     if(!props.isOpen) return null
 
    
@@ -13,7 +14,7 @@ export default function Modal(props :{isOpen :boolean; id :string, onClose :() =
         
         <div className={"overlay"}>
             <div id={props.id} className={"modal"} >
-                <h1>conteudo do modal</h1>
+                {props.content}
                 <div onClick={props.onClose}><Button size="small" text="fechar"/></div>
                 <div onClick={props.onConfirm}><Button size="small" text="confirmar"/></div>
             </div>
