@@ -11,19 +11,12 @@ import Footer from "@/app/components/Footer/Footer"
 import HeaderAdm from "../../components/Header/HeaderAdm";
 import Cellphone from "../../components/IconsTSX/CellPhone";
 import HeaderOptions from "../../components/Header/HeaderOptions";
+import Modal from "@/app/components/Modal/Modal"
 
 export default function Home() {
-  const checkSelects = function(){
-    var itens = document.body.querySelectorAll("[datatype='data-select-box-table-list'].selectedBox");
-    
-    console.log(itens)
-  }
-  const xx = function(){
-    console.log("esperando confirmação")
-  }
+  
   return (
     <>
-      
       <Link href="/Imoveis">clique aqui</Link>
       <SelectedStar width={54} height={54} color={"#001111"}/>
       <NotSelectedStar width={54} height={54} color={"#001111"}/>
