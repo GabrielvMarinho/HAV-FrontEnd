@@ -6,7 +6,6 @@ import InputText from "../Inputs/InputText";
 import Button from "../Inputs/Button";
 import Modal from "../Modal/Modal";
 import { useState } from "react";
-import Title from "../NonInteractable/Title";
 import ButtonOpenClosed from "../Inputs/ButtonOpenClosed";
 import ToggleButton from "../Inputs/ToggleButton";
 import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
@@ -20,11 +19,6 @@ export default function FormAddUserOwner() {
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget as HTMLFormElement);
-        
-        // Debugar se os dados estão sendo capturados corretamente
-        for (let pair of formData.entries()) {
-            console.log(pair[0] + ": " + pair[1]);
-        }
         
         const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
         console.log("Formulário enviado:", formObject);
@@ -104,7 +98,6 @@ export default function FormAddUserOwner() {
 
     return (
         <>
-            <Title text="Cadastrar Proprietário" tag="h1" />
             <form className="ownerForm" onSubmit={handleFormSubmit}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
