@@ -1,11 +1,87 @@
-.ownerForm{
-    
+@import "../../../variables.css";
+
+.ownerForm {
     padding: 10px;
-    background-color: aqua;
-    width: 1000px;
+    background-color: var(--box-red-pink);
+    border-radius: var(--border-box);
+    width: 1060px;
+    height: 669px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: center;
 }
-.ownerFormInputs{
-    width: 500px;
+
+.inputArticleDesktop {
     display: flex;
     flex-wrap: wrap;
+    width: 500px;
+    gap: 15px;
+}
+
+.imgPerson {
+    width: 390px;
+    height: 390px;
+    border-radius: 1.864px;
+    background-color: black;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.articleDataForm{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.divButtonsAceptCancelForms{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 96px 0 0 220px;
+}
+
+.inputArticleMobile{
+    display: none;
+}
+
+@media(max-width: 992px){
+
+    .ownerForm{
+        width: 305px;
+        height: 1450px;
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .inputArticleDesktop{
+        display: none;
+    }
+
+    .inputArticleMobile{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 500px;
+        align-items: center;
+        gap: 10px;
+    }
+    .imgPerson {
+        width: 210px;
+        height: 209px;
+        border-radius: 1.864px;
+        background-color: black;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
+    .divButtonsAceptCancelForms{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+
 }

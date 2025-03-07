@@ -9,13 +9,13 @@ export default function RelatorioEAnalise() {
 
     return (
         <>
+            <HeaderAdm/>
             <Title tag="h1" text="Estatísticas e análises" />
             <NavBarEstatisticaEAnalise />
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "490px" }}>
                 <Subtitle text="dados totais" lineDirection="left" /> {/**ainda não consegui alinhar a barra a esquerda */}
                 <p className="exportdatas">EXPORTAR DADOS</p>
             </div>
-            
 
         </>
     );

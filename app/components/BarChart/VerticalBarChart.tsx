@@ -1,4 +1,4 @@
-export default function VerticalBarChart(){
+export default function VerticalBarChart() {
   return (
     <>
       

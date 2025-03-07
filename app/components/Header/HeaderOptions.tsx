@@ -8,10 +8,6 @@ import Link from 'next/link';
 
 export default function HeaderOptions(props :{close :() => void; isOpen: boolean; options :string[], optionsLinks :string[], optionsIcons :ReactNode[], title :string}){
     
-    
-    
-    
-
     return (
         <div className="headerOptionContainer">
             <div className="headerOptionContainerTitle"style={{display: "flex", gap: "5px"}}>
