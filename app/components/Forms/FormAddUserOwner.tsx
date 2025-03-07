@@ -15,16 +15,23 @@ import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
 export default function FormAddUserOwner() {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [pendingFormData, setPendingFormData] = useState<FormData | null>(null);
+    const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("asdasd")
-        const formData = new FormData(e.currentTarget);
-        setPendingFormData(formData); // Armazena os dados temporariamente
-        setIsModalOpen(true); // Abre o modal
-        console.log(isModalOpen)
+        const formData = new FormData(e.currentTarget as HTMLFormElement);
+        
+        // Debugar se os dados estão sendo capturados corretamente
+        for (let pair of formData.entries()) {
+            console.log(pair[0] + ": " + pair[1]);
+        }
+        
+        const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
+        console.log("Formulário enviado:", formObject);
+        setPendingFormData(formObject); 
+        setIsModalOpen(true);
     };
+    
 
     const addOwner = async function () {
         if (!pendingFormData) return;
@@ -113,8 +120,8 @@ export default function FormAddUserOwner() {
                     </div>
                     <div className="inputArticleDesktop ">
                         {inputsDesktop.map((input) => (
-                            input &&
                             <InputText
+                                key={input.id}  // Sempre adicione uma chave única
                                 name={input.name}
                                 size={input.size}
                                 placeholder={input.placeholder}
@@ -122,6 +129,7 @@ export default function FormAddUserOwner() {
                                 id={input.id}
                             />
                         ))}
+
                         {inputDropdown.map((input) => (
                             input &&
                             <InputDropdown
@@ -134,7 +142,7 @@ export default function FormAddUserOwner() {
                         ))}
                     </div>
                     <div className="inputArticleMobile">
-                    {inputsMobile.map((input) => (
+                        {inputsMobile.map((input) => (
                             input &&
                             <InputText
                                 name={input.name}
@@ -142,7 +150,7 @@ export default function FormAddUserOwner() {
                                 placeholder={input.placeholder}
                                 text={input.text}
                                 id={input.id}
-                        />
+                            />
                         ))}
                         {inputDropdown.map((input) => (
                             input &&
@@ -154,13 +162,24 @@ export default function FormAddUserOwner() {
                                 options={input.options}
                             />
                         ))}
-                    </div>  
+                    </div>
                     <div className="divButtonsAceptCancelForms">
                         <Button size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)" background="var(--text-white)" />
-                        <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)"/>
+                        <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                     </div>
                 </article>
-                <Modal id="idModal" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onConfirm={addOwner}></Modal>
+                <Modal
+                    id="idModal"
+                    content={
+                        <div>
+                            <h1>Deseja confirmar o cadastro do usuário?</h1>
+                        </div>
+                    }
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    onConfirm={addOwner}
+                />
+
             </form>
         </>
     )

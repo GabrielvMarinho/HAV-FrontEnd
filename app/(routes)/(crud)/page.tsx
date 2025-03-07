@@ -7,7 +7,7 @@ import NotSelectedStar from "../../components/IconsTSX/NotSelectedStar"
 import Title from "../../components/NonInteractable/Title"
 
 import Link from "next/link";
-
+import Footer from "@/app/components/Footer/Footer"
 import HeaderAdm from "../../components/Header/HeaderAdm";
 import Cellphone from "../../components/IconsTSX/CellPhone";
 import HeaderOptions from "../../components/Header/HeaderOptions";
@@ -29,7 +29,7 @@ export default function Home() {
       <NotSelectedStar width={54} height={54} color={"#001111"}/>
       <DocumentIcon width={211} height={211} color={"#501010"}/>
       <Title tag="h1" text="titulo"/>
-
+      <Footer/>
 
 
       </>

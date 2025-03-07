@@ -5,7 +5,8 @@ import TableList from "../../../../components/Information/TableList";
 import Filter from "../../..//../components/Filters/Filter";
 import "@/app/pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
-import ActionButtons from "@/app/components/Inputs/ActionButton";
+import ActionButton from "@/app/components/Inputs/ActionButton";
+import Trashcan from "@/app/components/IconsTSX/Trashcan";
 
 export default async function page() {
 
@@ -67,7 +68,7 @@ export default async function page() {
               "objetivo": "Aluguel"
             }
           ]} />
-        <ActionButtons context="admin" />
+        <ActionButton className="" Icon={Trashcan} onClick={console.log("botão clicado")}/>
       </div>
 
     </>

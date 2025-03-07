@@ -18,4 +18,8 @@
     padding-inline: 70px;
     border-radius: var(--border-box);
     background-color: var(--modal-red);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
 }

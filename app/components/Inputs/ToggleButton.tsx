@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./css/style.css"; // Importa o CSS global
+import "./css/style.css"; 
 
 export default function ToggleButton() {
   const [selected, setSelected] = useState("pf");

@@ -1,4 +1,4 @@
-"use client"
+
 import './css/style.css';
 import MoreSignal from '../IconsTSX/MoreSignal';
 import Pencil from '../IconsTSX/Pencil';
