@@ -1,4 +1,3 @@
-import ActionButtons, { ActionButton } from "@/app/components/Inputs/ActionButton";
 import "../../../../pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import Title from "@/app/components/NonInteractable/Title";
@@ -15,8 +14,18 @@ interface Property {
     propertyCategory: string;
     purpose: string;
 }
-async function fetchImoveis(): Promise<Property[]> {
-    const url = "http://localhost:9090/property";
+async function fetchImoveis(
+
+  name: string, 
+  email: string, 
+  phone: string,
+  cpf: string,
+  minPrice: number,
+  maxPrice: number,
+
+  ): Promise<Property[]> {
+    const url = "http://localhost:9090/property/filter";
+    
     const response = await fetch(url);
     const data = await response.json();
     console.log(data)
@@ -33,9 +42,20 @@ async function fetchImoveis(): Promise<Property[]> {
 
 
 
-export default async function page(){
-    
-    const properties = await fetchImoveis(); // Buscando os dados da API
+export default async function page({searchParams}: {searchParams: {
+
+   name?: string; 
+   email?: string;
+   phone?: string;
+   cpf?: string;
+   status?: string;
+   minPrice: number;
+   maxPrice: number;
+
+  }}){
+
+    const {name, email, phone, cpf, status, minPrice, maxPrice} = searchParams
+
 
     
     const inputs = [
@@ -45,7 +65,7 @@ export default async function page(){
         {name: "cpf", size: "medium", text: "CPF", placeholder: "ex: 67298357955", id: "cpf",},
       ];
     const InputDropdown = [
-        {name: "Status", size: "medium", text: "Status", id: "status",
+        {name: "Status", size: "large", text: "Status", id: "status",
         options: [['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}
     ] 
     const priceRanges = [
