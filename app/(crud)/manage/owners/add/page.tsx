@@ -5,7 +5,7 @@ export default async function page() {
     return (
         <>
             <FormOwner>
-l
+
             </FormOwner>
         </>
     )
