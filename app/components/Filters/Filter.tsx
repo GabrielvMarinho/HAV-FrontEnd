@@ -45,14 +45,14 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
         }));
         console.log(filterData)
       };
-      /**
-       * 
-       * LÓGICA DE SET EFFECT DO RANGE SLIDER
-       * 
-       */
-    
+      
+
+
+      const pathname = usePathname()
+      
+
     return(
-        <form action="/Imoveis" className="filterSide">
+        <form action={pathname} className="filterSide">
             
             {props.inputs.map((input) => (
                 input &&

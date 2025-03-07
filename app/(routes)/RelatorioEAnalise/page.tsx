@@ -1,8 +1,9 @@
 "use client"
-import HeaderAdm from "../components/Header/HeaderAdm";
-import Title from "../components/NonInteractable/Title";
-import NavBarEstatisticaEAnalise from "../components/Header/NavBarEstatisticaEAnalise"
-import Subtitle from "../components/NonInteractable/Subtitle";
+import HeaderAdm from "../../components/Header/HeaderAdm";
+import Title from "../../components/NonInteractable/Title";
+import NavBarEstatisticaEAnalise from "../../components/Header/NavBarEstatisticaEAnalise"
+import Subtitle from "../../components/NonInteractable/Subtitle";
+<canvas id="grafico"></canvas>
 
 export default function RelatorioEAnalise() {
 

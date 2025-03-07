@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { color } from 'chart.js/helpers';
 
 // Componente ActionButton
-export function ActionButton(props: { className: string; Icon: any; onClick: any}) {
+export default function ActionButton(props: {  className: string; Icon: any; onClick: any}) {
     return (
         <div onClick={props.onClick} className={`ActionButton ${props.className}`}>
             <props.Icon
@@ -20,35 +20,3 @@ export function ActionButton(props: { className: string; Icon: any; onClick: any
     );
 }
 
-// Componente ActionButtons
-export default function ActionButtons(props: { context: 'editor' | 'admin' }) {
-    const router = useRouter();
-
-    const editFunction = function(){
-        router.push(`${window.location.pathname}/edit`);
-    }
-    const addFunction = function(){
-        router.push(`${window.location.pathname}/add`);
-    }
-    const deleteFunction = function(){
-        router.push(`${window.location.pathname}/delete`);
-    }
-    const archiveFunction = function(){
-        router.push(`${window.location.pathname}/archive`);
-    }
-    const graphFunction = function(){
-        router.push(`${window.location.pathname}/graphs`);
-    }
-    return (
-        <div className="actionButtons">
-            {props.context === 'admin' && (
-                <ActionButton onClick={graphFunction} className="graphicButton darkHover" Icon={Graphic}  />
-            )}
-            {/* Botões para Editor e Admin */}
-            <ActionButton onClick={addFunction} className="addButton darkHover" Icon={MoreSignal} />
-            <ActionButton onClick={editFunction} className="editButton darkHover" Icon={Pencil}  />
-            <ActionButton onClick={deleteFunction} className="deleteButton darkHover" Icon={Trashcan} />
-            <ActionButton onClick={archiveFunction} className="archiveButton darkHover" Icon={Folder}  />
-        </div>
-    );
-}
