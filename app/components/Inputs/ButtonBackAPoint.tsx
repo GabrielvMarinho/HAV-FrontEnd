@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 export default function ButtonBackAPoint(props: { size: string; text: string; hover: string, color: string; background: string }) {
     const router = useRouter();
     const handleBack = () => {
-        router.back(); //volta uma / sem ter que escrever a barra
+        router.back(); //volta um point sem ter que escrever a barra
     }
     return (
         <button

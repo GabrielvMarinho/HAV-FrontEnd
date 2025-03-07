@@ -12,7 +12,7 @@ import ToggleButton from "../Inputs/ToggleButton";
 import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
 import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
 
-export default function FormOwner() {
+export default function FormAddUserOwner() {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<FormData | null>(null);

@@ -1,12 +1,12 @@
-import FormOwner from "@/app/components/Forms/FormOwner";
+import FormOwner from "@/app/components/Forms/FormAddUserOwner";
 
-export default async function page(){
-    
+export default async function page() {
+
     return (
         <>
-        <FormOwner>
-            
-        </FormOwner>
+            <FormOwner>
+l
+            </FormOwner>
         </>
     )
 }
