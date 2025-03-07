@@ -9,34 +9,45 @@ import TableList from "@/app/components/Information/TableList";
 
 interface Property {
     id: string;
-    title: string;
     price: string;
+    propertyType: string;
     propertyCategory: string;
-    purpose: string;
+    propertyStatus: string;
 }
 async function fetchImoveis(
 
-  name: string, 
-  email: string, 
-  phone: string,
-  cpf: string,
-  minPrice: number,
-  maxPrice: number,
+  propertyCode?: string, 
+  propertyType?: string, 
+  propertyCategory?: string,
+  propertyStatus?: string,
+  minPrice?: number,
+  maxPrice?: number,
 
   ): Promise<Property[]> {
     const url = "http://localhost:9090/property/filter";
-    
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data)
-    const properties: Property[] = data.content.map((item) => ({
-        id: item.id,
-        name: item.title,
-        price: item.price,
-        propertyCategory: item.propertyCategory,
-        purpose: item.purpose
+  
+    const response = await fetch(url,{
+      method:"POST",
+      headers: {
+        "Content-Type": "application/json", // Garante que está enviando JSON
+      },
+      body:JSON.stringify({
+        "propertyCode":propertyCode, 
+        "minPric":minPrice, 
+        "maxPric":maxPrice,
+        "propertyType":propertyType,
+        "propertyCategory":propertyCategory,
+        "propertyStatus":propertyStatus
+      })
+    });
 
-      }));
+
+    const data = await response.json();
+
+    const properties: Property[] = data.content.map((property: Property) => property);
+    console.log(properties)
+
+    
       return properties
 }
 
@@ -44,34 +55,43 @@ async function fetchImoveis(
 
 export default async function page({searchParams}: {searchParams: {
 
-   name?: string; 
-   email?: string;
-   phone?: string;
-   cpf?: string;
-   status?: string;
-   minPrice: number;
-   maxPrice: number;
+  propertyCode?: string; 
+  minPrice?: number;
+  maxPrice?: number;
+  propertyType?: string;
+  propertyCategory?: string;
+  propertyStatus?: string;
 
   }}){
-
-    const {name, email, phone, cpf, status, minPrice, maxPrice} = searchParams
-
-
+    const params = await searchParams;
+    const {propertyCode=null, minPrice, maxPrice, propertyType=null, propertyCategory=null, propertyStatus=null} = params
     
+    const data = await fetchImoveis(propertyCode, propertyType, propertyCategory, propertyStatus, minPrice, maxPrice,)
+    
+
     const inputs = [
-        {name: "nome", size: "medium", text: "Nome", placeholder: "ex: Bianca", id: "nome",},
-        {name: "email", size: "medium", text: "Email", placeholder: "joao@gmail.com", id: "email",},
-        {name: "telefone", size: "medium", text: "Telefone", placeholder: "ex: 672983579", id: "telefone",},
-        {name: "cpf", size: "medium", text: "CPF", placeholder: "ex: 67298357955", id: "cpf",},
+        {name: "propertyCode", size: "medium", text: "Código", placeholder: "ex: P12334", id: "propertyCode",},
       ];
     const InputDropdown = [
-        {name: "Status", size: "large", text: "Status", id: "status",
-        options: [['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}
+        {
+          name: "propertyType", size: "large", text: "Tipo", id: "propertyType",
+        options: [['casa', "Casa"], ["terreno", 'Terreno'], ["apartamento", 'Apartamento']]
+      },
+
+          {name: "propertyStatus", size: "large", text: "Status", id: "propertyStatus",
+        options: [["lancamento", "Lançamento"], ["Comum", 'Comum'], ["promocao", 'Promoção'], ["recente", 'Recente']]
+      },
+      
+          {name: "propertyCategory", size: "large", text: "Finalidade", id: "propertyCategory",
+        options: [["locacao", "Locação"], ["locado", 'Locado'], ["venda", 'Venda'], ["vendido", 'Vendido'],
+        ["misto", 'Misto']]
+    }
+
     ] 
     const priceRanges = [
         {name: "preco",
         key: "preco",
-        min: 50000,
+        min: 100000,
         max: 2000000,
         step: 10000, 
         id: "priceRanger"}
@@ -91,31 +111,8 @@ export default async function page({searchParams}: {searchParams: {
             inputsDropdown={InputDropdown}
             inputPriceRanges={priceRanges}
             />
-            <TableList context="admin" size="large" titles={["id imóvel", "proprietário",  "tipo imóvel", "categoria", "status"]} 
-            data={[[
-                {
-                  "id imóvel": "333",
-                  "proprietário": "João Silva",
-                  "tipo imóvel": "Investimento",
-                  "categoria": "Moradia",
-                  "status": "Ativo"
-                },
-                {
-                  "id imóvel": "566",
-                  "proprietário": "Maria Oliveira",
-                  "tipo imóvel": "Moradia",
-                  "categoria": "Residencial",
-                  "status": "Ativo"
-                },
-                {
-                  "id imóvel": "769",
-                  "proprietário": "Carlos Santos",
-                  "tipo imóvel": "Aluguel",
-                  "categoria": "Comercial",
-                  "status": "Inativo"
-                }
-              ]
-              ]}/>
+            <TableList context="admin" size="large" titles={["id imóvel", "preço",  "tipo imóvel", "finalidade", "status"]} 
+            data={data}/>
         </div>
         
         </>

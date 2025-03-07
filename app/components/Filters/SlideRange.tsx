@@ -28,8 +28,9 @@ const PriceRangeSlider = (props: {min :number, max :number, step :number, id :nu
 
     //atualiza para o componente que ele esta
   if (minPrice !== props.min || maxPrice !== props.max) {
-    props.onChange(minPrice, maxPrice);
-  }
+    props.onChange(minPrice, maxPrice)
+  
+    }
   }, [minPrice, maxPrice]);
   
 
@@ -53,7 +54,8 @@ const PriceRangeSlider = (props: {min :number, max :number, step :number, id :nu
           </div>
           <div>
             <h3 style={{textAlign:"right"}}>Max</h3>
-            <p>R${maxPrice.toLocaleString('en-US').replace(/,/g, '.')}</p>
+            <p>R${maxPrice.toLocaleString('en-US').replace(/,/g, '.')}{maxPrice==2000000?<span>+</span>:<span></span>}</p>          
+
           </div>
         </div>
         <div className="slider">
@@ -61,7 +63,7 @@ const PriceRangeSlider = (props: {min :number, max :number, step :number, id :nu
         </div>
         <div className="range-input">
           <input
-            name="min"
+            name="minPrice"
             type="range"
             className="range-min"
             min={props.min}
@@ -71,7 +73,7 @@ const PriceRangeSlider = (props: {min :number, max :number, step :number, id :nu
             onInput={handleRangeInputChange}
           />
           <input
-            name="max"
+            name="maxPrice"
             type="range"
             className="range-max"
             min={props.min}

@@ -66,7 +66,6 @@ export default async function page() {
               "objetivo": "Aluguel"
             }
           ]} />
-        <ActionButtons context="admin" />
       </div>
 
     </>

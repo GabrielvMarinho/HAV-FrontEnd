@@ -14,6 +14,14 @@ import Modal from '../Modal/Modal';
 
 export default function TableList(props: {context :string; size :string, titles :string[], data :any[]}){
 
+    props.data.map((obj, index) =>{
+        console.log(Object.values(obj)[0])
+        console.log()
+    
+    }
+    )
+    
+
     //ACTION BUTTON RELATED
     const router = useRouter();
 
@@ -110,21 +118,23 @@ export default function TableList(props: {context :string; size :string, titles 
                     
                         <div className='tableListLine'></div>
 
-                        <tr className={selected.includes(obj.id)?"selectedRow tableRows":"tableRows"}>
+                        <tr className={selected.includes(Object.values(obj)[0])?"selectedRow tableRows":"tableRows"}>
                             <div className='marginSelectBox'>
 
                             <input
                             className='checkbox'
                                 type="checkbox"
-                                checked={selected.includes(obj.id)}
-                                onChange={() => handleSelect(obj.id)}
+                                checked={selected.includes(Object.values(obj)[0])}
+                                onChange={() => handleSelect(Object.values(obj)[0])}
                             />
 
                             </div>
-                            {props.titles.map( name => 
-                                <td >{obj[name]}</td>
-                            )}
-                            
+                            {Object.values(obj).map((value) => (
+                                    <td>
+                                        {typeof value === 'number' ? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value}
+                                    </td>
+
+                                ))}
                         </tr>
                     </>
                 )}
