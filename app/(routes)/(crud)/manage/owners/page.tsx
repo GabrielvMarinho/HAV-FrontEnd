@@ -5,6 +5,7 @@ import TableList from "../../../../components/Information/TableList";
 import Filter from "../../..//../components/Filters/Filter";
 import "@/app/pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
+import ActionButtons from "@/app/components/Inputs/ActionButton";
 
 export default async function page() {
 
