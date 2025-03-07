@@ -97,7 +97,7 @@ export default function FormAddUserOwner() {
 
     return (
         <>
-            <Title text="cadastrar imóvel" tag="h1" />
+            <Title text="Cadastrar Proprietário" tag="h1" />
             <form className="ownerForm" onSubmit={handleFormSubmit}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
