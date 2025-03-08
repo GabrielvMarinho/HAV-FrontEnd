@@ -5,13 +5,21 @@ import InputDropdown from "../Inputs/InputDropdown";
 import InputText from "../Inputs/InputText";
 import Button from "../Inputs/Button";
 import Modal from "../Modal/Modal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ToggleButton from "../Inputs/ToggleButton";
 import RadioButton from "../Inputs/RadioButton";
 import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
 import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
 
 export default function FormAddUserOwner() {
+
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 992);
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
@@ -22,17 +30,19 @@ export default function FormAddUserOwner() {
 
         const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
         console.log("Formulário enviado:", formObject);
-        setPendingFormData(formObject);
-        setIsModalOpen(true);
+        setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
+
+        console.log("Abrindo Modal");
+        setIsModalOpen(true); // Abre o modal
     };
+
 
 
     const addOwner = async function () {
         if (!pendingFormData) return;
-
-        const formData = pendingFormData;
-        const formObject = Object.fromEntries(formData.entries());
-        console.log(formObject)
+        // chamar a api
+        setIsModalOpen(false);
+        console.log("Enviando formulário com os dados:", pendingFormData);
     }
 
     const inputsDesktop = [
@@ -52,7 +62,7 @@ export default function FormAddUserOwner() {
         { name: "nome_completo", size: "medium", text: "Nome Completo", placeholder: "ex: Kauani da Silva", id: "nome_completo" },
         { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: 123.123.123-00", id: "cpf" },
         { name: "data_nascimento", size: "small", text: "Data Nascimento", placeholder: "dd/mm/aa", id: "data_nascimento" },
-        { name: "email", size: "small", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
+        { name: "email", size: "medium", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
         { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
         { name: "rua", size: "medium", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
         { name: "telefone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
@@ -111,53 +121,36 @@ export default function FormAddUserOwner() {
                         <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)" }}>DADOS</p>
                         <RadioButton />
                     </div>
-                    <div className="inputArticleDesktop ">
-                        {inputsDesktop.map((input) => (
-                            <InputText
-                                key={input.id}  // Sempre adicione uma chave única
-                                name={input.name}
-                                size={input.size}
-                                placeholder={input.placeholder}
-                                text={input.text}
-                                id={input.id}
-                            />
-                        ))}
+                    <div className="inputArticle">
+                        {isMobile ? (
+                            inputsMobile.map((input) => (
+                                <InputText
+                                    key={input.id}
+                                    name={input.name}
+                                    size={input.size}
+                                    placeholder={input.placeholder}
+                                    text={input.text}
+                                    id={input.id}
+                                />
+                            ))
+                        ) : (
+                            inputsDesktop.map((input) => (
+                                <InputText
+                                    key={input.id}
+                                    name={input.name}
+                                    size={input.size}
+                                    placeholder={input.placeholder}
+                                    text={input.text}
+                                    id={input.id}
+                                />
+                            ))
+                        )}
 
-                        {inputDropdown.map((input) => (
-                            input &&
-                            <InputDropdown
-                                name={input.name}
-                                size={input.size}
-                                text={input.text}
-                                id={input.id}
-                                options={input.options}
-                            />
-                        ))}
-                    </div>
-                    <div className="inputArticleMobile">
-                        {inputsMobile.map((input) => (
-                            input &&
-                            <InputText
-                                name={input.name}
-                                size={input.size}
-                                placeholder={input.placeholder}
-                                text={input.text}
-                                id={input.id}
-                            />
-                        ))}
-                        {inputDropdown.map((input) => (
-                            input &&
-                            <InputDropdown
-                                name={input.name}
-                                size={input.size}
-                                text={input.text}
-                                id={input.id}
-                                options={input.options}
-                            />
-                        ))}
                     </div>
                     <div className="divButtonsAceptCancelForms">
-                        <Button size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)" background="var(--text-white)" />
+                        <Button type="button" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
+                            background="var(--text-white)"
+                            onClick={() => setIsModalOpen(true)} />
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                     </div>
                 </article>
@@ -172,7 +165,6 @@ export default function FormAddUserOwner() {
                     onClose={() => setIsModalOpen(false)}
                     onConfirm={addOwner}
                 />
-
             </form>
         </>
     )

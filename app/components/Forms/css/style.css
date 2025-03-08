@@ -13,7 +13,7 @@
     justify-content: center;
 }
 
-.inputArticleDesktop {
+.inputArticle {
     display: flex;
     flex-wrap: wrap;
     width: 500px;
@@ -53,19 +53,18 @@
         height: 1450px;
         flex-direction: column;
         gap: 40px;
+        margin: 0 auto;
     }
     
     .inputArticleDesktop{
         display: none;
     }
 
-    .inputArticleMobile{
-        display: flex;
+    .inputArticle{
         flex-direction: column;
-        flex-wrap: wrap;
-        width: 500px;
         align-items: center;
-        gap: 10px;
+        gap: 15px;
+        margin-top: 40px;
     }
     .imgPerson {
         width: 210px;
