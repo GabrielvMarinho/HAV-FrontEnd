@@ -63,11 +63,6 @@ export default function TableList(props: {context :string; size :string, titles 
         localStorage.removeItem('selectedManage');
     }
 
-    
-
-
-
-
 
     localStorage.setItem('previousPathname', pathname);
         useEffect(() =>{

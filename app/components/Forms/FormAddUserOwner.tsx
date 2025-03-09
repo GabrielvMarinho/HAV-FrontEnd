@@ -21,8 +21,10 @@ export default function FormAddUserOwner() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
+
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -31,19 +33,35 @@ export default function FormAddUserOwner() {
         const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
         console.log("Formulário enviado:", formObject);
         setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
-
-        console.log("Abrindo Modal");
         setIsModalOpen(true); // Abre o modal
     };
 
 
-
     const addOwner = async function () {
         if (!pendingFormData) return;
-        // chamar a api
+        
         setIsModalOpen(false);
-        console.log("Enviando formulário com os dados:", pendingFormData);
-    }
+        
+        try {
+            const response = await fetch("http://sua-api.com/rota", { // Corrigir a URL
+                method: "POST",
+                headers: { "Content-Type": "application/json" }, // Adicionar cabeçalho
+                body: JSON.stringify(pendingFormData)
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Erro ao cadastrar usuário: ${response.status} - ${response.statusText}`);
+            }
+    
+            console.log("Usuário cadastrado com sucesso!", await response.json());
+    
+            setPendingFormData(null); // Limpa o formulário somente se deu certo
+    
+        } catch (err) {
+            console.error("Erro ao se comunicar com a API:", err);
+        }
+    };
+    
 
     const inputsDesktop = [
         { name: "nome_completo", size: "large", text: "Nome Completo", placeholder: "ex: Kauani da Silva", id: "nome_completo" },
@@ -107,6 +125,7 @@ export default function FormAddUserOwner() {
     ];
 
     return (
+        
         <>
             <form className="ownerForm" onSubmit={handleFormSubmit}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
@@ -145,6 +164,17 @@ export default function FormAddUserOwner() {
                                 />
                             ))
                         )}
+                        {inputDropdown.map((input) => (
+                            <InputDropdown
+                            
+                                key={input.id}
+                                name={input.name}  
+                                size={input.size}
+                                text={input.text}
+                                id={input.id}
+                                options={input.options}
+                            />
+                        ))}
 
                     </div>
                     <div className="divButtonsAceptCancelForms">
