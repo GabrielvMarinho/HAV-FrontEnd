@@ -31,22 +31,62 @@ export default function FormAddUserOwner() {
         const formData = new FormData(e.currentTarget as HTMLFormElement);
 
         const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
+        console.log("----------------")
         console.log("Formulário enviado:", formObject);
         setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
+        console.log(pendingFormData)
         setIsModalOpen(true); // Abre o modal
     };
 
 
     const addOwner = async function () {
+
         if (!pendingFormData) return;
         
         setIsModalOpen(false);
-        
+        console.log(pendingFormData, "----------------------")
+        console.log(JSON.stringify({
+            "name": pendingFormData.name,
+            "email": pendingFormData.email,
+            "password": "securePassword123",
+            "celphone": pendingFormData.cellphone,
+            "birthDate": pendingFormData.birth_date,
+            "cpf": pendingFormData.cpf,
+            "archived":false,
+            "address": {
+                "cep":pendingFormData.cep,
+                "street":pendingFormData.street,
+                "neighborhood":pendingFormData.neighborhood,
+                "city":pendingFormData.city,
+                "state":pendingFormData.state,
+                "propertyNumber":pendingFormData.property_number,
+                "complement":pendingFormData.complement
+            }
+        }))
         try {
-            const response = await fetch("http://sua-api.com/rota", { // Corrigir a URL
+            const response = await fetch("http://localhost:9090/customer", { 
                 method: "POST",
                 headers: { "Content-Type": "application/json" }, // Adicionar cabeçalho
-                body: JSON.stringify(pendingFormData)
+                
+                body: JSON.stringify({
+                    "name": pendingFormData.name,
+                    "email": pendingFormData.email,
+                    "password": "securePassword123",
+                    "celphone": pendingFormData.cellphone,
+                    "birthDate": pendingFormData.birth_date,
+                    "cpf": pendingFormData.cpf,
+                    "archived":false,
+                    "address": {
+                        "cep":pendingFormData.cep,
+                        "street":pendingFormData.street,
+                        "neighborhood":pendingFormData.neighborhood,
+                        "city":pendingFormData.city,
+                        "state":pendingFormData.state,
+                        "propertyNumber":pendingFormData.property_number,
+                        "complement":pendingFormData.complement
+                    }
+                })
+                
             });
     
             if (!response.ok) {
@@ -64,22 +104,22 @@ export default function FormAddUserOwner() {
     
 
     const inputsDesktop = [
-        { name: "nome_completo", size: "large", text: "Nome Completo", placeholder: "ex: Kauani da Silva", id: "nome_completo" },
+        { name: "name", size: "large", text: "Nome Completo", placeholder: "ex: Kauani da Silva", id: "nome_completo" },
         { name: "cpf", size: "small", text: "CPF", placeholder: "ex: 123.123.123-00", id: "cpf" },
-        { name: "data_nascimento", size: "small", text: "Data Nascimento", placeholder: "dd/mm/aa", id: "data_nascimento" },
+        { name: "birth_date", size: "small", text: "Data Nascimento", placeholder: "dd/mm/aa", id: "data_nascimento" },
         { name: "email", size: "small", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
         { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
-        { name: "rua", size: "large", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
-        { name: "telefone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
-        { name: "celular", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
-        { name: "numero", size: "small", text: "Número", placeholder: "1002", id: "numero" },
-        { name: "complemento", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
+        { name: "street", size: "large", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
+        { name: "phone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
+        { name: "cellphone", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
+        { name: "property_number", size: "small", text: "Número", placeholder: "1002", id: "numero" },
+        { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
     ];
 
     const inputsMobile = [
-        { name: "nome_completo", size: "medium", text: "Nome Completo", placeholder: "ex: Kauani da Silva", id: "nome_completo" },
+        { name: "name", size: "medium", text: "Nome Completo", placeholder: "ex: Kauani da Silva", id: "nome_completo" },
         { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: 123.123.123-00", id: "cpf" },
-        { name: "data_nascimento", size: "small", text: "Data Nascimento", placeholder: "dd/mm/aa", id: "data_nascimento" },
+        { name: "birth_date", size: "small", text: "Data Nascimento", placeholder: "dd/mm/aa", id: "data_nascimento" },
         { name: "email", size: "medium", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
         { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
         { name: "rua", size: "medium", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
@@ -90,7 +130,7 @@ export default function FormAddUserOwner() {
     ]
     const inputDropdown = [
         {
-            name: "estado",
+            name: "state",
             size: "medium",
             text: "Estado",
             id: "estado",
@@ -101,7 +141,7 @@ export default function FormAddUserOwner() {
             ]
         },
         {
-            name: "cidade",
+            name: "city",
             size: "medium",
             text: "Cidade",
             id: "cidade",
@@ -112,7 +152,7 @@ export default function FormAddUserOwner() {
             ]
         },
         {
-            name: "bairro",
+            name: "neighborhood",
             size: "medium",
             text: "Bairro",
             id: "bairro",
@@ -178,7 +218,7 @@ export default function FormAddUserOwner() {
 
                     </div>
                     <div className="divButtonsAceptCancelForms">
-                        <Button type="button" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
+                        <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
                             background="var(--text-white)"
                             onClick={() => setIsModalOpen(true)} />
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />

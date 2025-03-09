@@ -25,7 +25,7 @@ async function fetchImoveis(
   maxPrice?: number,
 
   ): Promise<Property[]> {
-    const url = "http://localhost:9090/property/filter";
+    const url = "http://localhost:9090/costumer/filter";
   
     const response = await fetch(url,{
       method:"POST",
@@ -105,7 +105,7 @@ export default async function page({searchParams}: {searchParams: {
         
         <Title tag="h1" text="Imóveis"/>
         <SearchBar placeholder="Busca:"/>   
-        <div style={{display:"flex", width:"95%", gap: "20px"}}>
+        <div className="containerFilterListAction">
             <Filter 
             size="medium" 
             inputs={inputs}

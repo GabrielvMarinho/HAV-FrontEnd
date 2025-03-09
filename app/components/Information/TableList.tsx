@@ -14,12 +14,7 @@ import Modal from '../Modal/Modal';
 
 export default function TableList(props: {context :string; size :string, titles :string[], data :any[]}){
 
-    props.data.map((obj, index) =>{
-        console.log(Object.values(obj)[0])
-        console.log()
     
-    }
-    )
     
 
     //ACTION BUTTON RELATED
@@ -126,7 +121,9 @@ export default function TableList(props: {context :string; size :string, titles 
                             </div>
                             {Object.values(obj).map((value) => (
                                     <td>
-                                        {typeof value === 'number' ? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value}
+                                        <div>
+                                            {typeof value === 'number' && value > 10000? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value}
+                                        </div>
                                     </td>
 
                                 ))}

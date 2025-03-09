@@ -78,7 +78,12 @@
     text-decoration: none;
 }
 
+
+::-webkit-scrollbar {
+    display: none;
+}
 body{
+    scrollbar-width: none;
     background-color: var(--bg-color);
     display: flex;
     justify-content: start;

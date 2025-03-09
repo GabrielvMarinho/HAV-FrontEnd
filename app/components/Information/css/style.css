@@ -7,7 +7,7 @@
     width: 66vw;
     opacity: 0.5;
     background-color: var(--text-black);
-    height: 1px;
+    height: 0.5px;
 
 }
 .marginSelectBox{
@@ -62,9 +62,19 @@
     font-weight: 700;
 }
 .tableListData td{
+    overflow: hidden;
+    text-overflow: ellipsis; 
+
     height: fit-content;
     font-size: var(--text-sm);
     color: var(--text-black);
     font-weight: 500;
     
+}
+
+.tableListData td div{
+    overflow: hidden;
+    text-overflow: ellipsis;  
+
+    width: 85%;
 }

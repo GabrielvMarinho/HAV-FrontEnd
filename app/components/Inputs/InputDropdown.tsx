@@ -13,7 +13,7 @@ export default function InputDropdown(props: {name :string; options :[string, st
                 <option value="" disabled selected>Selecione Algo</option>
 
                 {props.options.map(option =>
-                    <option  className="optionDropDown" value = {option[0].toUpperCase()} key={option[1]}>{option[1].toUpperCase()}</option> 
+                    <option  className="optionDropDown" value = {option[0]} key={option[1]}>{option[1].toUpperCase()}</option> 
                 )}
             </select>
         </div>
