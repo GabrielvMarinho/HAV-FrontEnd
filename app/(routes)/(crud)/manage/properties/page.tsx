@@ -5,6 +5,7 @@ import SearchBar from "@/app/components/Filters/SearchBar";
 import Filter from "@/app/components/Filters/Filter";
 import TableList from "@/app/components/Information/TableList";
 
+//ver com o marinho sobre os atributos title e name do objeto Property e a estruturação de pastas
 
 
 interface Property {
