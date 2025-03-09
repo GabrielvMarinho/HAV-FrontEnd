@@ -13,6 +13,9 @@
     align-items: center;
     justify-content: center;
 }
+.no-scroll{
+    overflow: hidden;
+}
 .modal{
     padding: 25px;
     padding-inline: 70px;
