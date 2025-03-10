@@ -205,14 +205,16 @@
 
 
 .changeRouteButton {
-    margin-top: 15px;
+    margin-top: 7px;
+    margin-bottom: 7px;
     transition: 0.5s ease;  
 
     background-color: var(--box-red-pink);
 }
 
 .actionSelectedButton {
-    margin-top: 15px;
+    margin-top: 7px;
+    margin-bottom: 7px;
     transition: 0.5s ease;  
     background-color: var(--box-dark-red-option);
 }
@@ -255,7 +257,7 @@
 
 .nonClickableButton{
     margin-top: 0px;
-
+    margin-bottom: 0px;
     transition: 0.5s ease;  
     opacity: 0.3;
     scale: 0.85;
