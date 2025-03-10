@@ -5,12 +5,7 @@ import TableList from "../../../../components/Information/TableList";
 import Filter from "../../../../components/Filters/Filter";
 import "@/app/pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
-import ActionButton from "@/app/components/Inputs/ActionButton";
-import Trashcan from "@/app/components/IconsTSX/Trashcan";
 import getByParamsProprietors from "@/app/apiCalls/Proprietor/getByParamsProprietors";
-
-
-
 
 
 export default async function page({searchParams}: {searchParams: {
@@ -28,7 +23,7 @@ export default async function page({searchParams}: {searchParams: {
     
     const data = await getByParamsProprietors(cpf, name, email, numberProperties, goal)
     
-
+  
   const inputs = [
     { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: ", id: "cpf", },
     { name: "name", size: "medium", text: "Nome", placeholder: "ex: ", id: "name", },
