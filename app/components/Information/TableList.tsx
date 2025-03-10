@@ -142,17 +142,17 @@ export default function TableList(props: {context :string; size :string, titles 
 
         <div className="actionButtons">
             {props.context === 'admin' && (
-                <ActionButton onClick={graphFunction} className={`${selected.length==0?"darkHover":"nonClickableButton"} changeRouteButton `} Icon={Graphic}  />
+                <ActionButton onClick={graphFunction} className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={Graphic}  />
 
             )}
-            <ActionButton onClick={archiveRoute}  className={`${selected.length==0?"darkHover":"nonClickableButton"} changeRouteButton `} Icon={Folder}  />
+            <ActionButton onClick={archiveRoute}  className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={Folder}  />
 
 
             {/* Botões para Editor e Admin */}
-            <ActionButton onClick={addFunction} className={`${selected.length==0?"darkHover":"nonClickableButton"} changeRouteButton `} Icon={MoreSignal} />
-            <ActionButton onClick={selected.length==1?editFunction:""} className={`${selected.length==1?"darkHover":"nonClickableButton"} actionSelectedButton `} Icon={Pencil}  />
-            <ActionButton onClick={selected.length>0?openDeleteModal:""} className={`${selected.length>0?"darkHover":"nonClickableButton"} actionSelectedButton `} Icon={Trashcan} />
-            <ActionButton onClick={selected.length>0?archiveFunction:""} className={`${selected.length>0?"darkHover":"nonClickableButton"} actionSelectedButton `} Icon={ArchiveIn}  />
+            <ActionButton onClick={addFunction} className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={MoreSignal} />
+            <ActionButton onClick={selected.length==1?editFunction:""} className={`${selected.length==1?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Pencil}  />
+            <ActionButton onClick={selected.length>0?openDeleteModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Trashcan} />
+            <ActionButton onClick={selected.length>0?archiveFunction:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={ArchiveIn}  />
             
             <Modal content={<div>delete modal</div>} id = "deleteModal" isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onConfirm={deleteEntitiesFunction}></Modal>
 

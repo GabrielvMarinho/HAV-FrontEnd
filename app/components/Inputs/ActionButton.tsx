@@ -6,15 +6,16 @@ import Trashcan from '../IconsTSX/Trashcan';
 import Folder from '../IconsTSX/Folder';
 import Graphic from '../IconsTSX/Graphic';
 import { useRouter } from "next/navigation";
-import { color } from 'chart.js/helpers';
+import "../../variables.css"
 
 // Componente ActionButton
 export default function ActionButton(props: {  className: string; Icon: any; onClick: any}) {
     return (
-        <div onClick={props.onClick} className={`ActionButton ${props.className}`}>
+        <div onClick={props.onClick} className={`actionButton ${props.className}`}>
             <props.Icon
-                width={45}
-                height={45}
+                width={25}
+                height={25}
+                color={"var(--box-white)"}
             />
         </div>
     );
