@@ -4,7 +4,7 @@ import Title from "@/app/components/NonInteractable/Title";
 import SearchBar from "@/app/components/Filters/SearchBar";
 import Filter from "@/app/components/Filters/Filter";
 import TableList from "@/app/components/Information/TableList";
-import fetchProperties from "@/app/apiCalls/fetchProperties";
+import getByParamsProperties from "@/app/apiCalls/Property/getByParamsProperties";
 
 
 
@@ -23,7 +23,7 @@ export default async function page({searchParams}: {searchParams: {
     const params = await searchParams;
     const {propertyCode=null, minPrice, maxPrice, propertyType=null, propertyCategory=null, propertyStatus=null} = params
     
-    const data = await fetchProperties(propertyCode, propertyType, propertyCategory, propertyStatus, minPrice, maxPrice,)
+    const data = await getByParamsProperties(propertyCode, propertyType, propertyCategory, propertyStatus, minPrice, maxPrice,)
     
 
     const inputs = [

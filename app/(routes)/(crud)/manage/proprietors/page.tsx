@@ -7,7 +7,7 @@ import "@/app/pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import ActionButton from "@/app/components/Inputs/ActionButton";
 import Trashcan from "@/app/components/IconsTSX/Trashcan";
-import fetchProprietors from "@/app/apiCalls/fetchProprietors";
+import getByParamsProprietors from "@/app/apiCalls/Proprietor/getByParamsProprietors";
 
 
 
@@ -26,10 +26,8 @@ export default async function page({searchParams}: {searchParams: {
     const params = await searchParams;
     const {cpf=null, name=null, email=null, numberProperties=null, goal=null} = params
     
-    const data = await fetchProprietors(cpf, name, email, numberProperties, goal)
-    console.log("----------------------------")
-    console.log(data)
-
+    const data = await getByParamsProprietors(cpf, name, email, numberProperties, goal)
+    
 
   const inputs = [
     { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: ", id: "cpf", },

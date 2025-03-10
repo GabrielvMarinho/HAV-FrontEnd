@@ -8,13 +8,27 @@ import Title from "@/app/components/NonInteractable/Title";
 import SearchBar from "@/app/components/Filters/SearchBar";
 import Filter from "@/app/components/Filters/Filter";
 import TableList from "@/app/components/Information/TableList";
+import getByParamsAdms from "@/app/apiCalls/Adm/getByParamsAdms";
 
 
 
 
-export default async function page(){
+export default async function page({searchParams}: {searchParams: {
+
+  cpf?: string; 
+  name?: string;
+  email?: String;
+  cellphone?: string;
+  phoneNumber?: string;
+  
+
+  }}){
+    const params = await searchParams;
+    const {cpf=null, name=null, email=null, cellphone=null, phoneNumber=null} = params
+        
+    const data = await getByParamsAdms(cpf, name, email, cellphone, phoneNumber)
+        
     
-    //const properties = await fetchImoveis(); // Buscando os dados da API
 
     
     const inputs = [
@@ -44,31 +58,7 @@ export default async function page(){
             inputPriceRanges={[]}
             />
             <TableList context="admin" size="large" titles={["cpf", "nome",  "email", "telefone", "status"]} 
-            data={[{
-                "id":23123,
-              "cpf": "123.456.789-00",
-              "nome": "João Silva",
-              "email": "joao@.com",
-              "telefone": "123123123",
-              "status": "Investidor"
-            },
-            {
-                "id":234,
-
-              "cpf": "987.654.321-00",
-              "nome": "Maria Oliveira",
-              "email": "maria@.com",
-              "telefone": "123123123",
-              "status": "Ativo"
-            },
-            {
-                "id":436,
-              "cpf": "456.123.789-00",
-              "nome": "Carlos Santos",
-              "email": "carlos@.com",
-              "telefone": "234234",
-              "status": "Investidor"
-            }]}/>
+            data={data}/>
         </div>
         
         </>

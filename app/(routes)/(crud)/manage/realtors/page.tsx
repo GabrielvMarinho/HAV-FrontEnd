@@ -1,21 +1,31 @@
-import ActionButtons, { ActionButton } from "@/app/components/Inputs/ActionButton";
 import "../../../../pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import Title from "@/app/components/NonInteractable/Title";
 import SearchBar from "@/app/components/Filters/SearchBar";
 import Filter from "@/app/components/Filters/Filter";
 import TableList from "@/app/components/Information/TableList";
+import getByParamsRealtors from "@/app/apiCalls/Realtor/getByParamsRealtors";
 
 
 
 
 
 
-export default async function page(){
-    
-    //const properties = await fetchImoveis(); // Buscando os dados da API
+export default async function page({searchParams}: {searchParams: {
 
-    
+  cpf?: string; 
+  name?: string;
+  email?: String;
+  cellphone?: number;
+  creci?: string;
+  
+
+  }}){
+    const params = await searchParams;
+    const {cpf=null, name=null, email=null, cellphone=null, creci=null} = params
+        
+    const data = await getByParamsRealtors(cpf, name, email, cellphone, creci)
+        
     const inputs = [
         {name: "nome", size: "medium", text: "Nome", placeholder: "ex: Bianca", id: "nome",},
         {name: "email", size: "medium", text: "Email", placeholder: "joao@gmail.com", id: "email",},
@@ -43,31 +53,7 @@ export default async function page(){
             inputPriceRanges={[]}
             />
             <TableList context="admin" size="large" titles={["cpf", "nome",  "email", "telefone", "status"]} 
-            data={[{
-                "id":23123,
-              "cpf": "123.456.789-00",
-              "nome": "João Silva",
-              "email": "joao@.com",
-              "telefone": "123123123",
-              "status": "Investidor"
-            },
-            {
-                "id":234,
-
-              "cpf": "987.654.321-00",
-              "nome": "Maria Oliveira",
-              "email": "maria@.com",
-              "telefone": "123123123",
-              "status": "Ativo"
-            },
-            {
-                "id":436,
-              "cpf": "456.123.789-00",
-              "nome": "Carlos Santos",
-              "email": "carlos@.com",
-              "telefone": "234234",
-              "status": "Investidor"
-            }]}/>
+            data={data}/>
         </div>
         
         </>

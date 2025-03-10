@@ -7,44 +7,8 @@ import "@/app/pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import ActionButton from "@/app/components/Inputs/ActionButton";
 import Trashcan from "@/app/components/IconsTSX/Trashcan";
+import getByParamsCustomers from "@/app/apiCalls/Customer/getByParamsCustomers";
 
-
-
-
-async function fetchImoveis(
-
-  cpf?: string,
-  name?: string,
-  email?: String,
-  numberProperties?: string,
-  goal?: string,
-
-): Promise<Customer[]> {
-  const url = "http://localhost:9090/customer/filter";
-  
-  const response = await fetch(url,{
-    method:"POST",
-    headers: {
-      "Content-Type": "application/json", // Garante que está enviando JSON
-    },
-    body:JSON.stringify({
-      "cpf":cpf, 
-      "name":name, 
-      "email":email,
-      "numberProperties":numberProperties,
-      "goal":goal
-    })
-  });
-
-
-  const data = await response.json();
-
-  const customers: Customer[] = data.content.map((customer: Customer) => customer);
-  console.log(customers)
-
-  
-    return customers
-}
 
 
 
@@ -54,19 +18,16 @@ export default async function page({searchParams}: {searchParams: {
   cpf?: string; 
   name?: string;
   email?: String;
-  numberProperties?: string;
-  goal?: string;
+  cellphone?: string;
+  status?: string;
   
 
   }}) {
     const params = await searchParams;
-    const {cpf=null, name=null, email=null, numberProperties=null, goal=null} = params
+    const {cpf=null, name=null, email=null, cellphone=null, status=null} = params
     
-    const data = await fetchImoveis(cpf, name, email, numberProperties, goal)
-    console.log("----------------------------")
-    console.log(data)
-
-  //const properties = await fetchImoveis(); // Buscando os dados da API
+    const data = await getByParamsCustomers(cpf, name, email, cellphone, status)
+    
 
   const inputs = [
     { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: ", id: "cpf", },

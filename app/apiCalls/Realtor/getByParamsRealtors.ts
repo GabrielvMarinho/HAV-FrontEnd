@@ -5,10 +5,10 @@ export default async function(
     name?: string,
     email?: String,
     cellphone?: number,
-    status?: string,
+    creci?: string,
   
-  ): Promise<Customer[]> {
-    const url = "http://localhost:9090/customer/filter";
+  ): Promise<Realtor[]> {
+    const url = "http://localhost:9090/realtor/filter";
     
     const response = await fetch(url,{
       method:"POST",
@@ -20,16 +20,16 @@ export default async function(
         "name":name, 
         "email":email,
         "cellphone":cellphone,
-        "status":status
+        "creci":creci
       })
     });
   
   
     const data = await response.json();
   
-    const customers: Customer[] = data.content.map((customer: Customer) => customer);
+    const realtors: Realtor[] = data.content.map((realtor: Realtor) => realtor);
   
     
-      return customers
+      return realtors
   }
   
