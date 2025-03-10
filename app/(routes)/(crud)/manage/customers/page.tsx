@@ -50,7 +50,7 @@ export default async function page({searchParams}: {searchParams: {
   return (
     <>
 
-      <Title tag="h1" text="Proprietários" />
+      <Title tag="h1" text="Usuários Comuns" />
       <NavBarAdm />
       <SearchBar placeholder="Busca:" />
       <div className="containerFilterListAction">

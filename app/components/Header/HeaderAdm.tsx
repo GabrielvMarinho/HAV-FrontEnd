@@ -7,6 +7,8 @@ import { ReactNode } from "react";
 import { useState, useEffect, useRef } from "react";
 import HeaderOptions from "./HeaderOptions";
 import ChamadaTelefonica from "../IconsTSX/CellPhone";
+import User from "../IconsTSX/User";
+import Construcao from "../IconsTSX/Construcao";
 
 
 
@@ -30,17 +32,15 @@ export default function HeaderAdm() {
             <div style={{display:"flex", gap:"30px"}}>
                 <div className="HeaderOptions">
                 
-                <Link href={"/xxx"}>asd</Link>
-                <Link href={"/asdma"}>asd</Link>
-                <Link href={"/asdma"}>asd</Link>
-                <Link href={"/asdma"}>asd</Link>
+                <Link href={"/"}>Home</Link>
+                
                 <div onClick={() => toggleDropdown(1)}>
                     <HeaderOptions 
                     isOpen={openDropdownId === 1} 
                     close={() => setOpenDropdownId(null)}
                     title={"Área do Admin"} 
-                    options={["asd", "asd"]}
-                    optionsLinks={["/asd", "/asd"]}
+                    options={["vazio", "vazio"]}
+                    optionsLinks={["/", "/"]}
                     optionsIcons = 
                                 {[<ChamadaTelefonica width={15} height={15} color={"var(--text-white)"}/>,
                                 <ChamadaTelefonica width={15} height={15} color={"var(--text-white)"}/>,
@@ -55,13 +55,13 @@ export default function HeaderAdm() {
                     <HeaderOptions 
                     isOpen={openDropdownId === 2} 
                     close={() => setOpenDropdownId(null)}
-                    title={"Área do Admin"} 
-                    options={["asd", "asd"]}
-                    optionsLinks={["/asd", "/asd"]}
+                    title={"Gestão"} 
+                    options={["Usuários", "Ímoveis"]}
+                    optionsLinks={["/manage/customers", "/manage/properties"]}
                     optionsIcons = 
-                                {[<ChamadaTelefonica width={15} height={15} color={"var(--text-white)"}/>,
-                                <ChamadaTelefonica width={15} height={15} color={"var(--text-white)"}/>,
-                                <ChamadaTelefonica width={15} height={15} color={"var(--text-white)"}/>]}/>
+                                {[<User width={15} height={15} color={"var(--text-white)"}/>,
+                                <Construcao width={15} height={15} color={"var(--text-white)"}/>]}/>
+
                                 </div>
                     </div>
                 <Language width={30} height={30} color="" />
