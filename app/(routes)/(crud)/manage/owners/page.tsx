@@ -10,13 +10,7 @@ import Trashcan from "@/app/components/IconsTSX/Trashcan";
 
 
 
-interface Customer {
-  id: string;
-  name: string;
-  email: string;
-  numberProperties: number;
-  goal: string;
-}
+
 async function fetchImoveis(
 
   cpf?: string,

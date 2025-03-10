@@ -1,76 +1,110 @@
-import ActionButtons, { ActionButton } from "@/app/components/Inputs/ActionButton";
-import "../../../../pageStructure.css"
+
+import Title from "../../../../components/NonInteractable/Title";
+import SearchBar from "../../../../components/Filters/SearchBar";
+import TableList from "../../../../components/Information/TableList";
+import Filter from "../../..//../components/Filters/Filter";
+import "@/app/pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
-import Title from "@/app/components/NonInteractable/Title";
-import SearchBar from "@/app/components/Filters/SearchBar";
-import Filter from "@/app/components/Filters/Filter";
-import TableList from "@/app/components/Information/TableList";
+import ActionButton from "@/app/components/Inputs/ActionButton";
+import Trashcan from "@/app/components/IconsTSX/Trashcan";
 
 
 
 
+async function fetchImoveis(
 
-export default async function page(){
+  cpf?: string,
+  name?: string,
+  email?: String,
+  numberProperties?: string,
+  goal?: string,
+
+): Promise<Customer[]> {
+  const url = "http://localhost:9090/customer/filter";
+  
+  const response = await fetch(url,{
+    method:"POST",
+    headers: {
+      "Content-Type": "application/json", // Garante que está enviando JSON
+    },
+    body:JSON.stringify({
+      "cpf":cpf, 
+      "name":name, 
+      "email":email,
+      "numberProperties":numberProperties,
+      "goal":goal
+    })
+  });
+
+
+  const data = await response.json();
+
+  const customers: Customer[] = data.content.map((customer: Customer) => customer);
+  console.log(customers)
+
+  
+    return customers
+}
+
+
+
+
+export default async function page({searchParams}: {searchParams: {
+
+  cpf?: string; 
+  name?: string;
+  email?: String;
+  numberProperties?: string;
+  goal?: string;
+  
+
+  }}) {
+    const params = await searchParams;
+    const {cpf=null, name=null, email=null, numberProperties=null, goal=null} = params
     
-    //const properties = await fetchImoveis(); // Buscando os dados da API
+    const data = await fetchImoveis(cpf, name, email, numberProperties, goal)
+    console.log("----------------------------")
+    console.log(data)
 
-    
-    const inputs = [
-        {name: "nome", size: "medium", text: "Nome", placeholder: "ex: Bianca", id: "nome",},
-        {name: "email", size: "medium", text: "Email", placeholder: "joao@gmail.com", id: "email",},
-        {name: "telefone", size: "medium", text: "Telefone", placeholder: "ex: 672983579", id: "telefone",},
-        {name: "cpf", size: "medium", text: "CPF", placeholder: "ex: 67298357955", id: "cpf",},
-      ];
-    const inputDropdown = [
-        {name: "Objetivo", size: "large", text: "Status", id: "status",
-        options: [['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}
-    ] 
-    
-    return (
-        <>
-        
-        
-        
-        <Title tag="h1" text="Proprietários"/>
-        <NavBarAdm/>
-        <SearchBar placeholder="Busca:"/>   
-        <div className="containerFilterListAction">
-            <Filter 
-            size="medium" 
-            inputs={inputs}
-            inputsDropdown={inputDropdown}
-            inputPriceRanges={[]}
-            />
-            <TableList context="admin" size="large" titles={["cpf", "nome",  "email", "telefone", "status"]} 
-            data={[{
-                "id":23123,
-              "cpf": "123.456.789-00",
-              "nome": "João Silva",
-              "email": "joao@.com",
-              "telefone": "123123123",
-              "status": "Investidor"
-            },
-            {
-                "id":234,
+  //const properties = await fetchImoveis(); // Buscando os dados da API
 
-              "cpf": "987.654.321-00",
-              "nome": "Maria Oliveira",
-              "email": "maria@.com",
-              "telefone": "123123123",
-              "status": "Ativo"
-            },
-            {
-                "id":436,
-              "cpf": "456.123.789-00",
-              "nome": "Carlos Santos",
-              "email": "carlos@.com",
-              "telefone": "234234",
-              "status": "Investidor"
-            }]}/>
-        </div>
-        
-        </>
-    )
+  const inputs = [
+    { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: ", id: "cpf", },
+    { name: "name", size: "medium", text: "Nome", placeholder: "ex: ", id: "name", },
+    { name: "email", size: "medium", text: "Email", placeholder: "ex: ", id: "email", }
+
+  ];
+  const inputDropdown = [
+    {
+      name: "numberProperties", size: "large", text: "Número de Propriedades", id: "numberProperties",
+      options: [[1, "1"], [2, '2'], [3, '3'], [4, "4"], [5, "5+"]]
+    },
+    {
+      name: "goal", size: "large", text: "Objetivo", id: "goal",
+      options: [['locacao', "Locação"], ["venda", 'Venda'], ["misto", 'Misto']]
+    }
+  ]
+
+
+  return (
+    <>
+
+      <Title tag="h1" text="Proprietários" />
+      <NavBarAdm />
+      <SearchBar placeholder="Busca:" />
+      <div className="containerFilterListAction">
+        <Filter
+          size="medium"
+          inputs={inputs}
+          inputsDropdown={inputDropdown}
+          inputPriceRanges={[]}
+        />
+        <TableList context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
+          data={data} />
+      </div>
+
+    </>
+  )
 }
 
 
