@@ -27,15 +27,14 @@ export default async function page({searchParams}: {searchParams: {
     const data = await getByParamsRealtors(cpf, name, email, cellphone, creci)
         
     const inputs = [
-        {name: "nome", size: "medium", text: "Nome", placeholder: "ex: Bianca", id: "nome",},
-        {name: "email", size: "medium", text: "Email", placeholder: "joao@gmail.com", id: "email",},
-        {name: "telefone", size: "medium", text: "Telefone", placeholder: "ex: 672983579", id: "telefone",},
-        {name: "cpf", size: "medium", text: "CPF", placeholder: "ex: 67298357955", id: "cpf",},
+      { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: ", id: "cpf", },
+      { name: "name", size: "medium", text: "Nome", placeholder: "ex: ", id: "name", },
+      { name: "email", size: "medium", text: "Email", placeholder: "ex: ", id: "email", },
+      { name: "cellphone", size: "medium", text: "Celular", placeholder: "ex: ", id: "cellphone", },
+      { name: "creci", size: "medium", text: "Creci", placeholder: "ex: ", id: "creci", }
+
       ];
-    const inputDropdown = [
-        {name: "Objetivo", size: "large", text: "Status", id: "status",
-        options: [['sssssss', "Indisponível"], ["bia", 'Disponível'], ["bia", 'Alugado'], ["bia", 'Vendido']]}
-    ] 
+
     
     return (
         <>
@@ -49,10 +48,10 @@ export default async function page({searchParams}: {searchParams: {
             <Filter 
             size="medium" 
             inputs={inputs}
-            inputsDropdown={inputDropdown}
+            inputsDropdown={[]}
             inputPriceRanges={[]}
             />
-            <TableList context="admin" size="large" titles={["cpf", "nome",  "email", "telefone", "status"]} 
+            <TableList context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
             data={data}/>
         </div>
         
