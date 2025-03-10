@@ -8,8 +8,9 @@ export default async function(
     phoneNumber?: string,
   
   ): Promise<Editor[]> {
+
     const url = "http://localhost:9090/editor/filter";
-    
+    try{
     const response = await fetch(url,{
       method:"POST",
       headers: {
@@ -28,8 +29,10 @@ export default async function(
     const data = await response.json();
   
     const editors: Editor[] = data.content.map((editor: Editor) => editor);
-  
-    
-      return editors
+    return editors
+
+    }catch{
+      return [];
+    }
   }
   

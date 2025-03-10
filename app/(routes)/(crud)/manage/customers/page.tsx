@@ -28,6 +28,8 @@ export default async function page({searchParams}: {searchParams: {
     
     const data = await getByParamsCustomers(cpf, name, email, cellphone, status)
     
+    
+    
 
   const inputs = [
     { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: ", id: "cpf", },

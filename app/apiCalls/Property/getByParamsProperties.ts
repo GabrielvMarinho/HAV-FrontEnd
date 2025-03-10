@@ -11,7 +11,7 @@ export default async function(
   
     ): Promise<Property[]> {
       const url = "http://localhost:9090/property/filter";
-    
+    try{
       const response = await fetch(url,{
         method:"POST",
         headers: {
@@ -31,8 +31,10 @@ export default async function(
       const data = await response.json();
   
       const properties: Property[] = data.content.map((property: Property) => property);
-  
-      
-    return properties
+      return properties
+
+    }catch{
+      return [];
+    }
   }
   

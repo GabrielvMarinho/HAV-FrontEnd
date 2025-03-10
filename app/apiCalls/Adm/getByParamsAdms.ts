@@ -9,7 +9,7 @@ export default async function(
   
   ): Promise<Adm[]> {
     const url = "http://localhost:9090/adm/filter";
-    
+    try{
     const response = await fetch(url,{
       method:"POST",
       headers: {
@@ -28,8 +28,9 @@ export default async function(
     const data = await response.json();
   
     const adms: Adm[] = data.content.map((adm: Adm) => adm);
-  
-    
-      return adms
+    return adms;
+  }catch{
+    return [];
+  }
   }
   

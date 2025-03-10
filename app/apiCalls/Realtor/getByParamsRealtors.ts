@@ -9,7 +9,7 @@ export default async function(
   
   ): Promise<Realtor[]> {
     const url = "http://localhost:9090/realtor/filter";
-    
+    try{
     const response = await fetch(url,{
       method:"POST",
       headers: {
@@ -28,8 +28,10 @@ export default async function(
     const data = await response.json();
   
     const realtors: Realtor[] = data.content.map((realtor: Realtor) => realtor);
+    return realtors;
+    }catch{
+      return [];
+    }
   
-    
-      return realtors
   }
   
