@@ -1,4 +1,6 @@
-async function fetchProperties(
+
+
+export default async function(
 
     propertyCode?: string, 
     propertyType?: string, 
@@ -8,7 +10,7 @@ async function fetchProperties(
     maxPrice?: number,
   
     ): Promise<Property[]> {
-      const url = "http://localhost:9090/proprietor/filter";
+      const url = "http://localhost:9090/property/filter";
     
       const response = await fetch(url,{
         method:"POST",
@@ -29,9 +31,8 @@ async function fetchProperties(
       const data = await response.json();
   
       const properties: Property[] = data.content.map((property: Property) => property);
-      console.log(properties)
   
       
-        return properties
+    return properties
   }
   

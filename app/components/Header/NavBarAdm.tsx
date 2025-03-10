@@ -11,8 +11,8 @@ export default function NavBarAdm() {
         { label: "ADMINISTRADOR", path: "/manage/admins" },
         { label: "EDITOR", path: "/manage/editors" },
         { label: "CORRETOR", path: "/manage/realtors" },
-        { label: "USUÁRIO", path: "/manage/users" },
-        { label: "PROPRIETÁRIO", path: "/manage/owners" }
+        { label: "USUÁRIO", path: "/manage/customers" },
+        { label: "PROPRIETÁRIO", path: "/manage/proprietors" }
     ];
 
     return (

@@ -4,8 +4,7 @@ import Title from "@/app/components/NonInteractable/Title";
 import SearchBar from "@/app/components/Filters/SearchBar";
 import Filter from "@/app/components/Filters/Filter";
 import TableList from "@/app/components/Information/TableList";
-
-
+import fetchProperties from "@/app/apiCalls/fetchProperties";
 
 
 
