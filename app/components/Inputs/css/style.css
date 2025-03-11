@@ -285,13 +285,17 @@
 background-color: var(--text-white);
 }
 
-.buttonUploadPhoto{
+.buttonUploadPhoto {
     width: 30px;
-    height: 29px;
+    height: 30px;
+    position: absolute; /* Para posicionar o botão dentro do quadrado */
+    bottom: -15px;
+    right: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--text-white);
     border-radius: 999px;
-}  
+    font-size: 20px;
+} 
   

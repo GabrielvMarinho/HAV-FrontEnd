@@ -25,9 +25,7 @@
     height: 390px;
     border-radius: 1.864px;
     background-color: black;
-    display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
+    position: relative;
 }
 
 .articleDataForm{

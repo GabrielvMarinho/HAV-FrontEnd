@@ -171,10 +171,11 @@ export default function FormAddCustomer() {
 
                     </div>
                     <div className="divButtonsAceptCancelForms">
+                        
+                        <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                         <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
                             background="var(--text-white)"
                             onClick={() => setIsModalOpen(true)} />
-                        <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                     </div>
                 </article>
                 <Modal
