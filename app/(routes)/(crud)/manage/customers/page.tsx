@@ -8,6 +8,7 @@ import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import ActionButton from "@/app/components/Inputs/ActionButton";
 import Trashcan from "@/app/components/IconsTSX/Trashcan";
 import getByParamsCustomers from "@/app/apiCalls/Customer/getByParamsCustomers";
+import deleteCustomerList from "@/app/apiCalls/Customer/deleteByListCustomer";
 
 
 
@@ -62,7 +63,7 @@ export default async function page({searchParams}: {searchParams: {
           inputsDropdown={inputDropdown}
           inputPriceRanges={[]}
         />
-        <TableList archived={false} context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
+        <TableList deleteFunction={deleteCustomerList} archived={false} context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
           data={data} />
       </div>
 

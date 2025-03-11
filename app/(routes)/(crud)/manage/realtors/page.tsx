@@ -7,6 +7,7 @@ import TableList from "@/app/components/Information/TableList";
 import getByParamsRealtors from "@/app/apiCalls/Realtor/getByParamsRealtors";
 
 import deleteByListAdm from "../../../../apiCalls/Adm/deleteByListAdm"
+import deleteRealtorList from "@/app/apiCalls/Realtor/deleteByListRealtor";
 
 
 
@@ -51,7 +52,7 @@ export default async function page({searchParams}: {searchParams: {
             inputsDropdown={[]}
             inputPriceRanges={[]}
             />
-            <TableList deleteFunction = {deleteByListAdm} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
+            <TableList deleteFunction = {deleteRealtorList} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
             data={data}/>
         </div>
         
