@@ -58,9 +58,15 @@ export default async function(
     });
   
   
-      return "sucesso";
-    }catch{
-      return "erro";
+    if (!response.ok) {
+      const errorData = await response.json(); // Tenta pegar o erro do servidor
+      throw new Error(`Erro ${response.status}: ${errorData.message || "Erro desconhecido"}`);
     }
+
+    console.log("sucesso")
+  }catch(error){
+    console.error("Erro na requisição:", error);
+    throw error; // Relança o erro para que possa ser capturado externamente
+  }
   }
   

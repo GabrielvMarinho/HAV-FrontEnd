@@ -1,12 +1,12 @@
-import FormAddUserProprietor from "@/app/components/Forms/FormAddUserProprietor";
+import FormAddProprietor from "@/app/components/Forms/FormAddProprietor";
 
 export default async function page() {
 
     return (
         <>
-            <FormAddUserProprietor>
+            <FormAddProprietor>
 
-            </FormAddUserProprietor>
+            </FormAddProprietor>
         </>
     )
 }

@@ -11,26 +11,20 @@ import RadioButton from "../Inputs/RadioButton";
 import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
 import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
 import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
+import postAdm from "@/app/apiCalls/Adm/postAdm";
+import postEditor from "@/app/apiCalls/Editor/postEditor";
+import { useRouter } from "next/navigation";
 
-export default function FormAddUserProprietor() {
+export default function FormAddEditor() {
 
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
-
-    useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth < 992);
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    
 
     
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
-    const [proprietorType, setProprietorType] = useState("pf")
+    const router = useRouter();
 
-    const handleTypeChange = function(type :string){
-        console.log(type)
-        setProprietorType(type)
-    }
+
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -54,8 +48,13 @@ export default function FormAddUserProprietor() {
         setIsModalOpen(false);
         console.log("-------", pendingFormData)
 
-        postProprietor(pendingFormData)
-
+        try{
+            await postEditor(pendingFormData)
+            router.back(); //volta um point sem ter que escrever a barra
+        }
+        catch(err){
+            console.log(err)
+        }
     };
     
 
@@ -69,15 +68,7 @@ export default function FormAddUserProprietor() {
         { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
     ];
 
-    const inputsMobile = [
-        { name: "email", size: "medium", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
-        { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
-        { name: "street", size: "medium", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
-        { name: "phone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
-        { name: "cellphone", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
-        { name: "propertyNumber", size: "small", text: "Número", placeholder: "1002", id: "numero" },
-        { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
-    ]
+   
     const inputDropdown = [
         {
             name: "state",
@@ -128,15 +119,14 @@ export default function FormAddUserProprietor() {
                 <article className="articleDataForm">
                     <div style={{ display: "flex", flexDirection: "column", gap: "25px", alignItems: "center" }}>
                         <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)" }}>DADOS</p>
-                        <RadioButton onChange = {handleTypeChange} selected={proprietorType}/>
                     </div>
                     <div className="inputArticle">
-                    {proprietorType === "pf" ? (
-                                <>
+
+
                                 <InputText
                                     key={"name"}
                                     name={"name"}
-                                    size={"small"}
+                                    size={"large"}
                                     placeholder={"ex: "}
                                     text={"Nome"}
                                     id={"name"}
@@ -149,46 +139,11 @@ export default function FormAddUserProprietor() {
                                     text={"CPF"}
                                     id={"cpf"}
                                 />
-                                </>
-                            ) : proprietorType === "pj" ? (
-                                <>
-                                <InputText
-                                    key={"name"}
-                                    name={"name"}
-                                    size={"small"}
-                                    placeholder={"ex: "}
-                                    text={"Nome Razão"}
-                                    id={"name"}
-                                />
-                                <InputText
-                                    key={"cnpj"}
-                                    name={"cnpj"}
-                                    size={"small"}
-                                    placeholder={"ex: 123.123.123/0001-12"}
-                                    text={"CNPJ"}
-                                    id={"cnpj"}
-                                />
-                                </>
-                            ) : null}
-                        <InputText key={"cnpj"}
-                                name={"cnpj"}
-                                size={"small"}
-                                placeholder={"ex: "}
-                                text={"CNPJ"}
-                                id={"cnpj"}/>            
+                                
+                               
                                     
-                        {isMobile ? (
-                            inputsMobile.map((input) => (
-                                <InputText
-                                    key={input.id}
-                                    name={input.name}
-                                    size={input.size}
-                                    placeholder={input.placeholder}
-                                    text={input.text}
-                                    id={input.id}
-                                />
-                            ))
-                        ) : (
+                        {
+                        
                             inputsDesktop.map((input) => (
                                 <InputText
                                     key={input.id}
@@ -199,7 +154,7 @@ export default function FormAddUserProprietor() {
                                     id={input.id}
                                 />
                             ))
-                        )}
+                        }
                         {inputDropdown.map((input) => (
                             <InputDropdown
                             
@@ -224,7 +179,7 @@ export default function FormAddUserProprietor() {
                     id="idModal"
                     content={
                         <div>
-                            <h1>Deseja confirmar o cadastro do usuário?</h1>
+                            <h1>Deseja confirmar o cadastro do editor?</h1>
                         </div>
                     }
                     isOpen={isModalOpen}
