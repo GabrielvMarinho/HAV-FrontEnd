@@ -12,11 +12,12 @@ import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
 import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
 import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
 import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form"
+import { NewUser, newUser } from "@/app/Validators/UserValidator";
 
 
 export default function FormAddProprietor() {
-
-    
 
     
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,41 +30,6 @@ export default function FormAddProprietor() {
         setProprietorType(type)
     }
 
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.currentTarget as HTMLFormElement);
-
-        const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
-
-        console.log("----------------")
-        console.log("Formulário enviado:", formObject);
-    
-        setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
-        setIsModalOpen(true); // Abre o modal
-    };
-
-
-    const addProprietor = async function () {
-
-        if (!pendingFormData) return;
-        
-        setIsModalOpen(false);
-        console.log("-------", pendingFormData)
-
-        try{
-            await postProprietor(pendingFormData)
-            router.back(); //volta um point sem ter que escrever a barra
-        }
-        catch(err){
-            console.log(err)
-        }
-        
-
-        
-    
-
-    };
     
 
     const inputsDesktop = [
@@ -113,10 +79,34 @@ export default function FormAddProprietor() {
         }
     ];
 
+    const { register, handleSubmit } = useForm<NewUser>({
+        resolver: zodResolver(newUser) //resolve os erros
+    });
+
+    function onSubmit(data: NewUser){
+        console.log("Dados do usuário: ",data);
+        setIsModalOpen(true); // Abre o modal
+    };
+
+
+    const addProprietor = async function () {
+        if (!pendingFormData) return;
+        setIsModalOpen(false);
+        console.log("-------", pendingFormData)
+        try{
+            await postProprietor(pendingFormData)
+            router.back(); //volta um point sem ter que escrever a barra
+        }
+        catch(err){
+            console.log(err)
+        }
+    };
+
+
     return (
         
         <>
-            <form className="ownerForm" onSubmit={handleFormSubmit}>
+            <form className="ownerForm" onSubmit={handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
                         <ButtonUploadPhoto />
@@ -181,6 +171,7 @@ export default function FormAddProprietor() {
                                     placeholder={input.placeholder}
                                     text={input.text}
                                     id={input.id}
+                                    register={register}
                                 />
                             ))
                         }
