@@ -1,4 +1,5 @@
 import { error } from "console";
+import router from "next/navigation";
 
 //igual o PostProprietorDto
 export default async function(
@@ -63,6 +64,7 @@ export default async function(
         }
     
         console.log("sucesso")
+
       }catch(error){
         console.error("Erro na requisição:", error);
         throw error; // Relança o erro para que possa ser capturado externamente

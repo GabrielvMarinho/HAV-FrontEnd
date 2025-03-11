@@ -9,6 +9,7 @@ import SearchBar from "@/app/components/Filters/SearchBar";
 import Filter from "@/app/components/Filters/Filter";
 import TableList from "@/app/components/Information/TableList";
 import getByParamsAdms from "@/app/apiCalls/Adm/getByParamsAdms";
+import deleteByListAdm from "@/app/apiCalls/Adm/deleteByListAdm";
 
 
 
@@ -28,8 +29,8 @@ export default async function page({searchParams}: {searchParams: {
         
     const data = await getByParamsAdms(cpf, name, email, cellphone, phoneNumber)
         
-    
 
+    
     
     const inputs = [
       { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: ", id: "cpf", },
@@ -56,7 +57,7 @@ export default async function page({searchParams}: {searchParams: {
             inputsDropdown={[]}
             inputPriceRanges={[]}
             />
-            <TableList context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
+            <TableList deleteFunction={deleteByListAdm} type={"user"} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
             data={data}/>
         </div>
         

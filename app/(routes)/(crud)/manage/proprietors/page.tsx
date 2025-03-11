@@ -6,6 +6,7 @@ import Filter from "../../../../components/Filters/Filter";
 import "@/app/pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import getByParamsProprietors from "@/app/apiCalls/Proprietor/getByParamsProprietors";
+import deleteProprietorList from "@/app/apiCalls/Proprietor/deleteByListProprietor";
 
 
 export default async function page({searchParams}: {searchParams: {
@@ -55,7 +56,7 @@ export default async function page({searchParams}: {searchParams: {
           inputsDropdown={inputDropdown}
           inputPriceRanges={[]}
         />
-        <TableList context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
+        <TableList deleteFunction={deleteProprietorList} archived={false} context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
           data={data} />
       </div>
 

@@ -1,14 +1,10 @@
-import "../../../../pageStructure.css"
-import NavBarAdm from "@/app/components/Header/NavBarAdm";
-import Title from "@/app/components/NonInteractable/Title";
-import SearchBar from "@/app/components/Filters/SearchBar";
+import getByParamsAdms from "@/app/apiCalls/Adm/getByParamsAdms";
 import Filter from "@/app/components/Filters/Filter";
+import SearchBar from "@/app/components/Filters/SearchBar";
+import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import TableList from "@/app/components/Information/TableList";
-
-
-import getByParamsEditors from "@/app/apiCalls/Editor/getByParamsEditors";
-import deleteEditorList from "@/app/apiCalls/Editor/deleteByListEditor";
-
+import Title from "@/app/components/NonInteractable/Title";
+import "../../../../../pageStructure.css"
 
 
 
@@ -25,8 +21,9 @@ export default async function page({searchParams}: {searchParams: {
     const params = await searchParams;
     const {cpf=null, name=null, email=null, cellphone=null, phoneNumber=null} = params
         
-    const data = await getByParamsEditors(cpf, name, email, cellphone, phoneNumber)
-    //const properties = await fetchImoveis(); // Buscando os dados da API
+    const data = await getByParamsAdms(cpf, name, email, cellphone, phoneNumber)
+        
+    
 
     
     const inputs = [
@@ -38,13 +35,13 @@ export default async function page({searchParams}: {searchParams: {
 
       ];
     
+    
     return (
         <>
         
         
         
-        <Title tag="h1" text="Editores"/>
-        <NavBarAdm/>
+        <Title tag="h1" text="Administradores Arquivados"/>
         <SearchBar placeholder="Busca:"/>   
         <div className="containerFilterListAction">
             <Filter 
@@ -53,7 +50,7 @@ export default async function page({searchParams}: {searchParams: {
             inputsDropdown={[]}
             inputPriceRanges={[]}
             />
-            <TableList deleteFunction={deleteEditorList} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
+            <TableList context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
             data={data}/>
         </div>
         

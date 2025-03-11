@@ -6,8 +6,8 @@ import { Content } from "next/font/google";
 
 export default function Modal(props: { content: ReactNode; isOpen: boolean; id: string, onClose: () => void, onConfirm: () => void }) {
 
-    document.body.classList.remove('no-scroll');
 
+    document.body.classList.remove('no-scroll');
     useEffect(() => {
         if (props.isOpen) {
           document.body.classList.add('no-scroll');

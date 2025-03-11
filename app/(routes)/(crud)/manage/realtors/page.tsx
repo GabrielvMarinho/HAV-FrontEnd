@@ -6,7 +6,8 @@ import Filter from "@/app/components/Filters/Filter";
 import TableList from "@/app/components/Information/TableList";
 import getByParamsRealtors from "@/app/apiCalls/Realtor/getByParamsRealtors";
 
-
+import deleteByListAdm from "../../../../apiCalls/Adm/deleteByListAdm"
+import deleteRealtorList from "@/app/apiCalls/Realtor/deleteByListRealtor";
 
 
 
@@ -41,7 +42,7 @@ export default async function page({searchParams}: {searchParams: {
         
         
         
-        <Title tag="h1" text="Proprietários"/>
+        <Title tag="h1" text="Corretores"/>
         <NavBarAdm/>
         <SearchBar placeholder="Busca:"/>   
         <div className="containerFilterListAction">
@@ -51,7 +52,7 @@ export default async function page({searchParams}: {searchParams: {
             inputsDropdown={[]}
             inputPriceRanges={[]}
             />
-            <TableList context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
+            <TableList deleteFunction = {deleteRealtorList} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
             data={data}/>
         </div>
         

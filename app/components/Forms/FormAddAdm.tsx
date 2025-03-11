@@ -51,6 +51,8 @@ export default function FormAddAdm() {
         try{
             await postAdm(pendingFormData); // Aguarda a resposta e pode lançar erro
             console.log("----------------------------------------||||||||||||||")
+
+
             router.back(); //volta um point sem ter que escrever a barra
         }
         catch(err){
