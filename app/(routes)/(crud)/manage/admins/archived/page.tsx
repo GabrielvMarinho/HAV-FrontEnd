@@ -1,13 +1,10 @@
-import "../../../../pageStructure.css"
-import NavBarAdm from "@/app/components/Header/NavBarAdm";
-import Title from "@/app/components/NonInteractable/Title";
-import SearchBar from "@/app/components/Filters/SearchBar";
+import getByParamsAdms from "@/app/apiCalls/Adm/getByParamsAdms";
 import Filter from "@/app/components/Filters/Filter";
+import SearchBar from "@/app/components/Filters/SearchBar";
+import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import TableList from "@/app/components/Information/TableList";
-import getByParamsRealtors from "@/app/apiCalls/Realtor/getByParamsRealtors";
-
-import deleteByListAdm from "../../../../apiCalls/Adm/deleteByListAdm"
-
+import Title from "@/app/components/NonInteractable/Title";
+import "../../../../../pageStructure.css"
 
 
 
@@ -16,33 +13,35 @@ export default async function page({searchParams}: {searchParams: {
   cpf?: string; 
   name?: string;
   email?: String;
-  cellphone?: number;
-  creci?: string;
+  cellphone?: string;
+  phoneNumber?: string;
   
 
   }}){
     const params = await searchParams;
-    const {cpf=null, name=null, email=null, cellphone=null, creci=null} = params
+    const {cpf=null, name=null, email=null, cellphone=null, phoneNumber=null} = params
         
-    const data = await getByParamsRealtors(cpf, name, email, cellphone, creci)
+    const data = await getByParamsAdms(cpf, name, email, cellphone, phoneNumber)
         
+    
+
+    
     const inputs = [
       { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: ", id: "cpf", },
       { name: "name", size: "medium", text: "Nome", placeholder: "ex: ", id: "name", },
       { name: "email", size: "medium", text: "Email", placeholder: "ex: ", id: "email", },
       { name: "cellphone", size: "medium", text: "Celular", placeholder: "ex: ", id: "cellphone", },
-      { name: "creci", size: "medium", text: "Creci", placeholder: "ex: ", id: "creci", }
+      { name: "phoneNumber", size: "medium", text: "Telefone", placeholder: "ex: ", id: "phoneNumber", }
 
       ];
-
+    
     
     return (
         <>
         
         
         
-        <Title tag="h1" text="Corretores"/>
-        <NavBarAdm/>
+        <Title tag="h1" text="Administradores Arquivados"/>
         <SearchBar placeholder="Busca:"/>   
         <div className="containerFilterListAction">
             <Filter 
@@ -51,7 +50,7 @@ export default async function page({searchParams}: {searchParams: {
             inputsDropdown={[]}
             inputPriceRanges={[]}
             />
-            <TableList deleteFunction = {deleteByListAdm} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
+            <TableList context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
             data={data}/>
         </div>
         

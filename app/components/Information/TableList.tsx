@@ -13,10 +13,26 @@ import ArchiveIn from '../IconsTSX/archiveIn';
 import Folder from '../IconsTSX/Folder';
 
 
-export default function TableList(props: {context :string; size :string, titles :string[], data :any[]}){
+export default function TableList(props: {deleteFunction: (ids: string[]) => Promise<void>; archived :boolean; context :string; size :string, titles :string[], data :any[]}){
 
     
+
     
+    const confirmDelete = async () => {
+        const selectedIds = JSON.parse(localStorage.getItem('selectedManage') || "[]");
+        console.log("-------------")
+        console.log(props.deleteFunction)
+
+        console.log("chamado ", selectedIds)
+        if (selectedIds.length > 0) {
+            await props.deleteFunction(selectedIds); 
+            localStorage.removeItem("selectedManage")
+            setIsDeleteModalOpen(false);
+            window.location.href = window.location.href
+        }
+    };
+
+
 
     //ACTION BUTTON RELATED
     const router = useRouter();
@@ -40,9 +56,7 @@ export default function TableList(props: {context :string; size :string, titles 
     const openDeleteModal = function(){
         setIsDeleteModalOpen(true)
     }
-    const deleteEntitiesFunction = function(){
-        console.log("deletaar", localStorage.getItem("selectedManage"))
-    }
+    
 
     //ARCHIVES RELATED
     const archiveFunction = function(){
@@ -63,7 +77,7 @@ export default function TableList(props: {context :string; size :string, titles 
         localStorage.removeItem('selectedManage');
     }
 
-
+    
     localStorage.setItem('previousPathname', pathname);
         useEffect(() =>{
             console.log("lets go")
@@ -83,7 +97,6 @@ export default function TableList(props: {context :string; size :string, titles 
 
 
 
-
     const handleSelect = (option: string) => {
         console.log(option);
         setSelected((prev: string[]) =>
@@ -91,7 +104,6 @@ export default function TableList(props: {context :string; size :string, titles 
         );
     }
 
-    console.log("LocalStorage SelectedManage:", localStorage.getItem('selectedManage'));
 
     return (
         <>
@@ -115,6 +127,7 @@ export default function TableList(props: {context :string; size :string, titles 
 
                         <tr className={selected.includes(Object.values(obj)[0])?"selectedRow tableRows":"tableRows"}>
                             <div className='marginSelectBox'>
+                            
 
                             <input
                             className='checkbox'
@@ -123,8 +136,9 @@ export default function TableList(props: {context :string; size :string, titles 
                                 onChange={() => handleSelect(Object.values(obj)[0])}
                             />
 
+
                             </div>
-                            {Object.values(obj).map((value) => (
+                            {Object.values(obj).slice(1).map((value) => (
                                     <td>
                                         <div>
                                             {typeof value === 'number' && value > 10000? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value}
@@ -140,21 +154,26 @@ export default function TableList(props: {context :string; size :string, titles 
             
         </table>
 
-        <div className="actionButtons">
-            {props.context === 'admin' && (
+        <div className="actionButtons"> 
+            {props.archived===false? (
+                <>
+                {props.context === 'admin'?(
                 <ActionButton onClick={graphFunction} className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={Graphic}  />
 
-            )}
-            <ActionButton onClick={archiveRoute}  className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={Folder}  />
+                ):("")}
+                <ActionButton onClick={archiveRoute}  className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={Folder}  />
+                <ActionButton onClick={addFunction} className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={MoreSignal} />
+                <ActionButton onClick={selected.length==1?editFunction:""} className={`${selected.length==1?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Pencil}  />
+                <ActionButton onClick={selected.length>0?openDeleteModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Trashcan} />
+                <ActionButton onClick={selected.length>0?archiveFunction:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={ArchiveIn}  />
+                <Modal content={<div>delete modal</div>} id="deleteModal" isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onConfirm={confirmDelete} />
+                </>
+            ) : (
+            <>
 
-
-            {/* Botões para Editor e Admin */}
-            <ActionButton onClick={addFunction} className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={MoreSignal} />
-            <ActionButton onClick={selected.length==1?editFunction:""} className={`${selected.length==1?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Pencil}  />
-            <ActionButton onClick={selected.length>0?openDeleteModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Trashcan} />
-            <ActionButton onClick={selected.length>0?archiveFunction:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={ArchiveIn}  />
-            <Modal content={<div>delete modal</div>} id = "deleteModal" isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onConfirm={deleteEntitiesFunction}></Modal>
-
+                </>
+                )}
+            
         </div>
         </>
 

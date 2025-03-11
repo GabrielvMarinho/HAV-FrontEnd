@@ -1,4 +1,3 @@
-import ActionButtons, { ActionButton } from "@/app/components/Inputs/ActionButton";
 import "../../../../pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import Title from "@/app/components/NonInteractable/Title";
@@ -7,7 +6,6 @@ import Filter from "@/app/components/Filters/Filter";
 import TableList from "@/app/components/Information/TableList";
 
 
-import { useRouter } from "next/navigation";
 import getByParamsEditors from "@/app/apiCalls/Editor/getByParamsEditors";
 
 
@@ -54,7 +52,7 @@ export default async function page({searchParams}: {searchParams: {
             inputsDropdown={[]}
             inputPriceRanges={[]}
             />
-            <TableList context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
+            <TableList archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
             data={data}/>
         </div>
         

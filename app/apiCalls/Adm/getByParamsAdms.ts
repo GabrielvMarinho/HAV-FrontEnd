@@ -10,6 +10,13 @@ export default async function(
   ): Promise<Adm[]> {
     const url = "http://localhost:9090/adm/filter";
     try{
+      console.log(JSON.stringify({
+        "cpf":cpf, 
+        "name":name, 
+        "email":email,
+        "cellphone":cellphone,
+        "phoneNumber":phoneNumber
+      }))
     const response = await fetch(url,{
       method:"POST",
       headers: {
