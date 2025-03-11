@@ -8,23 +8,23 @@ import MoreSignal from '../IconsTSX/MoreSignal';
 import Trashcan from '../IconsTSX/Trashcan';
 import Pencil from '../IconsTSX/Pencil';
 import Graphic from '../IconsTSX/Graphic';
-import Folder from '../IconsTSX/Folder';
 import Modal from '../Modal/Modal';
+import ArchiveIn from '../IconsTSX/archiveIn';
+import Folder from '../IconsTSX/Folder';
 
 
 export default function TableList(props: {context :string; size :string, titles :string[], data :any[]}){
 
-    props.data.map((obj, index) =>{
-        console.log(Object.values(obj)[0])
-        console.log()
     
-    }
-    )
     
 
     //ACTION BUTTON RELATED
     const router = useRouter();
 
+
+    const archiveRoute = function (){
+        router.push(`${window.location.pathname}/archived`);
+    }
     //EDIT RELATED
     const editFunction = function(){
         router.push(`${window.location.pathname}/edit`);
@@ -46,7 +46,7 @@ export default function TableList(props: {context :string; size :string, titles 
 
     //ARCHIVES RELATED
     const archiveFunction = function(){
-        router.push(`${window.location.pathname}/archive`);
+        //lógica para arquivar users ou imóveis
     }
 
     //GRAPHS RELATED
@@ -126,7 +126,9 @@ export default function TableList(props: {context :string; size :string, titles 
                             </div>
                             {Object.values(obj).map((value) => (
                                     <td>
-                                        {typeof value === 'number' ? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value}
+                                        <div>
+                                            {typeof value === 'number' && value > 10000? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value}
+                                        </div>
                                     </td>
 
                                 ))}
@@ -140,14 +142,17 @@ export default function TableList(props: {context :string; size :string, titles 
 
         <div className="actionButtons">
             {props.context === 'admin' && (
-                <ActionButton onClick={graphFunction} className="graphicButton darkHover" Icon={Graphic}  />
+                <ActionButton onClick={graphFunction} className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={Graphic}  />
+
             )}
+            <ActionButton onClick={archiveRoute}  className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={Folder}  />
+
+
             {/* Botões para Editor e Admin */}
-            <ActionButton onClick={addFunction} className="addButton darkHover" Icon={MoreSignal} />
-            <ActionButton onClick={selected.length==1?editFunction:""} className={`${selected.length==1?"darkHover":"nonClickableButton"} editButton `} Icon={Pencil}  />
-            <ActionButton onClick={selected.length>0?openDeleteModal:""} className={`${selected.length>0?"darkHover":"nonClickableButton"} deleteButton `} Icon={Trashcan} />
-            <ActionButton onClick={selected.length>0?archiveFunction:""} className={`${selected.length>0?"darkHover":"nonClickableButton"} archiveButton `} Icon={Folder}  />
-            
+            <ActionButton onClick={addFunction} className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={MoreSignal} />
+            <ActionButton onClick={selected.length==1?editFunction:""} className={`${selected.length==1?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Pencil}  />
+            <ActionButton onClick={selected.length>0?openDeleteModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Trashcan} />
+            <ActionButton onClick={selected.length>0?archiveFunction:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={ArchiveIn}  />
             <Modal content={<div>delete modal</div>} id = "deleteModal" isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onConfirm={deleteEntitiesFunction}></Modal>
 
         </div>

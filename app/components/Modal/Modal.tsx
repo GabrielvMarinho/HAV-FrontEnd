@@ -5,15 +5,16 @@ import Button from "../Inputs/Button";
 import { Content } from "next/font/google";
 
 export default function Modal(props: { content: ReactNode; isOpen: boolean; id: string, onClose: () => void, onConfirm: () => void }) {
-    document.body.classList.remove('no-scroll');
 
-    if (!props.isOpen) return null
+    document.body.classList.remove('no-scroll');
 
     useEffect(() => {
         if (props.isOpen) {
           document.body.classList.add('no-scroll');
         }
-      }, [props.isOpen]); // Trigger effect on modal open/close
+      }, [props.isOpen]); 
+      
+      if (!props.isOpen) return null
 
     return (
         <>

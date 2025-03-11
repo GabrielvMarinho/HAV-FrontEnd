@@ -10,87 +10,68 @@ import ToggleButton from "../Inputs/ToggleButton";
 import RadioButton from "../Inputs/RadioButton";
 import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
 import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
+import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
+import postAdm from "@/app/apiCalls/Adm/postAdm";
+import postEditor from "@/app/apiCalls/Editor/postEditor";
+import { useRouter } from "next/navigation";
 
-export default function FormAddUserOwner() {
+export default function FormAddEditor() {
 
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
-
-    useEffect(() => {
-        const handleResize = () => setIsMobile(window.innerWidth < 992);
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
+    
 
     
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
+    const router = useRouter();
+
 
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
         const formData = new FormData(e.currentTarget as HTMLFormElement);
 
         const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
+
+        console.log("----------------")
         console.log("Formulário enviado:", formObject);
+    
         setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
         setIsModalOpen(true); // Abre o modal
     };
 
 
-    const addOwner = async function () {
+    const addProprietor = async function () {
+
         if (!pendingFormData) return;
         
         setIsModalOpen(false);
-        
-        try {
-            const response = await fetch("http://sua-api.com/rota", { // Corrigir a URL
-                method: "POST",
-                headers: { "Content-Type": "application/json" }, // Adicionar cabeçalho
-                body: JSON.stringify(pendingFormData)
-            });
-    
-            if (!response.ok) {
-                throw new Error(`Erro ao cadastrar usuário: ${response.status} - ${response.statusText}`);
-            }
-    
-            console.log("Usuário cadastrado com sucesso!", await response.json());
-    
-            setPendingFormData(null); // Limpa o formulário somente se deu certo
-    
-        } catch (err) {
-            console.error("Erro ao se comunicar com a API:", err);
+        console.log("-------", pendingFormData)
+
+        try{
+            await postEditor(pendingFormData)
+            router.back(); //volta um point sem ter que escrever a barra
+        }
+        catch(err){
+            console.log(err)
         }
     };
     
 
     const inputsDesktop = [
-        { name: "nome_completo", size: "large", text: "Nome Completo", placeholder: "ex: Kauani da Silva", id: "nome_completo" },
-        { name: "cpf", size: "small", text: "CPF", placeholder: "ex: 123.123.123-00", id: "cpf" },
-        { name: "data_nascimento", size: "small", text: "Data Nascimento", placeholder: "dd/mm/aa", id: "data_nascimento" },
-        { name: "email", size: "small", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
+        { name: "email", size: "large", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
         { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
-        { name: "rua", size: "large", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
-        { name: "telefone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
-        { name: "celular", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
-        { name: "numero", size: "small", text: "Número", placeholder: "1002", id: "numero" },
-        { name: "complemento", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
+        { name: "street", size: "large", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
+        { name: "phone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
+        { name: "cellphone", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
+        { name: "propertyNumber", size: "small", text: "Número", placeholder: "1002", id: "numero" },
+        { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
     ];
 
-    const inputsMobile = [
-        { name: "nome_completo", size: "medium", text: "Nome Completo", placeholder: "ex: Kauani da Silva", id: "nome_completo" },
-        { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: 123.123.123-00", id: "cpf" },
-        { name: "data_nascimento", size: "small", text: "Data Nascimento", placeholder: "dd/mm/aa", id: "data_nascimento" },
-        { name: "email", size: "medium", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
-        { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
-        { name: "rua", size: "medium", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
-        { name: "telefone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
-        { name: "celular", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
-        { name: "numero", size: "small", text: "Número", placeholder: "1002", id: "numero" },
-        { name: "complemento", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
-    ]
+   
     const inputDropdown = [
         {
-            name: "estado",
+            name: "state",
             size: "medium",
             text: "Estado",
             id: "estado",
@@ -101,7 +82,7 @@ export default function FormAddUserOwner() {
             ]
         },
         {
-            name: "cidade",
+            name: "city",
             size: "medium",
             text: "Cidade",
             id: "cidade",
@@ -112,7 +93,7 @@ export default function FormAddUserOwner() {
             ]
         },
         {
-            name: "bairro",
+            name: "neighborhood",
             size: "medium",
             text: "Bairro",
             id: "bairro",
@@ -138,21 +119,31 @@ export default function FormAddUserOwner() {
                 <article className="articleDataForm">
                     <div style={{ display: "flex", flexDirection: "column", gap: "25px", alignItems: "center" }}>
                         <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)" }}>DADOS</p>
-                        <RadioButton />
                     </div>
                     <div className="inputArticle">
-                        {isMobile ? (
-                            inputsMobile.map((input) => (
+
+
                                 <InputText
-                                    key={input.id}
-                                    name={input.name}
-                                    size={input.size}
-                                    placeholder={input.placeholder}
-                                    text={input.text}
-                                    id={input.id}
+                                    key={"name"}
+                                    name={"name"}
+                                    size={"large"}
+                                    placeholder={"ex: "}
+                                    text={"Nome"}
+                                    id={"name"}
                                 />
-                            ))
-                        ) : (
+                                <InputText
+                                    key={"cpf"}
+                                    name={"cpf"}
+                                    size={"small"}
+                                    placeholder={"ex: 123.123.123-00"}
+                                    text={"CPF"}
+                                    id={"cpf"}
+                                />
+                                
+                               
+                                    
+                        {
+                        
                             inputsDesktop.map((input) => (
                                 <InputText
                                     key={input.id}
@@ -163,7 +154,7 @@ export default function FormAddUserOwner() {
                                     id={input.id}
                                 />
                             ))
-                        )}
+                        }
                         {inputDropdown.map((input) => (
                             <InputDropdown
                             
@@ -178,7 +169,7 @@ export default function FormAddUserOwner() {
 
                     </div>
                     <div className="divButtonsAceptCancelForms">
-                        <Button type="button" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
+                        <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
                             background="var(--text-white)"
                             onClick={() => setIsModalOpen(true)} />
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
@@ -188,12 +179,12 @@ export default function FormAddUserOwner() {
                     id="idModal"
                     content={
                         <div>
-                            <h1>Deseja confirmar o cadastro do usuário?</h1>
+                            <h1>Deseja confirmar o cadastro do editor?</h1>
                         </div>
                     }
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
-                    onConfirm={addOwner}
+                    onConfirm={addProprietor}
                 />
             </form>
         </>

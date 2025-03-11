@@ -19,6 +19,9 @@
     --button-color: #B23F52;
     --box-red-pink: #B23F52;
     --box-white: #F9F9F9;
+    --light-hover: #f9f9f926;
+    --dark-hover: #0f0f0f2a;
+
     --box-yello-light: #F2EBE3;
     --box-dark-red-option: #89565D;
     --box-dark-red: #421820;
@@ -78,7 +81,12 @@
     text-decoration: none;
 }
 
+
+::-webkit-scrollbar {
+    display: none;
+}
 body{
+    scrollbar-width: none;
     background-color: var(--bg-color);
     display: flex;
     justify-content: start;
@@ -88,10 +96,14 @@ body{
 }
 
 .lightHover:hover{
-    filter: brightness(0.9);
+    transition: 0.5s ease;  
+    filter: brightness(0.94) drop-shadow(0 0 2px var(--light-hover));
+
 }
 .darkHover:hover{
-    filter: brightness(1.1);
+    transition: 0.5s ease;  
+    filter: brightness(1.06) drop-shadow(0 0 2px var(--dark-hover));
+
 }
 a{
     text-decoration: none;

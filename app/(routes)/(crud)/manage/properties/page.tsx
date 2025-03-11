@@ -4,53 +4,9 @@ import Title from "@/app/components/NonInteractable/Title";
 import SearchBar from "@/app/components/Filters/SearchBar";
 import Filter from "@/app/components/Filters/Filter";
 import TableList from "@/app/components/Information/TableList";
-
-//ver com o marinho sobre os atributos title e name do objeto Property e a estruturação de pastas
-
-
-interface Property {
-    id: string;
-    price: string;
-    propertyType: string;
-    propertyCategory: string;
-    propertyStatus: string;
-}
-async function fetchImoveis(
-
-  propertyCode?: string, 
-  propertyType?: string, 
-  propertyCategory?: string,
-  propertyStatus?: string,
-  minPrice?: number,
-  maxPrice?: number,
-
-  ): Promise<Property[]> {
-    const url = "http://localhost:9090/property/filter";
-  
-    const response = await fetch(url,{
-      method:"POST",
-      headers: {
-        "Content-Type": "application/json", // Garante que está enviando JSON
-      },
-      body:JSON.stringify({
-        "propertyCode":propertyCode, 
-        "minPric":minPrice, 
-        "maxPric":maxPrice,
-        "propertyType":propertyType,
-        "propertyCategory":propertyCategory,
-        "propertyStatus":propertyStatus
-      })
-    });
+import getByParamsProperties from "@/app/apiCalls/Property/getByParamsProperties";
 
 
-    const data = await response.json();
-
-    const properties: Property[] = data.content.map((property: Property) => property);
-    console.log(properties)
-
-    
-      return properties
-}
 
 
 
@@ -67,7 +23,7 @@ export default async function page({searchParams}: {searchParams: {
     const params = await searchParams;
     const {propertyCode=null, minPrice, maxPrice, propertyType=null, propertyCategory=null, propertyStatus=null} = params
     
-    const data = await fetchImoveis(propertyCode, propertyType, propertyCategory, propertyStatus, minPrice, maxPrice,)
+    const data = await getByParamsProperties(propertyCode, propertyType, propertyCategory, propertyStatus, minPrice, maxPrice,)
     
 
     const inputs = [
@@ -105,7 +61,7 @@ export default async function page({searchParams}: {searchParams: {
         
         <Title tag="h1" text="Imóveis"/>
         <SearchBar placeholder="Busca:"/>   
-        <div style={{display:"flex", width:"95%", gap: "20px"}}>
+        <div className="containerFilterListAction">
             <Filter 
             size="medium" 
             inputs={inputs}

@@ -178,10 +178,11 @@
     outline: none !important;
     border: none;
   }
-
-  .ActionButton {
-    width: 45px;
-    height: 45px;
+  .actionButtonHover:hover{
+        scale: 1.2;
+  }
+  .actionButton {
+    padding: 10px;
     background-color: var(--box-red-pink);
     border-radius: 100%;
     display: flex;
@@ -190,37 +191,32 @@
     transition: background-color 0.3s ease;
 }
 
-.ActionButton svg {
-    width: 60%;
-    height: 60%;
-    fill: var(--text-white);
-}
+
 
 .actionButtons {
+
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
 }
 
-.graphicButton {
+
+
+.changeRouteButton {
+    margin-top: 7px;
+    margin-bottom: 7px;
+    transition: 0.5s ease;  
+
     background-color: var(--box-red-pink);
 }
 
-.addButton {
-    background-color: var(--box-red-pink);
-}
-
-.editButton {
+.actionSelectedButton {
+    margin-top: 7px;
+    margin-bottom: 7px;
+    transition: 0.5s ease;  
     background-color: var(--box-dark-red-option);
 }
 
-.deleteButton {
-    background-color: var(--box-dark-red-option);
-}
-
-.archiveButton {
-    background-color: var(--box-dark-red-option);
-}
 .containerComprarAlugar {
     display: flex;
     flex-direction: row;
@@ -256,6 +252,14 @@
     rotate: 180deg;
 }
 
+
+.nonClickableButton{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    transition: 0.5s ease;  
+    opacity: 0.3;
+    scale: 0.8;
+}
 .toggleContainer {
     display: flex;
     gap: 10px;
