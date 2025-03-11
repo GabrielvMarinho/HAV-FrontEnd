@@ -10,8 +10,9 @@ import ToggleButton from "../Inputs/ToggleButton";
 import RadioButton from "../Inputs/RadioButton";
 import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
 import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
+import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
 
-export default function FormAddUserOwner() {
+export default function FormAddUserProprietor() {
 
     const [isMobile, setIsMobile] = useState(window.innerWidth < 992);
 
@@ -24,109 +25,58 @@ export default function FormAddUserOwner() {
     
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
+    const [proprietorType, setProprietorType] = useState("pf")
 
+    const handleTypeChange = function(type :string){
+        console.log(type)
+        setProprietorType(type)
+    }
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
         const formData = new FormData(e.currentTarget as HTMLFormElement);
 
         const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
+
         console.log("----------------")
         console.log("Formulário enviado:", formObject);
+    
         setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
-        console.log(pendingFormData)
         setIsModalOpen(true); // Abre o modal
     };
 
 
-    const addOwner = async function () {
+    const addProprietor = async function () {
 
         if (!pendingFormData) return;
         
         setIsModalOpen(false);
-        console.log(pendingFormData, "----------------------")
-        console.log(JSON.stringify({
-            "name": pendingFormData.name,
-            "email": pendingFormData.email,
-            "password": "securePassword123",
-            "celphone": pendingFormData.cellphone,
-            "birthDate": pendingFormData.birth_date,
-            "cpf": pendingFormData.cpf,
-            "archived":false,
-            "address": {
-                "cep":pendingFormData.cep,
-                "street":pendingFormData.street,
-                "neighborhood":pendingFormData.neighborhood,
-                "city":pendingFormData.city,
-                "state":pendingFormData.state,
-                "propertyNumber":pendingFormData.property_number,
-                "complement":pendingFormData.complement
-            }
-        }))
-        try {
-            const response = await fetch("http://localhost:9090/customer", { 
-                method: "POST",
-                headers: { "Content-Type": "application/json" }, // Adicionar cabeçalho
-                
-                body: JSON.stringify({
-                    "name": pendingFormData.name,
-                    "email": pendingFormData.email,
-                    "password": "securePassword123",
-                    "celphone": pendingFormData.cellphone,
-                    "birthDate": pendingFormData.birth_date,
-                    "cpf": pendingFormData.cpf,
-                    "archived":false,
-                    "address": {
-                        "cep":pendingFormData.cep,
-                        "street":pendingFormData.street,
-                        "neighborhood":pendingFormData.neighborhood,
-                        "city":pendingFormData.city,
-                        "state":pendingFormData.state,
-                        "propertyNumber":pendingFormData.property_number,
-                        "complement":pendingFormData.complement
-                    }
-                })
-                
-            });
-    
-            if (!response.ok) {
-                throw new Error(`Erro ao cadastrar usuário: ${response.status} - ${response.statusText}`);
-            }
-    
-            console.log("Usuário cadastrado com sucesso!", await response.json());
-    
-            setPendingFormData(null); // Limpa o formulário somente se deu certo
-    
-        } catch (err) {
-            console.error("Erro ao se comunicar com a API:", err);
-        }
+        console.log("-------", pendingFormData)
+
+        postProprietor(pendingFormData)
+
     };
     
 
     const inputsDesktop = [
-        { name: "name", size: "large", text: "Nome Completo", placeholder: "ex: Kauani da Silva", id: "nome_completo" },
-        { name: "cpf", size: "small", text: "CPF", placeholder: "ex: 123.123.123-00", id: "cpf" },
-        { name: "birth_date", size: "small", text: "Data Nascimento", placeholder: "dd/mm/aa", id: "data_nascimento" },
-        { name: "email", size: "small", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
+        { name: "email", size: "large", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
         { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
         { name: "street", size: "large", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
         { name: "phone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
         { name: "cellphone", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
-        { name: "property_number", size: "small", text: "Número", placeholder: "1002", id: "numero" },
+        { name: "propertyNumber", size: "small", text: "Número", placeholder: "1002", id: "numero" },
         { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
     ];
 
     const inputsMobile = [
-        { name: "name", size: "medium", text: "Nome Completo", placeholder: "ex: Kauani da Silva", id: "nome_completo" },
-        { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: 123.123.123-00", id: "cpf" },
-        { name: "birth_date", size: "small", text: "Data Nascimento", placeholder: "dd/mm/aa", id: "data_nascimento" },
         { name: "email", size: "medium", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
         { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
-        { name: "rua", size: "medium", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
-        { name: "telefone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
-        { name: "celular", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
-        { name: "numero", size: "small", text: "Número", placeholder: "1002", id: "numero" },
-        { name: "complemento", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
+        { name: "street", size: "medium", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
+        { name: "phone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
+        { name: "cellphone", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
+        { name: "propertyNumber", size: "small", text: "Número", placeholder: "1002", id: "numero" },
+        { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
     ]
     const inputDropdown = [
         {
@@ -178,9 +128,55 @@ export default function FormAddUserOwner() {
                 <article className="articleDataForm">
                     <div style={{ display: "flex", flexDirection: "column", gap: "25px", alignItems: "center" }}>
                         <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)" }}>DADOS</p>
-                        <RadioButton />
+                        <RadioButton onChange = {handleTypeChange} selected={proprietorType}/>
                     </div>
                     <div className="inputArticle">
+                    {proprietorType === "pf" ? (
+                                <>
+                                <InputText
+                                    key={"name"}
+                                    name={"name"}
+                                    size={"small"}
+                                    placeholder={"ex: "}
+                                    text={"Nome"}
+                                    id={"name"}
+                                />
+                                <InputText
+                                    key={"cpf"}
+                                    name={"cpf"}
+                                    size={"small"}
+                                    placeholder={"ex: 123.123.123-00"}
+                                    text={"CPF"}
+                                    id={"cpf"}
+                                />
+                                </>
+                            ) : proprietorType === "pj" ? (
+                                <>
+                                <InputText
+                                    key={"name"}
+                                    name={"name"}
+                                    size={"small"}
+                                    placeholder={"ex: "}
+                                    text={"Nome Razão"}
+                                    id={"name"}
+                                />
+                                <InputText
+                                    key={"cnpj"}
+                                    name={"cnpj"}
+                                    size={"small"}
+                                    placeholder={"ex: 123.123.123/0001-12"}
+                                    text={"CNPJ"}
+                                    id={"cnpj"}
+                                />
+                                </>
+                            ) : null}
+                        <InputText key={"cnpj"}
+                                name={"cnpj"}
+                                size={"small"}
+                                placeholder={"ex: "}
+                                text={"CNPJ"}
+                                id={"cnpj"}/>            
+                                    
                         {isMobile ? (
                             inputsMobile.map((input) => (
                                 <InputText
@@ -233,7 +229,7 @@ export default function FormAddUserOwner() {
                     }
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
-                    onConfirm={addOwner}
+                    onConfirm={addProprietor}
                 />
             </form>
         </>
