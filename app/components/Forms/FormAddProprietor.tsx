@@ -79,15 +79,16 @@ export default function FormAddProprietor() {
         }
     ];
 
-    const { register, handleSubmit } = useForm<NewUser>({
+    const form = useForm<NewUser>({
         resolver: zodResolver(newUser) //resolve os erros
     });
+    console.log(form.register);
+
 
     function onSubmit(data: NewUser){
         console.log("Dados do usuário: ",data);
         setIsModalOpen(true); // Abre o modal
     };
-
 
     const addProprietor = async function () {
         if (!pendingFormData) return;
@@ -129,6 +130,7 @@ export default function FormAddProprietor() {
                                     placeholder={"ex: "}
                                     text={"Nome"}
                                     id={"name"}
+                                    register={form.register}
                                 />
                                 <InputText
                                     key={"cpf"}
@@ -137,6 +139,7 @@ export default function FormAddProprietor() {
                                     placeholder={"ex: 123.123.123-00"}
                                     text={"CPF"}
                                     id={"cpf"}
+                                    register={form.register}
                                 />
                                 </>
                             ) : proprietorType === "pj" ? (
@@ -148,6 +151,7 @@ export default function FormAddProprietor() {
                                     placeholder={"ex: "}
                                     text={"Nome Razão"}
                                     id={"name"}
+                                    register={form.register}
                                 />
                                 <InputText
                                     key={"cnpj"}
@@ -156,6 +160,7 @@ export default function FormAddProprietor() {
                                     placeholder={"ex: 123.123.123/0001-12"}
                                     text={"CNPJ"}
                                     id={"cnpj"}
+                                    register={form.register}
                                 />
                                 </>
                             ) : null}
@@ -171,13 +176,12 @@ export default function FormAddProprietor() {
                                     placeholder={input.placeholder}
                                     text={input.text}
                                     id={input.id}
-                                    register={register}
+                                    register={form.register}
                                 />
                             ))
                         }
                         {inputDropdown.map((input) => (
                             <InputDropdown
-                            
                                 key={input.id}
                                 name={input.name}  
                                 size={input.size}
