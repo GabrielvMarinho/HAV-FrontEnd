@@ -14,7 +14,7 @@ import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
-import { NewCnpj, NewUser, newUser } from "@/app/Validators/UserValidator";
+import { NewUser, newUser } from "@/app/Validators/UserValidator";
 
 
 export default function FormAddProprietor() {
@@ -22,7 +22,7 @@ export default function FormAddProprietor() {
     
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
-    const [proprietorType, setProprietorType] = useState("pf")
+    const [proprietorType, setProprietorType] = useState<"pf" | "pj">("pf");
     const router = useRouter();
 
     const handleTypeChange = function(type :string){
@@ -80,10 +80,20 @@ export default function FormAddProprietor() {
     ];
 
     const form = useForm<NewUser>({
-        resolver: zodResolver(newUser) //resolve os erros
+        resolver: zodResolver(newUser),
+        defaultValues: {
+            type: proprietorType as "pf" | "pj", // Define o tipo padrão baseado no estado do componente
+        },
     });
-    console.log(form.register);
-
+    
+    useEffect(() => {
+        form.setValue("type", proprietorType); // Atualiza o tipo dinamicamente
+        if(proprietorType === "pf"){
+            form.setValue("cnpj", "");
+        }else{
+            form.setValue("cpf", "");
+        }
+    }, [proprietorType, form.setValue]);
 
     function onSubmit(data: NewUser){
         console.log("Dados do usuário: ",data);
