@@ -10,6 +10,7 @@ import Filter from "@/app/components/Filters/Filter";
 import TableList from "@/app/components/Information/TableList";
 import getByParamsAdms from "@/app/apiCalls/Adm/getByParamsAdms";
 import deleteByListAdm from "@/app/apiCalls/Adm/deleteByListAdm";
+import changeArchivedStatusAdm from "@/app/apiCalls/Adm/changeArchivedStatusAdm";
 
 
 
@@ -57,7 +58,7 @@ export default async function page({searchParams}: {searchParams: {
             inputsDropdown={[]}
             inputPriceRanges={[]}
             />
-            <TableList deleteFunction={deleteByListAdm} type={"user"} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
+            <TableList changeArchivedStatus = {changeArchivedStatusAdm} deleteFunction={deleteByListAdm} type={"user"} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
             data={data}/>
         </div>
         

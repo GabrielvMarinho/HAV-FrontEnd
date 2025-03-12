@@ -7,6 +7,7 @@ import TableList from "@/app/components/Information/TableList";
 import Title from "@/app/components/NonInteractable/Title";
 import "../../../../../pageStructure.css"
 import deleteCustomerList from "@/app/apiCalls/Customer/deleteByListCustomer";
+import changeArchivedStatusCustomer from "@/app/apiCalls/Customer/changeArchivedStatusCustomer";
 
 
 export default async function page({searchParams}: {searchParams: {
@@ -57,7 +58,7 @@ export default async function page({searchParams}: {searchParams: {
             inputsDropdown={inputDropdown}
             inputPriceRanges={[]}
           />
-          <TableList deleteFunction={deleteCustomerList} archived={true} context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
+          <TableList changeArchivedStatus = {changeArchivedStatusCustomer} deleteFunction={deleteCustomerList} archived={true} context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
             data={data} />
         </div>
   

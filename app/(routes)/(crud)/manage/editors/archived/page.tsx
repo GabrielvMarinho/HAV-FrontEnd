@@ -6,6 +6,7 @@ import TableList from "@/app/components/Information/TableList";
 import Title from "@/app/components/NonInteractable/Title";
 import "../../../../../pageStructure.css"
 import deleteEditorList from "@/app/apiCalls/Editor/deleteByListEditor";
+import changeArchivedStatusEditor from "@/app/apiCalls/Editor/changeArchivedStatusEditor";
 
 
 
@@ -40,7 +41,7 @@ export default async function page({searchParams}: {searchParams: {
           
           
           
-          <Title tag="h1" text="Editores"/>
+          <Title tag="h1" text="Editores Arquivados"/>
           <SearchBar placeholder="Busca:"/>   
           <div className="containerFilterListAction">
               <Filter 
@@ -49,7 +50,7 @@ export default async function page({searchParams}: {searchParams: {
               inputsDropdown={[]}
               inputPriceRanges={[]}
               />
-              <TableList deleteFunction={deleteEditorList} archived={true} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
+              <TableList changeArchivedStatus = {changeArchivedStatusEditor} deleteFunction={deleteEditorList} archived={true} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
               data={data}/>
           </div>
           

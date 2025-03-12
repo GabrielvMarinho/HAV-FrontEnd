@@ -15,7 +15,7 @@ import ArchiveOut from '../IconsTSX/archiveOut';
 import ArrowBack from '../IconsTSX/ArrowBack';
 
 
-export default function TableList(props: {deleteFunction: (ids: string[]) => Promise<void>; archived :boolean; context :string; size :string, titles :string[], data :any[]}){
+export default function TableList(props: {changeArchivedStatus :(ids: string[]) => Promise<void>; deleteFunction: (ids: string[]) => Promise<void>; archived :boolean; context :string; size :string, titles :string[], data :any[]}){
 
     
 
@@ -64,13 +64,24 @@ export default function TableList(props: {deleteFunction: (ids: string[]) => Pro
         setIsDeleteModalOpen(true)
     }
     
+    //ARCHIVE RELATED
+    const [isArchiveModalOpen, setIsArchiveModalOpen] = useState(false)
 
-    //ARCHIVES RELATED
-    const archiveFunction = function(){
-        //lógica para arquivar users ou imóveis
+
+    const openArchiveModal = function(){
+        setIsArchiveModalOpen(true)
     }
-    const deArchiveFunction = function (){
-        //lógica para desarquivar users ou imóveis
+
+    const changeArchivedStatus = async function (){
+        
+        const selectedIds = JSON.parse(localStorage.getItem('selectedManage') || "[]");
+
+        if (selectedIds.length > 0) {
+            await props.changeArchivedStatus(selectedIds); 
+            localStorage.removeItem("selectedManage")
+            setIsDeleteModalOpen(false);
+            window.location.href = window.location.href
+        }
     }
 
     //GRAPHS RELATED
@@ -175,15 +186,19 @@ export default function TableList(props: {deleteFunction: (ids: string[]) => Pro
                 <ActionButton onClick={addFunction} className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={MoreSignal} />
                 <ActionButton onClick={selected.length==1?editFunction:""} className={`${selected.length==1?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Pencil}  />
                 <ActionButton onClick={selected.length>0?openDeleteModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Trashcan} />
-                <ActionButton onClick={selected.length>0?archiveFunction:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={ArchiveIn}  />
+                <ActionButton onClick={selected.length>0?openArchiveModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={ArchiveIn}  />
                 <Modal content={<div>delete modal</div>} id="deleteModal" isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onConfirm={confirmDelete} />
+                <Modal content={<div>arquivar modal</div>} id="archiveModal" isOpen={isArchiveModalOpen} onClose={() => setIsArchiveModalOpen(false)} onConfirm={changeArchivedStatus} />
+
                 </>
             ) : (
             <>
                 <ActionButton onClick={notArchiveRoute}  className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={ArrowBack}  />
                 <ActionButton onClick={selected.length==1?editFunction:""} className={`${selected.length==1?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Pencil}  />
                 <ActionButton onClick={selected.length>0?openDeleteModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Trashcan} />
-                <ActionButton onClick={selected.length>0?deArchiveFunction:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={ArchiveOut}  />
+                <ActionButton onClick={selected.length>0?openArchiveModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={ArchiveOut}  />
+                
+                <Modal content={<div>desarquivar modal</div>} id="archiveModal" isOpen={isArchiveModalOpen} onClose={() => setIsArchiveModalOpen(false)} onConfirm={changeArchivedStatus} />
                 <Modal content={<div>delete modal</div>} id="deleteModal" isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onConfirm={confirmDelete} />
                 </>
                 )}

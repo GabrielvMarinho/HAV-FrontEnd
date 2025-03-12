@@ -6,6 +6,8 @@ import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import TableList from "@/app/components/Information/TableList";
 import Title from "@/app/components/NonInteractable/Title";
 import "../../../../../pageStructure.css"
+import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArchivedStatusProprietor";
+import changeArchivedStatusRealtor from "@/app/apiCalls/Realtor/changeArchivedStatusRealtor";
 
 export default async function page({searchParams}: {searchParams: {
 
@@ -47,7 +49,7 @@ export default async function page({searchParams}: {searchParams: {
                 inputsDropdown={[]}
                 inputPriceRanges={[]}
                 />
-                <TableList deleteFunction = {deleteRealtorList} archived={true} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
+                <TableList changeArchivedStatus = {changeArchivedStatusRealtor}  deleteFunction = {deleteRealtorList} archived={true} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
                 data={data}/>
             </div>
             

@@ -9,6 +9,7 @@ import ActionButton from "@/app/components/Inputs/ActionButton";
 import Trashcan from "@/app/components/IconsTSX/Trashcan";
 import getByParamsCustomers from "@/app/apiCalls/Customer/getByParamsCustomers";
 import deleteCustomerList from "@/app/apiCalls/Customer/deleteByListCustomer";
+import changeArchivedStatusCustomer from "@/app/apiCalls/Customer/changeArchivedStatusCustomer";
 
 
 
@@ -63,7 +64,7 @@ export default async function page({searchParams}: {searchParams: {
           inputsDropdown={inputDropdown}
           inputPriceRanges={[]}
         />
-        <TableList deleteFunction={deleteCustomerList} archived={false} context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
+        <TableList changeArchivedStatus = {changeArchivedStatusCustomer} deleteFunction={deleteCustomerList} archived={false} context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
           data={data} />
       </div>
 

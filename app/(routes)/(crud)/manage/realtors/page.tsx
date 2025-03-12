@@ -8,6 +8,8 @@ import getByParamsRealtors from "@/app/apiCalls/Realtor/getByParamsRealtors";
 
 import deleteByListAdm from "../../../../apiCalls/Adm/deleteByListAdm"
 import deleteRealtorList from "@/app/apiCalls/Realtor/deleteByListRealtor";
+import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArchivedStatusProprietor";
+import changeArchivedStatusRealtor from "@/app/apiCalls/Realtor/changeArchivedStatusRealtor";
 
 
 
@@ -52,7 +54,7 @@ export default async function page({searchParams}: {searchParams: {
             inputsDropdown={[]}
             inputPriceRanges={[]}
             />
-            <TableList deleteFunction = {deleteRealtorList} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
+            <TableList changeArchivedStatus = {changeArchivedStatusRealtor} deleteFunction = {deleteRealtorList} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
             data={data}/>
         </div>
         

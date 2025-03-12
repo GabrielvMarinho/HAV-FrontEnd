@@ -8,6 +8,7 @@ import TableList from "@/app/components/Information/TableList";
 
 import getByParamsEditors from "@/app/apiCalls/Editor/getByParamsEditors";
 import deleteEditorList from "@/app/apiCalls/Editor/deleteByListEditor";
+import changeArchivedStatusEditor from "@/app/apiCalls/Editor/changeArchivedStatusEditor";
 
 
 
@@ -53,7 +54,7 @@ export default async function page({searchParams}: {searchParams: {
             inputsDropdown={[]}
             inputPriceRanges={[]}
             />
-            <TableList deleteFunction={deleteEditorList} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
+            <TableList changeArchivedStatus = {changeArchivedStatusEditor}  deleteFunction={deleteEditorList} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
             data={data}/>
         </div>
         

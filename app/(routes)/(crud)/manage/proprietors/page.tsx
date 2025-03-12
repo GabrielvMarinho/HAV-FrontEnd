@@ -7,6 +7,7 @@ import "@/app/pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import getByParamsProprietors from "@/app/apiCalls/Proprietor/getByParamsProprietors";
 import deleteProprietorList from "@/app/apiCalls/Proprietor/deleteByListProprietor";
+import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArchivedStatusProprietor";
 
 
 export default async function page({searchParams}: {searchParams: {
@@ -56,7 +57,7 @@ export default async function page({searchParams}: {searchParams: {
           inputsDropdown={inputDropdown}
           inputPriceRanges={[]}
         />
-        <TableList deleteFunction={deleteProprietorList} archived={false} context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
+        <TableList changeArchivedStatus = {changeArchivedStatusProprietor} deleteFunction={deleteProprietorList} archived={false} context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
           data={data} />
       </div>
 

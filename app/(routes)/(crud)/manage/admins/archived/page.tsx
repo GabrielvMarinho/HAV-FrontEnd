@@ -6,6 +6,7 @@ import TableList from "@/app/components/Information/TableList";
 import Title from "@/app/components/NonInteractable/Title";
 import "../../../../../pageStructure.css"
 import deleteByListAdm from "@/app/apiCalls/Adm/deleteByListAdm";
+import changeArchivedStatusAdm from "@/app/apiCalls/Adm/changeArchivedStatusAdm";
 
 
 
@@ -51,7 +52,7 @@ export default async function page({searchParams}: {searchParams: {
             inputsDropdown={[]}
             inputPriceRanges={[]}
             />
-            <TableList deleteFunction={deleteByListAdm} archived={true} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
+            <TableList changeArchivedStatus = {changeArchivedStatusAdm} deleteFunction={deleteByListAdm} archived={true} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
             data={data}/>
         </div>
         

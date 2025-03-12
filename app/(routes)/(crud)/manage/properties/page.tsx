@@ -5,6 +5,7 @@ import SearchBar from "@/app/components/Filters/SearchBar";
 import Filter from "@/app/components/Filters/Filter";
 import TableList from "@/app/components/Information/TableList";
 import getByParamsProperties from "@/app/apiCalls/Property/getByParamsProperties";
+import changeArchivedStatusProperty from "@/app/apiCalls/Property/changeArchivedStatusProperty";
 
 
 
@@ -68,7 +69,7 @@ export default async function page({searchParams}: {searchParams: {
             inputsDropdown={InputDropdown}
             inputPriceRanges={priceRanges}
             />
-            <TableList archived={false} context="admin" size="large" titles={["id imóvel", "preço",  "tipo imóvel", "finalidade", "status"]} 
+            <TableList changeArchivedStatus = {changeArchivedStatusProperty} archived={false} context="admin" size="large" titles={["id imóvel", "preço",  "tipo imóvel", "finalidade", "status"]} 
             data={data}/>
         </div>
         
