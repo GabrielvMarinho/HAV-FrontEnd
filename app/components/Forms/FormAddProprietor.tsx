@@ -14,7 +14,7 @@ import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
-import { NewUser, newUser } from "@/app/Validators/UserValidator";
+import { NewCnpj, NewUser, newUser } from "@/app/Validators/UserValidator";
 
 
 export default function FormAddProprietor() {
@@ -107,7 +107,7 @@ export default function FormAddProprietor() {
     return (
         
         <>
-            <form className="ownerForm" onSubmit={handleSubmit(onSubmit)}>
+            <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
                         <ButtonUploadPhoto />
