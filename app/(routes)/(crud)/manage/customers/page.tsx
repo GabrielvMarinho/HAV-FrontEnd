@@ -27,7 +27,7 @@ export default async function page({searchParams}: {searchParams: {
     const params = await searchParams;
     const {cpf=null, name=null, email=null, cellphone=null, status=null} = params
     
-    const data = await getByParamsCustomers(cpf, name, email, cellphone, status)
+    const data = await getByParamsCustomers(cpf, name, email, cellphone, status, false)
     
     
     

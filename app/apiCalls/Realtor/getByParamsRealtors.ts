@@ -6,9 +6,18 @@ export default async function(
     email?: String,
     cellphone?: number,
     creci?: string,
+    archived?: boolean
   
   ): Promise<Realtor[]> {
     const url = "http://localhost:9090/realtor/filter";
+    console.log(JSON.stringify({
+      "cpf":cpf, 
+      "name":name, 
+      "email":email,
+      "cellphone":cellphone,
+      "creci":creci,
+      "archived":archived
+    }))
     try{
     const response = await fetch(url,{
       method:"POST",
@@ -20,7 +29,8 @@ export default async function(
         "name":name, 
         "email":email,
         "cellphone":cellphone,
-        "creci":creci
+        "creci":creci,
+        "archived":archived
       })
     });
   

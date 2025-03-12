@@ -6,6 +6,7 @@ export default async function(
     email?: String,
     cellphone?: number,
     phoneNumber?: string,
+    archived?: boolean
   
   ): Promise<Adm[]> {
     const url = "http://localhost:9090/adm/filter";
@@ -15,7 +16,8 @@ export default async function(
         "name":name, 
         "email":email,
         "cellphone":cellphone,
-        "phoneNumber":phoneNumber
+        "phoneNumber":phoneNumber,
+        "archived":archived
       }))
     const response = await fetch(url,{
       method:"POST",
@@ -27,7 +29,8 @@ export default async function(
         "name":name, 
         "email":email,
         "cellphone":cellphone,
-        "phoneNumber":phoneNumber
+        "phoneNumber":phoneNumber,
+        "archived":archived
       })
     });
   

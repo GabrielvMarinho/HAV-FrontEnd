@@ -23,7 +23,7 @@ export default async function page({searchParams}: {searchParams: {
     const params = await searchParams;
     const {propertyCode=null, minPrice, maxPrice, propertyType=null, propertyCategory=null, propertyStatus=null} = params
     
-    const data = await getByParamsProperties(propertyCode, propertyType, propertyCategory, propertyStatus, minPrice, maxPrice,)
+    const data = await getByParamsProperties(propertyCode, propertyType, propertyCategory, propertyStatus, minPrice, maxPrice, false)
     
 
     const inputs = [

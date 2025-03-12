@@ -6,6 +6,7 @@ export default async function(
     email?: String,
     cellphone?: number,
     phoneNumber?: string,
+    archived?: boolean
   
   ): Promise<Editor[]> {
 
@@ -21,7 +22,8 @@ export default async function(
         "name":name, 
         "email":email,
         "cellphone":cellphone,
-        "phoneNumber":phoneNumber
+        "phoneNumber":phoneNumber,
+        "archived":archived
       })
     });
   

@@ -6,6 +6,7 @@ export default async function(
     email?: String,
     cellphone?: string,
     status?: string,
+    archived?: boolean
   
   ): Promise<Customer[]> {
     const url = "http://localhost:9090/customer/filter";
@@ -21,7 +22,8 @@ export default async function(
           "name":name, 
           "email":email,
           "cellphone":cellphone,
-          "status":status
+          "status":status,
+          "archived":archived
         })
       });
     

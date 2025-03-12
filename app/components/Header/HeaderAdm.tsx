@@ -42,9 +42,9 @@ export default function HeaderAdm() {
                     options={["vazio", "vazio"]}
                     optionsLinks={["/", "/"]}
                     optionsIcons = 
-                                {[<ChamadaTelefonica width={15} height={15} color={"var(--text-white)"}/>,
-                                <ChamadaTelefonica width={15} height={15} color={"var(--text-white)"}/>,
-                                <ChamadaTelefonica width={15} height={15} color={"var(--text-white)"}/>]}/>
+                                {[<ChamadaTelefonica width={17} height={17} color={"var(--text-white)"}/>,
+                                <ChamadaTelefonica width={17} height={17} color={"var(--text-white)"}/>,
+                                <ChamadaTelefonica width={17} height={17} color={"var(--text-white)"}/>]}/>
                                 </div>
 
 
@@ -59,8 +59,8 @@ export default function HeaderAdm() {
                     options={["Usuários", "Ímoveis"]}
                     optionsLinks={["/manage/customers", "/manage/properties"]}
                     optionsIcons = 
-                                {[<User width={15} height={15} color={"var(--text-white)"}/>,
-                                <Construcao width={15} height={15} color={"var(--text-white)"}/>]}/>
+                                {[<User width={17} height={17} color={"var(--text-white)"}/>,
+                                <Construcao width={17} height={17} color={"var(--text-white)"}/>]}/>
 
                                 </div>
                     </div>

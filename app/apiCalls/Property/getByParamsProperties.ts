@@ -8,6 +8,7 @@ export default async function(
     propertyStatus?: string,
     minPrice?: number,
     maxPrice?: number,
+    archived?: boolean
   
     ): Promise<Property[]> {
       const url = "http://localhost:9090/property/filter";
@@ -23,7 +24,8 @@ export default async function(
           "maxPric":maxPrice,
           "propertyType":propertyType,
           "propertyCategory":propertyCategory,
-          "propertyStatus":propertyStatus
+          "propertyStatus":propertyStatus,
+          "archived":archived
         })
       });
   

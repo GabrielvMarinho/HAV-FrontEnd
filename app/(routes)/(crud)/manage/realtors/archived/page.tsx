@@ -18,8 +18,9 @@ export default async function page({searchParams}: {searchParams: {
         const params = await searchParams;
         const {cpf=null, name=null, email=null, cellphone=null, creci=null} = params
             
-        const data = await getByParamsRealtors(cpf, name, email, cellphone, creci)
-            
+        const data = await getByParamsRealtors(cpf, name, email, cellphone, creci, true)
+        console.log("--------------------------------")
+        console.log(data)
         const inputs = [
           { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: ", id: "cpf", },
           { name: "name", size: "medium", text: "Nome", placeholder: "ex: ", id: "name", },
@@ -36,7 +37,6 @@ export default async function page({searchParams}: {searchParams: {
             
             
             <Title tag="h1" text="Corretores Arquivados"/>
-            <NavBarAdm/>
             <SearchBar placeholder="Busca:"/>   
             <div className="containerFilterListAction">
                 <Filter 

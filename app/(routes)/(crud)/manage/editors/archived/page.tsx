@@ -21,7 +21,7 @@ export default async function page({searchParams}: {searchParams: {
       const params = await searchParams;
       const {cpf=null, name=null, email=null, cellphone=null, phoneNumber=null} = params
           
-      const data = await getByParamsEditors(cpf, name, email, cellphone, phoneNumber)
+      const data = await getByParamsEditors(cpf, name, email, cellphone, phoneNumber, true)
       //const properties = await fetchImoveis(); // Buscando os dados da API
   
       

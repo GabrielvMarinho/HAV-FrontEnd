@@ -6,6 +6,7 @@ export default async function(
     email?: String,
     numberProperties?: number,
     goal?: string,
+    archived?: boolean
   
   ): Promise<Proprietor[]> {
     const url = "http://localhost:9090/proprietor/filter";
@@ -20,7 +21,8 @@ export default async function(
         "name":name, 
         "email":email,
         "numberProperties":numberProperties,
-        "goal":goal
+        "goal":goal,
+        "archived":archived
       })
     });
   
