@@ -26,7 +26,6 @@ export default async function(
       })
     });
   
-  
     const data = await response.json();
   
     const proprietors: Proprietor[] = data.content.map((proprietor: Proprietor) => proprietor);

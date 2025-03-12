@@ -12,16 +12,17 @@ import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
 import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
 import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
 import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form"
+import { NewUser, newUser } from "@/app/Validators/UserValidator";
 
 
 export default function FormAddProprietor() {
 
     
-
-    
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
-    const [proprietorType, setProprietorType] = useState("pf")
+    const [proprietorType, setProprietorType] = useState<"pf" | "pj">("pf");
     const router = useRouter();
 
     const handleTypeChange = function(type :string){
@@ -29,41 +30,6 @@ export default function FormAddProprietor() {
         setProprietorType(type)
     }
 
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.currentTarget as HTMLFormElement);
-
-        const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
-
-        console.log("----------------")
-        console.log("Formulário enviado:", formObject);
-    
-        setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
-        setIsModalOpen(true); // Abre o modal
-    };
-
-
-    const addProprietor = async function () {
-
-        if (!pendingFormData) return;
-        
-        setIsModalOpen(false);
-        console.log("-------", pendingFormData)
-
-        try{
-            await postProprietor(pendingFormData)
-            router.back(); //volta um point sem ter que escrever a barra
-        }
-        catch(err){
-            console.log(err)
-        }
-        
-
-        
-    
-
-    };
     
 
     const inputsDesktop = [
@@ -113,10 +79,45 @@ export default function FormAddProprietor() {
         }
     ];
 
+    const form = useForm<NewUser>({
+        resolver: zodResolver(newUser),
+        defaultValues: {
+            type: proprietorType as "pf" | "pj", // Define o tipo padrão baseado no estado do componente
+        },
+    });
+    
+    useEffect(() => {
+        form.setValue("type", proprietorType); // Atualiza o tipo dinamicamente
+        if(proprietorType === "pf"){
+            form.setValue("cnpj", "");
+        }else{
+            form.setValue("cpf", "");
+        }
+    }, [proprietorType, form.setValue]);
+
+    function onSubmit(data: NewUser){
+        console.log("Dados do usuário: ",data);
+        setIsModalOpen(true); // Abre o modal
+    };
+
+    const addProprietor = async function () {
+        if (!pendingFormData) return;
+        setIsModalOpen(false);
+        console.log("-------", pendingFormData)
+        try{
+            await postProprietor(pendingFormData)
+            router.back(); //volta um point sem ter que escrever a barra
+        }
+        catch(err){
+            console.log(err)
+        }
+    };
+
+
     return (
         
         <>
-            <form className="ownerForm" onSubmit={handleFormSubmit}>
+            <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
                         <ButtonUploadPhoto />
@@ -139,6 +140,7 @@ export default function FormAddProprietor() {
                                     placeholder={"ex: "}
                                     text={"Nome"}
                                     id={"name"}
+                                    register={form.register}
                                 />
                                 <InputText
                                     key={"cpf"}
@@ -147,6 +149,7 @@ export default function FormAddProprietor() {
                                     placeholder={"ex: 123.123.123-00"}
                                     text={"CPF"}
                                     id={"cpf"}
+                                    register={form.register}
                                 />
                                 </>
                             ) : proprietorType === "pj" ? (
@@ -158,6 +161,7 @@ export default function FormAddProprietor() {
                                     placeholder={"ex: "}
                                     text={"Nome Razão"}
                                     id={"name"}
+                                    register={form.register}
                                 />
                                 <InputText
                                     key={"cnpj"}
@@ -166,6 +170,7 @@ export default function FormAddProprietor() {
                                     placeholder={"ex: 123.123.123/0001-12"}
                                     text={"CNPJ"}
                                     id={"cnpj"}
+                                    register={form.register}
                                 />
                                 </>
                             ) : null}
@@ -181,12 +186,12 @@ export default function FormAddProprietor() {
                                     placeholder={input.placeholder}
                                     text={input.text}
                                     id={input.id}
+                                    register={form.register}
                                 />
                             ))
                         }
                         {inputDropdown.map((input) => (
                             <InputDropdown
-                            
                                 key={input.id}
                                 name={input.name}  
                                 size={input.size}
