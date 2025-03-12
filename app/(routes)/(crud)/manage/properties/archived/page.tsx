@@ -65,7 +65,7 @@ export default async function page({searchParams}: {searchParams: {
               inputsDropdown={InputDropdown}
               inputPriceRanges={priceRanges}
               />
-              <TableList context="admin" size="large" titles={["id imóvel", "preço",  "tipo imóvel", "finalidade", "status"]} 
+              <TableList archived={true} context="admin" size="large" titles={["id imóvel", "preço",  "tipo imóvel", "finalidade", "status"]} 
               data={data}/>
           </div>
           

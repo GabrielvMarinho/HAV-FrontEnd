@@ -1,9 +1,11 @@
+import deleteRealtorList from "@/app/apiCalls/Realtor/deleteByListRealtor";
 import getByParamsRealtors from "@/app/apiCalls/Realtor/getByParamsRealtors";
 import Filter from "@/app/components/Filters/Filter";
 import SearchBar from "@/app/components/Filters/SearchBar";
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import TableList from "@/app/components/Information/TableList";
 import Title from "@/app/components/NonInteractable/Title";
+import "../../../../../pageStructure.css"
 
 export default async function page({searchParams}: {searchParams: {
 
@@ -45,7 +47,7 @@ export default async function page({searchParams}: {searchParams: {
                 inputsDropdown={[]}
                 inputPriceRanges={[]}
                 />
-                <TableList context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
+                <TableList deleteFunction = {deleteRealtorList} archived={true} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
                 data={data}/>
             </div>
             

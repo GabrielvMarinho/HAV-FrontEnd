@@ -5,6 +5,7 @@ import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import TableList from "@/app/components/Information/TableList";
 import Title from "@/app/components/NonInteractable/Title";
 import "../../../../../pageStructure.css"
+import deleteByListAdm from "@/app/apiCalls/Adm/deleteByListAdm";
 
 
 
@@ -50,7 +51,7 @@ export default async function page({searchParams}: {searchParams: {
             inputsDropdown={[]}
             inputPriceRanges={[]}
             />
-            <TableList context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
+            <TableList deleteFunction={deleteByListAdm} archived={true} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
             data={data}/>
         </div>
         

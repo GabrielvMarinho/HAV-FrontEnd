@@ -11,6 +11,8 @@ import Graphic from '../IconsTSX/Graphic';
 import Modal from '../Modal/Modal';
 import ArchiveIn from '../IconsTSX/archiveIn';
 import Folder from '../IconsTSX/Folder';
+import ArchiveOut from '../IconsTSX/archiveOut';
+import ArrowBack from '../IconsTSX/ArrowBack';
 
 
 export default function TableList(props: {deleteFunction: (ids: string[]) => Promise<void>; archived :boolean; context :string; size :string, titles :string[], data :any[]}){
@@ -41,6 +43,10 @@ export default function TableList(props: {deleteFunction: (ids: string[]) => Pro
     const archiveRoute = function (){
         router.push(`${window.location.pathname}/archived`);
     }
+    const notArchiveRoute = function(){
+        router.push(window.location.pathname.replace(/\/archived$/, ""));
+
+    }
     //EDIT RELATED
     const editFunction = function(){
         router.push(`${window.location.pathname}/edit`);
@@ -48,6 +54,7 @@ export default function TableList(props: {deleteFunction: (ids: string[]) => Pro
 
     //ADD RELATED
     const addFunction = function(){
+        
         router.push(`${window.location.pathname}/add`);
     }
 
@@ -61,6 +68,9 @@ export default function TableList(props: {deleteFunction: (ids: string[]) => Pro
     //ARCHIVES RELATED
     const archiveFunction = function(){
         //lógica para arquivar users ou imóveis
+    }
+    const deArchiveFunction = function (){
+        //lógica para desarquivar users ou imóveis
     }
 
     //GRAPHS RELATED
@@ -170,7 +180,11 @@ export default function TableList(props: {deleteFunction: (ids: string[]) => Pro
                 </>
             ) : (
             <>
-
+                <ActionButton onClick={notArchiveRoute}  className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={ArrowBack}  />
+                <ActionButton onClick={selected.length==1?editFunction:""} className={`${selected.length==1?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Pencil}  />
+                <ActionButton onClick={selected.length>0?openDeleteModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Trashcan} />
+                <ActionButton onClick={selected.length>0?deArchiveFunction:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={ArchiveOut}  />
+                <Modal content={<div>delete modal</div>} id="deleteModal" isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onConfirm={confirmDelete} />
                 </>
                 )}
             
