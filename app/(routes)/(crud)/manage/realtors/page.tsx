@@ -21,13 +21,14 @@ export default async function page({searchParams}: {searchParams: {
   email?: String;
   cellphone?: number;
   creci?: string;
-  
+  page?: number;
+
 
   }}){
     const params = await searchParams;
-    const {cpf=null, name=null, email=null, cellphone=null, creci=null} = params
+    const {cpf=null, name=null, email=null, cellphone=null, creci=null, page=null} = params
         
-    const data = await getByParamsRealtors(cpf, name, email, cellphone, creci, false)
+    const {realtors, totalPages} = await getByParamsRealtors(cpf, name, email, cellphone, creci, false, page)
         
     const inputs = [
       { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: ", id: "cpf", },
@@ -55,7 +56,7 @@ export default async function page({searchParams}: {searchParams: {
             inputPriceRanges={[]}
             />
             <TableList changeArchivedStatus = {changeArchivedStatusRealtor} deleteFunction = {deleteRealtorList} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
-            data={data}/>
+            data={realtors} totalPages={totalPages}/>
         </div>
         
         </>

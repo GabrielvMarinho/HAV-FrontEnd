@@ -126,7 +126,6 @@ export default function FormAddAdm() {
                     </div>
                     <div className="inputArticle">
 
-
                                 <InputText
                                     key={"name"}
                                     name={"name"}

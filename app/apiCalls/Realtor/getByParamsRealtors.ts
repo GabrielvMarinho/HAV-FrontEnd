@@ -8,14 +8,18 @@ export default async function(
     creci?: string,
     archived?: boolean
   
-  ): Promise<Realtor[]> {
+  ): Promise<{
+    realtors: Realtor[];
+    totalPages: number;
+
+  }>{
     const url = "http://localhost:9090/realtor/filter";
     console.log(JSON.stringify({
-      "cpf":cpf, 
-      "name":name, 
-      "email":email,
-      "cellphone":cellphone,
-      "creci":creci,
+      "cpf":cpf===""?null:cpf, 
+      "name":name===""?null:name, 
+      "email":email===""?null:email,
+      "cellphone":cellphone===""?null:cellphone,
+      "creci":creci===""?null:creci,
       "archived":archived
     }))
     try{
@@ -38,9 +42,10 @@ export default async function(
     const data = await response.json();
   
     const realtors: Realtor[] = data.content.map((realtor: Realtor) => realtor);
-    return realtors;
+    return {realtors: realtors, totalPages: data.totalPages}
+
     }catch{
-      return [];
+      return {realtors: [], totalPages: 0};
     }
   
   }

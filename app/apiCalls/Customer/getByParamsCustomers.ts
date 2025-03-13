@@ -6,24 +6,41 @@ export default async function(
     email?: String,
     cellphone?: string,
     status?: string,
-    archived?: boolean
+    archived?: boolean,
+    page?: number
   
-  ): Promise<Customer[]> {
-    const url = "http://localhost:9090/customer/filter";
+  ): Promise<{
+    customers: Customer[];
+    totalPages: number;
 
+  }>
+   {
+    const url = `http://localhost:9090/customer/filter?page=${page}`;
+    
     try{
+      console.log(JSON.stringify({
+        "cpf":cpf, 
+        "name":name, 
+        "email":email,
+        "cellphone":cellphone,
+        "status":status,
+        "archived":archived,
+        "page":page,
+      }))
       const response = await fetch(url,{
         method:"POST",
         headers: {
           "Content-Type": "application/json", // Garante que está enviando JSON
         },
         body:JSON.stringify({
-          "cpf":cpf, 
-          "name":name, 
-          "email":email,
-          "cellphone":cellphone,
-          "status":status,
-          "archived":archived
+          "cpf":cpf===""?null:cpf, 
+          "name":name===""?null:name, 
+          "email":email===""?null:email,
+          "cellphone":cellphone===""?null:cellphone,
+          "status":status===""?null:status,
+          "archived":archived,
+          "page":page,
+          "size":10
         })
       });
     
@@ -31,10 +48,10 @@ export default async function(
       const data = await response.json();
     
       const customers: Customer[] = data.content.map((customer: Customer) => customer);
-      return customers
+      return {customers: customers, totalPages: data.totalPages}
 
     }catch{
-      return [];
+      return {customers: [], totalPages: 0};
     }
     
     

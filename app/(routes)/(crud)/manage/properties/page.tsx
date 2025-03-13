@@ -19,12 +19,13 @@ export default async function page({searchParams}: {searchParams: {
   propertyType?: string;
   propertyCategory?: string;
   propertyStatus?: string;
+  page?: number;
 
   }}){
     const params = await searchParams;
-    const {propertyCode=null, minPrice, maxPrice, propertyType=null, propertyCategory=null, propertyStatus=null} = params
+    const {propertyCode=null, minPrice, maxPrice, propertyType=null, propertyCategory=null, propertyStatus=null, page=null} = params
     
-    const data = await getByParamsProperties(propertyCode, propertyType, propertyCategory, propertyStatus, minPrice, maxPrice, false)
+    const {properties, totalPages} = await getByParamsProperties(propertyCode, propertyType, propertyCategory, propertyStatus, minPrice, maxPrice, false, page)
     
 
     const inputs = [
@@ -70,7 +71,7 @@ export default async function page({searchParams}: {searchParams: {
             inputPriceRanges={priceRanges}
             />
             <TableList changeArchivedStatus = {changeArchivedStatusProperty} archived={false} context="admin" size="large" titles={["id imóvel", "preço",  "tipo imóvel", "finalidade", "status"]} 
-            data={data}/>
+            data={properties} totalPages={totalPages}/>
         </div>
         
         </>

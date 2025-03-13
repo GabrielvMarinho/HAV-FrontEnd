@@ -6,18 +6,26 @@ export default async function(
     email?: String,
     cellphone?: number,
     phoneNumber?: string,
-    archived?: boolean
+    archived?: boolean,
+    page?: number
   
-  ): Promise<Adm[]> {
+  ): Promise<{
+    admins: Adm[];
+    totalPages: number;
+
+  }>{
+    console.log("cpf ->", cpf)
     const url = "http://localhost:9090/adm/filter";
     try{
       console.log(JSON.stringify({
-        "cpf":cpf, 
-        "name":name, 
-        "email":email,
-        "cellphone":cellphone,
-        "phoneNumber":phoneNumber,
-        "archived":archived
+        "cpf":cpf===""?null:cpf, 
+        "name":name===""?null:name, 
+        "email":email===""?null:email,
+        "cellphone":cellphone===""?null:phoneNumber,
+        "phoneNumber":phoneNumber===""?null:phoneNumber,
+        "archived":archived,
+        "page":page,
+        "size":10
       }))
     const response = await fetch(url,{
       method:"POST",
@@ -25,22 +33,26 @@ export default async function(
         "Content-Type": "application/json", // Garante que está enviando JSON
       },
       body:JSON.stringify({
-        "cpf":cpf, 
-        "name":name, 
-        "email":email,
+        "cpf":cpf===""?null:cpf, 
+        "name":name===""?null:name, 
+        "email":email===""?null:email,
         "cellphone":cellphone,
-        "phoneNumber":phoneNumber,
-        "archived":archived
+        "phoneNumber":phoneNumber===""?null:phoneNumber,
+        "archived":archived,
+        "page":page,
+        "size":10
+
       })
     });
   
   
     const data = await response.json();
   
-    const adms: Adm[] = data.content.map((adm: Adm) => adm);
-    return adms;
-  }catch{
-    return [];
-  }
+    const admins: Adm[] = data.content.map((adm: Adm) => adm);
+    return {admins: admins, totalPages: data.totalPages}
+
+    }catch{
+      return {admins: [], totalPages: 0};
+    }
   }
   
