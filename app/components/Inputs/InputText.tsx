@@ -1,4 +1,7 @@
-import { UseFormRegister } from "react-hook-form";
+import './css/style.css';
+
+import { NewUser } from "@/app/Validators/UserValidator";
+import { FieldError, UseFormRegister } from "react-hook-form";
 
 export default function InputText({
     name,
@@ -6,25 +9,28 @@ export default function InputText({
     text,
     placeholder,
     id,
-    register
+    register,
+    error
 }: {
-    name: string;
+    name: keyof NewUser;
     size: string;
     text: string;
     placeholder: string;
     id: string;
-    register?: UseFormRegister<any>; // Define corretamente register como função
+    register?: UseFormRegister<NewUser>;
+    error?: FieldError;
 }) {
     return (
-        <div style={{ width: "fit-content", display: "flex", flexDirection: "column", gap: "8px" }}>
+        <div className="inputContainer">
             <label className="label" htmlFor={id}>{text}</label>
             <input
                 id={id}
                 type="text"
                 className={`${size}Input input`}
                 placeholder={placeholder}
-                {...(register ? register(name): {})} // Garante que register seja uma função válida
+                {...(register ? register(name) : {})} // Garante que register seja uma função válida
             />
+            {error && <p className="errorText">{error.message}</p>}
         </div>
     );
 }

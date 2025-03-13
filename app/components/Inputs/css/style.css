@@ -297,5 +297,21 @@ background-color: var(--text-white);
     background-color: var(--text-white);
     border-radius: 999px;
     font-size: 20px;
-} 
-  
+}
+
+.errorText {  
+    color: #eead2d;
+    font-weight: 600;
+    font-size: var(--text-xs);
+    position: absolute;
+    margin-top: 65px;
+    opacity: 0.8;
+}
+
+.inputContainer{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: fit-content;
+}

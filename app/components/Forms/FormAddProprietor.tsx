@@ -19,18 +19,16 @@ import { NewUser, newUser } from "@/app/Validators/UserValidator";
 
 export default function FormAddProprietor() {
 
-    
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
     const [proprietorType, setProprietorType] = useState<"pf" | "pj">("pf");
     const router = useRouter();
 
-    const handleTypeChange = function(type :string){
+    const handleTypeChange = function (type: string) {
         console.log(type)
         setProprietorType(type)
     }
-
-    
 
     const inputsDesktop = [
         { name: "email", size: "large", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
@@ -42,7 +40,7 @@ export default function FormAddProprietor() {
         { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
     ];
 
-   
+
     const inputDropdown = [
         {
             name: "state",
@@ -85,18 +83,18 @@ export default function FormAddProprietor() {
             type: proprietorType as "pf" | "pj", // Define o tipo padrão baseado no estado do componente
         },
     });
-    
+
     useEffect(() => {
         form.setValue("type", proprietorType); // Atualiza o tipo dinamicamente
-        if(proprietorType === "pf"){
+        if (proprietorType === "pf") {
             form.setValue("cnpj", "");
-        }else{
+        } else {
             form.setValue("cpf", "");
         }
     }, [proprietorType, form.setValue]);
 
-    function onSubmit(data: NewUser){
-        console.log("Dados do usuário: ",data);
+    function onSubmit(data: NewUser) {
+        console.log("Dados do usuário: ", data);
         setIsModalOpen(true); // Abre o modal
     };
 
@@ -104,18 +102,18 @@ export default function FormAddProprietor() {
         if (!pendingFormData) return;
         setIsModalOpen(false);
         console.log("-------", pendingFormData)
-        try{
+        try {
             await postProprietor(pendingFormData)
             router.back(); //volta um point sem ter que escrever a barra
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     };
 
 
     return (
-        
+
         <>
             <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
@@ -128,19 +126,20 @@ export default function FormAddProprietor() {
                 <article className="articleDataForm">
                     <div style={{ display: "flex", flexDirection: "column", gap: "25px", alignItems: "center" }}>
                         <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)" }}>DADOS</p>
-                        <RadioButton onChange = {handleTypeChange} selected={proprietorType}/>
+                        <RadioButton onChange={handleTypeChange} selected={proprietorType} />
                     </div>
                     <div className="inputArticle">
-                    {proprietorType === "pf" ? (
-                                <>
+                        {proprietorType === "pf" ? (
+                            <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
                                 <InputText
                                     key={"name"}
                                     name={"name"}
                                     size={"large"}
-                                    placeholder={"ex: "}
+                                    placeholder={"ex: Kauani da Silva"}
                                     text={"Nome"}
                                     id={"name"}
                                     register={form.register}
+                                    error={form.formState.errors.name}
                                 />
                                 <InputText
                                     key={"cpf"}
@@ -150,18 +149,21 @@ export default function FormAddProprietor() {
                                     text={"CPF"}
                                     id={"cpf"}
                                     register={form.register}
+                                    error={form.formState.errors.cpf}
                                 />
-                                </>
-                            ) : proprietorType === "pj" ? (
-                                <>
+                            </div>
+
+                        ) : proprietorType === "pj" ? (
+                            <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
                                 <InputText
                                     key={"name"}
                                     name={"name"}
                                     size={"large"}
-                                    placeholder={"ex: "}
+                                    placeholder={"ex: Kauani da Silva"}
                                     text={"Nome Razão"}
                                     id={"name"}
                                     register={form.register}
+                                    error={form.formState.errors.name}
                                 />
                                 <InputText
                                     key={"cnpj"}
@@ -171,29 +173,33 @@ export default function FormAddProprietor() {
                                     text={"CNPJ"}
                                     id={"cnpj"}
                                     register={form.register}
+                                    error={form.formState.errors.cnpj}
                                 />
-                                </>
-                            ) : null}
-                               
-                                    
+                            </div>
+
+
+                        ) : null}
+
+
                         {
-                        
+
                             inputsDesktop.map((input) => (
                                 <InputText
                                     key={input.id}
-                                    name={input.name}
+                                    name={input.name as keyof NewUser}
                                     size={input.size}
                                     placeholder={input.placeholder}
                                     text={input.text}
                                     id={input.id}
                                     register={form.register}
+                                    error={form.formState.errors[input.name as keyof NewUser]}
                                 />
                             ))
                         }
                         {inputDropdown.map((input) => (
                             <InputDropdown
                                 key={input.id}
-                                name={input.name}  
+                                name={input.name}
                                 size={input.size}
                                 text={input.text}
                                 id={input.id}

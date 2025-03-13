@@ -1,7 +1,7 @@
 @import "../../../variables.css";
 
 .ownerForm {
-    padding: 10px;
+    padding: 8px;
     background-color: var(--box-red-pink);
     border-radius: var(--border-box);
     width: 1060px;
@@ -17,7 +17,7 @@
     display: flex;
     flex-wrap: wrap;
     width: 500px;
-    gap: 15px;
+    gap: 17px;
 }
 
 .imgPerson {
