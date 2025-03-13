@@ -24,6 +24,11 @@ export const newUser = z.object({
             message: "* 14 dígitos ",
             path: ["cnpj"]
         }),
+        city: z.string().nonempty("* Campo obrigatório"),
+        neighborhood: z.string().nonempty("* Campo obrigatório"),
+        state: z.string().nonempty("* Campo obrigatório")
+
+
 }).superRefine((data, ctx) => {
     if (data.type === "pf" && (!data.cpf || data.cpf.trim() === "")) {
         ctx.addIssue({

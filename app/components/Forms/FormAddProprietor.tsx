@@ -77,6 +77,8 @@ export default function FormAddProprietor() {
             ]
         }
     ];
+    
+
 
     const form = useForm<NewUser>({
         resolver: zodResolver(newUser),
@@ -103,6 +105,7 @@ export default function FormAddProprietor() {
             return; // Se houver erro, interrompe a execução
         }
 
+        console.log(data)
         setPendingFormData(data); // Salva os dados antes de confirmar
         setIsModalOpen(true); // Agora só abre se não houver erros
     };
@@ -208,13 +211,15 @@ export default function FormAddProprietor() {
                         }
                         {inputDropdown.map((input) => (
                             <InputDropdown
+                                register={form.register}
                                 key={input.id}
-                                name={input.name}
+                                name={input.name as keyof NewUser}
                                 size={input.size}
                                 text={input.text}
                                 id={input.id}
                                 options={input.options}
-                            />
+                                error={form.formState.errors[input.name as keyof typeof form.formState.errors]}
+                                />
                         ))}
 
                     </div>

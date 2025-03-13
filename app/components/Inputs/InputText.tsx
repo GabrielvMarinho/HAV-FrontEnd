@@ -1,9 +1,9 @@
 import './css/style.css';
 
 import { NewUser } from "@/app/Validators/ProprietorValidator";
-import { FieldError, UseFormRegister } from "react-hook-form";
+import { FieldError, UseFormRegister, FieldValues } from "react-hook-form";
 
-export default function InputText({
+export default function InputText<T>({
     name,
     size,
     text,
@@ -13,15 +13,16 @@ export default function InputText({
     register,
     error
 }: {
-    name: keyof NewUser;
+    name: keyof T;
     size: string;
     text: string;
     placeholder: string;
     id: string;
     defaulValue :any;
-    register?: UseFormRegister<NewUser>;
+    register?: UseFormRegister<T>;
     error?: FieldError;
 }) {
+    
     return (
         <div className="inputContainer">
             <label className="label" htmlFor={id}>{text}</label>
