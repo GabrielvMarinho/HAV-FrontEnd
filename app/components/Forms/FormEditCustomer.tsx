@@ -16,24 +16,25 @@ import { useRouter } from "next/navigation";
 import NonEditableInputText from "../Inputs/NonEditableInputText";
 import searchAdmDtoById from "@/app/apiCalls/Adm/searchAdmDtoById";
 import editAdm from "@/app/apiCalls/Adm/editAdm";
+import searchCustomerById from "@/app/apiCalls/Customer/searchCustomerById";
 
-export default function FormEditAdm(props :{id :any }) {
+export default function FormEditCustomer(props :{id :any }) {
     
-    const [adm, setAdm] = useState<AdmEditDto>()
+    const [customer, setCustomer] = useState<AdmEditDto>()
 
     useEffect(() => {
-        async function fetchAdm() {
+        async function fetchCustomer() {
           try {
-            const adm = await searchAdmDtoById(props.id);
-            console.log(adm)
-            setAdm(adm)
+            const customer = await searchCustomerById(props.id);
+            console.log(customer)
+            setCustomer(customer)
           } catch (error) {
             console.error("Error fetching admin data:", error);
           }
         }
     
         if (props.id) {
-          fetchAdm();
+          fetchCustomer();
         }
       }, [props.id]);
             
@@ -60,7 +61,7 @@ export default function FormEditAdm(props :{id :any }) {
     };
 
 
-    const editAdm = async function () {
+    const editCustomer = async function () {
 
         if (!pendingFormData) return;
         
@@ -68,7 +69,7 @@ export default function FormEditAdm(props :{id :any }) {
         console.log("-------", pendingFormData)
 
         try{
-            const adm :AdmEditDto= {
+            const customer :EditorEditDto= {
                 cpf: pendingFormData.cpf as string,
                 name: pendingFormData.name as string,
                 email: pendingFormData.email as string,
@@ -84,7 +85,7 @@ export default function FormEditAdm(props :{id :any }) {
 
             };
 
-            await editAdm(props.id, adm); 
+            await editAdm(props.id, customer); 
 
             router.back(); //volta um point sem ter que escrever a barra
         }
@@ -118,7 +119,7 @@ export default function FormEditAdm(props :{id :any }) {
                                     name={"name"}
                                     size={"large"}
                                     placeholder={"ex: "}
-                                    defaultValue={adm?.name??""}
+                                    defaultValue={customer?.name??""}
                                     text={"Nome"}
                                     id={"name"}
                                 />
@@ -127,7 +128,7 @@ export default function FormEditAdm(props :{id :any }) {
                                     name={"cpf"}
                                     size={"small"}
                                     text={"CPF"}
-                                    value={adm?.cpf??""}
+                                    value={customer?.cpf??""}
                                     id={"cpf"}
                                 />
                                 
@@ -135,7 +136,7 @@ export default function FormEditAdm(props :{id :any }) {
                                     key={"email"}
                                     name={"email"}
                                     size={"large"}
-                                    defaultValue={adm?.email??""}
+                                    defaultValue={customer?.email??""}
                                     placeholder={"ex: kauani@gmail.com"}
                                     text={"E-mail"}
                                     id={"email"}
@@ -144,7 +145,7 @@ export default function FormEditAdm(props :{id :any }) {
                                     key={"cep"}
                                     name={"cep"}
                                     size={"small"}
-                                    defaultValue={adm?.cep??""}
+                                    defaultValue={customer?.cep??""}
                                     placeholder={"ex: 00000-000"}
                                     text={"CEP"}
                                     id={"cep"}
@@ -153,7 +154,7 @@ export default function FormEditAdm(props :{id :any }) {
                                     key={"street"}
                                     name={"street"}
                                     size={"large"}
-                                    defaultValue={adm?.street??""}
+                                    defaultValue={customer?.street??""}
 
                                     placeholder={"Frederico Curt Alberto Vasel"}
                                     text={"Rua"}
@@ -163,7 +164,7 @@ export default function FormEditAdm(props :{id :any }) {
                                     key={"phone"}
                                     name={"phone"}
                                     size={"small"}
-                                    defaultValue={adm?.phoneNumber??""}
+                                    defaultValue={customer?.phoneNumber??""}
                                     placeholder={"Digite o telefone"}
                                     text={"Telefone"}
                                     id={"telefone"}
@@ -171,7 +172,7 @@ export default function FormEditAdm(props :{id :any }) {
                                 <InputText
                                     key={"cellphone"}
                                     name={"cellphone"}
-                                    defaultValue={adm?.celphone??""}
+                                    defaultValue={customer?.celphone??""}
                                     size={"small"}
                                     placeholder={"+55 ( )"}
                                     text={"Celular"}
@@ -181,7 +182,7 @@ export default function FormEditAdm(props :{id :any }) {
                                     key={"propertyNumber"}
                                     name={"propertyNumber"}
                                     size={"small"}
-                                    defaultValue={adm?.propertyNumber??""}
+                                    defaultValue={customer?.propertyNumber??""}
 
                                     placeholder={"1002"}
                                     text={"Número"}
@@ -192,14 +193,14 @@ export default function FormEditAdm(props :{id :any }) {
                                     name={"complement"}
                                     size={"small"}
                                     placeholder={"1030"}
-                                    defaultValue={adm?.complement??""}
+                                    defaultValue={customer?.complement??""}
 
                                     text={"Complemento"}
                                     id={"complemento"}
                                 />
 
                                 <InputDropdown
-                                    defaultValue={adm?.state ?? ""}
+                                    defaultValue={customer?.state ?? ""}
                                     key="estado"
                                     name="state"
                                     size="medium"
@@ -213,7 +214,7 @@ export default function FormEditAdm(props :{id :any }) {
                                 />
 
                                 <InputDropdown
-                                    defaultValue={adm?.city ?? ""}
+                                    defaultValue={customer?.city ?? ""}
                                     key="cidade"
                                     name="city"
                                     size="medium"
@@ -227,7 +228,7 @@ export default function FormEditAdm(props :{id :any }) {
                                 />
 
                                 <InputDropdown
-                                    defaultValue={adm?.neighborhood ?? ""}
+                                    defaultValue={customer?.neighborhood ?? ""}
                                     key="bairro"
                                     name="neighborhood"
                                     size="medium"

@@ -14,14 +14,15 @@ export default async function(
     totalPages: number;
 
   }>{
+    console.log("cpf ->", cpf)
     const url = "http://localhost:9090/adm/filter";
     try{
       console.log(JSON.stringify({
-        "cpf":cpf, 
-        "name":name, 
-        "email":email,
-        "cellphone":cellphone,
-        "phoneNumber":phoneNumber,
+        "cpf":cpf===""?null:cpf, 
+        "name":name===""?null:name, 
+        "email":email===""?null:email,
+        "cellphone":cellphone===""?null:phoneNumber,
+        "phoneNumber":phoneNumber===""?null:phoneNumber,
         "archived":archived,
         "page":page,
         "size":10
@@ -32,11 +33,11 @@ export default async function(
         "Content-Type": "application/json", // Garante que está enviando JSON
       },
       body:JSON.stringify({
-        "cpf":cpf, 
-        "name":name, 
-        "email":email,
+        "cpf":cpf===""?null:cpf, 
+        "name":name===""?null:name, 
+        "email":email===""?null:email,
         "cellphone":cellphone,
-        "phoneNumber":phoneNumber,
+        "phoneNumber":phoneNumber===""?null:phoneNumber,
         "archived":archived,
         "page":page,
         "size":10

@@ -33,11 +33,11 @@ export default async function(
           "Content-Type": "application/json", // Garante que está enviando JSON
         },
         body:JSON.stringify({
-          "cpf":cpf, 
-          "name":name, 
-          "email":email,
-          "cellphone":cellphone,
-          "status":status,
+          "cpf":cpf===""?null:cpf, 
+          "name":name===""?null:name, 
+          "email":email===""?null:email,
+          "cellphone":cellphone===""?null:cellphone,
+          "status":status===""?null:status,
           "archived":archived,
           "page":page,
           "size":10

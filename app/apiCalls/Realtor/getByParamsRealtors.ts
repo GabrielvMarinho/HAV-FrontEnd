@@ -15,11 +15,11 @@ export default async function(
   }>{
     const url = "http://localhost:9090/realtor/filter";
     console.log(JSON.stringify({
-      "cpf":cpf, 
-      "name":name, 
-      "email":email,
-      "cellphone":cellphone,
-      "creci":creci,
+      "cpf":cpf===""?null:cpf, 
+      "name":name===""?null:name, 
+      "email":email===""?null:email,
+      "cellphone":cellphone===""?null:cellphone,
+      "creci":creci===""?null:creci,
       "archived":archived
     }))
     try{

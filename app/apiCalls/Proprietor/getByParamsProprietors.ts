@@ -21,11 +21,11 @@ export default async function(
         "Content-Type": "application/json", // Garante que está enviando JSON
       },
       body:JSON.stringify({
-        "cpf":cpf, 
-        "name":name, 
-        "email":email,
-        "numberProperties":numberProperties,
-        "goal":goal,
+        "cpf":cpf===""?null:cpf, 
+        "name":name===""?null:name, 
+        "email":email===""?null:email,
+        "numberProperties":numberProperties===""?null:numberProperties,
+        "goal":goal===""?null:goal,
         "archived":archived
       })
     });
