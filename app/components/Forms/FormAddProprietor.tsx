@@ -89,6 +89,8 @@ export default function FormAddProprietor() {
     });
 
     useEffect(() => {
+        console.log("Erros no formulário:",form.formState.errors);
+        ([form.formState.errors])
         form.setValue("type", proprietorType); // Atualiza o tipo dinamicamente
         if (proprietorType === "pf") {
             form.setValue("cnpj", "");

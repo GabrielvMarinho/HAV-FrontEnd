@@ -7,7 +7,6 @@ import Button from "../Inputs/Button";
 import Modal from "../Modal/Modal";
 import { useState, useEffect } from "react";
 import ToggleButton from "../Inputs/ToggleButton";
-import RadioButton from "../Inputs/RadioButton";
 import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
 import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
 import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
@@ -26,6 +25,7 @@ export default function FormAddRealter() {
     const router = useRouter();
 
     const inputsDesktop = [
+        { name: "name", size: "large", text: "Nome", placeholder: "ex: Kauani da Silva", id: "nome" },
         { name: "cpf", size: "small", text: "CPF", placeholder: "ex:", id: "cpf" },
         { name: "email", size: "large", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
         { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
@@ -34,7 +34,7 @@ export default function FormAddRealter() {
         { name: "cellphone", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
         { name: "propertyNumber", size: "small", text: "Número", placeholder: "1002", id: "numero" },
         { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" },
-        {name: "creci", size: "small", text: "CRECI", placeholder: "0120390", id: "creci"}
+        { name: "creci", size: "small", text: "CRECI", placeholder: "0120390", id: "creci" }
     ];
 
 
@@ -79,17 +79,20 @@ export default function FormAddRealter() {
         mode: "onSubmit",
     });
 
+    useEffect(() => {
+        console.log("Erros do formulário:", form.formState.errors);
+    }, [form.formState.errors]);
 
     function onSubmit(data: NewRealter) {
-        console.log("Dados do usuário: ", data);
+        console.log("Dados do usuário:", data);
 
         if (Object.keys(form.formState.errors).length > 0) {
             console.log("Ocorreu um erro, modal não será aberto.");
-            return; // Se houver erro, interrompe a execução
+            return;
         }
         console.log("abrindo modal");
-        setPendingFormData(data); // Salva os dados antes de confirmar
-        setIsModalOpen(true); // Agora só abre se não houver erros
+        setPendingFormData(data);
+        setIsModalOpen(true);
     };
 
     const addRealter = async function () {
@@ -104,11 +107,14 @@ export default function FormAddRealter() {
             console.log(err)
         }
     };
+    console.log(isModalOpen); // Adicione isso dentro do componente FormAddRealter
+    console.log("Dados do formulário antes de enviar:", pendingFormData);
 
 
     return (
 
         <>
+
             <Title text="cadastrar corretor" tag="h1" />
             <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
