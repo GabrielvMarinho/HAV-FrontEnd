@@ -1,6 +1,6 @@
 import './css/style.css';
 
-import { NewUser } from "@/app/Validators/UserValidator";
+import { NewUser } from "@/app/Validators/ProprietorValidator";
 import { FieldError, UseFormRegister } from "react-hook-form";
 
 export default function InputText({

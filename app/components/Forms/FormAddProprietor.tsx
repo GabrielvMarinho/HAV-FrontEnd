@@ -14,7 +14,8 @@ import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
-import { NewUser, newUser } from "@/app/Validators/UserValidator";
+import { NewUser, newUser } from "@/app/Validators/ProprietorValidator";
+import Title from "../NonInteractable/Title";
 
 
 export default function FormAddProprietor() {
@@ -123,6 +124,7 @@ export default function FormAddProprietor() {
     return (
 
         <>
+            <Title text="cadastrar proprietário" tag="h1" />
             <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">

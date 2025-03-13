@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputTextTest from "../../components/Inputs/InputTextTest";
 import { useForm } from "react-hook-form"
-import { NewUser, newUser } from "@/app/Validators/UserValidator";
+import { NewUser, newUser } from "@/app/Validators/ProprietorValidator";
 
 export default function FormTestInput() {
 
