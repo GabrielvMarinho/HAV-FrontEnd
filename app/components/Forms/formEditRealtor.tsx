@@ -19,24 +19,26 @@ import editAdm from "@/app/apiCalls/Adm/editAdm";
 import searchCustomerById from "@/app/apiCalls/Customer/searchCustomerById";
 import editEditor from "@/app/apiCalls/Editor/editEditor";
 import editCustomer from "@/app/apiCalls/Customer/editCustomer";
+import searchRealtorById from "@/app/apiCalls/Realtor/searchRealtorById";
+import editRealtor from "@/app/apiCalls/Realtor/Realtor";
 
-export default function FormEditCustomer(props :{id :any }) {
+export default function FormEditRealtor(props :{id :any }) {
     
-    const [customer, setCustomer] = useState<CustomerEditDto>()
+    const [realtor, setRealtor] = useState<RealtorEditDto>()
 
     useEffect(() => {
-        async function fetchCustomer() {
+        async function fetchRealtor() {
           try {
-            const customer = await searchCustomerById(props.id);
-            console.log(customer)
-            setCustomer(customer)
+            const realtor = await searchRealtorById(props.id);
+            console.log(realtor)
+            setRealtor(realtor)
           } catch (error) {
             console.error("Error fetching admin data:", error);
           }
         }
     
         if (props.id) {
-          fetchCustomer();
+            fetchRealtor();
         }
       }, [props.id]);
             
@@ -71,12 +73,13 @@ export default function FormEditCustomer(props :{id :any }) {
         console.log("-------", pendingFormData)
 
         try{
-            const customer :CustomerEditDto= {
+            const realtor :RealtorEditDto= {
                 cpf: pendingFormData.cpf as string,
                 name: pendingFormData.name as string,
                 email: pendingFormData.email as string,
                 celphone: Number(pendingFormData.celphone),
                 phoneNumber: pendingFormData.phoneNumber as string,
+                creci: pendingFormData.creci as string,
                 cep: pendingFormData.cep as string,
                 street: pendingFormData.street as string,
                 propertyNumber: pendingFormData.propertyNumber as string,
@@ -87,7 +90,7 @@ export default function FormEditCustomer(props :{id :any }) {
 
             };
 
-            await editCustomer(props.id, customer); 
+            await editRealtor(props.id, realtor); 
 
             router.back(); //volta um point sem ter que escrever a barra
         }
@@ -121,7 +124,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                     name={"name"}
                                     size={"large"}
                                     placeholder={"ex: "}
-                                    defaultValue={customer?.name??""}
+                                    defaultValue={realtor?.name??""}
                                     text={"Nome"}
                                     id={"name"}
                                 />
@@ -130,7 +133,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                     name={"cpf"}
                                     size={"small"}
                                     text={"CPF"}
-                                    value={customer?.cpf??""}
+                                    value={realtor?.cpf??""}
                                     id={"cpf"}
                                 />
                                 
@@ -138,7 +141,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                     key={"email"}
                                     name={"email"}
                                     size={"large"}
-                                    defaultValue={customer?.email??""}
+                                    defaultValue={realtor?.email??""}
                                     placeholder={"ex: kauani@gmail.com"}
                                     text={"E-mail"}
                                     id={"email"}
@@ -147,7 +150,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                     key={"cep"}
                                     name={"cep"}
                                     size={"small"}
-                                    defaultValue={customer?.cep??""}
+                                    defaultValue={realtor?.cep??""}
                                     placeholder={"ex: 00000-000"}
                                     text={"CEP"}
                                     id={"cep"}
@@ -156,7 +159,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                     key={"street"}
                                     name={"street"}
                                     size={"large"}
-                                    defaultValue={customer?.street??""}
+                                    defaultValue={realtor?.street??""}
 
                                     placeholder={"Frederico Curt Alberto Vasel"}
                                     text={"Rua"}
@@ -166,7 +169,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                     key={"phone"}
                                     name={"phone"}
                                     size={"small"}
-                                    defaultValue={customer?.phoneNumber??""}
+                                    defaultValue={realtor?.phoneNumber??""}
                                     placeholder={"Digite o telefone"}
                                     text={"Telefone"}
                                     id={"telefone"}
@@ -174,7 +177,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                 <InputText
                                     key={"cellphone"}
                                     name={"cellphone"}
-                                    defaultValue={customer?.celphone??""}
+                                    defaultValue={realtor?.celphone??""}
                                     size={"small"}
                                     placeholder={"+55 ( )"}
                                     text={"Celular"}
@@ -184,7 +187,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                     key={"propertyNumber"}
                                     name={"propertyNumber"}
                                     size={"small"}
-                                    defaultValue={customer?.propertyNumber??""}
+                                    defaultValue={realtor?.propertyNumber??""}
 
                                     placeholder={"1002"}
                                     text={"Número"}
@@ -195,14 +198,14 @@ export default function FormEditCustomer(props :{id :any }) {
                                     name={"complement"}
                                     size={"small"}
                                     placeholder={"1030"}
-                                    defaultValue={customer?.complement??""}
+                                    defaultValue={realtor?.complement??""}
 
                                     text={"Complemento"}
                                     id={"complemento"}
                                 />
 
                                 <InputDropdown
-                                    defaultValue={customer?.state ?? ""}
+                                    defaultValue={realtor?.state ?? ""}
                                     key="estado"
                                     name="state"
                                     size="medium"
@@ -216,7 +219,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                 />
 
                                 <InputDropdown
-                                    defaultValue={customer?.city ?? ""}
+                                    defaultValue={realtor?.city ?? ""}
                                     key="cidade"
                                     name="city"
                                     size="medium"
@@ -230,7 +233,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                 />
 
                                 <InputDropdown
-                                    defaultValue={customer?.neighborhood ?? ""}
+                                    defaultValue={realtor?.neighborhood ?? ""}
                                     key="bairro"
                                     name="neighborhood"
                                     size="medium"
@@ -267,3 +270,5 @@ export default function FormEditCustomer(props :{id :any }) {
         </>
     )
 }
+
+

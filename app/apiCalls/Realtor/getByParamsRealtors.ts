@@ -1,3 +1,4 @@
+import page from "@/app/(routes)/(crud)/manage/admins/page";
 
 export default async function(
 
@@ -6,14 +7,15 @@ export default async function(
     email?: String,
     cellphone?: number,
     creci?: string,
-    archived?: boolean
-  
+    archived?: boolean,
+    page? :string
   ): Promise<{
     realtors: Realtor[];
     totalPages: number;
 
   }>{
-    const url = "http://localhost:9090/realtor/filter";
+    const url = `http://localhost:9090/realtor/filter?page=${page}`;
+
     console.log(JSON.stringify({
       "cpf":cpf===""?null:cpf, 
       "name":name===""?null:name, 

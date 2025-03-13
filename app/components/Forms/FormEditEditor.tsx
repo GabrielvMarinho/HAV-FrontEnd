@@ -19,24 +19,25 @@ import editAdm from "@/app/apiCalls/Adm/editAdm";
 import searchCustomerById from "@/app/apiCalls/Customer/searchCustomerById";
 import editEditor from "@/app/apiCalls/Editor/editEditor";
 import editCustomer from "@/app/apiCalls/Customer/editCustomer";
+import searchEditorById from "@/app/apiCalls/Editor/searchEditorById";
 
-export default function FormEditCustomer(props :{id :any }) {
+export default function FormEditEditor(props :{id :any }) {
     
-    const [customer, setCustomer] = useState<CustomerEditDto>()
+    const [editor, setEditor] = useState<EditorEditDto>()
 
     useEffect(() => {
-        async function fetchCustomer() {
+        async function fetchEditor() {
           try {
-            const customer = await searchCustomerById(props.id);
-            console.log(customer)
-            setCustomer(customer)
+            const editor = await searchEditorById(props.id);
+            console.log(editor)
+            setEditor(editor)
           } catch (error) {
             console.error("Error fetching admin data:", error);
           }
         }
     
         if (props.id) {
-          fetchCustomer();
+            fetchEditor();
         }
       }, [props.id]);
             
@@ -71,7 +72,7 @@ export default function FormEditCustomer(props :{id :any }) {
         console.log("-------", pendingFormData)
 
         try{
-            const customer :CustomerEditDto= {
+            const editor :EditorEditDto= {
                 cpf: pendingFormData.cpf as string,
                 name: pendingFormData.name as string,
                 email: pendingFormData.email as string,
@@ -87,7 +88,7 @@ export default function FormEditCustomer(props :{id :any }) {
 
             };
 
-            await editCustomer(props.id, customer); 
+            await editEditor(props.id, editor); 
 
             router.back(); //volta um point sem ter que escrever a barra
         }
@@ -121,7 +122,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                     name={"name"}
                                     size={"large"}
                                     placeholder={"ex: "}
-                                    defaultValue={customer?.name??""}
+                                    defaultValue={editor?.name??""}
                                     text={"Nome"}
                                     id={"name"}
                                 />
@@ -130,7 +131,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                     name={"cpf"}
                                     size={"small"}
                                     text={"CPF"}
-                                    value={customer?.cpf??""}
+                                    value={editor?.cpf??""}
                                     id={"cpf"}
                                 />
                                 
@@ -138,7 +139,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                     key={"email"}
                                     name={"email"}
                                     size={"large"}
-                                    defaultValue={customer?.email??""}
+                                    defaultValue={editor?.email??""}
                                     placeholder={"ex: kauani@gmail.com"}
                                     text={"E-mail"}
                                     id={"email"}
@@ -147,7 +148,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                     key={"cep"}
                                     name={"cep"}
                                     size={"small"}
-                                    defaultValue={customer?.cep??""}
+                                    defaultValue={editor?.cep??""}
                                     placeholder={"ex: 00000-000"}
                                     text={"CEP"}
                                     id={"cep"}
@@ -156,7 +157,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                     key={"street"}
                                     name={"street"}
                                     size={"large"}
-                                    defaultValue={customer?.street??""}
+                                    defaultValue={editor?.street??""}
 
                                     placeholder={"Frederico Curt Alberto Vasel"}
                                     text={"Rua"}
@@ -166,7 +167,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                     key={"phone"}
                                     name={"phone"}
                                     size={"small"}
-                                    defaultValue={customer?.phoneNumber??""}
+                                    defaultValue={editor?.phoneNumber??""}
                                     placeholder={"Digite o telefone"}
                                     text={"Telefone"}
                                     id={"telefone"}
@@ -174,7 +175,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                 <InputText
                                     key={"cellphone"}
                                     name={"cellphone"}
-                                    defaultValue={customer?.celphone??""}
+                                    defaultValue={editor?.celphone??""}
                                     size={"small"}
                                     placeholder={"+55 ( )"}
                                     text={"Celular"}
@@ -184,7 +185,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                     key={"propertyNumber"}
                                     name={"propertyNumber"}
                                     size={"small"}
-                                    defaultValue={customer?.propertyNumber??""}
+                                    defaultValue={editor?.propertyNumber??""}
 
                                     placeholder={"1002"}
                                     text={"Número"}
@@ -195,14 +196,14 @@ export default function FormEditCustomer(props :{id :any }) {
                                     name={"complement"}
                                     size={"small"}
                                     placeholder={"1030"}
-                                    defaultValue={customer?.complement??""}
+                                    defaultValue={editor?.complement??""}
 
                                     text={"Complemento"}
                                     id={"complemento"}
                                 />
 
                                 <InputDropdown
-                                    defaultValue={customer?.state ?? ""}
+                                    defaultValue={editor?.state ?? ""}
                                     key="estado"
                                     name="state"
                                     size="medium"
@@ -216,7 +217,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                 />
 
                                 <InputDropdown
-                                    defaultValue={customer?.city ?? ""}
+                                    defaultValue={editor?.city ?? ""}
                                     key="cidade"
                                     name="city"
                                     size="medium"
@@ -230,7 +231,7 @@ export default function FormEditCustomer(props :{id :any }) {
                                 />
 
                                 <InputDropdown
-                                    defaultValue={customer?.neighborhood ?? ""}
+                                    defaultValue={editor?.neighborhood ?? ""}
                                     key="bairro"
                                     name="neighborhood"
                                     size="medium"
@@ -256,7 +257,7 @@ export default function FormEditCustomer(props :{id :any }) {
                     id="idModal"
                     content={
                         <div>
-                            <h1>Deseja confirmar o editar do customer?</h1>
+                            <h1>Deseja confirmar o editar do editor?</h1>
                         </div>
                     }
                     isOpen={isModalOpen}

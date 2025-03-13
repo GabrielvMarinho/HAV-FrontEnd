@@ -60,7 +60,7 @@ export default function FormEditAdm(props :{id :any }) {
     };
 
 
-    const editAdm = async function () {
+    const edit = async function () {
 
         if (!pendingFormData) return;
         
@@ -258,7 +258,7 @@ export default function FormEditAdm(props :{id :any }) {
                     }
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
-                    onConfirm={editAdm}
+                    onConfirm={edit}
                 />
             </form>
         </>

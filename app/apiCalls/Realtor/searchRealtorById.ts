@@ -5,7 +5,7 @@ export default async function(
   
   ): Promise<
     RealtorEditDto>{
-    const url = `http://localhost:9090/realto/${id}`;
+    const url = `http://localhost:9090/realtor/${id}`;
     try{
 
     console.log(url)

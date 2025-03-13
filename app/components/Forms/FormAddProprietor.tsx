@@ -82,12 +82,12 @@ export default function FormAddProprietor() {
     const form = useForm<NewUser>({
         resolver: zodResolver(newUser),
         defaultValues: {
-            type: proprietorType as "pf" | "pj", // Define o tipo padrão baseado no estado do componente
+            type: proprietorType as "pf" | "pj",
         },
     });
     
     useEffect(() => {
-        form.setValue("type", proprietorType); // Atualiza o tipo dinamicamente
+        form.setValue("type", proprietorType); 
         if(proprietorType === "pf"){
             form.setValue("cnpj", "");
         }else{
@@ -96,11 +96,13 @@ export default function FormAddProprietor() {
     }, [proprietorType, form.setValue]);
 
     function onSubmit(data: NewUser){
+        form.handleSubmit(onSubmit)
         console.log("Dados do usuário: ",data);
         setIsModalOpen(true); // Abre o modal
     };
 
     const addProprietor = async function () {
+
         if (!pendingFormData) return;
         setIsModalOpen(false);
         console.log("-------", pendingFormData)
@@ -111,6 +113,20 @@ export default function FormAddProprietor() {
         catch(err){
             console.log(err)
         }
+    };
+    
+    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget as HTMLFormElement);
+
+        const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
+
+        console.log("----------------")
+        console.log("Formulário enviado:", formObject);
+    
+        setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
+        setIsModalOpen(true); // Abre o modal
     };
 
 
