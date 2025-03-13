@@ -9,38 +9,6 @@
     margin-inline: auto;
     border-radius: var(--xborder-box);
 }
-.mirrored{
-    transform: scaleX(-1);
-
-}
-.arrowBackContainer{
-    display: flex;
-    
-    margin-left: auto;
-    width: 100px;
-    height: fit-content;
-    align-items: center;
-}
-
-.arrowBackContainer p{
-    font-weight: 600;
-    font-size: var(--text-m);
-    color: var(--arrow-page-manager);
-}
-.arrowBackContainer label{
-    font-weight: 600;
-    font-size: var(--text-m);
-    color: var(--arrow-page-text);
-
-}
-.arrowBack{
-    background-color: transparent;
-    width: 40px;
-    height: 40px;
-}
-.arrowBack:disabled{
-    opacity: 0.3;
-}
 .dropDown{
     color: var(--button-color);
     border-radius: var(--border-box);
@@ -252,13 +220,6 @@
 .containerComprarAlugar {
     display: flex;
     flex-direction: row;
-}
-.nonEditableLabel{
-    opacity: 0.5;
-}
-.nonEditable{
-    color: var(--text-white);
-    opacity: 0.8;
 }
 
 .buttonComprarAlugar {

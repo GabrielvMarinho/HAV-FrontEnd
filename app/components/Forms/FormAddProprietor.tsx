@@ -82,7 +82,7 @@ export default function FormAddProprietor() {
         resolver: zodResolver(newUser),
         mode: "onTouched",
         defaultValues: {
-            type: proprietorType as "pf" | "pj",
+            type: proprietorType as "pf" | "pj", // Define o tipo padrão baseado no estado do componente
         },
     });
 
@@ -108,7 +108,6 @@ export default function FormAddProprietor() {
     };
 
     const addProprietor = async function () {
-
         if (!pendingFormData) return;
         setIsModalOpen(false);
         console.log("-------", pendingFormData)
@@ -120,20 +119,6 @@ export default function FormAddProprietor() {
             console.log(err)
         }
     };
-    
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.currentTarget as HTMLFormElement);
-
-        const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
-
-        console.log("----------------")
-        console.log("Formulário enviado:", formObject);
-    
-        setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
-        setIsModalOpen(true); // Abre o modal
-        };
 
 
     return (
