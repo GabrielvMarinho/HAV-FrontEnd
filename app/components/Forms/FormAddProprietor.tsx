@@ -79,6 +79,7 @@ export default function FormAddProprietor() {
 
     const form = useForm<NewUser>({
         resolver: zodResolver(newUser),
+        mode: "onTouched",
         defaultValues: {
             type: proprietorType as "pf" | "pj", // Define o tipo padrão baseado no estado do componente
         },
@@ -95,7 +96,14 @@ export default function FormAddProprietor() {
 
     function onSubmit(data: NewUser) {
         console.log("Dados do usuário: ", data);
-        setIsModalOpen(true); // Abre o modal
+
+        if (Object.keys(form.formState.errors).length > 0) {
+            console.log("Ocorreu um erro, modal não será aberto.");
+            return; // Se houver erro, interrompe a execução
+        }
+
+        setPendingFormData(data); // Salva os dados antes de confirmar
+        setIsModalOpen(true); // Agora só abre se não houver erros
     };
 
     const addProprietor = async function () {
@@ -154,7 +162,7 @@ export default function FormAddProprietor() {
                             </div>
 
                         ) : proprietorType === "pj" ? (
-                            <div>
+                            <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
                                 <InputText
                                     key={"name"}
                                     name={"name"}
@@ -212,7 +220,7 @@ export default function FormAddProprietor() {
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                         <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
                             background="var(--text-white)"
-                            onClick={() => setIsModalOpen(true)} />
+                        />
                     </div>
                 </article>
                 <Modal
