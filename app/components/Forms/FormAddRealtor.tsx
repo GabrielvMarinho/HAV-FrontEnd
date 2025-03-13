@@ -36,7 +36,7 @@ export default function FormAddProprietor() {
         { name: "phone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
         { name: "cellphone", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
         { name: "propertyNumber", size: "small", text: "Número", placeholder: "1002", id: "numero" },
-        { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
+        { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" },
         {name: "creci", size: "small", text: "creci", placeholder: "0120390", id: "creci"}
     ];
 

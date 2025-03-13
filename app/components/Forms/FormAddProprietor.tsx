@@ -133,7 +133,7 @@ export default function FormAddProprietor() {
     
         setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
         setIsModalOpen(true); // Abre o modal
-    };
+        };
 
 
     return (
