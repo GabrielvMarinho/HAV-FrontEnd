@@ -17,14 +17,9 @@ import { useRouter } from "next/navigation";
 
 export default function FormAddRealtor() {
 
-    
-
-    
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
     const router = useRouter();
-
-
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -39,7 +34,6 @@ export default function FormAddRealtor() {
         setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
         setIsModalOpen(true); // Abre o modal
     };
-
 
     const addProprietor = async function () {
 
