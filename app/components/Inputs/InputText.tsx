@@ -3,15 +3,16 @@ import './css/style.css';
 import { FieldError, UseFormRegister } from "react-hook-form";
 import { NewUser } from "@/app/Validators/ProprietorValidator";
 import { NewRealter } from '@/app/Validators/RealterValidator';
+import { NewEditor } from '@/app/Validators/EditorValidator';
 
 // Agrupar as interfaces com uma união de tipos
 type InputTextProps = {
-    name: keyof (NewUser & NewRealter); // Chave que pode ser tanto de NewUser quanto de NewRealter
+    name: keyof (NewUser & NewRealter & NewEditor); // Chave que pode ser tanto de NewUser quanto de NewRealter
     size: string;
     text: string;
     placeholder: string;
     id: string;
-    register?: UseFormRegister<NewUser | NewRealter>;
+    register?: UseFormRegister<NewUser | NewRealter | NewEditor>;
     error?: FieldError;
 };
 

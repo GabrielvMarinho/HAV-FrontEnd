@@ -14,51 +14,39 @@ import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
 import postAdm from "@/app/apiCalls/Adm/postAdm";
 import postEditor from "@/app/apiCalls/Editor/postEditor";
 import { useRouter } from "next/navigation";
+import { NewEditor, newEditor } from "@/app/Validators/EditorValidator";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Title from "../NonInteractable/Title";
 
 export default function FormAddEditor() {
 
-    
 
-    
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
     const router = useRouter();
 
 
-
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.currentTarget as HTMLFormElement);
-
-        const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
-
-        console.log("----------------")
-        console.log("Formulário enviado:", formObject);
-    
-        setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
-        setIsModalOpen(true); // Abre o modal
-    };
-
-
-    const addProprietor = async function () {
+    const addEditor = async function () {
 
         if (!pendingFormData) return;
-        
+
         setIsModalOpen(false);
         console.log("-------", pendingFormData)
 
-        try{
+        try {
             await postEditor(pendingFormData)
             router.back(); //volta um point sem ter que escrever a barra
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     };
-    
+
 
     const inputsDesktop = [
+        { name: "name", size: "large", text: "Nome", placeholder: "ex: kauani da SIlva", id: "nome" },
+        { name: "cpf", size: "large", text: "CPF", placeholder: "ex: 123-123-123-00", id: "cpf" },
         { name: "email", size: "large", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
         { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
         { name: "street", size: "large", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
@@ -68,7 +56,7 @@ export default function FormAddEditor() {
         { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
     ];
 
-   
+
     const inputDropdown = [
         {
             name: "state",
@@ -105,10 +93,26 @@ export default function FormAddEditor() {
         }
     ];
 
+    const form = useForm<NewEditor>({
+        resolver: zodResolver(newEditor),
+        mode: "onTouched"
+    });
+
+    function onSubmit(data: NewEditor) {
+        console.log("Dados do usuário:", data);
+        if (Object.keys(form.formState.errors).length > 0) {
+            console.log("Ocorreu um erro");
+            return;
+        }
+        setPendingFormData(data),
+            setIsModalOpen(true)
+    }
+
     return (
-        
+
         <>
-            <form className="ownerForm" onSubmit={handleFormSubmit}>
+            <Title text="cadastrar editor" tag="h1" />
+            <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
                         <ButtonUploadPhoto />
@@ -123,27 +127,27 @@ export default function FormAddEditor() {
                     <div className="inputArticle">
 
 
-                                <InputText
-                                    key={"name"}
-                                    name={"name"}
-                                    size={"large"}
-                                    placeholder={"ex: "}
-                                    text={"Nome"}
-                                    id={"name"}
-                                />
-                                <InputText
-                                    key={"cpf"}
-                                    name={"cpf"}
-                                    size={"small"}
-                                    placeholder={"ex: 123.123.123-00"}
-                                    text={"CPF"}
-                                    id={"cpf"}
-                                />
-                                
-                               
-                                    
+                        <InputText
+                            key={"name"}
+                            name={"name"}
+                            size={"large"}
+                            placeholder={"ex: "}
+                            text={"Nome"}
+                            id={"name"}
+                        />
+                        <InputText
+                            key={"cpf"}
+                            name={"cpf"}
+                            size={"small"}
+                            placeholder={"ex: 123.123.123-00"}
+                            text={"CPF"}
+                            id={"cpf"}
+                        />
+
+
+
                         {
-                        
+
                             inputsDesktop.map((input) => (
                                 <InputText
                                     key={input.id}
@@ -152,14 +156,16 @@ export default function FormAddEditor() {
                                     placeholder={input.placeholder}
                                     text={input.text}
                                     id={input.id}
+                                    register={form.register}
+                                    error={form.formState.errors[input.name as keyof NewEditor]}
                                 />
                             ))
                         }
                         {inputDropdown.map((input) => (
                             <InputDropdown
-                            
+
                                 key={input.id}
-                                name={input.name}  
+                                name={input.name}
                                 size={input.size}
                                 text={input.text}
                                 id={input.id}
@@ -171,8 +177,7 @@ export default function FormAddEditor() {
                     <div className="divButtonsAceptCancelForms">
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                         <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
-                            background="var(--text-white)"
-                            onClick={() => setIsModalOpen(true)} />
+                            background="var(--text-white)" />
                     </div>
                 </article>
                 <Modal
@@ -184,7 +189,7 @@ export default function FormAddEditor() {
                     }
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
-                    onConfirm={addProprietor}
+                    onConfirm={addEditor}
                 />
             </form>
         </>
