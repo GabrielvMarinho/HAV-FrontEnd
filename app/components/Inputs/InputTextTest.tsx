@@ -1,4 +1,4 @@
-import { UseFormRegister } from "react-hook-form";
+import './css/style.css';
 
 export default function InputText({
     name,
@@ -13,7 +13,7 @@ export default function InputText({
     text: string;
     placeholder: string;
     id: string;
-    register?: UseFormRegister<any>; // Define corretamente register como função
+    register: (name: string) => any; // Definindo corretamente o tipo da função
 }) {
     return (
         <div style={{ width: "fit-content", display: "flex", flexDirection: "column", gap: "8px" }}>
@@ -23,7 +23,7 @@ export default function InputText({
                 type="text"
                 className={`${size}Input input`}
                 placeholder={placeholder}
-                {...(register ? register(name): {})} // Garante que register seja uma função válida
+                {...register(name)} // Chamando corretamente a função register
             />
         </div>
     );
