@@ -13,11 +13,30 @@ import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
 import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
 import postAdm from "@/app/apiCalls/Adm/postAdm";
 import { useRouter } from "next/navigation";
+import NonEditableInputText from "../Inputs/NonEditableInputText";
+import searchAdmDtoById from "@/app/apiCalls/Adm/searchAdmDtoById";
+import editAdm from "@/app/apiCalls/Adm/editAdm";
 
-export default function FormEditAdm() {
-
+export default function FormEditAdm(props :{id :any }) {
     
+    const [adm, setAdm] = useState<AdmEditDto>()
 
+    useEffect(() => {
+        async function fetchAdm() {
+          try {
+            const adm = await searchAdmDtoById(props.id);
+            console.log(adm)
+            setAdm(adm)
+          } catch (error) {
+            console.error("Error fetching admin data:", error);
+          }
+        }
+    
+        if (props.id) {
+          fetchAdm();
+        }
+      }, [props.id]);
+            
     
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
@@ -49,8 +68,23 @@ export default function FormEditAdm() {
         console.log("-------", pendingFormData)
 
         try{
-            await editAdm(pendingFormData); // Aguarda a resposta e pode lançar erro
+            const adm :AdmEditDto= {
+                cpf: pendingFormData.cpf as string,
+                name: pendingFormData.name as string,
+                email: pendingFormData.email as string,
+                celphone: Number(pendingFormData.celphone),
+                phoneNumber: pendingFormData.phoneNumber as string,
+                cep: pendingFormData.cep as string,
+                street: pendingFormData.street as string,
+                propertyNumber: pendingFormData.propertyNumber as string,
+                complement: pendingFormData.complement as string,
+                state: pendingFormData.state as string,
+                city: pendingFormData.city as string,
+                neighborhood: pendingFormData.neighborhood as string
 
+            };
+
+            await editAdm(props.id, adm); 
 
             router.back(); //volta um point sem ter que escrever a barra
         }
@@ -60,41 +94,7 @@ export default function FormEditAdm() {
 
     };
    
-    const inputDropdown = [
-        {
-            name: "state",
-            size: "medium",
-            text: "Estado",
-            id: "estado",
-            options: [
-                ["sc", "Santa Catarina"],
-                ["pr", "Paraná"],
-                ["rs", "Rio Grande do Sul"]
-            ]
-        },
-        {
-            name: "city",
-            size: "medium",
-            text: "Cidade",
-            id: "cidade",
-            options: [
-                ["jaragua_do_sul", "Jaraguá do Sul"],
-                ["blumenau", "Blumenau"],
-                ["joinville", "Joinville"]
-            ]
-        },
-        {
-            name: "neighborhood",
-            size: "medium",
-            text: "Bairro",
-            id: "bairro",
-            options: [
-                ["centro", "Centro"],
-                ["vila_nova", "Vila Nova"],
-                ["três_rios_do_norte", "Três Rios do Norte"]
-            ]
-        }
-    ];
+    
 
     return (
         
@@ -118,15 +118,16 @@ export default function FormEditAdm() {
                                     name={"name"}
                                     size={"large"}
                                     placeholder={"ex: "}
+                                    defaultValue={adm?.name??""}
                                     text={"Nome"}
                                     id={"name"}
                                 />
-                                <InputText
+                                <NonEditableInputText
                                     key={"cpf"}
                                     name={"cpf"}
                                     size={"small"}
-                                    placeholder={"ex: 123.123.123-00"}
                                     text={"CPF"}
+                                    value={adm?.cpf??""}
                                     id={"cpf"}
                                 />
                                 
@@ -134,6 +135,7 @@ export default function FormEditAdm() {
                                     key={"email"}
                                     name={"email"}
                                     size={"large"}
+                                    defaultValue={adm?.email??""}
                                     placeholder={"ex: kauani@gmail.com"}
                                     text={"E-mail"}
                                     id={"email"}
@@ -142,6 +144,7 @@ export default function FormEditAdm() {
                                     key={"cep"}
                                     name={"cep"}
                                     size={"small"}
+                                    defaultValue={adm?.cep??""}
                                     placeholder={"ex: 00000-000"}
                                     text={"CEP"}
                                     id={"cep"}
@@ -150,6 +153,8 @@ export default function FormEditAdm() {
                                     key={"street"}
                                     name={"street"}
                                     size={"large"}
+                                    defaultValue={adm?.street??""}
+
                                     placeholder={"Frederico Curt Alberto Vasel"}
                                     text={"Rua"}
                                     id={"rua"}
@@ -158,6 +163,7 @@ export default function FormEditAdm() {
                                     key={"phone"}
                                     name={"phone"}
                                     size={"small"}
+                                    defaultValue={adm?.phoneNumber??""}
                                     placeholder={"Digite o telefone"}
                                     text={"Telefone"}
                                     id={"telefone"}
@@ -165,6 +171,7 @@ export default function FormEditAdm() {
                                 <InputText
                                     key={"cellphone"}
                                     name={"cellphone"}
+                                    defaultValue={adm?.celphone??""}
                                     size={"small"}
                                     placeholder={"+55 ( )"}
                                     text={"Celular"}
@@ -174,6 +181,8 @@ export default function FormEditAdm() {
                                     key={"propertyNumber"}
                                     name={"propertyNumber"}
                                     size={"small"}
+                                    defaultValue={adm?.propertyNumber??""}
+
                                     placeholder={"1002"}
                                     text={"Número"}
                                     id={"numero"}
@@ -183,21 +192,54 @@ export default function FormEditAdm() {
                                     name={"complement"}
                                     size={"small"}
                                     placeholder={"1030"}
+                                    defaultValue={adm?.complement??""}
+
                                     text={"Complemento"}
                                     id={"complemento"}
                                 />
 
-                        {inputDropdown.map((input) => (
-                            <InputDropdown
-                            
-                                key={input.id}
-                                name={input.name}  
-                                size={input.size}
-                                text={input.text}
-                                id={input.id}
-                                options={input.options}
-                            />
-                        ))}
+                                <InputDropdown
+                                    defaultValue={adm?.state ?? ""}
+                                    key="estado"
+                                    name="state"
+                                    size="medium"
+                                    text="Estado"
+                                    id="estado"
+                                    options={[
+                                        ["sc", "Santa Catarina"],
+                                        ["pr", "Paraná"],
+                                        ["rs", "Rio Grande do Sul"]
+                                    ]}
+                                />
+
+                                <InputDropdown
+                                    defaultValue={adm?.city ?? ""}
+                                    key="cidade"
+                                    name="city"
+                                    size="medium"
+                                    text="Cidade"
+                                    id="cidade"
+                                    options={[
+                                        ["São Paulo", "Jaraguá do Sul"],
+                                        ["blumenau", "Blumenau"],
+                                        ["joinville", "Joinville"]
+                                    ]}
+                                />
+
+                                <InputDropdown
+                                    defaultValue={adm?.neighborhood ?? ""}
+                                    key="bairro"
+                                    name="neighborhood"
+                                    size="medium"
+                                    text="Bairro"
+                                    id="bairro"
+                                    options={[
+                                        ["centro", "Centro"],
+                                        ["vila_nova", "Vila Nova"],
+                                        ["três_rios_do_norte", "Três Rios do Norte"]
+                                    ]}
+                                />
+
 
                     </div>
                     <div className="divButtonsAceptCancelForms">          

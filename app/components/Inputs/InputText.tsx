@@ -5,6 +5,7 @@ export default function InputText({
     size,
     text,
     placeholder,
+    defaultValue,
     id,
     register
 }: {
@@ -12,6 +13,7 @@ export default function InputText({
     size: string;
     text: string;
     placeholder: string;
+    defaultValue?: any;
     id: string;
     register?: UseFormRegister<any>; // Define corretamente register como função
 }) {
@@ -19,11 +21,14 @@ export default function InputText({
         <div style={{ width: "fit-content", display: "flex", flexDirection: "column", gap: "8px" }}>
             <label className="label" htmlFor={id}>{text}</label>
             <input
+
+                defaultValue={defaultValue}
+                name={name}
                 id={id}
                 type="text"
                 className={`${size}Input input`}
                 placeholder={placeholder}
-                {...(register ? register(name): {})} // Garante que register seja uma função válida
+                // {...(register ? register(name): {})} // Garante que register seja uma função válida
             />
         </div>
     );

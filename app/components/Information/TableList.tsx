@@ -49,7 +49,9 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
     }
     //EDIT RELATED
     const editFunction = function(){
-        router.push(`${window.location.pathname}/edit`);
+        const selectedId = JSON.parse(localStorage.getItem('selectedManage') || "[]");
+        localStorage.removeItem("selectedManage")
+        router.push(`${window.location.pathname}/edit/${selectedId[0]}`);
     }
 
     //ADD RELATED
@@ -80,7 +82,6 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
             await props.changeArchivedStatus(selectedIds); 
             localStorage.removeItem("selectedManage")
             setIsDeleteModalOpen(false);
-            window.location.href = window.location.href
         }
     }
 

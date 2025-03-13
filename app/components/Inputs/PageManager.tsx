@@ -44,12 +44,15 @@ export default function PageManager(props: {totalPages :number}){
     console.log("paginas totais", props.totalPages)
     return (
         <>
+        {props.totalPages==0?"":
+        <>
         <div className="arrowBackContainer">
             <button className={"arrowBack"} disabled={page==0?true:false} onClick={takeOneFromPageQuery}><ArrowBack width={20} height={20} color="var(--arrow-page-manager)"/></button>
             <p>{page+1}</p>
             <button className={"mirrored arrowBack"} disabled={page+1==props.totalPages?true:false} onClick={addOneToPageQuery}><ArrowBack width={20} height={20} color="var(--arrow-page-manager)"/></button>
             <label>{props.totalPages}</label>
         </div>
+        </>}
         
         </>
     )
