@@ -20,7 +20,6 @@ export default function InputDropdown<T>({
     id: string;
 }) {
     
-    console.log("error", error?.message)
     return (
         <div style={{ width: "fit-content", display: "flex", flexDirection: "column", gap: "8px" }}>
             <label className="label" htmlFor={id}>{text}</label>
@@ -29,7 +28,7 @@ export default function InputDropdown<T>({
                 id={id}
                 defaultValue="" // Define "Selecione Algo" como opção inicial
                 {...(register ? register(name) : {})}
-                className={`${size} InputDropdown inputDropdown ${error ? 'inputError' : ''}`}
+                className={`${size}InputDropdown inputDropdown ${error ? 'inputError' : ''}`}
             >
                 <option value="" disabled>Selecione Algo</option>
                 {options.map(option => (
