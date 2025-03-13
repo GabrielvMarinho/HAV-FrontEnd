@@ -1,7 +1,19 @@
 import './css/style.css';
 
-import { NewUser } from "@/app/Validators/ProprietorValidator";
 import { FieldError, UseFormRegister } from "react-hook-form";
+import { NewUser } from "@/app/Validators/ProprietorValidator";
+import { NewRealter } from '@/app/Validators/RealterValidator';
+
+// Agrupar as interfaces com uma união de tipos
+type InputTextProps = {
+    name: keyof (NewUser & NewRealter); // Chave que pode ser tanto de NewUser quanto de NewRealter
+    size: string;
+    text: string;
+    placeholder: string;
+    id: string;
+    register?: UseFormRegister<NewUser | NewRealter>;
+    error?: FieldError;
+};
 
 export default function InputText({
     name,
@@ -11,15 +23,7 @@ export default function InputText({
     id,
     register,
     error
-}: {
-    name: keyof NewUser;
-    size: string;
-    text: string;
-    placeholder: string;
-    id: string;
-    register?: UseFormRegister<NewUser>;
-    error?: FieldError;
-}) {
+}: InputTextProps) {
     return (
         <div className="inputContainer">
             <label className="label" htmlFor={id}>{text}</label>
@@ -28,7 +32,7 @@ export default function InputText({
                 type="text"
                 className={`${size}Input input`}
                 placeholder={placeholder}
-                {...(register ? register(name) : {})} // Garante que register seja uma função válida
+                {...(register ? register(name) : {})} 
             />
             {error && <p className="errorText">{error.message}</p>}
         </div>
