@@ -8,6 +8,7 @@ export default function InputText({
     size,
     text,
     placeholder,
+    defaultValue,
     id,
     register,
     error
@@ -17,6 +18,7 @@ export default function InputText({
     text: string;
     placeholder: string;
     id: string;
+    defaulValue :any;
     register?: UseFormRegister<NewUser>;
     error?: FieldError;
 }) {
@@ -25,7 +27,9 @@ export default function InputText({
             <label className="label" htmlFor={id}>{text}</label>
             <input 
                 id={id}
+                defaultValue={defaultValue}
                 type="text"
+                name={name}
                 className={`${size}Input input`}
                 placeholder={placeholder}
                 {...(register ? register(name) : {})} // Garante que register seja uma função válida

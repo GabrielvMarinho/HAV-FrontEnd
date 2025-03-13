@@ -19,25 +19,27 @@ import editAdm from "@/app/apiCalls/Adm/editAdm";
 import searchCustomerById from "@/app/apiCalls/Customer/searchCustomerById";
 import editEditor from "@/app/apiCalls/Editor/editEditor";
 import editCustomer from "@/app/apiCalls/Customer/editCustomer";
-import searchEditorById from "@/app/apiCalls/Editor/searchEditorById";
+import searchProprietorById from "@/app/apiCalls/Proprietor/searchProprietorById";
+import editProprietor from "@/app/apiCalls/Proprietor/editProprietor";
 
-export default function FormEditEditor(props :{id :any }) {
+export default function FormEditProprietor(props :{id :any }) {
     
-    const [editor, setEditor] = useState<EditorEditDto>()
+    const [proprietor, setProprietor] = useState<ProprietorEditDto>()
 
     useEffect(() => {
-        async function fetchEditor() {
+        async function fetchProprietor() {
           try {
-            const editor = await searchEditorById(props.id);
-            console.log(editor)
-            setEditor(editor)
+            const proprietor = await searchProprietorById(props.id);
+            console.log(proprietor)
+            console.log(proprietor.name)
+            setProprietor(proprietor)
           } catch (error) {
             console.error("Error fetching admin data:", error);
           }
         }
     
         if (props.id) {
-            fetchEditor();
+            fetchProprietor();
         }
       }, [props.id]);
             
@@ -50,16 +52,19 @@ export default function FormEditEditor(props :{id :any }) {
 
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
         e.preventDefault();
 
         const formData = new FormData(e.currentTarget as HTMLFormElement);
-
+        
         const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
 
         console.log("----------------")
+
         console.log("Formulário enviado:", formObject);
     
         setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
+
         setIsModalOpen(true); // Abre o modal
     };
 
@@ -72,7 +77,7 @@ export default function FormEditEditor(props :{id :any }) {
         console.log("-------", pendingFormData)
 
         try{
-            const editor :EditorEditDto= {
+            const proprietor :ProprietorEditDto= {
                 cpf: pendingFormData.cpf as string,
                 name: pendingFormData.name as string,
                 email: pendingFormData.email as string,
@@ -88,7 +93,7 @@ export default function FormEditEditor(props :{id :any }) {
 
             };
 
-            await editEditor(props.id, editor); 
+            await editProprietor(props.id, proprietor); 
 
             router.back(); //volta um point sem ter que escrever a barra
         }
@@ -122,7 +127,7 @@ export default function FormEditEditor(props :{id :any }) {
                                     name={"name"}
                                     size={"large"}
                                     placeholder={"ex: "}
-                                    defaultValue={editor?.name??""}
+                                    defaultValue={proprietor?.name??""}
                                     text={"Nome"}
                                     id={"name"}
                                 />
@@ -131,7 +136,7 @@ export default function FormEditEditor(props :{id :any }) {
                                     name={"cpf"}
                                     size={"small"}
                                     text={"CPF"}
-                                    value={editor?.cpf??""}
+                                    value={proprietor?.cpf??""}
                                     id={"cpf"}
                                 />
                                 
@@ -139,8 +144,8 @@ export default function FormEditEditor(props :{id :any }) {
                                     key={"email"}
                                     name={"email"}
                                     size={"large"}
+                                    defaultValue={proprietor?.email??""}
                                     placeholder={"ex: kauani@gmail.com"}
-                                    defaultValue={editor?.email??""}
                                     text={"E-mail"}
                                     id={"email"}
                                 />
@@ -148,7 +153,7 @@ export default function FormEditEditor(props :{id :any }) {
                                     key={"cep"}
                                     name={"cep"}
                                     size={"small"}
-                                    defaultValue={editor?.cep??""}
+                                    defaultValue={proprietor?.cep??""}
                                     placeholder={"ex: 00000-000"}
                                     text={"CEP"}
                                     id={"cep"}
@@ -157,7 +162,7 @@ export default function FormEditEditor(props :{id :any }) {
                                     key={"street"}
                                     name={"street"}
                                     size={"large"}
-                                    defaultValue={editor?.street??""}
+                                    defaultValue={proprietor?.street??""}
 
                                     placeholder={"Frederico Curt Alberto Vasel"}
                                     text={"Rua"}
@@ -167,7 +172,7 @@ export default function FormEditEditor(props :{id :any }) {
                                     key={"phone"}
                                     name={"phone"}
                                     size={"small"}
-                                    defaultValue={editor?.phoneNumber??""}
+                                    defaultValue={proprietor?.phoneNumber??""}
                                     placeholder={"Digite o telefone"}
                                     text={"Telefone"}
                                     id={"telefone"}
@@ -175,7 +180,7 @@ export default function FormEditEditor(props :{id :any }) {
                                 <InputText
                                     key={"cellphone"}
                                     name={"cellphone"}
-                                    defaultValue={editor?.celphone??""}
+                                    defaultValue={proprietor?.celphone??""}
                                     size={"small"}
                                     placeholder={"+55 ( )"}
                                     text={"Celular"}
@@ -185,7 +190,7 @@ export default function FormEditEditor(props :{id :any }) {
                                     key={"propertyNumber"}
                                     name={"propertyNumber"}
                                     size={"small"}
-                                    defaultValue={editor?.propertyNumber??""}
+                                    defaultValue={proprietor?.propertyNumber??""}
 
                                     placeholder={"1002"}
                                     text={"Número"}
@@ -196,14 +201,14 @@ export default function FormEditEditor(props :{id :any }) {
                                     name={"complement"}
                                     size={"small"}
                                     placeholder={"1030"}
-                                    defaultValue={editor?.complement??""}
+                                    defaultValue={proprietor?.complement??""}
 
                                     text={"Complemento"}
                                     id={"complemento"}
                                 />
 
                                 <InputDropdown
-                                    defaultValue={editor?.state ?? ""}
+                                    defaultValue={proprietor?.state ?? ""}
                                     key="estado"
                                     name="state"
                                     size="medium"
@@ -217,7 +222,7 @@ export default function FormEditEditor(props :{id :any }) {
                                 />
 
                                 <InputDropdown
-                                    defaultValue={editor?.city ?? ""}
+                                    defaultValue={proprietor?.city ?? ""}
                                     key="cidade"
                                     name="city"
                                     size="medium"
@@ -231,7 +236,7 @@ export default function FormEditEditor(props :{id :any }) {
                                 />
 
                                 <InputDropdown
-                                    defaultValue={editor?.neighborhood ?? ""}
+                                    defaultValue={proprietor?.neighborhood ?? ""}
                                     key="bairro"
                                     name="neighborhood"
                                     size="medium"
@@ -257,7 +262,7 @@ export default function FormEditEditor(props :{id :any }) {
                     id="idModal"
                     content={
                         <div>
-                            <h1>Deseja confirmar o editar do editor?</h1>
+                            <h1>Deseja confirmar o editar do customer?</h1>
                         </div>
                     }
                     isOpen={isModalOpen}
