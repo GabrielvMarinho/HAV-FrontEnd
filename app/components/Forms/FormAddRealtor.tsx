@@ -26,6 +26,7 @@ export default function FormAddRealter() {
     const router = useRouter();
 
     const inputsDesktop = [
+        { name: "cpf", size: "small", text: "CPF", placeholder: "ex:", id: "cpf" },
         { name: "email", size: "large", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
         { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
         { name: "street", size: "large", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
