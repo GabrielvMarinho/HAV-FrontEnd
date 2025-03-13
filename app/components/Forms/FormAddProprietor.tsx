@@ -154,7 +154,7 @@ export default function FormAddProprietor() {
                             </div>
 
                         ) : proprietorType === "pj" ? (
-                            <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
+                            <div>
                                 <InputText
                                     key={"name"}
                                     name={"name"}

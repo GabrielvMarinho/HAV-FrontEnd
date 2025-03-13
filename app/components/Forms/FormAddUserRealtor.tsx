@@ -5,76 +5,45 @@ import InputDropdown from "../Inputs/InputDropdown";
 import InputText from "../Inputs/InputText";
 import Button from "../Inputs/Button";
 import Modal from "../Modal/Modal";
-import { useState } from "react";
-
-import ButtonOpenClosed from "../Inputs/ButtonOpenClosed";
+import { useState, useEffect } from "react";
 import ToggleButton from "../Inputs/ToggleButton";
+import RadioButton from "../Inputs/RadioButton";
 import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
 import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
+import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form"
+import { NewUser, newUser } from "@/app/Validators/UserValidator";
 
-export default function FormAdmProfile() {
+
+export default function FormAddProprietor() {
+
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [pendingFormData, setPendingFormData] = useState<FormData | null>(null);
+    const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
+    const [proprietorType, setProprietorType] = useState<"pf" | "pj">("pf");
+    const router = useRouter();
 
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        console.log("asdasd")
-        const formData = new FormData(e.currentTarget);
-        setPendingFormData(formData); // Armazena os dados temporariamente
-        setIsModalOpen(true); // Abre o modal
-        console.log(isModalOpen)
-    };
-
-    const addOwner = async function () {
-        if (!pendingFormData) return;
-
-        const formData = pendingFormData;
-        const formObject = Object.fromEntries(formData.entries());
-        console.log(formObject)
+    const handleTypeChange = function (type: string) {
+        console.log(type)
+        setProprietorType(type)
     }
 
     const inputsDesktop = [
-        { name: "nome_completo", size: "large", text: "Nome Completo", placeholder: "ex: Kauani da Silva", id: "nome_completo" },
-        { name: "telefone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
-        { name: "cpf", size: "small", text: "CPF", placeholder: "ex: 123.123.123-00", id: "cpf" },
-        { name: "email", size: "small", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
-        { name: "celular", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
-        { name: "data_nascimento", size: "small", text: "Data Nascimento", placeholder: "dd/mm/aa", id: "data_nascimento" },
+        { name: "email", size: "large", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
         { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
-        { name: "numero", size: "small", text: "Número", placeholder: "1002", id: "numero" },
-        { name: "tipo_imovel", size: "small", text: "Tipo de Imóvel", placeholder: "Apartamento", id: "tipo_imovel" },
-        { name: "rua", size: "large", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
-        { name: "numero_apt", size: "small", text: "Número Apt.", placeholder: "Apartamento", id: "numero_apt" }
+        { name: "street", size: "large", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
+        { name: "phone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
+        { name: "cellphone", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
+        { name: "propertyNumber", size: "small", text: "Número", placeholder: "1002", id: "numero" },
+        { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
     ];
 
-    const inputsMobile = [
-        { name: "nome_completo", size: "medium", text: "Nome Completo", placeholder: "ex: Kauani da Silva", id: "nome_completo" },
-        { name: "data_nascimento", size: "small", text: "Data Nascimento", placeholder: "dd/mm/aa", id: "data_nascimento" },
-        { name: "cpf", size: "small", text: "CPF", placeholder: "ex: 123.123.123-00", id: "cpf" },
-        { name: "telefone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
-        { name: "email", size: "small", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
-        { name: "celular", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
-        { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
-        { name: "numero", size: "small", text: "Número", placeholder: "1002", id: "numero" },
-        { name: "tipo_imovel", size: "small", text: "Tipo de Imóvel", placeholder: "Apartamento", id: "tipo_imovel" },
-        { name: "rua", size: "medium", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
-        { name: "numero_apt", size: "small", text: "Número Apt.", placeholder: "Apartamento", id: "numero_apt" }
-    ]
+
     const inputDropdown = [
         {
-            name: "cidade",
-            size: "medium",
-            text: "Cidade",
-            id: "cidade",
-            options: [
-                ["jaragua_do_sul", "Jaraguá do Sul"],
-                ["blumenau", "Blumenau"],
-                ["joinville", "Joinville"]
-            ]
-        },
-        {
-            name: "estado",
+            name: "state",
             size: "medium",
             text: "Estado",
             id: "estado",
@@ -85,7 +54,18 @@ export default function FormAdmProfile() {
             ]
         },
         {
-            name: "bairro",
+            name: "city",
+            size: "medium",
+            text: "Cidade",
+            id: "cidade",
+            options: [
+                ["jaragua_do_sul", "Jaraguá do Sul"],
+                ["blumenau", "Blumenau"],
+                ["joinville", "Joinville"]
+            ]
+        },
+        {
+            name: "neighborhood",
             size: "medium",
             text: "Bairro",
             id: "bairro",
@@ -97,32 +77,125 @@ export default function FormAdmProfile() {
         }
     ];
 
-    return (
-        <>
+    const form = useForm<NewUser>({
+        resolver: zodResolver(newUser),
+        defaultValues: {
+            type: proprietorType as "pf" | "pj", // Define o tipo padrão baseado no estado do componente
+        },
+    });
 
-            <form className="ownerForm" onSubmit={handleFormSubmit}>
+    useEffect(() => {
+        form.setValue("type", proprietorType); // Atualiza o tipo dinamicamente
+        if (proprietorType === "pf") {
+            form.setValue("cnpj", "");
+        } else {
+            form.setValue("cpf", "");
+        }
+    }, [proprietorType, form.setValue]);
+
+    function onSubmit(data: NewUser) {
+        console.log("Dados do usuário: ", data);
+        setIsModalOpen(true); // Abre o modal
+    };
+
+    const addProprietor = async function () {
+        if (!pendingFormData) return;
+        setIsModalOpen(false);
+        console.log("-------", pendingFormData)
+        try {
+            await postProprietor(pendingFormData)
+            router.back(); //volta um point sem ter que escrever a barra
+        }
+        catch (err) {
+            console.log(err)
+        }
+    };
+
+
+    return (
+
+        <>
+            <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
                         <ButtonUploadPhoto />
                     </div>
                     <p style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text-white)" }}>STATUS CONTA</p>
-                    <ButtonOpenClosed />
+                    <ToggleButton />
                 </section>
                 <article className="articleDataForm">
                     <div style={{ display: "flex", flexDirection: "column", gap: "25px", alignItems: "center" }}>
                         <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)" }}>DADOS</p>
+                        <RadioButton onChange={handleTypeChange} selected={proprietorType} />
                     </div>
-                    <div className="inputArticleDesktop">
-                        {inputsDesktop.slice(0, 7).map((input) => (
-                            <InputText
-                                key={input.id}
-                                name={input.name}
-                                size={input.size}
-                                placeholder={input.placeholder}
-                                text={input.text}
-                                id={input.id}
-                            />
-                        ))}
+                    <div className="inputArticle">
+                        {proprietorType === "pf" ? (
+                            <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
+                                <InputText
+                                    key={"name"}
+                                    name={"name"}
+                                    size={"large"}
+                                    placeholder={"ex: Kauani da Silva"}
+                                    text={"Nome"}
+                                    id={"name"}
+                                    register={form.register}
+                                    error={form.formState.errors.name}
+                                />
+                                <InputText
+                                    key={"cpf"}
+                                    name={"cpf"}
+                                    size={"small"}
+                                    placeholder={"ex: 123.123.123-00"}
+                                    text={"CPF"}
+                                    id={"cpf"}
+                                    register={form.register}
+                                    error={form.formState.errors.cpf}
+                                />
+                            </div>
+
+                        ) : proprietorType === "pj" ? (
+                            <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
+                                <InputText
+                                    key={"name"}
+                                    name={"name"}
+                                    size={"large"}
+                                    placeholder={"ex: Kauani da Silva"}
+                                    text={"Nome Razão"}
+                                    id={"name"}
+                                    register={form.register}
+                                    error={form.formState.errors.name}
+                                />
+                                <InputText
+                                    key={"cnpj"}
+                                    name={"cnpj"}
+                                    size={"small"}
+                                    placeholder={"ex: 123.123.123/0001-12"}
+                                    text={"CNPJ"}
+                                    id={"cnpj"}
+                                    register={form.register}
+                                    error={form.formState.errors.cnpj}
+                                />
+                            </div>
+
+
+                        ) : null}
+
+
+                        {
+
+                            inputsDesktop.map((input) => (
+                                <InputText
+                                    key={input.id}
+                                    name={input.name as keyof NewUser}
+                                    size={input.size}
+                                    placeholder={input.placeholder}
+                                    text={input.text}
+                                    id={input.id}
+                                    register={form.register}
+                                    error={form.formState.errors[input.name as keyof NewUser]}
+                                />
+                            ))
+                        }
                         {inputDropdown.map((input) => (
                             <InputDropdown
                                 key={input.id}
@@ -133,46 +206,26 @@ export default function FormAdmProfile() {
                                 options={input.options}
                             />
                         ))}
-                        {inputsDesktop.slice(7).map((input) => (
-                            <InputText
-                                key={input.id}
-                                name={input.name}
-                                size={input.size}
-                                placeholder={input.placeholder}
-                                text={input.text}
-                                id={input.id}
-                            />
-                        ))}
-                    </div>
-                    
-                    <div className="inputArticleMobile">
-                        {inputsMobile.map((input) => (
-                            input &&
-                            <InputText
-                                name={input.name}
-                                size={input.size}
-                                placeholder={input.placeholder}
-                                text={input.text}
-                                id={input.id}
-                            />
-                        ))}
-                        {inputDropdown.map((input) => (
-                            input &&
-                            <InputDropdown
-                                name={input.name}
-                                size={input.size}
-                                text={input.text}
-                                id={input.id}
-                                options={input.options}
-                            />
-                        ))}
+
                     </div>
                     <div className="divButtonsAceptCancelForms">
-                        <Button size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)" background="var(--text-white)" />
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
+                        <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
+                            background="var(--text-white)"
+                            onClick={() => setIsModalOpen(true)} />
                     </div>
                 </article>
-                <Modal id="idModal" isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onConfirm={addOwner}></Modal>
+                <Modal
+                    id="idModal"
+                    content={
+                        <div>
+                            <h1>Deseja confirmar o cadastro do proprietário?</h1>
+                        </div>
+                    }
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    onConfirm={addProprietor}
+                />
             </form>
         </>
     )
