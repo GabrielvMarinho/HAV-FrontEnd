@@ -19,6 +19,7 @@ export default async function deleteCustomerList(list: string[]) {
         
         console.log("new url -----------------", urlNew)
         window.location.href = urlNew.toString();
+        
       return "success"
   } catch (error) {
       return "fail"

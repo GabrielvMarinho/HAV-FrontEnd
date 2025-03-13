@@ -8,7 +8,11 @@ export default async function(
     phoneNumber?: string,
     archived?: boolean
   
-  ): Promise<Editor[]> {
+  ): Promise<{
+    editors: Editor[];
+    totalPages: number;
+
+  }>{
 
     const url = "http://localhost:9090/editor/filter";
     try{
@@ -31,10 +35,10 @@ export default async function(
     const data = await response.json();
   
     const editors: Editor[] = data.content.map((editor: Editor) => editor);
-    return editors
+    return {editors: editors, totalPages: data.totalPages}
 
     }catch{
-      return [];
+      return {editors: [], totalPages: 0};
     }
   }
   

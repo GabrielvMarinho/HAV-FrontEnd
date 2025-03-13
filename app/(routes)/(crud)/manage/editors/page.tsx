@@ -20,13 +20,14 @@ export default async function page({searchParams}: {searchParams: {
   email?: String;
   cellphone?: string;
   phoneNumber?: string;
-  
+  page?: number;
+
 
   }}){
     const params = await searchParams;
-    const {cpf=null, name=null, email=null, cellphone=null, phoneNumber=null} = params
+    const {cpf=null, name=null, email=null, cellphone=null, phoneNumber=null, page=null} = params
         
-    const data = await getByParamsEditors(cpf, name, email, cellphone, phoneNumber, false)
+    const {editors, totalPages} = await getByParamsEditors(cpf, name, email, cellphone, phoneNumber, false, page)
     //const properties = await fetchImoveis(); // Buscando os dados da API
 
     
@@ -55,7 +56,7 @@ export default async function page({searchParams}: {searchParams: {
             inputPriceRanges={[]}
             />
             <TableList changeArchivedStatus = {changeArchivedStatusEditor}  deleteFunction={deleteEditorList} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
-            data={data}/>
+            data={editors} totalPages={totalPages}/>
         </div>
         
         </>

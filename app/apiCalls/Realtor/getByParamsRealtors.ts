@@ -8,7 +8,11 @@ export default async function(
     creci?: string,
     archived?: boolean
   
-  ): Promise<Realtor[]> {
+  ): Promise<{
+    realtors: Realtor[];
+    totalPages: number;
+
+  }>{
     const url = "http://localhost:9090/realtor/filter";
     console.log(JSON.stringify({
       "cpf":cpf, 
@@ -38,9 +42,10 @@ export default async function(
     const data = await response.json();
   
     const realtors: Realtor[] = data.content.map((realtor: Realtor) => realtor);
-    return realtors;
+    return {realtors: realtors, totalPages: data.totalPages}
+
     }catch{
-      return [];
+      return {realtors: [], totalPages: 0};
     }
   
   }

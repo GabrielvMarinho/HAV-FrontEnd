@@ -8,7 +8,11 @@ export default async function(
     goal?: string,
     archived?: boolean
   
-  ): Promise<Proprietor[]> {
+  ): Promise<{
+    proprietors: Proprietor[];
+    totalPages: number;
+
+  }>{
     const url = "http://localhost:9090/proprietor/filter";
     try{
     const response = await fetch(url,{
@@ -30,10 +34,10 @@ export default async function(
     const data = await response.json();
   
     const proprietors: Proprietor[] = data.content.map((proprietor: Proprietor) => proprietor);
-    return proprietors
+    return {proprietors: proprietors, totalPages: data.totalPages}
 
     }catch{
-      return [];
+      return {proprietors: [], totalPages: 0};
     }
   }
   

@@ -9,7 +9,11 @@ export default async function(
     archived?: boolean,
     page?: number
   
-  ): Promise<Adm[]> {
+  ): Promise<{
+    admins: Adm[];
+    totalPages: number;
+
+  }>{
     const url = "http://localhost:9090/adm/filter";
     try{
       console.log(JSON.stringify({
@@ -43,10 +47,11 @@ export default async function(
   
     const data = await response.json();
   
-    const adms: Adm[] = data.content.map((adm: Adm) => adm);
-    return adms;
-  }catch{
-    return [];
-  }
+    const admins: Adm[] = data.content.map((adm: Adm) => adm);
+    return {admins: admins, totalPages: data.totalPages}
+
+    }catch{
+      return {admins: [], totalPages: 0};
+    }
   }
   

@@ -17,13 +17,14 @@ export default async function page({searchParams}: {searchParams: {
     email?: String;
     cellphone?: string;
     status?: string;
-    
+    page?: number;
+
   
     }}) {
       const params = await searchParams;
-      const {cpf=null, name=null, email=null, cellphone=null, status=null} = params
+      const {cpf=null, name=null, email=null, cellphone=null, status=null, page=null} = params
       
-      const data = await getByParamsCustomers(cpf, name, email, cellphone, status, true)
+      const {customers, totalPages} = await getByParamsCustomers(cpf, name, email, cellphone, status, true, page ?? 0)
       
       
       
@@ -59,7 +60,7 @@ export default async function page({searchParams}: {searchParams: {
             inputPriceRanges={[]}
           />
           <TableList changeArchivedStatus = {changeArchivedStatusCustomer} deleteFunction={deleteCustomerList} archived={true} context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
-            data={data} />
+            data={customers} totalPages={totalPages}/>
         </div>
   
       </>

@@ -10,7 +10,11 @@ export default async function(
     maxPrice?: number,
     archived?: boolean
   
-    ): Promise<Property[]> {
+    ): Promise<{
+      properties: Property[];
+      totalPages: number;
+  
+    }>{
       const url = "http://localhost:9090/property/filter";
     try{
       const response = await fetch(url,{
@@ -33,10 +37,9 @@ export default async function(
       const data = await response.json();
   
       const properties: Property[] = data.content.map((property: Property) => property);
-      return properties
+      return {properties: properties, totalPages: data.totalPages}
 
     }catch{
-      return [];
+      return {properties: [], totalPages: 0};
     }
-  }
-  
+    }
