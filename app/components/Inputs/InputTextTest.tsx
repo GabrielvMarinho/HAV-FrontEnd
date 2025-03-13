@@ -1,30 +1,36 @@
 import './css/style.css';
 
+import { NewRealter } from "@/app/Validators/RealterValidator";
+import { FieldError, UseFormRegister } from "react-hook-form";
+
 export default function InputText({
     name,
     size,
     text,
     placeholder,
     id,
-    register
+    register,
+    error
 }: {
-    name: string;
+    name: keyof NewRealter;
     size: string;
     text: string;
     placeholder: string;
     id: string;
-    register: (name: string) => any; // Definindo corretamente o tipo da função
+    register?: UseFormRegister<NewRealter>;
+    error?: FieldError;
 }) {
     return (
-        <div style={{ width: "fit-content", display: "flex", flexDirection: "column", gap: "8px" }}>
+        <div className="inputContainer">
             <label className="label" htmlFor={id}>{text}</label>
-            <input
+            <input 
                 id={id}
                 type="text"
                 className={`${size}Input input`}
                 placeholder={placeholder}
-                {...register(name)} // Chamando corretamente a função register
+                {...(register ? register(name) : {})} // Garante que register seja uma função válida
             />
+            {error && <p className="errorText">{error.message}</p>}
         </div>
     );
 }
