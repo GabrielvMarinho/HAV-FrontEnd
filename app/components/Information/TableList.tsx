@@ -13,9 +13,10 @@ import ArchiveIn from '../IconsTSX/archiveIn';
 import Folder from '../IconsTSX/Folder';
 import ArchiveOut from '../IconsTSX/archiveOut';
 import ArrowBack from '../IconsTSX/ArrowBack';
+import PageManager from '../Inputs/PageManager';
 
 
-export default function TableList(props: {changeArchivedStatus :(ids: string[]) => Promise<void>; deleteFunction: (ids: string[]) => Promise<void>; archived :boolean; context :string; size :string, titles :string[], data :any[]}){
+export default function TableList(props: {totalPages :number; changeArchivedStatus :(ids: string[]) => Promise<void>; deleteFunction: (ids: string[]) => Promise<void>; archived :boolean; context :string; size :string, titles :string[], data :any[]}){
 
     
 
@@ -30,7 +31,6 @@ export default function TableList(props: {changeArchivedStatus :(ids: string[]) 
             await props.deleteFunction(selectedIds); 
             localStorage.removeItem("selectedManage")
             setIsDeleteModalOpen(false);
-            window.location.href = window.location.href
         }
     };
 
@@ -125,9 +125,12 @@ export default function TableList(props: {changeArchivedStatus :(ids: string[]) 
         );
     }
 
+    //PAGEABLE RELATED
+
 
     return (
         <>
+        <div>
         <table className="tableListData">
             <thead>
                     <tr>
@@ -174,7 +177,8 @@ export default function TableList(props: {changeArchivedStatus :(ids: string[]) 
             </tbody>
             
         </table>
-
+        <PageManager totalPages={props.totalPages}></PageManager>
+        </div>
         <div className="actionButtons"> 
             {props.archived===false? (
                 <>

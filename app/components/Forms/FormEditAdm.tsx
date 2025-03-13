@@ -14,7 +14,7 @@ import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
 import postAdm from "@/app/apiCalls/Adm/postAdm";
 import { useRouter } from "next/navigation";
 
-export default function FormAddAdm() {
+export default function FormEditAdm() {
 
     
 
@@ -41,7 +41,7 @@ export default function FormAddAdm() {
     };
 
 
-    const addProprietor = async function () {
+    const editProprietor = async function () {
 
         if (!pendingFormData) return;
         
@@ -49,8 +49,7 @@ export default function FormAddAdm() {
         console.log("-------", pendingFormData)
 
         try{
-            await postAdm(pendingFormData); // Aguarda a resposta e pode lançar erro
-            console.log("----------------------------------------||||||||||||||")
+            await editAdm(pendingFormData); // Aguarda a resposta e pode lançar erro
 
 
             router.back(); //volta um point sem ter que escrever a barra
@@ -60,18 +59,6 @@ export default function FormAddAdm() {
         }
 
     };
-    
-
-    const inputsDesktop = [
-        { name: "email", size: "large", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
-        { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
-        { name: "street", size: "large", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
-        { name: "phone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
-        { name: "cellphone", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
-        { name: "propertyNumber", size: "small", text: "Número", placeholder: "1002", id: "numero" },
-        { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
-    ];
-
    
     const inputDropdown = [
         {
@@ -143,21 +130,63 @@ export default function FormAddAdm() {
                                     id={"cpf"}
                                 />
                                 
-                               
-                                    
-                        {
-                        
-                            inputsDesktop.map((input) => (
                                 <InputText
-                                    key={input.id}
-                                    name={input.name}
-                                    size={input.size}
-                                    placeholder={input.placeholder}
-                                    text={input.text}
-                                    id={input.id}
+                                    key={"email"}
+                                    name={"email"}
+                                    size={"large"}
+                                    placeholder={"ex: kauani@gmail.com"}
+                                    text={"E-mail"}
+                                    id={"email"}
                                 />
-                            ))
-                        }
+                                <InputText
+                                    key={"cep"}
+                                    name={"cep"}
+                                    size={"small"}
+                                    placeholder={"ex: 00000-000"}
+                                    text={"CEP"}
+                                    id={"cep"}
+                                />
+                                <InputText
+                                    key={"street"}
+                                    name={"street"}
+                                    size={"large"}
+                                    placeholder={"Frederico Curt Alberto Vasel"}
+                                    text={"Rua"}
+                                    id={"rua"}
+                                />
+                                <InputText
+                                    key={"phone"}
+                                    name={"phone"}
+                                    size={"small"}
+                                    placeholder={"Digite o telefone"}
+                                    text={"Telefone"}
+                                    id={"telefone"}
+                                />
+                                <InputText
+                                    key={"cellphone"}
+                                    name={"cellphone"}
+                                    size={"small"}
+                                    placeholder={"+55 ( )"}
+                                    text={"Celular"}
+                                    id={"celular"}
+                                />
+                                <InputText
+                                    key={"propertyNumber"}
+                                    name={"propertyNumber"}
+                                    size={"small"}
+                                    placeholder={"1002"}
+                                    text={"Número"}
+                                    id={"numero"}
+                                />
+                                <InputText
+                                    key={"complement"}
+                                    name={"complement"}
+                                    size={"small"}
+                                    placeholder={"1030"}
+                                    text={"Complemento"}
+                                    id={"complemento"}
+                                />
+
                         {inputDropdown.map((input) => (
                             <InputDropdown
                             
@@ -182,12 +211,12 @@ export default function FormAddAdm() {
                     id="idModal"
                     content={
                         <div>
-                            <h1>Deseja confirmar o cadastro do adm?</h1>
+                            <h1>Deseja confirmar o editar do adm?</h1>
                         </div>
                     }
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
-                    onConfirm={addProprietor}
+                    onConfirm={editProprietor}
                 />
             </form>
         </>

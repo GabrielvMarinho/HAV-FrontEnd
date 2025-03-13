@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="db1a6ed1-e7a2-452f-9230-8beae019dc00" name="Changes" comment="" />
+    <list default="true" id="db1a6ed1-e7a2-452f-9230-8beae019dc00" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/app/components/Forms/FormAddAdm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Forms/FormAddAdm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Inputs/InputText.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Inputs/InputText.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,9 +16,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2uDVLZAId3tyzfqsZcrnrfiu7Nv" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -22,8 +28,9 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "<unknown>",
-    "last_opened_file_path": "C:/Users/Marinho/Documents/GitHub/Hav-BackEnd/hav-imobiliaria"
+    "git-widget-placeholder": "gabrielComponents",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/gabriel_v_marinho/Documents/GitHub/Hav-BackEnd/hav-imobiliaria"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

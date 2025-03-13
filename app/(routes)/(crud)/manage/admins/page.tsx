@@ -22,13 +22,13 @@ export default async function page({searchParams}: {searchParams: {
   email?: String;
   cellphone?: string;
   phoneNumber?: string;
-  
+  page?: number;
 
   }}){
     const params = await searchParams;
-    const {cpf=null, name=null, email=null, cellphone=null, phoneNumber=null} = params
+    const {cpf=null, name=null, email=null, cellphone=null, phoneNumber=null, page=null} = params
         
-    const data = await getByParamsAdms(cpf, name, email, cellphone, phoneNumber, false)
+    const data = await getByParamsAdms(cpf, name, email, cellphone, phoneNumber, false, page??0)
         
 
     

@@ -13,7 +13,11 @@ export default async function deleteEditorList(list: string[]) {
           },
           body: JSON.stringify(list),
         });
-
+        const urlNew = new URL(window.location.href);
+        urlNew.searchParams.set('page', (0).toString());
+        
+        console.log("new url -----------------", urlNew)
+        window.location.href = urlNew.toString();
       return "success"
   } catch (error) {
       return "fail"
