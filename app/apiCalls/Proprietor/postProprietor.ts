@@ -12,8 +12,8 @@ export default async function(
 
     console.log(JSON.stringify({
       "name": formData.name,
-      "cpf": formData.cpf,
-      "cnpj": formData.cnpj,
+      "cpf": formData.cpf===""?null:formData.cpf,
+      "cnpj": formData.cnpj===""?null:formData.cnpj,
       "email": formData.email,
       "celphone": formData.cellphone,
       "phoneNumber": formData.phoneNumber,
@@ -38,8 +38,8 @@ export default async function(
       },
       body:JSON.stringify({
         "name": formData.name,
-        "cpf": formData.cpf,
-        "cnpj": formData.cnpj,
+        "cpf": formData.cpf===""?null:formData.cpf,
+        "cnpj":formData.cnpj===""?null:formData.cnpj,
         "email": formData.email,
         "celphone": formData.cellphone,
         "phoneNumber": formData.phoneNumber,

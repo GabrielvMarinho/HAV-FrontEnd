@@ -18,7 +18,7 @@ export default function InputText<T>({
     text: string;
     placeholder: string;
     id: string;
-    defaulValue :any;
+    defaulValue?:any;
     register?: UseFormRegister<T>;
     error?: FieldError;
 }) {
