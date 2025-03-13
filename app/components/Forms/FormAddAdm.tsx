@@ -177,7 +177,7 @@ export default function FormAddAdm() {
                             background="var(--text-white)"
                             onClick={() => setIsModalOpen(true)} />
                     </div>
-                </article>
+                </article>  
                 <Modal
                     id="idModal"
                     content={

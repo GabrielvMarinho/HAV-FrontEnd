@@ -14,7 +14,8 @@ import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
-import { NewUser, newUser } from "@/app/Validators/UserValidator";
+import { NewUser, newUser } from "@/app/Validators/ProprietorValidator";
+import Title from "../NonInteractable/Title";
 
 
 export default function FormAddProprietor() {
@@ -79,6 +80,7 @@ export default function FormAddProprietor() {
 
     const form = useForm<NewUser>({
         resolver: zodResolver(newUser),
+        mode: "onTouched",
         defaultValues: {
             type: proprietorType as "pf" | "pj", // Define o tipo padrão baseado no estado do componente
         },
@@ -95,7 +97,14 @@ export default function FormAddProprietor() {
 
     function onSubmit(data: NewUser) {
         console.log("Dados do usuário: ", data);
-        setIsModalOpen(true); // Abre o modal
+
+        if (Object.keys(form.formState.errors).length > 0) {
+            console.log("Ocorreu um erro, modal não será aberto.");
+            return; // Se houver erro, interrompe a execução
+        }
+
+        setPendingFormData(data); // Salva os dados antes de confirmar
+        setIsModalOpen(true); // Agora só abre se não houver erros
     };
 
     const addProprietor = async function () {
@@ -115,6 +124,7 @@ export default function FormAddProprietor() {
     return (
 
         <>
+            <Title text="cadastrar proprietário" tag="h1" />
             <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
@@ -212,7 +222,7 @@ export default function FormAddProprietor() {
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                         <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
                             background="var(--text-white)"
-                            onClick={() => setIsModalOpen(true)} />
+                        />
                     </div>
                 </article>
                 <Modal

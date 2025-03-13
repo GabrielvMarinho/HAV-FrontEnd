@@ -11,49 +11,25 @@ import RadioButton from "../Inputs/RadioButton";
 import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
 import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
 import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
-import postAdm from "@/app/apiCalls/Adm/postAdm";
-import postRealtor from "@/app/apiCalls/Realtor/postRealtor";
 import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form"
+import { NewUser, newUser } from "@/app/Validators/ProprietorValidator";
+import Title from "../NonInteractable/Title";
 
-export default function FormAddRealtor() {
+export default function FormAddProprietor() {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
+    const [proprietorType, setProprietorType] = useState<"pf" | "pj">("pf");
     const router = useRouter();
 
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.currentTarget as HTMLFormElement);
-
-        const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
-
-        console.log("----------------")
-        console.log("Formulário enviado:", formObject);
-    
-        setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
-        setIsModalOpen(true); // Abre o modal
-    };
-
-    const addProprietor = async function () {
-
-        if (!pendingFormData) return;
-        
-        setIsModalOpen(false);
-        console.log("-------", pendingFormData)
-
-        try{
-            await postRealtor (pendingFormData)
-            router.back(); //volta um point sem ter que escrever a barra
-        }
-        catch(err){
-            console.log(err)
-        }
-    };
-    
+    const handleTypeChange = function (type: string) {
+        console.log(type)
+        setProprietorType(type)
+    }
 
     const inputsDesktop = [
-        { name: "creci", size: "small", text: "Creci", placeholder: "214445", id: "creci" },
         { name: "email", size: "large", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
         { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
         { name: "street", size: "large", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
@@ -61,10 +37,10 @@ export default function FormAddRealtor() {
         { name: "cellphone", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
         { name: "propertyNumber", size: "small", text: "Número", placeholder: "1002", id: "numero" },
         { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
-
+        {name: "creci", size: "small", text: "creci", placeholder: "0120390", id: "creci"}
     ];
 
-   
+
     const inputDropdown = [
         {
             name: "state",
@@ -101,10 +77,54 @@ export default function FormAddRealtor() {
         }
     ];
 
+    const form = useForm<NewUser>({
+        resolver: zodResolver(newUser),
+        mode: "onTouched",
+        defaultValues: {
+            type: proprietorType as "pf" | "pj", // Define o tipo padrão baseado no estado do componente
+        },
+    });
+
+    useEffect(() => {
+        form.setValue("type", proprietorType); // Atualiza o tipo dinamicamente
+        if (proprietorType === "pf") {
+            form.setValue("cnpj", "");
+        } else {
+            form.setValue("cpf", "");
+        }
+    }, [proprietorType, form.setValue]);
+
+    function onSubmit(data: NewUser) {
+        console.log("Dados do usuário: ", data);
+
+        if (Object.keys(form.formState.errors).length > 0) {
+            console.log("Ocorreu um erro, modal não será aberto.");
+            return; // Se houver erro, interrompe a execução
+        }
+
+        setPendingFormData(data); // Salva os dados antes de confirmar
+        setIsModalOpen(true); // Agora só abre se não houver erros
+    };
+
+    const addProprietor = async function () {
+        if (!pendingFormData) return;
+        setIsModalOpen(false);
+        console.log("-------", pendingFormData)
+        try {
+            await postProprietor(pendingFormData)
+            router.back(); //volta um point sem ter que escrever a barra
+        }
+        catch (err) {
+            console.log(err)
+        }
+    };
+
+
     return (
-        
+
         <>
-            <form className="ownerForm" onSubmit={handleFormSubmit}>
+            <Title text="cadastrar corretor" tag="h1" />
+            <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
                         <ButtonUploadPhoto />
@@ -115,17 +135,20 @@ export default function FormAddRealtor() {
                 <article className="articleDataForm">
                     <div style={{ display: "flex", flexDirection: "column", gap: "25px", alignItems: "center" }}>
                         <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)" }}>DADOS</p>
+                        <RadioButton onChange={handleTypeChange} selected={proprietorType} />
                     </div>
                     <div className="inputArticle">
-
-
+                        {proprietorType === "pf" ? (
+                            <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
                                 <InputText
                                     key={"name"}
                                     name={"name"}
                                     size={"large"}
-                                    placeholder={"ex: "}
+                                    placeholder={"ex: Kauani da Silva"}
                                     text={"Nome"}
                                     id={"name"}
+                                    register={form.register}
+                                    error={form.formState.errors.name}
                                 />
                                 <InputText
                                     key={"cpf"}
@@ -134,28 +157,58 @@ export default function FormAddRealtor() {
                                     placeholder={"ex: 123.123.123-00"}
                                     text={"CPF"}
                                     id={"cpf"}
+                                    register={form.register}
+                                    error={form.formState.errors.cpf}
                                 />
-                                
-                               
-                                    
+                            </div>
+
+                        ) : proprietorType === "pj" ? (
+                            <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
+                                <InputText
+                                    key={"name"}
+                                    name={"name"}
+                                    size={"large"}
+                                    placeholder={"ex: Kauani da Silva"}
+                                    text={"Nome Razão"}
+                                    id={"name"}
+                                    register={form.register}
+                                    error={form.formState.errors.name}
+                                />
+                                <InputText
+                                    key={"cnpj"}
+                                    name={"cnpj"}
+                                    size={"small"}
+                                    placeholder={"ex: 123.123.123/0001-12"}
+                                    text={"CNPJ"}
+                                    id={"cnpj"}
+                                    register={form.register}
+                                    error={form.formState.errors.cnpj}
+                                />
+                            </div>
+
+
+                        ) : null}
+
+
                         {
-                        
+
                             inputsDesktop.map((input) => (
                                 <InputText
                                     key={input.id}
-                                    name={input.name}
+                                    name={input.name as keyof NewUser}
                                     size={input.size}
                                     placeholder={input.placeholder}
                                     text={input.text}
                                     id={input.id}
+                                    register={form.register}
+                                    error={form.formState.errors[input.name as keyof NewUser]}
                                 />
                             ))
                         }
                         {inputDropdown.map((input) => (
                             <InputDropdown
-                            
                                 key={input.id}
-                                name={input.name}  
+                                name={input.name}
                                 size={input.size}
                                 text={input.text}
                                 id={input.id}
@@ -168,14 +221,14 @@ export default function FormAddRealtor() {
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                         <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
                             background="var(--text-white)"
-                            onClick={() => setIsModalOpen(true)} />
+                        />
                     </div>
                 </article>
                 <Modal
                     id="idModal"
                     content={
                         <div>
-                            <h1>Deseja confirmar o cadastro do corretor?</h1>
+                            <h1>Deseja confirmar o cadastro do proprietário?</h1>
                         </div>
                     }
                     isOpen={isModalOpen}
