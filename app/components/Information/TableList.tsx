@@ -75,13 +75,17 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
     }
 
     const changeArchivedStatus = async function (){
-        
-        const selectedIds = JSON.parse(localStorage.getItem('selectedManage') || "[]");
 
+        const selectedIds = JSON.parse(localStorage.getItem('selectedManage') || "[]");
+        console.log(selectedIds)
+        console.log("-----------------")
+        
         if (selectedIds.length > 0) {
             await props.changeArchivedStatus(selectedIds); 
             localStorage.removeItem("selectedManage")
             setIsDeleteModalOpen(false);
+
+
         }
     }
 

@@ -13,6 +13,11 @@ export default async function changeArchivedStatusProprietor(list: string[]) {
           },
           body: JSON.stringify(list),
         });
+        
+        const urlNew = new URL(window.location.href);
+        urlNew.searchParams.set('page', (0).toString());
+        
+        window.location.href = urlNew.toString();
 
       return "success"
   } catch (error) {

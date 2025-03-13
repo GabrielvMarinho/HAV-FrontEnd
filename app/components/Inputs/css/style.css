@@ -1,5 +1,41 @@
 @import "../../../variables.css";
 
+
+
+
+.mirrored{
+    transform: scaleX(-1);
+
+}
+.arrowBackContainer{
+    display: flex;
+    
+    margin-left: auto;
+    width: 100px;
+    height: fit-content;
+    align-items: center;
+}
+
+.arrowBackContainer p{
+    font-weight: 600;
+    font-size: var(--text-m);
+    color: var(--arrow-page-manager);
+}
+.arrowBackContainer label{
+    font-weight: 600;
+    font-size: var(--text-m);
+    color: var(--arrow-page-text);
+
+}
+.arrowBack{
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+}
+.arrowBack:disabled{
+    opacity: 0.3;
+}
+
 .buttonBuscaClaro{
     background-color: var(--box-white);
     width: fit-content;

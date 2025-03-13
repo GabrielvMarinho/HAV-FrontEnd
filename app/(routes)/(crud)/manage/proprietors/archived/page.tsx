@@ -20,7 +20,7 @@ export default async function page({searchParams}: {searchParams: {
   
     }}) {
       const params = await searchParams;
-      const {cpf=null, name=null, email=null, numberProperties=null, goal=null, page=null} = params
+      const {cpf=null, name=null, email=null, numberProperties=null, goal=null, page=0} = params
       
       const {proprietors, totalPages} = await getByParamsProprietors(cpf, name, email, numberProperties, goal, true, page)
       

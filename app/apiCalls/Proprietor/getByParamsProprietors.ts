@@ -6,14 +6,14 @@ export default async function(
     email?: String,
     numberProperties?: number,
     goal?: string,
-    archived?: boolean
-  
+    archived?: boolean,
+    page?: any
   ): Promise<{
     proprietors: Proprietor[];
     totalPages: number;
 
   }>{
-    const url = "http://localhost:9090/proprietor/filter";
+    const url = `http://localhost:9090/proprietor/filter?page=${page}`;
     try{
     const response = await fetch(url,{
       method:"POST",
