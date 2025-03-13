@@ -23,7 +23,7 @@ export default function InputText({
     return (
         <div className="inputContainer">
             <label className="label" htmlFor={id}>{text}</label>
-            <input
+            <input 
                 id={id}
                 type="text"
                 className={`${size}Input input`}
