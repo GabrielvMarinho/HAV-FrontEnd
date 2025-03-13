@@ -14,23 +14,22 @@ import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
-import { NewUser, newUser } from "@/app/Validators/UserValidator";
+import { NewUser, newUser } from "@/app/Validators/ProprietorValidator";
+import Title from "../NonInteractable/Title";
 
 
 export default function FormAddProprietor() {
 
-    
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
     const [proprietorType, setProprietorType] = useState<"pf" | "pj">("pf");
     const router = useRouter();
 
-    const handleTypeChange = function(type :string){
+    const handleTypeChange = function (type: string) {
         console.log(type)
         setProprietorType(type)
     }
-
-    
 
     const inputsDesktop = [
         { name: "email", size: "large", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
@@ -42,7 +41,7 @@ export default function FormAddProprietor() {
         { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
     ];
 
-   
+
     const inputDropdown = [
         {
             name: "state",
@@ -81,24 +80,31 @@ export default function FormAddProprietor() {
 
     const form = useForm<NewUser>({
         resolver: zodResolver(newUser),
+        mode: "onTouched",
         defaultValues: {
             type: proprietorType as "pf" | "pj",
         },
     });
-    
+
     useEffect(() => {
-        form.setValue("type", proprietorType); 
-        if(proprietorType === "pf"){
+        form.setValue("type", proprietorType); // Atualiza o tipo dinamicamente
+        if (proprietorType === "pf") {
             form.setValue("cnpj", "");
-        }else{
+        } else {
             form.setValue("cpf", "");
         }
     }, [proprietorType, form.setValue]);
 
-    function onSubmit(data: NewUser){
-        form.handleSubmit(onSubmit)
-        console.log("Dados do usuário: ",data);
-        setIsModalOpen(true); // Abre o modal
+    function onSubmit(data: NewUser) {
+        console.log("Dados do usuário: ", data);
+
+        if (Object.keys(form.formState.errors).length > 0) {
+            console.log("Ocorreu um erro, modal não será aberto.");
+            return; // Se houver erro, interrompe a execução
+        }
+
+        setPendingFormData(data); // Salva os dados antes de confirmar
+        setIsModalOpen(true); // Agora só abre se não houver erros
     };
 
     const addProprietor = async function () {
@@ -106,11 +112,11 @@ export default function FormAddProprietor() {
         if (!pendingFormData) return;
         setIsModalOpen(false);
         console.log("-------", pendingFormData)
-        try{
+        try {
             await postProprietor(pendingFormData)
             router.back(); //volta um point sem ter que escrever a barra
         }
-        catch(err){
+        catch (err) {
             console.log(err)
         }
     };
@@ -131,8 +137,9 @@ export default function FormAddProprietor() {
 
 
     return (
-        
+
         <>
+            <Title text="cadastrar proprietário" tag="h1" />
             <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
@@ -144,19 +151,20 @@ export default function FormAddProprietor() {
                 <article className="articleDataForm">
                     <div style={{ display: "flex", flexDirection: "column", gap: "25px", alignItems: "center" }}>
                         <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)" }}>DADOS</p>
-                        <RadioButton onChange = {handleTypeChange} selected={proprietorType}/>
+                        <RadioButton onChange={handleTypeChange} selected={proprietorType} />
                     </div>
                     <div className="inputArticle">
-                    {proprietorType === "pf" ? (
-                                <>
+                        {proprietorType === "pf" ? (
+                            <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
                                 <InputText
                                     key={"name"}
                                     name={"name"}
                                     size={"large"}
-                                    placeholder={"ex: "}
+                                    placeholder={"ex: Kauani da Silva"}
                                     text={"Nome"}
                                     id={"name"}
                                     register={form.register}
+                                    error={form.formState.errors.name}
                                 />
                                 <InputText
                                     key={"cpf"}
@@ -166,18 +174,21 @@ export default function FormAddProprietor() {
                                     text={"CPF"}
                                     id={"cpf"}
                                     register={form.register}
+                                    error={form.formState.errors.cpf}
                                 />
-                                </>
-                            ) : proprietorType === "pj" ? (
-                                <>
+                            </div>
+
+                        ) : proprietorType === "pj" ? (
+                            <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
                                 <InputText
                                     key={"name"}
                                     name={"name"}
                                     size={"large"}
-                                    placeholder={"ex: "}
+                                    placeholder={"ex: Kauani da Silva"}
                                     text={"Nome Razão"}
                                     id={"name"}
                                     register={form.register}
+                                    error={form.formState.errors.name}
                                 />
                                 <InputText
                                     key={"cnpj"}
@@ -187,29 +198,33 @@ export default function FormAddProprietor() {
                                     text={"CNPJ"}
                                     id={"cnpj"}
                                     register={form.register}
+                                    error={form.formState.errors.cnpj}
                                 />
-                                </>
-                            ) : null}
-                               
-                                    
+                            </div>
+
+
+                        ) : null}
+
+
                         {
-                        
+
                             inputsDesktop.map((input) => (
                                 <InputText
                                     key={input.id}
-                                    name={input.name}
+                                    name={input.name as keyof NewUser}
                                     size={input.size}
                                     placeholder={input.placeholder}
                                     text={input.text}
                                     id={input.id}
                                     register={form.register}
+                                    error={form.formState.errors[input.name as keyof NewUser]}
                                 />
                             ))
                         }
                         {inputDropdown.map((input) => (
                             <InputDropdown
                                 key={input.id}
-                                name={input.name}  
+                                name={input.name}
                                 size={input.size}
                                 text={input.text}
                                 id={input.id}
@@ -222,7 +237,7 @@ export default function FormAddProprietor() {
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                         <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
                             background="var(--text-white)"
-                            onClick={() => setIsModalOpen(true)} />
+                        />
                     </div>
                 </article>
                 <Modal
