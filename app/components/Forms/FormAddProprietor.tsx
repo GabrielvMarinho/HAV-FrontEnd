@@ -16,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
 import { NewUser, newUser } from "@/app/Validators/ProprietorValidator";
 import Title from "../NonInteractable/Title";
+import { textFields } from "../globalFormsConfig/InputTextConfig";
 
 
 export default function FormAddProprietor() {
@@ -147,24 +148,75 @@ export default function FormAddProprietor() {
                         {proprietorType === "pf" ? (
                             <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
                                 <InputText
-                                    key={"name"}
-                                    name={"name"}
-                                    size={"large"}
-                                    placeholder={"ex: Kauani da Silva"}
-                                    text={"Nome"}
-                                    id={"name"}
+                                    key={textFields.email.id}
+                                    name={textFields.email.name}
+                                    size={textFields.email.size}
+                                    placeholder={textFields.email.placeholder}
+                                    text={textFields.email.text}
+                                    id={textFields.email.id}
                                     register={form.register}
-                                    error={form.formState.errors.name}
+                                    error={form.formState.errors.email}
                                 />
                                 <InputText
-                                    key={"cpf"}
-                                    name={"cpf"}
-                                    size={"small"}
-                                    placeholder={"ex: 123.123.123-00"}
-                                    text={"CPF"}
-                                    id={"cpf"}
+                                    key={textFields.cep.id}
+                                    name={textFields.cep.name}
+                                    size={textFields.cep.size}
+                                    placeholder={textFields.cep.placeholder}
+                                    text={textFields.cep.text}
+                                    id={textFields.cep.id}
                                     register={form.register}
-                                    error={form.formState.errors.cpf}
+                                    error={form.formState.errors.cep}
+                                />
+                                <InputText
+                                    key={textFields.street.id}
+                                    name={textFields.street.name}
+                                    size={textFields.street.size}
+                                    placeholder={textFields.street.placeholder}
+                                    text={textFields.street.text}
+                                    id={textFields.street.id}
+                                    register={form.register}
+                                    error={form.formState.errors.street}
+                                />
+                                <InputText
+                                    key={textFields.phoneNumber.id}
+                                    name={textFields.phoneNumber.name}
+                                    size={textFields.phoneNumber.size}
+                                    placeholder={textFields.phoneNumber.placeholder}
+                                    text={textFields.phoneNumber.text}
+                                    id={textFields.phoneNumber.id}
+                                    register={form.register}
+                                    error={form.formState.errors.phoneNumber}
+                                />
+                                <InputText
+                                    key={textFields.cellphone.id}
+                                    name={textFields.cellphone.name}
+                                    size={textFields.cellphone.size}
+                                    placeholder={textFields.cellphone.placeholder}
+                                    text={textFields.cellphone.text}
+                                    id={textFields.cellphone.id}
+                                    register={form.register}
+                                    error={form.formState.errors.cellphone}
+                                />
+                                <InputText
+                                    key={textFields.propertyNumber.id}
+                                    name={textFields.propertyNumber.name}
+                                    size={textFields.propertyNumber.size}
+                                    placeholder={textFields.propertyNumber.placeholder}
+                                    text={textFields.propertyNumber.text}
+                                    id={textFields.propertyNumber.id}
+                                    register={form.register}
+                                    error={form.formState.errors.propertyNumber}
+                                    
+                                />
+                                <InputText
+                                    key={textFields.complement.id}
+                                    name={textFields.complement.name}
+                                    size={textFields.complement.size}
+                                    placeholder={textFields.complement.placeholder}
+                                    text={textFields.complement.text}
+                                    id={textFields.complement.id}
+                                    register={form.register}
+                                    error={form.formState.errors.complement}
                                 />
                             </div>
 

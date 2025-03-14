@@ -15,6 +15,7 @@ import postAdm from "@/app/apiCalls/Adm/postAdm";
 import postEditor from "@/app/apiCalls/Editor/postEditor";
 import postCustomer from "@/app/apiCalls/Customer/postCustomer";
 import { useRouter } from "next/navigation";
+import { textFields } from "../globalFormsConfig/InputTextConfig";
 
 export default function FormAddCustomer() {
 
@@ -59,16 +60,6 @@ export default function FormAddCustomer() {
 
     };
     
-
-    const inputsDesktop = [
-        { name: "email", size: "large", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
-        { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
-        { name: "street", size: "large", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
-        { name: "phone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
-        { name: "cellphone", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
-        { name: "propertyNumber", size: "small", text: "Número", placeholder: "1002", id: "numero" },
-        { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
-    ];
 
    
     const inputDropdown = [
@@ -126,37 +117,63 @@ export default function FormAddCustomer() {
 
 
                                 <InputText
-                                    key={"name"}
-                                    name={"name"}
-                                    size={"large"}
-                                    placeholder={"ex: "}
-                                    text={"Nome"}
-                                    id={"name"}
+                                    key={textFields.email.id}
+                                    name={textFields.email.name}
+                                    size={textFields.email.size}
+                                    placeholder={textFields.email.placeholder}
+                                    text={textFields.email.text}
+                                    id={textFields.email.id}
                                 />
                                 <InputText
-                                    key={"cpf"}
-                                    name={"cpf"}
-                                    size={"small"}
-                                    placeholder={"ex: 123.123.123-00"}
-                                    text={"CPF"}
-                                    id={"cpf"}
+                                    key={textFields.cep.id}
+                                    name={textFields.cep.name}
+                                    size={textFields.cep.size}
+                                    placeholder={textFields.cep.placeholder}
+                                    text={textFields.cep.text}
+                                    id={textFields.cep.id}
+                                />
+                                <InputText
+                                    key={textFields.street.id}
+                                    name={textFields.street.name}
+                                    size={textFields.street.size}
+                                    placeholder={textFields.street.placeholder}
+                                    text={textFields.street.text}
+                                    id={textFields.street.id}
+                                />
+                                <InputText
+                                    key={textFields.phoneNumber.id}
+                                    name={textFields.phoneNumber.name}
+                                    size={textFields.phoneNumber.size}
+                                    placeholder={textFields.phoneNumber.placeholder}
+                                    text={textFields.phoneNumber.text}
+                                    id={textFields.phoneNumber.id}
+                                />
+                                <InputText
+                                    key={textFields.cellphone.id}
+                                    name={textFields.cellphone.name}
+                                    size={textFields.cellphone.size}
+                                    placeholder={textFields.cellphone.placeholder}
+                                    text={textFields.cellphone.text}
+                                    id={textFields.cellphone.id}
+                                />
+                                <InputText
+                                    key={textFields.propertyNumber.id}
+                                    name={textFields.propertyNumber.name}
+                                    size={textFields.propertyNumber.size}
+                                    placeholder={textFields.propertyNumber.placeholder}
+                                    text={textFields.propertyNumber.text}
+                                    id={textFields.propertyNumber.id}
+                                />
+                                <InputText
+                                    key={textFields.complement.id}
+                                    name={textFields.complement.name}
+                                    size={textFields.complement.size}
+                                    placeholder={textFields.complement.placeholder}
+                                    text={textFields.complement.text}
+                                    id={textFields.complement.id}
                                 />
                                 
                                
-                                    
-                        {
-                        
-                            inputsDesktop.map((input) => (
-                                <InputText
-                                    key={input.id}
-                                    name={input.name}
-                                    size={input.size}
-                                    placeholder={input.placeholder}
-                                    text={input.text}
-                                    id={input.id}
-                                />
-                            ))
-                        }
                         {inputDropdown.map((input) => (
                             <InputDropdown
                             

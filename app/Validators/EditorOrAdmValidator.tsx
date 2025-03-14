@@ -7,7 +7,7 @@ export const newEditorOrAdm = z.object({
     cep: z.string().min(1, { message: "* Campo obrigatório" })
         .regex(/^\d{8}$/, { message: "* 8 dígitos numéricos" }), // Apenas números
     street: z.string().min(1, { message: "* Campo obrigatório" }),
-    phone: z.string().min(1, { message: "* Campo obrigatório" })
+    phoneNumber: z.string().min(1, { message: "* Campo obrigatório" })
         .regex(/^\d{10,11}$/, { message: "* 10 ou 11 dígitos" }), // Aceita fixo (10) ou celular (11)
     cellphone: z.string().min(1, { message: "* Campo obrigatório" })
         .regex(/^\d{11}$/, { message: "* 11 dígitos" }), // Apenas números

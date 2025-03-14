@@ -46,7 +46,6 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
     };
 
     function onSubmit(data: newProperty) {
-        console.log("Dados do usuário:", data);
         if (Object.keys(form.formState.errors).length > 0) {
             console.log("Ocorreu um erro");
             return;
@@ -54,7 +53,7 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
         setPendingFormData(data),
             setIsModalOpen(true)
     }
-   
+
     const form = useForm<newProperty>({
         resolver: zodResolver(newProperty),
         mode: "onTouched"
@@ -387,12 +386,12 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     onClose={() => setIsModalOpen(false)}
                     onConfirm={addProperty}
                 />
-
         </section>
-        
+
         </form>
-        
-        
         </>
+        
+
+
     )
 }
