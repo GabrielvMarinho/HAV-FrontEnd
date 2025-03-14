@@ -38,8 +38,8 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
         setPriceRange({ min, max });
     };
 
-
-
+    const pathname = usePathname()
+    
       
     
     return(

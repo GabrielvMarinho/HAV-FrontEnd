@@ -371,7 +371,7 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                         }
                 </div>
                 <div className="divButtonsAceptCancelForms">
-                    <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
+                    <ButtonBackAPoint point = {"/manage/properties"} size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                     <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
                     background="var(--text-white)" />
                 </div>
