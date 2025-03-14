@@ -12,6 +12,38 @@
     gap: 30px;
     justify-content: center;
 }
+.propertyForm{
+    max-width: 1000px;
+    display: flex;
+    gap: 5%;
+    background-color: var(--box-red-pink);
+    padding: 60px;
+    border-radius: var(--border-box);
+}
+.propertyForm .propertyFormGroup{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.propertyForm h3, .propertyForm h2{
+    font-size: var(--text-sm);
+    margin-bottom: 20px;
+    color: var(--text-white);
+}
+.propertyForm h3{
+    margin-top: 60px;
+
+}
+.propertyForm #smallerSection{
+   
+
+    width: 45%;
+}
+.propertyForm #biggerSection{
+    
+    width: 50% ;
+}
 
 .inputArticle {
     display: flex;

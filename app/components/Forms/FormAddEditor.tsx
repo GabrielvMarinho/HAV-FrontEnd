@@ -148,7 +148,6 @@ export default function FormAddEditor() {
                         }
                         {inputDropdown.map((input) => (
                             <InputDropdown
-
                                 key={input.id}
                                 name={input.name}
                                 size={input.size}
