@@ -146,7 +146,7 @@ export default function FormAddProprietor() {
                     </div>
                     <div className="inputArticle">
                         {proprietorType === "pf" ? (
-                            <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
+                            <div className="divInputs">
                                 <InputText
                                     key={textFields.email.id}
                                     name={textFields.email.name}
@@ -248,21 +248,7 @@ export default function FormAddProprietor() {
                         ) : null}
 
 
-                        {
-
-                            inputsDesktop.map((input) => (
-                                <InputText
-                                    key={input.id}
-                                    name={input.name as keyof NewUser}
-                                    size={input.size}
-                                    placeholder={input.placeholder}
-                                    text={input.text}
-                                    id={input.id}
-                                    register={form.register}
-                                    error={form.formState.errors[input.name as keyof NewUser]}
-                                />
-                            ))
-                        }
+                        
                         {inputDropdown.map((input) => (
                             <InputDropdown
                                 register={form.register}

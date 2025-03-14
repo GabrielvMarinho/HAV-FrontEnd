@@ -4,3 +4,8 @@
     justify-content: space-between;
     margin-bottom: 100px;
 }
+@media (width <992px) {
+    .containerFilterListAction{
+        flex-direction: column;
+    }
+}
