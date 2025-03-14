@@ -46,7 +46,7 @@ export default function FormAddEditor() {
 
     const inputsDesktop = [
         { name: "name", size: "large", text: "Nome", placeholder: "ex: kauani da SIlva", id: "nome" },
-        { name: "cpf", size: "large", text: "CPF", placeholder: "ex: 123-123-123-00", id: "cpf" },
+        { name: "cpf", size: "small", text: "CPF", placeholder: "ex: 123.123.123-00", id: "cpf" },
         { name: "email", size: "large", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
         { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
         { name: "street", size: "large", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
@@ -108,6 +108,11 @@ export default function FormAddEditor() {
             setIsModalOpen(true)
     }
 
+    useEffect(() =>{
+        console.log("erros: ",form.formState.errors);
+        
+    }, [form.formState.errors])
+
     return (
 
         <>
@@ -125,26 +130,6 @@ export default function FormAddEditor() {
                         <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)" }}>DADOS</p>
                     </div>
                     <div className="inputArticle">
-
-
-                        <InputText
-                            key={"name"}
-                            name={"name"}
-                            size={"large"}
-                            placeholder={"ex: "}
-                            text={"Nome"}
-                            id={"name"}
-                        />
-                        <InputText
-                            key={"cpf"}
-                            name={"cpf"}
-                            size={"small"}
-                            placeholder={"ex: 123.123.123-00"}
-                            text={"CPF"}
-                            id={"cpf"}
-                        />
-
-
 
                         {
 

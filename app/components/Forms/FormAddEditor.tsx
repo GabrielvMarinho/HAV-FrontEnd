@@ -108,6 +108,11 @@ export default function FormAddEditor() {
             setIsModalOpen(true)
     }
 
+    useEffect(() => {
+        console.log("Erros do formulário:", form.formState.errors);
+    }, [form.formState.errors]);
+
+
     return (
 
         <>
@@ -125,26 +130,6 @@ export default function FormAddEditor() {
                         <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)" }}>DADOS</p>
                     </div>
                     <div className="inputArticle">
-
-
-                        <InputText
-                            key={"name"}
-                            name={"name"}
-                            size={"large"}
-                            placeholder={"ex: "}
-                            text={"Nome"}
-                            id={"name"}
-                        />
-                        <InputText
-                            key={"cpf"}
-                            name={"cpf"}
-                            size={"small"}
-                            placeholder={"ex: 123.123.123-00"}
-                            text={"CPF"}
-                            id={"cpf"}
-                        />
-
-
 
                         {
 
