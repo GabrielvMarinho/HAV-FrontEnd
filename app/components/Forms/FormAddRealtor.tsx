@@ -17,6 +17,8 @@ import { NewUser, newUser } from "@/app/Validators/ProprietorValidator";
 import { NewRealter, newRealter } from "@/app/Validators/RealterValidator";
 import Title from "../NonInteractable/Title";
 import { textFields } from "../globalFormsConfig/InputTextConfig";
+import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
+import postRealtor from "@/app/apiCalls/Realtor/postRealtor";
 
 export default function FormAddRealter() {
 
@@ -24,43 +26,6 @@ export default function FormAddRealter() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
     const router = useRouter();
-    
-
-    const inputDropdown = [
-        {
-            name: "state",
-            size: "medium",
-            text: "Estado",
-            id: "estado",
-            options: [
-                ["sc", "Santa Catarina"],
-                ["pr", "Paraná"],
-                ["rs", "Rio Grande do Sul"]
-            ]
-        },
-        {
-            name: "city",
-            size: "medium",
-            text: "Cidade",
-            id: "cidade",
-            options: [
-                ["jaragua_do_sul", "Jaraguá do Sul"],
-                ["blumenau", "Blumenau"],
-                ["joinville", "Joinville"]
-            ]
-        },
-        {
-            name: "neighborhood",
-            size: "medium",
-            text: "Bairro",
-            id: "bairro",
-            options: [
-                ["centro", "Centro"],
-                ["vila_nova", "Vila Nova"],
-                ["três_rios_do_norte", "Três Rios do Norte"]
-            ]
-        }
-    ];
 
     const form = useForm<NewRealter>({
         resolver: zodResolver(newRealter),
@@ -86,13 +51,41 @@ export default function FormAddRealter() {
     const addRealter = async function () {
         if (!pendingFormData) return;
         setIsModalOpen(false);
-        console.log("-------", pendingFormData)
+        console.log("-------", pendingFormData);
         try {
-            await postProprietor(pendingFormData)
-            router.back(); //volta um point sem ter que escrever a barra
-        }
-        catch (err) {
-            console.log(err)
+            await postRealtor(pendingFormData);
+            router.back(); // Volta um ponto sem ter que escrever a barra
+        } catch (err) {
+            console.log(err);
+            if (err.response && err.response.data) {
+                const { errors } = err.response.data;
+
+                // Limpa erros anteriores
+                form.clearErrors();
+
+                // Mapear os erros do backend para os campos do formulário
+                if (errors && Array.isArray(errors)) {
+                    errors.forEach((errorMessage) => {
+                        const [fieldName, message] = errorMessage.split(": ");
+                        form.setError(fieldName, {
+                            type: "manual",
+                            message: message,
+                        });
+                    });
+                } else {
+                    // Erro genérico caso a mensagem de erro não esteja disponível
+                    form.setError("backendError", {
+                        type: "manual",
+                        message: err.response.data.message || "Ocorreu um erro ao processar a solicitação.",
+                    });
+                }
+            } else {
+                // Erro de rede ou outro erro inesperado
+                form.setError("backendError", {
+                    type: "manual",
+                    message: "Erro de conexão. Tente novamente mais tarde.",
+                });
+            }
         }
     };
     console.log(isModalOpen); // Adicione isso dentro do componente FormAddRealter
@@ -117,119 +110,137 @@ export default function FormAddRealter() {
                         <p style={{ fontSize: "var(--text-m)", fontWeight: 700, color: "var(--text-white)" }}>DADOS</p>
                     </div>
                     <div className="inputArticle">
-                    
-                                <InputTextTest
-                                    key={textFields.name.id}
-                                    name={textFields.name.name}
-                                    size={textFields.name.size}
-                                    placeholder={textFields.name.placeholder}
-                                    text={textFields.name.text}
-                                    id={textFields.name.id}
-                                    register={form.register}
-                                    error={form.formState.errors[textFields.name.name as keyof NewRealter]}
-                                />
-                                 <InputTextTest
-                                    key={textFields.cpf.id}
-                                    name={textFields.cpf.name}
-                                    size={textFields.cpf.size}
-                                    placeholder={textFields.cpf.placeholder}
-                                    text={textFields.cpf.text}
-                                    id={textFields.cpf.id}
-                                    register={form.register}
-                                    error={form.formState.errors[textFields.cpf.name as keyof NewRealter]}
-                                />
-                                 <InputTextTest
-                                    key={textFields.email.id}
-                                    name={textFields.email.name}
-                                    size={textFields.email.size}
-                                    placeholder={textFields.email.placeholder}
-                                    text={textFields.email.text}
-                                    id={textFields.email.id}
-                                    register={form.register}
-                                    error={form.formState.errors[textFields.email.name as keyof NewRealter]}
-                                />
-                                 <InputTextTest
-                                    key={textFields.cep.id}
-                                    name={textFields.cep.name}
-                                    size={textFields.cep.size}
-                                    placeholder={textFields.cep.placeholder}
-                                    text={textFields.cep.text}
-                                    id={textFields.cep.id}
-                                    register={form.register}
-                                    error={form.formState.errors[textFields.cep.name as keyof NewRealter]}
-                                />
-                                 <InputTextTest
-                                    key={textFields.street.id}
-                                    name={textFields.street.name}
-                                    size={textFields.street.size}
-                                    placeholder={textFields.street.placeholder}
-                                    text={textFields.street.text}
-                                    id={textFields.street.id}
-                                    register={form.register}
-                                    error={form.formState.errors[textFields.street.name as keyof NewRealter]}
-                                />
-                                 <InputTextTest
-                                    key={textFields.phoneNumber.id}
-                                    name={textFields.phoneNumber.name}
-                                    size={textFields.phoneNumber.size}
-                                    placeholder={textFields.phoneNumber.placeholder}
-                                    text={textFields.phoneNumber.text}
-                                    id={textFields.phoneNumber.id}
-                                    register={form.register}
-                                    error={form.formState.errors[textFields.phoneNumber.name as keyof NewRealter]}
-                                />
-                                <InputTextTest
-                                    key={textFields.cellphone.id}
-                                    name={textFields.cellphone.name}
-                                    size={textFields.cellphone.size}
-                                    placeholder={textFields.cellphone.placeholder}
-                                    text={textFields.cellphone.text}
-                                    id={textFields.cellphone.id}
-                                    register={form.register}
-                                    error={form.formState.errors[textFields.cellphone.name as keyof NewRealter]}
-                                />
-                                <InputTextTest
-                                    key={textFields.propertyNumber.id}
-                                    name={textFields.propertyNumber.name}
-                                    size={textFields.propertyNumber.size}
-                                    placeholder={textFields.propertyNumber.placeholder}
-                                    text={textFields.propertyNumber.text}
-                                    id={textFields.propertyNumber.id}
-                                    register={form.register}
-                                    error={form.formState.errors[textFields.propertyNumber.name as keyof NewRealter]}
-                                />
-                                <InputTextTest
-                                    key={textFields.complement.id}
-                                    name={textFields.complement.name}
-                                    size={textFields.complement.size}
-                                    placeholder={textFields.complement.placeholder}
-                                    text={textFields.complement.text}
-                                    id={textFields.complement.id}
-                                    register={form.register}
-                                    error={form.formState.errors[textFields.complement.name as keyof NewRealter]}
-                                />
-                                <InputTextTest
-                                    key={textFields.creci.id}
-                                    name={textFields.creci.name}
-                                    size={textFields.creci.size}
-                                    placeholder={textFields.creci.placeholder}
-                                    text={textFields.creci.text}
-                                    id={textFields.creci.id}
-                                    register={form.register}
-                                    error={form.formState.errors[textFields.creci.name as keyof NewRealter]}
-                                />
 
-
-                        {inputDropdown.map((input) => (
-                            <InputDropdown
-                                key={input.id}
-                                name={input.name}
-                                size={input.size}
-                                text={input.text}
-                                id={input.id}
-                                options={input.options}
-                            />
-                        ))}
+                        <InputTextTest
+                            key={textFields.name.id}
+                            name={textFields.name.name}
+                            size={textFields.name.size}
+                            placeholder={textFields.name.placeholder}
+                            text={textFields.name.text}
+                            id={textFields.name.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.name.name as keyof NewRealter]}
+                        />
+                        <InputTextTest
+                            key={textFields.cpf.id}
+                            name={textFields.cpf.name}
+                            size={textFields.cpf.size}
+                            placeholder={textFields.cpf.placeholder}
+                            text={textFields.cpf.text}
+                            id={textFields.cpf.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.cpf.name as keyof NewRealter]}
+                        />
+                        <InputTextTest
+                            key={textFields.email.id}
+                            name={textFields.email.name}
+                            size={textFields.email.size}
+                            placeholder={textFields.email.placeholder}
+                            text={textFields.email.text}
+                            id={textFields.email.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.email.name as keyof NewRealter]}
+                        />
+                        <InputTextTest
+                            key={textFields.cep.id}
+                            name={textFields.cep.name}
+                            size={textFields.cep.size}
+                            placeholder={textFields.cep.placeholder}
+                            text={textFields.cep.text}
+                            id={textFields.cep.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.cep.name as keyof NewRealter]}
+                        />
+                        <InputTextTest
+                            key={textFields.street.id}
+                            name={textFields.street.name}
+                            size={textFields.street.size}
+                            placeholder={textFields.street.placeholder}
+                            text={textFields.street.text}
+                            id={textFields.street.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.street.name as keyof NewRealter]}
+                        />
+                        <InputTextTest
+                            key={textFields.phoneNumber.id}
+                            name={textFields.phoneNumber.name}
+                            size={textFields.phoneNumber.size}
+                            placeholder={textFields.phoneNumber.placeholder}
+                            text={textFields.phoneNumber.text}
+                            id={textFields.phoneNumber.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.phoneNumber.name as keyof NewRealter]}
+                        />
+                        <InputTextTest
+                            key={textFields.cellphone.id}
+                            name={textFields.cellphone.name}
+                            size={textFields.cellphone.size}
+                            placeholder={textFields.cellphone.placeholder}
+                            text={textFields.cellphone.text}
+                            id={textFields.cellphone.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.cellphone.name as keyof NewRealter]}
+                        />
+                        <InputTextTest
+                            key={textFields.propertyNumber.id}
+                            name={textFields.propertyNumber.name}
+                            size={textFields.propertyNumber.size}
+                            placeholder={textFields.propertyNumber.placeholder}
+                            text={textFields.propertyNumber.text}
+                            id={textFields.propertyNumber.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.propertyNumber.name as keyof NewRealter]}
+                        />
+                        <InputTextTest
+                            key={textFields.complement.id}
+                            name={textFields.complement.name}
+                            size={textFields.complement.size}
+                            placeholder={textFields.complement.placeholder}
+                            text={textFields.complement.text}
+                            id={textFields.complement.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.complement.name as keyof NewRealter]}
+                        />
+                        <InputTextTest
+                            key={textFields.creci.id}
+                            name={textFields.creci.name}
+                            size={textFields.creci.size}
+                            placeholder={textFields.creci.placeholder}
+                            text={textFields.creci.text}
+                            id={textFields.creci.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.creci.name as keyof NewRealter]}
+                        />
+                        <InputDropdown
+                            key={dropdownFields.city.id}
+                            name={dropdownFields.city.name}
+                            size={dropdownFields.city.size}
+                            text={dropdownFields.city.text}
+                            id={dropdownFields.city.id}
+                            options={dropdownFields.city.options}
+                            register={form.register}
+                            error={form.formState.errors[dropdownFields.city.name as keyof NewRealter]}
+                        />
+                        <InputDropdown
+                            key={dropdownFields.state.id}
+                            name={dropdownFields.state.name}
+                            size={dropdownFields.state.size}
+                            text={dropdownFields.state.text}
+                            id={dropdownFields.state.id}
+                            options={dropdownFields.state.options}
+                            register={form.register}
+                            error={form.formState.errors[dropdownFields.state.name as keyof NewRealter]}
+                        />
+                        <InputDropdown
+                            key={dropdownFields.neighborhood.id}
+                            name={dropdownFields.neighborhood.name}
+                            size={dropdownFields.neighborhood.size}
+                            text={dropdownFields.neighborhood.text}
+                            id={dropdownFields.neighborhood.id}
+                            options={dropdownFields.neighborhood.options}
+                            register={form.register}
+                            error={form.formState.errors[dropdownFields.neighborhood.name as keyof NewRealter]}
+                        />
 
                     </div>
                     <div className="divButtonsAceptCancelForms">
