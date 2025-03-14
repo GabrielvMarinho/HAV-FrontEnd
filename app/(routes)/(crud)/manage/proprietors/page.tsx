@@ -8,6 +8,7 @@ import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import getByParamsProprietors from "@/app/apiCalls/Proprietor/getByParamsProprietors";
 import deleteProprietorList from "@/app/apiCalls/Proprietor/deleteByListProprietor";
 import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArchivedStatusProprietor";
+import { filterFields } from "@/app/components/globalFormsConfig/InputFilterConfig";
 
 
 export default async function page({ searchParams }: {
@@ -56,7 +57,15 @@ export default async function page({ searchParams }: {
       <div className="containerFilterListAction">
         <Filter
           size="medium"
-          inputs={inputs}
+          inputs={
+            [
+              filterFields.cpf, 
+              filterFields.name, 
+              filterFields.email, 
+              filterFields.cellphone,
+              filterFields.phoneNumber
+            ]
+          }
           inputsDropdown={inputDropdown}
           inputPriceRanges={[]}
         />

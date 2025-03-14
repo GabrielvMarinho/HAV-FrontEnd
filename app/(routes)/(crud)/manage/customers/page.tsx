@@ -10,6 +10,7 @@ import Trashcan from "@/app/components/IconsTSX/Trashcan";
 import getByParamsCustomers from "@/app/apiCalls/Customer/getByParamsCustomers";
 import deleteCustomerList from "@/app/apiCalls/Customer/deleteByListCustomer";
 import changeArchivedStatusCustomer from "@/app/apiCalls/Customer/changeArchivedStatusCustomer";
+import { filterFields } from "@/app/components/globalFormsConfig/InputFilterConfig";
 
 
 
@@ -60,7 +61,15 @@ export default async function page({searchParams}: {searchParams: {
       <div className="containerFilterListAction">
         <Filter
           size="medium"
-          inputs={inputs}
+          inputs={
+            [
+              filterFields.cpf, 
+              filterFields.name, 
+              filterFields.email, 
+              filterFields.cellphone,
+              filterFields.phoneNumber
+            ]
+          }
           inputsDropdown={inputDropdown}
           inputPriceRanges={[]}
         />
