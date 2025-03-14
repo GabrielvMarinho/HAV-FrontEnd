@@ -19,7 +19,7 @@ import PageManager from '../Inputs/PageManager';
 export default function TableList(props: {totalPages :number; changeArchivedStatus :(ids: string[]) => Promise<void>; deleteFunction: (ids: string[]) => Promise<void>; archived :boolean; context :string; size :string, titles :string[], data :any[]}){
 
     
-
+    
     
     const confirmDelete = async () => {
         const selectedIds = JSON.parse(localStorage.getItem('selectedManage') || "[]");

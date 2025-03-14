@@ -13,7 +13,7 @@ import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
 import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
 import postAdm from "@/app/apiCalls/Adm/postAdm";
 import postEditor from "@/app/apiCalls/Editor/postEditor";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Title from "../NonInteractable/Title";
@@ -21,7 +21,7 @@ import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
 import { textFields } from "../globalFormsConfig/InputTextConfig";
 import { newProperty } from "@/app/Validators/PropertyValidator";
 
-export default function FormAddProperty() {
+export default function FormAddProperty(props :{proprietor :any; realtors :any[]}) {
 
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,8 +59,49 @@ export default function FormAddProperty() {
         resolver: zodResolver(newProperty),
         mode: "onTouched"
     });
+
+
+
+
+
+    
+
+
+    const handleAddRealtor = (event: React.MouseEvent<HTMLButtonElement>) =>{
+        event.preventDefault(); 
+        const form = event.target.closest("form") as HTMLFormElement; 
+        const formData = new FormData(form); 
+
+        const dados = Object.fromEntries(formData.entries()); 
+        console.log(dados)
+        const params = new URLSearchParams();
+        formData.forEach((value, key) => {
+        params.append(key, value.toString());
+        });
+        const url = `/choose/realtor?${params.toString()}`;
+        window.location.href = url
+    }
+    const handleAddProprietor = (event: React.MouseEvent<HTMLButtonElement>) =>{
+        event.preventDefault();
+        const form = event.target.closest("form") as HTMLFormElement; 
+        const formData = new FormData(form);
+
+        const dados = Object.fromEntries(formData.entries()); 
+        console.log(dados)
+        const params = new URLSearchParams();
+        formData.forEach((value, key) => {
+        params.append(key, value.toString());
+        });
+        const url = `/choose/proprietor?${params.toString()}`;
+        console.log(url)
+        window.location.href = url
+    }
+
+
+
     return (
         <>
+        
         <form onSubmit={form.handleSubmit(onSubmit)} className="propertyForm">
         <section id="smallerSection">
             <div className="imgPerson">
@@ -121,14 +162,17 @@ export default function FormAddProperty() {
                     register={form.register}
                     error={form.formState.errors[textFields.iptu.name as keyof newProperty]}
                 />
-                <InputDropdown
-                    key={dropdownFields.allowsPet.id}
-                    name={dropdownFields.allowsPet.name}
-                    size={dropdownFields.allowsPet.size}
-                    text={dropdownFields.allowsPet.text}
-                    id={dropdownFields.allowsPet.id}
-                    options={dropdownFields.allowsPet.options}
+                <InputText
+                    key={textFields.condominiumFee.id}
+                    name={textFields.condominiumFee.name}
+                    size={textFields.condominiumFee.size}
+                    placeholder={textFields.condominiumFee.placeholder}
+                    text={textFields.condominiumFee.text}
+                    id={textFields.condominiumFee.id}
+                    register={form.register}
+                    error={form.formState.errors[textFields.condominiumFee.name as keyof newProperty]}
                 />
+               
             </div>
             <h3>OUTROS</h3>
             <div className="propertyFormGroup">
@@ -306,8 +350,27 @@ export default function FormAddProperty() {
                     register={form.register}
                     error={form.formState.errors[textFields.complement.name as keyof newProperty]}
                 />
-                </div>
+                
 
+                </div>
+                <div>
+                
+                
+                    <button onClick={handleAddRealtor}>adicionar corretor</button>  
+                    {props.realtors &&
+                        <>
+                        <input hidden={true} value ={props.realtors} name = {"realtors"}/>
+                        <div>{props.realtors}</div>
+                        </>
+                        }
+                    <button onClick={handleAddProprietor}>adicionar proprietario</button>                 
+                    {props.proprietor &&
+                        <>
+                        <input hidden={true} value ={props.proprietor} name = {"proprietor"}/>
+                        <div>{props.proprietor}</div>
+                        </>
+                        }
+                </div>
                 <div className="divButtonsAceptCancelForms">
                     <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                     <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
