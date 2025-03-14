@@ -14,7 +14,7 @@ import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
 import postAdm from "@/app/apiCalls/Adm/postAdm";
 import postEditor from "@/app/apiCalls/Editor/postEditor";
 import { useRouter } from "next/navigation";
-import { NewEditor, newEditor } from "@/app/Validators/EditorValidator";
+import { NewEditorOrAdm, newEditorOrAdm } from "@/app/Validators/EditorOrAdmValidator";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Title from "../NonInteractable/Title";
@@ -93,12 +93,12 @@ export default function FormAddEditor() {
         }
     ];
 
-    const form = useForm<NewEditor>({
-        resolver: zodResolver(newEditor),
+    const form = useForm<NewEditorOrAdm>({
+        resolver: zodResolver(newEditorOrAdm),
         mode: "onTouched"
     });
 
-    function onSubmit(data: NewEditor) {
+    function onSubmit(data: NewEditorOrAdm) {
         console.log("Dados do usuário:", data);
         if (Object.keys(form.formState.errors).length > 0) {
             console.log("Ocorreu um erro");
@@ -157,7 +157,7 @@ export default function FormAddEditor() {
                                     text={input.text}
                                     id={input.id}
                                     register={form.register}
-                                    error={form.formState.errors[input.name as keyof NewEditor]}
+                                    error={form.formState.errors[input.name as keyof NewEditorOrAdm]}
                                 />
                             ))
                         }

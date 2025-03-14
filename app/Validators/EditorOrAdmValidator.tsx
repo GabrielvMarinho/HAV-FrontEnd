@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const newEditor = z.object({
+export const newEditorOrAdm = z.object({
     name: z.string().min(1, { message: "* Campo obrigatório" }),
     email: z.string().min(1, { message: "* Campo obrigatório" })
         .email({ message: "* E-mail inválido" }).refine(email => email.includes("@"), { message: "O E-mal deve ser válido", path: ["email"], }),
@@ -16,4 +16,4 @@ export const newEditor = z.object({
     cpf: z.string().min(11, { message: "* CPF deve ter 11 dígitos" }).max(11, { message: "* CPF deve ter 11 dígitos" }).regex(/^\d{11}$/, { message: "* CPF deve conter apenas números" }),
 });
 
-export type NewEditor = z.infer<typeof newEditor>;
+export type NewEditorOrAdm = z.infer<typeof newEditorOrAdm>;
