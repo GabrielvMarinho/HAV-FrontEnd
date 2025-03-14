@@ -35,7 +35,7 @@ export default function FormAddProprietor() {
         { name: "email", size: "large", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
         { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
         { name: "street", size: "large", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
-        { name: "phone", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
+        { name: "phoneNumber", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
         { name: "cellphone", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
         { name: "propertyNumber", size: "small", text: "Número", placeholder: "1002", id: "numero" },
         { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
