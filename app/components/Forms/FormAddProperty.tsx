@@ -122,7 +122,7 @@ export default function FormAddProperty() {
                     <div className="propertyFormGroup">
                         <InputText
                             key={textFields.iptu.id}
-                            name={textFields.iptu.name}
+                            name={textFields.iptu.name as keyof newProperty }
                             size={textFields.iptu.size}
                             placeholder={textFields.iptu.placeholder}
                             text={textFields.iptu.text}

@@ -10,23 +10,25 @@ import deleteProprietorList from "@/app/apiCalls/Proprietor/deleteByListPropriet
 import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArchivedStatusProprietor";
 
 
-export default async function page({searchParams}: {searchParams: {
+export default async function page({ searchParams }: {
+  searchParams: {
 
-  cpf?: string; 
-  name?: string;
-  email?: String;
-  numberProperties?: string;
-  goal?: string;
-  page?: number;
+    cpf?: string;
+    name?: string;
+    email?: String;
+    numberProperties?: string;
+    goal?: string;
+    page?: number;
 
 
-  }}) {
-    const params = await searchParams;
-    const {cpf=null, name=null, email=null, numberProperties=null, goal=null, page=0} = params
-    
-    const {proprietors, totalPages} = await getByParamsProprietors(cpf, name, email, numberProperties, goal, false, page)
-    
-  
+  }
+}) {
+  const params = await searchParams;
+  const { cpf = null, name = null, email = null, numberProperties = null, goal = null, page = 0 } = params
+
+  const { proprietors, totalPages } = await getByParamsProprietors(cpf, name, email, numberProperties, goal, false, page)
+
+
   const inputs = [
     { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: ", id: "cpf", },
     { name: "name", size: "medium", text: "Nome", placeholder: "ex: ", id: "name", },
@@ -46,8 +48,8 @@ export default async function page({searchParams}: {searchParams: {
 
 
   return (
-    <>
 
+    <article className="pageProprietorDesktop">
       <Title tag="h1" text="Proprietários" />
       <NavBarAdm />
       <SearchBar placeholder="Busca:" />
@@ -58,11 +60,11 @@ export default async function page({searchParams}: {searchParams: {
           inputsDropdown={inputDropdown}
           inputPriceRanges={[]}
         />
-        <TableList changeArchivedStatus = {changeArchivedStatusProprietor} deleteFunction={deleteProprietorList} archived={false} context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
+        <TableList changeArchivedStatus={changeArchivedStatusProprietor} deleteFunction={deleteProprietorList} archived={false} context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
           data={proprietors} totalPages={totalPages} />
       </div>
+    </article>
 
-    </>
   )
 }
 
