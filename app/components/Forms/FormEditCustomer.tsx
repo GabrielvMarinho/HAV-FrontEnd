@@ -19,6 +19,7 @@ import editAdm from "@/app/apiCalls/Adm/editAdm";
 import searchCustomerById from "@/app/apiCalls/Customer/searchCustomerById";
 import editEditor from "@/app/apiCalls/Editor/editEditor";
 import editCustomer from "@/app/apiCalls/Customer/editCustomer";
+import { textFields } from "../globalFormsConfig/InputTextConfig";
 
 export default function FormEditCustomer(props :{id :any }) {
     
@@ -117,88 +118,85 @@ export default function FormEditCustomer(props :{id :any }) {
                     <div className="inputArticle">
 
                                 <InputText
-                                    key={"name"}
-                                    name={"name"}
-                                    size={"large"}
-                                    placeholder={"ex: "}
+                                    key={textFields.name.id}
+                                    name={textFields.name.name}
+                                    size={textFields.name.size}
+                                    placeholder={textFields.name.placeholder}
                                     defaultValue={customer?.name??""}
-                                    text={"Nome"}
-                                    id={"name"}
+                                    text={textFields.name.text}
+                                    id={textFields.name.id}
                                 />
                                 <NonEditableInputText
-                                    key={"cpf"}
-                                    name={"cpf"}
-                                    size={"small"}
-                                    text={"CPF"}
+                                    key={textFields.cpf.id}
+                                    name={textFields.cpf.name}
+                                    size={textFields.cpf.size}
+                                    text={textFields.cpf.text}
                                     value={customer?.cpf??""}
-                                    id={"cpf"}
+                                    id={textFields.cpf.id}
                                 />
                                 
                                 <InputText
-                                    key={"email"}
-                                    name={"email"}
-                                    size={"large"}
+                                    key={textFields.email.id}
+                                    name={textFields.email.name}
+                                    size={textFields.email.size}
                                     defaultValue={customer?.email??""}
-                                    placeholder={"ex: kauani@gmail.com"}
-                                    text={"E-mail"}
-                                    id={"email"}
+                                    placeholder={textFields.email.placeholder}
+                                    text={textFields.email.text}
+                                    id={textFields.email.id}
                                 />
                                 <InputText
-                                    key={"cep"}
-                                    name={"cep"}
-                                    size={"small"}
+                                    key={textFields.cep.id}
+                                    name={textFields.cep.name}
+                                    size={textFields.cep.size}
                                     defaultValue={customer?.cep??""}
-                                    placeholder={"ex: 00000-000"}
-                                    text={"CEP"}
-                                    id={"cep"}
+                                    placeholder={textFields.cep.placeholder}
+                                    text={textFields.cep.text}
+                                    id={textFields.cep.id}
                                 />
                                 <InputText
-                                    key={"street"}
-                                    name={"street"}
-                                    size={"large"}
+                                    key={textFields.street.id}
+                                    name={textFields.street.name}
+                                    size={textFields.street.size}
                                     defaultValue={customer?.street??""}
-
-                                    placeholder={"Frederico Curt Alberto Vasel"}
-                                    text={"Rua"}
-                                    id={"rua"}
+                                    placeholder={textFields.street.placeholder}
+                                    text={textFields.street.text}
+                                    id={textFields.street.id}
                                 />
                                 <InputText
-                                    key={"phone"}
-                                    name={"phone"}
-                                    size={"small"}
+                                    key={textFields.phoneNumber.id}
+                                    name={textFields.phoneNumber.name}
+                                    size={textFields.phoneNumber.size}
                                     defaultValue={customer?.phoneNumber??""}
-                                    placeholder={"Digite o telefone"}
-                                    text={"Telefone"}
-                                    id={"telefone"}
+                                    placeholder={textFields.phoneNumber.placeholder}
+                                    text={textFields.phoneNumber.text}
+                                    id={textFields.phoneNumber.id}
                                 />
                                 <InputText
-                                    key={"cellphone"}
-                                    name={"cellphone"}
+                                    key={textFields.cellphone.id}
+                                    name={textFields.cellphone.name}
                                     defaultValue={customer?.celphone??""}
-                                    size={"small"}
-                                    placeholder={"+55 ( )"}
-                                    text={"Celular"}
-                                    id={"celular"}
+                                    size={textFields.cellphone.size}
+                                    placeholder={textFields.cellphone.placeholder}
+                                    text={textFields.cellphone.text}
+                                    id={textFields.cellphone.id}
                                 />
                                 <InputText
-                                    key={"propertyNumber"}
-                                    name={"propertyNumber"}
-                                    size={"small"}
+                                    key={textFields.propertyNumber.id}
+                                    name={textFields.propertyNumber.name}
+                                    size={textFields.propertyNumber.size}
                                     defaultValue={customer?.propertyNumber??""}
-
-                                    placeholder={"1002"}
-                                    text={"Número"}
-                                    id={"numero"}
+                                    placeholder={textFields.propertyNumber.placeholder}
+                                    text={textFields.propertyNumber.text}
+                                    id={textFields.propertyNumber.id}
                                 />
                                 <InputText
-                                    key={"complement"}
-                                    name={"complement"}
-                                    size={"small"}
-                                    placeholder={"1030"}
+                                    key={textFields.complement.id}
+                                    name={textFields.complement.name}
+                                    size={textFields.complement.size}
+                                    placeholder={textFields.complement.placeholder}
                                     defaultValue={customer?.complement??""}
-
-                                    text={"Complemento"}
-                                    id={"complemento"}
+                                    text={textFields.complement.text}
+                                    id={textFields.complement.id}
                                 />
 
                                 <InputDropdown
