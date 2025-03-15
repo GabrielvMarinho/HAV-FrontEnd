@@ -34,7 +34,9 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
     const router = useRouter();
 
 
+
     const changePurpose = function(type :string){
+        
         if(type != "locacao"){
             setHasIptu(true)
         }
@@ -69,7 +71,6 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
 
     
 
-
     const addProperty = async function () {
 
         if (!pendingFormData) return;
@@ -85,8 +86,9 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
             console.log(err)
         }
     };
-
     function onSubmit(data: newProperty) {
+        console.log("0000000000--0-0-0-")
+        console.log(data)
         if (Object.keys(form.formState.errors).length > 0) {
             console.log("Ocorreu um erro");
             return;
@@ -97,6 +99,7 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
 
     const form = useForm<newProperty>({
         resolver: zodResolver(newProperty),
+        
         mode: "onTouched"
     });
 
@@ -158,6 +161,8 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     size={dropdownFields.bedRoom.size}
                     text={dropdownFields.bedRoom.text}
                     id={dropdownFields.bedRoom.id}
+                    register={form.register}
+                    error={form.formState.errors[textFields.iptu.name as keyof newProperty]}
                     options={dropdownFields.bedRoom.options}
                     
                 />
@@ -167,6 +172,8 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     size={dropdownFields.livingRoom.size}
                     text={dropdownFields.livingRoom.text}
                     id={dropdownFields.livingRoom.id}
+                    register={form.register}
+                    error={form.formState.errors[textFields.iptu.name as keyof newProperty]}
                     options={dropdownFields.livingRoom.options}
                 />
                 <InputDropdown
@@ -175,6 +182,8 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     size={dropdownFields.bathRoom.size}
                     text={dropdownFields.bathRoom.text}
                     id={dropdownFields.bathRoom.id}
+                    register={form.register}
+                    error={form.formState.errors[textFields.iptu.name as keyof newProperty]}
                     options={dropdownFields.bathRoom.options}
                 />
                 <InputDropdown
@@ -183,6 +192,8 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     size={dropdownFields.floors.size}
                     text={dropdownFields.floors.text}
                     id={dropdownFields.floors.id}
+                    register={form.register}
+                    error={form.formState.errors[textFields.iptu.name as keyof newProperty]}
                     options={dropdownFields.floors.options}
                 />
                 <InputDropdown
@@ -191,6 +202,8 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     size={dropdownFields.suite.size}
                     text={dropdownFields.suite.text}
                     id={dropdownFields.suite.id}
+                    register={form.register}
+                    error={form.formState.errors[textFields.iptu.name as keyof newProperty]}
                     options={dropdownFields.suite.options}
                 />
                 <InputDropdown
@@ -199,6 +212,8 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     size={dropdownFields.garageSpace.size}
                     text={dropdownFields.garageSpace.text}
                     id={dropdownFields.garageSpace.id}
+                    register={form.register}
+                    error={form.formState.errors[textFields.iptu.name as keyof newProperty]}
                     options={dropdownFields.garageSpace.options}
                 />
                 </>
@@ -209,6 +224,8 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     key={dropdownFields.bedRoom.id}
                     name={dropdownFields.bedRoom.name}
                     size={"small"}
+                    register={form.register}
+                    error={form.formState.errors[textFields.iptu.name as keyof newProperty]}
                     text={dropdownFields.bedRoom.text}
                     id={dropdownFields.bedRoom.id}
                     value={0}
@@ -218,6 +235,7 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     key={dropdownFields.livingRoom.id}
                     name={dropdownFields.livingRoom.name}
                     size={"small"}
+                    register={form.register}
                     text={dropdownFields.livingRoom.text}
                     id={dropdownFields.livingRoom.id}
                     value={0}
@@ -226,6 +244,7 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     key={dropdownFields.bathRoom.id}
                     name={dropdownFields.bathRoom.name}
                     size={"small"}
+                    register={form.register}
                     text={dropdownFields.bathRoom.text}
                     id={dropdownFields.bathRoom.id}
                     value={0}
@@ -235,6 +254,7 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     key={dropdownFields.floors.id}
                     name={dropdownFields.floors.name}
                     size={"small"}
+                    register={form.register}
                     text={dropdownFields.floors.text}
                     id={dropdownFields.floors.id}
                     value={0}
@@ -243,14 +263,16 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     key={dropdownFields.suite.id}
                     name={dropdownFields.suite.name}
                     size={"small"}
+                    value={0}
+                    register={form.register}
                     text={dropdownFields.suite.text}
                     id={dropdownFields.suite.id}
-                    value={0}
                 />
                 <NonEditableInputText
                     key={dropdownFields.garageSpace.id}
                     name={dropdownFields.garageSpace.name}
                     size={"small"}
+                    register={form.register}
                     text={dropdownFields.garageSpace.text}
                     id={dropdownFields.garageSpace.id}
                     value={0}
@@ -315,16 +337,33 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     size={dropdownFields.isFurnished.size}
                     text={dropdownFields.isFurnished.text}
                     id={dropdownFields.isFurnished.id}
+                    register={form.register}
+                    error={form.formState.errors[dropdownFields.isFurnished.name as keyof newProperty]}
                     options={dropdownFields.isFurnished.options}
                 />
+                {hasIptu?
                 <InputDropdown
                     key={dropdownFields.allowsPet.id}
                     name={dropdownFields.allowsPet.name}
                     size={dropdownFields.allowsPet.size}
                     text={dropdownFields.allowsPet.text}
                     id={dropdownFields.allowsPet.id}
+                    
+                    register={form.register}
+                    error={form.formState.errors[dropdownFields.allowsPet.name as keyof newProperty]}
                     options={dropdownFields.allowsPet.options}
                 />
+                :<NonEditableInputText
+                key={dropdownFields.allowsPet.id}
+                name={dropdownFields.allowsPet.name}
+                size={"small"}
+                text={dropdownFields.allowsPet.text}
+                register={form.register}
+                value={(0)}
+                id={dropdownFields.allowsPet.id}
+                options={dropdownFields.allowsPet.options}
+            />
+                }
             </div>
         </section>
         <section id="biggerSection">
@@ -421,8 +460,7 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     text={textFields.propertyPromotionalPrice.text}
                     value={0}
                     id={textFields.propertyPromotionalPrice.id}
-                    register={form.register}
-                    error={form.formState.errors[textFields.propertyPromotionalPrice.name as keyof newProperty]}/>
+                    register={form.register}/>
                 }
                 <InputDropdown
                     key={dropdownFields.propertyHighlight.id}
@@ -430,6 +468,8 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     size={dropdownFields.propertyHighlight.size}
                     text={dropdownFields.propertyHighlight.text}
                     id={dropdownFields.propertyHighlight.id}
+                    register={form.register}
+                    error={form.formState.errors[textFields.iptu.name as keyof newProperty]}
                     options={dropdownFields.propertyHighlight.options}
                 />
             </div>
@@ -472,6 +512,8 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     text={dropdownFields.city.text}
                     id={dropdownFields.city.id}
                     options={dropdownFields.city.options}
+                    register={form.register}
+                    error={form.formState.errors[dropdownFields.city.name as keyof newProperty]}
                 />
                 <InputDropdown
                     key={dropdownFields.state.id}
@@ -480,6 +522,8 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     text={dropdownFields.state.text}
                     id={dropdownFields.state.id}
                     options={dropdownFields.state.options}
+                    register={form.register}
+                    error={form.formState.errors[dropdownFields.state.name as keyof newProperty]}
                 />
                 <InputDropdown
                     key={dropdownFields.neighborhood.id}
@@ -488,6 +532,8 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     text={dropdownFields.neighborhood.text}
                     id={dropdownFields.neighborhood.id}
                     options={dropdownFields.neighborhood.options}
+                    register={form.register}
+                    error={form.formState.errors[dropdownFields.neighborhood.name as keyof newProperty]}
                 />
                  <InputText
                     key={textFields.complement.id}
@@ -502,15 +548,23 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                 
 
                 </div>
-                <div>
+                <div className="addProprietorsRealtors">
                 
                 
                     <button onClick={handleAddRealtor}>adicionar corretor</button>  
                     {props.realtors &&
+                    
                         <>
-                        <input hidden={true} value ={props.realtors} name = {"realtors"}/>
+                        
+                        <input hidden={true} value ={props.realtors} {...(form.register ? form.register("realtors") : {})} name = {"realtors"}/>
+                        
+                        {form.formState.errors.realtors && (
+                            <p className="errorText">{form.formState.errors.realtors.message}</p>
+                            )}
+
                         <div>{props.realtors}</div>
-                        </>
+                        
+                        </>//falta fazer para validar se tem algum corretor e proprietor
                         }
                     <button onClick={handleAddProprietor}>adicionar proprietario</button>                 
                     {props.proprietor &&

@@ -32,8 +32,9 @@ export default async function page({searchParams}: {searchParams: {
     { name: "name", size: "medium", text: "Nome", placeholder: "ex: ", id: "name", },
 
   ];
+  console.log("_-----------------------")
  
-  
+  console.log(proprietors)
 
 
   return (
