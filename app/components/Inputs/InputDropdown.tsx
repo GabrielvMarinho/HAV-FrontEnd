@@ -9,7 +9,9 @@ export default function InputDropdown<T>({
     options,
     size,
     text,
-    id
+    id,
+    onChange 
+
 }: {
     error?: FieldError;
     register?: UseFormRegister<T>;
@@ -18,6 +20,8 @@ export default function InputDropdown<T>({
     size: string;
     text: string;
     id: string;
+    onChange?: (value: string) => void; 
+
 }) {
     
     return (
@@ -26,8 +30,11 @@ export default function InputDropdown<T>({
             <select
                 name={name}
                 id={id}
-                defaultValue="" // Define "Selecione Algo" como opção inicial
+                defaultValue="" 
                 {...(register ? register(name) : {})}
+                
+                onChange={(e) => onChange?.(e.target.value)} 
+
                 className={`${size}InputDropdown inputDropdown ${error ? 'inputError' : ''}`}
             >
                 <option value="" disabled>Selecione Algo</option>

@@ -20,13 +20,54 @@ import Title from "../NonInteractable/Title";
 import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
 import { textFields } from "../globalFormsConfig/InputTextConfig";
 import { newProperty } from "@/app/Validators/PropertyValidator";
+import NonEditableInputText from "../Inputs/NonEditableInputText";
 
 export default function FormAddProperty(props :{proprietor :any; realtors :any[]}) {
 
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
+    const [isPromotional, setIsPromotional] = useState(true)
+    const [isLand, setIsLand] = useState(false)
+    const [isCondominiumFree, setIsCondominiumFree] = useState(false)
+    const [hasIptu, setHasIptu] = useState(true)
     const router = useRouter();
+
+
+    const changePurpose = function(type :string){
+        if(type != "locacao"){
+            setHasIptu(true)
+        }
+        else{
+            setHasIptu(false)
+        }
+    }
+
+    const changeStatus = function(type :string){
+        if(type == "promocao"){
+            setIsPromotional(true)
+        }
+        else{
+            setIsPromotional(false)
+        }
+    }   
+    const changeType = function(type :string){
+        if(type == "terreno"){
+            setIsLand(true)
+            setIsCondominiumFree(true)
+        }
+        if(type != "apartamento"){
+            setIsCondominiumFree(true)
+        }
+        else{
+            setIsCondominiumFree(false)
+
+            setIsLand(false)
+        }
+    }   
+
+
+    
 
 
     const addProperty = async function () {
@@ -108,6 +149,9 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                                 </div>
             <h3>CARACTERÍSTICAS DO IMÓVEL</h3>
             <div className="propertyFormGroup">
+                {!isLand==true? 
+                                <>
+
                 <InputDropdown
                     key={dropdownFields.bedRoom.id}
                     name={dropdownFields.bedRoom.name}
@@ -115,6 +159,7 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     text={dropdownFields.bedRoom.text}
                     id={dropdownFields.bedRoom.id}
                     options={dropdownFields.bedRoom.options}
+                    
                 />
                 <InputDropdown
                     key={dropdownFields.livingRoom.id}
@@ -133,6 +178,14 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     options={dropdownFields.bathRoom.options}
                 />
                 <InputDropdown
+                    key={dropdownFields.floors.id}
+                    name={dropdownFields.floors.name}
+                    size={dropdownFields.floors.size}
+                    text={dropdownFields.floors.text}
+                    id={dropdownFields.floors.id}
+                    options={dropdownFields.floors.options}
+                />
+                <InputDropdown
                     key={dropdownFields.suite.id}
                     name={dropdownFields.suite.name}
                     size={dropdownFields.suite.size}
@@ -148,9 +201,66 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     id={dropdownFields.garageSpace.id}
                     options={dropdownFields.garageSpace.options}
                 />
+                </>
+                :
+                <>
+
+                <NonEditableInputText
+                    key={dropdownFields.bedRoom.id}
+                    name={dropdownFields.bedRoom.name}
+                    size={"small"}
+                    text={dropdownFields.bedRoom.text}
+                    id={dropdownFields.bedRoom.id}
+                    value={0}
+                    
+                />
+                <NonEditableInputText
+                    key={dropdownFields.livingRoom.id}
+                    name={dropdownFields.livingRoom.name}
+                    size={"small"}
+                    text={dropdownFields.livingRoom.text}
+                    id={dropdownFields.livingRoom.id}
+                    value={0}
+                />
+                <NonEditableInputText
+                    key={dropdownFields.bathRoom.id}
+                    name={dropdownFields.bathRoom.name}
+                    size={"small"}
+                    text={dropdownFields.bathRoom.text}
+                    id={dropdownFields.bathRoom.id}
+                    value={0}
+
+                />
+                <NonEditableInputText
+                    key={dropdownFields.floors.id}
+                    name={dropdownFields.floors.name}
+                    size={"small"}
+                    text={dropdownFields.floors.text}
+                    id={dropdownFields.floors.id}
+                    value={0}
+                />
+                <NonEditableInputText
+                    key={dropdownFields.suite.id}
+                    name={dropdownFields.suite.name}
+                    size={"small"}
+                    text={dropdownFields.suite.text}
+                    id={dropdownFields.suite.id}
+                    value={0}
+                />
+                <NonEditableInputText
+                    key={dropdownFields.garageSpace.id}
+                    name={dropdownFields.garageSpace.name}
+                    size={"small"}
+                    text={dropdownFields.garageSpace.text}
+                    id={dropdownFields.garageSpace.id}
+                    value={0}
+                />
+                </>
+                }
             </div>
             <h3>IMPOSTOS</h3>
             <div className="propertyFormGroup">
+                {hasIptu?
                 <InputText
                     key={textFields.iptu.id}
                     name={textFields.iptu.name}
@@ -161,6 +271,29 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     register={form.register}
                     error={form.formState.errors[textFields.iptu.name as keyof newProperty]}
                 />
+                :
+                <NonEditableInputText
+                    key={textFields.iptu.id}
+                    name={textFields.iptu.name}
+                    size={textFields.iptu.size}
+                    text={textFields.iptu.text}
+                    id={textFields.iptu.id}
+                    register={form.register}
+                    value={0}
+                />
+                }
+                {isCondominiumFree?
+                <NonEditableInputText
+                key={textFields.condominiumFee.id}
+                name={textFields.condominiumFee.name}
+                size={textFields.condominiumFee.size}
+                text={textFields.condominiumFee.text}
+                id={textFields.condominiumFee.id}
+                register={form.register}
+                value={0}
+            />
+            
+                :
                 <InputText
                     key={textFields.condominiumFee.id}
                     name={textFields.condominiumFee.name}
@@ -171,6 +304,7 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     register={form.register}
                     error={form.formState.errors[textFields.condominiumFee.name as keyof newProperty]}
                 />
+                }   
                
             </div>
             <h3>OUTROS</h3>
@@ -204,6 +338,8 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     text={dropdownFields.purpose.text}
                     id={dropdownFields.purpose.id}
                     options={dropdownFields.purpose.options}
+                    onChange={changePurpose}
+
                 />
                 <InputDropdown
                     key={dropdownFields.status.id}
@@ -212,6 +348,8 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     text={dropdownFields.status.text}
                     id={dropdownFields.status.id}
                     options={dropdownFields.status.options}
+                    onChange={changeStatus}
+
                 />
                 <InputDropdown
                     key={dropdownFields.propertyType.id}
@@ -220,6 +358,7 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     text={dropdownFields.propertyType.text}
                     id={dropdownFields.propertyType.id}
                     options={dropdownFields.propertyType.options}
+                    onChange={changeType}
                 />
             </div>
             <h3>CARACTERÍSTICAS GERAIS</h3>
@@ -264,7 +403,8 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     register={form.register}
                     error={form.formState.errors[textFields.propertyPrice.name as keyof newProperty]}
                 />
-                <InputText
+                {isPromotional?
+                    <InputText
                     key={textFields.propertyPromotionalPrice.id}
                     name={textFields.propertyPromotionalPrice.name}
                     size={textFields.propertyPromotionalPrice.size}
@@ -272,8 +412,18 @@ export default function FormAddProperty(props :{proprietor :any; realtors :any[]
                     text={textFields.propertyPromotionalPrice.text}
                     id={textFields.propertyPromotionalPrice.id}
                     register={form.register}
-                    error={form.formState.errors[textFields.propertyPromotionalPrice.name as keyof newProperty]}
-                />
+                    error={form.formState.errors[textFields.propertyPromotionalPrice.name as keyof newProperty]}/>
+                :
+                <NonEditableInputText
+                    key={textFields.propertyPromotionalPrice.id}
+                    name={textFields.propertyPromotionalPrice.name}
+                    size={textFields.propertyPromotionalPrice.size}                    
+                    text={textFields.propertyPromotionalPrice.text}
+                    value={0}
+                    id={textFields.propertyPromotionalPrice.id}
+                    register={form.register}
+                    error={form.formState.errors[textFields.propertyPromotionalPrice.name as keyof newProperty]}/>
+                }
                 <InputDropdown
                     key={dropdownFields.propertyHighlight.id}
                     name={dropdownFields.propertyHighlight.name}
