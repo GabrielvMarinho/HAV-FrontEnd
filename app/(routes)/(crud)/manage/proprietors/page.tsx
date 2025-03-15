@@ -50,7 +50,7 @@ export default async function page({ searchParams }: {
 
   return (
 
-    <article className="pageProprietorDesktop">
+    <div className="cu" style={{alignItems:"center", display: "flex", flexDirection: "column"}}>
       <Title tag="h1" text="Proprietários" />
       <NavBarAdm />
       <SearchBar placeholder="Busca:" />
@@ -72,7 +72,7 @@ export default async function page({ searchParams }: {
         <TableList changeArchivedStatus={changeArchivedStatusProprietor} deleteFunction={deleteProprietorList} archived={false} context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
           data={proprietors} totalPages={totalPages} />
       </div>
-    </article>
+      </div>
 
   )
 }

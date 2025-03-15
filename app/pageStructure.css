@@ -9,21 +9,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}   
 
-    @media (width <992px) {
-        .containerFilterListAction {
-            flex-direction: column;
-        }
+@media (width <992px) {
+    .containerFilterListAction {
+        flex-direction: column;
+    }
 
-        .noHeaderPage {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 100px;
-            width: 100%;
-            justify-content: start;
-            align-items: center;
-            gap: 0px;
-        }
+    .noHeaderPage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 100px;
+        width: 100%;
+        justify-content: start;
+        align-items: center;
+        gap: 0px;
     }
 }

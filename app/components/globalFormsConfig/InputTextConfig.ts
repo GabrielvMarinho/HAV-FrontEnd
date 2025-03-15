@@ -1,7 +1,7 @@
 export const textFields = {
     name:{ name: "name", size: "large", text: "Nome", placeholder: "ex: kauani da SIlva", id: "nome" },
     cpf:{ name: "cpf", size: "large", text: "CPF", placeholder: "ex: 123-123-123-00", id: "cpf" },
-    email:{ name: "email", size: "medium", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
+    email:{ name: "email", size: "large", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
     cep:{ name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
     street:{ name: "street", size: "large", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
     phoneNumber:{ name: "phoneNumber", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "phoneNumber" },
