@@ -27,7 +27,7 @@ export default function InputDropdown<T>({
     return (
         <div style={{ width: "fit-content", display: "flex", flexDirection: "column", gap: "8px" }}>
             <label className="label" htmlFor={id}>{text}</label>
-            <select
+            <select 
                 name={name}
                 id={id}
                 defaultValue="" 

@@ -18,6 +18,9 @@ export const newRealter = z.object({
     creci: z.string()
         .min(1, { message: "* Campo obrigatório" }) // Agora é obrigatório
         .max(6, { message: "* Até 6 dígitos" }),
+    city: z.string().min(1, { message: "* Campo obrigatório" }),
+    neighborhood: z.string().min(1, { message: "* Campo obrigatório" }),
+    state: z.string().min(1, { message: "* Campo obrigatório" })
 });
 
 export type NewRealter = z.infer<typeof newRealter>;

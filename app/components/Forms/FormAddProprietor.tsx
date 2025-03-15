@@ -17,6 +17,7 @@ import { useForm } from "react-hook-form"
 import { NewUser, newUser } from "@/app/Validators/ProprietorValidator";
 import Title from "../NonInteractable/Title";
 import { textFields } from "../globalFormsConfig/InputTextConfig";
+import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
 
 
 export default function FormAddProprietor() {
@@ -78,7 +79,7 @@ export default function FormAddProprietor() {
             ]
         }
     ];
-    
+
 
 
     const form = useForm<NewUser>({
@@ -90,7 +91,7 @@ export default function FormAddProprietor() {
     });
 
     useEffect(() => {
-        console.log("Erros no formulário:",form.formState.errors);
+        console.log("Erros no formulário:", form.formState.errors);
         ([form.formState.errors])
         form.setValue("type", proprietorType); // Atualiza o tipo dinamicamente
         if (proprietorType === "pf") {
@@ -146,7 +147,17 @@ export default function FormAddProprietor() {
                     </div>
                     <div className="inputArticle">
                         {proprietorType === "pf" ? (
-                            <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
+                            <div className="divInputs">
+                                <InputText
+                                    key={textFields.name.id}
+                                    name={textFields.name.name}
+                                    size={textFields.name.size}
+                                    placeholder={textFields.name.placeholder}
+                                    text={textFields.name.text}
+                                    id={textFields.name.id}
+                                    register={form.register}
+                                    error={form.formState.errors.name}
+                                />
                                 <InputText
                                     key={textFields.email.id}
                                     name={textFields.email.name}
@@ -206,7 +217,7 @@ export default function FormAddProprietor() {
                                     id={textFields.propertyNumber.id}
                                     register={form.register}
                                     error={form.formState.errors.propertyNumber}
-                                    
+
                                 />
                                 <InputText
                                     key={textFields.complement.id}
@@ -248,33 +259,36 @@ export default function FormAddProprietor() {
                         ) : null}
 
 
-                        {
-
-                            inputsDesktop.map((input) => (
-                                <InputText
-                                    key={input.id}
-                                    name={input.name as keyof NewUser}
-                                    size={input.size}
-                                    placeholder={input.placeholder}
-                                    text={input.text}
-                                    id={input.id}
-                                    register={form.register}
-                                    error={form.formState.errors[input.name as keyof NewUser]}
-                                />
-                            ))
-                        }
-                        {inputDropdown.map((input) => (
-                            <InputDropdown
-                                register={form.register}
-                                key={input.id}
-                                name={input.name as keyof NewUser}
-                                size={input.size}
-                                text={input.text}
-                                id={input.id}
-                                options={input.options}
-                                error={form.formState.errors[input.name as keyof typeof form.formState.errors]}
-                                />
-                        ))}
+                        <InputDropdown
+                            key={dropdownFields.city.id}
+                            name={dropdownFields.city.name}
+                            size={dropdownFields.city.size}
+                            text={dropdownFields.city.text}
+                            id={dropdownFields.city.id}
+                            options={dropdownFields.city.options}
+                            register={form.register}
+                            error={form.formState.errors.city}
+                        />
+                        <InputDropdown
+                            key={dropdownFields.state.id}
+                            name={dropdownFields.state.name}
+                            size={dropdownFields.state.size}
+                            text={dropdownFields.state.text}
+                            id={dropdownFields.state.id}
+                            options={dropdownFields.state.options}
+                            register={form.register}
+                            error={form.formState.errors.state}
+                        />
+                        <InputDropdown
+                            key={dropdownFields.neighborhood.id}
+                            name={dropdownFields.neighborhood.name}
+                            size={dropdownFields.neighborhood.size}
+                            text={dropdownFields.neighborhood.text}
+                            id={dropdownFields.neighborhood.id}
+                            options={dropdownFields.neighborhood.options}
+                            register={form.register}
+                            error={form.formState.errors.neighborhood}
+                        />
 
                     </div>
                     <div className="divButtonsAceptCancelForms">

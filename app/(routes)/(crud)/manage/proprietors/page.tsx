@@ -11,7 +11,8 @@ import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArch
 import { filterFields } from "@/app/components/globalFormsConfig/InputFilterConfig";
 
 
-export default async function page({searchParams}: {searchParams: {
+export default async function page({ searchParams }: {
+  searchParams: {
 
   cpf?: string; 
   cnpj?: string; 
@@ -43,8 +44,8 @@ export default async function page({searchParams}: {searchParams: {
   ]
 
   return (
-    <>
 
+    <div className="cu" style={{alignItems:"center", display: "flex", flexDirection: "column"}}>
       <Title tag="h1" text="Proprietários" />
       <NavBarAdm />
       <SearchBar placeholder="Busca:" />
@@ -67,8 +68,8 @@ export default async function page({searchParams}: {searchParams: {
         <TableList changeArchivedStatus = {changeArchivedStatusProprietor} deleteFunction={deleteProprietorList} archived={false} context="admin" size="large" titles={["cpf/cnpj", "nome", "email", "n. imóveis", "objetivo"]}
           data={proprietors} totalPages={totalPages} />
       </div>
+      </div>
 
-    </>
   )
 }
 

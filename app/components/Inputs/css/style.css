@@ -104,6 +104,7 @@
 .largeInput{
     width: 290px;
 }
+
 .extraLargeInput{
     width: 460px;
 }
@@ -355,3 +356,14 @@ background-color: var(--text-white);
     gap: 8px;
     width: fit-content;
 }
+
+@media (width <992px) {
+    .actionButtons{
+        flex-direction: row;
+    }
+
+    .largeInput{
+        width: 170px;
+    }
+}
+
