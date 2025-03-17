@@ -93,7 +93,8 @@ export default function FormAddProperty(props :{objectData :any;}) {
         setIsModalOpen(false);
 
         try {
-            await postProperty(pendingFormData)
+            const response = await postProperty(pendingFormData)
+            console.log(response)
             window.location.href = "/manage/properties"
         }
         catch (err) {

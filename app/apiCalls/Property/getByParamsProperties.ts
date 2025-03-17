@@ -8,14 +8,24 @@ export default async function(
     propertyStatus?: string,
     minPrice?: number,
     maxPrice?: number,
-    archived?: boolean
-  
+    archived?: boolean,
+    page?: string
     ): Promise<{
       properties: Property[];
       totalPages: number;
   
     }>{
-      const url = "http://localhost:9090/property/filter";
+      const url = `http://localhost:9090/property/filter?page=${page}`
+
+      console.log(JSON.stringify({
+        "propertyCode":propertyCode===""?null:propertyCode, 
+        "minPric":minPrice, 
+        "maxPric":maxPrice,
+        "propertyType":propertyType===""?null:propertyType,
+        "propertyCategory":propertyCategory===""?null:propertyCategory,
+        "propertyStatus":propertyStatus===""?null:propertyStatus,
+        "archived":archived
+      }))
     try{
       const response = await fetch(url,{
         method:"POST",
@@ -35,8 +45,10 @@ export default async function(
   
   
       const data = await response.json();
-  
+      console.log(data)
       const properties: Property[] = data.content.map((property: Property) => property);
+      console.log("total pages")
+      console.log(data.totalPages)
       return {properties: properties, totalPages: data.totalPages}
 
     }catch{

@@ -23,7 +23,7 @@ export default async function page({searchParams}: {searchParams: {
 
   }}){
     const params = await searchParams;
-    const {propertyCode=null, minPrice, maxPrice, propertyType=null, propertyCategory=null, propertyStatus=null, page=null} = params
+    const {propertyCode=null, minPrice=null, maxPrice=null, propertyType=null, propertyCategory=null, propertyStatus=null, page=0} = params
     
     const {properties, totalPages} = await getByParamsProperties(propertyCode, propertyType, propertyCategory, propertyStatus, minPrice, maxPrice, false, page)
     
@@ -50,7 +50,7 @@ export default async function page({searchParams}: {searchParams: {
     const priceRanges = [
         {name: "preco",
         key: "preco",
-        min: 100000,
+        min: 0,
         max: 2000000,
         step: 10000, 
         id: "priceRanger"}
