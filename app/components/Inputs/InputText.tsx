@@ -4,7 +4,7 @@ import { NewUser } from "@/app/Validators/ProprietorValidator";
 import { FieldError, UseFormRegister, FieldValues } from "react-hook-form";
 import { FieldError, UseFormRegister } from "react-hook-form";
 import { NewUser } from "@/app/Validators/ProprietorValidator";
-import { NewRealter } from '@/app/Validators/RealterValidator';
+import { NewRealter } from '@/app/Validators/RealtorValidator';
 import { NewEditor } from '@/app/Validators/EditorOrAdmValidator';
 
 export default function InputText<T>({

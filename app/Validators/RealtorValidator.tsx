@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const newEditorOrAdm = z.object({
+export const newRealtor = z.object({
     name: z.string().min(1, { message: "* Campo obrigatório" }),
     email: z.string().min(1, { message: "* Campo obrigatório" })
         .email({ message: "* E-mail inválido" })
@@ -12,6 +12,9 @@ export const newEditorOrAdm = z.object({
     cpf: z.string().min(11, { message: "* CPF deve ter 11 dígitos" })
         .max(11, { message: "* CPF deve ter 11 dígitos" })
         .regex(/^\d{11}$/, { message: "* CPF deve conter apenas números" }),
+    creci: z.string()
+        .min(1, { message: "* Campo obrigatório" })
+        .max(6, { message: "* Até 6 dígitos" }),
 
     cep: z.string().min(1, { message: "* Campo obrigatório" })
         .regex(/^\d{8}$/, { message: "* 8 dígitos numéricos" }),
@@ -29,4 +32,4 @@ export const newEditorOrAdm = z.object({
     complement: z.string().optional(),
 });
 
-export type NewEditorOrAdm = z.infer<typeof newEditorOrAdm>;
+export type NewRealtor = z.infer<typeof newRealtor>;

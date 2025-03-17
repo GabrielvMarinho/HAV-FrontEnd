@@ -1,6 +1,6 @@
 import './css/style.css';
 
-import { NewRealter } from "@/app/Validators/RealterValidator";
+import { NewRealter } from "@/app/Validators/RealtorValidator";
 import { FieldError, UseFormRegister } from "react-hook-form";
 
 export default function InputText({

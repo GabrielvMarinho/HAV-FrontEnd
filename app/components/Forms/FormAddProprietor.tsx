@@ -33,53 +33,6 @@ export default function FormAddProprietor() {
         setProprietorType(type)
     }
 
-    const inputsDesktop = [
-        { name: "email", size: "large", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
-        { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
-        { name: "street", size: "large", text: "Rua", placeholder: "Frederico Curt Alberto Vasel", id: "rua" },
-        { name: "phoneNumber", size: "small", text: "Telefone", placeholder: "Digite o telefone", id: "telefone" },
-        { name: "cellphone", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
-        { name: "propertyNumber", size: "small", text: "Número", placeholder: "1002", id: "numero" },
-        { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" }
-    ];
-
-
-    const inputDropdown = [
-        {
-            name: "state",
-            size: "medium",
-            text: "Estado",
-            id: "estado",
-            options: [
-                ["sc", "Santa Catarina"],
-                ["pr", "Paraná"],
-                ["rs", "Rio Grande do Sul"]
-            ]
-        },
-        {
-            name: "city",
-            size: "medium",
-            text: "Cidade",
-            id: "cidade",
-            options: [
-                ["jaragua_do_sul", "Jaraguá do Sul"],
-                ["blumenau", "Blumenau"],
-                ["joinville", "Joinville"]
-            ]
-        },
-        {
-            name: "neighborhood",
-            size: "medium",
-            text: "Bairro",
-            id: "bairro",
-            options: [
-                ["centro", "Centro"],
-                ["vila_nova", "Vila Nova"],
-                ["três_rios_do_norte", "Três Rios do Norte"]
-            ]
-        }
-    ];
-
 
 
     const form = useForm<NewUser>({
@@ -117,13 +70,50 @@ export default function FormAddProprietor() {
     const addProprietor = async function () {
         if (!pendingFormData) return;
         setIsModalOpen(false);
-        console.log("-------", pendingFormData)
+
         try {
-            await postProprietor(pendingFormData)
-            router.back(); //volta um point sem ter que escrever a barra
-        }
-        catch (err) {
-            console.log(err)
+            const response = await postProprietor(pendingFormData);
+            if (response) {
+                router.back(); // Volta um ponto sem ter que escrever a barra
+            }
+        } catch (err: any) {
+            console.log("Erro completo:", err); // Log do erro completo
+
+            // Verifica se a resposta do backend está disponível
+            if (err.response?.data) {
+                const { message, errors } = err.response.data;
+                console.log("Resposta do backend:", err.response.data); // Log da resposta do backend
+                console.log("Erros mapeados:", errors); // Log dos erros mapeados
+
+                // Limpa erros anteriores
+                form.clearErrors();
+
+                // Mapear os erros do backend para os campos do formulário
+                if (errors && Array.isArray(errors)) {
+                    errors.forEach((errorMessage: string) => {
+                        const [fieldName, message] = errorMessage.split(": ");
+                        if (fieldName && message) {
+                            console.log(`Campo com erro: ${fieldName}, Mensagem: ${message}`); // Log de cada erro específico
+                            form.setError(fieldName.toLowerCase() as keyof NewUser, {
+                                type: "manual",
+                                message: message.trim(),
+                            });
+                        }
+                    });
+                } else {
+                    // Erro genérico caso a mensagem de erro não esteja disponível
+                    form.setError("root", {
+                        type: "manual",
+                        message: message || "Ocorreu um erro ao processar a solicitação.",
+                    });
+                }
+            } else {
+                // Erro de rede ou outro erro inesperado
+                form.setError("root", {
+                    type: "manual",
+                    message: "Erro de conexão. Tente novamente mais tarde.",
+                });
+            }
         }
     };
 
@@ -156,7 +146,17 @@ export default function FormAddProprietor() {
                                     text={textFields.name.text}
                                     id={textFields.name.id}
                                     register={form.register}
-                                    error={form.formState.errors.name}
+                                    error={form.formState.errors[textFields.name.name as keyof NewUser]}
+                                />
+                                <InputText
+                                    key={textFields.cpf.id}
+                                    name={textFields.cpf.name}
+                                    size={textFields.cpf.size}
+                                    placeholder={textFields.cpf.placeholder}
+                                    text={textFields.cpf.text}
+                                    id={textFields.cpf.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.cpf.name as keyof NewUser]}
                                 />
                                 <InputText
                                     key={textFields.email.id}
@@ -166,7 +166,7 @@ export default function FormAddProprietor() {
                                     text={textFields.email.text}
                                     id={textFields.email.id}
                                     register={form.register}
-                                    error={form.formState.errors.email}
+                                    error={form.formState.errors[textFields.email.name as keyof NewUser]}
                                 />
                                 <InputText
                                     key={textFields.cep.id}
@@ -176,7 +176,7 @@ export default function FormAddProprietor() {
                                     text={textFields.cep.text}
                                     id={textFields.cep.id}
                                     register={form.register}
-                                    error={form.formState.errors.cep}
+                                    error={form.formState.errors[textFields.cep.name as keyof NewUser]}
                                 />
                                 <InputText
                                     key={textFields.street.id}
@@ -186,7 +186,7 @@ export default function FormAddProprietor() {
                                     text={textFields.street.text}
                                     id={textFields.street.id}
                                     register={form.register}
-                                    error={form.formState.errors.street}
+                                    error={form.formState.errors[textFields.street.name as keyof NewUser]}
                                 />
                                 <InputText
                                     key={textFields.phoneNumber.id}
@@ -196,7 +196,7 @@ export default function FormAddProprietor() {
                                     text={textFields.phoneNumber.text}
                                     id={textFields.phoneNumber.id}
                                     register={form.register}
-                                    error={form.formState.errors.phoneNumber}
+                                    error={form.formState.errors[textFields.phoneNumber.name as keyof NewUser]}
                                 />
                                 <InputText
                                     key={textFields.cellphone.id}
@@ -206,7 +206,7 @@ export default function FormAddProprietor() {
                                     text={textFields.cellphone.text}
                                     id={textFields.cellphone.id}
                                     register={form.register}
-                                    error={form.formState.errors.cellphone}
+                                    error={form.formState.errors[textFields.cellphone.name as keyof NewUser]}
                                 />
                                 <InputText
                                     key={textFields.propertyNumber.id}
@@ -216,7 +216,7 @@ export default function FormAddProprietor() {
                                     text={textFields.propertyNumber.text}
                                     id={textFields.propertyNumber.id}
                                     register={form.register}
-                                    error={form.formState.errors.propertyNumber}
+                                    error={form.formState.errors[textFields.propertyNumber.name as keyof NewUser]}
 
                                 />
                                 <InputText
@@ -227,68 +227,66 @@ export default function FormAddProprietor() {
                                     text={textFields.complement.text}
                                     id={textFields.complement.id}
                                     register={form.register}
-                                    error={form.formState.errors.complement}
+                                    error={form.formState.errors[textFields.complement.name as keyof NewUser]}
+                                />
+                                <InputDropdown
+                                    key={dropdownFields.city.id}
+                                    name={dropdownFields.city.name}
+                                    size={dropdownFields.city.size}
+                                    text={dropdownFields.city.text}
+                                    id={dropdownFields.city.id}
+                                    options={dropdownFields.city.options}
+                                    register={form.register}
+                                    error={form.formState.errors[dropdownFields.city.name as keyof NewUser]}
+                                />
+                                <InputDropdown
+                                    key={dropdownFields.state.id}
+                                    name={dropdownFields.state.name}
+                                    size={dropdownFields.state.size}
+                                    text={dropdownFields.state.text}
+                                    id={dropdownFields.state.id}
+                                    options={dropdownFields.state.options}
+                                    register={form.register}
+                                    error={form.formState.errors[dropdownFields.state.name as keyof NewUser]}
+                                />
+                                <InputDropdown
+                                    key={dropdownFields.neighborhood.id}
+                                    name={dropdownFields.neighborhood.name}
+                                    size={dropdownFields.neighborhood.size}
+                                    text={dropdownFields.neighborhood.text}
+                                    id={dropdownFields.neighborhood.id}
+                                    options={dropdownFields.neighborhood.options}
+                                    register={form.register}
+                                    error={form.formState.errors[dropdownFields.neighborhood.name as keyof NewUser]}
                                 />
                             </div>
 
                         ) : proprietorType === "pj" ? (
                             <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
                                 <InputText
-                                    key={"name"}
-                                    name={"name"}
-                                    size={"large"}
-                                    placeholder={"ex: Kauani da Silva"}
-                                    text={"Nome Razão"}
-                                    id={"name"}
+                                    key={textFields.name.id}
+                                    name={textFields.name.name}
+                                    size={textFields.name.size}
+                                    placeholder={textFields.name.placeholder}
+                                    text={textFields.name.text}
+                                    id={textFields.name.name}
                                     register={form.register}
-                                    error={form.formState.errors.name}
+                                    error={form.formState.errors[textFields.name.name as keyof NewUser]}
                                 />
                                 <InputText
-                                    key={"cnpj"}
-                                    name={"cnpj"}
-                                    size={"small"}
-                                    placeholder={"ex: 123.123.123/0001-12"}
-                                    text={"CNPJ"}
-                                    id={"cnpj"}
+                                    key={textFields.cnpj.id}
+                                    name={textFields.cnpj.name}
+                                    size={textFields.cnpj.size}
+                                    placeholder={textFields.cnpj.placeholder}
+                                    text={textFields.cnpj.text}
+                                    id={textFields.cnpj.id}
                                     register={form.register}
-                                    error={form.formState.errors.cnpj}
+                                    error={form.formState.errors[textFields.cnpj.name as keyof NewUser]}
                                 />
                             </div>
 
 
                         ) : null}
-
-
-                        <InputDropdown
-                            key={dropdownFields.city.id}
-                            name={dropdownFields.city.name}
-                            size={dropdownFields.city.size}
-                            text={dropdownFields.city.text}
-                            id={dropdownFields.city.id}
-                            options={dropdownFields.city.options}
-                            register={form.register}
-                            error={form.formState.errors.city}
-                        />
-                        <InputDropdown
-                            key={dropdownFields.state.id}
-                            name={dropdownFields.state.name}
-                            size={dropdownFields.state.size}
-                            text={dropdownFields.state.text}
-                            id={dropdownFields.state.id}
-                            options={dropdownFields.state.options}
-                            register={form.register}
-                            error={form.formState.errors.state}
-                        />
-                        <InputDropdown
-                            key={dropdownFields.neighborhood.id}
-                            name={dropdownFields.neighborhood.name}
-                            size={dropdownFields.neighborhood.size}
-                            text={dropdownFields.neighborhood.text}
-                            id={dropdownFields.neighborhood.id}
-                            options={dropdownFields.neighborhood.options}
-                            register={form.register}
-                            error={form.formState.errors.neighborhood}
-                        />
 
                     </div>
                     <div className="divButtonsAceptCancelForms">
