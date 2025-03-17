@@ -40,15 +40,14 @@
     color: var(--text-light-red);
     font-family: Montserrat;
     text-align: start;
+    font-style: normal;
 }
 
 .PromotionalPrice {
     font-size: var(--text-m);
-    font-style: normal;
     font-weight: 900;
     line-height: 90%; /* 16.2px */
     letter-spacing: 1.26px;
-    text-transform: uppercase;
     text-decoration: line-through;
     text-decoration-thickness: 3px;
 }
@@ -62,7 +61,6 @@
 
 .Taxes {
     font-size: var(--text-s);
-    font-style: normal;
     font-weight: 800;
     line-height: 130%;
 }
