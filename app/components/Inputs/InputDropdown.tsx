@@ -1,4 +1,5 @@
 "use client"
+import SelectedStar from '../IconsTSX/SelectedStar';
 import './css/style.css';
 import { FieldError, UseFormRegister } from 'react-hook-form';
 
@@ -32,7 +33,6 @@ export default function InputDropdown<T>({
             <select 
                 name={name}
                 id={id}
-                defaultValue={defaultValue===null || defaultValue===undefined?"":defaultValue}
                 {...(register ? register(name) : {})}
                 
                 onChange={(e) => onChange?.(e.target.value)} 
@@ -41,7 +41,7 @@ export default function InputDropdown<T>({
             >
                 <option value="" disabled>Selecione Algo</option>
                 {options.map(option => (
-                    <option className="optionDropDown" value={option[0]} key={option[0]}>
+                    <option selected={defaultValue === option[0]} className="optionDropDown" value={option[0]} key={option[0]}>
                         {option[1].toUpperCase()}
                     </option>
                 ))}
