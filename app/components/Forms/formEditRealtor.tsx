@@ -243,7 +243,33 @@ export default function FormEditRealtor(props :{id :any }) {
                                         ["três_rios_do_norte", "Três Rios do Norte"]
                                     ]}
                                 />
+{/* 
+                                    <InputDropdown
+                                     key={dropdownFields.state.id}
+                                     name={dropdownFields.state.name}
+                                     size={dropdownFields.state.size}
+                                     text={dropdownFields.state.text}
+                                     id={dropdownFields.state.id}
+                                     options={dropdownFields.state.options}
+                                />
 
+                                <InputDropdown
+                                   key={dropdownFields.city.id}
+                                   name={dropdownFields.city.name}
+                                   size={dropdownFields.city.size}
+                                   text={dropdownFields.city.text}
+                                   id={dropdownFields.city.id}
+                                   options={dropdownFields.city.options}
+                                />
+
+                                <InputDropdown
+                                     key={dropdownFields.neighborhood.id}
+                                     name={dropdownFields.neighborhood.name}
+                                     size={dropdownFields.neighborhood.size}
+                                     text={dropdownFields.neighborhood.text}
+                                     id={dropdownFields.neighborhood.id}
+                                     options={dropdownFields.neighborhood.options}
+                                /> */}
 
                     </div>
                     <div className="divButtonsAceptCancelForms">          
