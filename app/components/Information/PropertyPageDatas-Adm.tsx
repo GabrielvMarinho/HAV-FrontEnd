@@ -12,11 +12,7 @@ import Rule from "../IconsTSX/Rule";
 
 
 export default function propertyPageDatasAdm(props: { objectType: string, 
-    bedroom: number, 
-    bathroom: number, 
-    garage :number, 
-    livingRoom :number, 
-    areaProperty :number }) {
+    obj: PropertySpecific }) {
     return (
         <article style={{ display: "flex", flexDirection: "column", alignItems: "left" }}>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "15px" }}>
@@ -35,27 +31,27 @@ export default function propertyPageDatasAdm(props: { objectType: string,
                 <VerticalLine height={41} />
                 <div className="divCountItems">
                     <Bed width={25} height={25} color="var(--box-mid-dark-red)" />
-                    <p className="countItemNumber">{props.bedroom}</p>
+                    <p className="countItemNumber">{props.obj.bedroom}</p>
                 </div>
                 <VerticalLine height={41} />
                 <div className="divCountItems">
                     <Shower width={25} height={25} color="var(--box-mid-dark-red)" />
-                    <p className="countItemNumber">{props.bathroom}</p>
+                    <p className="countItemNumber">{props.obj.bathroom}</p>
                 </div>
                 <VerticalLine height={41} />
                 <div className="divCountItems">
                     <Garage width={25} height={25} color="var(--box-mid-dark-red)" />
-                    <p className="countItemNumber">{props.garage}</p>
+                    <p className="countItemNumber">{props.obj.garage}</p>
                 </div>
                 <VerticalLine height={41} />
                 <div className="divCountItems">
                     <Sofa width={25} height={25} color="var(--box-mid-dark-red)" />
-                    <p className="countItemNumber">{props.livingRoom}</p>
+                    <p className="countItemNumber">{props.obj.livingRoom}</p>
                 </div>
                 <VerticalLine height={41} />
                 <div className="divCountItems">
                     <Rule width={25} height={25} color="var(--box-mid-dark-red)" />
-                    <p className="countItemNumber">{props.areaProperty}</p>
+                    <p className="countItemNumber">{props.obj.areaProperty}</p>
                 </div>
 
             </div>

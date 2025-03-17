@@ -25,9 +25,15 @@ export default function Home() {
       <DocumentIcon width={211} height={211} color={"#501010"} />
       <Title tag="h1" text="titulo" />
       <FormTestInput />
-      <PropertyPageDatasAdm objectType="apartamento" bedroom={2} bathroom={2} garage={1} livingRoom={1} areaProperty={200} />
+      <PropertyPageDatasAdm objectType="apartamento" obj={{
+        bedroom: 2,
+        bathroom: 2,
+        garage: 1,
+        livingRoom: 1,
+        areaProperty: 2000
+      }} />
       <Footer />
-     
+
     </>
   )
 
