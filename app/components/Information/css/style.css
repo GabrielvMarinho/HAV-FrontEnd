@@ -78,3 +78,22 @@
 
     width: 85%;
 }
+
+.propertyType{
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--text-dark-red);
+    text-transform: uppercase;
+}
+
+.countItemNumber{
+    color: var(--box-mid-dark-red);
+    font-size: (--text-s);
+    font-weight: 700;
+}
+
+.divCountItems{
+    display: flex;
+    gap: 8px;
+    align-items: center
+}
