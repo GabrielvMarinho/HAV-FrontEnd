@@ -1,0 +1,64 @@
+import HorizontalLine from "../NonInteractable/HorizontalLine";
+import "./css/style.css"
+import CategoryCardImovel from "./CategoryCardImovel";
+import StarFavorite from "../Inputs/StarFavorite";
+import ShareProperty from "../IconsTSX/ShareProperty";
+import VerticalLine from "../NonInteractable/VerticalLine";
+import Bed from "../IconsTSX/Bed";
+import Shower from "../IconsTSX/Shower";
+import Garage from "../IconsTSX/Garage";
+import Sofa from "../IconsTSX/Sofa";
+import Rule from "../IconsTSX/Rule";
+
+
+export default function propertyPageDatasAdm(props: { objectType: string, 
+    bedroom: number, 
+    bathroom: number, 
+    garage :number, 
+    livingRoom :number, 
+    areaProperty :number }) {
+    return (
+        <article style={{ display: "flex", flexDirection: "column", alignItems: "left" }}>
+            <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "15px" }}>
+                <p style={{
+                    fontSize: "var(--text-xl)",
+                    fontWeight: "700",
+                    color: "var(--text-dark-red)",
+                    textTransform: "uppercase"
+                }}>{props.objectType}</p>
+                <HorizontalLine size={259} />
+                <CategoryCardImovel text="venda" />
+                <StarFavorite selected={false} width={30} height={30} color="var(--box-dark-red)" />
+                <ShareProperty width={30} height={30} />
+            </div>
+            <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "16px" }}>
+                <VerticalLine height={41} />
+                <div className="divCountItems">
+                    <Bed width={25} height={25} color="var(--box-mid-dark-red)" />
+                    <p className="countItemNumber">{props.bedroom}</p>
+                </div>
+                <VerticalLine height={41} />
+                <div className="divCountItems">
+                    <Shower width={25} height={25} color="var(--box-mid-dark-red)" />
+                    <p className="countItemNumber">{props.bathroom}</p>
+                </div>
+                <VerticalLine height={41} />
+                <div className="divCountItems">
+                    <Garage width={25} height={25} color="var(--box-mid-dark-red)" />
+                    <p className="countItemNumber">{props.garage}</p>
+                </div>
+                <VerticalLine height={41} />
+                <div className="divCountItems">
+                    <Sofa width={25} height={25} color="var(--box-mid-dark-red)" />
+                    <p className="countItemNumber">{props.livingRoom}</p>
+                </div>
+                <VerticalLine height={41} />
+                <div className="divCountItems">
+                    <Rule width={25} height={25} color="var(--box-mid-dark-red)" />
+                    <p className="countItemNumber">{props.areaProperty}</p>
+                </div>
+
+            </div>
+        </article>
+    );
+}
