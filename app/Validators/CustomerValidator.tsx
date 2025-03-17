@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const newEditorOrAdm = z.object({
+export const newCustomer = z.object({
     name: z.string().min(1, { message: "* Campo obrigatório" }),
     email: z.string().min(1, { message: "* Campo obrigatório" })
         .email({ message: "* E-mail inválido" })
@@ -29,4 +29,4 @@ export const newEditorOrAdm = z.object({
     complement: z.string().optional(),
 });
 
-export type NewEditorOrAdm = z.infer<typeof newEditorOrAdm>;
+export type NewCustomer = z.infer<typeof newCustomer>;

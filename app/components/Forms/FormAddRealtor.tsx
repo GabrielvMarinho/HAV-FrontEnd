@@ -2,19 +2,17 @@
 import "../../variables.css"
 import "./css/style.css"
 import InputDropdown from "../Inputs/InputDropdown";
-import InputTextTest from "../Inputs/InputTextTest";
+import InputText from "../Inputs/InputText";
 import Button from "../Inputs/Button";
 import Modal from "../Modal/Modal";
 import { useState, useEffect } from "react";
 import ToggleButton from "../Inputs/ToggleButton";
 import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
 import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
-import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form"
-import { NewUser, newUser } from "@/app/Validators/ProprietorValidator";
-import { NewRealter, newRealter } from "@/app/Validators/RealterValidator";
+import { NewRealtor, newRealtor } from "@/app/Validators/RealtorValidator";
 import Title from "../NonInteractable/Title";
 import { textFields } from "../globalFormsConfig/InputTextConfig";
 import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
@@ -27,8 +25,8 @@ export default function FormAddRealter() {
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
     const router = useRouter();
 
-    const form = useForm<NewRealter>({
-        resolver: zodResolver(newRealter),
+    const form = useForm<NewRealtor>({
+        resolver: zodResolver(newRealtor),
         mode: "onSubmit",
     });
 
@@ -36,7 +34,7 @@ export default function FormAddRealter() {
         console.log("Erros do formulário:", form.formState.errors);
     }, [form.formState.errors]);
 
-    function onSubmit(data: NewRealter) {
+    function onSubmit(data: NewRealtor) {
         console.log("Dados do usuário:", data);
 
         if (Object.keys(form.formState.errors).length > 0) {
@@ -51,37 +49,46 @@ export default function FormAddRealter() {
     const addRealter = async function () {
         if (!pendingFormData) return;
         setIsModalOpen(false);
-        console.log("-------", pendingFormData);
+
         try {
-            await postRealtor(pendingFormData);
-            router.back(); // Volta um ponto sem ter que escrever a barra
-        } catch (err) {
-            console.log(err);
-            if (err.response && err.response.data) {
-                const { errors } = err.response.data;
+            const response = await postRealtor(pendingFormData);
+            if (response) {
+                router.back(); // Volta um ponto sem ter que escrever a barra
+            }
+        } catch (err: any) {
+            console.log("Erro completo:", err); // Log do erro completo
+
+            // Verifica se a resposta do backend está disponível
+            if (err.response?.data) {
+                const { message, errors } = err.response.data;
+                console.log("Resposta do backend:", err.response.data); // Log da resposta do backend
+                console.log("Erros mapeados:", errors); // Log dos erros mapeados
 
                 // Limpa erros anteriores
                 form.clearErrors();
 
                 // Mapear os erros do backend para os campos do formulário
                 if (errors && Array.isArray(errors)) {
-                    errors.forEach((errorMessage) => {
+                    errors.forEach((errorMessage: string) => {
                         const [fieldName, message] = errorMessage.split(": ");
-                        form.setError(fieldName, {
-                            type: "manual",
-                            message: message,
-                        });
+                        if (fieldName && message) {
+                            console.log(`Campo com erro: ${fieldName}, Mensagem: ${message}`); // Log de cada erro específico
+                            form.setError(fieldName.toLowerCase() as keyof NewRealtor, {
+                                type: "manual",
+                                message: message.trim(),
+                            });
+                        }
                     });
                 } else {
                     // Erro genérico caso a mensagem de erro não esteja disponível
-                    form.setError("backendError", {
+                    form.setError("root", {
                         type: "manual",
-                        message: err.response.data.message || "Ocorreu um erro ao processar a solicitação.",
+                        message: message || "Ocorreu um erro ao processar a solicitação.",
                     });
                 }
             } else {
                 // Erro de rede ou outro erro inesperado
-                form.setError("backendError", {
+                form.setError("root", {
                     type: "manual",
                     message: "Erro de conexão. Tente novamente mais tarde.",
                 });
@@ -90,7 +97,6 @@ export default function FormAddRealter() {
     };
     console.log(isModalOpen); // Adicione isso dentro do componente FormAddRealter
     console.log("Dados do formulário antes de enviar:", pendingFormData);
-
 
     return (
 
@@ -111,7 +117,7 @@ export default function FormAddRealter() {
                     </div>
                     <div className="inputArticle">
 
-                        <InputTextTest
+                        <InputText
                             key={textFields.name.id}
                             name={textFields.name.name}
                             size={textFields.name.size}
@@ -119,9 +125,9 @@ export default function FormAddRealter() {
                             text={textFields.name.text}
                             id={textFields.name.id}
                             register={form.register}
-                            error={form.formState.errors[textFields.name.name as keyof NewRealter]}
+                            error={form.formState.errors[textFields.name.name as keyof NewRealtor]}
                         />
-                        <InputTextTest
+                        <InputText
                             key={textFields.cpf.id}
                             name={textFields.cpf.name}
                             size={textFields.cpf.size}
@@ -129,9 +135,9 @@ export default function FormAddRealter() {
                             text={textFields.cpf.text}
                             id={textFields.cpf.id}
                             register={form.register}
-                            error={form.formState.errors[textFields.cpf.name as keyof NewRealter]}
+                            error={form.formState.errors[textFields.cpf.name as keyof NewRealtor]}
                         />
-                        <InputTextTest
+                        <InputText
                             key={textFields.email.id}
                             name={textFields.email.name}
                             size={textFields.email.size}
@@ -139,9 +145,9 @@ export default function FormAddRealter() {
                             text={textFields.email.text}
                             id={textFields.email.id}
                             register={form.register}
-                            error={form.formState.errors[textFields.email.name as keyof NewRealter]}
+                            error={form.formState.errors[textFields.email.name as keyof NewRealtor]}
                         />
-                        <InputTextTest
+                        <InputText
                             key={textFields.cep.id}
                             name={textFields.cep.name}
                             size={textFields.cep.size}
@@ -149,9 +155,9 @@ export default function FormAddRealter() {
                             text={textFields.cep.text}
                             id={textFields.cep.id}
                             register={form.register}
-                            error={form.formState.errors[textFields.cep.name as keyof NewRealter]}
+                            error={form.formState.errors[textFields.cep.name as keyof NewRealtor]}
                         />
-                        <InputTextTest
+                        <InputText
                             key={textFields.street.id}
                             name={textFields.street.name}
                             size={textFields.street.size}
@@ -159,9 +165,9 @@ export default function FormAddRealter() {
                             text={textFields.street.text}
                             id={textFields.street.id}
                             register={form.register}
-                            error={form.formState.errors[textFields.street.name as keyof NewRealter]}
+                            error={form.formState.errors[textFields.street.name as keyof NewRealtor]}
                         />
-                        <InputTextTest
+                        <InputText
                             key={textFields.phoneNumber.id}
                             name={textFields.phoneNumber.name}
                             size={textFields.phoneNumber.size}
@@ -169,9 +175,9 @@ export default function FormAddRealter() {
                             text={textFields.phoneNumber.text}
                             id={textFields.phoneNumber.id}
                             register={form.register}
-                            error={form.formState.errors[textFields.phoneNumber.name as keyof NewRealter]}
+                            error={form.formState.errors[textFields.phoneNumber.name as keyof NewRealtor]}
                         />
-                        <InputTextTest
+                        <InputText
                             key={textFields.cellphone.id}
                             name={textFields.cellphone.name}
                             size={textFields.cellphone.size}
@@ -179,9 +185,9 @@ export default function FormAddRealter() {
                             text={textFields.cellphone.text}
                             id={textFields.cellphone.id}
                             register={form.register}
-                            error={form.formState.errors[textFields.cellphone.name as keyof NewRealter]}
+                            error={form.formState.errors[textFields.cellphone.name as keyof NewRealtor]}
                         />
-                        <InputTextTest
+                        <InputText
                             key={textFields.propertyNumber.id}
                             name={textFields.propertyNumber.name}
                             size={textFields.propertyNumber.size}
@@ -189,9 +195,9 @@ export default function FormAddRealter() {
                             text={textFields.propertyNumber.text}
                             id={textFields.propertyNumber.id}
                             register={form.register}
-                            error={form.formState.errors[textFields.propertyNumber.name as keyof NewRealter]}
+                            error={form.formState.errors[textFields.propertyNumber.name as keyof NewRealtor]}
                         />
-                        <InputTextTest
+                        <InputText
                             key={textFields.complement.id}
                             name={textFields.complement.name}
                             size={textFields.complement.size}
@@ -199,9 +205,9 @@ export default function FormAddRealter() {
                             text={textFields.complement.text}
                             id={textFields.complement.id}
                             register={form.register}
-                            error={form.formState.errors[textFields.complement.name as keyof NewRealter]}
+                            error={form.formState.errors[textFields.complement.name as keyof NewRealtor]}
                         />
-                        <InputTextTest
+                        <InputText
                             key={textFields.creci.id}
                             name={textFields.creci.name}
                             size={textFields.creci.size}
@@ -209,7 +215,7 @@ export default function FormAddRealter() {
                             text={textFields.creci.text}
                             id={textFields.creci.id}
                             register={form.register}
-                            error={form.formState.errors[textFields.creci.name as keyof NewRealter]}
+                            error={form.formState.errors[textFields.creci.name as keyof NewRealtor]}
                         />
                         <InputDropdown
                             key={dropdownFields.city.id}
@@ -219,7 +225,7 @@ export default function FormAddRealter() {
                             id={dropdownFields.city.id}
                             options={dropdownFields.city.options}
                             register={form.register}
-                            error={form.formState.errors[dropdownFields.city.name as keyof NewRealter]}
+                            error={form.formState.errors[dropdownFields.city.name as keyof NewRealtor]}
                         />
                         <InputDropdown
                             key={dropdownFields.state.id}
@@ -229,7 +235,7 @@ export default function FormAddRealter() {
                             id={dropdownFields.state.id}
                             options={dropdownFields.state.options}
                             register={form.register}
-                            error={form.formState.errors[dropdownFields.state.name as keyof NewRealter]}
+                            error={form.formState.errors[dropdownFields.state.name as keyof NewRealtor]}
                         />
                         <InputDropdown
                             key={dropdownFields.neighborhood.id}
@@ -239,7 +245,7 @@ export default function FormAddRealter() {
                             id={dropdownFields.neighborhood.id}
                             options={dropdownFields.neighborhood.options}
                             register={form.register}
-                            error={form.formState.errors[dropdownFields.neighborhood.name as keyof NewRealter]}
+                            error={form.formState.errors[dropdownFields.neighborhood.name as keyof NewRealtor]}
                         />
 
                     </div>
