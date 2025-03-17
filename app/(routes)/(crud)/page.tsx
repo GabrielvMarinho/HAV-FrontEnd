@@ -30,7 +30,9 @@ export default function Home() {
         bathroom: 2,
         garage: 1,
         livingRoom: 1,
-        areaProperty: 2000
+        areaProperty: 2000,
+        id: "123",
+        address: "Rua Rio Grande do Sul"
       }} />
       <Footer />
 

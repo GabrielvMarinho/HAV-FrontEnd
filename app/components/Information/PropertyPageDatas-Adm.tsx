@@ -11,10 +11,14 @@ import Sofa from "../IconsTSX/Sofa";
 import Rule from "../IconsTSX/Rule";
 
 
-export default function propertyPageDatasAdm(props: { objectType: string, 
-    obj: PropertySpecific }) {
+export default function propertyPageDatasAdm(props: {
+    objectType: string,
+    obj: PropertySpecific
+}) {
     return (
         <article style={{ display: "flex", flexDirection: "column", alignItems: "left" }}>
+            <p className="idProperty">{props.obj.id}</p>
+            <p className="addressProperty">{props.obj.address}</p>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "15px" }}>
                 <p style={{
                     fontSize: "var(--text-xl)",
@@ -53,7 +57,6 @@ export default function propertyPageDatasAdm(props: { objectType: string,
                     <Rule width={25} height={25} color="var(--box-mid-dark-red)" />
                     <p className="countItemNumber">{props.obj.areaProperty}</p>
                 </div>
-
             </div>
         </article>
     );

@@ -97,3 +97,13 @@
     gap: 8px;
     align-items: center
 }
+
+.idProperty{
+    font-size: var(--text-s);
+    font-weight: 800;
+    color: var(--text-light-red);
+}
+.addressProperty{
+    font-size: var(--text-s);
+    color: var(--text-light-red);
+}

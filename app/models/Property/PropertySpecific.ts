@@ -1,4 +1,6 @@
 interface PropertySpecific{
+    id: string;
+    address: string;
     bedroom: number;
     bathroom: number;
     garage :number;
