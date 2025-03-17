@@ -25,13 +25,14 @@ export default function InputDropdown<T>({
     onChange?: (value: string) => void; 
 
 }) {
+    console.log("joinville")
     return (
         <div style={{ width: "fit-content", display: "flex", flexDirection: "column", gap: "8px" }}>
             <label className="label" htmlFor={id}>{text}</label>
             <select 
                 name={name}
                 id={id}
-                defaultValue={defaultValue==null || undefined?"":defaultValue} 
+                defaultValue={defaultValue===null || defaultValue===undefined?"":defaultValue}
                 {...(register ? register(name) : {})}
                 
                 onChange={(e) => onChange?.(e.target.value)} 

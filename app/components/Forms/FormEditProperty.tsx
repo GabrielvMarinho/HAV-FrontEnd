@@ -22,10 +22,11 @@ import { textFields } from "../globalFormsConfig/InputTextConfig";
 import { newProperty } from "@/app/Validators/PropertyValidator";
 import NonEditableInputText from "../Inputs/NonEditableInputText";
 import postProperty from "@/app/apiCalls/Property/postProperty";
+import searchPropertyById from "@/app/apiCalls/Property/searchPropertyById";
 
-export default function FormAddProperty(props :{objectData :any;}) {
+export default function FormEditProperty(props :{id :any, objectData :any}) {
 
-    console.log(props.objectData)
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
     const [isPromotional, setIsPromotional] = useState(true)
@@ -34,6 +35,23 @@ export default function FormAddProperty(props :{objectData :any;}) {
     const [hasIptu, setHasIptu] = useState(true)
     const router = useRouter();
 
+    const [property, setProperty] = useState<PropertyEditDto>()
+
+    useEffect(() => {
+        async function fetchProperty() {
+          try {
+            const property = await searchPropertyById(props.id);
+            console.log(property)
+            setProperty(property)
+          } catch (error) {
+            console.error("Error fetching admin data:", error);
+          }
+        }
+    
+        if (props.id) {
+            fetchProperty();
+        }
+      }, [props.id]);
 
     const changePurpose = function(type :string){
         if(type == undefined){
@@ -131,7 +149,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
         formData.forEach((value, key) => {
         params.append(key, value.toString());
         });
-        const url = `/choose/realtor?action=add&${params.toString()}`;
+        const url = `/choose/realtor?action=edit&id=${props.id}&${params.toString()}`;
         window.location.href = url
     }
     const handleAddProprietor = (event: React.MouseEvent<HTMLButtonElement>) =>{
@@ -144,11 +162,13 @@ export default function FormAddProperty(props :{objectData :any;}) {
         formData.forEach((value, key) => {
         params.append(key, value.toString());
         });
-        const url = `/choose/proprietor?action=add&${params.toString()}`;
+        const url = `/choose/proprietor?action=edit&id=${props.id}${params.toString()}`;
         window.location.href = url
     }
 
 
+    console.log(props.objectData.bedRoom)
+    console.log(property?.bedRoom)
 
     return (
         <>
@@ -170,7 +190,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     size={dropdownFields.bedRoom.size}
                     text={dropdownFields.bedRoom.text}
                     id={dropdownFields.bedRoom.id}
-                    defaultValue={props.objectData.bedRoom}
+                    defaultValue={props.objectData.bedRoom===undefined?property?.bedRoom:props.objectData.bedRoom}
                     register={form.register}
                     error={form.formState.errors[dropdownFields.bedRoom.name as keyof newProperty]}
                     options={dropdownFields.bedRoom.options}

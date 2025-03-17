@@ -13,7 +13,6 @@ export default async function(
     ): Promise<{
       properties: Property[];
       totalPages: number;
-  
     }>{
       const url = `http://localhost:9090/property/filter?page=${page}`
 
@@ -48,6 +47,7 @@ export default async function(
       console.log(data)
       const properties: Property[] = data.content.map((property: Property) => property);
       console.log("total pages")
+      console.log(properties)
       console.log(data.totalPages)
       return {properties: properties, totalPages: data.totalPages}
 

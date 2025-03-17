@@ -151,7 +151,7 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
             <tbody>
                 {props.data && props.data.map((obj, index) =>
                     <>
-                    
+
                         <div className='tableListLine'></div>
 
                         <tr className={selected.includes(Object.values(obj)[0])?"selectedRow tableRows":"tableRows"}>
@@ -167,10 +167,10 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
 
 
                             </div>
-                            {Object.values(obj).slice(1).map((value) => (
+                            {Object.entries(obj).slice(1).map(([key, value]) => (
                                     <td>
                                         <div>
-                                            {typeof value === 'number' && value > 10000? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value}
+                                            {key === "price" ? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value}
                                         </div>
                                     </td>
 
