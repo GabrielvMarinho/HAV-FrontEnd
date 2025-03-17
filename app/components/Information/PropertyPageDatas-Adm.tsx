@@ -17,7 +17,7 @@ export default function propertyPageDatasAdm(props: {
 }) {
     return (
         <article style={{ display: "flex", flexDirection: "column", alignItems: "left" }}>
-            <p className="idProperty">{props.obj.id}</p>
+            <p className="idProperty">Código: {props.obj.id}</p>
             <p className="addressProperty">{props.obj.address}</p>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "15px" }}>
                 <p style={{
