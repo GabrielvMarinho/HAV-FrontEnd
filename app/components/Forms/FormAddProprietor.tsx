@@ -137,8 +137,7 @@ export default function FormAddProprietor() {
                     </div>
                     <div className="inputArticle">
                         {proprietorType === "pf" ? (
-                            <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
-
+                            <div className="divInputs">
                                 <InputText
                                     key={textFields.name.id}
                                     name={textFields.name.name}

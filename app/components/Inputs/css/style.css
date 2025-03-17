@@ -7,6 +7,13 @@
     transform: scaleX(-1);
 
 }
+.nonEditable{
+    background-color: var(--box-white);
+    opacity: 0.2;
+}
+.nonEditableLabel, .nonEditable{
+    color: var(--text-white-non-editable-placeholder) !important;
+}
 .arrowBackContainer{
     display: flex;
     
@@ -100,6 +107,7 @@
 .largeInput{
     width: 290px;
 }
+
 .extraLargeInput{
     width: 460px;
 }
@@ -301,7 +309,7 @@
     gap: 10px;
     align-items: center;
 }
-  
+
 .toggleButton {
     width: 12px;
     height: 12px;
@@ -351,3 +359,14 @@ background-color: var(--text-white);
     gap: 8px;
     width: fit-content;
 }
+
+@media (width <992px) {
+    .actionButtons{
+        flex-direction: row;
+    }
+
+    .largeInput{
+        width: 170px;
+    }
+}
+

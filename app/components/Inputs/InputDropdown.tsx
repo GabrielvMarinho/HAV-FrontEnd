@@ -3,14 +3,18 @@ import './css/style.css';
 import { FieldError, UseFormRegister } from 'react-hook-form';
 
 export default function InputDropdown<T>({
+    defaultValue,
     error,
     register,
     name,
     options,
     size,
     text,
-    id
+    id,
+    onChange 
+
 }: {
+    defaultValue?: string;
     error?: FieldError;
     register?: UseFormRegister<T>;
     name: string;
@@ -18,16 +22,20 @@ export default function InputDropdown<T>({
     size: string;
     text: string;
     id: string;
+    onChange?: (value: string) => void; 
+
 }) {
-    
     return (
         <div style={{ width: "fit-content", display: "flex", flexDirection: "column", gap: "8px" }}>
             <label className="label" htmlFor={id}>{text}</label>
-            <select
+            <select 
                 name={name}
                 id={id}
-                defaultValue="" // Define "Selecione Algo" como opção inicial
+                defaultValue={defaultValue==null || undefined?"":defaultValue} 
                 {...(register ? register(name) : {})}
+                
+                onChange={(e) => onChange?.(e.target.value)} 
+
                 className={`${size}InputDropdown inputDropdown ${error ? 'inputError' : ''}`}
             >
                 <option value="" disabled>Selecione Algo</option>

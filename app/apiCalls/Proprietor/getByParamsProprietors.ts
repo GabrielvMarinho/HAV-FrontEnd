@@ -1,7 +1,9 @@
 
 export default async function(
 
-    cpf?: string,
+  cpf?: string,
+  cnpj?: string,
+
     name?: string,
     email?: String,
     numberProperties?: number,
@@ -13,7 +15,19 @@ export default async function(
     totalPages: number;
 
   }>{
+    
     const url = `http://localhost:9090/proprietor/filter?page=${page}`;
+    console.log(url)
+
+    console.log(JSON.stringify({
+      "cpf": cpf===""?null:cpf,
+      "cnpj": cnpj===""?null:cnpj,
+      "name":name===""?null:name, 
+      "email":email===""?null:email,
+      "numberOfProperty":numberProperties===null?null:numberProperties,
+      "goal":goal===""?null:goal,
+      "archived":archived
+    }))
     try{
     const response = await fetch(url,{
       method:"POST",
@@ -21,17 +35,19 @@ export default async function(
         "Content-Type": "application/json", // Garante que está enviando JSON
       },
       body:JSON.stringify({
-        "cpf":cpf===""?null:cpf, 
+        "cpf": cpf===""?null:cpf,
+        "cnpj": cnpj===""?null:cnpj,
         "name":name===""?null:name, 
         "email":email===""?null:email,
-        "numberProperties":numberProperties===""?null:numberProperties,
+        "numberOfProperty":numberProperties===null?null:numberProperties,
         "goal":goal===""?null:goal,
         "archived":archived
       })
     });
-  
+
     const data = await response.json();
-  
+    console.log(data)
+
     const proprietors: Proprietor[] = data.content.map((proprietor: Proprietor) => proprietor);
     return {proprietors: proprietors, totalPages: data.totalPages}
 

@@ -4,7 +4,7 @@ export const newProperty = z.object({
         purpose: z.string().nonempty("* Campo obrigatório"),
         status: z.string().nonempty("* Campo obrigatório"),
         propertyType: z.string().nonempty("* Campo obrigatório"),
-
+        allowsPet: z.string().nonempty("*Campo obrigatório"),
         title: z.string().min(1, { message: "* Campo obrigatório" }),
         propertyDescription: z.string().min(1, { message: "* Campo obrigatório" }),
         area: z.string()
@@ -22,14 +22,11 @@ export const newProperty = z.object({
                         return !isNaN(number) && number > 0;
                 }, { message: "* Valor deve ser positivo" }),
         promotionalPrice: z.string()
-                .optional() // Campo opcional
                 .refine((value) => {
-                        // Se o campo estiver vazio, a validação passa
-                        if (!value || value.trim() === "") return true;
 
                         // Se o campo não estiver vazio, aplica as validações
                         const number = parseFloat(value.replace(",", ".")); // Substitui vírgula por ponto
-                        return !isNaN(number) && number > 0;
+                        return !isNaN(number) && number >= 0;
                 }, { message: "* Valor deve ser positivo" })
                 .refine((value) => {
                         // Se o campo estiver vazio, a validação passa
@@ -54,15 +51,11 @@ export const newProperty = z.object({
         state: z.string().nonempty("* Campo obrigatório"),
         complement: z.string().optional(),
 
-        condominiumFee: z.string()
-                .optional() // Campo opcional
+        condominiumFee: z.string().nonempty("* Campo obrigatório")
                 .refine((value) => {
-                        // Se o campo estiver vazio, a validação passa
-                        if (!value || value.trim() === "") return true;
 
-                        // Se o campo não estiver vazio, aplica as validações
                         const number = parseFloat(value.replace(",", ".")); // Substitui vírgula por ponto
-                        return !isNaN(number) && number > 0;
+                        return !isNaN(number) && number >= 0;
                 }, { message: "* Valor deve ser positivo" })
                 .refine((value) => {
                         // Se o campo estiver vazio, a validação passa
@@ -76,17 +69,20 @@ export const newProperty = z.object({
                 .regex(/^\d+([.,]\d+)?$/, { message: "* Apenas números" })
                 .refine((value) => {
                         const number = parseFloat(value.replace(",", ".")); // Substitui vírgula por ponto
-                        return !isNaN(number) && number > 0;
+                        return !isNaN(number) && number >= 0;
                 }, { message: "* Valor deve ser positivo" }),
 
-        allowsPet: z.string().nonempty("* Campo obrigatório"),
         bedRoom: z.string().nonempty("* Campo obrigatório"),
         livingRoom: z.string().nonempty("* Campo obrigatório"),
         suite: z.string().nonempty("* Campo obrigatório"),
         bathRoom: z.string().nonempty("* Campo obrigatório"),
         garageSpace: z.string().nonempty("* Campo obrigatório"),
         isFurnished: z.string().nonempty("* Campo obrigatório"),
-        highlight: z.string().nonempty("* Campo obrigatório")
+        highlight: z.string().nonempty("* Campo obrigatório"),
+        realtors: z.string().nonempty("* Selecione ao menos um corretor"),
+        proprietor: z.string().nonempty("* Selecione ao menos um corretor"),
+        floors: z.string().nonempty("* Selecione ao menos um corretor")
 });
+console.log(newProperty.shape)
 
 export type newProperty = z.infer<typeof newProperty>;

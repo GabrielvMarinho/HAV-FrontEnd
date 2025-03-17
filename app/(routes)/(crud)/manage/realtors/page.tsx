@@ -10,6 +10,7 @@ import deleteByListAdm from "../../../../apiCalls/Adm/deleteByListAdm"
 import deleteRealtorList from "@/app/apiCalls/Realtor/deleteByListRealtor";
 import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArchivedStatusProprietor";
 import changeArchivedStatusRealtor from "@/app/apiCalls/Realtor/changeArchivedStatusRealtor";
+import { filterFields } from "@/app/components/globalFormsConfig/InputFilterConfig";
 
 
 
@@ -44,14 +45,21 @@ export default async function page({searchParams}: {searchParams: {
         <>
         
         
-        
         <Title tag="h1" text="Corretores"/>
         <NavBarAdm/>
         <SearchBar placeholder="Busca:"/>   
         <div className="containerFilterListAction">
             <Filter 
-            size="medium" 
-            inputs={inputs}
+            size="medium"
+            inputs={
+              [
+                filterFields.cpf, 
+                filterFields.name, 
+                filterFields.email, 
+                filterFields.cellphone,
+                filterFields.phoneNumber
+              ]
+            }
             inputsDropdown={[]}
             inputPriceRanges={[]}
             />

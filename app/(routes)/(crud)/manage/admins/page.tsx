@@ -11,6 +11,8 @@ import TableList from "@/app/components/Information/TableList";
 import getByParamsAdms from "@/app/apiCalls/Adm/getByParamsAdms";
 import deleteByListAdm from "@/app/apiCalls/Adm/deleteByListAdm";
 import changeArchivedStatusAdm from "@/app/apiCalls/Adm/changeArchivedStatusAdm";
+import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
+import { filterFields } from "@/app/components/globalFormsConfig/InputFilterConfig";
 
 
 
@@ -54,7 +56,15 @@ export default async function page({searchParams}: {searchParams: {
         <div className="containerFilterListAction">
             <Filter 
             size="medium" 
-            inputs={inputs}
+            inputs={
+              [
+                filterFields.cpf, 
+                filterFields.name, 
+                filterFields.email, 
+                filterFields.cellphone,
+                filterFields.phoneNumber
+              ]
+            }
             inputsDropdown={[]}
             inputPriceRanges={[]}
             />

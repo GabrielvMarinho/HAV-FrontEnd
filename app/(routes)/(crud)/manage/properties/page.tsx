@@ -6,6 +6,8 @@ import Filter from "@/app/components/Filters/Filter";
 import TableList from "@/app/components/Information/TableList";
 import getByParamsProperties from "@/app/apiCalls/Property/getByParamsProperties";
 import changeArchivedStatusProperty from "@/app/apiCalls/Property/changeArchivedStatusProperty";
+import deleteProprertyList from "@/app/apiCalls/Property/deleteByListProperty";
+import deletePropertyList from "@/app/apiCalls/Property/deleteByListProperty";
 
 
 
@@ -23,7 +25,7 @@ export default async function page({searchParams}: {searchParams: {
 
   }}){
     const params = await searchParams;
-    const {propertyCode=null, minPrice, maxPrice, propertyType=null, propertyCategory=null, propertyStatus=null, page=null} = params
+    const {propertyCode=null, minPrice=null, maxPrice=null, propertyType=null, propertyCategory=null, propertyStatus=null, page=0} = params
     
     const {properties, totalPages} = await getByParamsProperties(propertyCode, propertyType, propertyCategory, propertyStatus, minPrice, maxPrice, false, page)
     
@@ -50,12 +52,14 @@ export default async function page({searchParams}: {searchParams: {
     const priceRanges = [
         {name: "preco",
         key: "preco",
-        min: 100000,
+        min: 0,
         max: 2000000,
         step: 10000, 
         id: "priceRanger"}
     ]
     
+  
+
     return (
         <>
         
@@ -70,7 +74,7 @@ export default async function page({searchParams}: {searchParams: {
             inputsDropdown={InputDropdown}
             inputPriceRanges={priceRanges}
             />
-            <TableList changeArchivedStatus = {changeArchivedStatusProperty} archived={false} context="admin" size="large" titles={["id imóvel", "preço",  "tipo imóvel", "finalidade", "status"]} 
+            <TableList deleteFunction ={deletePropertyList} changeArchivedStatus = {changeArchivedStatusProperty} archived={false} context="admin" size="large" titles={["id imóvel", "preço",  "tipo imóvel", "finalidade", "status"]} 
             data={properties} totalPages={totalPages}/>
         </div>
         

@@ -17,6 +17,7 @@ import Title from "../NonInteractable/Title";
 import { textFields } from "../globalFormsConfig/InputTextConfig";
 import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
 import postRealtor from "@/app/apiCalls/Realtor/postRealtor";
+import InputText from "../Inputs/InputText";
 
 export default function FormAddRealter() {
 
@@ -24,6 +25,7 @@ export default function FormAddRealter() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
     const router = useRouter();
+
 
     const form = useForm<NewRealtor>({
         resolver: zodResolver(newRealtor),
@@ -34,7 +36,7 @@ export default function FormAddRealter() {
         console.log("Erros do formulário:", form.formState.errors);
     }, [form.formState.errors]);
 
-    function onSubmit(data: NewRealtor) {
+    function onSubmit(data: NewRealter) {console.log("---------------------------------")
         console.log("Dados do usuário:", data);
 
         if (Object.keys(form.formState.errors).length > 0) {

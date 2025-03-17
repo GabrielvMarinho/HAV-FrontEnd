@@ -11,12 +11,13 @@ export const textFields = {
     creci: { name: "creci", size: "small", text: "Creci", placeholder: "ex:", id: "creci" },
     cnpj: { name: "cnpj", size: "large", text: "CNPJ", placeholder: "ex: 12.123.123/0001-12", id: "cnpj" },
 
-    propertyDescription: { name: "propertyDescription", size: "large", text: "Descrição da Propriedade", placeholder: "ex:", id: "propertyDescription" },
-    propertyTitle: { name: "title", size: "large", text: "Título da Propriedade", placeholder: "ex:", id: "title" },
-    propertyArea: { name: "area", size: "small", text: "Área", placeholder: "ex:", id: "area" },
-    propertyPrice: { name: "price", size: "small", text: "Preço", placeholder: "ex:", id: "price" },
-    propertyPromotionalPrice: { name: "promotionalPrice", size: "large", text: "Preço Promocional", placeholder: "ex:", id: "promotionalPrice" },
-    iptu: { name: "iptu", size: "small", text: "Iptu", placeholder: "ex:", id: "iptu" },
-    condominiumFee: { name: "condominiumFee", size: "large", text: "condominiumFee", placeholder: "ex:", id: "condominiumFee" },
+
+    propertyDescription:{ name: "propertyDescription", size: "large", text: "Descrição da Propriedade", placeholder: "ex:", id: "propertyDescription" },
+    propertyTitle:{ name: "title", size: "small", text: "Título da Propriedade", placeholder: "ex:", id: "title" },
+    propertyArea:{ name: "area", size: "small", text: "Área", placeholder: "ex:", id: "area"},
+    propertyPrice:{ name: "price", size: "small", text: "Preço", placeholder: "ex:", id: "price"},
+    propertyPromotionalPrice:{ name: "promotionalPrice", size: "small", text: "Preço Promocional", placeholder: "ex:", id: "promotionalPrice"},
+    iptu:{ name: "iptu", size: "small", text: "Iptu", placeholder: "ex:", id: "iptu"},
+    condominiumFee:{ name: "condominiumFee", size: "small", text: "Condomínio", placeholder: "ex:", id: "condominiumFee"},
 
 }

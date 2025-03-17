@@ -13,7 +13,7 @@ import ButtonComprarAlugar from "../Inputs/ButtonComprarAlugar";
 
 export default function Filter(props: {size :string, inputs :any[], inputsDropdown :any[], inputPriceRanges :any[] | null}){
     
-
+    
     console.log(props.inputPriceRanges)
 
 
@@ -38,13 +38,23 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
         setPriceRange({ min, max });
     };
 
-    const pathname = usePathname()
-    
+
+
       
+    const pathname = usePathname()
+    const searchParams = useSearchParams();  
+  
+    const finalExistingSearchParams = Object.fromEntries(searchParams.entries());
+    
+    const filteredParams = Object.keys(finalExistingSearchParams).reduce((acc, key) => {
+        if (key !== 'cpf' && key !== 'name' && key !== 'creci') {
+            acc[key] = finalExistingSearchParams[key];
+        }
+        return acc;
+    }, {});
     
     return(
         <form action={pathname} className="filterSide">
-            
             {props.inputs.map((input) => (
                 input &&
                 <InputText
@@ -55,28 +65,16 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
                     id={input.id}
                 />
             ))}
-            {props.inputsDropdown.map((input) => (
-                input &&
-                <InputDropdown
-                    name = {input.name}
-                    options={input.options}
-                    size={input.size}
-                    text={input.text}
-                    id={input.id}
+            {Object.entries(filteredParams).map(([key, value]) => (
+                <input
+                    hidden={true}
+                    type="text"
+                    id={key}
+                    name={key}
+                    value={value}
                 />
             ))}
-            {props.inputPriceRanges.map((input) => (
-                input &&
-                <PriceRangeSlider
-                    name = {input.name}
-                    min={input.min}
-                    max={input.max}
-                    step={input.step}
-                    id={input.id}
-                    onChange={handlePriceChange}
-                    
-                />
-            ))}
+            
             <button type="submit" className="buttonBuscaClaro lightHover">
                 <SearchIcon height={35} width={35} color={"var(--box-red-pink)"}/>
             </button>
