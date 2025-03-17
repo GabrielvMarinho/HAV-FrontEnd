@@ -24,13 +24,13 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
     const confirmDelete = async () => {
         const selectedIds = JSON.parse(localStorage.getItem('selectedManage') || "[]");
         console.log("-------------")
-        console.log(props.deleteFunction)
-
         console.log("chamado ", selectedIds)
         if (selectedIds.length > 0) {
+            console.log("entrou")
             await props.deleteFunction(selectedIds); 
             localStorage.removeItem("selectedManage")
             setIsDeleteModalOpen(false);
+
         }
     };
 
@@ -83,8 +83,7 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
         if (selectedIds.length > 0) {
             await props.changeArchivedStatus(selectedIds); 
             localStorage.removeItem("selectedManage")
-            setIsDeleteModalOpen(false);
-
+            setIsArchiveModalOpen(false);
 
         }
     }

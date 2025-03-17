@@ -5,6 +5,8 @@ import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import TableList from "@/app/components/Information/TableList";
 import Title from "@/app/components/NonInteractable/Title";
 import "../../../../../pageStructure.css"
+import changeArchivedStatusProperty from "@/app/apiCalls/Property/changeArchivedStatusProperty";
+import deletePropertyList from "@/app/apiCalls/Property/deleteByListProperty";
 
 
 export default async function page({searchParams}: {searchParams: {
@@ -19,7 +21,7 @@ export default async function page({searchParams}: {searchParams: {
 
     }}){
       const params = await searchParams;
-      const {propertyCode=null, minPrice, maxPrice, propertyType=null, propertyCategory=null, propertyStatus=null, page=null} = params
+      const {propertyCode=null, minPrice, maxPrice, propertyType=null, propertyCategory=null, propertyStatus=null, page=0} = params
       
       const {properties, totalPages} = await getByParamsProperties(propertyCode, propertyType, propertyCategory, propertyStatus, minPrice, maxPrice, true, page)
       
@@ -66,7 +68,7 @@ export default async function page({searchParams}: {searchParams: {
               inputsDropdown={InputDropdown}
               inputPriceRanges={priceRanges}
               />
-              <TableList changeArchivedStatus = {changeArchivedStatusProperty} archived={true} context="admin" size="large" titles={["id imóvel", "preço",  "tipo imóvel", "finalidade", "status"]} 
+              <TableList deleteFunction ={deletePropertyList} changeArchivedStatus = {changeArchivedStatusProperty} archived={true} context="admin" size="large" titles={["id imóvel", "preço",  "tipo imóvel", "finalidade", "status"]} 
               data={properties} totalPages={totalPages}/>
           </div>
           
