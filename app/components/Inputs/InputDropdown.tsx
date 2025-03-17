@@ -3,6 +3,7 @@ import './css/style.css';
 import { FieldError, UseFormRegister } from 'react-hook-form';
 
 export default function InputDropdown<T>({
+    defaultValue,
     error,
     register,
     name,
@@ -13,6 +14,7 @@ export default function InputDropdown<T>({
     onChange 
 
 }: {
+    defaultValue?: string;
     error?: FieldError;
     register?: UseFormRegister<T>;
     name: string;
@@ -23,14 +25,13 @@ export default function InputDropdown<T>({
     onChange?: (value: string) => void; 
 
 }) {
-    
     return (
         <div style={{ width: "fit-content", display: "flex", flexDirection: "column", gap: "8px" }}>
             <label className="label" htmlFor={id}>{text}</label>
             <select 
                 name={name}
                 id={id}
-                defaultValue="" 
+                defaultValue={defaultValue==null || undefined?"":defaultValue} 
                 {...(register ? register(name) : {})}
                 
                 onChange={(e) => onChange?.(e.target.value)} 

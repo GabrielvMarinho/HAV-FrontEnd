@@ -4,11 +4,54 @@ export default async function(
 
     formData: { [key: string]: FormDataEntryValue } | null
     
-    
     ): Promise<string> {  
       const url = "http://localhost:9090/property";
       console.log("api")
-      console.log(formData.name)
+      console.log("fllorrrs", formData.floors)
+
+      console.log(JSON.stringify(
+        {
+          "title": formData.title,
+          "propertyDescription": formData.propertyDescription,
+          "propertyType": formData.propertyType,
+          "propertyStatus": formData.status,
+          "purpose":  formData.purpose,
+          "area": formData.area,
+          "price": formData.price,
+          "promotionalPrice": formData.promotionalPrice,
+          "highlight": formData.highlight,
+          "floors":formData.floors,
+
+          "propertyCategory": "",
+          "floors":formData.floors,
+
+          "address": {
+            "street": formData.street,
+            "propertyNumber": formData.propertyNumber,
+            "city": formData.city,
+            "state": formData.state,
+            "cep": formData.cep,
+            "neighborhood": formData.neighborhood,
+            "Complement": formData.complement
+          },
+          "taxes": {
+            "iptu": formData.iptu,
+            "condominiumFee": formData.condominiumFee
+          },
+          "propertyFeatures": {
+            "bedRoom": formData.bedRoom,
+            "bathRoom": formData.bathRoom,
+            "garageSpace": formData.garageSpace,
+            "suite": formData.suite,
+            "livingRoom": formData.livingRoom,
+            "isFurnished": formData.isFurnished,
+            "allowsPet": formData.allowsPet
+          },
+          "additionals": null,
+          "realtors": formData.realtors.split(",").map((s: string) => Number(s.trim())),
+          "proprietor": Number(formData.proprietor)
+        }
+      ))
   
       try{
       const response = await fetch(url,{
@@ -19,40 +62,44 @@ export default async function(
         body:JSON.stringify(
           {
             "title": formData.title,
-            "propertyDescription": formData.propertyDescription,
-            "propertyType": formData.propertyType,
-            "propertyStatus": formData.propertyStatus,
-            "purpose":  formData.purpose,
-            "area": formData.propertyArea,
-            "price": formData.propertyPrice,
-            "promotionalPrice": formData.propertyPromocionalPrice,
-            "highlight": formData.propertyHighlight,
-            "propertyCategory": "",
-            "address": {
-              "street": formData.street,
-              "propertyNumber": formData.propertyNumber,
-              "city": formData.city,
-              "state": formData.state,
-              "cep": formData.cep,
-              "neighborhood": formData.neighborhood,
-              "Complement": formData.complement
-            },
-            "taxes": {
-              "iptu": ,
-              "condominiumFee": 0
-            },
-            "propertyFeatures": {
-              "bedRoom": 3,
-              "bathRoom": 2,
-              "garageSpace": 2,
-              "suite": 2,
-              "livingRoom": 2,
-              "isFurnished": false,
-              "allowsPet": false
-            },
-            "additionals": [2],
-            "realtors": [3],
-            "proprietor": 1
+          "propertyDescription": formData.propertyDescription,
+          "propertyType": formData.propertyType,
+          "propertyStatus": formData.status,
+          "purpose":  formData.purpose,
+          "area": formData.area,
+          "price": formData.price,
+          "promotionalPrice": formData.promotionalPrice,
+          "highlight": formData.highlight,
+          "floors":formData.floors,
+
+          "propertyCategory": "",
+          "floors":formData.floors,
+
+          "address": {
+            "street": formData.street,
+            "propertyNumber": formData.propertyNumber,
+            "city": formData.city,
+            "state": formData.state,
+            "cep": formData.cep,
+            "neighborhood": formData.neighborhood,
+            "Complement": formData.complement
+          },
+          "taxes": {
+            "iptu": formData.iptu,
+            "condominiumFee": formData.condominiumFee
+          },
+          "propertyFeatures": {
+            "bedRoom": formData.bedRoom,
+            "bathRoom": formData.bathRoom,
+            "garageSpace": formData.garageSpace,
+            "suite": formData.suite,
+            "livingRoom": formData.livingRoom,
+            "isFurnished": formData.isFurnished,
+            "allowsPet": formData.allowsPet
+          },
+          "additionals": null,
+          "realtors": formData.realtors.split(",").map((s: string) => Number(s.trim())),
+          "proprietor": Number(formData.proprietor)
           }
         )
       });

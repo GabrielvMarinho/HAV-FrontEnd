@@ -16,8 +16,9 @@ export default async function(
 
   }>{
     
-    
     const url = `http://localhost:9090/proprietor/filter?page=${page}`;
+    console.log(url)
+
     console.log(JSON.stringify({
       "cpf": cpf===""?null:cpf,
       "cnpj": cnpj===""?null:cnpj,
@@ -38,14 +39,15 @@ export default async function(
         "cnpj": cnpj===""?null:cnpj,
         "name":name===""?null:name, 
         "email":email===""?null:email,
-        "numberOfProperty":numberProperties===null?0:numberProperties,
+        "numberOfProperty":numberProperties===null?null:numberProperties,
         "goal":goal===""?null:goal,
         "archived":archived
       })
     });
-  
+
     const data = await response.json();
-  
+    console.log(data)
+
     const proprietors: Proprietor[] = data.content.map((proprietor: Proprietor) => proprietor);
     return {proprietors: proprietors, totalPages: data.totalPages}
 

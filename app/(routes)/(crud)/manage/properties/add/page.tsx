@@ -11,7 +11,7 @@ export default function page(){
     console.log(searchParamsObject)
     return (
         <FormAddProperty 
-            proprietor = {searchParamsObject.proprietor} realtors = {searchParamsObject.realtors}
+            objectData = {searchParamsObject}
         />
     )
 }

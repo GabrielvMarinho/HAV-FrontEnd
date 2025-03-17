@@ -26,7 +26,7 @@ export const newProperty = z.object({
 
                         // Se o campo não estiver vazio, aplica as validações
                         const number = parseFloat(value.replace(",", ".")); // Substitui vírgula por ponto
-                        return !isNaN(number) && number > 0;
+                        return !isNaN(number) && number >= 0;
                 }, { message: "* Valor deve ser positivo" })
                 .refine((value) => {
                         // Se o campo estiver vazio, a validação passa
@@ -55,7 +55,7 @@ export const newProperty = z.object({
                 .refine((value) => {
 
                         const number = parseFloat(value.replace(",", ".")); // Substitui vírgula por ponto
-                        return !isNaN(number) && number > 0;
+                        return !isNaN(number) && number >= 0;
                 }, { message: "* Valor deve ser positivo" })
                 .refine((value) => {
                         // Se o campo estiver vazio, a validação passa
@@ -69,7 +69,7 @@ export const newProperty = z.object({
                 .regex(/^\d+([.,]\d+)?$/, { message: "* Apenas números" })
                 .refine((value) => {
                         const number = parseFloat(value.replace(",", ".")); // Substitui vírgula por ponto
-                        return !isNaN(number) && number > 0;
+                        return !isNaN(number) && number >= 0;
                 }, { message: "* Valor deve ser positivo" }),
 
         bedRoom: z.string().nonempty("* Campo obrigatório"),
@@ -79,8 +79,9 @@ export const newProperty = z.object({
         garageSpace: z.string().nonempty("* Campo obrigatório"),
         isFurnished: z.string().nonempty("* Campo obrigatório"),
         highlight: z.string().nonempty("* Campo obrigatório"),
-        realtors: z.string().nonempty("* Selecione ao menos um corretor")
-
+        realtors: z.string().nonempty("* Selecione ao menos um corretor"),
+        proprietor: z.string().nonempty("* Selecione ao menos um corretor"),
+        floors: z.string().nonempty("* Selecione ao menos um corretor")
 });
 console.log(newProperty.shape)
 

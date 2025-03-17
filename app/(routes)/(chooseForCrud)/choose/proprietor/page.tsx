@@ -14,6 +14,7 @@ import FilterToAddProperty from "@/app/components/Filters/FilterToAddProperty";
 export default async function page({searchParams}: {searchParams: {
 
   cpf?: string; 
+  cnpj?: string;
   name?: string;
   page?: number;
 
@@ -22,13 +23,16 @@ export default async function page({searchParams}: {searchParams: {
     console.log("--------------------")
     const params = await searchParams;
     console.log(params)
-    const {cpf=null, name=null, email=null, numberProperties=null, goal=null, page=0} = params
+    const {cpf=null, cnpj=null, name=null, email=null, numberProperties=null, goal=null, page=0} = params
     
-    const {proprietors, totalPages} = await getByParamsProprietors(cpf, name, email, numberProperties, goal, false, page)
-    
+    const {proprietors, totalPages} = await getByParamsProprietors(cpf, cnpj, name, email, numberProperties, goal, false, page)
+    console.log("proprietors")
+    console.log(proprietors)
   
   const inputs = [
     { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: ", id: "cpf", },
+    { name: "cnpj", size: "medium", text: "CNPJ", placeholder: "ex: ", id: "cnpj", },
+
     { name: "name", size: "medium", text: "Nome", placeholder: "ex: ", id: "name", },
 
   ];
