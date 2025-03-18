@@ -17,7 +17,9 @@ import { getServerSession } from "next-auth"
 import Image from "next/image";
 import "@/public/Image/css/style.css"
 import MainFilter from "@/app/components/Filters/MainFilter";
-
+import HavLogo from "@/app/components/IconsTSX/HavLogoLight";
+import "../../GeneralPages.css"
+import HavLogoDark from "@/app/components/IconsTSX/HavLogoDark";
 
 export default function Home() {
 
@@ -28,6 +30,12 @@ export default function Home() {
   return (
     <>
       <img className={"bannerHome"} src="/Image/BannerHome.png"/>
+
+      <div style={{display: "flex", alignItems: "center", marginBottom:"60px"}}>
+        <h1 className="mainTitleHome">CONECTANDO VOCÊ AO SEU NOVO LAR</h1>
+        <HavLogoDark height={150} width={150}/>
+      </div>
+
       <div className="bannerHomeLine"></div>
       <MainFilter/>
     <CardImovel 

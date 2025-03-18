@@ -1,0 +1,10 @@
+@import "./variables.css";
+
+.mainTitleHome{
+    font-size: var(--text-xl);
+    color: var(--text-red-pink);
+    width: 500px;
+    margin-right: 20px;
+    font-weight: 900;
+    text-align: right;
+}
