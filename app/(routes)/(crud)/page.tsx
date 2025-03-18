@@ -14,7 +14,7 @@ import HeaderOptions from "../../components/Header/HeaderOptions";
 import Modal from "@/app/components/Modal/Modal"
 import FormTestInput from "@/app/components/Forms/FormTestInput"
 import PropertyPageDatasAdm from "@/app/components/Information/PropertyPageDatas-Adm"
-import RealterAssociated from "@/app/components/IconsTSX/RealterAssociated"
+import RealterAssociated from "@/app/components/Information/RealtorAssociated"
 import Furnished from "@/app/components/NonInteractable/Furnished"
 
 export default function Home() {
@@ -36,8 +36,8 @@ export default function Home() {
         id: "123",
         address: "Rua Rio Grande do Sul"
       }} />
-      <RealterAssociated/>
       <Furnished obj={{isFurnished: true}}/>
+      <RealterAssociated obj={{name : "nathan", email : "nathan@gmail.com", id : "1"}}/>
       <Footer />
 
     </>
