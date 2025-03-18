@@ -65,6 +65,17 @@
     line-height: 130%;
 }
 
+.horizontalLine{
+    background-color: var(--box-red-pink);
+    height: 1px; 
+
+}
+
+.verticalLine{
+    background-color: var(--box-dark-red);
+    width: 1px; 
+}
+
 @media (width < 992px) {
     .sizeTitle{
         font-size: var(--text-ml);

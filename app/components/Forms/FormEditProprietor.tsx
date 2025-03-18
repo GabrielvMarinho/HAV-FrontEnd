@@ -104,7 +104,6 @@ export default function FormEditProprietor(props :{id :any }) {
 
     };
    
-    
 
     return (
         

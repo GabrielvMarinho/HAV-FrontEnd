@@ -1,4 +1,5 @@
 "use client"
+import SelectedStar from '../IconsTSX/SelectedStar';
 import './css/style.css';
 import { FieldError, UseFormRegister } from 'react-hook-form';
 
@@ -25,13 +26,13 @@ export default function InputDropdown<T>({
     onChange?: (value: string) => void; 
 
 }) {
+    console.log("joinville")
     return (
         <div style={{ width: "fit-content", display: "flex", flexDirection: "column", gap: "8px" }}>
             <label className="label" htmlFor={id}>{text}</label>
             <select 
                 name={name}
                 id={id}
-                defaultValue={defaultValue==null || undefined?"":defaultValue} 
                 {...(register ? register(name) : {})}
                 
                 onChange={(e) => onChange?.(e.target.value)} 
@@ -40,7 +41,7 @@ export default function InputDropdown<T>({
             >
                 <option value="" disabled>Selecione Algo</option>
                 {options.map(option => (
-                    <option className="optionDropDown" value={option[0]} key={option[0]}>
+                    <option selected={defaultValue === option[0]} className="optionDropDown" value={option[0]} key={option[0]}>
                         {option[1].toUpperCase()}
                     </option>
                 ))}

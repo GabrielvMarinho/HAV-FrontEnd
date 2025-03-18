@@ -15,9 +15,12 @@ import Modal from "@/app/components/Modal/Modal";
 import FormTestInput from "@/app/components/Forms/FormTestInput";
 import PropertyPrice from "../../components/NonInteractable/PropertyPrice";
 import CardImovel from "@/app/components/Cards/CardImovel"
+import Modal from "@/app/components/Modal/Modal"
+import FormTestInput from "@/app/components/Forms/FormTestInput"
+import PropertyPageDatasAdm from "@/app/components/Information/PropertyPageDatas-Adm"
 
 export default function Home() {
-  
+
   return (
     <>
       <Link href="/Imoveis">clique aqui</Link>
@@ -30,9 +33,23 @@ export default function Home() {
       <CardImovel bairro="Bairro czerniewicz" cidade="Jaraguá do Sul" valor="R$200.000,00" infoParcela="" quantQuartos={2} quantBanheiros={2} quantSala={1} informationStatus="Lançamento" category="Venda"/>
       <CardImovel bairro="Amizade" cidade="Jaraguá do Sul" valor="R$1.000,00" infoParcela="/mês" quantQuartos={2} quantBanheiros={2} quantSala={2} informationStatus="Lançamento" category="Locação"/>
       <Footer/>
+      <SelectedStar width={54} height={54} color={"#001111"} />
+      <NotSelectedStar width={54} height={54} color={"#001111"} />
+      <DocumentIcon width={211} height={211} color={"#501010"} />
+      <Title tag="h1" text="titulo" />
+      <FormTestInput />
+      <PropertyPageDatasAdm objectType="apartamento" obj={{
+        bedroom: 2,
+        bathroom: 2,
+        garage: 1,
+        livingRoom: 1,
+        areaProperty: 2000,
+        id: "123",
+        address: "Rua Rio Grande do Sul"
+      }} />
+      <Footer />
 
-
-      </>
+    </>
   )
 
 }
