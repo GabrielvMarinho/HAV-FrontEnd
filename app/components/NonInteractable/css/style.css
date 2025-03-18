@@ -47,6 +47,12 @@
     width: 1px; 
 }
 
+.isFurnishedText{
+    color: var(--box-dark-red-option);
+    font-size: var(--text-ml);
+    font-weight: 500;
+}
+
 @media (width < 992px) {
     .sizeTitle{
         font-size: var(--text-ml);

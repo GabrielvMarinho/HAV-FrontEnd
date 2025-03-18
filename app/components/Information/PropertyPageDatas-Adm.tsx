@@ -13,7 +13,7 @@ import Rule from "../IconsTSX/Rule";
 
 export default function propertyPageDatasAdm(props: {
     objectType: string,
-    obj: PropertySpecific
+    obj: Omit<PropertySpecific, "isFurnished"> 
 }) {
     return (
         <article style={{ display: "flex", flexDirection: "column", alignItems: "left" }}>
