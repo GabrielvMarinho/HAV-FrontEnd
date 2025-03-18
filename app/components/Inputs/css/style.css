@@ -7,6 +7,10 @@
     transform: scaleX(-1);
 
 }
+.toggleRentOrBuyLabel{
+    color: var(--text-white);
+    font-size: var(--text-s);
+}
 .nonEditable{
     background-color: var(--box-white);
     opacity: 0.2;
@@ -89,7 +93,6 @@
     background-repeat: no-repeat;
     background-position: calc(100% - 8px);
     background-size: 16px; 
-    border: 1px var(--button-color) solid;
 }
 
 .input::placeholder{

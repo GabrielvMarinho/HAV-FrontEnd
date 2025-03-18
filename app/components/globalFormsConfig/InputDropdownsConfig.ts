@@ -52,7 +52,7 @@ export const dropdownFields = {
             ["três_rios_do_norte", "Três Rios do Norte"]
         ]
     },
-    purpose: {
+    purpose: { //this component has dependencies, (toggle rent or buy)
         name: "purpose",
         size: "medium",
         text: "Finalidade",

@@ -1,4 +1,6 @@
+import HeaderAdm from "@/app/components/Header/HeaderAdm"
 import montserrat from "@/app/Fonts"
+
 
 export const metadata = {
   title: 'Next.js',
@@ -12,7 +14,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${montserrat.variable}`}>
-      <body>{children}</body>
+      
+      <body>
+      <HeaderAdm/>
+
+        {children}
+        </body>
     </html>
   )
 }
