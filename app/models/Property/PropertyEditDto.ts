@@ -23,7 +23,7 @@ interface PropertyEditDto {
     realtors: number[];
     proprietor: number;
     state: string;
-    status: string;
+    propertyStatus: string;
     street: string;
     suite: number;
     title: string;
