@@ -10,7 +10,7 @@ export default function Subtitle(props: { text: string; lineDirection: string })
         );
     }
     return (
-        <div className="subtitle" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start"}}>
+        <div className="subtitle" style={{ display: "flex", flexDirection: "column", alignItems: "left"}}>
             <h1 className='sizesubtitle'>{props.text.toUpperCase()}</h1>
             <div className="subtitleLine"></div>
         </div>

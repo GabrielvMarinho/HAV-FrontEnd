@@ -5,12 +5,12 @@ import Button from "../Inputs/Button";
 export default function RealtorAssociated(props: { obj: Pick<Realtor, "id" | "name" | "email"> }) {
     return (
         <article style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "21px" }}>
-            <div style={{ width: "160px", height: "160px", backgroundColor: "blackl" }}> </div>
-            <div style={{ display: "flex", alignItems: "left", flexDirection: "column", gap: "13px" }}>
+            <div style={{ width: "160px", height: "160px", backgroundColor: "black" }}> </div>
+            <div style={{ display: "flex", alignItems: "left", flexDirection: "column", gap: "9px" }}>
                 <p className="realtorName">{props.obj.name}</p>
-                <p className="realtorEmail">{props.obj.email}</p>
+                <p className="realtorEmail">{`Email - ${props.obj.email}`}</p>
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "13px" }}>
-                    <p className="realtorId">{`ID: ${props.obj.id}`}</p>
+                    <p className="realtorId">{`id: ${props.obj.id}`}</p>
                     <HorizontalLine size={203} />
                 </div>
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "15px" }}>
