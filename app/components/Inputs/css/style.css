@@ -1,8 +1,5 @@
 @import "../../../variables.css";
 
-
-
-
 .mirrored{
     transform: scaleX(-1);
 

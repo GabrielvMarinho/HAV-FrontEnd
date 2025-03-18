@@ -6,4 +6,5 @@ interface PropertySpecific{
     garage :number;
     livingRoom: number;
     areaProperty: number;
+    isFurnished: boolean;
 }
