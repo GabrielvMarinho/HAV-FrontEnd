@@ -20,8 +20,8 @@ interface PropertyEditDto {
     propertyNumber: string;
     propertyType: string;
     purpose: string;
-    realtors: number[];
-    proprietor: number;
+    realtors: any[];
+    proprietor: any;
     state: string;
     propertyStatus: string;
     street: string;

@@ -16,9 +16,9 @@ export default async function(
     console.log("resposta api")
     console.log(data)
 
-    const { address, taxes, propertyFeatures, ...rest } = data;
+    const { realtors, proprietor, address, taxes, propertyFeatures, ...rest } = data;
 
-    const property = { ...rest, ...address, ...taxes, ...propertyFeatures };
+    const property = { ...rest, ...address, ...taxes, ...propertyFeatures, proprietor, realtors };
 
     console.log(property)
     return property

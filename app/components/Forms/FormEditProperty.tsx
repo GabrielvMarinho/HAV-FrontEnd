@@ -176,7 +176,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
         window.location.href = url
     }
 
-    console.log(property)
 
     return (
         <>
@@ -647,26 +646,27 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                 
                 
                     <button onClick={handleAddRealtor}>adicionar corretor</button>  
-                    {props.objectData.realtors &&
-                    
+                    {props.objectData.realtors || property?.realtors[0].name  &&
+                
                         <>
                         
                         <input hidden={true} value ={props.objectData.realtors== null || props.objectData.realtors==undefined?property?.realtors:props.objectData.realtors} {...(form.register ? form.register("realtors") : {})} name = {"realtors"}/>
                         
-                        {form.formState.errors.realtors && (
+                        {form.formState.errors.realtors &&(
                             <p className="errorText">{form.formState.errors.realtors.message}</p>
                             )}
+                            
 
-                        <div>{props.objectData.realtors== null || props.objectData.realtors==undefined?property?.realtors:props.objectData.realtors}</div>
+                        <div>{props.objectData.realtors== null || props.objectData.realtors==undefined?property?.realtors[0].name:props.objectData.realtors}</div>
                         
                         </>//falta fazer para validar se tem algum corretor e proprietor
                         }
                     <button onClick={handleAddProprietor}>adicionar proprietario</button>                 
-                    {props.objectData.proprietor &&
+                    {props.objectData.proprietor || property?.proprietor &&
                         <>
 
-                        <input hidden={true} {...(form.register ? form.register("proprietor") : {})} value ={props.objectData.proprietor== null || props.objectData.proprietor==undefined?property?.proprietor:props.objectData.proprietor} name = {"proprietor"}/>
-                        <div>{props.objectData.proprietor== null || props.objectData.proprietor==undefined?property?.proprietor:props.objectData.proprietor}</div>
+                        <input hidden={true} {...(form.register ? form.register("proprietor") : {})} value ={props.objectData.proprietor== null || props.objectData.proprietor==undefined?property?.proprietor.name:props.objectData.proprietor} name = {"proprietor"}/>
+                        <div>{props.objectData.proprietor== null || props.objectData.proprietor==undefined?property?.proprietor.name:props.objectData.proprietor}</div>
                         </>
                         }
                 </div>
