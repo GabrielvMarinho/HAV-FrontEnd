@@ -37,7 +37,7 @@ export default function MainFilter(){
       
     
     return(
-        <form action={pathname} className="filterMain">
+        <form action={pathname} className="filterMain filterMainShort">
             
             <div className="mainSection">
                 <ToggleRentOrBuy/>
