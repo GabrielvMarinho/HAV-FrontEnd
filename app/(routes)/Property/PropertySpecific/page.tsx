@@ -16,6 +16,7 @@ import HorizontalPropertySpecific from "@/app/components/NonInteractable/Horizon
 import Title from "@/app/components/NonInteractable/Title";
 import SliderContent from "@/app/components/Information/SliderContent";
 import CardImovel from "@/app/components/Cards/CardImovel";
+import RealterAssociatedVertical from "@/app/components/Information/RealterAssociatedVertical";
 
 export default function PropertySpecific(props: { obj: Pick<PropertySpecific, "description"> }) {
     return (
@@ -35,7 +36,7 @@ export default function PropertySpecific(props: { obj: Pick<PropertySpecific, "d
                                     hover="darkHover"
                                     color=""
                                     background="" />
-                                <Cubes width={30} height={30} />
+                                <Cubes width={30} height={30} color="var(--button-color)" />
                             </div>
                             <div className="buttonIconDiv">
                                 <Gear height={30} width={30} color="var(--button-color)" />
@@ -74,8 +75,8 @@ export default function PropertySpecific(props: { obj: Pick<PropertySpecific, "d
                             }} />
                         <PropertyPrice obj={{
                             Purpose: "vendaPromocao",
-                            ActualPrice: 2000000,  // 🔹 Remova as aspas para garantir que é um número
-                            Taxes: 2000,           // 🔹 Remova as aspas
+                            ActualPrice: 2000000,
+                            Taxes: 2000,
                             PromotionalPrice: 2500000
                         }} />
                         <Furnished obj={{ isFurnished: true }} />
@@ -83,7 +84,7 @@ export default function PropertySpecific(props: { obj: Pick<PropertySpecific, "d
                     </div>
                 </article>
                 <article className="enviroments-interestPoint">
-                    <OtherEnvironmentsProperty obj={{ additional: ["caralhoooooooo", "pinto", "pinto", "pinto"] }} />
+                    <OtherEnvironmentsProperty obj={{ additional: ["Churrasqueira", "Área de serviço", "Lavabo", "Escritório"] }} />
                     <DescriptionTitlePropertySpecific text="pontos de interesse" />
                 </article>
                 <DescriptionProperty obj={{ description: "Se você está procurando seu novo lar na região do Jardim Maria Estela/Via Anchieta, já encontrou! Apartamento impecável e ensolarado (face norte), 2 dormitórios e 1 vaga livre" }} />
@@ -94,47 +95,71 @@ export default function PropertySpecific(props: { obj: Pick<PropertySpecific, "d
                 <div style={{ display: "flex", justifyContent: "center", width: "100%", marginTop: "115px" }}>
                     <Title text="imóveis semelhantes" tag="h1" />
                 </div>
-                <SliderContent items={[<CardImovel
-                    bairro="Barra do rio molha"
-                    cidade="Jaraguá do Sul"
-                    valor="2000000"
-                    sell={true}
-                    quantQuartos={2}
-                    quantSala={3}
-                    quantBanheiros={5}
-                    informationStatus="string"
-                    category="string" />,
+                <SliderContent items={[
                     <CardImovel
-                    bairro="a"
-                    cidade="a"
-                    valor="2000000"
-                    sell={true}
-                    quantQuartos={2}
-                    quantSala={3}
-                    quantBanheiros={5}
-                    informationStatus="a"
-                    category="a" />,
+                        bairro="a"
+                        cidade="a"
+                        valor="2000000"
+                        sell={true}
+                        quantQuartos={2}
+                        quantSala={3}
+                        quantBanheiros={5}
+                        informationStatus="a"
+                        category="a" />,
                     <CardImovel
-                    bairro="b"
-                    cidade="b"
-                    valor="2000000"
-                    sell={true}
-                    quantQuartos={2}
-                    quantSala={3}
-                    quantBanheiros={5}
-                    informationStatus="b"
-                    category="b" />,
+                        bairro="b"
+                        cidade="b"
+                        valor="2000000"
+                        sell={true}
+                        quantQuartos={2}
+                        quantSala={3}
+                        quantBanheiros={5}
+                        informationStatus="b"
+                        category="b" />,
                     <CardImovel
-                    bairro="c"
-                    cidade="c"
-                    valor="2000000"
-                    sell={true}
-                    quantQuartos={2}
-                    quantSala={3}
-                    quantBanheiros={5}
-                    informationStatus="c"
-                    category="c " />
-                    ]} />
+                        bairro="c"
+                        cidade="c"
+                        valor="2000000"
+                        sell={true}
+                        quantQuartos={2}
+                        quantSala={3}
+                        quantBanheiros={5}
+                        informationStatus="c"
+                        category="c " />,
+                    <CardImovel
+                        bairro="1"
+                        cidade="1"
+                        valor="2000000"
+                        sell={true}
+                        quantQuartos={2}
+                        quantSala={3}
+                        quantBanheiros={5}
+                        informationStatus="1"
+                        category="1 " />,
+                    <CardImovel
+                        bairro="2"
+                        cidade="2"
+                        valor="2000000"
+                        sell={true}
+                        quantQuartos={2}
+                        quantSala={3}
+                        quantBanheiros={5}
+                        informationStatus="2"
+                        category="2 " />,
+                    <CardImovel
+                        bairro="3"
+                        cidade="3"
+                        valor="2000000"
+                        sell={true}
+                        quantQuartos={2}
+                        quantSala={3}
+                        quantBanheiros={5}
+                        informationStatus="3"
+                        category="3 " />
+                ]} />
+            </div>
+            <div style={{margin: "200px 0 100px 0"}}>
+                <RealterAssociatedVertical obj={{ name: "KAUANI DA SILVA", cellphone: "+55 (47) 11111-1111" }} />
             </div>
             <Footer />
         </>

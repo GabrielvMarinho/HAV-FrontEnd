@@ -1,17 +1,19 @@
 "use client"
 
 import { JSX, useState } from "react";
-import "./css/style.css"
+import "./css/style.css";
+import ButtonSlideContent from "../Inputs/ButtonSlideBackContent";
+import ButtonSlideNextContent from "../Inputs/ButtonSlideNextContent"
 
 export default function SliderContent(props :{ items: JSX.Element[] }){
 
     const [page, setPage] = useState(0)
     const nextPage = () => {
-        setPage((prevPage) => (prevPage + 1) % props.items.length);
+        setPage((prevPage) => (prevPage + 3) % props.items.length);
       };
     
       const prevPage = () => {
-        setPage((prevPage) => (prevPage - 1 + props.items.length) % props.items.length);
+        setPage((prevPage) => (prevPage - 3 + props.items.length) % props.items.length);
       };
     
       return (
@@ -19,7 +21,7 @@ export default function SliderContent(props :{ items: JSX.Element[] }){
           <div className="sliderContent">
           
           <button onClick={prevPage} className="changeSliderButton">
-                Prev
+                <ButtonSlideContent/>
             </button>
               <div className="sliderHidden sliderItemHiddenLeft">
                 {props.items[(page - 1 + props.items.length) % props.items.length]}
@@ -35,7 +37,7 @@ export default function SliderContent(props :{ items: JSX.Element[] }){
     
             
             <button onClick={nextPage} className="next-button">
-              Next 
+              <ButtonSlideNextContent/> 
             </button>
           </div>
         </>

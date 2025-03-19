@@ -21,6 +21,7 @@ export default function RealtorAssociated(props: { obj: Pick<Realtor, "id" | "na
                         color=""
                         background="" />
                     <p className="ou">OU</p>
+                    <img src="/Image/whatsapp.png" alt="Whatsapp icon" />
                 </div>
             </div>
         </article>

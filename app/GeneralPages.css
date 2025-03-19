@@ -31,7 +31,6 @@
 .sliderContent{
     display: flex;
     gap: 10px;
-
 }
 .sliderContentMain{
     transition: transform 0.5s ease-in-out;
@@ -39,7 +38,6 @@
 .sliderItemHiddenLeft{
     position: absolute;
     left: 0;
-
     margin-left: -50%;
 
 }
@@ -51,7 +49,6 @@
 }
   
 .sliderHidden{
-    
     filter: saturate(0);
     opacity: 0.5;
 }
