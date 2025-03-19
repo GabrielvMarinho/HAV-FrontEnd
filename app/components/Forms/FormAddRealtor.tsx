@@ -17,7 +17,6 @@ import Title from "../NonInteractable/Title";
 import { textFields } from "../globalFormsConfig/InputTextConfig";
 import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
 import postRealtor from "@/app/apiCalls/Realtor/postRealtor";
-import InputText from "../Inputs/InputText";
 
 export default function FormAddRealter() {
 
@@ -130,6 +129,16 @@ export default function FormAddRealter() {
                             error={form.formState.errors[textFields.name.name as keyof NewRealtor]}
                         />
                         <InputText
+                            key={textFields.phoneNumber.id}
+                            name={textFields.phoneNumber.name}
+                            size={textFields.phoneNumber.size}
+                            placeholder={textFields.phoneNumber.placeholder}
+                            text={textFields.phoneNumber.text}
+                            id={textFields.phoneNumber.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.phoneNumber.name as keyof NewRealtor]}
+                        />
+                        <InputText
                             key={textFields.cpf.id}
                             name={textFields.cpf.name}
                             size={textFields.cpf.size}
@@ -150,36 +159,6 @@ export default function FormAddRealter() {
                             error={form.formState.errors[textFields.email.name as keyof NewRealtor]}
                         />
                         <InputText
-                            key={textFields.cep.id}
-                            name={textFields.cep.name}
-                            size={textFields.cep.size}
-                            placeholder={textFields.cep.placeholder}
-                            text={textFields.cep.text}
-                            id={textFields.cep.id}
-                            register={form.register}
-                            error={form.formState.errors[textFields.cep.name as keyof NewRealtor]}
-                        />
-                        <InputText
-                            key={textFields.street.id}
-                            name={textFields.street.name}
-                            size={textFields.street.size}
-                            placeholder={textFields.street.placeholder}
-                            text={textFields.street.text}
-                            id={textFields.street.id}
-                            register={form.register}
-                            error={form.formState.errors[textFields.street.name as keyof NewRealtor]}
-                        />
-                        <InputText
-                            key={textFields.phoneNumber.id}
-                            name={textFields.phoneNumber.name}
-                            size={textFields.phoneNumber.size}
-                            placeholder={textFields.phoneNumber.placeholder}
-                            text={textFields.phoneNumber.text}
-                            id={textFields.phoneNumber.id}
-                            register={form.register}
-                            error={form.formState.errors[textFields.phoneNumber.name as keyof NewRealtor]}
-                        />
-                        <InputText
                             key={textFields.cellphone.id}
                             name={textFields.cellphone.name}
                             size={textFields.cellphone.size}
@@ -190,34 +169,14 @@ export default function FormAddRealter() {
                             error={form.formState.errors[textFields.cellphone.name as keyof NewRealtor]}
                         />
                         <InputText
-                            key={textFields.propertyNumber.id}
-                            name={textFields.propertyNumber.name}
-                            size={textFields.propertyNumber.size}
-                            placeholder={textFields.propertyNumber.placeholder}
-                            text={textFields.propertyNumber.text}
-                            id={textFields.propertyNumber.id}
+                            key={textFields.cep.id}
+                            name={textFields.cep.name}
+                            size={textFields.cep.size}
+                            placeholder={textFields.cep.placeholder}
+                            text={textFields.cep.text}
+                            id={textFields.cep.id}
                             register={form.register}
-                            error={form.formState.errors[textFields.propertyNumber.name as keyof NewRealtor]}
-                        />
-                        <InputText
-                            key={textFields.complement.id}
-                            name={textFields.complement.name}
-                            size={textFields.complement.size}
-                            placeholder={textFields.complement.placeholder}
-                            text={textFields.complement.text}
-                            id={textFields.complement.id}
-                            register={form.register}
-                            error={form.formState.errors[textFields.complement.name as keyof NewRealtor]}
-                        />
-                        <InputText
-                            key={textFields.creci.id}
-                            name={textFields.creci.name}
-                            size={textFields.creci.size}
-                            placeholder={textFields.creci.placeholder}
-                            text={textFields.creci.text}
-                            id={textFields.creci.id}
-                            register={form.register}
-                            error={form.formState.errors[textFields.creci.name as keyof NewRealtor]}
+                            error={form.formState.errors[textFields.cep.name as keyof NewRealtor]}
                         />
                         <InputDropdown
                             key={dropdownFields.city.id}
@@ -248,6 +207,46 @@ export default function FormAddRealter() {
                             options={dropdownFields.neighborhood.options}
                             register={form.register}
                             error={form.formState.errors[dropdownFields.neighborhood.name as keyof NewRealtor]}
+                        />
+                        <InputText
+                            key={textFields.propertyNumber.id}
+                            name={textFields.propertyNumber.name}
+                            size={textFields.propertyNumber.size}
+                            placeholder={textFields.propertyNumber.placeholder}
+                            text={textFields.propertyNumber.text}
+                            id={textFields.propertyNumber.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.propertyNumber.name as keyof NewRealtor]}
+                        />
+                        <InputText
+                            key={textFields.creci.id}
+                            name={textFields.creci.name}
+                            size={textFields.creci.size}
+                            placeholder={textFields.creci.placeholder}
+                            text={textFields.creci.text}
+                            id={textFields.creci.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.creci.name as keyof NewRealtor]}
+                        />
+                        <InputText
+                            key={textFields.street.id}
+                            name={textFields.street.name}
+                            size={textFields.street.size}
+                            placeholder={textFields.street.placeholder}
+                            text={textFields.street.text}
+                            id={textFields.street.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.street.name as keyof NewRealtor]}
+                        />
+                        <InputText
+                            key={textFields.complement.id}
+                            name={textFields.complement.name}
+                            size={textFields.complement.size}
+                            placeholder={textFields.complement.placeholder}
+                            text={textFields.complement.text}
+                            id={textFields.complement.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.complement.name as keyof NewRealtor]}
                         />
 
                     </div>

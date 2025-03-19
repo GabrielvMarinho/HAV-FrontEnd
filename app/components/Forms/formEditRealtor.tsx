@@ -22,6 +22,7 @@ import editCustomer from "@/app/apiCalls/Customer/editCustomer";
 import searchRealtorById from "@/app/apiCalls/Realtor/searchRealtorById";
 import editRealtor from "@/app/apiCalls/Realtor/Realtor";
 import { textFields } from "../globalFormsConfig/InputTextConfig";
+import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
 
 export default function FormEditRealtor(props :{id :any }) {
     
@@ -203,47 +204,31 @@ export default function FormEditRealtor(props :{id :any }) {
                                 />
 
                                 <InputDropdown
-                                    defaultValue={realtor?.state ?? ""}
-                                    key="estado"
-                                    name="state"
-                                    size="medium"
-                                    text="Estado"
-                                    id="estado"
-                                    options={[
-                                        ["sc", "Santa Catarina"],
-                                        ["pr", "Paraná"],
-                                        ["rs", "Rio Grande do Sul"]
-                                    ]}
+                                    key={dropdownFields.state.id}
+                                    name={dropdownFields.state.name}
+                                    size={dropdownFields.state.size}
+                                    text={dropdownFields.state.text}
+                                    id={dropdownFields.state.id}
+                                    options={dropdownFields.state.options}
                                 />
 
                                 <InputDropdown
-                                    defaultValue={realtor?.city ?? ""}
-                                    key="cidade"
-                                    name="city"
-                                    size="medium"
-                                    text="Cidade"
-                                    id="cidade"
-                                    options={[
-                                        ["São Paulo", "Jaraguá do Sul"],
-                                        ["blumenau", "Blumenau"],
-                                        ["joinville", "Joinville"]
-                                    ]}
+                                   key={dropdownFields.city.id}
+                                   name={dropdownFields.city.name}
+                                   size={dropdownFields.city.size}
+                                   text={dropdownFields.city.text}
+                                   id={dropdownFields.city.id}
+                                   options={dropdownFields.city.options}
                                 />
 
                                 <InputDropdown
-                                    defaultValue={realtor?.neighborhood ?? ""}
-                                    key="bairro"
-                                    name="neighborhood"
-                                    size="medium"
-                                    text="Bairro"
-                                    id="bairro"
-                                    options={[
-                                        ["centro", "Centro"],
-                                        ["vila_nova", "Vila Nova"],
-                                        ["três_rios_do_norte", "Três Rios do Norte"]
-                                    ]}
+                                    key={dropdownFields.neighborhood.id}
+                                    name={dropdownFields.neighborhood.name}
+                                    size={dropdownFields.neighborhood.size}
+                                    text={dropdownFields.neighborhood.text}
+                                    id={dropdownFields.neighborhood.id}
+                                    options={dropdownFields.neighborhood.options}
                                 />
-
 
                     </div>
                     <div className="divButtonsAceptCancelForms">          
