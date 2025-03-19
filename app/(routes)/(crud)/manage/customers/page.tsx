@@ -10,7 +10,7 @@ import Trashcan from "@/app/components/IconsTSX/Trashcan";
 import getByParamsCustomers from "@/app/apiCalls/Customer/getByParamsCustomers";
 import deleteCustomerList from "@/app/apiCalls/Customer/deleteByListCustomer";
 import changeArchivedStatusCustomer from "@/app/apiCalls/Customer/changeArchivedStatusCustomer";
-import { filterFields } from "@/app/components/globalFormsConfig/InputFilterConfig";
+import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
 
 
 
@@ -63,11 +63,11 @@ export default async function page({searchParams}: {searchParams: {
           size="medium"
           inputs={
             [
-              filterFields.cpf, 
-              filterFields.name, 
-              filterFields.email, 
-              filterFields.cellphone,
-              filterFields.phoneNumber
+              InputFilterConfig.cpf, 
+              InputFilterConfig.name, 
+              InputFilterConfig.email, 
+              InputFilterConfig.cellphone,
+              InputFilterConfig.phoneNumber
             ]
           }
           inputsDropdown={inputDropdown}

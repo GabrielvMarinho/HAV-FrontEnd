@@ -67,6 +67,8 @@ export default async function page({searchParams}: {searchParams: {
               inputs={inputs}
               inputsDropdown={InputDropdown}
               inputPriceRanges={priceRanges}
+              inputChooseQuantites={[]}
+
               />
               <TableList deleteFunction ={deletePropertyList} changeArchivedStatus = {changeArchivedStatusProperty} archived={true} context="admin" size="large" titles={["id imóvel", "preço",  "tipo imóvel", "finalidade", "status"]} 
               data={properties} totalPages={totalPages}/>

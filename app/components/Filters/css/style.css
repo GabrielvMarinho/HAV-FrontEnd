@@ -2,17 +2,37 @@
 
 .filterMain{
   padding: 30px;
+  padding-bottom: 20px;
   border-radius: var(--xborder-box);
   background-color: var(--box-mid-dark-red);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-.filterMain .mainSection{
+.filterMain .mainSection, .subSection{
   display: flex;
   gap: 20px;
 }
+.subSection{
+  height: 78px;
+}
 .boxRangeFilter{
+  margin-top: 8px;
     width: 200px;
-  }
-  
+}
+.moreFilter{
+  justify-content: center;
+  display: flex;
+  gap: 5px;
+  opacity: 0.5;
+  color: var(--text-white);
+}
+.moreFilter button{
+  font-weight: 600;
+  color: var(--text-white);
+  font-size: var(--text-s);
+  background-color: transparent;
+}
   input[type="number"]::-webkit-outer-spin-button,
   input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -29,7 +49,7 @@
     color: var(--text-white);
   }
   .priceBox div h3{
-    font-size: var(--text-sm);
+    font-size: var(--text-s);
     color: var(--text-white);
     opacity: 0.6;
     font-weight: 100;

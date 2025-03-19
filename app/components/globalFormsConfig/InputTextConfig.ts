@@ -10,8 +10,8 @@ export const textFields = {
     complement: { name: "complement", size: "small", text: "Complemento", placeholder: "1030", id: "complemento" },
     creci: { name: "creci", size: "small", text: "Creci", placeholder: "ex:", id: "creci" },
     cnpj: { name: "cnpj", size: "large", text: "CNPJ", placeholder: "ex: 12.123.123/0001-12", id: "cnpj" },
-
-
+    
+    
     propertyDescription:{ name: "propertyDescription", size: "large", text: "Descrição da Propriedade", placeholder: "ex:", id: "propertyDescription" },
     propertyTitle:{ name: "title", size: "small", text: "Título da Propriedade", placeholder: "ex:", id: "title" },
     propertyArea:{ name: "area", size: "small", text: "Área", placeholder: "ex:", id: "area"},

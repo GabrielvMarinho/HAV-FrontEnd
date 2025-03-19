@@ -22,6 +22,7 @@ import "../../GeneralPages.css"
 import "../../variables.css"
 
 import HavLogoDark from "@/app/components/IconsTSX/HavLogoDark";
+import MainHomeInfo from "@/app/components/Information/mainHomeInfo";
 import SliderContent from "@/app/components/Information/SliderContent";
 import ChamadaTelefonica from "../../components/IconsTSX/CellPhone";
 import Button from "@/app/components/Inputs/Button";
@@ -42,9 +43,9 @@ export default function Home() {
     <>
       <img className={"bannerHome"} src="/Image/BannerHome.png"/>
     <section className="homeMainSection">
-      <div className={"bannerHomeTitle"} style={{display: "flex", alignItems: "center", marginBottom:"80px"}}>
+      <div className={"bannerHomeTitle"} style={{display: "flex", alignItems: "center", marginBottom:"60px"}}>
         <h1 className="mainTitleHome">CONECTANDO VOCÊ AO SEU NOVO LAR</h1>
-        <HavLogoDark height={170} width={170}/>
+        <HavLogoDark height={160} width={160}/>
       </div>
       
 
@@ -226,6 +227,7 @@ export default function Home() {
         informationStatus="string" 
         category="string" 
       />
+
       <CardImovel 
         bairro="Barra do rio molha" 
         cidade="Jaraguá do Sul" 
@@ -237,7 +239,11 @@ export default function Home() {
         informationStatus="LANÇAMENTO" 
         category="VENDA" 
       />
-      <PropertyPrice obj={{PromotionalPrice: 2000000 ,ActualPrice: 1999, Taxes: 900, Purpose: "vendaPromocao"}}/>
+
+      
+      <MainHomeInfo/>
+      
+      
       <Link href="/Imoveis">clique aqui</Link>
       <SelectedStar width={54} height={54} color={"#001111"}/>
       <NotSelectedStar width={54} height={54} color={"#001111"}/>

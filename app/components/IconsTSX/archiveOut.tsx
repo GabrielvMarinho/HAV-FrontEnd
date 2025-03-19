@@ -2,6 +2,9 @@
 import Icon from "./IconInterface";
 
 export default function ArchiveOut({ width, height, color }: Icon) {
+
+    const asd = 10;
+    console.log("dasdasd")
     return (
         <svg width={width} height={height} viewBox="0 0 101 101" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_4061_44670)">
@@ -13,5 +16,5 @@ export default function ArchiveOut({ width, height, color }: Icon) {
             </clipPath>
             </defs>
             </svg>
-    )
+    ) 
 }
