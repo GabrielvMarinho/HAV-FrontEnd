@@ -36,6 +36,52 @@
     text-decoration: underline;
 }
 
+.Price {
+    color: var(--text-light-red);
+    font-family: Montserrat;
+    text-align: start;
+    font-style: normal;
+}
+
+.PromotionalPrice {
+    font-size: var(--text-m);
+    font-weight: 900;
+    line-height: 90%; /* 16.2px */
+    letter-spacing: 1.26px;
+    text-decoration: line-through;
+    text-decoration-thickness: 3px;
+}
+
+.ActualPrice {
+    font-size: var(--text-xxl);
+    letter-spacing: 2.8px;
+    font-weight: 900;
+    line-height: 90%;
+}
+
+.Taxes {
+    font-size: var(--text-s);
+    font-weight: 800;
+    line-height: 130%;
+}
+
+.horizontalLine{
+    background-color: var(--box-red-pink);
+    height: 1px; 
+
+}
+
+.verticalLine{
+    background-color: var(--box-dark-red);
+    width: 1px; 
+}
+
+.isFurnishedText{
+    color: var(--box-dark-red-option);
+    font-size: var(--text-ml);
+    font-weight: 500;
+}
+
 @media (width < 992px) {
     .sizeTitle{
         font-size: var(--text-ml);
