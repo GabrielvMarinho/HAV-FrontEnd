@@ -6,7 +6,7 @@ export const newUser = z.object({
     email: z.string().min(1, { message: "* Campo obrigatório" })
         .email({ message: "* E-mail inválido" }).refine(email => email.includes("@"), { message: "O E-mal deve ser válido", path: ["email"], }),
     phoneNumber: z.string().min(1, { message: "* Campo obrigatório" })
-        .regex(/^\d{10,11}$/, { message: "* 10 ou 11 dígitos" }), // Aceita fixo (10) ou celular (11)
+                .regex(/^\d{10}$/, { message: "* 10 dígitos" }),
     cellphone: z.string().min(1, { message: "* Campo obrigatório" })
         .regex(/^\d{11}$/, { message: "* 11 dígitos" }), // Apenas números
     cpf: z.string().optional()

@@ -6,7 +6,7 @@ export const newRealtor = z.object({
         .email({ message: "* E-mail inválido" })
         .refine(email => email.includes("@"), { message: "O E-mal deve ser válido", path: ["email"], }),
     phoneNumber: z.string().min(1, { message: "* Campo obrigatório" })
-        .regex(/^\d{10,11}$/, { message: "* 10 ou 11 dígitos" }),
+                .regex(/^\d{10}$/, { message: "* 10 dígitos" }),
     cellphone: z.string().min(1, { message: "* Campo obrigatório" })
         .regex(/^\d{11}$/, { message: "* 11 dígitos" }),
     cpf: z.string().min(11, { message: "* CPF deve ter 11 dígitos" })

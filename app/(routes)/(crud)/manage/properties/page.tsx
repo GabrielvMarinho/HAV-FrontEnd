@@ -22,12 +22,20 @@ export default async function page({searchParams}: {searchParams: {
   propertyCategory?: string;
   propertyStatus?: string;
   page?: number;
+  bedRoom?: boolean,
+  bathRoom?: boolean,
+  garageSpace?: boolean,
+  suite?: boolean,
+  purpose?: string
 
   }}){
     const params = await searchParams;
-    const {propertyCode=null, minPrice=null, maxPrice=null, propertyType=null, propertyCategory=null, propertyStatus=null, page=0} = params
+    const {propertyCode=null, minPrice=null, maxPrice=null, propertyType=null, 
+      propertyCategory=null, propertyStatus=null, page=0, bedRoom=null, 
+      bathRoom=null, garageSpace=null, suite=null, purpose=null} = params
     
-    const {properties, totalPages} = await getByParamsProperties(propertyCode, propertyType, propertyCategory, propertyStatus, minPrice, maxPrice, false, page)
+    const {properties, totalPages} = await getByParamsProperties(propertyCode, propertyType, propertyCategory, propertyStatus, 
+      minPrice, maxPrice, false, page, bedRoom, bathRoom, garageSpace, suite, purpose)
     
 
     const inputs = [

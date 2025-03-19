@@ -90,8 +90,8 @@ export const dropdownFields = {
         text: "Destaque",
         id: "highlight",
         options: [
-            [true, "SIM"],
-            [false, "NÃO"]
+            [1, "SIM"],
+            [0, "NÃO"]
         ]
     },
     bedRoom: {
@@ -215,8 +215,8 @@ export const dropdownFields = {
         text: "Mobiliado",
         id: "isFurnished",
         options: [
-            [true, "SIM"],
-            [false, "NÃO"]
+            [1, "SIM"],
+            [0, "NÃO"]
         ]
     },
     allowsPet: {
@@ -225,8 +225,8 @@ export const dropdownFields = {
         text: "Animais",
         id: "allowsPet",
         options: [
-            [true, "Permitido"],
-            [false, "Não Permitido"]
+            [1, "Permitido"],
+            [0, "Não Permitido"]
         ]
     }
 }

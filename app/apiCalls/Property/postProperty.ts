@@ -21,7 +21,6 @@ export default async function(
           "promotionalPrice": formData.promotionalPrice,
           "highlight": formData.highlight,
           "floors":formData.floors,
-
           "propertyCategory": "",
           "floors":formData.floors,
 
@@ -52,6 +51,8 @@ export default async function(
           "proprietor": Number(formData.proprietor)
         }
       ))
+
+      
   
       try{
       const response = await fetch(url,{
@@ -69,7 +70,7 @@ export default async function(
           "area": formData.area,
           "price": formData.price,
           "promotionalPrice": formData.promotionalPrice,
-          "highlight": formData.highlight,
+          "highlight": formData.highlight==="1"?true:false,
           "floors":formData.floors,
 
           "propertyCategory": "",
@@ -94,8 +95,8 @@ export default async function(
             "garageSpace": formData.garageSpace,
             "suite": formData.suite,
             "livingRoom": formData.livingRoom,
-            "isFurnished": formData.isFurnished,
-            "allowsPet": formData.allowsPet
+            "isFurnished": formData.isFurnished==="1"?true:false,
+            "allowsPet": formData.allowsPet==="1"?true:false
           },
           "additionals": null,
           "realtors": formData.realtors.split(",").map((s: string) => Number(s.trim())),

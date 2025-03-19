@@ -5,17 +5,17 @@ export default async function(
 
     propertyCode?: string, 
     propertyType?: string, 
-    purpose?: string,
     propertyCategory?: string,
     propertyStatus?: string,
     minPrice?: number,
     maxPrice?: number,
     archived?: boolean,
+    page?: string,
     bedRoom?: boolean,
     bathRoom?: boolean,
     garageSpace?: boolean,
     suite?: boolean,
-    page?: string
+    purpose?: string
 
     ): Promise<{
       properties: Property[];
@@ -23,6 +23,10 @@ export default async function(
     }>{
       const url = `http://localhost:9090/property/filter?page=${page}`
       
+
+      console.log("---------")
+      console.log(minPrice)
+      console.log(maxPrice)
       if(purpose==="venda"){
         if(minPrice===null){
           minPrice=0
@@ -33,12 +37,29 @@ export default async function(
 
       } else if(purpose==="locacao") {
         if(minPrice===null){
-          minPrice=0
+          minPrice = 0
         }
         if(maxPrice===null || maxPrice ===InputFilterConfig.priceRangesRent.max){
           maxPrice = 100000000
         }
-      }    
+      }  
+      
+      console.log(JSON.stringify({
+        "propertyCode":propertyCode===""?null:propertyCode, 
+          "minPric":minPrice, 
+          "maxPric":maxPrice,
+          "propertyType":propertyType===""?null:propertyType,
+          "propertyCategory":propertyCategory===""?null:propertyCategory,
+          "propertyStatus":propertyStatus===""?null:propertyStatus,
+          "archived":archived,
+          "propertyFeatures":{
+            "bedRoom":bedRoom,
+            "bathRoom":bathRoom,
+            "garageSpace":garageSpace,
+            "suite":suite
+          }
+          
+      }))
     try{
       const response = await fetch(url,{
         method:"POST",
@@ -53,10 +74,13 @@ export default async function(
           "propertyCategory":propertyCategory===""?null:propertyCategory,
           "propertyStatus":propertyStatus===""?null:propertyStatus,
           "archived":archived,
-          "bedRoom":bedRoom,
-          "bathRoom":bathRoom,
-          "garageSpace":garageSpace,
-          "suite":suite
+          "propertyFeatures":{
+            "bedRoom":bedRoom,
+            "bathRoom":bathRoom,
+            "garageSpace":garageSpace,
+            "suite":suite
+          }
+          
         })
       });
   
