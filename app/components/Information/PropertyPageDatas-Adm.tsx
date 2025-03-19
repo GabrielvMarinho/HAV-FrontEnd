@@ -27,7 +27,7 @@ export default function propertyPageDatasAdm(props: {
                     textTransform: "uppercase"
                 }}>{props.objectType}</p>
                 <HorizontalLine size={259} />
-                <CategoryCardImovel text="venda" />
+                <CategoryCardImovel text="venda"/>
                 <StarFavorite selected={false} width={30} height={30} color="var(--box-dark-red)" />
                 <ShareProperty width={30} height={30} />
             </div>

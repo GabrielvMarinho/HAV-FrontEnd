@@ -84,10 +84,9 @@ export default function PropertySpecific(props: { obj: Pick<PropertySpecific, "d
                     <HorizontalPropertySpecific />
                     <div className="containerGraphic"></div>
                 </section>
-                <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+                <div style={{ display: "flex", justifyContent: "center", width: "100%", marginTop: "115px" }}>
                     <Title text="imóveis semelhantes" tag="h1" />
                 </div>
-
 
             </div>
             <Footer />
