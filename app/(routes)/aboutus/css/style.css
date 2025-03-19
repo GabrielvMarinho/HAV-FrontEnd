@@ -1,0 +1,22 @@
+@import "../../../variables.css";
+
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.titleAboutus {
+    width: fit-content;
+    font-weight: 900;
+    color: var(--box-mid-dark-red);
+    margin-bottom: 2px;
+    font-size: var(--text-l);
+}
+
+.titleLineAboutus {
+    width: 45px;
+    height: 3px;
+    background-color: var(--box-red-pink);
+    margin-left: 0px;
+}
