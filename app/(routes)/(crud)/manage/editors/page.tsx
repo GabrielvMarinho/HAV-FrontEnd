@@ -9,7 +9,7 @@ import TableList from "@/app/components/Information/TableList";
 import getByParamsEditors from "@/app/apiCalls/Editor/getByParamsEditors";
 import deleteEditorList from "@/app/apiCalls/Editor/deleteByListEditor";
 import changeArchivedStatusEditor from "@/app/apiCalls/Editor/changeArchivedStatusEditor";
-import { filterFields } from "@/app/components/globalFormsConfig/InputFilterConfig";
+import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
 
 
 
@@ -54,11 +54,11 @@ export default async function page({searchParams}: {searchParams: {
             size="medium" 
             inputs={
               [
-                filterFields.cpf, 
-                filterFields.name, 
-                filterFields.email, 
-                filterFields.cellphone,
-                filterFields.phoneNumber
+                InputFilterConfig.cpf, 
+                InputFilterConfig.name, 
+                InputFilterConfig.email, 
+                InputFilterConfig.cellphone,
+                InputFilterConfig.phoneNumber
               ]
             }
             inputsDropdown={[]}

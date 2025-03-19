@@ -8,7 +8,7 @@ import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import getByParamsProprietors from "@/app/apiCalls/Proprietor/getByParamsProprietors";
 import deleteProprietorList from "@/app/apiCalls/Proprietor/deleteByListProprietor";
 import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArchivedStatusProprietor";
-import { filterFields } from "@/app/components/globalFormsConfig/InputFilterConfig";
+import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
 
 
 export default async function page({ searchParams }: {
@@ -54,12 +54,12 @@ export default async function page({ searchParams }: {
           size="medium"
           inputs={
             [
-              filterFields.cpf, 
-              filterFields.cnpj, 
-              filterFields.name, 
-              filterFields.email, 
-              filterFields.cellphone,
-              filterFields.phoneNumber
+              InputFilterConfig.cpf, 
+              InputFilterConfig.cnpj, 
+              InputFilterConfig.name, 
+              InputFilterConfig.email, 
+              InputFilterConfig.cellphone,
+              InputFilterConfig.phoneNumber
             ]
           }
           inputsDropdown={inputDropdown}

@@ -45,17 +45,14 @@ const PriceRangeSlider = (props: {min :number, max :number, step :number, id :nu
 
   return (
     <div>
-      <h3 className='label' style={{textAlign: "center"}}>PREÇO</h3>
+      <h3 className='label'>Preço</h3>
       <div className="boxRangeFilter">
         <div className="priceBox">
           <div>
-            <h3 style={{textAlign:"left"}}>Min</h3>
             <p>R${minPrice.toLocaleString('en-US').replace(/,/g, '.')}</p>
           </div>
           <div>
-            <h3 style={{textAlign:"right"}}>Max</h3>
             <p>R${maxPrice.toLocaleString('en-US').replace(/,/g, '.')}{maxPrice==2000000?<span>+</span>:<span></span>}</p>          
-
           </div>
         </div>
         <div className="slider">

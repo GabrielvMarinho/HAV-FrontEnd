@@ -12,7 +12,7 @@ import getByParamsAdms from "@/app/apiCalls/Adm/getByParamsAdms";
 import deleteByListAdm from "@/app/apiCalls/Adm/deleteByListAdm";
 import changeArchivedStatusAdm from "@/app/apiCalls/Adm/changeArchivedStatusAdm";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
-import { filterFields } from "@/app/components/globalFormsConfig/InputFilterConfig";
+import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
 
 
 
@@ -58,11 +58,11 @@ export default async function page({searchParams}: {searchParams: {
             size="medium" 
             inputs={
               [
-                filterFields.cpf, 
-                filterFields.name, 
-                filterFields.email, 
-                filterFields.cellphone,
-                filterFields.phoneNumber
+                InputFilterConfig.cpf, 
+                InputFilterConfig.name, 
+                InputFilterConfig.email, 
+                InputFilterConfig.cellphone,
+                InputFilterConfig.phoneNumber
               ]
             }
             inputsDropdown={[]}

@@ -10,7 +10,7 @@ import deleteByListAdm from "../../../../apiCalls/Adm/deleteByListAdm"
 import deleteRealtorList from "@/app/apiCalls/Realtor/deleteByListRealtor";
 import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArchivedStatusProprietor";
 import changeArchivedStatusRealtor from "@/app/apiCalls/Realtor/changeArchivedStatusRealtor";
-import { filterFields } from "@/app/components/globalFormsConfig/InputFilterConfig";
+import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
 
 
 
@@ -53,11 +53,11 @@ export default async function page({searchParams}: {searchParams: {
             size="medium"
             inputs={
               [
-                filterFields.cpf, 
-                filterFields.name, 
-                filterFields.email, 
-                filterFields.cellphone,
-                filterFields.phoneNumber
+                InputFilterConfig.cpf, 
+                InputFilterConfig.name, 
+                InputFilterConfig.email, 
+                InputFilterConfig.cellphone,
+                InputFilterConfig.phoneNumber
               ]
             }
             inputsDropdown={[]}

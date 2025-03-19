@@ -12,6 +12,10 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import ButtonComprarAlugar from "../Inputs/ToggleRentOrBuy";
 import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
 import ToggleRentOrBuy from "../Inputs/ToggleRentOrBuy";
+import ChooseQuantity from "../Inputs/ChooseQuantity";
+import { InputChooseQuantity } from "../globalFormsConfig/InputChooseQuantity";
+import { InputFilterConfig } from "../globalFormsConfig/InputFilterConfig";
+import Filter from "../IconsTSX/Filter";
 
 export default function MainFilter(){
     
@@ -20,24 +24,23 @@ export default function MainFilter(){
 
     
     
-    
-    
-    // const [priceRange, setPriceRange] = useState({ min: props.inputPriceRanges?.[0]?.min ?? 0, max: props.inputPriceRanges?.[0]?.max });
+    const [isOpen, setIsOpen] = useState(false)
+    const [priceRangeSell, setPriceRangeSell] = useState({ min: 10000, max: 2000000});
+
     
 
-    // const handlePriceChange = (min: number, max: number) => {
-    //     if(!props.inputPriceRanges) return 
-    //     if(max==2000000) max = 100000000
-    //     console.log(max)
-    //     setPriceRange({ min, max });
-    // };
+    const handlePriceChange = (min: number, max: number) => {
 
-    const pathname = usePathname()
+        setPriceRangeSell({ min, max });
+    };
+
+
+    const pathname = "/search"
     
       
     
     return(
-        <form action={pathname} className="filterMain filterMainShort">
+        <form action={pathname} className="filterMain">
             
             <div className="mainSection">
                 <ToggleRentOrBuy/>
@@ -48,6 +51,15 @@ export default function MainFilter(){
                     size={"large"}
                     id={dropdownFields.propertyType.id}
                 />
+                <PriceRangeSlider
+                    name = {InputFilterConfig.priceRangesSell.name}
+                    min={InputFilterConfig.priceRangesSell.min}
+                    max={InputFilterConfig.priceRangesSell.max}
+                    step={InputFilterConfig.priceRangesSell.step}
+                    id={InputFilterConfig.priceRangesSell.id}
+                    onChange={handlePriceChange}
+                    
+                />
                 <InputDropdown 
                     text={dropdownFields.neighborhood.text}
                     name = {dropdownFields.neighborhood.name}
@@ -57,8 +69,32 @@ export default function MainFilter(){
                 />
                 <button type="submit" className="buttonBuscaClaro lightHover">
                 <SearchIcon height={35} width={35} color={"var(--box-red-pink)"}/>
-            </button>
+                </button>
             </div>
+            {isOpen &&
+                <div className="subSection">
+                    <ChooseQuantity name={InputChooseQuantity.bedRoom.name}
+                    text={InputChooseQuantity.bedRoom.text}
+                    id={InputChooseQuantity.bedRoom.id}/>
+
+                    <ChooseQuantity name={InputChooseQuantity.bathRoom.name}
+                    text={InputChooseQuantity.bathRoom.text}
+                    id={InputChooseQuantity.bathRoom.id}/>
+
+                    <ChooseQuantity name={InputChooseQuantity.livingRoom.name}
+                    text={InputChooseQuantity.livingRoom.text}
+                    id={InputChooseQuantity.livingRoom.id}/>
+
+                    <ChooseQuantity name={InputChooseQuantity.suite.name}
+                    text={InputChooseQuantity.suite.text}
+                    id={InputChooseQuantity.suite.id}/>
+                </div>
+            }
+            <div className="moreFilter">
+                <Filter height={25} width={25} color="var(--text-white)"/>
+                <button type="button" onClick={() =>{setIsOpen(!isOpen)}}>{isOpen?"Menos Filtros":"Mais Filtros"}</button>
+            </div>
+            
             
         </form>
     );

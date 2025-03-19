@@ -10,8 +10,10 @@ import InputDropdown from "../Inputs/InputDropdown";
 import PriceRangeSlider from "./SlideRange";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import ButtonComprarAlugar from "../Inputs/ToggleRentOrBuy";
+import ChooseQuantity from "../Inputs/ChooseQuantity";
+import { InputChooseQuantity } from "../globalFormsConfig/InputChooseQuantity";
 
-export default function Filter(props: {size :string, inputs :any[], inputsDropdown :any[], inputPriceRanges :any[] | null}){
+export default function Filter(props: {size :string, inputs :any[], inputsDropdown :any[], inputPriceRanges :any[] | null, inputChooseQuantites:any[] | null}){
     
 
     console.log(props.inputPriceRanges)
@@ -44,12 +46,12 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
     
     return(
         <form action={pathname} className="filterSide">
-            
+
             {props.inputs.map((input) => (
                 input &&
                 <InputText
                     name = {input.name}
-                    size={input.size}
+                    size={"medium"}
                     placeholder={input.placeholder}
                     text={input.text}
                     id={input.id}
@@ -60,11 +62,21 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
                 <InputDropdown
                     name = {input.name}
                     options={input.options}
-                    size={input.size}
+                    size={"large"}
                     text={input.text}
                     id={input.id}
                 />
             ))}
+            {props.inputChooseQuantites.map((input) =>(
+                input && 
+                <ChooseQuantity
+                    name={input.name}
+                    id ={input.id}
+                    text={input.text}
+                />
+            ))
+
+            }
             {props.inputPriceRanges.map((input) => (
                 input &&
                 <PriceRangeSlider

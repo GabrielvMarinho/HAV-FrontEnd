@@ -23,7 +23,47 @@
     height: fit-content;
     align-items: center;
 }
+.searchResult{
+    color: var(--box-dark-red);
+    gap: 2px;
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    width: 83vw;
+    left: 0;
+    right: 0;
+}
+.buttonChooseQuantity button{
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
 
+    opacity: 0.25;
+    height: 36px;
+    width: 36px;
+    border-radius: var(--border-box);
+    background-color: var(--box-white);
+    color: var(--text-dark-mid-red);
+    font-size: var(--text-s);
+}
+
+.buttonChooseQuantity .selected{
+    opacity: 1;
+    background-color: var(--box-white);
+}
+.buttonChooseQuantity{
+    display: flex;
+
+    gap: 5px;
+    background-color: transparent;
+
+    color: var(--box-mid-dark-red);
+}
+.searchResultLine{
+    height: 2px;
+    width: 70vw;
+    background-color: var(--box-mid-dark-red);
+    margin-top: 10px;
+    margin-left: 100px;
+}
 .arrowBackContainer p{
     font-weight: 600;
     font-size: var(--text-m);
@@ -209,6 +249,7 @@
 
 }
 .label{
+    font-weight: 400;
     font-size: var(--text-s);
     color: var(--text-white)
 }
@@ -267,22 +308,25 @@
 }
 
 .buttonComprarAlugar {
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
+
     width: 100px;
     height: 37.353px;
-    border-radius: 5px;
+    border-radius: var(--border-box);
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--box-dark-red-option);
-    transition: background-color 0.3s ease;
     font-weight: 500;
-    color: var(--bg-color);
-    opacity: 0.6;
+    color: var(--text-black);
+    opacity: 0.25;
+    background-color: var(--box-white); /* Ensure initial background is set */
+
 }
 
 .buttonComprarAlugar.selected {
+    transition: background-color 0.3s ease;
     background-color: var(--text-white); 
-    color: var(--box-mid-dark-red);
+    color: var(--text-light-red);
     font-size: var(--text-s);
     opacity: 1;
 }

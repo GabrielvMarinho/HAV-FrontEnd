@@ -41,9 +41,9 @@ export default function Home() {
     <>
       <img className={"bannerHome"} src="/Image/BannerHome.png"/>
     <section className="homeMainSection">
-      <div className={"bannerHomeTitle"} style={{display: "flex", alignItems: "center", marginBottom:"80px"}}>
+      <div className={"bannerHomeTitle"} style={{display: "flex", alignItems: "center", marginBottom:"60px"}}>
         <h1 className="mainTitleHome">CONECTANDO VOCÊ AO SEU NOVO LAR</h1>
-        <HavLogoDark height={170} width={170}/>
+        <HavLogoDark height={160} width={160}/>
       </div>
       
 
