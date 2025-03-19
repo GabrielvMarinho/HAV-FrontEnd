@@ -14,6 +14,8 @@ import DescriptionTitlePropertySpecific from "@/app/components/NonInteractable/D
 import DescriptionProperty from "@/app/components/Information/DescriptionProperty";
 import HorizontalPropertySpecific from "@/app/components/NonInteractable/HorizontalTitlePropertySpecific";
 import Title from "@/app/components/NonInteractable/Title";
+import SliderContent from "@/app/components/Information/SliderContent";
+import CardImovel from "@/app/components/Cards/CardImovel";
 
 export default function PropertySpecific(props: { obj: Pick<PropertySpecific, "description"> }) {
     return (
@@ -70,7 +72,12 @@ export default function PropertySpecific(props: { obj: Pick<PropertySpecific, "d
                                 areaProperty: 2000,
                                 address: "Czeniewiscz - Rua Bonita - SC "
                             }} />
-                        <PropertyPrice Purpose="vendaPromocao" ActualPrice=" 2.000.000" Taxes=" 2.000" PromotionalPrice=" 2.500.000" />
+                        <PropertyPrice obj={{
+                            Purpose: "vendaPromocao",
+                            ActualPrice: 2000000,  // 🔹 Remova as aspas para garantir que é um número
+                            Taxes: 2000,           // 🔹 Remova as aspas
+                            PromotionalPrice: 2500000
+                        }} />
                         <Furnished obj={{ isFurnished: true }} />
                         <RealtorAssociated obj={{ name: "nathan", id: "1", email: "nathan@gmail.com" }} />
                     </div>
@@ -87,7 +94,47 @@ export default function PropertySpecific(props: { obj: Pick<PropertySpecific, "d
                 <div style={{ display: "flex", justifyContent: "center", width: "100%", marginTop: "115px" }}>
                     <Title text="imóveis semelhantes" tag="h1" />
                 </div>
-
+                <SliderContent items={[<CardImovel
+                    bairro="Barra do rio molha"
+                    cidade="Jaraguá do Sul"
+                    valor="2000000"
+                    sell={true}
+                    quantQuartos={2}
+                    quantSala={3}
+                    quantBanheiros={5}
+                    informationStatus="string"
+                    category="string" />,
+                    <CardImovel
+                    bairro="a"
+                    cidade="a"
+                    valor="2000000"
+                    sell={true}
+                    quantQuartos={2}
+                    quantSala={3}
+                    quantBanheiros={5}
+                    informationStatus="a"
+                    category="a" />,
+                    <CardImovel
+                    bairro="b"
+                    cidade="b"
+                    valor="2000000"
+                    sell={true}
+                    quantQuartos={2}
+                    quantSala={3}
+                    quantBanheiros={5}
+                    informationStatus="b"
+                    category="b" />,
+                    <CardImovel
+                    bairro="c"
+                    cidade="c"
+                    valor="2000000"
+                    sell={true}
+                    quantQuartos={2}
+                    quantSala={3}
+                    quantBanheiros={5}
+                    informationStatus="c"
+                    category="c " />
+                    ]} />
             </div>
             <Footer />
         </>
