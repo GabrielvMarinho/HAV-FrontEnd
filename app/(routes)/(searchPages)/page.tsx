@@ -25,6 +25,7 @@ import HavLogoDark from "@/app/components/IconsTSX/HavLogoDark";
 import SliderContent from "@/app/components/Information/SliderContent";
 import ChamadaTelefonica from "../../components/IconsTSX/CellPhone";
 import Button from "@/app/components/Inputs/Button";
+import PropertyPrice from "@/app/components/NonInteractable/PropertyPrice"
 
 export default function Home() {
 
@@ -236,7 +237,7 @@ export default function Home() {
         informationStatus="LANÇAMENTO" 
         category="VENDA" 
       />
-
+      <PropertyPrice obj={{PromotionalPrice: 2000000 ,ActualPrice: 1999, Taxes: 900, Purpose: "vendaPromocao"}}/>
       <Link href="/Imoveis">clique aqui</Link>
       <SelectedStar width={54} height={54} color={"#001111"}/>
       <NotSelectedStar width={54} height={54} color={"#001111"}/>

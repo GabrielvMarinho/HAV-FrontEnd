@@ -13,11 +13,11 @@ import Rule from "../IconsTSX/Rule";
 
 export default function propertyPageDatasAdm(props: {
     objectType: string,
-    obj: Omit<PropertySpecific, "isFurnished"> 
+    obj: Omit<PropertySpecific, "isFurnished" | "additional"> 
 }) {
     return (
-        <article style={{ display: "flex", flexDirection: "column", alignItems: "left" }}>
-            <p className="idProperty">Código: {props.obj.id}</p>
+        <article style={{ display: "flex", flexDirection: "column", alignItems: "left", gap: "10px" }}>
+            <p className="idProperty">cód: {props.obj.id}</p>
             <p className="addressProperty">{props.obj.address}</p>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "15px" }}>
                 <p style={{
@@ -55,8 +55,9 @@ export default function propertyPageDatasAdm(props: {
                 <VerticalLine height={41} />
                 <div className="divCountItems">
                     <Rule width={25} height={25} color="var(--box-mid-dark-red)" />
-                    <p className="countItemNumber">{props.obj.areaProperty}</p>
+                    <p className="countItemNumber">{`${props.obj.areaProperty}m²`}</p>
                 </div>
+                <VerticalLine height={41} />
             </div>
         </article>
     );

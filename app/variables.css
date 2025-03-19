@@ -40,6 +40,8 @@
     --text-dark-red: #421820;
     --text-light-red: #CD6778;
 
+    --back-ground-light-red: #E595A3;
+
     /*CONFIGURAÇÕES GLOBAIS*/
     --text-xxs: 10px;
     --text-xs: 12px;
@@ -50,6 +52,9 @@
     --text-l: 24px;
     --text-xl: 32px;
     --text-xxl: 40px;
+
+    /* ALINHAMENTO COM O HEADER*/
+    --width-page: 78vw;
 }
 [data-theme="lightPallete"]{
     --bg-color: #F2EBE3;
