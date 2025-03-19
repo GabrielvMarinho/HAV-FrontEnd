@@ -13,31 +13,33 @@ import HeaderOptions from "../../components/Header/HeaderOptions";
 import Modal from "@/app/components/Modal/Modal"
 import FormTestInput from "@/app/components/Forms/FormTestInput"
 import CardImovel from "@/app/components/Cards/CardImovel"
-import { getServerSession } from "next-auth"
+// import { getServerSession } from "next-auth"
 import Image from "next/image";
 import "@/public/Image/css/style.css"
 import MainFilter from "@/app/components/Filters/MainFilter";
 import HavLogo from "@/app/components/IconsTSX/HavLogoLight";
 import "../../GeneralPages.css"
 import HavLogoDark from "@/app/components/IconsTSX/HavLogoDark";
+import MainHomeInfo from "@/app/components/Information/mainHomeInfo";
 
 export default function Home() {
 
-  const session = getServerSession()
+  // const session = getServerSession()
   
-  console.log(session)
+  // console.log(session)
 
   return (
     <>
       <img className={"bannerHome"} src="/Image/BannerHome.png"/>
 
-      <div style={{display: "flex", alignItems: "center", marginBottom:"60px"}}>
+      {/* <div style={{display: "flex", alignItems: "center", marginBottom:"60px"}}>
         <h1 className="mainTitleHome">CONECTANDO VOCÊ AO SEU NOVO LAR</h1>
         <HavLogoDark height={150} width={150}/>
       </div>
 
       <div className="bannerHomeLine"></div>
-      <MainFilter/>
+      <MainFilter/> */}
+
     <CardImovel 
         bairro="Barra do rio molha" 
         cidade="Jaraguá do Sul" 
@@ -49,6 +51,7 @@ export default function Home() {
         informationStatus="string" 
         category="string" 
       />
+
       <CardImovel 
         bairro="Barra do rio molha" 
         cidade="Jaraguá do Sul" 
@@ -61,6 +64,10 @@ export default function Home() {
         category="VENDA" 
       />
 
+      
+      <MainHomeInfo/>
+      
+      
       <Link href="/Imoveis">clique aqui</Link>
       <SelectedStar width={54} height={54} color={"#001111"}/>
       <NotSelectedStar width={54} height={54} color={"#001111"}/>
