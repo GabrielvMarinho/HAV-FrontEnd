@@ -52,6 +52,9 @@
     --text-l: 24px;
     --text-xl: 32px;
     --text-xxl: 40px;
+
+    /* ALINHAMENTO COM O HEADER*/
+    --width-page: 78vw;
 }
 [data-theme="lightPallete"]{
     --bg-color: #F2EBE3;
