@@ -1,12 +1,14 @@
 @import "../../../variables.css";
 
 .vendaBox, .aluguelBox {
-    width: 431px;
-    height: 605px;
+    width: 300px;
+    height: 450px;
     flex-shrink: 0;
     border-radius: 10px;
     background: var(--FundoCor, #F2EBE3);
     box-shadow: 0px 15px 40px 8px rgba(0, 0, 0, 0.10);
+    padding: 75px; 
+    margin-bottom: 20rem;
 }
 
 .navSubtitle {
@@ -16,16 +18,24 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    width: 770px;
+    margin-bottom: 70px;
+    margin-top: -20px
 }
 
 .questions {
+    width: 300px;
+    display: flex;
+    flex-direction: column;  /* Certificando-se de que as perguntas ficam em coluna */
+    gap: 50px; 
+    margin: 0, 20, 0, 20;
     color: #5F1E2A;
     font-family: Montserrat;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: 130%;
-    margin: 
+    
 }
 
 .searchAndBoxesContainer {

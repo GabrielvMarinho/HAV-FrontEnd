@@ -3,6 +3,7 @@ import HeaderAdm from "@/app/components/Header/HeaderAdm";
 import "../faq/style/style.css";
 import Title from "@/app/components/NonInteractable/Title";
 import SearchBarDesktop from "@/app/components/Filters/SearchBar";
+import Button from "@/app/components/Inputs/Button";
 
 export default function page() {
     return (
@@ -37,7 +38,6 @@ export default function page() {
                     </div>
                 </div>
             </div>
-
             <Footer />
         </>
     );
