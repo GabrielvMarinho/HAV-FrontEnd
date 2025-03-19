@@ -1,3 +1,4 @@
+import getByParamsProperties from "@/app/apiCalls/Property/getByParamsProperties";
 import Filter from "@/app/components/Filters/Filter";
 import PriceRangeSlider from "@/app/components/Filters/SlideRange";
 import ChooseQuantity from "@/app/components/Inputs/ChooseQuantity";
@@ -8,7 +9,9 @@ import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdown
 import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 
-export default function(){
+export default async function(){
+    
+    const data = getByParamsProperties()
     
 
     return (
@@ -25,7 +28,7 @@ export default function(){
 
             ]}
             inputChooseQuantites={[InputChooseQuantity.bedRoom,InputChooseQuantity.bathRoom, 
-                InputChooseQuantity.livingRoom,InputChooseQuantity.suite ]}
+                InputChooseQuantity.garageSpace,InputChooseQuantity.suite ]}
             inputPriceRanges={[InputFilterConfig.priceRangesRent]}
             />
         </>

@@ -15,13 +15,16 @@ import { InputChooseQuantity } from "../globalFormsConfig/InputChooseQuantity";
 
 export default function Filter(props: {size :string, inputs :any[], inputsDropdown :any[], inputPriceRanges :any[] | null, inputChooseQuantites:any[] | null}){
     
-
+    const inputPriceRanges = props.inputPriceRanges ?? [];
+    const inputChooseQuantites = props.inputChooseQuantites ?? [];
+    const inputsDropdown = props.inputsDropdown ?? [];
+    const inputs = props.inputs ?? [];
     console.log(props.inputPriceRanges)
 
 
     
     
-    const allInputs = [props.inputs, props.inputsDropdown];
+    const allInputs = [inputs, inputsDropdown];
 
     const [filterData, setFilterData] = useState(() =>
     allInputs.reduce((acc) => {
@@ -30,11 +33,11 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
     );
 
     
-    const [priceRange, setPriceRange] = useState({ min: props.inputPriceRanges?.[0]?.min ?? 0, max: props.inputPriceRanges?.[0]?.max });
+    const [priceRange, setPriceRange] = useState({ min: inputPriceRanges?.[0]?.min ?? 0, max: inputPriceRanges?.[0]?.max });
     
 
     const handlePriceChange = (min: number, max: number) => {
-        if(!props.inputPriceRanges) return 
+        if(!inputPriceRanges) return 
         if(max==2000000) max = 100000000
         console.log(max)
         setPriceRange({ min, max });
@@ -47,7 +50,7 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
     return(
         <form action={pathname} className="filterSide">
 
-            {props.inputs.map((input) => (
+            {inputs.map((input) => (
                 input &&
                 <InputText
                     name = {input.name}
@@ -57,7 +60,7 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
                     id={input.id}
                 />
             ))}
-            {props.inputsDropdown.map((input) => (
+            {inputsDropdown.map((input) => (
                 input &&
                 <InputDropdown
                     name = {input.name}
@@ -67,7 +70,7 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
                     id={input.id}
                 />
             ))}
-            {props.inputChooseQuantites.map((input) =>(
+            {inputChooseQuantites.map((input) =>(
                 input && 
                 <ChooseQuantity
                     name={input.name}
@@ -77,7 +80,7 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
             ))
 
             }
-            {props.inputPriceRanges.map((input) => (
+            {inputPriceRanges.map((input) => (
                 input &&
                 <PriceRangeSlider
                     name = {input.name}

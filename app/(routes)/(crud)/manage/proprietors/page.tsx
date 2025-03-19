@@ -64,6 +64,8 @@ export default async function page({ searchParams }: {
           }
           inputsDropdown={inputDropdown}
           inputPriceRanges={[]}
+          inputChooseQuantites={[]}
+
         />
         <TableList changeArchivedStatus = {changeArchivedStatusProprietor} deleteFunction={deleteProprietorList} archived={false} context="admin" size="large" titles={["cpf/cnpj", "nome", "email", "n. imóveis", "objetivo"]}
           data={proprietors} totalPages={totalPages} />

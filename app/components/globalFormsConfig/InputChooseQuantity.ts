@@ -5,6 +5,12 @@ export const InputChooseQuantity ={
         id: "bedRoom",
         
     },
+    garageSpace: {
+        name: "garageSpace",
+        text: "Vagas",
+        id: "garageSpace",
+        
+    },
     livingRoom: {
         name: "livingRoom",
         text: "Salas",

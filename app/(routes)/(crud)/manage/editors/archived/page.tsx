@@ -50,6 +50,7 @@ export default async function page({searchParams}: {searchParams: {
               inputs={inputs}
               inputsDropdown={[]}
               inputPriceRanges={[]}
+              
               />
               <TableList changeArchivedStatus = {changeArchivedStatusEditor} deleteFunction={deleteEditorList} archived={true} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
               data={editors} totalPages={totalPages}/>

@@ -81,9 +81,9 @@ export default function MainFilter(){
                     text={InputChooseQuantity.bathRoom.text}
                     id={InputChooseQuantity.bathRoom.id}/>
 
-                    <ChooseQuantity name={InputChooseQuantity.livingRoom.name}
-                    text={InputChooseQuantity.livingRoom.text}
-                    id={InputChooseQuantity.livingRoom.id}/>
+                    <ChooseQuantity name={InputChooseQuantity.garageSpace.name}
+                    text={InputChooseQuantity.garageSpace.text}
+                    id={InputChooseQuantity.garageSpace.id}/>
 
                     <ChooseQuantity name={InputChooseQuantity.suite.name}
                     text={InputChooseQuantity.suite.text}
