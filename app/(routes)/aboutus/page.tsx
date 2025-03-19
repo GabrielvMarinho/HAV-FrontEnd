@@ -49,7 +49,7 @@ export default function page() {
 
             <div style={{
                 display: "flex", flexDirection: "column", gap: "20px", width: "100%",
-                marginTop: "120px"
+                marginTop: "120px", marginBottom: "200px"
             }}>
 
                 <div style={{ display: "flex", flexDirection: "row", gap: "50px" }}>
@@ -62,7 +62,7 @@ export default function page() {
                             <h3 className="titleAboutus">MISSÃO</h3>
                             <div className="titleLineAboutus"></div>
                         </div>
-                        <div style={{ width: "70%" }}>
+                        <div style={{ width: "75%" }}>
                             <p>
                                 Nossa missão é simplificar o processo imobiliário,
                                 oferecendo suporte em todas as etapas.
@@ -78,7 +78,7 @@ export default function page() {
                             <h3 className="titleAboutus">VALORES</h3>
                             <div className="titleLineAboutus"></div>
                         </div>
-                        <div style={{ width: "70%" }}>
+                        <div style={{ width: "75%" }}>
                             <p>
                                 Nossa missão é simplificar o processo imobiliário,
                                 oferecendo suporte em todas as etapas.
@@ -98,7 +98,7 @@ export default function page() {
                             <h3 className="titleAboutus">VISÃO</h3>
                             <div className="titleLineAboutus"></div>
                         </div>
-                        <div style={{ width: "70%" }}>
+                        <div style={{ width: "75%" }}>
                             <p>
                                 Nossa missão é simplificar o processo imobiliário,
                                 oferecendo suporte em todas as etapas.
@@ -112,7 +112,7 @@ export default function page() {
                             <h3 className="titleAboutus">CONFIANÇA</h3>
                             <div className="titleLineAboutus"></div>
                         </div>
-                        <div style={{ width: "70%" }}>
+                        <div style={{ width: "75%" }}>
                             <p>
                                 Nossa missão é simplificar o processo imobiliário,
                                 oferecendo suporte em todas as etapas.
@@ -121,6 +121,35 @@ export default function page() {
                     </div>
                 </div>
             </div >
+            <div style={{ gap: "30px" }}>
+                <div>
+                    <div className="titleContainer" style={{ width: "60%" }}>
+                        <h3 className="titleAboutus">NOSSAS CONQUISTAS</h3>
+                        <div className="titleLineAboutus"></div>
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
+                        <p>
+                            Nos tornamos uma das imobiliárias mais confiáveis e respeitadas da região,
+                            consolidando nossa marca e ampliando nosso impacto no mercado.
+                        </p>
+                        <p>
+                            Expandimos com sucesso para o mercado comercial, oferecendo soluções sob medida
+                            para empresas prosperarem.
+                        </p>
+                        <p>
+                            Investimos em tecnologia de ponta, garantindo uma experiência de busca
+                            eficiente e personalizada para cada cliente.</p>
+                        <p>
+                            Recebemos prêmios de excelência em atendimento e inovação, reconhecendo nosso
+                            compromisso com a satisfação do cliente.
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+
+                </div>
+            </div>
             <Footer />
         </>
     )
