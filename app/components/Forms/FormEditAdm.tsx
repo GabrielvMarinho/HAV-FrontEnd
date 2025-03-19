@@ -17,6 +17,7 @@ import NonEditableInputText from "../Inputs/NonEditableInputText";
 import searchAdmDtoById from "@/app/apiCalls/Adm/searchAdmDtoById";
 import editAdm from "@/app/apiCalls/Adm/editAdm";
 import { textFields } from "../globalFormsConfig/InputTextConfig";
+import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
 
 export default function FormEditAdm(props :{id :any }) {
     
@@ -197,45 +198,30 @@ export default function FormEditAdm(props :{id :any }) {
                                 />
 
                                 <InputDropdown
-                                    defaultValue={adm?.state ?? ""}
-                                    key="estado"
-                                    name="state"
-                                    size="medium"
-                                    text="Estado"
-                                    id="estado"
-                                    options={[
-                                        ["sc", "Santa Catarina"],
-                                        ["pr", "Paraná"],
-                                        ["rs", "Rio Grande do Sul"]
-                                    ]}
+                                    key={dropdownFields.state.id}
+                                    name={dropdownFields.state.name}
+                                    size={dropdownFields.state.size}
+                                    text={dropdownFields.state.text}
+                                    id={dropdownFields.state.id}
+                                    options={dropdownFields.state.options}
                                 />
 
                                 <InputDropdown
-                                    defaultValue={adm?.city ?? ""}
-                                    key="cidade"
-                                    name="city"
-                                    size="medium"
-                                    text="Cidade"
-                                    id="cidade"
-                                    options={[
-                                        ["São Paulo", "Jaraguá do Sul"],
-                                        ["blumenau", "Blumenau"],
-                                        ["joinville", "Joinville"]
-                                    ]}
+                                   key={dropdownFields.city.id}
+                                   name={dropdownFields.city.name}
+                                   size={dropdownFields.city.size}
+                                   text={dropdownFields.city.text}
+                                   id={dropdownFields.city.id}
+                                   options={dropdownFields.city.options}
                                 />
 
                                 <InputDropdown
-                                    defaultValue={adm?.neighborhood ?? ""}
-                                    key="bairro"
-                                    name="neighborhood"
-                                    size="medium"
-                                    text="Bairro"
-                                    id="bairro"
-                                    options={[
-                                        ["centro", "Centro"],
-                                        ["vila_nova", "Vila Nova"],
-                                        ["três_rios_do_norte", "Três Rios do Norte"]
-                                    ]}
+                                    key={dropdownFields.neighborhood.id}
+                                    name={dropdownFields.neighborhood.name}
+                                    size={dropdownFields.neighborhood.size}
+                                    text={dropdownFields.neighborhood.text}
+                                    id={dropdownFields.neighborhood.id}
+                                    options={dropdownFields.neighborhood.options}
                                 />
 
 

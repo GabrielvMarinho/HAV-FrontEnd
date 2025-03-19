@@ -99,7 +99,7 @@ export default function TableListChoose(props: {id? :any; action :string; type :
         
 
         params["realtors"] = parsedData
-
+        
         const queryString = new URLSearchParams(params);
         const id = queryString.get("id"); // "123"
         queryString.delete("id");

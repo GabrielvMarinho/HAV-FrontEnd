@@ -9,7 +9,7 @@ import { useState } from "react";
 import InputDropdown from "../Inputs/InputDropdown";
 import PriceRangeSlider from "./SlideRange";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import ButtonComprarAlugar from "../Inputs/ButtonComprarAlugar";
+import ButtonComprarAlugar from "../Inputs/ToggleRentOrBuy";
 
 export default function Filter(props: {size :string, inputs :any[], inputsDropdown :any[], inputPriceRanges :any[] | null}){
     

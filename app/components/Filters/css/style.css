@@ -1,5 +1,14 @@
 @import "../../../variables.css";
 
+.filterMain{
+  padding: 30px;
+  border-radius: var(--xborder-box);
+  background-color: var(--box-mid-dark-red);
+}
+.filterMain .mainSection{
+  display: flex;
+  gap: 20px;
+}
 .boxRangeFilter{
     width: 200px;
   }
@@ -8,6 +17,7 @@
   input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
+
   .priceBox{
     display: flex;
     justify-content: space-between;

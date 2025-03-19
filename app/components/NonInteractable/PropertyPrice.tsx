@@ -1,27 +1,22 @@
 import './css/style.css';
 
-export default function Price(props: { PromotionalPrice: string; ActualPrice: string; Taxes: string; Purpose: string }) {
-    if (props.Purpose == "venda") {
-        return (
-            <div className="Price" style={{ display: "flex", flexDirection: "column" }}>
-                <h1 className='ActualPrice'>{`R$ ${props.ActualPrice.toUpperCase()},00`}</h1>
-                <p className='Taxes'>IPTU: {`R$ ${props.Taxes.toUpperCase()},00`}</p>
-            </div>
-        );
-    } else if (props.Purpose == "vendaPromocao") {
-        return (
-            <div className="Price" style={{ display: "flex", flexDirection: "column" }}>
-                <p className='PromotionalPrice'>{`R$ ${props.PromotionalPrice.toUpperCase()},00`}</p>
-                <h1 className='ActualPrice'>{`R$ ${props.ActualPrice.toUpperCase()},00`}</h1>
-                <p className='Taxes'>IPTU: {`R$ ${props.Taxes.toUpperCase()},00`}</p>
-            </div>
-        );
-    } else if (props.Purpose == "locacao") {
-        return (
-            <div className="Price" style={{ display: "flex", flexDirection: "column" }}>
-                <h1 className='ActualPrice'>{`R$ ${props.ActualPrice.toUpperCase()},00 /MÊS`}</h1>
-                <p className='Taxes'>{`Condomínio: ${props.Taxes.toUpperCase()}`}</p>
-            </div>
-        );
-    }
+export default function Price(props: {obj: Pick<PropertySpecific, "PromotionalPrice" | "ActualPrice" | "Taxes" | "Purpose">}) {
+    // Formatador para moeda brasileira
+    const formatCurrency = (value: number) => new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    }).format(value);
+
+    return (
+        <div className="Price" style={{ display: "flex", flexDirection: "column" }}>
+            {props.obj.Purpose === "vendaPromocao" && (
+                <p className='PromotionalPrice'>{formatCurrency(props.obj.PromotionalPrice)}</p>
+            )}
+            <h1 className='ActualPrice'>{formatCurrency(props.obj.ActualPrice)}</h1>
+            <p className='Taxes'>
+                {props.obj.Purpose === "locacao" ? "Condomínio: " : "IPTU: "}
+                {formatCurrency(props.obj.Taxes)}
+            </p>
+        </div>
+    );
 }

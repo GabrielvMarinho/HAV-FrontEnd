@@ -17,6 +17,8 @@
     --modal-red: #AC3434;
     --icon-footer-color: #F2EBE3;
     --button-color: #B23F52;
+    --button-color-reverse: #F9F9F9;
+
     --box-red-pink: #B23F52;
     --box-white: #F9F9F9;
     --light-hover: #f9f9f926;
@@ -32,10 +34,13 @@
     --text-white: #F9F9F9;
     --text-white-non-editable-placeholder: #f9f9f97c;
 
+    --text-red-pink: #B23F52;
     --text-black: #0F0F0F;
     --text-black-50: #0f0f0f7c;
     --text-dark-red: #421820;
     --text-light-red: #CD6778;
+
+    --back-ground-light-red: #E595A3;
 
     /*CONFIGURAÇÕES GLOBAIS*/
     --text-xxs: 10px;

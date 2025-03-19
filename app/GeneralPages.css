@@ -1,0 +1,81 @@
+@import "./variables.css";
+
+.mainTitleHome{
+    font-size: var(--text-xxl);
+    color: var(--text-red-pink);
+    width: 500px;
+    margin-right: 20px;
+    font-weight: 900;
+    
+    text-align: right;
+}
+.bannerHomeTitle{
+    width: 78vw;
+    display: flex;
+    justify-content: right;
+}
+.homeMainSection{
+    height: 100vh;
+}
+.homeHiglightProperties{
+    height: 100vh;
+}
+.homeHiglightProperties h2{
+    font-size: var(--text-xl);
+    font-weight: 700;
+}
+.homeHiglightProperties h3{
+    font-size: var(--text-m);
+    font-weight: 100;
+}
+.sliderContent{
+    display: flex;
+    gap: 10px;
+
+}
+.sliderContentMain{
+    transition: transform 0.5s ease-in-out;
+}
+.sliderItemHiddenLeft{
+    position: absolute;
+    left: 0;
+
+    margin-left: -50%;
+
+}
+.sliderItemHiddenRight{
+    position: absolute;
+    right: 0;
+
+    margin-right: -50%;
+}
+  
+.sliderHidden{
+    
+    filter: saturate(0);
+    opacity: 0.5;
+}
+
+.highlightPropertyBox{
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+    width: 450px;
+    background-color: var(--box-red-pink);
+}
+
+
+.highlightProperty img{
+    width: 350px;
+    height: 350px;
+}
+
+.highlightProperty{ 
+    margin-top: 20px;
+    height: 350px;
+    width: fit-content;
+    color: var(--text-white);
+    display: flex;
+    align-items: center;
+}

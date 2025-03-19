@@ -9,6 +9,16 @@
     text-transform: uppercase;
     font-size: 15px;
 }
+.rentingText{
+    font-size: var(--text-xs);
+    font-weight: 100;
+}
+.cardImovelSection{
+    padding: 15px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
 .cidade{
     font-size: var(--text-xs);
     opacity: 0.6;

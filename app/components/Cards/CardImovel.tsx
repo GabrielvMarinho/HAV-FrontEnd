@@ -12,7 +12,7 @@ import CategoryCardImovel from "../Information/CategoryCardImovel";
 
 export default function CardImovel(props: {
     bairro: string, cidade: string, valor: string,
-    infoParcela: string, quantQuartos: number, quantSala: number, quantBanheiros: number, informationStatus: string,
+    sell: boolean, quantQuartos: number, quantSala: number, quantBanheiros: number, informationStatus: string,
     category: string
 }) {
     return (
@@ -21,7 +21,7 @@ export default function CardImovel(props: {
                 <section style={{ position: "relative", display: "inline-block" }}>
                     <div style={{
                         position: "absolute",
-                        top: "8px",
+                        top: "5px",
                         left: "-16px",
                         display: "flex",
                         alignItems: "center",
@@ -40,31 +40,36 @@ export default function CardImovel(props: {
                 </section>
             </div>
 
-            <section style={{ backgroundColor: "var(--button-color)", color: "var(--text-white)", height: "155px", borderRadius: "0 0 10px 10px" }}>
-                <div style={{ display: "flex", textAlign: "left", flexDirection: "column", margin: "13px 0 0 17.47px" }}>
+            <section className={"cardImovelSection"}style={{ backgroundColor: "var(--button-color)", color: "var(--text-white)", height: "fit-content", borderRadius: "0 0 10px 10px" }}>
+                <div style={{ display: "flex", textAlign: "left", flexDirection: "column"}}>
                     <p className="bairro">{props.bairro}</p>
                     <p className="cidade">{props.cidade}</p>
                 </div>
-                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", margin: "13px 0 0 17.47px", gap: "12px" }}>
+                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: "12px" }}>
                     <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                        <p className="valorImovel">{props.valor}</p>
-                        <p className="infoParcela">{props.infoParcela}</p>
+                        {props.sell?
+                            <p className="valorImovel">R${props.valor}</p>
+                            :
+                            <p className="valorImovel">R${props.valor}<span className="rentingText">/mês</span></p>
+
+                        }
+
                     </div>
-                    <div className="infoImovel">
-                        <Bed width={18} height={18} color=""></Bed>
-                        <p className="infoQuantity">{props.quantQuartos}</p>
-                    </div>
-                    <div className="infoImovel">
-                        <Sofa width={18} height={18} color="" />
-                        <p className="infoQuantity">{props.quantSala}</p>
-                    </div>
-                    <div className="infoImovel">
-                        <Shower width={18} height={18} color="" />
-                        <p className="infoQuantity">{props.quantBanheiros}</p>
+                    <div style={{display: "flex"}}>
+                        <div className="infoImovel">
+                            <Bed width={18} height={18} color=""></Bed>
+                            <p className="infoQuantity">{props.quantQuartos}</p>
+                            <Sofa width={18} height={18} color="" />
+                            <p className="infoQuantity">{props.quantSala}</p>
+                            <Shower width={18} height={18} color="" />
+                            <p className="infoQuantity">{props.quantBanheiros}</p>
+                        </div>
+
+                        
                     </div>
                 </div>
-                <div style={{ width: "235px", height: "1px", backgroundColor: "var(--text-white)", opacity: "0.20", margin: "11px auto" }} />
-                <article style={{ display: "flex", flexDirection: "row", margin: "17px 0 0 17.47px", gap: "55px", alignItems: "center" }}>
+                <div style={{ width: "235px", height: "1px", backgroundColor: "var(--text-white)", opacity: "0.20", margin: "5px auto" }} />
+                <article style={{ display: "flex", flexDirection: "row", gap: "55px", alignItems: "center" }}>
                     <Button size="small" text="saiba mais" background="var(--text-white)" color="var(--box-red-pink)" hover="lightHover"></Button>
                     <div style={{ display: "flex", flexDirection: "row", gap: "7.92px", opacity: 0.6, alignItems: "center" }}>
                         <StarFavorite width={27} height={27} color="#FFFF" selected={false} />

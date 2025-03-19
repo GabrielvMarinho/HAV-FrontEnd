@@ -125,14 +125,14 @@ export default function FormAddAdm() {
                             error={form.formState.errors[textFields.name.name as keyof NewEditorOrAdm]}
                         />
                         <InputText
-                            key={textFields.cpf.id}
-                            name={textFields.cpf.name}
-                            size={textFields.cpf.size}
-                            placeholder={textFields.cpf.placeholder}
-                            text={textFields.cpf.text}
-                            id={textFields.cpf.id}
-                            register={form.register}
-                            error={form.formState.errors[textFields.cpf.name as keyof NewEditorOrAdm]}
+                          key={textFields.phoneNumber.id}
+                          name={textFields.phoneNumber.name}
+                          size={textFields.phoneNumber.size}
+                          placeholder={textFields.phoneNumber.placeholder}
+                          text={textFields.phoneNumber.text}
+                          id={textFields.phoneNumber.id}
+                          register={form.register}
+                          error={form.formState.errors[textFields.phoneNumber.name as keyof NewEditorOrAdm]}
                         />
                         <InputText
                             key={textFields.email.id}
@@ -145,34 +145,14 @@ export default function FormAddAdm() {
                             error={form.formState.errors[textFields.email.name as keyof NewEditorOrAdm]}
                         />
                         <InputText
-                            key={textFields.cep.id}
-                            name={textFields.cep.name}
-                            size={textFields.cep.size}
-                            placeholder={textFields.cep.placeholder}
-                            text={textFields.cep.text}
-                            id={textFields.cep.id}
+                            key={textFields.cpf.id}
+                            name={textFields.cpf.name}
+                            size={textFields.cpf.size}
+                            placeholder={textFields.cpf.placeholder}
+                            text={textFields.cpf.text}
+                            id={textFields.cpf.id}
                             register={form.register}
-                            error={form.formState.errors[textFields.cep.name as keyof NewEditorOrAdm]}
-                        />
-                        <InputText
-                            key={textFields.street.id}
-                            name={textFields.street.name}
-                            size={textFields.street.size}
-                            placeholder={textFields.street.placeholder}
-                            text={textFields.street.text}
-                            id={textFields.street.id}
-                            register={form.register}
-                            error={form.formState.errors[textFields.street.name as keyof NewEditorOrAdm]}
-                        />
-                        <InputText
-                            key={textFields.phoneNumber.id}
-                            name={textFields.phoneNumber.name}
-                            size={textFields.phoneNumber.size}
-                            placeholder={textFields.phoneNumber.placeholder}
-                            text={textFields.phoneNumber.text}
-                            id={textFields.phoneNumber.id}
-                            register={form.register}
-                            error={form.formState.errors[textFields.phoneNumber.name as keyof NewEditorOrAdm]}
+                            error={form.formState.errors[textFields.cpf.name as keyof NewEditorOrAdm]}
                         />
                         <InputText
                             key={textFields.cellphone.id}
@@ -185,24 +165,14 @@ export default function FormAddAdm() {
                             error={form.formState.errors[textFields.cellphone.name as keyof NewEditorOrAdm]}
                         />
                         <InputText
-                            key={textFields.propertyNumber.id}
-                            name={textFields.propertyNumber.name}
-                            size={textFields.propertyNumber.size}
-                            placeholder={textFields.propertyNumber.placeholder}
-                            text={textFields.propertyNumber.text}
-                            id={textFields.propertyNumber.id}
+                            key={textFields.cep.id}
+                            name={textFields.cep.name}
+                            size={textFields.cep.size}
+                            placeholder={textFields.cep.placeholder}
+                            text={textFields.cep.text}
+                            id={textFields.cep.id}
                             register={form.register}
-                            error={form.formState.errors[textFields.propertyNumber.name as keyof NewEditorOrAdm]}
-                        />
-                        <InputText
-                            key={textFields.complement.id}
-                            name={textFields.complement.name}
-                            size={textFields.complement.size}
-                            placeholder={textFields.complement.placeholder}
-                            text={textFields.complement.text}
-                            id={textFields.complement.id}
-                            register={form.register}
-                            error={form.formState.errors[textFields.complement.name as keyof NewEditorOrAdm]}
+                            error={form.formState.errors[textFields.cep.name as keyof NewEditorOrAdm]}
                         />
                         <InputDropdown
                             key={dropdownFields.city.id}
@@ -234,7 +204,37 @@ export default function FormAddAdm() {
                             register={form.register}
                             error={form.formState.errors[dropdownFields.neighborhood.name as keyof NewEditorOrAdm]}
                         />
-
+                         <InputText
+                            key={textFields.propertyNumber.id}
+                            name={textFields.propertyNumber.name}
+                            size={textFields.propertyNumber.size}
+                            placeholder={textFields.propertyNumber.placeholder}
+                            text={textFields.propertyNumber.text}
+                            id={textFields.propertyNumber.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.propertyNumber.name as keyof NewEditorOrAdm]}
+                        />
+                        <InputText
+                            key={textFields.street.id}
+                            name={textFields.street.name}
+                            size={textFields.street.size}
+                            placeholder={textFields.street.placeholder}
+                            text={textFields.street.text}
+                            id={textFields.street.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.street.name as keyof NewEditorOrAdm]}
+                        />
+                        <InputText
+                            key={textFields.complement.id}
+                            name={textFields.complement.name}
+                            size={textFields.complement.size}
+                            placeholder={textFields.complement.placeholder}
+                            text={textFields.complement.text}
+                            id={textFields.complement.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.complement.name as keyof NewEditorOrAdm]}
+                        />
+                        
                     </div>
                     <div className="divButtonsAceptCancelForms">
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
