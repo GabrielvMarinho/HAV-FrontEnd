@@ -81,7 +81,7 @@ export const newProperty = z.object({
         highlight: z.string().nonempty("* Campo obrigatório"),
         realtors: z.string().nonempty("* Selecione ao menos um corretor"),
         proprietor: z.string().nonempty("* Selecione ao menos um corretor"),
-        floors: z.string().nonempty("* Selecione ao menos um corretor")
+        floors: z.string().nonempty("* Campo obrigatório")
 });
 console.log(newProperty.shape)
 

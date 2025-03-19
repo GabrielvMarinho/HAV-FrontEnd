@@ -1,3 +1,4 @@
+
 import Title from "../../../../components/NonInteractable/Title";
 import SearchBar from "../../../../components/Filters/SearchBar";
 import TableList from "../../../../components/Information/TableList";
@@ -8,7 +9,7 @@ import deleteProprietorList from "@/app/apiCalls/Proprietor/deleteByListPropriet
 import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArchivedStatusProprietor";
 import TableListChoose from "@/app/components/Information/TableListChoose";
 import "@/app/pageStructure.css"
-import { usePathname, useSearchParams } from "next/navigation";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 import FilterToAddProperty from "@/app/components/Filters/FilterToAddProperty";
 
 export default async function page({searchParams}: {searchParams: {
@@ -39,7 +40,9 @@ export default async function page({searchParams}: {searchParams: {
   console.log("_-----------------------")
  
   console.log(proprietors)
+  const queryString = new URLSearchParams(params);
 
+  const action = queryString.get("action")
 
   return (
       <div className="noHeaderPage">
@@ -53,7 +56,7 @@ export default async function page({searchParams}: {searchParams: {
           inputsDropdown={[]}
           inputPriceRanges={[]}
         />
-        <TableListChoose type ={"one"}archived={false} size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
+        <TableListChoose action={action} add={true} type ={"one"}archived={false} size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
           data={proprietors} totalPages={totalPages} />
 
       

@@ -1,5 +1,5 @@
 "use client"
-import HavLogo from "../IconsTSX/HavLogo";
+import HavLogo from "../IconsTSX/HavLogoLight";
 import Language from "../IconsTSX/Language";
 import Hamburger from "../IconsTSX/Hamburguer";
 import Link from "next/link";

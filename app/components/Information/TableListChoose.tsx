@@ -17,9 +17,10 @@ import Verificar from '../IconsTSX/Verificar';
 import { useRouter } from 'next/router';
 
 
-export default function TableListChoose(props: {type :string; totalPages :number; archived :boolean; size :string, titles :string[], data :any[]}){
+export default function TableListChoose(props: {id? :any; action :string; type :string; totalPages :number; archived :boolean; size :string, titles :string[], data :any[]}){
 
-    
+    console.log("action")
+    console.log(props.action)
     
     
     
@@ -71,10 +72,22 @@ export default function TableListChoose(props: {type :string; totalPages :number
 
         params["proprietor"] = parsedData[0]
 
-        const queryString = new URLSearchParams(params).toString();
+        const queryString = new URLSearchParams(params);
+        const id = queryString.get("id"); // "123"
+        queryString.delete("id");
 
+        const finalQuery = queryString.toString()
         localStorage.removeItem("selectedManage")
-        window.location.href = `/manage/properties/add?${queryString}`
+        console.log("asdasd")
+        if(props.action==="add"){
+            window.location.href = `/manage/properties/add?${finalQuery}`
+        }
+        else{
+            window.location.href = `/manage/properties/edit/${id}?${finalQuery}`
+
+        }
+
+
 
     }
 
@@ -83,14 +96,25 @@ export default function TableListChoose(props: {type :string; totalPages :number
         console.log(":::::::::::::::::")
 
         const parsedData = JSON.parse(localStorage.getItem("selectedManage") || "[]");  
-
+        
 
         params["realtors"] = parsedData
-
-        const queryString = new URLSearchParams(params).toString();
+        
+        const queryString = new URLSearchParams(params);
+        const id = queryString.get("id"); // "123"
+        queryString.delete("id");
+        
+        const finalQuery = queryString.toString()
 
         localStorage.removeItem("selectedManage")
-        window.location.href = `/manage/properties/add?${queryString}`
+        if(props.action==="add"){
+
+            window.location.href = `/manage/properties/add?${finalQuery}`
+        }
+        else{
+            window.location.href = `/manage/properties/edit/${id}?${finalQuery}`
+
+        }
 
     }
 

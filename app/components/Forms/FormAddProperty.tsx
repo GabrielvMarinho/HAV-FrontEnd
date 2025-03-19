@@ -25,7 +25,7 @@ import postProperty from "@/app/apiCalls/Property/postProperty";
 
 export default function FormAddProperty(props :{objectData :any;}) {
 
-
+    console.log(props.objectData)
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
     const [isPromotional, setIsPromotional] = useState(true)
@@ -131,7 +131,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
         formData.forEach((value, key) => {
         params.append(key, value.toString());
         });
-        const url = `/choose/realtor?${params.toString()}`;
+        const url = `/choose/realtor?action=add&${params.toString()}`;
         window.location.href = url
     }
     const handleAddProprietor = (event: React.MouseEvent<HTMLButtonElement>) =>{
@@ -144,7 +144,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
         formData.forEach((value, key) => {
         params.append(key, value.toString());
         });
-        const url = `/choose/proprietor?${params.toString()}`;
+        const url = `/choose/proprietor?action=add&${params.toString()}`;
         window.location.href = url
     }
 
