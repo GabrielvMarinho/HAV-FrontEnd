@@ -10,8 +10,12 @@ import Button from "@/app/components/Inputs/Button";
 import Cubes from "@/app/components/IconsTSX/Cubes";
 import Gear from "@/app/components/IconsTSX/Gear";
 import Balanca from "@/app/components/IconsTSX/Balanca";
+import DescriptionTitlePropertySpecific from "@/app/components/NonInteractable/DescriptionTitlePropertySpecific";
+import DescriptionProperty from "@/app/components/Information/DescriptionProperty";
+import HorizontalPropertySpecific from "@/app/components/NonInteractable/HorizontalTitlePropertySpecific";
+import Title from "@/app/components/NonInteractable/Title";
 
-export default function PropertySpecific() {
+export default function PropertySpecific(props: { obj: Pick<PropertySpecific, "description"> }) {
     return (
         <>
 
@@ -19,7 +23,7 @@ export default function PropertySpecific() {
             <div style={{ width: "var(--width-page)" }}>
                 <article style={{ display: "flex", flexDirection: "row", gap: "83px" }}>
                     <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                        <div style={{ width: "450px", height: "300px", backgroundColor: "black" }}></div>
+                        <div style={{ width: "450px", height: "462px", backgroundColor: "black" }}></div>
                         <div style={{ display: "flex", flexDirection: "row", gap: "110px" }}>
                             <div className="buttonIconDiv">
                                 <Button
@@ -71,7 +75,19 @@ export default function PropertySpecific() {
                         <RealtorAssociated obj={{ name: "nathan", id: "1", email: "nathan@gmail.com" }} />
                     </div>
                 </article>
-                <OtherEnvironmentsProperty obj={{ additional: ["caralhoooooooo", "pinto", "pinto", "pinto"] }} />
+                <article className="enviroments-interestPoint">
+                    <OtherEnvironmentsProperty obj={{ additional: ["caralhoooooooo", "pinto", "pinto", "pinto"] }} />
+                    <DescriptionTitlePropertySpecific text="pontos de interesse" />
+                </article>
+                <DescriptionProperty obj={{ description: "Se você está procurando seu novo lar na região do Jardim Maria Estela/Via Anchieta, já encontrou! Apartamento impecável e ensolarado (face norte), 2 dormitórios e 1 vaga livre" }} />
+                <section className="sectionPriceProperty">
+                    <HorizontalPropertySpecific />
+                    <div className="containerGraphic"></div>
+                </section>
+                <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>
+                    <Title text="imóveis semelhantes" tag="h1" />
+                </div>
+
 
             </div>
             <Footer />

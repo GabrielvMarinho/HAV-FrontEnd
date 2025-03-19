@@ -160,4 +160,15 @@
     flex-direction: column;
     gap: 34px;
 }
+#descriptionProperty{
+    font-size: var(--text-sm);
+    color: var(--box-mid-dark-red);
+    font-weight: 500;
+}
 
+#divDescriptionProperty{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 60px;
+}

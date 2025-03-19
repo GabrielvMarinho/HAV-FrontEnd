@@ -102,6 +102,19 @@
     background-color: var(--box-red-pink);
 }
 
+.verticalStrongLine{
+    height: 89px;
+    width: 3px;
+    background-color: var(--box-red-pink);
+}
+
+.propertyPriceTitle{
+    color: var(--box-dark-red);
+    font-size: 28px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
 @media (width < 992px) {
     .sizeTitle{
         font-size: var(--text-ml);
