@@ -30,7 +30,7 @@ export default function PropertySpecific() {
                     <RealtorAssociated obj={{ name: "nathan", id: "1", email: "nathan@gmail.com" }} />
                 </div>
             </article>
-            <OtherEnvironmentsProperty/>
+            <OtherEnvironmentsProperty obj={{additional: ["caralhoooooooo", "pinto", "pinto", "pinto"]}}/>
             <Footer />
         </>
     );

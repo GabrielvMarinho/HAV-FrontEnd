@@ -7,4 +7,5 @@ interface PropertySpecific{
     livingRoom: number;
     areaProperty: number;
     isFurnished: boolean;
+    additional: string[];
 }
