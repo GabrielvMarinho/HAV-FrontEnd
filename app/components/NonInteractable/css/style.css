@@ -41,6 +41,7 @@
     font-family: Montserrat;
     text-align: start;
     font-style: normal;
+    gap: 10px;
 }
 
 .PromotionalPrice {
@@ -80,6 +81,25 @@
     color: var(--box-dark-red-option);
     font-size: var(--text-ml);
     font-weight: 500;
+}
+
+.descriptionTitlePropertySpecific{
+    font-size: var(--text-l);
+    font-weight: 900;
+    color: var(--box-dark-red);
+    text-transform: uppercase;  
+    
+}
+.divDescriptionTitlePropertySpecific{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+}
+.lineDescriptionTitlePropertySpecific{
+    width: 75px;
+    height: 3px;
+    background-color: var(--box-red-pink);
 }
 
 @media (width < 992px) {
