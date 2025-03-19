@@ -134,6 +134,97 @@
     color: var(--text-light-red);
 }
 
+
+.mainHomeInfoContainer{
+    background: var(--box-mid-dark-red);
+    width: 100%;
+    min-width: 100vw; 
+    height:34vh;
+    min-height: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center; 
+    /* height: 100%; */
+    gap: 37vh;
+}
+
+.mainHomeInfoSubContainer{
+    margin-top: 52px;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    align-items: center;
+    gap: 38vh;
+    position: relative;
+    color: var(--bg-color);
+}
+
+.mainHomeInfoEspecific{
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-wrap: wrap;
+}
+
+.mainHomeInfoEspecificP{
+    text-wrap: wrap;
+    width: 108px;
+    opacity: 1;
+    font-size: 16px;
+    position: absolute;
+    top: 70px; 
+    transition: top 0.3s ease-in-out; 
+    z-index: 1;
+}
+
+.textBehind {
+    font-size: 13px;
+    position: absolute;
+    top: 50px; 
+    opacity: 0; 
+    transition: opacity 0.3s ease-in-out; 
+    z-index: 1;
+}
+
+.icone{
+    position: absolute; 
+    top: 0; 
+    z-index: 2; 
+    transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out; 
+}
+
+.mainHomeInfoEspecific:hover .icone {
+    opacity: 0; 
+    top: -10px;
+}
+
+.mainHomeInfoEspecific:hover .mainHomeInfoEspecificP {
+    top: 0; 
+}
+
+.mainHomeInfoEspecific:hover .textBehind {
+    opacity: 1; 
+    top: 50px; 
+}
+
+
+@media (max-width: 992px) { 
+    .mainHomeInfoContainer {
+        background: var(--box-mid-dark-red);
+        height: 50vh; 
+        min-height: 250px; 
+        flex-direction: column;
+        gap: 12.5vh;
+    }
+
+    .mainHomeInfoSubContainer{
+        gap: 14vh;
+    }
+
+}
 .divDescriptionPropertySpecific {
     display: flex;
     flex-direction: column;

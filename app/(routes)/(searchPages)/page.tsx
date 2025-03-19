@@ -13,7 +13,7 @@ import HeaderOptions from "../../components/Header/HeaderOptions";
 import Modal from "@/app/components/Modal/Modal"
 import FormTestInput from "@/app/components/Forms/FormTestInput"
 import CardImovel from "@/app/components/Cards/CardImovel"
-import { getServerSession } from "next-auth"
+// import { getServerSession } from "next-auth"
 import Image from "next/image";
 import "@/public/Image/css/style.css"
 import MainFilter from "@/app/components/Filters/MainFilter";
@@ -22,6 +22,7 @@ import "../../GeneralPages.css"
 import "../../variables.css"
 
 import HavLogoDark from "@/app/components/IconsTSX/HavLogoDark";
+import MainHomeInfo from "@/app/components/Information/mainHomeInfo";
 import SliderContent from "@/app/components/Information/SliderContent";
 import ChamadaTelefonica from "../../components/IconsTSX/CellPhone";
 import Button from "@/app/components/Inputs/Button";
@@ -29,7 +30,7 @@ import PropertyPrice from "@/app/components/NonInteractable/PropertyPrice"
 
 export default function Home() {
 
-  const session = getServerSession()
+  // const session = getServerSession()
   
   console.log(session)
   const images = [
@@ -226,6 +227,7 @@ export default function Home() {
         informationStatus="string" 
         category="string" 
       />
+
       <CardImovel 
         bairro="Barra do rio molha" 
         cidade="Jaraguá do Sul" 
@@ -237,7 +239,11 @@ export default function Home() {
         informationStatus="LANÇAMENTO" 
         category="VENDA" 
       />
-      <PropertyPrice obj={{PromotionalPrice: 2000000 ,ActualPrice: 1999, Taxes: 900, Purpose: "vendaPromocao"}}/>
+
+      
+      <MainHomeInfo/>
+      
+      
       <Link href="/Imoveis">clique aqui</Link>
       <SelectedStar width={54} height={54} color={"#001111"}/>
       <NotSelectedStar width={54} height={54} color={"#001111"}/>
