@@ -1,28 +1,28 @@
-export default async function(
+export default async function (
 
-    id: number
-  
-  ): Promise<
-    PropertySpecific>{
-    const url = `http://localhost:9090/property/propertyspecific${id}`;
-    try{
+  id: number
+
+): Promise<
+  PropertySpecific> {
+  const url = `http://localhost:9090/property/propertyspecific/${id}`;
+  try {
 
     console.log(url)
     const response = await fetch(url);
-  
+    if (!response.ok) {
+      throw new Error(`Erro na API: ${response.status}`);
+    }
+
     const data = await response.json();
-    console.log("resposta api")
-    console.log(data)
+    console.log("resposta api", data)
 
-    const { realtors, address, taxes, ...rest } = data;
+    const { realtors, address, taxes, propertyFeatures, ...rest } = data;
 
-    const property = { ...rest, ...address, ...taxes, ...realtors };
+    const property = { ...rest, ...address, ...taxes, ...propertyFeatures, ...realtors };
 
-    console.log(property)
     return property
 
-    }catch{
-        return {} as PropertySpecific;
-    }
+  } catch {
+    return {} as PropertySpecific;
   }
-  
+}

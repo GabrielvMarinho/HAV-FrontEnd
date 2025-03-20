@@ -1,3 +1,4 @@
+"use client"
 import "../css/style.css"
 import RealtorAssociated from "@/app/components/Information/RealtorAssociated";
 import Furnished from "@/app/components/NonInteractable/Furnished";
@@ -19,18 +20,46 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import searchPropertyByIdSpecific from "@/app/apiCalls/Property/searchPropertyByIdSpecific";
 
-export default function PropertySpecific(props: {id: any, objectData: any}) {
+export default function PropertySpecific(props: { obj: PropertySpecific; }) {
 
-    const [property, setProperty] = useState<PropertySpecific>();
-    useEffect(()=>{
+    const { id } = useParams(); // Pegando o ID da URL
+    const propertyId = props.obj?.id ?? id; // Prioriza props.obj.id, mas usa o ID da URL se necessário
+
+    console.log("ID final utilizado:", propertyId);
+
+    const [property, setProperty] = useState<PropertySpecific | null>(null);
+
+    useEffect(() => {
         async function fetchProperty() {
-            try{
-                const property = await searchPropertyByIdSpecific(props.id);
-                console.log(property)
-                setProperty(property)
+            if (!propertyId) return;
+            try {
+                const property = await searchPropertyByIdSpecific(propertyId);
+                console.log("Propriedade encontrada:", property);
+                setProperty(property);
+            } catch (error) {
+                console.log("Erro ao buscar propriedade:", error);
             }
         }
-    })
+        fetchProperty();
+    }, [propertyId]);
+
+    console.log("Propriedade no estado: ", property);
+    if(!property){
+        return <p>carregando...</p>
+    }
+
+    // return (
+    //     <div>
+    //         <h1>Detalhes da Propriedade</h1>
+    //         <p><strong>ID:</strong> {property.id}</p>
+    //         <p><strong>Endereço:</strong> {property.address ?? "Não informado"}</p>
+    //         <p><strong>Preço:</strong> R$ {property.ActualPrice ?? "Sem preço"}</p>
+    //         <p><strong>Promoção:</strong> {property.PromotionalPrice ?? "Sem promoção"}</p>
+    //         <p><strong>Quartos:</strong> {property.bedroom ?? "Não informado"}</p>
+    //         <p><strong>Banheiros:</strong> {property.bathroom ?? "Não informado"}</p>
+    //         <p><strong>Área:</strong> {property.areaProperty ?? "Não informado"} m²</p>
+    //     </div>
+    // );
 
     return (
         <>
@@ -74,31 +103,32 @@ export default function PropertySpecific(props: {id: any, objectData: any}) {
                         </div>
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-                        <PropertyPageDatasAdm objectType="casa"
+                        <PropertyPageDatasAdm
                             obj={{
-                                id: "1",
-                                bedroom: 2,
-                                livingRoom: 1,
-                                garage: 1,
-                                bathroom: 2,
-                                areaProperty: 2000,
-                                address: "Czeniewiscz - Rua Bonita - SC "
+                                propertyType: property.propertyType,
+                                id: property.id,
+                                bedroom: property.bedroom,
+                                livingRoom: property.livingRoom,
+                                garage: property.garage,
+                                bathroom: property.bathroom,
+                                areaProperty: property.areaProperty,
+                                address: property.address
                             }} />
                         <PropertyPrice obj={{
-                            Purpose: "vendaPromocao",
-                            ActualPrice: 2000000,
-                            Taxes: 2000,
-                            PromotionalPrice: 2500000
+                            purpose: property.purpose,
+                            ActualPrice: property.price,
+                            taxes: property.taxes,
+                            PromotionalPrice: props.obj?.PromotionalPrice
                         }} />
                         <Furnished obj={{ isFurnished: true }} />
-                        <RealtorAssociated obj={{ name: "nathan", id: "1", email: "nathan@gmail.com" }} />
+                        <RealtorAssociated objPropertyList={{ realtors: property?.realtors ?? [] }} />
                     </div>
                 </article>
                 <article className="enviroments-interestPoint">
                     <OtherEnvironmentsProperty obj={{ additional: ["Churrasqueira", "Área de serviço", "Lavabo", "Escritório"] }} />
                     <DescriptionTitlePropertySpecific text="pontos de interesse" />
                 </article>
-                <DescriptionProperty obj={{ description: "Se você está procurando seu novo lar na região do Jardim Maria Estela/Via Anchieta, já encontrou! Apartamento impecável e ensolarado (face norte), 2 dormitórios e 1 vaga livre" }} />
+                <DescriptionProperty obj={{ propertyDescription: property.propertyDescription }} />
                 <section className="sectionPriceProperty">
                     <HorizontalPropertySpecific />
                     <div className="containerGraphic"></div>
@@ -169,7 +199,7 @@ export default function PropertySpecific(props: {id: any, objectData: any}) {
                         category="3 " />
                 ]} />
             </div>
-            <div style={{margin: "200px 0 100px 0"}}>
+            <div style={{ margin: "200px 0 100px 0" }}>
                 <RealterAssociatedVertical obj={{ name: "KAUANI DA SILVA", cellphone: "+55 (47) 11111-1111" }} />
             </div>
         </>

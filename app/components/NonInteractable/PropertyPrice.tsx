@@ -1,6 +1,6 @@
 import './css/style.css';
 
-export default function Price(props: {obj: Pick<PropertySpecific, "PromotionalPrice" | "ActualPrice" | "Taxes" | "Purpose">}) {
+export default function Price(props: {obj: Pick<PropertySpecific, "PromotionalPrice" | "ActualPrice" | "taxes" | "purpose">}) {
     // Formatador para moeda brasileira
     const formatCurrency = (value: number) => new Intl.NumberFormat("pt-BR", {
         style: "currency",
@@ -9,13 +9,13 @@ export default function Price(props: {obj: Pick<PropertySpecific, "PromotionalPr
 
     return (
         <div className="Price" style={{ display: "flex", flexDirection: "column" }}>
-            {props.obj.Purpose === "vendaPromocao" && (
+            {props.obj.purpose === "vendaPromocao" && (
                 <p className='PromotionalPrice'>{formatCurrency(props.obj.PromotionalPrice)}</p>
             )}
             <h1 className='ActualPrice'>{formatCurrency(props.obj.ActualPrice)}</h1>
             <p className='Taxes'>
-                {props.obj.Purpose === "locacao" ? "Condomínio: " : "IPTU: "}
-                {formatCurrency(props.obj.Taxes)}
+                {props.obj.purpose === "locacao" ? "Condomínio: " : "IPTU: "}
+                {formatCurrency(props.obj.taxes)}
             </p>
         </div>
     );
