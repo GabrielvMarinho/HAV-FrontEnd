@@ -28,7 +28,7 @@ export default function Footer() {
                     <p className="titleContent-footer">Páginas de apoio</p>
                     <div className="iconInfos">
                         <Help width={25} height={25} color={"var(--icon-footer-color)"}></Help>
-                        <Link style={{ color: "var(--text-white)", opacity: "0.6"}} href={"/"}>FAQ</Link>
+                        <Link style={{ color: "var(--text-white)", opacity: "0.6"}} href={"/faq"}>FAQ</Link>
                     </div>
                     <div className="iconInfos">
                         <Sobre width={25} height={25} color={"var(--icon-footer-color)"}></Sobre>
