@@ -244,17 +244,26 @@
 @media (max-width: 992px) { 
     .mainHomeInfoContainer {
         background: var(--box-mid-dark-red);
-        height: 50vh; 
+        height: 65vh; 
         min-height: 250px; 
         flex-direction: column;
-        gap: 12.5vh;
+        /* gap: 0; */
     }
 
     .mainHomeInfoSubContainer{
-        gap: 14vh;
+        margin-top: -70px;
+        margin-bottom: 40px
     }
 
+    .textBehind{
+        width: 150px;
+        text-wrap: wrap ;
+    }
+  
+
 }
+
+
 .divDescriptionPropertySpecific {
     display: flex;
     flex-direction: column;
