@@ -11,6 +11,7 @@ import getByParamsCustomers from "@/app/apiCalls/Customer/getByParamsCustomers";
 import deleteCustomerList from "@/app/apiCalls/Customer/deleteByListCustomer";
 import changeArchivedStatusCustomer from "@/app/apiCalls/Customer/changeArchivedStatusCustomer";
 import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
+import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 
 
 
@@ -56,7 +57,7 @@ export default async function page({searchParams}: {searchParams: {
     <>
 
       <Title tag="h1" text="Usuários Comuns" />
-      <NavBarAdm />
+      <NavBarAdm options={NavBarPath.users}/> 
       <SearchBar placeholder="Busca:" />
       <div className="containerFilterListAction">
         <Filter

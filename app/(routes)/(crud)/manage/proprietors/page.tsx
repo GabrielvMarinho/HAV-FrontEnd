@@ -9,6 +9,7 @@ import getByParamsProprietors from "@/app/apiCalls/Proprietor/getByParamsProprie
 import deleteProprietorList from "@/app/apiCalls/Proprietor/deleteByListProprietor";
 import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArchivedStatusProprietor";
 import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
+import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 
 
 export default async function page({ searchParams }: {
@@ -47,7 +48,7 @@ export default async function page({ searchParams }: {
 
     <div className="cu" style={{alignItems:"center", display: "flex", flexDirection: "column"}}>
       <Title tag="h1" text="Proprietários" />
-      <NavBarAdm />
+      <NavBarAdm options={NavBarPath.users}/>
       <SearchBar placeholder="Busca:" />
       <div className="containerFilterListAction">
         <Filter

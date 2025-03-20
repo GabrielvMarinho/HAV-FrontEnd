@@ -114,7 +114,6 @@ export default function TableListHistory(props: {totalPages :number; titles :str
         <PageManager totalPages={props.totalPages}></PageManager>
         </div>
         </>
-
         
     );
 }

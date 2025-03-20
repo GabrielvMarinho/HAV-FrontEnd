@@ -48,7 +48,6 @@ export default function MainHomeInfo(){
                             <p className="textBehind">  adoednwincwnu awjubfeocsodievbwo  euueueu eej ebeueueb eubebeu</p>
                         </div>
                 </div>
-
             </div>
         </>
     )

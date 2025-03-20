@@ -5,6 +5,7 @@ import './css/style.css';
 
 export default function PageManager(props: {totalPages :number}){
 
+    console.log("apareceu")
     
 
     const [page, setPage] = useState<number>(0);
@@ -44,7 +45,7 @@ export default function PageManager(props: {totalPages :number}){
     console.log("paginas totais", props.totalPages)
     return (
         <>
-        {props.totalPages==0?"":
+        {props.totalPages==0?"": props.totalPages==1?"":
         <>
         <div className="arrowBackContainer">
             <button className={"arrowBack"} disabled={page==0?true:false} onClick={takeOneFromPageQuery}><ArrowBack width={20} height={20} color="var(--arrow-page-manager)"/></button>
