@@ -1,4 +1,4 @@
-import "./css/style.css"
+import "../css/style.css"
 import RealtorAssociated from "@/app/components/Information/RealtorAssociated";
 import Furnished from "@/app/components/NonInteractable/Furnished";
 import PropertyPageDatasAdm from "@/app/components/Information/PropertyPageDatas-Adm";
@@ -21,8 +21,6 @@ import RealterAssociatedVertical from "@/app/components/Information/RealterAssoc
 export default function PropertySpecific(props: { obj: Pick<PropertySpecific, "description"> }) {
     return (
         <>
-
-            <HeaderAdm />
             <div style={{ width: "var(--width-page)" }}>
                 <article style={{ display: "flex", flexDirection: "row", gap: "83px" }}>
                     <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -161,7 +159,6 @@ export default function PropertySpecific(props: { obj: Pick<PropertySpecific, "d
             <div style={{margin: "200px 0 100px 0"}}>
                 <RealterAssociatedVertical obj={{ name: "KAUANI DA SILVA", cellphone: "+55 (47) 11111-1111" }} />
             </div>
-            <Footer />
         </>
     );
 }
