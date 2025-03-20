@@ -1,57 +1,63 @@
 "use client"
 import { useState } from "react";
+import ArrowIcon from "../IconsTSX/ArrowIcon";
+import "../../variables.css"
+const options: string[][] = [["Apple", "asdasd"], ["Banana", "Cherry"]];
 
-const options: string[] = ["Apple", "Banana", "Cherry", "Orange"];
+export default function MultiSelectDropdown(props :{text :string, options :string[][], size :string}){
 
-const MultiSelectDropdown: React.FC = () => {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedItems, setSelectedItems] = useState<string[]>([]); 
 
-  const handleCheckboxChange = (option: string) => {
-    setSelectedOptions((prev) =>
-      prev.includes(option) ? prev.filter((item) => item !== option) : [...prev, option]
-    );
+   const options = [
+    { value: '1', label: 'asdascd' },
+    { value: '2', label: 'Cherry' },
+    { value: '3', label: 'Outro Item' },
+  ];
+
+  // Função para alternar o dropdown
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleSelect = (value: string, label: string) => {
+    if (selectedItems.includes(label)) {
+      setSelectedItems(selectedItems.filter((item) => item !== label));
+    } else {
+      setSelectedItems([...selectedItems, label]);
+    }
   };
 
   return (
-    <details style={{ display: "inline-block", position: "relative" }}>
-      <summary
-        style={{
-          cursor: "pointer",
-          padding: "10px",
-          border: "1px solid #ccc",
-          background: "#fff",
-          borderRadius: "5px",
-          listStyle: "none",
-          userSelect: "none",
-        }}
-      >
-        Selecione Algo
-      </summary>
-      <div
-        style={{
-          position: "absolute",
-          background: "white",
-          border: "1px solid #ccc",
-          borderRadius: "5px",
-          padding: "8px",
-          boxShadow: "0px 4px 6px rgba(0,0,0,0.1)",
-          zIndex: 10,
-          width: "150px",
-        }}
-      >
-        {options.map((option) => (
-          <label key={option} style={{ display: "block", padding: "5px" }}>
-            <input
-              type="checkbox"
-              checked={selectedOptions.includes(option)}
-              onChange={() => handleCheckboxChange(option)}
-            />{" "}
-            {option}
-          </label>
-        ))}
+    <div className={"customMultiselect"}>
+      <div className={"selectedItems"} onClick={toggleDropdown}>
+        <div style={{display: "flex"}}>
+          <span>
+            {selectedItems.length > 0 ?  'Selecionados' : 'Selecione Algo'}
+          </span>
+          <span className={"arrow"}>{isOpen ? <div style={{width: "fit-content", height: "20px"}}className="rotateIcon"><ArrowIcon width={20} height={20} color="var(--text-light-red)" /></div> 
+          : <div style={{width: "fit-content", height: "20px"}}><ArrowIcon width={20} height={20} color="var(--text-light-red)" /></div>
+          }</span>
+        </div>
+
       </div>
-    </details>
+
+      {isOpen && (
+        <div className={"dropdownOptions"}>
+          {options.map((option) => (
+            <label key={option.value} className={"option"}>
+              <input
+                type="checkbox"
+                value={option.value}
+                checked={selectedItems.includes(option.label)}
+                onChange={() => handleSelect(option.value, option.label)}
+              />
+              {option.label}
+            </label>
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 
-export default MultiSelectDropdown;

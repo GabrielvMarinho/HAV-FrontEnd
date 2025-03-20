@@ -6,9 +6,7 @@ export default function page(){
     const searchParams = useSearchParams();  
     const searchParamsObject = Object.fromEntries(searchParams.entries());
 
-    console.log(searchParamsObject.proprietor)
-    console.log(searchParamsObject.realtors)
-    console.log(searchParamsObject)
+    console.log(searchParamsObject.isFurnished)
     return (
         <FormAddProperty 
             objectData = {searchParamsObject}

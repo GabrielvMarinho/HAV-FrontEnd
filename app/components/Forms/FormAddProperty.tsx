@@ -362,7 +362,6 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     text={dropdownFields.isFurnished.text}
                     id={dropdownFields.isFurnished.id}
                     defaultValue={props.objectData.isFurnished}
-
                     register={form.register}
                     error={form.formState.errors[dropdownFields.isFurnished.name as keyof newProperty]}
                     options={dropdownFields.isFurnished.options}
