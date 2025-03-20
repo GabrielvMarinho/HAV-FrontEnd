@@ -43,7 +43,7 @@ export default function page() {
             </div>
             <div className="chatButtonContainer" style={{ display: "flex", alignItems: "center" }}>
             <Button type="button" size="large" text="ACESSE O CHAT" hover="darken" color="white" background="#B23F52" />
-                <span style={{ marginLeft: "10px", marginRight: "10px" }}>OU</span><img src="/Image/whatsapp.png" alt="Whatsapp icon" />
+            <span className="orText">OU</span><img src="/Image/whatsapp.png" alt="Whatsapp icon" />
             </div>
 
             
