@@ -14,4 +14,5 @@ export const NavBarPath = {
             { label: "CORRETOR", path: "/manage/realtors" },
             { label: "USUÁRIO", path: "/manage/customers" },          
         ]
+        
 }
