@@ -10,11 +10,9 @@ import Garage from "../IconsTSX/Garage";
 import Sofa from "../IconsTSX/Sofa";
 import Rule from "../IconsTSX/Rule";
 
-
 export default function propertyPageDatasAdm(props: {
-    objectType: string,
-    obj: Omit<PropertySpecific, "isFurnished" | "additional" | "description" | 
-    "PromotionalPrice" | "ActualPrice" | "Taxes" | "Purpose"> 
+    obj: Omit<PropertySpecific, "isFurnished" | "additional" | "propertyDescription" | 
+    "PromotionalPrice" | "ActualPrice" | "taxes" | "purpose" | "price" | "realtors"> 
 }) {
     return (
         <article style={{ display: "flex", flexDirection: "column", alignItems: "left", gap: "10px" }}>
@@ -26,7 +24,7 @@ export default function propertyPageDatasAdm(props: {
                     fontWeight: "700",
                     color: "var(--text-dark-red)",
                     textTransform: "uppercase"
-                }}>{props.objectType}</p>
+                }}>{props.obj.propertyType}</p>
                 <HorizontalLine size={259} />
                 <CategoryCardImovel text="venda"/>
                 <StarFavorite selected={false} width={30} height={30} color="var(--box-dark-red)" />
