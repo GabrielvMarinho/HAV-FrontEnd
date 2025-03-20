@@ -33,6 +33,52 @@
     left: 0;
     right: 0;
 }
+summary {
+    list-style: none;
+    
+}
+.customMultiselect{
+    color: var(--text-light-red);
+    cursor: pointer;
+    background-color: var(--box-white);
+    padding: 10px;
+    border-radius: var(--border-box);
+}
+.smallCustomerMultiSelect{
+    width: 200px;
+
+}
+.customMultiselect .arrow{
+    margin-left: 10px;
+}
+.detailMultSelectBox{
+    background-color: var(--box-white);
+    padding: 10px;
+    padding-inline: 15px;
+    padding-right: 30px;
+    text-align: left;
+    border-radius: var(--border-box);
+    color: var(--text-light-red);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url(/Icons/ArrowIcon.svg);
+    background-repeat: no-repeat;
+    background-position: calc(100% - 8px);
+    background-size: 16px;
+
+}
+.detailMultSelectBox[open]{
+    background-image: none 
+
+}
+.dropdownOptions{
+    display: flex;
+    flex-direction: column;
+}
+.detailMultSelectBox[open] summary{
+    margin-bottom: 5px;
+}
 .buttonChooseQuantity button{
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
 
@@ -117,6 +163,7 @@
     text-align: left
 }
 .inputDropdown{
+    cursor: pointer;
     padding: 10px;
     padding-inline: 15px;
     padding-right: 30px;
