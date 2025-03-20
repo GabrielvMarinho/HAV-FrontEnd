@@ -3,6 +3,7 @@ import HeaderAdm from "@/app/components/Header/HeaderAdm";
 import "../faq/style/style.css";
 import Title from "@/app/components/NonInteractable/Title";
 import SearchBarDesktop from "@/app/components/Filters/SearchBar";
+import HavLogo from "@/app/components/IconsTSX/HavLogoLight";
 import Button from "@/app/components/Inputs/Button";
 
 export default function page() {
@@ -20,7 +21,8 @@ export default function page() {
             </div>
             <div className="searchAndBoxesContainer">
                 <div className="vendaBox">
-                    <Title tag={"h1"} text={"Venda"} />
+                <HavLogo width={50} height={50} />
+                    <Title tag={"h2"} text={"Venda"} />
                     <div className="questions">
                         <p>Quais tipos de imóveis estão disponíveis para compra?</p>
                         <p>O imóvel está pronto para morar ou em construção?</p>
@@ -29,7 +31,8 @@ export default function page() {
                     </div>
                 </div>
                 <div className="aluguelBox">
-                    <Title tag={"h1"} text={"Aluguel"} />
+                <HavLogo width={50} height={50} />
+                    <Title tag={"h2"} text={"Aluguel"} />
                     <div className="questions">
                         <p>Há um período mínimo de contrato para aluguel?</p>
                         <p>O aluguel inclui taxas como IPTU e condomínio?</p>
@@ -38,6 +41,12 @@ export default function page() {
                     </div>
                 </div>
             </div>
+            <div className="chatButtonContainer" style={{ display: "flex", alignItems: "center" }}>
+            <Button type="button" size="large" text="ACESSE O CHAT" hover="darken" color="white" background="#B23F52" />
+                <span style={{ marginLeft: "10px", marginRight: "10px" }}>OU</span><img src="/Image/whatsapp.png" alt="Whatsapp icon" />
+            </div>
+
+            
             <Footer />
         </>
     );
