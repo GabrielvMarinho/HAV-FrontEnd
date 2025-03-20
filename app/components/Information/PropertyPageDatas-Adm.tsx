@@ -10,7 +10,6 @@ import Garage from "../IconsTSX/Garage";
 import Sofa from "../IconsTSX/Sofa";
 import Rule from "../IconsTSX/Rule";
 
-
 export default function propertyPageDatasAdm(props: {
     objectType: string,
     obj: Omit<PropertySpecific, "isFurnished" | "additional" | "description" | 

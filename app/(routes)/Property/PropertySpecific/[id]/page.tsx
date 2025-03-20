@@ -2,8 +2,6 @@ import "../css/style.css"
 import RealtorAssociated from "@/app/components/Information/RealtorAssociated";
 import Furnished from "@/app/components/NonInteractable/Furnished";
 import PropertyPageDatasAdm from "@/app/components/Information/PropertyPageDatas-Adm";
-import HeaderAdm from "@/app/components/Header/HeaderAdm";
-import Footer from "@/app/components/Footer/Footer";
 import PropertyPrice from "@/app/components/NonInteractable/PropertyPrice";
 import OtherEnvironmentsProperty from "@/app/components/Information/OtherEnvironmentsProperty";
 import Button from "@/app/components/Inputs/Button";
@@ -17,8 +15,23 @@ import Title from "@/app/components/NonInteractable/Title";
 import SliderContent from "@/app/components/Information/SliderContent";
 import CardImovel from "@/app/components/Cards/CardImovel";
 import RealterAssociatedVertical from "@/app/components/Information/RealterAssociatedVertical";
+import { useParams, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import searchPropertyByIdSpecific from "@/app/apiCalls/Property/searchPropertyByIdSpecific";
 
-export default function PropertySpecific(props: { obj: Pick<PropertySpecific, "description"> }) {
+export default function PropertySpecific(props: {id: any, objectData: any}) {
+
+    const [property, setProperty] = useState<PropertySpecific>();
+    useEffect(()=>{
+        async function fetchProperty() {
+            try{
+                const property = await searchPropertyByIdSpecific(props.id);
+                console.log(property)
+                setProperty(property)
+            }
+        }
+    })
+
     return (
         <>
             <div style={{ width: "var(--width-page)" }}>
