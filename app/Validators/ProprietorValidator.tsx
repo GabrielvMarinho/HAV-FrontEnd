@@ -37,21 +37,24 @@ export const newUser = z.object({
 
 
 }).superRefine((data, ctx) => {
-    if (data.type === "pf" && (!data.cpf || data.cpf.trim() === "")) {
+    console.log("Dados recebidos para validação:", data);
+    console.log(data.type)
+    if (data.type === "pf" && (!data.cpf || data.cpf.trim().length !== 11)) {
         ctx.addIssue({
             code: "custom",
-            message: "* CPF é obrigatório",
+            message: "* CPF deve ter 11 caracteres",
             path: ["cpf"],
         });
     }
-
-    if (data.type === "pj" && (!data.cnpj || data.cnpj.trim() === "")) {
+    
+    if (data.type === "pj" && (!data.cnpj || data.cnpj.trim().length !== 14)) {
         ctx.addIssue({
             code: "custom",
-            message: "* CNPJ é obrigatório",
+            message: "* CNPJ deve ter 14 caracteres",
             path: ["cnpj"],
         });
     }
 });
+
 
 export type NewUser = z.infer<typeof newUser>;

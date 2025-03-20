@@ -432,6 +432,7 @@ background-color: var(--text-white);
     background-color: var(--text-white);
     border-radius: 999px;
     font-size: 20px;
+    border: var(--box-red-pink) 2px solid;
 }
 
 .errorText {  

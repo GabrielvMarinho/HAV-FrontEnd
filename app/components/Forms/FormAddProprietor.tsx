@@ -22,6 +22,7 @@ import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
 
 export default function FormAddProprietor() {
 
+    
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
@@ -121,6 +122,7 @@ export default function FormAddProprietor() {
     return (
 
         <>
+
             <Title text="cadastrar proprietário" tag="h1" />
             <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
@@ -137,7 +139,8 @@ export default function FormAddProprietor() {
                     </div>
                     <div className="inputArticle">
                         {proprietorType === "pf" ? (
-                            <div className="divInputs">
+
+                            <>
                                 <InputText
                                     key={textFields.name.id}
                                     name={textFields.name.name}
@@ -158,7 +161,36 @@ export default function FormAddProprietor() {
                                     register={form.register}
                                     error={form.formState.errors[textFields.cpf.name as keyof NewUser]}
                                 />
+                                
+                            </>
+
+                        ) : proprietorType === "pj" ? (
+                            <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
                                 <InputText
+                                    key={textFields.name.id}
+                                    name={textFields.name.name}
+                                    size={textFields.name.size}
+                                    placeholder={textFields.name.placeholder}
+                                    text={textFields.name.text}
+                                    id={textFields.name.name}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.name.name as keyof NewUser]}
+                                />
+                                <InputText
+                                    key={textFields.cnpj.id}
+                                    name={textFields.cnpj.name}
+                                    size={textFields.cnpj.size}
+                                    placeholder={textFields.cnpj.placeholder}
+                                    text={textFields.cnpj.text}
+                                    id={textFields.cnpj.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.cnpj.name as keyof NewUser]}
+                                />
+                            </div>
+
+
+                        ) : null}
+                        <InputText
                                     key={textFields.email.id}
                                     name={textFields.email.name}
                                     size={textFields.email.size}
@@ -259,34 +291,6 @@ export default function FormAddProprietor() {
                                     register={form.register}
                                     error={form.formState.errors[dropdownFields.neighborhood.name as keyof NewUser]}
                                 />
-                            </div>
-
-                        ) : proprietorType === "pj" ? (
-                            <div style={{ display: "flex", flexDirection: "row", gap: "15px" }}>
-                                <InputText
-                                    key={textFields.name.id}
-                                    name={textFields.name.name}
-                                    size={textFields.name.size}
-                                    placeholder={textFields.name.placeholder}
-                                    text={textFields.name.text}
-                                    id={textFields.name.name}
-                                    register={form.register}
-                                    error={form.formState.errors[textFields.name.name as keyof NewUser]}
-                                />
-                                <InputText
-                                    key={textFields.cnpj.id}
-                                    name={textFields.cnpj.name}
-                                    size={textFields.cnpj.size}
-                                    placeholder={textFields.cnpj.placeholder}
-                                    text={textFields.cnpj.text}
-                                    id={textFields.cnpj.id}
-                                    register={form.register}
-                                    error={form.formState.errors[textFields.cnpj.name as keyof NewUser]}
-                                />
-                            </div>
-
-
-                        ) : null}
 
                     </div>
                     <div className="divButtonsAceptCancelForms">
