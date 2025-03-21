@@ -106,7 +106,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                         <PropertyPageDatasAdm
                             obj={{
                                 propertyType: property.propertyType,
-                                id: property.id,
+                                propertyCode: property.propertyCode,
                                 bedroom: property.bedroom,
                                 livingRoom: property.livingRoom,
                                 garage: property.garage,
@@ -120,7 +120,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                             taxes: property.taxes,
                             PromotionalPrice: props.obj?.PromotionalPrice
                         }} />
-                        <Furnished obj={{ isFurnished: true }} />
+                        <Furnished obj={{ isFurnished: property.isFurnished }} />
                         <RealtorAssociated objPropertyList={{ realtors: property?.realtors ?? [] }} />
                     </div>
                 </article>

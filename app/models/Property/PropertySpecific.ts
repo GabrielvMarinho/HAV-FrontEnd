@@ -1,5 +1,6 @@
 interface PropertySpecific{
     id: number;
+    propertyCode: string;
     address: string;
     PromotionalPrice: number;
     ActualPrice: number;

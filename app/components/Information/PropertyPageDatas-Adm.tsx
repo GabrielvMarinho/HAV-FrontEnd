@@ -12,11 +12,11 @@ import Rule from "../IconsTSX/Rule";
 
 export default function propertyPageDatasAdm(props: {
     obj: Omit<PropertySpecific, "isFurnished" | "additional" | "propertyDescription" | 
-    "PromotionalPrice" | "ActualPrice" | "taxes" | "purpose" | "price" | "realtors"> 
+    "PromotionalPrice" | "ActualPrice" | "taxes" | "purpose" | "price" | "realtors" | "id" > 
 }) {
     return (
         <article style={{ display: "flex", flexDirection: "column", alignItems: "left", gap: "10px" }}>
-            <p className="idProperty">cód: {props.obj.id}</p>
+            <p className="idProperty">cód: {props.obj.propertyCode}</p>
             <p className="addressProperty">{props.obj.address}</p>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "15px" }}>
                 <p style={{
