@@ -54,7 +54,6 @@ export default function FormAddProprietor() {
     }, [proprietorType, form.setValue]);
 
     function onSubmit(data: NewUser) {
-
         if (Object.keys(form.formState.errors).length > 0) {
             return; // Se houver erro, interrompe a execução
         }
