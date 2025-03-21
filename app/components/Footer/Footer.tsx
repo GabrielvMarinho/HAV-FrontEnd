@@ -41,9 +41,15 @@ export default function Footer() {
                 <section className="contentFooter">
                     <p className="titleContent-footer">Redes sociais</p>
                     <div style={{ display: "flex", flexDirection: "row", gap: "22px" }}>
-                        <div className="socialMedia"></div>
-                        <div className="socialMedia"></div>
-                        <div className="socialMedia"></div>
+                        <div className="socialMedia">
+                        <img src="/Image/instagram.png" width={35} height={35} alt="Instagram icon" />
+                        </div>
+                        <div className="socialMedia">
+                        <img src="/Image/whatsapp.png" width={35} height={35} alt="Whatsapp icon" />
+                        </div>
+                        <div className="socialMedia">
+                        <img src="/Image/twitter.png" width={35} height={35} alt="X icon" />
+                        </div>
                     </div>
                 </section>
             </article>

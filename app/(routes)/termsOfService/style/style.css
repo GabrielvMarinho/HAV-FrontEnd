@@ -29,14 +29,14 @@
   line-height: 28px;
 }
 
-h1 {
+.terms-of-use-container h1 {
   font-size: 22px;
   color: var(--text-dark-red);
   font-weight: 700;
   line-height: 30px;
 }
 
-h2 {
+.terms-of-use-container h2 {
   font-size: 17px;
   margin-top: 30px;
   font-weight: 700;
@@ -44,12 +44,7 @@ h2 {
   color: var(--text-dark-red);
 }
 
-.updated-date {
-  font-size: 16px;
-  color: var(--text-dark-red);
-}
-
-p {
+.terms-of-use-container p {
   text-align: justify;
   font-size: 17px;
   color: var(--text-dark-red);
