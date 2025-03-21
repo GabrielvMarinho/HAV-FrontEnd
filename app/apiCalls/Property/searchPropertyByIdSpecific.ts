@@ -14,7 +14,6 @@ export default async function (
     }
 
     const data = await response.json();
-    console.log("resposta api", data)
 
     const { realtors, address, taxes, property_feature, ...rest } = data;
 

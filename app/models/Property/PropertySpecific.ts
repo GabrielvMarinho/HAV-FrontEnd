@@ -1,24 +1,31 @@
-interface Address{
-  
-    neighborhood: string;
-    city: string;
-    state: string;
-}
+// interface AddressPropertySpecific{
 
+// }
 
-interface PropertySpecific{
+// interface FeaturesPropertySpecific{
+
+// }
+
+interface PropertySpecific {
     id: number;
+    address: {
+        neighborhood: string;
+        city: string;
+        state: string;
+        street: string;
+    };
+    property_feature: {
+        bedRoom: number;
+        bathRoom: number;
+        garageSpace: number;
+        livingRoom: number;
+    };
     propertyCode: string;
-    address: Address;
     promotionalPrice: number;
     actualPrice: number;
     taxes: number;
     purpose: string; // venda, vendaPromocao, locacao
-    bedroom: number;
     propertyDescription: string,
-    bathroom: number;
-    garage :number;
-    livingRoom: number;
     areaProperty: number;
     isFurnished: boolean;
     propertyType: string;
