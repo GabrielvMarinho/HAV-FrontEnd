@@ -422,12 +422,12 @@ background-color: var(--text-white);
 .buttonUploadPhotoIcon{
     width: 30px;
     height: 30px;
-    position: absolute; /* Para posicionar o botão dentro do quadrado */
-    bottom: -15px;
+    position: absolute; 
+    bottom: 10px;
     right: 15px;
     display: flex;
     align-items: center;
-    background-color: var(--text-white);
+    background-color: var(--box-red-pink);
     border-radius: 999px;
     font-size: 20px;
     border: var(--box-red-pink) 2px solid;
@@ -436,7 +436,7 @@ background-color: var(--text-white);
     width: 30px;
     height: 30px;
     position: absolute; /* Para posicionar o botão dentro do quadrado */
-    bottom: -15px;
+    bottom: 10px;
     right: 15px;
     display: flex;
     align-items: center;

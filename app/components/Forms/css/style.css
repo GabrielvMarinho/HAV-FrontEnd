@@ -61,6 +61,41 @@
     height: 100%;
     object-fit: cover;
 }
+.trashcanPhoto{
+    border-radius: 100%;
+    right: 15px;
+    top: 15px;
+    width:39px;
+    height: 39px;
+    position: absolute;
+    background-color: var(--box-dark-red-option);
+    padding:8px;
+}
+.photoArrowLeft{
+    left: -35px;
+    bottom: -60px;
+}
+.photoArrowRight{
+    
+    right: -35px;
+    bottom: -60px;;
+}
+.photoArrow{
+    position: absolute;
+    background: transparent;
+}
+.subPreviewImg{
+    width: 23%;
+    margin: 1%;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+}
+.markedImage{
+    width: 23%;
+    margin: 0;
+    scale: 1.05;
+    border: 2px solid var(--box-white);
+}
 .imgPerson {
     width: 400px;
     height: 300px;
