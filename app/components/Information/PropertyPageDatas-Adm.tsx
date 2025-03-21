@@ -10,14 +10,15 @@ import Garage from "../IconsTSX/Garage";
 import Sofa from "../IconsTSX/Sofa";
 import Rule from "../IconsTSX/Rule";
 
-export default function propertyPageDatasAdm(props: {
-    obj: Omit<PropertySpecific, "isFurnished" | "additional" | "propertyDescription" | 
-    "PromotionalPrice" | "ActualPrice" | "taxes" | "purpose" | "price" | "realtors"> 
+export default function PropertyPageDatasAdm(props: {
+    obj: Omit<PropertySpecific, "isFurnished" | "additional" | "propertyDescription" |
+        "promotionalPrice" | "actualPrice" | "taxes" | "purpose" | "price" | "realtors" | "id">
 }) {
     return (
         <article style={{ display: "flex", flexDirection: "column", alignItems: "left", gap: "10px" }}>
-            <p className="idProperty">cód: {props.obj.id}</p>
-            <p className="addressProperty">{props.obj.address}</p>
+            <p className="idProperty">cód: {props.obj.propertyCode}</p>
+            <p className="addressProperty">
+                {props.obj.address?.neighborhood} - {props.obj.address?.city} - {props.obj.address?.state}</p>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "15px" }}>
                 <p style={{
                     fontSize: "var(--text-xl)",
@@ -26,7 +27,7 @@ export default function propertyPageDatasAdm(props: {
                     textTransform: "uppercase"
                 }}>{props.obj.propertyType}</p>
                 <HorizontalLine size={259} />
-                <CategoryCardImovel text="venda"/>
+                <CategoryCardImovel text="venda" />
                 <StarFavorite selected={false} width={30} height={30} color="var(--box-dark-red)" />
                 <ShareProperty width={30} height={30} />
             </div>
@@ -34,27 +35,27 @@ export default function propertyPageDatasAdm(props: {
                 <VerticalLine height={41} />
                 <div className="divCountItems">
                     <Bed width={25} height={25} color="var(--box-mid-dark-red)" />
-                    <p className="countItemNumber">{props.obj.bedroom}</p>
+                    <p className="countItemNumber">{props.obj.property_feature?.bedRoom}</p>
                 </div>
                 <VerticalLine height={41} />
                 <div className="divCountItems">
                     <Shower width={25} height={25} color="var(--box-mid-dark-red)" />
-                    <p className="countItemNumber">{props.obj.bathroom}</p>
+                    <p className="countItemNumber">{props.obj.property_feature?.bathRoom}</p>
                 </div>
                 <VerticalLine height={41} />
                 <div className="divCountItems">
                     <Garage width={25} height={25} color="var(--box-mid-dark-red)" />
-                    <p className="countItemNumber">{props.obj.garage}</p>
+                    <p className="countItemNumber">{props.obj.property_feature?.garageSpace}</p>
                 </div>
                 <VerticalLine height={41} />
                 <div className="divCountItems">
                     <Sofa width={25} height={25} color="var(--box-mid-dark-red)" />
-                    <p className="countItemNumber">{props.obj.livingRoom}</p>
+                    <p className="countItemNumber">{props.obj.property_feature?.livingRoom}</p>
                 </div>
                 <VerticalLine height={41} />
                 <div className="divCountItems">
                     <Rule width={25} height={25} color="var(--box-mid-dark-red)" />
-                    <p className="countItemNumber">{`${props.obj.areaProperty}m²`}</p>
+                    <p className="countItemNumber">{props.obj.areaProperty}m²</p>
                 </div>
                 <VerticalLine height={41} />
             </div>
