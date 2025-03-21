@@ -17,6 +17,7 @@
 }
 .tableListLineHide{
     padding: 10px;
+    padding-right: 14px;
 }
 .tableListData tr{
     transition: 0.5s ease;  
@@ -43,7 +44,7 @@
     background-color: transparent;
     padding: 0;
     border: 0;
-    margin: 0;
+    margin: 1px;
     outline: 1px var(--text-black) solid;
     border-radius: var(--border-box);
 }
@@ -75,8 +76,8 @@
 .tableListData td div{
     overflow: hidden;
     text-overflow: ellipsis;  
-
     width: 85%;
+
 }
 
 .propertyType{

@@ -14,6 +14,7 @@ import Folder from '../IconsTSX/Folder';
 import ArchiveOut from '../IconsTSX/archiveOut';
 import ArrowBack from '../IconsTSX/ArrowBack';
 import PageManager from '../Inputs/PageManager';
+import React from 'react';
 
 
 export default function TableList(props: {totalPages :number; changeArchivedStatus :(ids: string[]) => Promise<void>; deleteFunction: (ids: string[]) => Promise<void>; archived :boolean; context :string; size :string, titles :string[], data :any[]}){
@@ -23,10 +24,7 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
     
     const confirmDelete = async () => {
         const selectedIds = JSON.parse(localStorage.getItem('selectedManage') || "[]");
-        console.log("-------------")
-        console.log("chamado ", selectedIds)
         if (selectedIds.length > 0) {
-            console.log("entrou")
             await props.deleteFunction(selectedIds); 
             localStorage.removeItem("selectedManage")
             setIsDeleteModalOpen(false);
@@ -77,8 +75,6 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
     const changeArchivedStatus = async function (){
 
         const selectedIds = JSON.parse(localStorage.getItem('selectedManage') || "[]");
-        console.log(selectedIds)
-        console.log("-----------------")
         
         if (selectedIds.length > 0) {
             await props.changeArchivedStatus(selectedIds); 
@@ -105,13 +101,11 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
     
     localStorage.setItem('previousPathname', pathname);
         useEffect(() =>{
-            console.log("lets go")
             localStorage.removeItem('selectedManage')
         }, [pathname])
 
     const [selected, setSelected] = useState<string[]>(() => {
         const saved = localStorage.getItem('selectedManage');
-        console.log("copiando os dados para o state")
 
         return saved ? JSON.parse(saved) : [];
     });
@@ -123,7 +117,6 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
 
 
     const handleSelect = (option: string) => {
-        console.log(option);
         setSelected((prev: string[]) =>
             prev.includes(option) ? prev.filter((item) => item !== option) : [...prev, option]
         );
@@ -139,36 +132,38 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
         <table className="tableListData">
             <thead>
                     <tr>
-                    <div className='tableListLineHide marginSelectBox'></div>
+                            <div className='tableListLineHide marginSelectBox'></div>
 
-                        {props.titles.map( text => 
-                                <th>{text.toLocaleUpperCase()}</th>
-                            )}
+                            {props.titles.map( (text, index) => 
+                                    <th key={index}>{text.toLocaleUpperCase()}</th>
+                                )}
 
                     </tr>
             </thead>
             
             <tbody>
                 {props.data && props.data.map((obj, index) =>
-                    <>
 
+                    <React.Fragment key={Object.values(obj)[0] || index}>
                         <div className='tableListLine'></div>
 
                         <tr className={selected.includes(Object.values(obj)[0])?"selectedRow tableRows":"tableRows"}>
-                            <div className='marginSelectBox'>
-                            
+                            <td style={{all: "unset", margin:"3px"}}>
+                                <div className='marginSelectBox'>
+                                
 
-                            <input
-                            className='checkbox'
-                                type="checkbox"
-                                checked={selected.includes(Object.values(obj)[0])}
-                                onChange={() => handleSelect(Object.values(obj)[0])}
-                            />
+                                <input
+                                className='checkbox'
+                                    type="checkbox"
+                                    checked={selected.includes(Object.values(obj)[0])}
+                                    onChange={() => handleSelect(Object.values(obj)[0])}
+                                />
 
 
-                            </div>
+                                </div>
+                            </td>
                             {Object.entries(obj).slice(1).map(([key, value]) => (
-                                    <td>
+                                    <td key = {key}>
                                         <div>
                                             {key === "price" ? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value}
                                         </div>
@@ -176,8 +171,9 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
 
                                 ))}
                         </tr>
-                    </>
-                )}
+                        </React.Fragment>
+
+                    )}
             
             </tbody>
             

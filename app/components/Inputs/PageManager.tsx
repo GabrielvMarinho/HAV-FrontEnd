@@ -41,7 +41,6 @@ export default function PageManager(props: {totalPages :number}){
     
     
     
-    console.log("paginas totais", props.totalPages)
     return (
         <>
         {props.totalPages==0?"":

@@ -6,52 +6,8 @@ export default async function(
     
     ): Promise<string> {  
       const url = "http://localhost:9090/property";
-      console.log("api")
-      console.log("fllorrrs", formData.floors)
 
-      console.log(JSON.stringify(
-        {
-          "title": formData.title,
-          "propertyDescription": formData.propertyDescription,
-          "propertyType": formData.propertyType,
-          "propertyStatus": formData.status,
-          "purpose":  formData.purpose,
-          "area": formData.area,
-          "price": formData.price,
-          "promotionalPrice": formData.promotionalPrice,
-          "highlight": formData.highlight,
-          "floors":formData.floors,
-          "propertyCategory": "",
-          "floors":formData.floors,
-
-          "address": {
-            "street": formData.street,
-            "propertyNumber": formData.propertyNumber,
-            "city": formData.city,
-            "state": formData.state,
-            "cep": formData.cep,
-            "neighborhood": formData.neighborhood,
-            "Complement": formData.complement
-          },
-          "taxes": {
-            "iptu": formData.iptu,
-            "condominiumFee": formData.condominiumFee
-          },
-          "propertyFeatures": {
-            "bedRoom": formData.bedRoom,
-            "bathRoom": formData.bathRoom,
-            "garageSpace": formData.garageSpace,
-            "suite": formData.suite,
-            "livingRoom": formData.livingRoom,
-            "isFurnished": formData.isFurnished,
-            "allowsPet": formData.allowsPet
-          },
-          "additionals": null,
-          "realtors": formData.realtors.split(",").map((s: string) => Number(s.trim())),
-          "proprietor": Number(formData.proprietor)
-        }
-      ))
-
+      
       
   
       try{
@@ -111,9 +67,7 @@ export default async function(
         throw new Error(`Erro ${response.status}: ${errorData.message || "Erro desconhecido"}`);
       }
   
-      console.log("sucesso")
     }catch(error){
-      console.error("Erro na requisição:", error);
       throw error; // Relança o erro para que possa ser capturado externamente
     }
     }

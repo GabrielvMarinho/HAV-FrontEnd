@@ -32,10 +32,8 @@ export default function FormEditRealtor(props :{id :any }) {
         async function fetchRealtor() {
           try {
             const realtor = await searchRealtorById(props.id);
-            console.log(realtor)
             setRealtor(realtor)
           } catch (error) {
-            console.error("Error fetching admin data:", error);
           }
         }
     
@@ -59,8 +57,6 @@ export default function FormEditRealtor(props :{id :any }) {
 
         const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
 
-        console.log("----------------")
-        console.log("Formulário enviado:", formObject);
     
         setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
         setIsModalOpen(true); // Abre o modal
@@ -72,7 +68,6 @@ export default function FormEditRealtor(props :{id :any }) {
         if (!pendingFormData) return;
         
         setIsModalOpen(false);
-        console.log("-------", pendingFormData)
 
         try{
             const realtor :RealtorEditDto= {
@@ -97,7 +92,6 @@ export default function FormEditRealtor(props :{id :any }) {
             router.back(); //volta um point sem ter que escrever a barra
         }
         catch(err){
-            console.log(err)
         }
 
     };

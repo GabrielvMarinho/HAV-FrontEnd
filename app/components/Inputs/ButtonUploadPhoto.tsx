@@ -20,8 +20,6 @@ export default function ButtonUploadPhoto<T>({
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const file = event.target.files?.[0];
-        console.log("entrou no file")
-        console.log()
       if (file) {
         const reader = new FileReader();
 

@@ -19,7 +19,6 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
     const inputChooseQuantites = props.inputChooseQuantites ?? [];
     const inputsDropdown = props.inputsDropdown ?? [];
     const inputs = props.inputs ?? [];
-    console.log(props.inputPriceRanges)
 
 
     
@@ -39,7 +38,6 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
     const handlePriceChange = (min: number, max: number) => {
         if(!inputPriceRanges) return 
         if(max==2000000) max = 100000000
-        console.log(max)
         setPriceRange({ min, max });
     };
 
@@ -53,6 +51,7 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
             {inputs.map((input) => (
                 input &&
                 <InputText
+                    key={input.id}
                     name = {input.name}
                     size={"medium"}
                     placeholder={input.placeholder}
@@ -63,6 +62,7 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
             {inputsDropdown.map((input) => (
                 input &&
                 <InputDropdown
+                    key={input.id}
                     name = {input.name}
                     options={input.options}
                     size={"large"}
@@ -73,6 +73,7 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
             {inputChooseQuantites.map((input) =>(
                 input && 
                 <ChooseQuantity
+                    key={input.id}
                     name={input.name}
                     id ={input.id}
                     text={input.text}

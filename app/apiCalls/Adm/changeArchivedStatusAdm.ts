@@ -1,11 +1,9 @@
 "use client"
 
 export default async function changeArchivedStatusAdm(list: string[]) {
-    console.log("bora");
   const url = "http://localhost:9090/adm/changeArchiveStatus";
   
   try {
-    console.log(JSON.stringify(list))
       const response = await fetch(url, {
           method: "PATCH",
           headers: {

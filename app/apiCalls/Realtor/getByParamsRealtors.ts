@@ -16,14 +16,7 @@ export default async function(
   }>{
     const url = `http://localhost:9090/realtor/filter?page=${page}`;
 
-    console.log(JSON.stringify({
-      "cpf":cpf===""?null:cpf, 
-      "name":name===""?null:name, 
-      "email":email===""?null:email,
-      "cellphone":cellphone===""?null:cellphone,
-      "creci":creci===""?null:creci,
-      "archived":archived
-    }))
+   
     try{
     const response = await fetch(url,{
       method:"POST",

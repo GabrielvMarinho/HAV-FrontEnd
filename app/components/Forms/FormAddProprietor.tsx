@@ -30,7 +30,6 @@ export default function FormAddProprietor() {
     const router = useRouter();
 
     const handleTypeChange = function (type: string) {
-        console.log(type)
         setProprietorType(type)
     }
 
@@ -45,7 +44,6 @@ export default function FormAddProprietor() {
     });
 
     useEffect(() => {
-        console.log("Erros no formulário:", form.formState.errors);
         ([form.formState.errors])
         form.setValue("type", proprietorType); // Atualiza o tipo dinamicamente
         if (proprietorType === "pf") {
@@ -56,14 +54,11 @@ export default function FormAddProprietor() {
     }, [proprietorType, form.setValue]);
 
     function onSubmit(data: NewUser) {
-        console.log("Dados do usuário: ", data);
 
         if (Object.keys(form.formState.errors).length > 0) {
-            console.log("Ocorreu um erro, modal não será aberto.");
             return; // Se houver erro, interrompe a execução
         }
 
-        console.log(data)
         setPendingFormData(data); // Salva os dados antes de confirmar
         setIsModalOpen(true); // Agora só abre se não houver erros
     };
@@ -78,13 +73,10 @@ export default function FormAddProprietor() {
                 router.back(); // Volta um ponto sem ter que escrever a barra
             }
         } catch (err: any) {
-            console.log("Erro completo:", err); // Log do erro completo
 
             // Verifica se a resposta do backend está disponível
             if (err.response?.data) {
                 const { message, errors } = err.response.data;
-                console.log("Resposta do backend:", err.response.data); // Log da resposta do backend
-                console.log("Erros mapeados:", errors); // Log dos erros mapeados
 
                 // Limpa erros anteriores
                 form.clearErrors();
@@ -94,7 +86,6 @@ export default function FormAddProprietor() {
                     errors.forEach((errorMessage: string) => {
                         const [fieldName, message] = errorMessage.split(": ");
                         if (fieldName && message) {
-                            console.log(`Campo com erro: ${fieldName}, Mensagem: ${message}`); // Log de cada erro específico
                             form.setError(fieldName.toLowerCase() as keyof NewUser, {
                                 type: "manual",
                                 message: message.trim(),

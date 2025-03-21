@@ -17,7 +17,6 @@ export default function Footer() {
     const sendEmail = function(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault();
         const formData = new FormData(e.currentTarget as HTMLFormElement);
-        console.log("email enviado para notificações", formData.get("emailFooter"))
     }   
 
 

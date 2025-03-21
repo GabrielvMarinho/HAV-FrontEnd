@@ -136,7 +136,7 @@ summary {
     height: fit-content;
     padding: 15px;
     margin-top: 10px;
-    margin-inline: auto;
+    
     border-radius: var(--xborder-box);
 }
 .dropDown{

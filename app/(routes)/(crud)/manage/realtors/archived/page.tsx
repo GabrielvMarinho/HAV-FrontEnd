@@ -24,7 +24,6 @@ export default async function page({searchParams}: {searchParams: {
         const {cpf=null, name=null, email=null, cellphone=null, creci=null, page=null} = params
             
         const {realtors, totalPages} = await getByParamsRealtors(cpf, name, email, cellphone, creci, true, page)
-        console.log("--------------------------------")
 
         const inputs = [
           { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: ", id: "cpf", },

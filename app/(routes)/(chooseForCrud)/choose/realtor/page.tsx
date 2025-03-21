@@ -21,9 +21,7 @@ export default async function page({searchParams}: {searchParams: {
 
 
   }}) {
-    console.log("--------------------")
     const params = await searchParams;
-    console.log(params)
     const {cpf=null, creci=null, email=null, numberProperties=null, goal=null, page=0} = params
     
     const {realtors, totalPages} = await getByParamsRealtors(cpf, creci, email, numberProperties, goal, false, page)
@@ -41,8 +39,6 @@ export default async function page({searchParams}: {searchParams: {
 
   const action = queryString.get("action")
 
-  console.log("action realtor")
-  console.log(action)
   
   return (
       <div className="noHeaderPage">

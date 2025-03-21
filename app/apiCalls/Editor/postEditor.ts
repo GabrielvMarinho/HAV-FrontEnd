@@ -2,7 +2,6 @@ export default async function postEditor(
   formData: { [key: string]: FormDataEntryValue } | null
 ): Promise<string> {
   const url = "http://localhost:9090/editor";
-  console.log("Enviando dados para o backend:", formData);
 
 
   //tranformando imagem em base 64
@@ -14,11 +13,7 @@ export default async function postEditor(
 
   try {
     const form = new FormData();
-    
-
-
-    
-
+  
     form.append("editor", new Blob([JSON.stringify({
       name: formData?.name,
       cpf: formData?.cpf,
@@ -42,8 +37,6 @@ export default async function postEditor(
       form.append("image", file); // Agora enviando a imagem como base64
     }
 
-    console.log("_--------------------------_")
-    console.log("Conteúdo do FormData:");
     
 
     const response = await fetch(url, {
@@ -53,7 +46,6 @@ export default async function postEditor(
 
     if (!response.ok) {
       const errorData = await response.json(); // Captura a resposta de erro do backend
-      console.log("Erro do backend:", errorData);
 
       // Lança o erro com a estrutura completa
       throw {
@@ -64,10 +56,8 @@ export default async function postEditor(
       };
     }
 
-    console.log("Sucesso ao enviar dados para o backend");
     return await response.json(); // Retorna a resposta em caso de sucesso
   } catch (error) {
-    console.error("Erro na requisição:", error);
     throw error; // Relança o erro para que possa ser capturado externamente
   }
 }

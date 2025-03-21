@@ -31,10 +31,8 @@ export default function FormEditEditor(props :{id :any }) {
         async function fetchEditor() {
           try {
             const editor = await searchEditorById(props.id);
-            console.log(editor)
             setEditor(editor)
           } catch (error) {
-            console.error("Error fetching admin data:", error);
           }
         }
     
@@ -58,8 +56,6 @@ export default function FormEditEditor(props :{id :any }) {
 
         const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
 
-        console.log("----------------")
-        console.log("Formulário enviado:", formObject);
     
         setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
         setIsModalOpen(true); // Abre o modal
@@ -71,7 +67,6 @@ export default function FormEditEditor(props :{id :any }) {
         if (!pendingFormData) return;
         
         setIsModalOpen(false);
-        console.log("-------", pendingFormData)
 
         try{
             const editor :EditorEditDto= {
@@ -95,7 +90,6 @@ export default function FormEditEditor(props :{id :any }) {
             router.back(); //volta um point sem ter que escrever a barra
         }
         catch(err){
-            console.log(err)
         }
 
     };
@@ -207,6 +201,7 @@ export default function FormEditEditor(props :{id :any }) {
                                     size={dropdownFields.state.size}
                                     text={dropdownFields.state.text}
                                     id={dropdownFields.state.id}
+                                    defaultValue={editor?.state??""}
                                     options={dropdownFields.state.options}
                                 />
 
@@ -216,6 +211,7 @@ export default function FormEditEditor(props :{id :any }) {
                                    size={dropdownFields.city.size}
                                    text={dropdownFields.city.text}
                                    id={dropdownFields.city.id}
+                                   defaultValue={editor?.city??""}
                                    options={dropdownFields.city.options}
                                 />
 
@@ -225,6 +221,8 @@ export default function FormEditEditor(props :{id :any }) {
                                     size={dropdownFields.neighborhood.size}
                                     text={dropdownFields.neighborhood.text}
                                     id={dropdownFields.neighborhood.id}
+                                    defaultValue={editor?.neighborhood??""}
+
                                     options={dropdownFields.neighborhood.options}
                                 />
 

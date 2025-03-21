@@ -39,8 +39,6 @@ export default function FormAddCustomer() {
 
         const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
 
-        console.log("----------------")
-        console.log("Formulário enviado:", formObject);
 
         setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
         setIsModalOpen(true); // Abre o modal
@@ -57,13 +55,10 @@ export default function FormAddCustomer() {
                 router.back(); // Volta um ponto sem ter que escrever a barra
             }
         } catch (err: any) {
-            console.log("Erro completo:", err); // Log do erro completo
 
             // Verifica se a resposta do backend está disponível
             if (err.response?.data) {
                 const { message, errors } = err.response.data;
-                console.log("Resposta do backend:", err.response.data); // Log da resposta do backend
-                console.log("Erros mapeados:", errors); // Log dos erros mapeados
 
                 // Limpa erros anteriores
                 form.clearErrors();
@@ -73,7 +68,6 @@ export default function FormAddCustomer() {
                     errors.forEach((errorMessage: string) => {
                         const [fieldName, message] = errorMessage.split(": ");
                         if (fieldName && message) {
-                            console.log(`Campo com erro: ${fieldName}, Mensagem: ${message}`); // Log de cada erro específico
                             form.setError(fieldName.toLowerCase() as keyof NewCustomer, {
                                 type: "manual",
                                 message: message.trim(),

@@ -8,7 +8,6 @@ export default function page(){
     const searchParamsObject = Object.fromEntries(searchParams.entries());
     
     
-    console.log(searchParamsObject.isFurnished)
     return (
         
         <>

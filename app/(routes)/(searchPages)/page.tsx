@@ -11,9 +11,7 @@ import HeaderAdm from "../../components/Header/HeaderAdm";
 import Cellphone from "../../components/IconsTSX/CellPhone";
 import HeaderOptions from "../../components/Header/HeaderOptions";
 import Modal from "@/app/components/Modal/Modal"
-import FormTestInput from "@/app/components/Forms/FormTestInput"
 import CardImovel from "@/app/components/Cards/CardImovel"
-import { getServerSession } from "next-auth"
 import Image from "next/image";
 import "@/public/Image/css/style.css"
 import MainFilter from "@/app/components/Filters/MainFilter";
@@ -29,9 +27,7 @@ import PropertyPrice from "@/app/components/NonInteractable/PropertyPrice"
 
 export default function Home() {
 
-  const session = getServerSession()
   
-  console.log(session)
   const images = [
     "https://images.unsplash.com/photo-1726607962647-84ec2451d553?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxfHx8ZW58MHx8fHx8",
     "https://plus.unsplash.com/premium_photo-1734543942868-2470c4cba7b5?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyfHx8ZW58MHx8fHx8",

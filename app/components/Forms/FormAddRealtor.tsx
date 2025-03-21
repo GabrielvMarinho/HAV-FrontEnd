@@ -31,18 +31,13 @@ export default function FormAddRealter() {
         mode: "onSubmit",
     });
 
-    useEffect(() => {
-        console.log("Erros do formulário:", form.formState.errors);
-    }, [form.formState.errors]);
+    
 
-    function onSubmit(data: NewRealter) {console.log("---------------------------------")
-        console.log("Dados do usuário:", data);
+    function onSubmit(data: NewRealter) {
 
         if (Object.keys(form.formState.errors).length > 0) {
-            console.log("Ocorreu um erro, modal não será aberto.");
             return;
         }
-        console.log("abrindo modal");
         setPendingFormData(data);
         setIsModalOpen(true);
     };
@@ -57,13 +52,10 @@ export default function FormAddRealter() {
                 router.back(); // Volta um ponto sem ter que escrever a barra
             }
         } catch (err: any) {
-            console.log("Erro completo:", err); // Log do erro completo
 
             // Verifica se a resposta do backend está disponível
             if (err.response?.data) {
                 const { message, errors } = err.response.data;
-                console.log("Resposta do backend:", err.response.data); // Log da resposta do backend
-                console.log("Erros mapeados:", errors); // Log dos erros mapeados
 
                 // Limpa erros anteriores
                 form.clearErrors();
@@ -73,7 +65,6 @@ export default function FormAddRealter() {
                     errors.forEach((errorMessage: string) => {
                         const [fieldName, message] = errorMessage.split(": ");
                         if (fieldName && message) {
-                            console.log(`Campo com erro: ${fieldName}, Mensagem: ${message}`); // Log de cada erro específico
                             form.setError(fieldName.toLowerCase() as keyof NewRealtor, {
                                 type: "manual",
                                 message: message.trim(),
@@ -96,8 +87,6 @@ export default function FormAddRealter() {
             }
         }
     };
-    console.log(isModalOpen); // Adicione isso dentro do componente FormAddRealter
-    console.log("Dados do formulário antes de enviar:", pendingFormData);
 
     return (
 

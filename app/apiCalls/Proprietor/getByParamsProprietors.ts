@@ -17,17 +17,8 @@ export default async function(
   }>{
     
     const url = `http://localhost:9090/proprietor/filter?page=${page}`;
-    console.log(url)
 
-    console.log(JSON.stringify({
-      "cpf": cpf===""?null:cpf,
-      "cnpj": cnpj===""?null:cnpj,
-      "name":name===""?null:name, 
-      "email":email===""?null:email,
-      "numberOfProperty":numberProperties===null?null:numberProperties,
-      "goal":goal===""?null:goal,
-      "archived":archived
-    }))
+    
     try{
     const response = await fetch(url,{
       method:"POST",
@@ -46,7 +37,6 @@ export default async function(
     });
 
     const data = await response.json();
-    console.log(data)
 
     const proprietors: Proprietor[] = data.content.map((proprietor: Proprietor) => proprietor);
     return {proprietors: proprietors, totalPages: data.totalPages}

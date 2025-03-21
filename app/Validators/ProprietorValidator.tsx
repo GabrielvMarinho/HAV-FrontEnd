@@ -37,8 +37,6 @@ export const newUser = z.object({
 
 
 }).superRefine((data, ctx) => {
-    console.log("Dados recebidos para validação:", data);
-    console.log(data.type)
     if (data.type === "pf" && (!data.cpf || data.cpf.trim().length !== 11)) {
         ctx.addIssue({
             code: "custom",

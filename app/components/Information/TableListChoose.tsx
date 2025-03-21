@@ -19,8 +19,6 @@ import { useRouter } from 'next/router';
 
 export default function TableListChoose(props: {id? :any; action :string; type :string; totalPages :number; archived :boolean; size :string, titles :string[], data :any[]}){
 
-    console.log("action")
-    console.log(props.action)
     
     
     
@@ -35,13 +33,11 @@ export default function TableListChoose(props: {id? :any; action :string; type :
     
     localStorage.setItem('previousPathname', pathname);
         useEffect(() =>{
-            console.log("lets go")
             localStorage.removeItem('selectedManage')
         }, [pathname])
 
     const [selected, setSelected] = useState<string[]>(() => {
         const saved = localStorage.getItem('selectedManage');
-        console.log("copiando os dados para o state")
 
         return saved ? JSON.parse(saved) : [];
     });
@@ -53,7 +49,6 @@ export default function TableListChoose(props: {id? :any; action :string; type :
 
 
     const handleSelect = (option: string) => {
-        console.log(option);
         setSelected((prev: string[]) =>
             prev.includes(option) ? prev.filter((item) => item !== option) : [...prev, option]
         );
@@ -62,10 +57,9 @@ export default function TableListChoose(props: {id? :any; action :string; type :
     const searchParams = useSearchParams();
   
     const params = Object.fromEntries(searchParams.entries());
-    console.log(params)
+
     const returnToPropertyOne = function() {
         
-        console.log(":::::::::::::::::")
 
         const parsedData = JSON.parse(localStorage.getItem("selectedManage") || "");  
 
@@ -78,7 +72,6 @@ export default function TableListChoose(props: {id? :any; action :string; type :
 
         const finalQuery = queryString.toString()
         localStorage.removeItem("selectedManage")
-        console.log("asdasd")
         if(props.action==="add"){
             window.location.href = `/manage/properties/add?${finalQuery}`
         }
@@ -93,7 +86,6 @@ export default function TableListChoose(props: {id? :any; action :string; type :
 
     const returnToPropertyMany = function() {
         
-        console.log(":::::::::::::::::")
 
         const parsedData = JSON.parse(localStorage.getItem("selectedManage") || "[]");  
         

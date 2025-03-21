@@ -14,19 +14,9 @@ export default async function(
     totalPages: number;
 
   }>{
-    console.log("cpf ->", cpf)
     const url = "http://localhost:9090/adm/filter";
     try{
-      console.log(JSON.stringify({
-        "cpf":cpf===""?null:cpf, 
-        "name":name===""?null:name, 
-        "email":email===""?null:email,
-        "cellphone":cellphone===""?null:phoneNumber,
-        "phoneNumber":phoneNumber===""?null:phoneNumber,
-        "archived":archived,
-        "page":page,
-        "size":10
-      }))
+      
     const response = await fetch(url,{
       method:"POST",
       headers: {

@@ -24,9 +24,6 @@ export default async function(
       const url = `http://localhost:9090/property/filter?page=${page}`
       
 
-      console.log("---------")
-      console.log(minPrice)
-      console.log(maxPrice)
       if(purpose==="venda"){
         if(minPrice===null){
           minPrice=0
@@ -44,22 +41,7 @@ export default async function(
         }
       }  
       
-      console.log(JSON.stringify({
-        "propertyCode":propertyCode===""?null:propertyCode, 
-          "minPric":minPrice, 
-          "maxPric":maxPrice,
-          "propertyType":propertyType===""?null:propertyType,
-          "propertyCategory":propertyCategory===""?null:propertyCategory,
-          "propertyStatus":propertyStatus===""?null:propertyStatus,
-          "archived":archived,
-          "propertyFeatures":{
-            "bedRoom":bedRoom,
-            "bathRoom":bathRoom,
-            "garageSpace":garageSpace,
-            "suite":suite
-          }
-          
-      }))
+      
     try{
       const response = await fetch(url,{
         method:"POST",
@@ -86,11 +68,7 @@ export default async function(
   
   
       const data = await response.json();
-      console.log(data)
       const properties: Property[] = data.content.map((property: Property) => property);
-      console.log("total pages")
-      console.log(properties)
-      console.log(data.totalPages)
       return {properties: properties, totalPages: data.totalPages}
 
     }catch{

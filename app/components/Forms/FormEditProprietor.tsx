@@ -32,11 +32,8 @@ export default function FormEditProprietor(props :{id :any }) {
         async function fetchProprietor() {
           try {
             const proprietor = await searchProprietorById(props.id);
-            console.log(proprietor)
-            console.log(proprietor.name)
             setProprietor(proprietor)
           } catch (error) {
-            console.error("Error fetching admin data:", error);
           }
         }
     
@@ -61,9 +58,7 @@ export default function FormEditProprietor(props :{id :any }) {
         
         const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
 
-        console.log("----------------")
 
-        console.log("Formulário enviado:", formObject);
     
         setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
 
@@ -76,7 +71,6 @@ export default function FormEditProprietor(props :{id :any }) {
         if (!pendingFormData) return;
         
         setIsModalOpen(false);
-        console.log("-------", pendingFormData)
 
         try{
             const proprietor :ProprietorEditDto= {
@@ -100,7 +94,6 @@ export default function FormEditProprietor(props :{id :any }) {
             router.back(); //volta um point sem ter que escrever a barra
         }
         catch(err){
-            console.log(err)
         }
 
     };
@@ -211,6 +204,8 @@ export default function FormEditProprietor(props :{id :any }) {
                                     size={dropdownFields.state.size}
                                     text={dropdownFields.state.text}
                                     id={dropdownFields.state.id}
+                                    defaultValue={proprietor?.state??""}
+
                                     options={dropdownFields.state.options}
                                 />
 
@@ -220,6 +215,8 @@ export default function FormEditProprietor(props :{id :any }) {
                                    size={dropdownFields.city.size}
                                    text={dropdownFields.city.text}
                                    id={dropdownFields.city.id}
+                                   defaultValue={proprietor?.state??""}
+
                                    options={dropdownFields.city.options}
                                 />
 
@@ -229,6 +226,8 @@ export default function FormEditProprietor(props :{id :any }) {
                                     size={dropdownFields.neighborhood.size}
                                     text={dropdownFields.neighborhood.text}
                                     id={dropdownFields.neighborhood.id}
+                                    defaultValue={proprietor?.state??""}
+
                                     options={dropdownFields.neighborhood.options}
                                 />
 

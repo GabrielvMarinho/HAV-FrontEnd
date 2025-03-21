@@ -38,13 +38,10 @@ export default function FormAddEditor() {
                 router.back(); // Volta um ponto sem ter que escrever a barra
             }
         } catch (err: any) {
-            console.log("Erro completo:", err); // Log do erro completo
 
             // Verifica se a resposta do backend está disponível
             if (err.response?.data) {
                 const { message, errors } = err.response.data;
-                console.log("Resposta do backend:", err.response.data); // Log da resposta do backend
-                console.log("Erros mapeados:", errors); // Log dos erros mapeados
 
                 // Limpa erros anteriores
                 form.clearErrors();
@@ -54,7 +51,6 @@ export default function FormAddEditor() {
                     errors.forEach((errorMessage: string) => {
                         const [fieldName, message] = errorMessage.split(": ");
                         if (fieldName && message) {
-                            console.log(`Campo com erro: ${fieldName}, Mensagem: ${message}`); // Log de cada erro específico
                             form.setError(fieldName.toLowerCase() as keyof NewEditorOrAdm, {
                                 type: "manual",
                                 message: message.trim(),
@@ -82,22 +78,17 @@ export default function FormAddEditor() {
         resolver: zodResolver(newEditorOrAdm),
         mode: "onTouched"
     });
-    console.log("form")
-    console.log(form.getValues())
 
     function onSubmit(data: NewEditorOrAdm) {
-        console.log("Dados do usuário:", data);
+
         if (Object.keys(form.formState.errors).length > 0) {
-            console.log("Ocorreu um erro");
             return;
         }
         setPendingFormData(data),
             setIsModalOpen(true)
     }
 
-    useEffect(() => {
-        console.log("Erros do formulário:", form.formState.errors);
-    }, [form.formState.errors]);
+    
 
     return (
 

@@ -21,14 +21,10 @@ export default async function page({searchParams}: {searchParams: {
 
 
   }}) {
-    console.log("--------------------")
     const params = await searchParams;
-    console.log(params)
     const {cpf=null, cnpj=null, name=null, email=null, numberProperties=null, goal=null, page=0} = params
     
     const {proprietors, totalPages} = await getByParamsProprietors(cpf, cnpj, name, email, numberProperties, goal, false, page)
-    console.log("proprietors")
-    console.log(proprietors)
   
   const inputs = [
     { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: ", id: "cpf", },
@@ -37,9 +33,7 @@ export default async function page({searchParams}: {searchParams: {
     { name: "name", size: "medium", text: "Nome", placeholder: "ex: ", id: "name", },
 
   ];
-  console.log("_-----------------------")
  
-  console.log(proprietors)
   const queryString = new URLSearchParams(params);
 
   const action = queryString.get("action")

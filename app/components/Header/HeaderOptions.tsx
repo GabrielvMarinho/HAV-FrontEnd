@@ -21,7 +21,7 @@ export default function HeaderOptions(props :{close :() => void; isOpen: boolean
                 {
                  props.options.map((option, index) =>
             
-                    <div className={"iconPlusTextHeaderOption"} style={{display: "flex", gap: "5px"}}>
+                    <div key={index} className={"iconPlusTextHeaderOption"} style={{display: "flex", gap: "5px"}}>
                         {props.optionsIcons[index]}
                         <Link href={props.optionsLinks[index]} className='headerOptionContainerOption'>{option}</Link>
 

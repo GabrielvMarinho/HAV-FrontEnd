@@ -10,20 +10,20 @@ export default function HavLogo({ width, height }: Icon) {
             <path d="M137.418 26.7993C137.418 24.7938 139.133 23.168 141.248 23.168H146.17C148.286 23.168 150 24.7938 150 26.7993V123.221C150 125.227 148.286 126.853 146.17 126.853H141.248C139.133 126.853 137.418 125.227 137.418 123.221V26.7993Z" fill="url(#paint3_linear_698_8110)"/>
             <defs>
             <linearGradient id="paint0_linear_698_8110" x1="74.9906" y1="65.9336" x2="74.9906" y2="150" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#61262F"/>
-            <stop offset="1" stop-color="#B23F52"/>
+            <stop stopColor="#61262F"/>
+            <stop offset="1" stopColor="#B23F52"/>
             </linearGradient>
             <linearGradient id="paint1_linear_698_8110" x1="74.9906" y1="0" x2="74.9906" y2="85.1074" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#61262F"/>
-            <stop offset="1" stop-color="#B23F52"/>
+            <stop stopColor="#61262F"/>
+            <stop offset="1" stopColor="#B23F52"/>
             </linearGradient>
             <linearGradient id="paint2_linear_698_8110" x1="6.29121" y1="23.168" x2="6.29121" y2="126.853" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#61262F"/>
-            <stop offset="1" stop-color="#B23F52"/>
+            <stop stopColor="#61262F"/>
+            <stop offset="1" stopColor="#B23F52"/>
             </linearGradient>
             <linearGradient id="paint3_linear_698_8110" x1="143.709" y1="23.168" x2="143.709" y2="126.853" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#61262F"/>
-            <stop offset="1" stop-color="#B23F52"/>
+            <stop stopColor="#61262F"/>
+            <stop offset="1" stopColor="#B23F52"/>
             </linearGradient>
             </defs>
             </svg>

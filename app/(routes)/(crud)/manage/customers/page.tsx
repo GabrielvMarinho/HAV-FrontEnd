@@ -31,7 +31,6 @@ export default async function page({searchParams}: {searchParams: {
     
     const {customers, totalPages} = await getByParamsCustomers(cpf, name, email, cellphone, status, false, page ?? 0)
     
-    console.log("total de paginas ", totalPages)
     
 
   const inputs = [

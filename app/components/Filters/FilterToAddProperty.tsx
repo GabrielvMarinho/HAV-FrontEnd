@@ -14,7 +14,6 @@ import ButtonComprarAlugar from "../Inputs/ToggleRentOrBuy";
 export default function Filter(props: {size :string, inputs :any[], inputsDropdown :any[], inputPriceRanges :any[] | null}){
     
     
-    console.log(props.inputPriceRanges)
 
 
     
@@ -34,7 +33,6 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
     const handlePriceChange = (min: number, max: number) => {
         if(!props.inputPriceRanges) return 
         if(max==2000000) max = 100000000
-        console.log(max)
         setPriceRange({ min, max });
     };
 

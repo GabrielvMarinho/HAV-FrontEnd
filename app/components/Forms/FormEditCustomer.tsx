@@ -30,10 +30,8 @@ export default function FormEditCustomer(props :{id :any }) {
         async function fetchCustomer() {
           try {
             const customer = await searchCustomerById(props.id);
-            console.log(customer)
             setCustomer(customer)
           } catch (error) {
-            console.error("Error fetching admin data:", error);
           }
         }
     
@@ -57,8 +55,6 @@ export default function FormEditCustomer(props :{id :any }) {
 
         const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
 
-        console.log("----------------")
-        console.log("Formulário enviado:", formObject);
     
         setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
         setIsModalOpen(true); // Abre o modal
@@ -70,7 +66,6 @@ export default function FormEditCustomer(props :{id :any }) {
         if (!pendingFormData) return;
         
         setIsModalOpen(false);
-        console.log("-------", pendingFormData)
 
         try{
             const customer :CustomerEditDto= {
@@ -94,7 +89,6 @@ export default function FormEditCustomer(props :{id :any }) {
             router.back(); //volta um point sem ter que escrever a barra
         }
         catch(err){
-            console.log(err)
         }
 
     };
@@ -206,6 +200,8 @@ export default function FormEditCustomer(props :{id :any }) {
                                     size={dropdownFields.state.size}
                                     text={dropdownFields.state.text}
                                     id={dropdownFields.state.id}
+                                    defaultValue={customer?.state??""}
+
                                     options={dropdownFields.state.options}
                                 />
 
@@ -215,6 +211,8 @@ export default function FormEditCustomer(props :{id :any }) {
                                    size={dropdownFields.city.size}
                                    text={dropdownFields.city.text}
                                    id={dropdownFields.city.id}
+                                   defaultValue={customer?.city??""}
+
                                    options={dropdownFields.city.options}
                                 />
 
@@ -224,6 +222,8 @@ export default function FormEditCustomer(props :{id :any }) {
                                     size={dropdownFields.neighborhood.size}
                                     text={dropdownFields.neighborhood.text}
                                     id={dropdownFields.neighborhood.id}
+                                    defaultValue={customer?.neighborhood??""}
+
                                     options={dropdownFields.neighborhood.options}
                                 />
 

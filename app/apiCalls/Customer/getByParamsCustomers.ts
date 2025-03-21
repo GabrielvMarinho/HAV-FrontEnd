@@ -18,15 +18,7 @@ export default async function(
     const url = `http://localhost:9090/customer/filter?page=${page}`;
     
     try{
-      console.log(JSON.stringify({
-        "cpf":cpf, 
-        "name":name, 
-        "email":email,
-        "cellphone":cellphone,
-        "status":status,
-        "archived":archived,
-        "page":page,
-      }))
+      
       const response = await fetch(url,{
         method:"POST",
         headers: {

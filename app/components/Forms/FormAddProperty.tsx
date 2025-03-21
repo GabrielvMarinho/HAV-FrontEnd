@@ -25,7 +25,6 @@ import postProperty from "@/app/apiCalls/Property/postProperty";
 
 export default function FormAddProperty(props :{objectData :any;}) {
 
-    console.log(props.objectData)
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
     const [isPromotional, setIsPromotional] = useState(true)
@@ -94,16 +93,13 @@ export default function FormAddProperty(props :{objectData :any;}) {
 
         try {
             const response = await postProperty(pendingFormData)
-            console.log(response)
             window.location.href = "/manage/properties"
         }
         catch (err) {
-            console.log(err)
         }
     };
     function onSubmit(data: newProperty) {
         if (Object.keys(form.formState.errors).length > 0) {
-            console.log("Ocorreu um erro");
             return;
         }
         setPendingFormData(data),

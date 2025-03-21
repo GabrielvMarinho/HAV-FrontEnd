@@ -41,7 +41,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
         async function fetchProperty() {
           try {
             const property = await searchPropertyById(props.id);
-            console.log(property)
             setProperty(property)
             changePurpose(props.objectData.purpose== null || props.objectData.purpose==undefined?property?.purpose:props.objectData.purpose)
             changeStatus(props.objectData.status== null || props.objectData.status==undefined?property?.propertyStatus:props.objectData.status)
@@ -49,7 +48,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
     
 
           } catch (error) {
-            console.error("Error fetching admin data:", error);
           }
         }
     
@@ -57,7 +55,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
             fetchProperty();
         }
 
-        console.log(props.objectData.purpose)
         
       }, [props.id]);
 
@@ -106,8 +103,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
     }   
     useEffect(() =>{
         changePurpose(props.objectData.purpose== null || props.objectData.purpose==undefined?property?.purpose:props.objectData.purpose)
-        console.log("-------")
-        console.log(props.objectData.purpose== null || props.objectData.purpose==undefined?property?.purpose:props.objectData.purpose)
         changeStatus(props.objectData.status== null || props.objectData.status==undefined?property?.propertyStatus:props.objectData.status)
         changeType(props.objectData.propertyType== null || props.objectData.propertyType==undefined?property?.propertyType:props.objectData.propertyType)
     }, [])
@@ -122,16 +117,13 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
 
         try {
             const response = await postProperty(pendingFormData)
-            console.log(response)
             window.location.href = "/manage/properties"
         }
         catch (err) {
-            console.log(err)
         }
     };
     function onSubmit(data: newProperty) {
         if (Object.keys(form.formState.errors).length > 0) {
-            console.log("Ocorreu um erro");
             return;
         }
         setPendingFormData(data),

@@ -30,7 +30,6 @@ export default async function page({ searchParams }: {
 
     const {proprietors, totalPages} = await getByParamsProprietors(cpf, cnpj, name, email, numberProperties, goal, false, page)
     
-    console.log(proprietors)
   
   const inputDropdown = [
     {
