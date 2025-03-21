@@ -11,6 +11,7 @@ import deleteRealtorList from "@/app/apiCalls/Realtor/deleteByListRealtor";
 import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArchivedStatusProprietor";
 import changeArchivedStatusRealtor from "@/app/apiCalls/Realtor/changeArchivedStatusRealtor";
 import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
+import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 
 
 
@@ -44,9 +45,8 @@ export default async function page({searchParams}: {searchParams: {
     return (
         <>
         
-        
         <Title tag="h1" text="Corretores"/>
-        <NavBarAdm/>
+        <NavBarAdm options={NavBarPath.users}/>
         <SearchBar placeholder="Busca:"/>   
         <div className="containerFilterListAction">
             <Filter 

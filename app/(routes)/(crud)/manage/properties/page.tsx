@@ -71,8 +71,6 @@ export default async function page({searchParams}: {searchParams: {
     return (
         <>
         
-        
-        
         <Title tag="h1" text="Imóveis"/>
         <SearchBar placeholder="Busca:"/>   
         <div className="containerFilterListAction">

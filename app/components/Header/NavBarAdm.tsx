@@ -4,29 +4,22 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import './css/style.css';
 
-export default function NavBarAdm() {
+export default function NavBarAdm(props: { options: { label: string; path: string }[] }) {
     const pathname = usePathname();
-    
-    const options = [
-        { label: "ADMINISTRADOR", path: "/manage/admins" },
-        { label: "EDITOR", path: "/manage/editors" },
-        { label: "CORRETOR", path: "/manage/realtors" },
-        { label: "USUÁRIO", path: "/manage/customers" },
-        { label: "PROPRIETÁRIO", path: "/manage/proprietors" }
-    ];
 
+    console.log(props.options)
     return (
         <div className="navBarAdm" style={{ display: "flex", flexDirection: "row" }}>
-            {options.map((option, index) => {
+            {props.options.map((option, index) => {
                 const isSelected = pathname === option.path;
-
+            
                 return (
                     <Link
                         href={option.path}
                         key={option.label}
                         className={`boxNavBarAdm 
                             ${index === 0 ? "boxNavBarAdmLeftCorner" : ""} 
-                            ${index === options.length - 1 ? "boxNavBarAdmRightCorner" : ""} 
+                            ${index === props.options.length - 1 ? "boxNavBarAdmRightCorner" : ""} 
                             ${isSelected ? "selected" : ""}`}
                     >
                         {option.label}
@@ -36,3 +29,4 @@ export default function NavBarAdm() {
         </div>
     );
 }
+

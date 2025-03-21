@@ -13,6 +13,7 @@ import deleteByListAdm from "@/app/apiCalls/Adm/deleteByListAdm";
 import changeArchivedStatusAdm from "@/app/apiCalls/Adm/changeArchivedStatusAdm";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
+import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 
 
 
@@ -39,10 +40,8 @@ export default async function page({ searchParams }: {
     return (
         <>
         
-        
-        
         <Title tag="h1" text="Administradores"/>
-        <NavBarAdm/>
+        <NavBarAdm options={NavBarPath.users}/>
         <SearchBar placeholder="Busca:"/>   
         <div className="containerFilterListAction">
             <Filter 
