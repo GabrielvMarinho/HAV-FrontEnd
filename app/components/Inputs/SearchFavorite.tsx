@@ -3,8 +3,9 @@
 import { useRouter } from "next/navigation";
 import ArrowBack from "../IconsTSX/ArrowBack";
 import "./css/style.css"; 
+import StarFavorite from "./StarFavorite";
 
-export default function SearchFavorite(props :{typeSearch:string}){
+export default function SearchFavorite(){
     const router = useRouter();
 
     const BackAPoint = function(){
@@ -14,15 +15,14 @@ export default function SearchFavorite(props :{typeSearch:string}){
         <>
         <div className="searchResult" style={{display: "flex", flexDirection:"row"}}>
             <div onClick={BackAPoint} style={{display: "flex", justifyContent:"center", alignItems:"center", marginRight:"10px"}}>
-                <ArrowBack width={35} height={35} color="var(--text--mid-dark-red)"/>    
+                <StarFavorite width={45} height={45} color="var(--box-mid-dark-red)" selected={false} />
             </div>
 
-            <div>
-                <h2>RESULTADOS</h2>
-                    <div style={{display: "flex", gap:"10px", alignItems:"center"}}>
-                        <p>da sua pesquisa</p>
-                        <h3>{props.typeSearch === "venda"?"VENDA":props.typeSearch === "locacao"?"LOCAÇÃO":""}</h3>
-                    </div>
+            <div >
+                <div style={{display: "flex", gap:"10px", alignItems:"center", color: "var(--box-mid-dark-red)"}}>
+                    <p>MEUS</p>
+                </div>
+                <h2>FAVORITOS</h2>
                 <div className="searchResultLine"></div>
             </div>
         </div>

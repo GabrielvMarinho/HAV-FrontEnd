@@ -10,7 +10,28 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}   
+}  
+
+.dropdownSchedulingHistory{
+    width: 78vw;
+    display: flex;
+    justify-content:"start";
+    margin-top: 30px; 
+    margin-left: 50px; 
+    margin-bottom: 32px;
+}
+
+.dropdownFavorite{
+    width: 78vw;
+    display: flex;
+    justify-content:"start"; 
+    margin-top: 100px;
+    margin-left:50px;
+}
+
+.dropdownSegundo{
+    margin-left:20px;
+}
 
 @media (width <992px) {
     .containerFilterListAction {
@@ -26,5 +47,13 @@
         justify-content: start;
         align-items: center;
         gap: 0px;
+    }
+
+    .dropdownSchedulingHistory{
+    
+    }
+
+    .dropdownFavorite{
+       
     }
 }
