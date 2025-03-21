@@ -30,6 +30,8 @@ export const newRealtor = z.object({
     neighborhood: z.string().nonempty("* Campo obrigatório"),
     state: z.string().nonempty("* Campo obrigatório"),
     complement: z.string().optional(),
+    image: z.any().optional().nullable()
+
 });
 
 export type NewRealtor = z.infer<typeof newRealtor>;

@@ -32,6 +32,7 @@ export default function FormEditProprietor(props :{id :any }) {
         async function fetchProprietor() {
           try {
             const proprietor = await searchProprietorById(props.id);
+            console.log(proprietor)
             setProprietor(proprietor)
           } catch (error) {
           }
@@ -129,7 +130,7 @@ export default function FormEditProprietor(props :{id :any }) {
                                    key={textFields.cpf.id}
                                    name={textFields.cpf.name}
                                    size={textFields.cpf.size}
-                                   text={textFields.cpf.text}
+                                   text={"CPF/CNPJ"}
                                    value={proprietor?.cpf??""}
                                    id={textFields.cpf.id}
                                 />
@@ -215,7 +216,7 @@ export default function FormEditProprietor(props :{id :any }) {
                                    size={dropdownFields.city.size}
                                    text={dropdownFields.city.text}
                                    id={dropdownFields.city.id}
-                                   defaultValue={proprietor?.state??""}
+                                   defaultValue={proprietor?.city??""}
 
                                    options={dropdownFields.city.options}
                                 />
@@ -226,7 +227,7 @@ export default function FormEditProprietor(props :{id :any }) {
                                     size={dropdownFields.neighborhood.size}
                                     text={dropdownFields.neighborhood.text}
                                     id={dropdownFields.neighborhood.id}
-                                    defaultValue={proprietor?.state??""}
+                                    defaultValue={proprietor?.neighborhood??""}
 
                                     options={dropdownFields.neighborhood.options}
                                 />

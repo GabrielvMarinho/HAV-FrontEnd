@@ -21,11 +21,37 @@ import editEditor from "@/app/apiCalls/Editor/editEditor";
 import editCustomer from "@/app/apiCalls/Customer/editCustomer";
 import { textFields } from "../globalFormsConfig/InputTextConfig";
 import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
+import { NewCustomer, newCustomer } from "@/app/Validators/CustomerValidator";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function FormEditCustomer(props :{id :any }) {
     
+
+
+
+
     const [customer, setCustomer] = useState<CustomerEditDto>()
 
+
+
+
+    const form = useForm<NewCustomer>({
+        resolver: zodResolver(newCustomer),
+        mode: "onSubmit",
+    });
+
+    function onSubmit(data: NewCustomer) {
+        console.log("entro")
+
+        if (Object.keys(form.formState.errors).length > 0) {
+            console.log("erros")
+            return;
+        }
+        setPendingFormData(data);
+        setIsModalOpen(true);
+    };
+    
     useEffect(() => {
         async function fetchCustomer() {
           try {
@@ -98,7 +124,7 @@ export default function FormEditCustomer(props :{id :any }) {
     return (
         
         <>
-            <form className="ownerForm" onSubmit={handleFormSubmit}>
+            <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
                         <ButtonUploadPhoto />
@@ -232,8 +258,7 @@ export default function FormEditCustomer(props :{id :any }) {
                     <div className="divButtonsAceptCancelForms">          
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                         <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
-                            background="var(--text-white)"
-                            onClick={() => setIsModalOpen(true)} />
+                            background="var(--text-white)" />
                     </div>
                 </article>
                 <Modal
