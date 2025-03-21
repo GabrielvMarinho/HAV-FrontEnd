@@ -419,7 +419,19 @@ summary {
 .toggleButton.active {
 background-color: var(--text-white);
 }
-
+.buttonUploadPhotoIcon{
+    width: 30px;
+    height: 30px;
+    position: absolute; /* Para posicionar o botão dentro do quadrado */
+    bottom: -15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    background-color: var(--text-white);
+    border-radius: 999px;
+    font-size: 20px;
+    border: var(--box-red-pink) 2px solid;
+}
 .buttonUploadPhoto {
     width: 30px;
     height: 30px;
@@ -431,6 +443,7 @@ background-color: var(--text-white);
     justify-content: center;
     background-color: var(--text-white);
     border-radius: 999px;
+    opacity: 0; 
     font-size: 20px;
     border: var(--box-red-pink) 2px solid;
 }

@@ -4,30 +4,51 @@ export default async function postEditor(
   const url = "http://localhost:9090/editor";
   console.log("Enviando dados para o backend:", formData);
 
+
+  //tranformando imagem em base 64
+  const file = formData?.image[0];
+
+  
+
+
+
   try {
+    const form = new FormData();
+    
+
+
+    
+
+    form.append("editor", new Blob([JSON.stringify({
+      name: formData?.name,
+      cpf: formData?.cpf,
+      email: formData?.email,
+      celphone: formData?.cellphone,
+      phoneNumber: formData?.phoneNumber,
+      archived: false,
+      address: {
+        cep: formData?.cep,
+        street: formData?.street,
+        neighborhood: formData?.neighborhood,
+        city: formData?.city,
+        state: formData?.state,
+        propertyNumber: formData?.propertyNumber,
+        complement: formData?.complement,
+      }
+      }
+      )],  { type: "application/json" }));
+
+    if (file) {
+      form.append("image", file); // Agora enviando a imagem como base64
+    }
+
+    console.log("_--------------------------_")
+    console.log("Conteúdo do FormData:");
+    
+
     const response = await fetch(url, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: formData?.name,
-        cpf: formData?.cpf,
-        cnpj: formData?.cnpj,
-        email: formData?.email,
-        celphone: formData?.cellphone,
-        phoneNumber: formData?.phoneNumber,
-        archived: false,
-        address: {
-          cep: formData?.cep,
-          street: formData?.street,
-          neighborhood: formData?.neighborhood,
-          city: formData?.city,
-          state: formData?.state,
-          propertyNumber: formData?.propertyNumber,
-          complement: formData?.complement,
-        },
-      }),
+      body:form,
     });
 
     if (!response.ok) {

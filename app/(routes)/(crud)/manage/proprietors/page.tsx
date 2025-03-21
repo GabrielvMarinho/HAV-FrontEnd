@@ -1,9 +1,9 @@
+import "../../../../pageStructure.css"
 
 import Title from "../../../../components/NonInteractable/Title";
 import SearchBar from "../../../../components/Filters/SearchBar";
 import TableList from "../../../../components/Information/TableList";
 import Filter from "../../../../components/Filters/Filter";
-import "@/app/pageStructure.css"
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import getByParamsProprietors from "@/app/apiCalls/Proprietor/getByParamsProprietors";
 import deleteProprietorList from "@/app/apiCalls/Proprietor/deleteByListProprietor";
@@ -44,8 +44,7 @@ export default async function page({ searchParams }: {
   ]
 
   return (
-
-    <div className="cu" style={{alignItems:"center", display: "flex", flexDirection: "column"}}>
+<>
       <Title tag="h1" text="Proprietários" />
       <NavBarAdm />
       <SearchBar placeholder="Busca:" />
@@ -70,8 +69,7 @@ export default async function page({ searchParams }: {
         <TableList changeArchivedStatus = {changeArchivedStatusProprietor} deleteFunction={deleteProprietorList} archived={false} context="admin" size="large" titles={["cpf/cnpj", "nome", "email", "n. imóveis", "objetivo"]}
           data={proprietors} totalPages={totalPages} />
       </div>
-      </div>
-
+      </>
   )
 }
 

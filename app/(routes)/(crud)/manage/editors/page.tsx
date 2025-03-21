@@ -32,14 +32,6 @@ export default async function page({searchParams}: {searchParams: {
     //const properties = await fetchImoveis(); // Buscando os dados da API
 
     
-    const inputs = [
-      { name: "cpf", size: "medium", text: "CPF", placeholder: "ex: ", id: "cpf", },
-      { name: "name", size: "medium", text: "Nome", placeholder: "ex: ", id: "name", },
-      { name: "email", size: "medium", text: "Email", placeholder: "ex: ", id: "email", },
-      { name: "cellphone", size: "medium", text: "Celular", placeholder: "ex: ", id: "cellphone", },
-      { name: "phoneNumber", size: "medium", text: "Telefone", placeholder: "ex: ", id: "phoneNumber", }
-
-      ];
     
     return (
         <>

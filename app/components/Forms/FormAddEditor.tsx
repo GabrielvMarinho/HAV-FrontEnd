@@ -26,11 +26,13 @@ export default function FormAddEditor() {
     const router = useRouter();
 
 
+
     const addEditor = async function () {
         if (!pendingFormData) return;
         setIsModalOpen(false);
-
+        
         try {
+            
             const response = await postEditor(pendingFormData);
             if (response) {
                 router.back(); // Volta um ponto sem ter que escrever a barra
@@ -80,6 +82,8 @@ export default function FormAddEditor() {
         resolver: zodResolver(newEditorOrAdm),
         mode: "onTouched"
     });
+    console.log("form")
+    console.log(form.getValues())
 
     function onSubmit(data: NewEditorOrAdm) {
         console.log("Dados do usuário:", data);
@@ -95,7 +99,6 @@ export default function FormAddEditor() {
         console.log("Erros do formulário:", form.formState.errors);
     }, [form.formState.errors]);
 
-
     return (
 
         <>
@@ -103,7 +106,10 @@ export default function FormAddEditor() {
             <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
-                        <ButtonUploadPhoto />
+                        <ButtonUploadPhoto name={"image"} 
+                            register={form.register}
+                            error={form.formState.errors["image" as keyof NewEditorOrAdm]}
+                        />
                     </div>
                     <p style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text-white)" }}>STATUS CONTA</p>
                     <ToggleButton />
@@ -172,6 +178,7 @@ export default function FormAddEditor() {
                             placeholder={textFields.cep.placeholder}
                             text={textFields.cep.text}
                             id={textFields.cep.id}
+                            
                             register={form.register}
                             error={form.formState.errors[textFields.cep.name as keyof NewEditorOrAdm]}
                         />

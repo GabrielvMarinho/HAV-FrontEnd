@@ -36,7 +36,6 @@ export default function InputDropdown<T>({
                 
                 {...(register ? register(name) : {})}
                 
-                onChange={(e) => onChange?.(e.target.value)} 
 
                 className={`${size}InputDropdown inputDropdown ${error ? 'inputError' : ''}`}
             >
