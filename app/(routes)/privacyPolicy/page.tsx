@@ -3,6 +3,7 @@ import "../privacyPolicy/style/style.css";
 import Title from "@/app/components/NonInteractable/Title";
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
+import Footer from "@/app/components/Footer/Footer";
 
 export default function Page() {
   return (
@@ -85,7 +86,7 @@ export default function Page() {
           </section>
         </div>
       </div>
-
+      <Footer/>
     </>
   );
 }

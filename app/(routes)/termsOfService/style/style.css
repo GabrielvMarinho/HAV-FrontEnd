@@ -1,24 +1,32 @@
-@import "../../../variables.css";
+@import "../../../variables.css"; /* Se necessário, importando as variáveis */
 
-/* Container principal para centralizar o conteúdo */
-.privacy-policy-container {
+.title {
+    width: 5px;
+    text-align: center;
+  }
+  
+  .sizeTitle {
+    width: 540px;
+  }
+
+.terms-of-use-container {
   display: flex;
   justify-content: center;
   align-items: flex-start; /* Alinha o conteúdo ao topo */
   width: 62.063rem;
-  height: 79.875rem;
   padding-bottom: 60px; /* Garantir que o conteúdo não fique atrás do footer */
+  margin-bottom: 119px
 }
 
-.privacy-policy-text {
+.terms-of-use-text {
   width: 57.938rem;
-  height: 68.75rem;
+  height: 59rem;
   background-color: var(--FundoCor, #F2EBE3);
   box-shadow: 0px 15px 40px 8px rgba(0, 0, 0, 0.10);
   padding: 3.125rem 2.5rem 0.3rem 2.5rem;
   border-radius: 15px;
   margin: 0 25px;
-  line-height: 28px
+  line-height: 28px;
 }
 
 h1 {
@@ -51,8 +59,6 @@ p {
   font-weight: 500;
   line-height: 28px;
 }
-
-
 
 section {
   margin-bottom: 25px;

@@ -35,7 +35,7 @@ export default function Footer() {
                     </div>
                     <div className="iconInfos">
                         <Folder width={25} height={25} color={"var(--icon-footer-color)"}></Folder>
-                        <Link style={{ color: "var(--text-white)", opacity: "0.6"}} href={"/"}>Política de privacidade</Link>
+                        <Link style={{ color: "var(--text-white)", opacity: "0.6"}} href={"/privacyPolicy"}>Política de privacidade</Link>
                     </div>
                 </section>
                 <section className="contentFooter">

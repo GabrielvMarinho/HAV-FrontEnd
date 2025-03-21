@@ -1,5 +1,15 @@
 @import "../../../variables.css";
 
+.title {
+  width: 5px;
+  text-align: center;
+}
+
+.sizeTitle {
+  width: 540px;
+}
+
+
 /* Container principal para centralizar o conteúdo */
 .privacy-policy-container {
   display: flex;
