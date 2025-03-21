@@ -465,6 +465,16 @@ background-color: var(--text-white);
     width: fit-content;
 }
 
+.buttonSlideBackContent, .buttonSlideNextContent{
+    width: 40px;
+    height: 37px;
+    border-radius: 99px;
+    background-color: var(--box-mid-dark-red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 @media (width <992px) {
     .actionButtons{
         flex-direction: row;
