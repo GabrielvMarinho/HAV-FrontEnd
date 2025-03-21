@@ -10,6 +10,7 @@ import getByParamsEditors from "@/app/apiCalls/Editor/getByParamsEditors";
 import deleteEditorList from "@/app/apiCalls/Editor/deleteByListEditor";
 import changeArchivedStatusEditor from "@/app/apiCalls/Editor/changeArchivedStatusEditor";
 import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
+import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 
 
 
@@ -35,11 +36,8 @@ export default async function page({searchParams}: {searchParams: {
     
     return (
         <>
-        
-        
-        
         <Title tag="h1" text="Editores"/>
-        <NavBarAdm/>
+        <NavBarAdm options={NavBarPath.users} />
         <SearchBar placeholder="Busca:"/>   
         <div className="containerFilterListAction">
             <Filter 
