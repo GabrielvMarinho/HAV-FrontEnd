@@ -1,9 +1,17 @@
+interface Address{
+  
+    neighborhood: string;
+    city: string;
+    state: string;
+}
+
+
 interface PropertySpecific{
     id: number;
     propertyCode: string;
-    address: string;
-    PromotionalPrice: number;
-    ActualPrice: number;
+    address: Address;
+    promotionalPrice: number;
+    actualPrice: number;
     taxes: number;
     purpose: string; // venda, vendaPromocao, locacao
     bedroom: number;
