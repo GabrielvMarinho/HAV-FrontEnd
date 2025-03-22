@@ -34,7 +34,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
     const [hasIptu, setHasIptu] = useState(true)
     const router = useRouter();
 
-
+    
     const changePurpose = function(type :string){
         if(type == undefined){
             setHasIptu(true)
@@ -42,9 +42,11 @@ export default function FormAddProperty(props :{objectData :any;}) {
         }
         if(type != "locacao"){
             setHasIptu(true)
+            return;
         }
         else{
             setHasIptu(false)
+            return;
         }
     }
 
@@ -55,12 +57,15 @@ export default function FormAddProperty(props :{objectData :any;}) {
         }
         if(type == "promocao"){
             setIsPromotional(true)
+            return;
         }
         else{
             setIsPromotional(false)
+            return;
         }
     }   
     const changeType = function(type :string){
+        console.log(type)
         if(type == undefined){
             setIsCondominiumFree(false)
             return;
@@ -68,14 +73,18 @@ export default function FormAddProperty(props :{objectData :any;}) {
         if(type == "terreno"){
             setIsLand(true)
             setIsCondominiumFree(true)
+            return;
         }
         if(type != "apartamento"){
             setIsCondominiumFree(true)
+            return;
+
         }
         else{
             setIsCondominiumFree(false)
-
             setIsLand(false)
+            return;
+
         }
     }   
     useEffect(() =>{
@@ -100,6 +109,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
         }
     };
     function onSubmit(data: newProperty) {
+
         if (Object.keys(form.formState.errors).length > 0) {
             return;
         }
@@ -109,11 +119,12 @@ export default function FormAddProperty(props :{objectData :any;}) {
 
     const form = useForm<newProperty>({
         resolver: zodResolver(newProperty),
-        
+
         mode: "onTouched"
     });
 
 
+   
 
     
 
@@ -161,7 +172,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
                                 </div>
             <h3>CARACTERÍSTICAS DO IMÓVEL</h3>
             <div className="propertyFormGroup">
-                {!isLand==true? 
+                {isLand===false? 
                                 <>
 
                 <InputDropdown
@@ -195,7 +206,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     text={dropdownFields.bathRoom.text}
                     id={dropdownFields.bathRoom.id}
                     defaultValue={props.objectData.bathRoom}
-
+                    
                     register={form.register}
                     error={form.formState.errors[dropdownFields.bathRoom.name as keyof newProperty]}
                     options={dropdownFields.bathRoom.options}
@@ -363,6 +374,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     id={dropdownFields.isFurnished.id}
                     defaultValue={props.objectData.isFurnished}
                     register={form.register}
+                    
                     error={form.formState.errors[dropdownFields.isFurnished.name as keyof newProperty]}
                     options={dropdownFields.isFurnished.options}
                 />
@@ -405,6 +417,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     id={dropdownFields.purpose.id}
                     defaultValue={props.objectData.purpose}
                     register={form.register}
+                    
                     error={form.formState.errors[dropdownFields.purpose.name as keyof newProperty]}
                     options={dropdownFields.purpose.options}
                     onChange={changePurpose}

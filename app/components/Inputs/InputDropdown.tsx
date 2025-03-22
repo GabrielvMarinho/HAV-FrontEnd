@@ -26,6 +26,8 @@ export default function InputDropdown<T>({
     onChange?: (value: string) => void; 
     
 }) {
+    
+    
     return (
         <div style={{ width: "fit-content", display: "flex", flexDirection: "column", gap: "8px" }}>
             <label className="label" htmlFor={id}>{text}</label>
@@ -35,6 +37,7 @@ export default function InputDropdown<T>({
                 
                 {...(register ? register(name) : {})}
 
+                onChange={(e) => onChange?.(e.target.value)} 
                 defaultValue={defaultValue}
 
                 className={`${size}InputDropdown inputDropdown ${error ? 'inputError' : ''}`}
