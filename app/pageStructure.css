@@ -50,10 +50,15 @@
     }
 
     .dropdownSchedulingHistory{
-    
+        display: flex;
+        align-items: center;      
+        justify-content: center;  
     }
 
     .dropdownFavorite{
-       
+        display: flex;
+        align-items: center;     
+        justify-content: center;  
+        margin-left: 0px;
     }
 }

@@ -23,6 +23,7 @@ export default function SearchFavorite(){
                     <p>MEUS</p>
                 </div>
                 <h2>FAVORITOS</h2>
+                {/* a linha está quebrando  */}
                 <div className="searchResultLine"></div>
             </div>
         </div>
