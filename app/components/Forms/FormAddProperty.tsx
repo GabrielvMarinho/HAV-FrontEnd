@@ -22,6 +22,7 @@ import { textFields } from "../globalFormsConfig/InputTextConfig";
 import { newProperty } from "@/app/Validators/PropertyValidator";
 import NonEditableInputText from "../Inputs/NonEditableInputText";
 import postProperty from "@/app/apiCalls/Property/postProperty";
+import ButtonUploadPhotos from "../Inputs/buttonUploadPhotos";
 
 export default function FormAddProperty(props :{objectData :any;}) {
 
@@ -153,7 +154,10 @@ export default function FormAddProperty(props :{objectData :any;}) {
 
         <section id="smallerSection">
             <div className="imgPerson">
-                                    <ButtonUploadPhoto />
+                                    <ButtonUploadPhotos name={"image"} 
+                                        register={form.register}
+                                        error={form.formState.errors["image" as keyof NewEditorOrAdm]}
+                                    />
                                 </div>
             <h3>CARACTERÍSTICAS DO IMÓVEL</h3>
             <div className="propertyFormGroup">

@@ -34,6 +34,7 @@ export const newUser = z.object({
     neighborhood: z.string().nonempty("* Campo obrigatório"),
     state: z.string().nonempty("* Campo obrigatório"),
     complement: z.string().optional(),
+    image: z.any().optional().nullable()
 
 
 }).superRefine((data, ctx) => {

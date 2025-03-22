@@ -54,6 +54,7 @@ export default function FormAddProprietor() {
     }, [proprietorType, form.setValue]);
 
     function onSubmit(data: NewUser) {
+        console.log(data)
         if (Object.keys(form.formState.errors).length > 0) {
             return; // Se houver erro, interrompe a execução
         }
@@ -67,16 +68,17 @@ export default function FormAddProprietor() {
         setIsModalOpen(false);
 
         try {
+            
             const response = await postProprietor(pendingFormData);
             if (response) {
                 router.back(); // Volta um ponto sem ter que escrever a barra
             }
         } catch (err: any) {
-
             // Verifica se a resposta do backend está disponível
             if (err.response?.data) {
                 const { message, errors } = err.response.data;
-
+                console.log(message)
+                console.log(errors)
                 // Limpa erros anteriores
                 form.clearErrors();
 
@@ -117,7 +119,9 @@ export default function FormAddProprietor() {
             <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
-                        <ButtonUploadPhoto />
+                        <ButtonUploadPhoto name={"image"} 
+                            register={form.register}
+                            error={form.formState.errors["image" as keyof NewUser]}/>
                     </div>
                     <p style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text-white)" }}>STATUS CONTA</p>
                     <ToggleButton />
