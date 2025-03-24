@@ -23,6 +23,7 @@ import { newProperty } from "@/app/Validators/PropertyValidator";
 import NonEditableInputText from "../Inputs/NonEditableInputText";
 import postProperty from "@/app/apiCalls/Property/postProperty";
 import ButtonUploadPhotos from "../Inputs/buttonUploadPhotos";
+import MultiSelectDropdown from "../Inputs/MultiSelectDropdown";
 
 export default function FormAddProperty(props :{objectData :any;}) {
 
@@ -501,6 +502,8 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     register={form.register}
                     error={form.formState.errors[textFields.propertyPrice.name as keyof newProperty]}
                 />
+
+                
                 {isPromotional?
                     <InputText
                     key={textFields.propertyPromotionalPrice.id}
@@ -535,6 +538,10 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     error={form.formState.errors[dropdownFields.propertyHighlight.name as keyof newProperty]}
                     options={dropdownFields.propertyHighlight.options}
                 />
+                
+                <MultiSelectDropdown text="Adicionais"/>
+
+
             </div>
             <h3>ENDEREÇO</h3>
             <div className="propertyFormGroup">

@@ -37,11 +37,23 @@ summary {
     list-style: none;
     
 }
+.spanMultiSelect{
+    height: fit-content;
+    font-size: var(--text-s);
+}
+.labelDropdown{
+    font-size: var(--text-s);
+
+}
 .customMultiselect{
+
     color: var(--text-light-red);
     cursor: pointer;
     background-color: var(--box-white);
     padding: 10px;
+    padding-left: 15px;
+    padding-right: 7px;
+
     border-radius: var(--border-box);
 }
 .smallCustomerMultiSelect{
@@ -49,7 +61,8 @@ summary {
 
 }
 .customMultiselect .arrow{
-    margin-left: 10px;
+    margin-left: 5px;
+    
 }
 .detailMultSelectBox{
     background-color: var(--box-white);
@@ -72,8 +85,19 @@ summary {
     background-image: none 
 
 }
-.dropdownOptions{
+.optionLabelMultiSelect{
     display: flex;
+    gap: 5px ;
+}
+.dropdownOptions{
+    left: 0;
+    background-color: var(--box-white);
+    position: absolute;
+    margin-top: 5px;
+    display: flex;
+    width: 130px;
+    padding: 10px;
+    gap: 6px;
     flex-direction: column;
 }
 .detailMultSelectBox[open] summary{

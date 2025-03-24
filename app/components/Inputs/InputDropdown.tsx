@@ -40,11 +40,11 @@ export default function InputDropdown<T>({
                 onChange={(e) => onChange?.(e.target.value)} 
                 defaultValue={defaultValue}
 
-                className={`${size}InputDropdown inputDropdown ${error ? 'inputError' : ''}`}
+                className={`${size}InputDropdown inputDropdown labelDropdown ${error ? 'inputError' : ''}`}
             >
-                <option value="" selected disabled>Selecione Algo</option>
+                <option value="" className='labelDropdown' selected disabled>Selecione Algo</option>
                 {options.map(option => (
-                    <option selected={defaultValue === option[0]} className="optionDropDown" value={option[0]} key={option[0]}>
+                    <option selected={defaultValue === option[0]} className="optionDropDown labelDropdown" value={option[0]} key={option[0]}>
                         {option[1].toUpperCase()}
                     </option>
                 ))}
