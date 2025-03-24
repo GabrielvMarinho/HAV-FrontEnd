@@ -35,7 +35,10 @@ export default function ButtonUploadPhotos<T>({
         console.log(preview.length)
         if(preview.length>1){
             setPreview((prev) => prev.filter((_, i) => i !== currentIndex));
-            setCurrentIndex(currentIndex-1)
+            if(currentIndex>0){
+                setCurrentIndex(currentIndex-1)
+
+            }
 
         }else{
             console.log("final")

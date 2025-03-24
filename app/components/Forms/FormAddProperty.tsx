@@ -164,10 +164,10 @@ export default function FormAddProperty(props :{objectData :any;}) {
        
 
         <section id="smallerSection">
-            <div className="imgPerson">
-                                    <ButtonUploadPhotos name={"image"} 
+            <div className="imgProperty">
+                                    <ButtonUploadPhotos name={"images"} 
                                         register={form.register}
-                                        error={form.formState.errors["image" as keyof NewEditorOrAdm]}
+                                        error={form.formState.errors["images" as keyof NewEditorOrAdm]}
                                     />
                                 </div>
             <h3>CARACTERÍSTICAS DO IMÓVEL</h3>
@@ -287,7 +287,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     register={form.register}
                     text={dropdownFields.floors.text}
                     id={dropdownFields.floors.id}
-                    value={0}
+                    value={1}
                 />
                 <NonEditableInputText
                     key={dropdownFields.suite.id}
@@ -308,6 +308,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     value={0}
                 />
                 </>
+                
                 }
             </div>
             <h3>IMPOSTOS</h3>
