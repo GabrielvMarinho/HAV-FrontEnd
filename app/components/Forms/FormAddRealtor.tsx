@@ -33,8 +33,8 @@ export default function FormAddRealter() {
 
     
 
-    function onSubmit(data: NewRealter) {
-
+    function onSubmit(data: NewRealtor) {
+        console.log("asd")
         if (Object.keys(form.formState.errors).length > 0) {
             return;
         }
@@ -96,7 +96,9 @@ export default function FormAddRealter() {
             <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
-                        <ButtonUploadPhoto />
+                    <ButtonUploadPhoto name={"image"} 
+                            register={form.register}
+                            error={form.formState.errors["image" as keyof NewRealtor]}/>
                     </div>
                     <p style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text-white)" }}>STATUS CONTA</p>
                     <ToggleButton />

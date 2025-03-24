@@ -4,7 +4,6 @@ export default async function postEditor(
   const url = "http://localhost:9090/editor";
 
 
-  //tranformando imagem em base 64
   const file = formData?.image[0];
 
   

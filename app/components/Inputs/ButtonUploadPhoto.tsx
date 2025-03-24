@@ -41,7 +41,7 @@ export default function ButtonUploadPhoto<T>({
 
               
               <div className="buttonUploadPhotoIcon">
-                <MoreSignal width={30} height={22} color="var(--box-red-pink)"/>
+                <MoreSignal width={30} height={22} color="var(--box-white)"/>
               </div>
               <input className="buttonUploadPhoto" type="file"  
               {...(register ? register(name) : {})} 

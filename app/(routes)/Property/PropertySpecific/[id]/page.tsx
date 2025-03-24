@@ -25,17 +25,35 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
     const { id } = useParams(); // Pegando o ID da URL
     const propertyId = props.obj?.id ?? id; // Prioriza props.obj.id, mas usa o ID da URL se necessário
 
-    console.log("ID final utilizado:", propertyId);
-
     const [property, setProperty] = useState<PropertySpecific | null>(null);
 
+    const formatProperty = (apiData: any): PropertySpecific => ({
+        ...apiData,
+        address: {
+            neighborhood: apiData.neighborhood ?? "Não informado",
+            city: apiData.city ?? "Não informado",
+            state: apiData.state ?? "Não informado",
+            street: apiData.street ?? "Não informado"
+        },
+        property_feature: { 
+            bedRoom: apiData.propertyFeature?.bedRoom ?? 0, 
+            bathRoom: apiData.propertyFeature?.bathRoom ?? 0,
+            garageSpace: apiData.propertyFeature?.garageSpace ?? 0,
+            livingRoom: apiData.propertyFeature?.livingRoom ?? 0
+        }
+    });
+
+    // Chamando a formatação antes de definir o estado
     useEffect(() => {
         async function fetchProperty() {
             if (!propertyId) return;
             try {
-                const property = await searchPropertyByIdSpecific(propertyId);
-                console.log("Propriedade encontrada:", property);
-                setProperty(property);
+                const response = await searchPropertyByIdSpecific(propertyId);
+                console.log("Resposta completa da API:", response);
+    
+                const formattedProperty = formatProperty(response);
+                console.log("Propriedade formatada:", formattedProperty); 
+                setProperty(formattedProperty);
             } catch (error) {
                 console.log("Erro ao buscar propriedade:", error);
             }
@@ -43,8 +61,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
         fetchProperty();
     }, [propertyId]);
 
-    console.log("Propriedade no estado: ", property);
-    if(!property){
+    if (!property || !property.property_feature) {
         return <p>carregando...</p>
     }
 
@@ -106,21 +123,23 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                         <PropertyPageDatasAdm
                             obj={{
                                 propertyType: property.propertyType,
-                                id: property.id,
-                                bedroom: property.bedroom,
-                                livingRoom: property.livingRoom,
-                                garage: property.garage,
-                                bathroom: property.bathroom,
+                                propertyCode: property.propertyCode,
+                                bedroom: property.property_feature?.bedRoom, 
+                                livingRoom: property.property_feature?.livingRoom, 
+                                garage: property.property_feature?.garageSpace,
+                                bathroom: property.property_feature?.bathRoom, 
                                 areaProperty: property.areaProperty,
                                 address: property.address
-                            }} />
+                            }}
+                        />
+
                         <PropertyPrice obj={{
                             purpose: property.purpose,
                             ActualPrice: property.price,
                             taxes: property.taxes,
-                            PromotionalPrice: props.obj?.PromotionalPrice
+                            PromotionalPrice: props.obj?.promotionalPrice
                         }} />
-                        <Furnished obj={{ isFurnished: true }} />
+                        <Furnished obj={{ isFurnished: property.isFurnished }} />
                         <RealtorAssociated objPropertyList={{ realtors: property?.realtors ?? [] }} />
                     </div>
                 </article>

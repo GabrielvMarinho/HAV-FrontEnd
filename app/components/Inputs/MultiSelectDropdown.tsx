@@ -29,35 +29,41 @@ export default function MultiSelectDropdown(props :{text :string, options :strin
   };
 
   return (
-    <div className={"customMultiselect"}>
-      <div className={"selectedItems"} onClick={toggleDropdown}>
-        <div style={{display: "flex"}}>
-          <span>
-            {selectedItems.length > 0 ?  'Selecionados' : 'Selecione Algo'}
-          </span>
-          <span className={"arrow"}>{isOpen ? <div style={{width: "fit-content", height: "20px"}}className="rotateIcon"><ArrowIcon width={20} height={20} color="var(--text-light-red)" /></div> 
-          : <div style={{width: "fit-content", height: "20px"}}><ArrowIcon width={20} height={20} color="var(--text-light-red)" /></div>
-          }</span>
+    <div className="inputContainer">
+      <label className="label">{props.text}</label>
+
+      <div className={"customMultiselect"}>
+
+
+        <div className={"selectedItems"} onClick={toggleDropdown}>
+          <div style={{display: "flex", height:"fit-content", width: "128px", justifyContent: "space-between"}}>
+            <span className="spanMultiSelect">
+              {selectedItems.length > 0 ?  'Selecionados' : 'Selecione Algo'}
+            </span>
+            <span className={"arrow"}>{isOpen ? <div style={{width: "fit-content", height: "17px"}}className="rotateIcon"><ArrowIcon width={17} height={17} color="var(--text-light-red)" /></div> 
+            : <div style={{width: "fit-content", height: "17px"}}><ArrowIcon width={17} height={17} color="var(--text-light-red)" /></div>
+            }</span>
+          </div>
+
         </div>
 
+        {isOpen && (
+          <div className={"dropdownOptions"}>
+            {options.map((option) => (
+              <label key={option.value} className={"optionLabelMultiSelect"}>
+                <input
+                  type="checkbox"
+                  value={option.value}
+                  checked={selectedItems.includes(option.label)}
+                  onChange={() => handleSelect(option.value, option.label)}
+                />
+                {option.label}
+              </label>
+            ))}
+          </div>
+        )}
       </div>
-
-      {isOpen && (
-        <div className={"dropdownOptions"}>
-          {options.map((option) => (
-            <label key={option.value} className={"option"}>
-              <input
-                type="checkbox"
-                value={option.value}
-                checked={selectedItems.includes(option.label)}
-                onChange={() => handleSelect(option.value, option.label)}
-              />
-              {option.label}
-            </label>
-          ))}
-        </div>
-      )}
     </div>
-  );
+      );
 };
 

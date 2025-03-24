@@ -32,18 +32,18 @@ export default function FormAddCustomer() {
         mode: "onSubmit",
     });
 
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    function onSubmit(data: NewCustomer) {
+        console.log("entro")
 
-        const formData = new FormData(e.currentTarget as HTMLFormElement);
-
-        const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
-
-
-        setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
-        setIsModalOpen(true); // Abre o modal
+        if (Object.keys(form.formState.errors).length > 0) {
+            console.log("erros")
+            return;
+        }
+        setPendingFormData(data);
+        setIsModalOpen(true);
     };
 
+    
 
     const addCustomer = async function () {
         if (!pendingFormData) return;
@@ -94,10 +94,12 @@ export default function FormAddCustomer() {
     return (
 
         <>
-            <form className="ownerForm" onSubmit={handleFormSubmit}>
+            <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
-                        <ButtonUploadPhoto />
+                    <ButtonUploadPhoto name={"image"} 
+                            register={form.register}
+                            error={form.formState.errors["image" as keyof NewCustomer]}/>
                     </div>
                     <p style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text-white)" }}>STATUS CONTA</p>
                     <ToggleButton />
@@ -232,8 +234,7 @@ export default function FormAddCustomer() {
 
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                         <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
-                            background="var(--text-white)"
-                            onClick={() => setIsModalOpen(true)} />
+                            background="var(--text-white)"/>
                     </div>
                 </article>
                 <Modal

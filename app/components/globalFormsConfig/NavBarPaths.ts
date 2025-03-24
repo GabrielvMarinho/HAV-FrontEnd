@@ -13,6 +13,12 @@ export const NavBarPath = {
             { label: "PROPRIETÁRIO", path: "/manage/proprietors" },
             { label: "CORRETOR", path: "/manage/realtors" },
             { label: "USUÁRIO", path: "/manage/customers" },          
+        ],
+
+    policy:
+        [
+            { label: "POLÍTICA", path: "/privacyPolicy" },
+            { label: "TERMOS", path: "/termsOfService" },
         ]
-        
+  
 }

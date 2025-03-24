@@ -1,15 +1,31 @@
-interface PropertySpecific{
+// interface AddressPropertySpecific{
+
+// }
+
+// interface FeaturesPropertySpecific{
+
+// }
+
+interface PropertySpecific {
     id: number;
-    address: string;
-    PromotionalPrice: number;
-    ActualPrice: number;
+    address: {
+        neighborhood: string;
+        city: string;
+        state: string;
+        street: string;
+    };
+    property_feature: {
+        bedRoom: number;
+        bathRoom: number;
+        garageSpace: number;
+        livingRoom: number;
+    };
+    propertyCode: string;
+    promotionalPrice: number;
+    actualPrice: number;
     taxes: number;
     purpose: string; // venda, vendaPromocao, locacao
-    bedroom: number;
     propertyDescription: string,
-    bathroom: number;
-    garage :number;
-    livingRoom: number;
     areaProperty: number;
     isFurnished: boolean;
     propertyType: string;

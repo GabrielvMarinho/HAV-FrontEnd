@@ -203,6 +203,8 @@ export default function FormEditRealtor(props :{id :any }) {
                                     size={dropdownFields.state.size}
                                     text={dropdownFields.state.text}
                                     id={dropdownFields.state.id}
+                                    defaultValue={realtor?.state??""}
+
                                     options={dropdownFields.state.options}
                                 />
 
@@ -212,6 +214,8 @@ export default function FormEditRealtor(props :{id :any }) {
                                    size={dropdownFields.city.size}
                                    text={dropdownFields.city.text}
                                    id={dropdownFields.city.id}
+                                   defaultValue={realtor?.city??""}
+
                                    options={dropdownFields.city.options}
                                 />
 
@@ -221,6 +225,8 @@ export default function FormEditRealtor(props :{id :any }) {
                                     size={dropdownFields.neighborhood.size}
                                     text={dropdownFields.neighborhood.text}
                                     id={dropdownFields.neighborhood.id}
+                                    defaultValue={realtor?.neighborhood??""}
+
                                     options={dropdownFields.neighborhood.options}
                                 />
 

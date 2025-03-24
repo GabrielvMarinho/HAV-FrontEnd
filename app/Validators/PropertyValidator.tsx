@@ -81,7 +81,9 @@ export const newProperty = z.object({
         highlight: z.string().nonempty("* Campo obrigatório"),
         realtors: z.string().nonempty("* Selecione ao menos um corretor"),
         proprietor: z.string().nonempty("* Selecione ao menos um corretor"),
-        floors: z.string().nonempty("* Campo obrigatório")
+        floors: z.string().nonempty("* Campo obrigatório"),
+        images: z.any().optional().nullable()
+
 });
 
 export type newProperty = z.infer<typeof newProperty>;
