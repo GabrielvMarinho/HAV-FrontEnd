@@ -2,29 +2,31 @@
 import { useState } from "react";
 import ArrowIcon from "../IconsTSX/ArrowIcon";
 import "../../variables.css"
-const options: string[][] = [["Apple", "asdasd"], ["Banana", "Cherry"]];
 
-export default function MultiSelectDropdown(props :{text :string, options :string[][], size :string}){
+type Option = {
+  id: string;
+  name: string;
+};
+
+export default function MultiSelectDropdown(props :{text :string, options :Option[], size :string}){
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItems, setSelectedItems] = useState<string[]>([]); 
 
-   const options = [
-    { value: '1', label: 'asdascd' },
-    { value: '2', label: 'Cherry' },
-    { value: '3', label: 'Outro Item' },
-  ];
+  props.options.map((option) => (
+      console.log(option) 
+  ))
 
   // Função para alternar o dropdown
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleSelect = (value: string, label: string) => {
-    if (selectedItems.includes(label)) {
-      setSelectedItems(selectedItems.filter((item) => item !== label));
+  const handleSelect = (id: string, name: string) => {
+    if (selectedItems.includes(name)) {
+      setSelectedItems(selectedItems.filter((item) => item !== name));
     } else {
-      setSelectedItems([...selectedItems, label]);
+      setSelectedItems([...selectedItems, name]);
     }
   };
 
@@ -49,15 +51,15 @@ export default function MultiSelectDropdown(props :{text :string, options :strin
 
         {isOpen && (
           <div className={"dropdownOptions"}>
-            {options.map((option) => (
-              <label key={option.value} className={"optionLabelMultiSelect"}>
+            {props.options.map((option) => (
+              <label key={option.id} className={"optionLabelMultiSelect"}>
                 <input
                   type="checkbox"
-                  value={option.value}
-                  checked={selectedItems.includes(option.label)}
-                  onChange={() => handleSelect(option.value, option.label)}
+                  value={option.id}
+                  checked={selectedItems.includes(option.name)}
+                  onChange={() => handleSelect(option.id, option.name)}
                 />
-                {option.label}
+                {option.id}
               </label>
             ))}
           </div>

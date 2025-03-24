@@ -24,6 +24,7 @@ import NonEditableInputText from "../Inputs/NonEditableInputText";
 import postProperty from "@/app/apiCalls/Property/postProperty";
 import ButtonUploadPhotos from "../Inputs/buttonUploadPhotos";
 import MultiSelectDropdown from "../Inputs/MultiSelectDropdown";
+import GetAdditionals from "@/app/apiCalls/Property/GetAdditionals";
 
 export default function FormAddProperty(props :{objectData :any;}) {
 
@@ -33,8 +34,9 @@ export default function FormAddProperty(props :{objectData :any;}) {
     const [isLand, setIsLand] = useState(false)
     const [isCondominiumFree, setIsCondominiumFree] = useState(false)
     const [hasIptu, setHasIptu] = useState(true)
+    const [additionals, setAdditionals] = useState()
     const router = useRouter();
-
+    
     
     const changePurpose = function(type :string){
         if(type == undefined){
@@ -66,7 +68,6 @@ export default function FormAddProperty(props :{objectData :any;}) {
         }
     }   
     const changeType = function(type :string){
-        console.log(type)
         if(type == undefined){
             setIsCondominiumFree(false)
             return;
@@ -158,6 +159,19 @@ export default function FormAddProperty(props :{objectData :any;}) {
     }
 
 
+    //get do additionals
+    const findAdditionals = async function (): Promise<[]> {
+        try {
+            const additionals = await GetAdditionals();
+
+            return additionals;
+        } catch {
+            return [];
+        }
+    };
+    useEffect(() => {
+        findAdditionals().then(setAdditionals); // Armazena os dados corretamente no estado
+    }, []);
 
     return (
         <>
@@ -539,7 +553,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     options={dropdownFields.propertyHighlight.options}
                 />
                 
-                <MultiSelectDropdown text="Adicionais"/>
+                <MultiSelectDropdown text="Adicionais" options={[additionals]}/>
 
 
             </div>
