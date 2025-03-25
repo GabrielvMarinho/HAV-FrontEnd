@@ -5,46 +5,94 @@
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    background-color: var(--button-color-hover); /* Parte inferior branca */
+    background-color: var(--box-mid-dark-red); 
 }
+
 
 .diagonal {
     position: absolute;
+    z-index: 1;
     width: 100%;
     height: 100%;
-    background-color: var(--box-mid-dark-red); /* Cor da parte superior esquerda */
-    clip-path: polygon(0 0, 70% 0, 60% 100%, 0% 100%);
-
+    background-color: var(--button-color-hover);
+    clip-path: polygon(100% 100%, 60% 100%, 65% 0%, 100% 0%);
+    background-position: center;
 }
+
 
 .logo {
     position: absolute;
-    right: 7%; 
+    right: 1vw; 
+    z-index: 3;
     top: 55%; 
-    transform: translateY(-50%); /* Ajusta para centralizar completamente */
+    transform: translateY(-50%); 
 }
+
 
 .logoFundo {
-    position: fixed; 
-    left: 20px;
+    position: absolute; 
     top: -20px;
-    /* transform: translateX(-25%); */
-    /* bottom: 0;  */
-    /* z-index: -1; Garante que o logoFundo fique atrás do conteúdo */
-    /* width: 100%; Faz com que ocupe toda a largura da tela */
-    /* height: auto; Ajusta a altura de acordo com a imagem (pode ser definida conforme necessário) */
 }
 
-/* Media query para esconder o ícone em telas menores que 992px */
+
+.form-box {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    background-color: var(--box-yello-light);
+    padding: 60px;
+    border-radius: 15px;
+    z-index: 3; /* Fica acima da diagonal */
+    width: 290px;
+    height: 380px;
+}
+
+.tituloLogin{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.EsqueceuSenha{
+    margin-top: 8px;
+    font-size: 12px;
+    display: flex;
+    color: var(--box-dark-red-option);
+    justify-content: end;
+    text-decoration: underline;
+}
+
+.botao{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.ou{
+    display: flex;
+    justify-content: center;
+    /* font-size: 12px;
+    font-size: var(--text-xs); */
+}
+
 @media (max-width: 992px) {
     .logo {
-        display: none; /* Esconde o ícone */
+        display: none; 
+    }
+
+    .diagonal{
+        clip-path: none !important;
+        background-color: var(--box-mid-dark-red);
     }
 }
 
 
 @media (max-width: 1330px) {
-    .logo {
-        right: 5%; 
+    
+    .logoFundo {
+        position: absolute;
+        left: 0; 
+        top: -20px;
     }
 }
