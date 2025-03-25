@@ -11,7 +11,6 @@ export default async function(
       const files = formData?.images;
       
       
-      
       try{
         const form = new FormData();
   
@@ -26,10 +25,9 @@ export default async function(
       "price": formData?.price,
       "promotionalPrice": formData?.promotionalPrice,
       "highlight": formData?.highlight==="1"?true:false,
-
       "propertyCategory": "",
       "floors":formData?.floors,
-
+      "additionals":formData?.additionals,
       "address": {
         "street": formData?.street,
         "propertyNumber": formData?.propertyNumber,
@@ -52,7 +50,6 @@ export default async function(
         "isFurnished": formData?.isFurnished==="1"?true:false,
         "allowsPet": formData?.allowsPet==="1"?true:false
       },
-      "additionals": null,
       "realtors": formData?.realtors.split(",").map((s: string) => Number(s.trim())),
       "proprietor": Number(formData?.proprietor)
       }

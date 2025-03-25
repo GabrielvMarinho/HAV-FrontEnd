@@ -1,0 +1,50 @@
+@import "../../../variables.css";
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--button-color-hover); /* Parte inferior branca */
+}
+
+.diagonal {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--box-mid-dark-red); /* Cor da parte superior esquerda */
+    clip-path: polygon(0 0, 70% 0, 60% 100%, 0% 100%);
+
+}
+
+.logo {
+    position: absolute;
+    right: 7%; 
+    top: 55%; 
+    transform: translateY(-50%); /* Ajusta para centralizar completamente */
+}
+
+.logoFundo {
+    position: fixed; 
+    left: 20px;
+    top: -20px;
+    /* transform: translateX(-25%); */
+    /* bottom: 0;  */
+    /* z-index: -1; Garante que o logoFundo fique atrás do conteúdo */
+    /* width: 100%; Faz com que ocupe toda a largura da tela */
+    /* height: auto; Ajusta a altura de acordo com a imagem (pode ser definida conforme necessário) */
+}
+
+/* Media query para esconder o ícone em telas menores que 992px */
+@media (max-width: 992px) {
+    .logo {
+        display: none; /* Esconde o ícone */
+    }
+}
+
+
+@media (max-width: 1330px) {
+    .logo {
+        right: 5%; 
+    }
+}

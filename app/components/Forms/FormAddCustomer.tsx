@@ -33,7 +33,6 @@ export default function FormAddCustomer() {
     });
 
     function onSubmit(data: NewCustomer) {
-        console.log("entro")
 
         if (Object.keys(form.formState.errors).length > 0) {
             console.log("erros")
@@ -90,6 +89,7 @@ export default function FormAddCustomer() {
             }
         }
     };
+
 
     return (
 

@@ -24,6 +24,7 @@ import NonEditableInputText from "../Inputs/NonEditableInputText";
 import postProperty from "@/app/apiCalls/Property/postProperty";
 import ButtonUploadPhotos from "../Inputs/buttonUploadPhotos";
 import MultiSelectDropdown from "../Inputs/MultiSelectDropdown";
+import GetAdditionals from "@/app/apiCalls/Property/GetAdditionals";
 
 export default function FormAddProperty(props :{objectData :any;}) {
 
@@ -33,8 +34,19 @@ export default function FormAddProperty(props :{objectData :any;}) {
     const [isLand, setIsLand] = useState(false)
     const [isCondominiumFree, setIsCondominiumFree] = useState(false)
     const [hasIptu, setHasIptu] = useState(true)
+    const [additionals, setAdditionals] = useState()
     const router = useRouter();
 
+    const [selectedItems, setSelectedItems] = useState<string[]>([]); 
+
+    const handleSelect = (id: string, name: string) => {
+        if (selectedItems.includes(id)) {
+        setSelectedItems(selectedItems.filter((item) => item !== id));
+        } else {
+        setSelectedItems([...selectedItems, id]);
+        }
+        
+    };
     
     const changePurpose = function(type :string){
         if(type == undefined){
@@ -66,7 +78,6 @@ export default function FormAddProperty(props :{objectData :any;}) {
         }
     }   
     const changeType = function(type :string){
-        console.log(type)
         if(type == undefined){
             setIsCondominiumFree(false)
             return;
@@ -89,7 +100,10 @@ export default function FormAddProperty(props :{objectData :any;}) {
         }
     }   
     useEffect(() =>{
-        changePurpose(props.objectData.purpose)
+        setSelectedItems(
+            props.objectData?.additionals ? JSON.parse(props.objectData.additionals) : []
+          );
+                  changePurpose(props.objectData.purpose)
         changeStatus(props.objectData.status)
         changeType(props.objectData.propertyType)
     }, [])
@@ -114,6 +128,8 @@ export default function FormAddProperty(props :{objectData :any;}) {
         if (Object.keys(form.formState.errors).length > 0) {
             return;
         }
+        data.additionals = selectedItems
+        console.log(data)
         setPendingFormData(data),
         setIsModalOpen(true)
     }
@@ -140,6 +156,8 @@ export default function FormAddProperty(props :{objectData :any;}) {
         formData.forEach((value, key) => {
         params.append(key, value.toString());
         });
+        //adicionando o additionals que é um pouco diferente
+        params.append("additionals", JSON.stringify(selectedItems))
         const url = `/choose/realtor?action=add&${params.toString()}`;
         window.location.href = url
     }
@@ -151,13 +169,28 @@ export default function FormAddProperty(props :{objectData :any;}) {
         const dados = Object.fromEntries(formData.entries()); 
         const params = new URLSearchParams();
         formData.forEach((value, key) => {
-        params.append(key, value.toString());
+            params.append(key, value.toString());
         });
+        //adicionando o additionals que é um pouco diferente
+        params.append("additionals", JSON.stringify(selectedItems))
         const url = `/choose/proprietor?action=add&${params.toString()}`;
         window.location.href = url
     }
 
 
+    //get do additionals
+    const findAdditionals = async function (): Promise<[]> {
+        try {
+            const additionals = await GetAdditionals();
+            return additionals;
+        } catch {
+            return [];
+        }
+    };
+
+    useEffect(() => {
+        findAdditionals().then(setAdditionals); // Armazena os dados corretamente no estado
+    }, []);
 
     return (
         <>
@@ -376,7 +409,6 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     id={dropdownFields.isFurnished.id}
                     defaultValue={props.objectData.isFurnished}
                     register={form.register}
-                    
                     error={form.formState.errors[dropdownFields.isFurnished.name as keyof newProperty]}
                     options={dropdownFields.isFurnished.options}
                 />
@@ -539,7 +571,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     options={dropdownFields.propertyHighlight.options}
                 />
                 
-                <MultiSelectDropdown text="Adicionais"/>
+                <MultiSelectDropdown selectedItems={selectedItems} register={form.register} handleSelect={handleSelect} text="Adicionais" options={[additionals]}/>
 
 
             </div>

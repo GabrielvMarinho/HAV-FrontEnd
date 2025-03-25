@@ -2,7 +2,6 @@ import getByParamsProperties from "@/app/apiCalls/Property/getByParamsProperties
 import Filter from "@/app/components/Filters/Filter";
 import PriceRangeSlider from "@/app/components/Filters/SlideRange";
 import ChooseQuantity from "@/app/components/Inputs/ChooseQuantity";
-import MultiSelectDropdown from "@/app/components/Inputs/MultiSelectDropdown";
 import SearchResult from "@/app/components/Inputs/SearchResult";
 import { InputChooseQuantity } from "@/app/components/globalFormsConfig/InputChooseQuantity";
 import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdownsConfig";

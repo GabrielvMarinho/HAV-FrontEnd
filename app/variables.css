@@ -33,7 +33,7 @@
     --button-color-hover: #F2EBE3;
     --text-white: #F9F9F9;
     --text-white-non-editable-placeholder: #f9f9f97c;
-    --text-dark-red: #5F1E2A;
+    --text--mid-dark-red: #5F1E2A;
     --text-red-pink: #B23F52;
     --text-black: #0F0F0F;
     --text-black-50: #0f0f0f7c;
@@ -91,6 +91,7 @@
     border: 0;
     font-family: 'Montserrat', sans-serif;
     text-decoration: none;
+    outline: none;
 }
 
 
