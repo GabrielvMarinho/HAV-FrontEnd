@@ -1,14 +1,16 @@
 @import "../../../variables.css";
 
 .footer{
-    background-color: var(--box-mid-dark-red);
-    width: 100%;
-    height: 373px;
-    display: flex;
-    flex-direction: row;
     color: var(--text-white);
     align-items: center;
     justify-content: space-around;
+    background: var(--box-mid-dark-red);
+    width: 100%;
+    min-width: 100vw; 
+    height:34,56vh;
+    min-height: 150px;
+    display: flex;
+    flex-direction: row;
 }
 .firstArticle-footer, .thirdArticle-footer{
     display: flex;

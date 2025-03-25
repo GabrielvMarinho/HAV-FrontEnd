@@ -24,7 +24,7 @@
     align-items: center;
 }
 .searchResult{
-    color: var(--box-dark-red);
+    color: var(--text--mid-dark-red);
     gap: 2px;
     display: flex;
     justify-content: left;
@@ -130,7 +130,7 @@ summary {
 .searchResultLine{
     height: 2px;
     width: 70vw;
-    background-color: var(--box-mid-dark-red);
+    background-color: var(--button-color);
     margin-top: 10px;
     margin-left: 100px;
 }
@@ -201,6 +201,26 @@ summary {
     background-repeat: no-repeat;
     background-position: calc(100% - 8px);
     background-size: 16px; 
+}
+
+.inputDropdownNoLabel{
+    cursor: pointer;
+    padding: 10px;
+    padding-inline: 15px;
+    padding-right: 30px;
+    text-align: left;
+    border-radius: var(--border-box);
+    color: var(--text-light-red);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("/Icons/ArrowIcon.svg");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 8px);
+    background-size: 16px; 
+    background-color: var(--bg-color);
+    border: 1px solid var(--button-color);
+    
 }
 
 .input::placeholder{
