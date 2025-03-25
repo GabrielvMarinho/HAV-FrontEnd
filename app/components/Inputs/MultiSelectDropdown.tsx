@@ -20,10 +20,8 @@ export default function MultiSelectDropdown(props :{text :string, register?: Use
   };
 
   
-  console.log(JSON.stringify(props.selectedItems))
   return (
     <div className="inputContainer">
-      <input name = {"additionals"} {...(props.register ? props.register("additionals") : {})} value={JSON.stringify(props.selectedItems)}/>
       <label className="label">{props.text}</label>
 
       <div className={"customMultiselect"}>

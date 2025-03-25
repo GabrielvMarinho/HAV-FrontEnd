@@ -11,46 +11,6 @@ export default async function(
       const files = formData?.images;
       
       
-    console.log((
-      {
-        "title": formData?.title,
-      "propertyDescription": formData?.propertyDescription,
-      "propertyType": formData?.propertyType,
-      "propertyStatus": formData?.status,
-      "purpose":  formData?.purpose,
-      "area": formData?.area,
-      "price": formData?.price,
-      "promotionalPrice": formData?.promotionalPrice,
-      "highlight": formData?.highlight==="1"?true:false,
-      "propertyCategory": "",
-      "floors":formData?.floors,
-      "additionals":formData?.additionals ? JSON.parse(formData.additionals) : [],
-      "address": {
-        "street": formData?.street,
-        "propertyNumber": formData?.propertyNumber,
-        "city": formData?.city,
-        "state": formData?.state,
-        "cep": formData?.cep,
-        "neighborhood": formData?.neighborhood,
-        "Complement": formData?.complement
-      },
-      "taxes": {
-        "iptu": formData?.iptu,
-        "condominiumFee": formData?.condominiumFee
-      },
-      "propertyFeatures": {
-        "bedRoom": formData?.bedRoom,
-        "bathRoom": formData?.bathRoom,
-        "garageSpace": formData?.garageSpace,
-        "suite": formData?.suite,
-        "livingRoom": formData?.livingRoom,
-        "isFurnished": formData?.isFurnished==="1"?true:false,
-        "allowsPet": formData?.allowsPet==="1"?true:false
-      },
-      "realtors": formData?.realtors.split(",").map((s: string) => Number(s.trim())),
-      "proprietor": Number(formData?.proprietor)
-      }
-      ))    
       try{
         const form = new FormData();
   
@@ -67,7 +27,7 @@ export default async function(
       "highlight": formData?.highlight==="1"?true:false,
       "propertyCategory": "",
       "floors":formData?.floors,
-      "additionals":formData?.additionals ? JSON.parse(formData.additionals) : [],
+      "additionals":formData?.additionals,
       "address": {
         "street": formData?.street,
         "propertyNumber": formData?.propertyNumber,

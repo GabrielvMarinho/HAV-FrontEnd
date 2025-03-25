@@ -1,5 +1,5 @@
 interface PropertyEditDto {
-    allowsPet: boolean;
+    allowsPet: number;
     area: number;
     bathRoom: number;
     bedRoom: number;
@@ -9,9 +9,9 @@ interface PropertyEditDto {
     condominiumFee: number;
     floors: number;
     garageSpace: number;
-    highlight: boolean;
+    highlight: number;
     iptu: number;
-    isFurnished: boolean;
+    isFurnished: number;
     livingRoom: number;
     neighborhood: string;
     price: number;
