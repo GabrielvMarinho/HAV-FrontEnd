@@ -21,6 +21,9 @@ interface PropertySpecific {
         livingRoom: number;
         areaProperty: number;
     };
+    additional: { 
+        name: string;
+    } 
     bedRoom: number;
     propertyCode: string;
     promotionalPrice: number;
@@ -30,7 +33,6 @@ interface PropertySpecific {
     propertyDescription: string,
     isFurnished: boolean;
     propertyType: string;
-    additional: string[];
     realtors: Realtor[];
     price: number; //botei esse pra ver se ta funcionando (sim)
 }

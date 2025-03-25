@@ -14,6 +14,7 @@ export default function PropertyPageDatasAdm(props: {
     obj: Omit<PropertySpecific, "isFurnished" | "additional" | "propertyDescription" |
         "promotionalPrice" | "actualPrice" | "taxes" | "purpose" | "price" | "realtors" | "id">
 }) {
+   
 
     return (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "left", gap: "10px" }}>

@@ -43,6 +43,10 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
             garageSpace: apiData.propertyFeature?.garageSpace ?? "Não informado",
             livingRoom: apiData.propertyFeature?.livingRoom ?? "Não informado",
             areaProperty: apiData.propertyFeature?.areaProperty ?? "Não informado"
+        },
+        additional: {
+            ...apiData.additional,
+            additional: apiData.additional?.name ?? "Não informado"
         }
     });
     
@@ -136,7 +140,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                     </div>
                 </article>
                 <article className="enviroments-interestPoint">
-                    <OtherEnvironmentsProperty obj={{ additional: ["Churrasqueira", "Área de serviço", "Lavabo", "Escritório"] }} />
+                    <OtherEnvironmentsProperty obj={{ additional: property.additional}} />
                     <DescriptionTitlePropertySpecific text="pontos de interesse" />
                 </article>
                 <DescriptionProperty obj={{ propertyDescription: property.propertyDescription }} />
