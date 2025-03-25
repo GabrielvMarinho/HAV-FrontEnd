@@ -6,6 +6,7 @@ import { FieldError, UseFormRegister } from "react-hook-form";
 import { NewUser } from "@/app/Validators/ProprietorValidator";
 import { NewRealter } from '@/app/Validators/RealtorValidator';
 import { NewEditor } from '@/app/Validators/EditorOrAdmValidator';
+import { useEffect, useRef } from 'react';
 
 export default function InputText<T>({
     name,
@@ -15,7 +16,7 @@ export default function InputText<T>({
     defaultValue,
     id,
     register,
-    error
+    error,
 }: {
     name: keyof T;
     size: string;
@@ -26,18 +27,25 @@ export default function InputText<T>({
     register?: UseFormRegister<T>;
     error?: FieldError;
 }) {
+
+
+
+    
+    
+    
     
     return (
         <div className="inputContainer">
             <label className="label" htmlFor={id}>{text}</label>
             <input 
                 id={id}
-                defaultValue={defaultValue}
                 type="text"
                 name={name}
+
+                {...(register ? register(name) : {})} 
                 className={`${size}Input input`}
                 placeholder={placeholder}
-                {...(register ? register(name) : {})} 
+                
             />
             {error && <p className="errorText">{error.message}</p>}
         </div>

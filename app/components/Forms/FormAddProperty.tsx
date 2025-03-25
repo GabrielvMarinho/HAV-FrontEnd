@@ -100,7 +100,10 @@ export default function FormAddProperty(props :{objectData :any;}) {
         }
     }   
     useEffect(() =>{
-        changePurpose(props.objectData.purpose)
+        setSelectedItems(
+            props.objectData?.additionals ? JSON.parse(props.objectData.additionals) : []
+          );
+                  changePurpose(props.objectData.purpose)
         changeStatus(props.objectData.status)
         changeType(props.objectData.propertyType)
     }, [])
@@ -115,7 +118,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
 
         try {
             const response = await postProperty(pendingFormData)
-            // window.location.href = "/manage/properties"
+            window.location.href = "/manage/properties"
         }
         catch (err) {
         }
@@ -153,6 +156,8 @@ export default function FormAddProperty(props :{objectData :any;}) {
         formData.forEach((value, key) => {
         params.append(key, value.toString());
         });
+        //adicionando o additionals que é um pouco diferente
+        params.append("additionals", JSON.stringify(selectedItems))
         const url = `/choose/realtor?action=add&${params.toString()}`;
         window.location.href = url
     }
@@ -164,8 +169,10 @@ export default function FormAddProperty(props :{objectData :any;}) {
         const dados = Object.fromEntries(formData.entries()); 
         const params = new URLSearchParams();
         formData.forEach((value, key) => {
-        params.append(key, value.toString());
+            params.append(key, value.toString());
         });
+        //adicionando o additionals que é um pouco diferente
+        params.append("additionals", JSON.stringify(selectedItems))
         const url = `/choose/proprietor?action=add&${params.toString()}`;
         window.location.href = url
     }
@@ -402,7 +409,6 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     id={dropdownFields.isFurnished.id}
                     defaultValue={props.objectData.isFurnished}
                     register={form.register}
-                    
                     error={form.formState.errors[dropdownFields.isFurnished.name as keyof newProperty]}
                     options={dropdownFields.isFurnished.options}
                 />
