@@ -16,7 +16,6 @@ export default async function(){
 
     return (
         <>
-        <MultiSelectDropdown/>
         <SearchResult typeSearch="locacao"/>
         <Filter 
             size="medium" 

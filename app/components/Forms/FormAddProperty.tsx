@@ -23,6 +23,7 @@ import { newProperty } from "@/app/Validators/PropertyValidator";
 import NonEditableInputText from "../Inputs/NonEditableInputText";
 import postProperty from "@/app/apiCalls/Property/postProperty";
 import ButtonUploadPhotos from "../Inputs/buttonUploadPhotos";
+import MultiSelectDropdown from "../Inputs/MultiSelectDropdown";
 
 export default function FormAddProperty(props :{objectData :any;}) {
 
@@ -34,7 +35,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
     const [hasIptu, setHasIptu] = useState(true)
     const router = useRouter();
 
-
+    
     const changePurpose = function(type :string){
         if(type == undefined){
             setHasIptu(true)
@@ -42,9 +43,11 @@ export default function FormAddProperty(props :{objectData :any;}) {
         }
         if(type != "locacao"){
             setHasIptu(true)
+            return;
         }
         else{
             setHasIptu(false)
+            return;
         }
     }
 
@@ -55,12 +58,15 @@ export default function FormAddProperty(props :{objectData :any;}) {
         }
         if(type == "promocao"){
             setIsPromotional(true)
+            return;
         }
         else{
             setIsPromotional(false)
+            return;
         }
     }   
     const changeType = function(type :string){
+        console.log(type)
         if(type == undefined){
             setIsCondominiumFree(false)
             return;
@@ -68,14 +74,18 @@ export default function FormAddProperty(props :{objectData :any;}) {
         if(type == "terreno"){
             setIsLand(true)
             setIsCondominiumFree(true)
+            return;
         }
         if(type != "apartamento"){
             setIsCondominiumFree(true)
+            return;
+
         }
         else{
             setIsCondominiumFree(false)
-
             setIsLand(false)
+            return;
+
         }
     }   
     useEffect(() =>{
@@ -100,6 +110,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
         }
     };
     function onSubmit(data: newProperty) {
+
         if (Object.keys(form.formState.errors).length > 0) {
             return;
         }
@@ -109,11 +120,12 @@ export default function FormAddProperty(props :{objectData :any;}) {
 
     const form = useForm<newProperty>({
         resolver: zodResolver(newProperty),
-        
+
         mode: "onTouched"
     });
 
 
+   
 
     
 
@@ -153,15 +165,15 @@ export default function FormAddProperty(props :{objectData :any;}) {
        
 
         <section id="smallerSection">
-            <div className="imgPerson">
-                                    <ButtonUploadPhotos name={"image"} 
+            <div className="imgProperty">
+                                    <ButtonUploadPhotos name={"images"} 
                                         register={form.register}
-                                        error={form.formState.errors["image" as keyof NewEditorOrAdm]}
+                                        error={form.formState.errors["images" as keyof NewEditorOrAdm]}
                                     />
                                 </div>
             <h3>CARACTERÍSTICAS DO IMÓVEL</h3>
             <div className="propertyFormGroup">
-                {!isLand==true? 
+                {isLand===false? 
                                 <>
 
                 <InputDropdown
@@ -195,7 +207,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     text={dropdownFields.bathRoom.text}
                     id={dropdownFields.bathRoom.id}
                     defaultValue={props.objectData.bathRoom}
-
+                    
                     register={form.register}
                     error={form.formState.errors[dropdownFields.bathRoom.name as keyof newProperty]}
                     options={dropdownFields.bathRoom.options}
@@ -276,7 +288,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     register={form.register}
                     text={dropdownFields.floors.text}
                     id={dropdownFields.floors.id}
-                    value={0}
+                    value={1}
                 />
                 <NonEditableInputText
                     key={dropdownFields.suite.id}
@@ -297,6 +309,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     value={0}
                 />
                 </>
+                
                 }
             </div>
             <h3>IMPOSTOS</h3>
@@ -363,6 +376,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     id={dropdownFields.isFurnished.id}
                     defaultValue={props.objectData.isFurnished}
                     register={form.register}
+                    
                     error={form.formState.errors[dropdownFields.isFurnished.name as keyof newProperty]}
                     options={dropdownFields.isFurnished.options}
                 />
@@ -405,6 +419,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     id={dropdownFields.purpose.id}
                     defaultValue={props.objectData.purpose}
                     register={form.register}
+                    
                     error={form.formState.errors[dropdownFields.purpose.name as keyof newProperty]}
                     options={dropdownFields.purpose.options}
                     onChange={changePurpose}
@@ -487,6 +502,8 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     register={form.register}
                     error={form.formState.errors[textFields.propertyPrice.name as keyof newProperty]}
                 />
+
+                
                 {isPromotional?
                     <InputText
                     key={textFields.propertyPromotionalPrice.id}
@@ -521,6 +538,10 @@ export default function FormAddProperty(props :{objectData :any;}) {
                     error={form.formState.errors[dropdownFields.propertyHighlight.name as keyof newProperty]}
                     options={dropdownFields.propertyHighlight.options}
                 />
+                
+                <MultiSelectDropdown text="Adicionais"/>
+
+
             </div>
             <h3>ENDEREÇO</h3>
             <div className="propertyFormGroup">

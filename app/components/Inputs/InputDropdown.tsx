@@ -26,6 +26,8 @@ export default function InputDropdown<T>({
     onChange?: (value: string) => void; 
     
 }) {
+    
+    
     return (
         <div style={{ width: "fit-content", display: "flex", flexDirection: "column", gap: "8px" }}>
             <label className="label" htmlFor={id}>{text}</label>
@@ -35,13 +37,14 @@ export default function InputDropdown<T>({
                 
                 {...(register ? register(name) : {})}
 
+                onChange={(e) => onChange?.(e.target.value)} 
                 defaultValue={defaultValue}
 
-                className={`${size}InputDropdown inputDropdown ${error ? 'inputError' : ''}`}
+                className={`${size}InputDropdown inputDropdown labelDropdown ${error ? 'inputError' : ''}`}
             >
-                <option value="" selected disabled>Selecione Algo</option>
+                <option value="" className='labelDropdown' selected disabled>Selecione Algo</option>
                 {options.map(option => (
-                    <option selected={defaultValue === option[0]} className="optionDropDown" value={option[0]} key={option[0]}>
+                    <option selected={defaultValue === option[0]} className="optionDropDown labelDropdown" value={option[0]} key={option[0]}>
                         {option[1].toUpperCase()}
                     </option>
                 ))}
