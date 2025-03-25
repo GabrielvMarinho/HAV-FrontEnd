@@ -28,55 +28,51 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
     const [property, setProperty] = useState<PropertySpecific | null>(null);
 
     const formatProperty = (apiData: any): PropertySpecific => ({
-        ...apiData,
+        ...apiData, //para manter os valores da api
         address: {
-            neighborhood: apiData.neighborhood ?? "Não informado",
-            city: apiData.city ?? "Não informado",
-            state: apiData.state ?? "Não informado",
-            street: apiData.street ?? "Não informado"
+            ...apiData.address, // Mantém todos os dados que já existem no address
+            neighborhood: apiData.address?.neighborhood ?? "Não informado",
+            city: apiData.address?.city ?? "Não informado",
+            state: apiData.address?.state ?? "Não informado",
+            street: apiData.address?.street ?? "Não informado"
         },
-        property_feature: { 
-            bedRoom: apiData.propertyFeature?.bedRoom ?? 0, 
-            bathRoom: apiData.propertyFeature?.bathRoom ?? 0,
-            garageSpace: apiData.propertyFeature?.garageSpace ?? 0,
-            livingRoom: apiData.propertyFeature?.livingRoom ?? 0
+        propertyFeature: {
+            ...apiData.propertyFeature, // Mantém todos os dados que já existem no propertyFeature
+            bedRoom: apiData.propertyFeature?.bedRoom ?? "Não informado",
+            bathRoom: apiData.propertyFeature?.bathRoom ?? "Não informado",
+            garageSpace: apiData.propertyFeature?.garageSpace ?? "Não informado",
+            livingRoom: apiData.propertyFeature?.livingRoom ?? "Não informado",
+            areaProperty: apiData.propertyFeature?.areaProperty ?? "Não informado"
         }
     });
+    
 
     // Chamando a formatação antes de definir o estado
     useEffect(() => {
         async function fetchProperty() {
             if (!propertyId) return;
+
             try {
                 const response = await searchPropertyByIdSpecific(propertyId);
                 console.log("Resposta completa da API:", response);
-    
+
                 const formattedProperty = formatProperty(response);
-                console.log("Propriedade formatada:", formattedProperty); 
+                console.log("Propriedade formatada:", formattedProperty);
+
                 setProperty(formattedProperty);
             } catch (error) {
                 console.log("Erro ao buscar propriedade:", error);
             }
         }
+
         fetchProperty();
     }, [propertyId]);
 
-    if (!property || !property.property_feature) {
+
+    if (!property) {
         return <p>carregando...</p>
     }
 
-    // return (
-    //     <div>
-    //         <h1>Detalhes da Propriedade</h1>
-    //         <p><strong>ID:</strong> {property.id}</p>
-    //         <p><strong>Endereço:</strong> {property.address ?? "Não informado"}</p>
-    //         <p><strong>Preço:</strong> R$ {property.ActualPrice ?? "Sem preço"}</p>
-    //         <p><strong>Promoção:</strong> {property.PromotionalPrice ?? "Sem promoção"}</p>
-    //         <p><strong>Quartos:</strong> {property.bedroom ?? "Não informado"}</p>
-    //         <p><strong>Banheiros:</strong> {property.bathroom ?? "Não informado"}</p>
-    //         <p><strong>Área:</strong> {property.areaProperty ?? "Não informado"} m²</p>
-    //     </div>
-    // );
 
     return (
         <>
@@ -124,11 +120,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                             obj={{
                                 propertyType: property.propertyType,
                                 propertyCode: property.propertyCode,
-                                bedroom: property.property_feature?.bedRoom, 
-                                livingRoom: property.property_feature?.livingRoom, 
-                                garage: property.property_feature?.garageSpace,
-                                bathroom: property.property_feature?.bathRoom, 
-                                areaProperty: property.areaProperty,
+                                propertyFeature: property.propertyFeature, 
                                 address: property.address
                             }}
                         />

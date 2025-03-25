@@ -14,8 +14,9 @@ export default function PropertyPageDatasAdm(props: {
     obj: Omit<PropertySpecific, "isFurnished" | "additional" | "propertyDescription" |
         "promotionalPrice" | "actualPrice" | "taxes" | "purpose" | "price" | "realtors" | "id">
 }) {
+
     return (
-        <article style={{ display: "flex", flexDirection: "column", alignItems: "left", gap: "10px" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "left", gap: "10px" }}>
             <p className="idProperty">cód: {props.obj.propertyCode}</p>
             <p className="addressProperty">
                 {props.obj.address?.neighborhood} - {props.obj.address?.city} - {props.obj.address?.state}</p>
@@ -35,30 +36,30 @@ export default function PropertyPageDatasAdm(props: {
                 <VerticalLine height={41} />
                 <div className="divCountItems">
                     <Bed width={25} height={25} color="var(--box-mid-dark-red)" />
-                    <p className="countItemNumber">{props.obj.property_feature?.bedRoom}</p>
+                    <p className="countItemNumber">{props.obj.propertyFeature?.bedRoom}</p>
                 </div>
                 <VerticalLine height={41} />
                 <div className="divCountItems">
                     <Shower width={25} height={25} color="var(--box-mid-dark-red)" />
-                    <p className="countItemNumber">{props.obj.property_feature?.bathRoom}</p>
+                    <p className="countItemNumber">{props.obj.propertyFeature?.bathRoom}</p>
                 </div>
                 <VerticalLine height={41} />
                 <div className="divCountItems">
                     <Garage width={25} height={25} color="var(--box-mid-dark-red)" />
-                    <p className="countItemNumber">{props.obj.property_feature?.garageSpace}</p>
+                    <p className="countItemNumber">{props.obj.propertyFeature?.garageSpace}</p>
                 </div>
                 <VerticalLine height={41} />
                 <div className="divCountItems">
                     <Sofa width={25} height={25} color="var(--box-mid-dark-red)" />
-                    <p className="countItemNumber">{props.obj.property_feature?.livingRoom}</p>
+                    <p className="countItemNumber">{props.obj.propertyFeature?.livingRoom}</p>
                 </div>
                 <VerticalLine height={41} />
                 <div className="divCountItems">
                     <Rule width={25} height={25} color="var(--box-mid-dark-red)" />
-                    <p className="countItemNumber">{props.obj.areaProperty}m²</p>
+                    <p className="countItemNumber">{props.obj.propertyFeature?.areaProperty}m²</p>
                 </div>
                 <VerticalLine height={41} />
             </div>
-        </article>
+        </div>
     );
 }
