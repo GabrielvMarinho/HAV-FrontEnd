@@ -1,0 +1,139 @@
+@import "../../../variables.css";
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--box-mid-dark-red); 
+}
+
+
+.diagonal {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: var(--button-color-hover);
+    clip-path: polygon(100% 100%, 60% 100%, 65% 0%, 100% 0%);
+    background-position: center;
+}
+
+
+.logo {
+    position: absolute;
+    right: 1vw; 
+    z-index: 3;
+    top: 55%; 
+    transform: translateY(-50%); 
+}
+
+
+.logoFundo {
+    position: absolute; 
+    top: -20px;
+}
+
+
+.form-box {
+    position: absolute;
+    top: 50%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+    background-color: var(--box-yello-light);
+    padding: 40px;
+    border-radius: 15px;
+    z-index: 3; /* Fica acima da diagonal */
+    width: 290px;
+    height: 380px;
+}
+
+.tituloLogin{
+    font-size: 26px;
+    display: flex;
+    justify-content: center;
+    color:var(--box-mid-dark-red);
+}
+
+.EsqueceuSenha{
+    margin-top: 8px;
+    font-size: 12px;
+    display: flex;
+    color: var(--box-dark-red-option);
+    justify-content: end;
+    text-decoration: underline;
+}
+
+.botao{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.ou{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    font-size: var(--text-xs); 
+    color: var(--box-dark-red-option);
+}
+
+.linha{
+    width: 16%;
+    margin-top: 5px;
+    padding: 1px;
+    background-color: var(--box-mid-dark-red);
+    margin-bottom: 5px;
+}
+
+.containerLinha{
+    display: flex;
+    justify-content: center;
+}
+
+.naoPossuiConta{
+    margin-top: 8px;
+    font-size: 12px;
+    display: flex;
+    color: var(--box-dark-red-option);
+    justify-content: center;
+}
+
+.logoGoogle{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.cadastrarConta{
+    text-decoration: underline;
+    color: var(--box-mid-dark-red);
+
+}
+
+@media (max-width: 992px) {
+    .logo {
+        display: none; 
+    }
+
+    .diagonal{
+        clip-path: none !important;
+        background-color: var(--box-mid-dark-red);
+    }
+}
+
+@media (width < 1195px) {
+    .logo{
+        right: -2vw;
+    }
+}
+
+@media (max-width: 1330px) {
+    
+    .logoFundo {
+        position: absolute;
+        left: 0; 
+        top: -20px;
+    }
+}
