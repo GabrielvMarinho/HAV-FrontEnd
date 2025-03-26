@@ -3,17 +3,13 @@ import DescriptionTitlePropertySpecific from "../NonInteractable/DescriptionTitl
 import ArrowRight from "../IconsTSX/ArrowRight";
 
 export default function OtherEnvironmentsProperty(props: { obj: Pick<PropertySpecific, "additional"> }) {
-    const chunkSize = 3; 
-    const additionalChunks = props.obj.additional.reduce<string[][]>((resultArray, item, index) => {
-        const chunkIndex = Math.floor(index / chunkSize);
+    const chunkSize = 3;
+    
+    // Verifica se additional é um objeto e extrai o nome corretamente
+    const additionalName = props.obj.additional ? props.obj.additional.name : "Não informado";
 
-        if (!resultArray[chunkIndex]) {
-            resultArray[chunkIndex] = [];
-        }
-        resultArray[chunkIndex].push(item);
-
-        return resultArray;
-    }, []);
+    // Como é um único item, não precisa dividir em chunks
+    const additionalChunks = [[additionalName]]; // Colocamos em uma lista para manter a estrutura
 
     return (
         <div className="divDescriptionPropertySpecific">
