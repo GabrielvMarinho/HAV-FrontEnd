@@ -4,6 +4,7 @@ import Title from "@/app/components/NonInteractable/Title";
 import Button from "@/app/components/Inputs/Button";
 import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 import ArrowNextSlide from "@/app/components/IconsTSX/ArrowNextSlide";
+import sinoSolido from "@/app/components/IconsTSX/sinoSolido"
 
 export default function ProfilePage() {
   return (

@@ -1,0 +1,34 @@
+import { z } from "zod";
+
+export const saveConfig = z.object({
+    name: z.string().min(1, { message: "* Campo obrigatório" }),
+    phoneNumber: z.string().min(1, { message: "* Campo obrigatório" })
+        .regex(/^\d{10}$/, { message: "* 10 dígitos" }),
+    email: z.string().min(1, { message: "* Campo obrigatório" })
+        .email({ message: "* E-mail inválido" })
+        .refine(email => email.includes("@"), { message: "O E-mal deve ser válido", path: ["email"], }),
+    cellphone: z.string().min(1, { message: "* Campo obrigatório" })
+        .regex(/^\d{11}$/, { message: "* 11 dígitos" }),
+    // cpf: z.string().min(11, { message: "* CPF deve ter 11 dígitos" })
+    //    .max(11, { message: "* CPF deve ter 11 dígitos" })
+    //    .regex(/^\d{11}$/, { message: "* CPF deve conter apenas números" }),
+
+    cep: z.string().min(1, { message: "* Campo obrigatório" })
+        .regex(/^\d{8}$/, { message: "* 8 dígitos numéricos" }),
+    city: z.string().nonempty("* Campo obrigatório"),
+    state: z.string().nonempty("* Campo obrigatório"),
+    neighborhood: z.string().nonempty("* Campo obrigatório"),
+    propertyNumber: z.string()
+        .min(1, { message: "* Campo obrigatório" })
+        .regex(/^\d+$/, { message: "* Apenas números" })
+        .refine((value) => {
+            const number = parseFloat(value);
+            return !isNaN(number) && number > 0;
+        }, { message: "* Valor deve ser positivo" }),
+    street: z.string().min(1, { message: "* Campo obrigatório" }),
+    complement: z.string().optional(),
+    image: z.any().optional().nullable() // Profile picture
+
+});
+
+export type saveConfig = z.infer<typeof saveConfig>;
