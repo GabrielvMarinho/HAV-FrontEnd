@@ -12,9 +12,8 @@ import Rule from "../IconsTSX/Rule";
 
 export default function PropertyPageDatasAdm(props: {
     obj: Omit<PropertySpecific, "isFurnished" | "additional" | "propertyDescription" |
-        "promotionalPrice" | "actualPrice" | "taxes" | "price" | "realtors" | "id">
+        "promotionalPrice" | "actualPrice" | "taxes" | "price" | "id">
 }) {
-    console.log("Purpose recebido:", props.obj.purpose);
     return (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "left", gap: "10px" }}>
             <p className="idProperty">cód: {props.obj.propertyCode}</p>
@@ -60,6 +59,7 @@ export default function PropertyPageDatasAdm(props: {
                 </div>
                 <VerticalLine height={41} />
             </div>
+           <p className="isFurnishedText">{props.obj.propertyFeature?.isFurnished ? "Mobiliado" : "Não Mobiliado"}</p> 
         </div>
     );
 }

@@ -303,4 +303,8 @@
     gap: 30px;
     margin-top: 60px;
 }
-
+.isFurnishedText{
+    color: var(--box-dark-red-option);
+    font-size: var(--text-ml);
+    font-weight: 500;
+}

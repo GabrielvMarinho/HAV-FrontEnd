@@ -15,7 +15,7 @@ export default async function (
 
     const data = await response.json();
 
-    const { realtors, address, taxes, propertyFeature, additional, ...rest } = data;
+    const {address, taxes, propertyFeature, additional, realtorPropertySpecific, ...rest } = data;
 
     const property: PropertySpecific = {
       ...rest,
@@ -23,8 +23,9 @@ export default async function (
       taxes,
       propertyFeature, 
       additional,
-      realtors
+      realtorPropertySpecific,
     };
+    
     return property;
 
   } catch {

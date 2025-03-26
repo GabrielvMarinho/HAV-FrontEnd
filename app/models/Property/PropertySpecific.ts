@@ -20,6 +20,7 @@ interface PropertySpecific {
         garageSpace: number;
         livingRoom: number;
         areaProperty: number;
+        isFurnished: boolean;
     };
     additional: { 
         name: string;
@@ -31,8 +32,7 @@ interface PropertySpecific {
     taxes: number;
     purpose: string; // venda, vendaPromocao, locacao
     propertyDescription: string,
-    isFurnished: boolean;
     propertyType: string;
-    realtors: Realtor[];
+    realtorPropertySpecific: realtorPropertySpecific[];
     price: number; //botei esse pra ver se ta funcionando (sim)
 }

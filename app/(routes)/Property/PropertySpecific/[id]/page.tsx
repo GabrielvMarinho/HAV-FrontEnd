@@ -47,7 +47,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
         additional: {
             ...apiData.additional,
             additional: apiData.additional?.name ?? "Não informado"
-        }
+        },
     });
     
 
@@ -127,7 +127,6 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                                 propertyFeature: property.propertyFeature, 
                                 address: property.address,
                                 purpose: property.purpose
-                                
                             }}
                         />
 
@@ -137,8 +136,8 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                             taxes: property.taxes,
                             PromotionalPrice: props.obj?.promotionalPrice
                         }} />
-                        <Furnished obj={{ isFurnished: property.isFurnished }} />
-                        <RealtorAssociated objPropertyList={{ realtors: property?.realtors ?? [] }} />
+                        {/* <Furnished obj={{ propertyFeature: property.propertyFeature.isFurnished}} /> */}
+                        <RealtorAssociated objPropertyList={{ realtorPropertySpecific: property?.realtorPropertySpecific ?? [] }} />
                     </div>
                 </article>
                 <article className="enviroments-interestPoint">
