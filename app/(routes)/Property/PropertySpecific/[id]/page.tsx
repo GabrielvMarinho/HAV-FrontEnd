@@ -125,7 +125,9 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                                 propertyType: property.propertyType,
                                 propertyCode: property.propertyCode,
                                 propertyFeature: property.propertyFeature, 
-                                address: property.address
+                                address: property.address,
+                                purpose: property.purpose
+                                
                             }}
                         />
 

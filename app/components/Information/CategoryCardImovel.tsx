@@ -1,6 +1,7 @@
-export default function CategoryCardImovel(props: {text: string}){
+export default function CategoryCardImovel(props: {text: string}){  
+    const text = props.text || ""
     const keywords = ["venda", "locação", "misto", "compra"];
-    const backgroundColor = keywords.some(keywords => props.text.toLocaleLowerCase().includes(keywords))
+    const backgroundColor = keywords.some(keywords => text.toLocaleLowerCase().includes(keywords))
     ? "var(--box-mid-dark-red)"
     : "var(--box-dark-red-option)"
     return(

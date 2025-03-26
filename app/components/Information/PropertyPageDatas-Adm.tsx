@@ -12,10 +12,9 @@ import Rule from "../IconsTSX/Rule";
 
 export default function PropertyPageDatasAdm(props: {
     obj: Omit<PropertySpecific, "isFurnished" | "additional" | "propertyDescription" |
-        "promotionalPrice" | "actualPrice" | "taxes" | "purpose" | "price" | "realtors" | "id">
+        "promotionalPrice" | "actualPrice" | "taxes" | "price" | "realtors" | "id">
 }) {
-   
-
+    console.log("Purpose recebido:", props.obj.purpose);
     return (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "left", gap: "10px" }}>
             <p className="idProperty">cód: {props.obj.propertyCode}</p>
@@ -29,7 +28,7 @@ export default function PropertyPageDatasAdm(props: {
                     textTransform: "uppercase"
                 }}>{props.obj.propertyType}</p>
                 <HorizontalLine size={100} />
-                <CategoryCardImovel text={props.obj.propertyType}/>
+                <CategoryCardImovel text={props.obj.purpose || "N/A"}/>
                 <StarFavorite selected={false} width={30} height={30} color="var(--box-dark-red)" />
                 <ShareProperty width={30} height={30} />
             </div>
