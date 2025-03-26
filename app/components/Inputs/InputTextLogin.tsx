@@ -24,8 +24,8 @@ export default function InputTextLogin<T>({
 }) {
     return (
         <div className="inputContainer">
-            <label className="label" htmlFor={id}>{text}</label>
-            <div className="inputWrapper">
+            <label className="labelLogin" htmlFor={id}>{text}</label>
+            <div className="inputWrapperLogin">
                 <input 
                     id={id}
                     type="text"
@@ -35,7 +35,7 @@ export default function InputTextLogin<T>({
                     placeholder={placeholder}
                     defaultValue={defaultValue}
                 />
-                {icon && <span className="inputIcon">{icon}</span>} {/* Ícone dentro do input */}
+                {icon && <span className="inputIcon">{icon}</span>} 
             </div>
             {error && <p className="errorText">{error.message}</p>}
         </div>

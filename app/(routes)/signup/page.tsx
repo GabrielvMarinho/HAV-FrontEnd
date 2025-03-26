@@ -5,13 +5,24 @@ import LogoFundo from "@/app/components/IconsTSX/logoFundo";
 import Title from "@/app/components/NonInteractable/Title";
 import InputText from "@/app/components/Inputs/InputText";
 import Button from "@/app/components/Inputs/Button";
+import InputTextLogin from "@/app/components/Inputs/InputTextLogin";
+import StarFavorite from "@/app/components/Inputs/StarFavorite";
+import User from "@/app/components/IconsTSX/User";
+import "@/app/variables.css";
+import Envelope from "@/app/components/IconsTSX/Envelope";
+import ClosedPadlock from "@/app/components/IconsTSX/ClosedPadlock";
+import Eye from "@/app/components/IconsTSX/Eye";
+import LogoClara from "@/app/components/IconsTSX/LogoClara";
 
-
-export default function login(){
+export default function signup(){
     return(
         <>
         <div className= "container">
-            <div className= "diagonal"> </div>
+            <div className= "diagonal"> 
+                <div className="LogoClara">
+                    <LogoClara width="150" height="150"/>
+                </div>
+            </div>
 
             <div className="form-box">
                 <h2 className="tituloLogin"> CADASTRO</h2>
@@ -19,10 +30,10 @@ export default function login(){
                     <h2 className="linha"> </h2>
                 </div>
                 <form>
-                    <InputText name="name" size="medium" id="name" text="Nome" placeholder="Digite seu nome"/>
-                    <InputText name="name" size="medium" id="user" text="E-mail" placeholder="Digite seu e-mail"/>
-                    <InputText name="name" size="medium" id="pass" text="Senha" placeholder="Digite sua senha"/>
-                    <InputText name="name" size="medium" id="pass" text="Confirme sua senha" placeholder="Digite sua senha"/>
+                <InputTextLogin name="name" size="medium" id="user" text="Nome" placeholder="Digite seu nome" icon={<User width="18" height="18" color="var(--text-light-red)"/>}/>
+                <InputTextLogin name="name" size="medium" id="user" text="E-mail" placeholder="Digite seu e-mail" icon={<Envelope width="18" height="18" color="var(--text-light-red)"/>}/>
+                <InputTextLogin name="name" size="medium" id="user" text="Senha" placeholder="Digite sua senha" icon={<Eye width="18" height="18" color="var(--text-light-red)"/>}/>
+                <InputTextLogin name="name" size="medium" id="user" text="Confirmar senha" placeholder="Digite sua senha" icon={<Eye width="18"  height="18" color="var(--text-light-red)"/>}/>
                     <div className="botao">
                         <Button name="button" size="small" text="Entrar" /> 
                     </div>

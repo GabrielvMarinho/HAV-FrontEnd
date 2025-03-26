@@ -344,6 +344,13 @@ summary {
     font-size: var(--text-s);
     color: var(--text-white)
 }
+
+.labelLogin{
+    font-weight: 400;
+    font-size: var(--text-xs);
+    color: var(--arrow-page-manager)
+}
+
 .divInputFooter input::placeholder{
     color: var(--text-white);
     opacity: 0.6;
@@ -524,16 +531,25 @@ background-color: var(--text-white);
 }
 
 .inputWrapper input {
-    padding-right: 30px; /* Espaço para o ícone, ajuste conforme necessário */
+    padding-right: 30px;
+    margin-bottom: 10px;
+}
+
+.inputWrapperLogin input{
+    padding-right: 105px;
+    margin-bottom: 10px;
 }
 
 .inputIcon {
     position: absolute;
-    top: 50%;
-    right: 10px;  /* Posição do ícone à direita */
-    transform: translateY(-50%); /* Alinha verticalmente o ícone no centro */
-    pointer-events: none; /* Para que o ícone não interfira na interação com o campo de input */
+    top: 60%;
+    right: 10px; 
+    transform: translateY(-50%); 
+    pointer-events: none; 
+    display: flex;
+    justify-content: center;
 }
+
 @media (width <992px) {
     .actionButtons{
         flex-direction: row;
@@ -541,6 +557,10 @@ background-color: var(--text-white);
 
     .largeInput{
         width: 170px;
+    }
+
+    .inputWrapperLogin input{
+        padding-right: 68px;
     }
 }
 
