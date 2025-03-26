@@ -1,5 +1,5 @@
 import HavLogo from "@/app/components/IconsTSX/HavLogoLight";
-import "../login/style/style.css";
+import "../signup/style/style.css";
 import Logo from "@/app/components/IconsTSX/logo";
 import LogoFundo from "@/app/components/IconsTSX/logoFundo";
 import Title from "@/app/components/NonInteractable/Title";
@@ -14,23 +14,25 @@ export default function login(){
             <div className= "diagonal"> </div>
 
             <div className="form-box">
-                <h2 className="tituloLogin"> LOGIN</h2>
+                <h2 className="tituloLogin"> CADASTRO</h2>
                 <div className="containerLinha">
                     <h2 className="linha"> </h2>
                 </div>
-                {/* <div className="tituloLogin">
-                <Title tag="h1" text="LOGIN"/>
-                </div> */}
                 <form>
+                    <InputText name="name" size="medium" id="name" text="Nome" placeholder="Digite seu nome"/>
                     <InputText name="name" size="medium" id="user" text="E-mail" placeholder="Digite seu e-mail"/>
                     <InputText name="name" size="medium" id="pass" text="Senha" placeholder="Digite sua senha"/>
-                    <p className="EsqueceuSenha">Esqueceu a senha?</p>
+                    <InputText name="name" size="medium" id="pass" text="Confirme sua senha" placeholder="Digite sua senha"/>
                     <div className="botao">
                         <Button name="button" size="small" text="Entrar" /> 
                     </div>
-                    <p className="ou">ou</p>
+                    <div>
+                        {/* terminar isssoooo */}
+                        <p className="ou">ou</p>
+                        <img className={"Google"} src="/Image/Google.png"/>
+                    </div>
                     <p className="logoGoogle"> logo </p>
-                    <p className="naoPossuiConta"> Não possui conta? <p className="cadastrarConta"> Cadastrar </p></p>
+                    <p className="naoPossuiConta"> Já possui Conta? <p className="cadastrarConta"> Entrar </p></p>
                 </form>
              </div>
 
