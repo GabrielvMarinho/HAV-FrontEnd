@@ -14,22 +14,25 @@ interface PropertySpecific {
         state: string;
         street: string;
     };
-    property_feature: {
+    propertyFeature: {
         bedRoom: number;
         bathRoom: number;
         garageSpace: number;
         livingRoom: number;
+        areaProperty: number;
     };
+    additional: { 
+        name: string;
+    } 
+    bedRoom: number;
     propertyCode: string;
     promotionalPrice: number;
     actualPrice: number;
     taxes: number;
     purpose: string; // venda, vendaPromocao, locacao
     propertyDescription: string,
-    areaProperty: number;
     isFurnished: boolean;
     propertyType: string;
-    additional: string[];
     realtors: Realtor[];
     price: number; //botei esse pra ver se ta funcionando (sim)
 }
