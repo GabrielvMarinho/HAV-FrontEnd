@@ -136,12 +136,11 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                             taxes: property.taxes,
                             PromotionalPrice: props.obj?.promotionalPrice
                         }} />
-                        {/* <Furnished obj={{ propertyFeature: property.propertyFeature.isFurnished}} /> */}
                         <RealtorAssociated objPropertyList={{ realtorPropertySpecific: property?.realtorPropertySpecific ?? [] }} />
                     </div>
                 </article>
                 <article className="enviroments-interestPoint">
-                    <OtherEnvironmentsProperty obj={{ additional: property.additional}} />
+                    <OtherEnvironmentsProperty obj={{ additionals: property.additionals}} />
                     <DescriptionTitlePropertySpecific text="pontos de interesse" />
                 </article>
                 <DescriptionProperty obj={{ propertyDescription: property.propertyDescription }} />

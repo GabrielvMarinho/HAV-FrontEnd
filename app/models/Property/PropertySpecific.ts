@@ -22,10 +22,7 @@ interface PropertySpecific {
         areaProperty: number;
         isFurnished: boolean;
     };
-    additional: { 
-        name: string;
-    } 
-    bedRoom: number;
+    additionals: AdditionalsPropertySpecific[];
     propertyCode: string;
     promotionalPrice: number;
     actualPrice: number;
