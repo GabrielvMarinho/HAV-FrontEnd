@@ -1,43 +1,51 @@
 @import "../../../variables.css";
 
-.tableListData{
+.tableListData {
     width: 65vw;
 }
-.tableListLine{
+
+.tableListLine {
     width: 66vw;
     opacity: 0.5;
     background-color: var(--text-black);
     height: 0.5px;
 
 }
-.marginSelectBox{
+
+.marginSelectBox {
     margin-inline: 15px;
     margin-right: 25px;
 
 }
-.tableListLineHide{
+
+.tableListLineHide {
     padding: 10px;
     padding-right: 14px;
 }
-.tableListData tr{
-    transition: 0.5s ease;  
+
+.tableListData tr {
+    transition: 0.5s ease;
 
     padding-top: 22px;
     padding-bottom: 22px;
     display: flex;
     align-items: center;
 }
-.tableListData thead tr{
+
+.tableListData thead tr {
     padding: 0px;
     padding-bottom: 22px;
     display: flex;
     align-items: center;
 }
-.tableListData th, .tableListData td{
+
+.tableListData th,
+.tableListData td {
     text-align: left;
     flex: 1;
 }
-.checkbox{
+
+.checkbox {
     all: unset;
     width: 20px;
     height: 20px;
@@ -48,87 +56,92 @@
     outline: 1px var(--text-black) solid;
     border-radius: var(--border-box);
 }
-.checkbox:checked{
+
+.checkbox:checked {
     background-color: var(--dark-blue);
     outline: 1px var(--text-black) solid;
 
 }
-.selectedRow{
-    transition: 0.5s ease;  
+
+.selectedRow {
+    transition: 0.5s ease;
     background-color: var(--light-blue);
 }
-.tableListData th{
+
+.tableListData th {
     font-size: var(--text-sl);
     color: var(--text-dark-red);
     font-weight: 700;
 }
-.tableListData td{
+
+.tableListData td {
     overflow: hidden;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
 
     height: fit-content;
     font-size: var(--text-sm);
     color: var(--text-black);
     font-weight: 500;
-    
+
 }
 
-.tableListData td div{
+.tableListData td div {
     overflow: hidden;
-    text-overflow: ellipsis;  
+    text-overflow: ellipsis;
     width: 85%;
 
 }
 
-.propertyType{
+.propertyType {
     font-size: var(--text-xl);
     font-weight: 700;
     color: var(--text-dark-red);
     text-transform: uppercase;
 }
 
-.countItemNumber{
+.countItemNumber {
     color: var(--box-mid-dark-red);
     font-size: (--text-s);
     font-weight: 700;
 }
 
-.divCountItems{
+.divCountItems {
     display: flex;
     gap: 8px;
     align-items: center
 }
 
-.idProperty{
+.idProperty {
     font-size: var(--text-s);
     font-weight: 800;
     color: var(--text-light-red);
 }
-.addressProperty{
+
+.addressProperty {
     font-size: var(--text-s);
     color: var(--text-light-red);
 }
 
-.realtorName{
+.realtorName {
     font-size: var(--text-l);
     color: var(--box-mid-dark-red);
     font-weight: 900;
     text-transform: uppercase;
 }
 
-.realtorEmail{
+.realtorEmail {
     font-size: var(--text-s);
     color: var(--text-light-red);
     font-weight: 500;
 }
 
-.realtorId{
+.realtorId {
     font-size: var(--text-s);
     color: var(--text-light-red);
     font-weight: 800;
 }
 
-.ou{
+.ou {
     font-size: var(--text-sm);
     text-transform: uppercase;
     font-weight: 600;
@@ -136,21 +149,21 @@
 }
 
 
-.mainHomeInfoContainer{
+.mainHomeInfoContainer {
     background: var(--box-mid-dark-red);
     width: 100%;
-    min-width: 100vw; 
-    height:34vh;
+    min-width: 100vw;
+    height: 34vh;
     min-height: 150px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    text-align: center; 
+    text-align: center;
     /* height: 100%; */
     gap: 37vh;
 }
 
-.mainHomeInfoSubContainer{
+.mainHomeInfoSubContainer {
     margin-top: 52px;
     justify-content: center;
     display: flex;
@@ -162,7 +175,7 @@
     color: var(--bg-color);
 }
 
-.mainHomeInfoEspecific{
+.mainHomeInfoEspecific {
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -170,70 +183,73 @@
     text-wrap: wrap;
 }
 
-.mainHomeInfoEspecificP{
+.mainHomeInfoEspecificP {
     text-wrap: wrap;
     width: 108px;
     opacity: 1;
     font-size: 16px;
     position: absolute;
-    top: 70px; 
-    transition: top 0.3s ease-in-out; 
+    top: 70px;
+    transition: top 0.3s ease-in-out;
     z-index: 1;
 }
 
 .textBehind {
     font-size: 13px;
     position: absolute;
-    top: 50px; 
-    opacity: 0; 
-    transition: opacity 0.3s ease-in-out; 
+    top: 50px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
     z-index: 1;
 }
 
-.icone{
-    position: absolute; 
-    top: 0; 
-    z-index: 2; 
-    transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out; 
+.icone {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out;
 }
 
 .mainHomeInfoEspecific:hover .icone {
-    opacity: 0; 
+    opacity: 0;
     top: -10px;
 }
 
 .mainHomeInfoEspecific:hover .mainHomeInfoEspecificP {
-    top: 0; 
+    top: 0;
 }
 
 .mainHomeInfoEspecific:hover .textBehind {
-    opacity: 1; 
-    top: 50px; 
+    opacity: 1;
+    top: 50px;
 }
 
-.sliderContent{
+.sliderContent {
     display: flex;
     gap: 22px;
     flex-direction: row;
     justify-content: center;
 }
-.sliderContentMain{
+
+.sliderContentMain {
     transition: transform 0.5s ease-in-out;
 }
 
-#realtor{
+#realtor {
     font-size: 22px;
     font-weight: 900;
     text-transform: uppercase;
     color: var(--box-mid-dark-red);
 }
-#realtorNameVertical{
+
+#realtorNameVertical {
     color: black;
     font-size: var(--text-sm);
     text-transform: uppercase;
     font-weight: 700;
 }
-#realtorNumberVertical{
+
+#realtorNumberVertical {
     display: flex;
     gap: 10px;
     align-items: center;
@@ -242,26 +258,24 @@
     font-weight: 500;
 }
 
-@media (max-width: 992px) { 
+@media (max-width: 992px) {
     .mainHomeInfoContainer {
         background: var(--box-mid-dark-red);
-        height: 65vh; 
-        min-height: 250px; 
+        height: 65vh;
+        min-height: 250px;
         flex-direction: column;
         /* gap: 0; */
     }
 
-    .mainHomeInfoSubContainer{
+    .mainHomeInfoSubContainer {
         margin-top: -70px;
         margin-bottom: 40px
     }
 
-    .textBehind{
+    .textBehind {
         width: 150px;
-        text-wrap: wrap ;
+        text-wrap: wrap;
     }
-  
-
 }
 
 
@@ -291,16 +305,38 @@
     flex-direction: column;
     gap: 34px;
 }
-#descriptionProperty{
+
+#descriptionProperty {
     font-size: var(--text-sm);
     color: var(--box-mid-dark-red);
     font-weight: 500;
 }
 
-#divDescriptionProperty{
+#divDescriptionProperty {
     display: flex;
     flex-direction: column;
     gap: 30px;
     margin-top: 60px;
 }
 
+.card {
+    text-align: center;
+    padding: 20px;
+}
+
+.profileImage {
+    border-radius: 50%;
+}
+
+.name {
+    color: #0F0F0F;
+    font-size: 15px;
+    margin: 10px 0;
+    font-weight: bolder;
+}
+
+.socialIcons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
