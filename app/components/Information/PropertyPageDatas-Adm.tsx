@@ -28,8 +28,8 @@ export default function PropertyPageDatasAdm(props: {
                     color: "var(--text-dark-red)",
                     textTransform: "uppercase"
                 }}>{props.obj.propertyType}</p>
-                <HorizontalLine size={259} />
-                <CategoryCardImovel text="venda" />
+                <HorizontalLine size={100} />
+                <CategoryCardImovel text={props.obj.propertyType}/>
                 <StarFavorite selected={false} width={30} height={30} color="var(--box-dark-red)" />
                 <ShareProperty width={30} height={30} />
             </div>
