@@ -26,12 +26,10 @@ export default function login(){
                     <div className="botao">
                         <Button name="button" size="small" text="Entrar" /> 
                     </div>
-                    <div>
-                        {/* terminar isssoooo */}
+                    <div className="containerGoogle">
                         <p className="ou">ou</p>
                         <img className={"Google"} src="/Image/Google.png"/>
                     </div>
-                    <p className="logoGoogle"> logo </p>
                     <p className="naoPossuiConta"> Já possui Conta? <p className="cadastrarConta"> Entrar </p></p>
                 </form>
              </div>

@@ -27,12 +27,6 @@ export default function InputText<T>({
     register?: UseFormRegister<T>;
     error?: FieldError;
 }) {
-
-
-
-    
-    
-    
     
     return (
         <div className="inputContainer">

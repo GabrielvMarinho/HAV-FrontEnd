@@ -519,6 +519,21 @@ background-color: var(--text-white);
     justify-content: center;
 }
 
+.inputWrapper {
+    position: relative; /* Permite o posicionamento absoluto do ícone dentro do input */
+}
+
+.inputWrapper input {
+    padding-right: 30px; /* Espaço para o ícone, ajuste conforme necessário */
+}
+
+.inputIcon {
+    position: absolute;
+    top: 50%;
+    right: 10px;  /* Posição do ícone à direita */
+    transform: translateY(-50%); /* Alinha verticalmente o ícone no centro */
+    pointer-events: none; /* Para que o ícone não interfira na interação com o campo de input */
+}
 @media (width <992px) {
     .actionButtons{
         flex-direction: row;

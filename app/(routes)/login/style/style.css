@@ -66,13 +66,12 @@
 }
 
 .botao{
-    margin-top: 20px;
+    margin-top: 30px;
     display: flex;
     justify-content: center;
 }
 
 .ou{
-    margin-top: 5px;
     display: flex;
     justify-content: center;
     font-size: var(--text-xs); 
@@ -93,7 +92,7 @@
 }
 
 .naoPossuiConta{
-    margin-top: 8px;
+    margin-top: 15px;
     font-size: 12px;
     display: flex;
     color: var(--box-dark-red-option);
@@ -111,6 +110,14 @@
     text-decoration: underline;
     color: var(--box-mid-dark-red);
 
+}
+
+.containerGoogle{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
 }
 
 @media (max-width: 992px) {
