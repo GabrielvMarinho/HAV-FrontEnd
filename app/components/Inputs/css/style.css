@@ -267,17 +267,17 @@ summary {
 .smallButton{
     font-size: var(--text-xs);
     padding: 7px;
-    padding-inline: 25px;
+    padding-inline: 50px;
 }
 .mediumButton{
     font-size: var(--text-xs);
     padding: 9px;
-    padding-inline: 25px;
+    padding-inline: 50px;
 }
 .largeButton{
     font-size: var(--text-s);
     padding: 11px;
-    padding-inline: 25px;
+    padding-inline: 50px;
 }
 
 

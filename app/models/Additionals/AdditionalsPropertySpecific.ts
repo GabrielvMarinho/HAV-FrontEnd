@@ -1,0 +1,3 @@
+interface AdditionalsPropertySpecific{
+    name: string;
+}
