@@ -1,23 +1,63 @@
 @import "../../../variables.css";
 
+/* ===== Estilos Base ===== */
 .ownerForm {
     padding: 8px;
     background-color: var(--box-red-pink);
     border-radius: var(--border-box);
     width: 1060px;
-    height: 669px;
+    min-height: 552px;
     display: flex;
     align-items: center;
     flex-direction: row;
     gap: 30px;
     justify-content: center;
+    position: relative;
+    overflow: visible;
 }
-.addProprietorsRealtors{
+
+/* ===== Seção de Informações ===== */
+.info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 2rem;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.info-section__title {
+    font-size: var(--text-m);
+    font-weight: 700;
+    color: var(--text-white);
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.personName {
+    color: var(--text-white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.userType {
+    color: #D99FA8;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 500;
+}
+
+/* ===== Formulários e Containers ===== */
+.addProprietorsRealtors {
     margin-top: 50px;
     display: flex;
     flex-direction: column;
 }
-.propertyForm{
+
+.propertyForm {
     max-width: 1000px;
     display: flex;
     gap: 5%;
@@ -25,114 +65,92 @@
     padding: 60px;
     border-radius: var(--border-box);
 }
-.propertyForm .propertyFormGroup{
+
+.propertyFormGroup {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
 }
 
-.propertyForm h3, .propertyForm h2{
-    font-size: var(--text-sm);
-    margin-bottom: 20px;
-    color: var(--text-white);
-}
-.propertyForm h3{
-    margin-top: 60px;
-
-}
-.propertyForm #smallerSection{
-   
-
-    width: 45%;
-}
-.propertyForm #biggerSection{
-    
-    width: 50% ;
-}
-
+/* ===== Componentes de Entrada ===== */
 .inputArticle {
     display: flex;
     flex-wrap: wrap;
     width: 700px;
     gap: 17px;
 }
-.previewImg{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+
+.disabled-input {
+    background-color: #D69CA6 !important;
+    cursor: not-allowed;
 }
-.trashcanPhoto{
-    border-radius: 100%;
-    right: 15px;
-    top: 15px;
-    width:39px;
-    height: 39px;
-    position: absolute;
-    background-color: var(--box-dark-red-option);
-    padding:8px;
+
+.input.disabled-input, 
+.input:disabled {
+    color: #CD6778 !important;
+    background-color: #D69CA6 !important;
 }
-.photoArrowLeft{
-    left: -35px;
-    bottom: -60px;
-}
-.photoArrowRight{
-    
-    right: -35px;
-    bottom: -60px;;
-}
-.photoArrow{
-    position: absolute;
-    background: transparent;
-}
-.subPreviewImg{
-    width: 23%;
-    margin: 1%;
-    object-fit: cover;
-    aspect-ratio: 4/3;
-}
-.markedImage{
-    width: 23%;
-    margin: 0;
-    scale: 1.05;
-    border: 2px solid var(--box-white);
-}
-.imgPerson, .imgProperty {
+
+/* ===== Componentes Visuais ===== */
+.imgPerson, 
+.imgProperty {
     width: 250px;
     height: 250px;
     border-radius: 1.864px;
     background-color: black;
     position: relative;
-    margin-top: -220px;
+    margin-top: -9.5rem;
 }
-.imgProperty{
+
+.imgProperty {
     margin-bottom: 100px;
 }
 
-.articleDataForm{
+.articleDataForm {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding-bottom: 80px;
 }
-.divButtonsAceptCancelForms{
+
+/* ===== Botões e Controles ===== */
+.divButtonsAceptCancelForms {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    margin: 0 !important;
+    z-index: 10;
+}
+
+.changeButton {
     display: flex;
-    flex-direction: row;
-    gap: 10px;
-    margin: 96px 0 0 220px;
+    border: 1px solid #F9F9F9;
+    border-radius: 30px;
+    width: 160px;
+    height: 25px;
+    overflow: hidden;
+    justify-content: center;
 }
 
-.inputArticleMobile{
-    display: none;
+.changeButton .button-content {
+    font-size: var(--text-xxs);
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-white);
+    text-align: center;
+    width: 100%;
+    padding: 4px 0;
+    line-height: 1;
+    margin: 0;
 }
 
-.divInputs {
-    display: "flex";
-    flex-direction: "row"; 
-    gap: "15px";
+.changeButton:hover {
+    border-color: #FFFFFF;
+    box-shadow: 0 0 0 1px #FFFFFF;
 }
 
-@media(max-width: 992px){
-
-    .ownerForm{
+/* ===== Media Queries ===== */
+@media (max-width: 992px) {
+    .ownerForm {
         width: 305px;
         height: 1450px;
         flex-direction: column;
@@ -140,36 +158,32 @@
         margin: 0 auto;
     }
     
-    .inputArticleDesktop{
+    .inputArticleDesktop {
         display: none;
     }
 
-    .inputArticle{
+    .inputArticle {
         flex-direction: column;
         align-items: center;
         gap: 15px;
         margin-top: 40px;
     }
-    .imgPerson, .imgProperty {
+    
+    .imgPerson, 
+    .imgProperty {
         width: 210px;
         height: 209px;
         border-radius: 1.864px;
-        background-color: black;
         display: flex;
         align-items: flex-end;
         justify-content: flex-end;
     }
     
-    .divButtonsAceptCancelForms{
-        display: flex;
-        flex-direction: row;
-        gap: 10px;
-        margin: 0 auto;
-        margin-top: 40px;
+    .divButtonsAceptCancelForms {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        justify-content: center;
+        margin-top: 20px !important;
     }
-
-    .divInputs{
-        flex-direction: "column"; 
-    }
-
 }

@@ -4,6 +4,7 @@ export const configFields = {
     cpf: { name: "cpf", size: "small", text: "CPF", placeholder: "ex: 123.123.123-00", id: "cpf" },
     email: { name: "email", size: "small", text: "E-mail", placeholder: "ex: kauani@gmail.com", id: "email" },
     cellphone: { name: "cellphone", size: "small", text: "Celular", placeholder: "+55 ( )", id: "celular" },
+    birthdate: {name: "birthdate", size: "small", text: "Data de Nascimento", placeholder: "dd/mm/aa", id: "nascimento"},
     cep: { name: "cep", size: "small", text: "CEP", placeholder: "ex: 00000-000", id: "cep" },
     city: { name: "city", size: "small", text: "Cidade", placeholder: "Jaraguá do Sul", id: "cidade" },
     state: { name: "state", size: "samll", text: "Estado", placeholder: "SC", id: "estado"},
