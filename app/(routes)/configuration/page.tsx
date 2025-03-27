@@ -22,7 +22,6 @@ type FormData = {
 };
 
 export default function Configuration() {
-  // Estado e hooks (mantidos exatamente como estão)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pendingFormData, setPendingFormData] = useState<FormData | null>(null);
   const router = useRouter();
@@ -46,24 +45,19 @@ export default function Configuration() {
       const response = await postCustomer(pendingFormData);
       if (response) router.back();
     } catch (err: any) {
-      // Tratamento de erro mantido igual
     }
   };
 
-  // Componente dividido em seções lógicas sem alterar a estrutura visual
   return (
     <>
       <HeaderAdm />
       <Title tag="h1" text="configuração" />
 
       <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
-        {/* Seção de Perfil (foto e nome) - mantido exatamente igual */}
         <ProfileSection form={form} />
 
-        {/* Formulário de Dados - mantida a mesma estrutura */}
         <FormSection form={form} />
 
-        {/* Modal de confirmação - idêntico ao original */}
         <ConfirmationModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
@@ -74,7 +68,6 @@ export default function Configuration() {
   );
 }
 
-// Componentes auxiliares (apenas para organização, sem alterar comportamento)
 const ProfileSection = ({ form }: { form: any }) => (
   <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
     <div className="imgPerson">
@@ -108,7 +101,6 @@ const FormSection = ({ form }: { form: any }) => (
       <AddressInfoFields form={form} />
     </div>
 
-    {/* Botões - mantidos exatamente iguais */}
     <div className="divButtonsAceptCancelForms">
       <div className="changeButton">
         <ButtonBackAPoint
@@ -124,7 +116,6 @@ const FormSection = ({ form }: { form: any }) => (
   </article>
 );
 
-// Componentes de campos (mantendo todos os props originais)
 const PersonalInfoFields = ({ form }: { form: any }) => (
   <>
     <InputText

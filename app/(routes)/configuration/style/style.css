@@ -1,6 +1,5 @@
 @import "../../../variables.css";
 
-/* ===== Estilos Base ===== */
 .ownerForm {
     padding: 8px;
     background-color: var(--box-red-pink);
@@ -16,7 +15,6 @@
     overflow: visible;
 }
 
-/* ===== Seção de Informações ===== */
 .info-section {
     display: flex;
     flex-direction: column;
@@ -50,7 +48,6 @@
     font-weight: 500;
 }
 
-/* ===== Formulários e Containers ===== */
 .addProprietorsRealtors {
     margin-top: 50px;
     display: flex;
@@ -72,7 +69,6 @@
     flex-wrap: wrap;
 }
 
-/* ===== Componentes de Entrada ===== */
 .inputArticle {
     display: flex;
     flex-wrap: wrap;
@@ -91,7 +87,6 @@
     background-color: #D69CA6 !important;
 }
 
-/* ===== Componentes Visuais ===== */
 .imgPerson, 
 .imgProperty {
     width: 250px;
@@ -113,7 +108,6 @@
     padding-bottom: 80px;
 }
 
-/* ===== Botões e Controles ===== */
 .divButtonsAceptCancelForms {
     position: absolute;
     right: 30px;
@@ -148,7 +142,6 @@
     box-shadow: 0 0 0 1px #FFFFFF;
 }
 
-/* ===== Media Queries ===== */
 @media (max-width: 992px) {
     .ownerForm {
         width: 305px;
