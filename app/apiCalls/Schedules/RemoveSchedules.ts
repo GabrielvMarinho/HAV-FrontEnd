@@ -6,7 +6,7 @@ export default async function RemoveSchedules(ids :string[]){
           headers: {
             "Content-Type": "application/json", // Garante que está enviando JSON
           },
-          body:JSON.stringify({ids})
+          body:JSON.stringify(ids)
     })
     const data = await response.json()
     

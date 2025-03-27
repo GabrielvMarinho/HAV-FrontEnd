@@ -3,13 +3,56 @@ import "../../variables.css"
 import "./css/style.css"
 import Button from "../Inputs/Button";
 
-export default function selectHour(props :{day: string; ids :string[], selectHours: string[],
+export default function selectHour(props :{day: Date; ids :Record<string, number>, selectHours: string[],
      saveHours: (hoursAdd: string[], hoursRemove: string[]) => void;}){
     
     if(!props.day){
         return(
             <h3>selecione um dia</h3>
         )
+    }
+    const date = new Date()
+
+    if (props.day.getFullYear() <= date.getFullYear() && 
+        props.day.getMonth() <= date.getMonth() && 
+        props.day.getDate() < date.getDate()) {
+      return(
+        <div style={{display:"flex", flexDirection:"column", alignItems:"center", gap:"10px"}}>
+        <h3>{props.day.toLocaleString()}</h3>
+        <div className="hourButtonContainer">
+          {Array.from({ length: 12 }, (_, i) => {
+            const hour = i + 8;
+            var time00 = `${hour}:00`;
+            var time30 = `${hour}:30`;
+            if(time00.length==4){
+              time00 = "0"+time00
+            }
+            if(time30.length==4){
+              time30 = "0"+time30
+            }
+            return (
+                <>
+                <button
+                  onClick={() => {}}
+                  className="hourButton"                  >
+                  <div className="hourLine"></div>
+                  <div className="hourContent">{time00}</div>
+                </button>
+                <button
+                  onClick={() => {}}
+                  className="hourButton"
+                >
+                  <div className="hourLineOpacity"></div>
+                  <div className="hourContent">{time30}</div>
+                  </button>
+                </>
+                );
+          })}
+            
+        </div>
+        <h3>não é possível editar data passada</h3>
+        </div>
+      )
     }
     
     const [selectedHours, setSelectedHours] = useState<string[]>(props.selectHours);
@@ -38,6 +81,7 @@ export default function selectHour(props :{day: string; ids :string[], selectHou
         setRemoveId((prev) =>
           prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
         );
+        
     }
       
 
@@ -45,23 +89,28 @@ export default function selectHour(props :{day: string; ids :string[], selectHou
         return addHours.length === 0 && removeHours.length === 0;
     };
     
-
-
       return (
         <div style={{display:"flex", flexDirection:"column", alignItems:"center", gap:"10px"}}>
-        <h3>{props.day}</h3>
+        <h3>{props.day.toLocaleString()}</h3>
         <div className="hourButtonContainer">
+          
           {Array.from({ length: 12 }, (_, i) => {
             const hour = i + 8;
-            const time00 = `${hour}:00`;
-            const time30 = `${hour}:30`;
+            var time00 = `${hour}:00`;
+            var time30 = `${hour}:30`;
+            if(time00.length==4){
+              time00 = "0"+time00
+            }
+            if(time30.length==4){
+              time30 = "0"+time30
+            }
             
             return (
                 <>
                 <button
                   className={`${(selectedHours.includes(time00) || 
                     addHours.includes(time00)) && !removeHours.includes(time00)? "hourButtonSelect" : "hourButton"}`}
-                  onClick={() => {selectedHours.includes(time00)?toggleRemoveHour(time00, props.ids[i]):toggleAddHour(time00)}}
+                  onClick={() => {selectedHours.includes(time00)?toggleRemoveHour(time00, props.ids[time00]):toggleAddHour(time00)}}
                 >
                   <div className="hourLine"></div>
                   <div className="hourContent">{time00}</div>
@@ -69,7 +118,7 @@ export default function selectHour(props :{day: string; ids :string[], selectHou
                 <button
                   className={`${(selectedHours.includes(time30) || 
                     addHours.includes(time30)) && !removeHours.includes(time30)? "hourButtonSelect" : "hourButton"}`}
-                  onClick={() => {selectedHours.includes(time30)?toggleRemoveHour(time30, props.ids[i]):toggleAddHour(time30)}}
+                  onClick={() => {selectedHours.includes(time30)?toggleRemoveHour(time30, props.ids[time30]):toggleAddHour(time30)}}
                 >
                   <div className="hourLineOpacity"></div>
                   <div className="hourContent">{time30}</div>
@@ -77,6 +126,7 @@ export default function selectHour(props :{day: string; ids :string[], selectHou
                 </>
                 );
           })}
+        
             
         </div>
         {areArraysEqual()?

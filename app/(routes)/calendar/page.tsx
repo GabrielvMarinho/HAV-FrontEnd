@@ -21,8 +21,7 @@ export default function calendar(){
     const [selected, setSelected] = useState<Date>();
     const [data, setData] = useState();
 
-
-    const realtorId = "1"
+    const realtorId = "5"
 
 
 
@@ -49,32 +48,64 @@ export default function calendar(){
             }),
       }
 
-    const getHoursFromDay = function(date :string){
+    const getHoursFromDay = function(date :Date){
+        console.log(date)
         var arrayOfHour :string[] = []
-        data?.map((schedule) =>{
+        if(date != undefined){
+            data?.map((schedule) =>{
 
-            const [year, month, day] = schedule.day.split("-").map(Number); // Divide e converte para número
-            
-            if(date==new Date(year, month -1, day).toLocaleString()){
-                arrayOfHour.push(schedule.start_hour.slice(0, 5))
-            }
-        })
+                const [year, month, day] = schedule.day.split("-").map(Number); // Divide e converte para número
+                const scheduleDate = new Date(year, month - 1, day); // Cria um objeto Date para comparar
+    
+
+
+                // Comparando apenas ano, mês e dia
+                if (scheduleDate.getFullYear() === date.getFullYear() && 
+                    scheduleDate.getMonth() === date.getMonth() && 
+                    scheduleDate.getDate() === date.getDate()) {
+                    arrayOfHour.push(schedule.start_hour.slice(0, 5))
+                }
+            })
+        }
+        
 
         return arrayOfHour
     }
+
+    const getIdsFromDay = function(date :Date){
+        var objectId :Record<string, number> = {}
+        if(date){
+            data?.map((schedule) =>{
+
+                const [year, month, day] = schedule.day.split("-").map(Number); // Divide e converte para número
+                const compareDate = new Date(year, month-1, day)
+    
+                if (compareDate.getFullYear() === date.getFullYear() && 
+                    compareDate.getMonth() === date.getMonth() && 
+                        compareDate.getDate() === date.getDate()) {            
+                    objectId[schedule.start_hour.slice(0, 5)] = schedule.id
+                }
+            })
+        }
+       
+        return objectId
+    }
     const saveHours = function(addHours :string[], removeHoursId :string[]){
+        console.log(removeHoursId)
         if(removeHoursId.length!=0){
             RemoveSchedules(removeHoursId)
         }
         
         const objects :{day :string, start_hour: string, realtor_id :string}[]
          = addHours.map((hour) =>({
-            day: selected?.toLocaleDateString() || "",
+            day: selected 
+            ? `${selected.getDate().toString().padStart(2, '0')}-${(selected.getMonth() + 1).toString().padStart(2, '0')}-${selected.getFullYear()}`
+            : "",
             start_hour: hour,
             realtor_id: realtorId, 
         }))
-        console.log(objects)
         AddSchedules(objects)
+        window.location.href = window.location.href 
         
     }
     return(
@@ -99,7 +130,7 @@ export default function calendar(){
             }}
             locale={pt}
             />
-            <SelectHour saveHours={saveHours} day={selected?.toLocaleDateString()} selectHours={getHoursFromDay(selected?.toLocaleString())}/>
+            <SelectHour saveHours={saveHours} ids={getIdsFromDay(selected)} day={selected} selectHours={getHoursFromDay(selected)}/>
             </div>
             
         <Footer/>
