@@ -239,6 +239,7 @@ summary {
     color: var(--text-light-red);
 }
 .button{
+    height: fit-content;
     border-radius: 100px;
     background-color: var(--button-color);
     color: var(--text-white);

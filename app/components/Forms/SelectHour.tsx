@@ -4,7 +4,8 @@ import "./css/style.css"
 import Button from "../Inputs/Button";
 
 export default function selectHour(props :{day: Date; ids :Record<string, number>, selectHours: string[],
-     saveHours: (hoursAdd: string[], hoursRemove: string[]) => void;}){
+     saveHours: (hoursAdd: string[], hoursRemove: string[]) => void, cards :Record<string, string>[]}){
+    console.log(props.cards)
     
     if(!props.day){
         return(
@@ -30,6 +31,7 @@ export default function selectHour(props :{day: Date; ids :Record<string, number
             if(time30.length==4){
               time30 = "0"+time30
             }
+            
             return (
                 <>
                 <button

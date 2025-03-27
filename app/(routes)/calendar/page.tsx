@@ -15,13 +15,14 @@ import SelectHour from "@/app/components/Forms/SelectHour";
 import Button from "@/app/components/Inputs/Button";
 import AddSchedules from "@/app/apiCalls/Schedules/AddSchedules";
 import RemoveSchedules from "@/app/apiCalls/Schedules/RemoveSchedules";
+import SchedulingCard from "@/app/components/Information/SchedulingCard";
 
 
 export default function calendar(){
     const [selected, setSelected] = useState<Date>();
     const [data, setData] = useState();
 
-    const realtorId = "5"
+    const realtorId = "1"
 
 
 
@@ -49,7 +50,6 @@ export default function calendar(){
       }
 
     const getHoursFromDay = function(date :Date){
-        console.log(date)
         var arrayOfHour :string[] = []
         if(date != undefined){
             data?.map((schedule) =>{
@@ -91,7 +91,6 @@ export default function calendar(){
         return objectId
     }
     const saveHours = function(addHours :string[], removeHoursId :string[]){
-        console.log(removeHoursId)
         if(removeHoursId.length!=0){
             RemoveSchedules(removeHoursId)
         }
@@ -106,16 +105,63 @@ export default function calendar(){
         }))
         AddSchedules(objects)
         window.location.href = window.location.href 
-        
     }
+    const getCardsData = function(date :Date){
+        var arrayOfCardsData :Record<string, string>[] = []
+        var index =0;
+        if(date != undefined){
+            data?.map((schedule) =>{
+
+                const [year, month, day] = schedule.day.split("-").map(Number);
+                const scheduleDate = new Date(year, month - 1, day);
+    
+                
+
+                // Comparando apenas ano, mês e dia
+                if (scheduleDate.getFullYear() === date.getFullYear() && 
+                    scheduleDate.getMonth() === date.getMonth() && 
+                    scheduleDate.getDate() === date.getDate()) {
+                    if(schedule.customer && schedule.property){
+                        if(schedule.customer.id && schedule.property.id){
+                            const indexArray = arrayOfCardsData.findIndex(record => 
+                                record["customer_id"] === schedule.customer.id &&
+                                record["property_id"] === schedule.property.id
+                            );
+                            if (indexArray !== -1) {
+                                arrayOfCardsData[indexArray]["end_hour"] = schedule.start_hour;
+                            }else{
+                                console.log(arrayOfCardsData[index])
+                                arrayOfCardsData[index] = {}
+                                arrayOfCardsData[index]["customer_id"] = schedule.customer.id
+                                arrayOfCardsData[index]["property_id"] = schedule.property.id
+                                arrayOfCardsData[index]["name"] = schedule.customer.name
+                                arrayOfCardsData[index]["city"] = schedule.property.address.city
+                                arrayOfCardsData[index]["neighbourhood"] = schedule.property.address.neighbourhood
+                                arrayOfCardsData[index]["phone"] = schedule.customer.celphone
+                                arrayOfCardsData[index]["start_hour"] = schedule.start_hour
+                                arrayOfCardsData[index]["end_hour"] = schedule.start_hour
+
+                                index = index+1
+
+                            }
+                        }
+                    }
+                }
+            })
+        }
+        
+
+        return arrayOfCardsData
+    }
+
     return(
         <> 
         <HeaderAdm/>
         <Title tag="h1" text="Agenda" /> 
         <NavBarAdm options={NavBarPath.historic} />
-
         <div style={{display:"flex", gap:"50px", margin:"100px"}}>
         <DayPicker
+
             showOutsideDays
             fixedWeeks
             mode="single"
@@ -130,7 +176,7 @@ export default function calendar(){
             }}
             locale={pt}
             />
-            <SelectHour saveHours={saveHours} ids={getIdsFromDay(selected)} day={selected} selectHours={getHoursFromDay(selected)}/>
+            <SelectHour cards={getCardsData(selected)} saveHours={saveHours} ids={getIdsFromDay(selected)} day={selected} selectHours={getHoursFromDay(selected)}/>
             </div>
             
         <Footer/>
