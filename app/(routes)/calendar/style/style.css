@@ -14,7 +14,8 @@
     --rdp-day_button-height: 42px; /* The height of the day cells. */
     --rdp-day_button-width: 42px; /* The width of the day cells. */
     
-    --rdp-selected-border: 2px solid var(--rdp-accent-color); /* The border of the selected days. */
+    --free-day-style: var(--box-realtor-available); /* The border of the selected days. */
+    --free-day-style-with-customer: 3px solid var(--rdp-accent-color);
     --rdp-disabled-opacity: 0.5; /* The opacity of the disabled days. */
     --rdp-outside-opacity: 0.15; /* The opacity of the days outside the current month. */
     --rdp-today-color: var(--rdp-accent-color); /* The color of the today's date. */
@@ -256,12 +257,15 @@
     font-weight: bold;
     font-size: large;
   }
+  
   .free_day_style .rdp-day_button{
-    border: var(--rdp-selected-border);
+    background-color: var(--free-day-style);
+  }
+  .free_day_with_customer_style .rdp-day_button{
+    border: var(--free-day-style-with-customer);
   }
   .rdp-selected .rdp-day_button {
     background-color: var(--rdp-accent-color);
-    border: var(--rdp-selected-border);
   }
  
   

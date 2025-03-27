@@ -61,6 +61,42 @@
     height: 100%;
     object-fit: cover;
 }
+.hourLineOpacity{
+    opacity: 0.2;
+}
+.hourLine, .hourLineOpacity{
+    width: 25vw;
+    height: 1px;
+    background-color: var(--hour-gray);
+}
+.hourButton:hover {
+    
+    cursor: pointer;
+}
+.hourButtonContainer{
+    display: flex;
+    flex-direction: column;
+    max-height: 400px;
+    overflow-y: scroll;
+    padding-right: 20px;
+    scrollbar-color: #888888 #f1f1f100/* Cor da barra e do fundo */
+}
+
+.hourButton{
+    all: unset;
+}
+.hourButtonSelect{
+    all: unset;
+    background-color: var(--box-realtor-available) !important;
+}
+
+.hourContent{
+    margin-top: 2px;
+    margin-bottom:20px;
+    font-weight: 500;
+    font-size: var(--text-sm);
+    color:  var(--hour-gray);
+}
 .trashcanPhoto{
     border-radius: 100%;
     right: 15px;

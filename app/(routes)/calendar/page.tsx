@@ -11,44 +11,86 @@ import { DayPicker } from "react-day-picker";
 import { pt } from "react-day-picker/locale";
 import "./style/style.css"
 import FetchScheduleFutureByIdAndFuture from "@/app/apiCalls/Schedules/FetchScheduleFutureByIdAndFuture";
+import SelectHour from "@/app/components/Forms/SelectHour";
+import Button from "@/app/components/Inputs/Button";
+import AddSchedules from "@/app/apiCalls/Schedules/AddSchedules";
+import RemoveSchedules from "@/app/apiCalls/Schedules/RemoveSchedules";
 
 
 export default function calendar(){
     const [selected, setSelected] = useState<Date>();
     const [data, setData] = useState();
-    
+
+
+    const realtorId = "1"
+
+
+
     useEffect(() => {
         async function fetch(){
-            const data = await FetchScheduleFutureByIdAndFuture(5)
+            const data = await FetchScheduleFutureByIdAndFuture(realtorId)
             setData(data);
-
         }
         fetch();
       }, []);
 
-      console.log(data)
-      console.log(new Date(2025, 12, 2))
       const modifierList ={
             freeDays: data?.map((schedule) => {
                 const [year, month, day] = schedule.day.split("-").map(Number); // Divide e converte para número
                 return new Date(year, month -1, day)
             }),
-            freeDaysWithCustomer: []
+            freeDaysWithCustomer: data?.map((schedule) => {
+                const [year, month, day] = schedule.day.split("-").map(Number); // Divide e converte para número
+                if(schedule.customer != null){
+                    return new Date(year, month -1, day)
+
+                }
+
+            }),
       }
-      console.log(modifierList)
+
+    const getHoursFromDay = function(date :string){
+        var arrayOfHour :string[] = []
+        data?.map((schedule) =>{
+
+            const [year, month, day] = schedule.day.split("-").map(Number); // Divide e converte para número
+            
+            if(date==new Date(year, month -1, day).toLocaleString()){
+                arrayOfHour.push(schedule.start_hour.slice(0, 5))
+            }
+        })
+
+        return arrayOfHour
+    }
+    const saveHours = function(addHours :string[], removeHoursId :string[]){
+        if(removeHoursId.length!=0){
+            RemoveSchedules(removeHoursId)
+        }
+        
+        const objects :{day :string, start_hour: string, realtor_id :string}[]
+         = addHours.map((hour) =>({
+            day: selected?.toLocaleDateString() || "",
+            start_hour: hour,
+            realtor_id: realtorId, 
+        }))
+        console.log(objects)
+        AddSchedules(objects)
+        
+    }
     return(
         <> 
         <HeaderAdm/>
         <Title tag="h1" text="Agenda" /> 
+        <NavBarAdm options={NavBarPath.historic} />
+
+        <div style={{display:"flex", gap:"50px", margin:"100px"}}>
         <DayPicker
             showOutsideDays
             fixedWeeks
             mode="single"
             selected={selected}
             onSelect={setSelected}
-            footer={
-                selected ? `Selected: ${selected.toLocaleDateString()}` : "Pick a day."
-            }
+           
             
             modifiers={modifierList}
             modifiersClassNames={{
@@ -57,7 +99,9 @@ export default function calendar(){
             }}
             locale={pt}
             />
-        <NavBarAdm options={NavBarPath.historic} />
+            <SelectHour saveHours={saveHours} day={selected?.toLocaleDateString()} selectHours={getHoursFromDay(selected?.toLocaleString())}/>
+            </div>
+            
         <Footer/>
 
         

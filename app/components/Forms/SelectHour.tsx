@@ -1,0 +1,95 @@
+import { useEffect, useState } from "react";
+import "../../variables.css"
+import "./css/style.css"
+import Button from "../Inputs/Button";
+
+export default function selectHour(props :{day: string; ids :string[], selectHours: string[],
+     saveHours: (hoursAdd: string[], hoursRemove: string[]) => void;}){
+    
+    if(!props.day){
+        return(
+            <h3>selecione um dia</h3>
+        )
+    }
+    
+    const [selectedHours, setSelectedHours] = useState<string[]>(props.selectHours);
+    const [addHours, setAddHours] = useState<string[]>([]);
+    const [removeHours, setRemoveHours] = useState<string[]>([]);
+    const [removeId, setRemoveId] = useState<string[]>([])
+
+    useEffect(() =>{
+        setSelectedHours(props.selectHours)
+        setAddHours([])
+        setRemoveHours([])
+        setRemoveId([])
+    }, [props.day, props.selectHours])
+
+
+    const toggleAddHour = (hour: string) => {
+        setAddHours((prev) =>
+          prev.includes(hour) ? prev.filter((h) => h !== hour) : [...prev, hour]
+        );
+        
+      };
+    const toggleRemoveHour = (hour: string, id :string) =>{
+        setRemoveHours((prev) =>
+          prev.includes(hour) ? prev.filter((h) => h !== hour) : [...prev, hour]
+        );
+        setRemoveId((prev) =>
+          prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+        );
+    }
+      
+
+    const areArraysEqual = () => {
+        return addHours.length === 0 && removeHours.length === 0;
+    };
+    
+
+
+      return (
+        <div style={{display:"flex", flexDirection:"column", alignItems:"center", gap:"10px"}}>
+        <h3>{props.day}</h3>
+        <div className="hourButtonContainer">
+          {Array.from({ length: 12 }, (_, i) => {
+            const hour = i + 8;
+            const time00 = `${hour}:00`;
+            const time30 = `${hour}:30`;
+            
+            return (
+                <>
+                <button
+                  className={`${(selectedHours.includes(time00) || 
+                    addHours.includes(time00)) && !removeHours.includes(time00)? "hourButtonSelect" : "hourButton"}`}
+                  onClick={() => {selectedHours.includes(time00)?toggleRemoveHour(time00, props.ids[i]):toggleAddHour(time00)}}
+                >
+                  <div className="hourLine"></div>
+                  <div className="hourContent">{time00}</div>
+                </button>
+                <button
+                  className={`${(selectedHours.includes(time30) || 
+                    addHours.includes(time30)) && !removeHours.includes(time30)? "hourButtonSelect" : "hourButton"}`}
+                  onClick={() => {selectedHours.includes(time30)?toggleRemoveHour(time30, props.ids[i]):toggleAddHour(time30)}}
+                >
+                  <div className="hourLineOpacity"></div>
+                  <div className="hourContent">{time30}</div>
+                  </button>
+                </>
+                );
+          })}
+            
+        </div>
+        {areArraysEqual()?
+        <div style={{pointerEvents:"none", opacity:"0.5"}} >
+            <Button type="button" size={"medium"} text="Salvar" color="var(--text-white)"
+            background="var(--button-color)" />
+        </div>
+        :
+            <Button type="button" size={"medium"} text="Salvar" onClick={() =>{props.saveHours(addHours, removeId)}} hover="darkHover" color="var(--text-white)"
+            background="var(--button-color)" />
+        }
+        </div>
+
+        
+      );
+}
