@@ -90,6 +90,7 @@
     flex-direction: column;
     align-items: start;
     gap: 10px;
+    white-space: nowrap;
 }
 .lineDescriptionTitlePropertySpecific{
     width: 75px;
@@ -110,8 +111,11 @@
     text-transform: uppercase;
 }
 
-@media (width < 992px) {
+@media (max-width: 992px) {
     .sizeTitle{
         font-size: var(--text-ml);
+    }
+    .divDescriptionTitlePropertySpecific{
+        align-items: center;
     }
 }

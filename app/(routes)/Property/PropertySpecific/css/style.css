@@ -1,5 +1,11 @@
 @import "../../../../variables.css";
 
+.articleFirstContent{
+    display: flex;
+    flex-direction: row;
+    gap: 83px;
+}
+
 .buttonIconDiv{
     display: flex;
     flex-direction: row;
@@ -39,4 +45,13 @@
     height: 405px;
     background-color: var(--box-red-pink);
     border-radius: 10px 0 0 10px;
+}
+@media (max-width: 992px) {
+    .articleFirstContent{
+        flex-direction: column;
+        gap: 45px;
+    }
+    .enviroments-interestPoint{
+        flex-direction: column;
+    }
 }
