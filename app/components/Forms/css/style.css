@@ -129,6 +129,28 @@
     gap: "15px";
 }
 
+.titleModal{
+    color: var(--text-white);
+    margin-bottom: 20px;
+    font-weight: 800;
+    font-size: var( --text-l);
+}
+
+.containerModal{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
+.descModal{
+    max-width:400px; /* Define uma largura máxima */
+    word-wrap: break-word;
+    color: var(--text-white-opacity-85);
+    font-weight: 500;
+}
+
 @media(max-width: 992px){
 
     .ownerForm{
@@ -169,6 +191,10 @@
 
     .divInputs{
         flex-direction: "column"; 
+    }
+
+    .titleModal{
+        font-size: var(--text-m);
     }
 
 }

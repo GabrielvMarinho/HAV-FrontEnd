@@ -23,7 +23,7 @@ export default function Modal(props: { content: ReactNode; isOpen: boolean; id: 
                     {props.content}
                     <div style={{display: "flex", gap: "20px"}}>
                         <div onClick={props.onClose}><Button
-                            size="small" text="fechar"
+                            size="small" text="Cancelar"
                             background="var(--button-color)"
                             color="var(--text-white)" hover="darkHover" /></div>
                         <div onClick={props.onConfirm}><Button size="small" text="confirmar"

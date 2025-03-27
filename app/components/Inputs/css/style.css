@@ -562,5 +562,9 @@ background-color: var(--text-white);
     .inputWrapperLogin input{
         padding-right: 68px;
     }
+
+    .smallButton{
+        padding-inline: 25px;
+    }
 }
 

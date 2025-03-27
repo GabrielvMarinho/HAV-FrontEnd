@@ -241,7 +241,10 @@ export default function FormAddCustomer() {
                     id="idModal"
                     content={
                         <div>
-                            <h1>Deseja confirmar o cadastro do usuário?</h1>
+                            <div className="containerModal">
+                            <h1 className="titleModal">DESEJA ADICIONAR O CLIENTE ? </h1>
+                            <p className="descModal"> Ao confirmar, os dados inseridos no formulário serão adicionados no sistema </p>
+                        </div>
                         </div>
                     }
                     isOpen={isModalOpen}

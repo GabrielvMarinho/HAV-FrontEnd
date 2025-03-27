@@ -701,8 +701,9 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                 <Modal
                     id="idModal"
                     content={
-                        <div>
-                            <h1>Deseja confirmar o editar da propriedade?</h1>
+                        <div className="containerModal">
+                            <h1 className="titleModal">DESEJA EDITAR A PROPRIEDADE? </h1>
+                            <p className="descModal"> Ao confirmar, todos os dados alterados serão salvos no novo formato, está ação não pode ser desfeita!</p>
                         </div>
                     }
                     isOpen={isModalOpen}

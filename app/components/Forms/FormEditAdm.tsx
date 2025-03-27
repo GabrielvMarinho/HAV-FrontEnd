@@ -236,8 +236,9 @@ export default function FormEditAdm(props :{id :any }) {
                 <Modal
                     id="idModal"
                     content={
-                        <div>
-                            <h1>Deseja confirmar o editar do adm?</h1>
+                         <div className="containerModal">
+                            <h1 className="titleModal">DESEJA ADICIONAR O EDITOR ? </h1>
+                            <p className="descModal"> Ao confirmar, os dados inseridos no formulário serão adicionados no sistema </p>
                         </div>
                     }
                     isOpen={isModalOpen}
