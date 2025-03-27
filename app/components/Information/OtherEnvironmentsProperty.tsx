@@ -1,5 +1,5 @@
 import "./css/style.css";
-import DescriptionTitlePropertySpecific from "../NonInteractable/DescriptionTitlePropertySpecific";
+import DescriptionTitlePropertySpecific from "../NonInteractable/InterestPoints";
 import ArrowRight from "../IconsTSX/ArrowRight";
 
 export default function OtherEnvironmentsProperty(props: { obj: Pick<PropertySpecific, "additionals"> }) {
@@ -23,7 +23,7 @@ export default function OtherEnvironmentsProperty(props: { obj: Pick<PropertySpe
     return (
         <div className="divDescriptionPropertySpecific">
             <DescriptionTitlePropertySpecific text="Outros Ambientes" />
-            <div style={{ display: "flex", gap: "50px" }}>
+            <div style={{ display: "flex", gap: "50px", alignItems: "left" }}>
                 {additionalChunks.map((chunk, colIndex) => (
                     <ul key={colIndex} className="enviromentsUl">
                         {chunk.map((item, index) => (

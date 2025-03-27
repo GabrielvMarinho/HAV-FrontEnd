@@ -8,7 +8,7 @@ import Button from "@/app/components/Inputs/Button";
 import Cubes from "@/app/components/IconsTSX/Cubes";
 import Gear from "@/app/components/IconsTSX/Gear";
 import Balanca from "@/app/components/IconsTSX/Balanca";
-import DescriptionTitlePropertySpecific from "@/app/components/NonInteractable/DescriptionTitlePropertySpecific";
+import InterestPointsPropertySpecific from "@/app/components/NonInteractable/InterestPoints";
 import DescriptionProperty from "@/app/components/Information/DescriptionProperty";
 import HorizontalPropertySpecific from "@/app/components/NonInteractable/HorizontalTitlePropertySpecific";
 import Title from "@/app/components/NonInteractable/Title";
@@ -139,7 +139,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                 </article>
                 <article className="enviroments-interestPoint">
                     <OtherEnvironmentsProperty obj={{ additionals: property.additionals }} />
-                    <DescriptionTitlePropertySpecific text="pontos de interesse" />
+                    <InterestPointsPropertySpecific text="pontos de interesse" />
                 </article>
                 <DescriptionProperty obj={{ propertyDescription: property.propertyDescription }} />
                 <section className="sectionPriceProperty">
