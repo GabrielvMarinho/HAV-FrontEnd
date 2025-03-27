@@ -77,11 +77,6 @@
     width: 1px; 
 }
 
-.isFurnishedText{
-    color: var(--box-dark-red-option);
-    font-size: var(--text-ml);
-    font-weight: 500;
-}
 
 .descriptionTitlePropertySpecific{
     font-size: var(--text-l);

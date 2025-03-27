@@ -1,14 +1,8 @@
 import './css/style.css';
-
-import { NewUser } from "@/app/Validators/ProprietorValidator";
 import { FieldError, UseFormRegister, FieldValues } from "react-hook-form";
-import { FieldError, UseFormRegister } from "react-hook-form";
-import { NewUser } from "@/app/Validators/ProprietorValidator";
-import { NewRealter } from '@/app/Validators/RealtorValidator';
-import { NewEditor } from '@/app/Validators/EditorOrAdmValidator';
 import { useEffect, useRef } from 'react';
 
-export default function InputText<T>({
+export default function InputText<T extends FieldValues>({
     name,
     size,
     text,
@@ -17,15 +11,17 @@ export default function InputText<T>({
     id,
     register,
     error,
+    disabled = false,
 }: {
     name: keyof T;
     size: string;
     text: string;
     placeholder: string;
     id: string;
-    defaulValue?:any;
+    defaultValue?: any;
     register?: UseFormRegister<T>;
     error?: FieldError;
+    disabled?: boolean;
 }) {
     
     return (
@@ -34,12 +30,12 @@ export default function InputText<T>({
             <input 
                 id={id}
                 type="text"
-                name={name}
-
+                name={name as string}
                 {...(register ? register(name) : {})} 
-                className={`${size}Input input`}
+                className={`${size}Input input ${disabled ? 'disabled-input' : ''}`}
                 placeholder={placeholder}
-                
+                disabled={disabled}
+                defaultValue={defaultValue}
             />
             {error && <p className="errorText">{error.message}</p>}
         </div>
