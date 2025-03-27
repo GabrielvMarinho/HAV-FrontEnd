@@ -16,6 +16,9 @@ import { saveConfig } from "@/app/Validators/ProfileConfigValidator";
 import postCustomer from "@/app/apiCalls/Customer/postCustomer";
 import "../../variables.css";
 import "../configuration/style/style.css";
+import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
+import Button from "@/app/components/Inputs/Button";
+import ToggleButton from "@/app/components/Inputs/ToggleButton";
 
 type FormData = {
   [key: string]: FormDataEntryValue;
@@ -24,6 +27,14 @@ type FormData = {
 export default function Configuration() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pendingFormData, setPendingFormData] = useState<FormData | null>(null);
+  const [toggleStates, setToggleStates] = useState({
+    tema: false,
+    idioma: false,
+    autenticacao2Fatores: false,
+    libras: true,
+    leitorTela: false,
+    tamanhoFonte: false
+  });
   const router = useRouter();
 
   const form = useForm<saveConfig>({
@@ -31,20 +42,24 @@ export default function Configuration() {
     mode: "onSubmit",
   });
 
+  const handleToggle = (key: string) => {
+    setToggleStates(prev => ({ ...prev, [key]: !prev[key] }));
+  };
+
   const onSubmit = (data: saveConfig) => {
     if (Object.keys(form.formState.errors).length > 0) return;
     setPendingFormData(data);
     setIsModalOpen(true);
   };
 
-  const addCustomer = async () => {
+  const saveChanges = async () => {
     if (!pendingFormData) return;
     setIsModalOpen(false);
-
     try {
       const response = await postCustomer(pendingFormData);
       if (response) router.back();
-    } catch (err: any) {
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -53,23 +68,90 @@ export default function Configuration() {
       <HeaderAdm />
       <Title tag="h1" text="configuração" />
 
-      <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
-        <ProfileSection form={form} />
+      <div className="configurationLayout">
+        <div className="formContainer">
+          <form className="profileConfig" onSubmit={form.handleSubmit(onSubmit)}>
+            <ProfileSection form={form} />
+            <FormSection form={form} />
+          </form>
+        </div>
 
-        <FormSection form={form} />
+        <div className="menuColumns">
+          <div className="menuColumn">
+            <h3 className="columnTitle">PREFERÊNCIAS</h3>
+            <ul className="menuList">
+              <MenuItem 
+                label="TEMA" 
+                isToggled={toggleStates.tema}
+                onToggle={() => handleToggle('tema')}
+              />
+              <MenuItem
+                label="IDIOMA"
+                isToggled={toggleStates.idioma}
+                onToggle={() => handleToggle('idioma')}
+              />
+              <MenuItem
+                label="AUTENTICAÇÃO 2 FATORES"
+                isToggled={toggleStates.autenticacao2Fatores}
+                onToggle={() => handleToggle('autenticacao2Fatores')}
+              />
+            </ul>
+          </div>
 
-        <ConfirmationModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onConfirm={addCustomer}
-        />
-      </form>
+          <div className="menuColumn">
+            <h3 className="columnTitle">ACESSIBILIDADE</h3>
+            <ul className="menuList">
+              <MenuItem 
+                label="LIBRAS"
+                isToggled={toggleStates.libras}
+                onToggle={() => handleToggle('libras')}
+              />
+              <MenuItem
+                label="LEITOR DE TELA"
+                isToggled={toggleStates.leitorTela}
+                onToggle={() => handleToggle('leitorTela')}
+              />
+              <MenuItem
+                label="TAMANHO FONTE"
+                isToggled={toggleStates.tamanhoFonte}
+                onToggle={() => handleToggle('tamanhoFonte')}
+              />
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <ConfirmationModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={saveChanges}
+      />
     </>
   );
 }
 
+const MenuItem = ({ 
+  label,
+  isToggled = false,
+  onToggle = () => {}
+}: {
+  label: string;
+  isToggled?: boolean;
+  onToggle?: () => void;
+}) => (
+  <li className="menuItem">
+    <HorizontalLine size={500} color="#0F0F0F80" />
+    <div className="menuContent">
+      <span className="menuLabel">{label}</span>
+      <div className="toggleWrapper">
+        <ToggleButton toggled={isToggled} onChange={onToggle} />
+      </div>
+    </div>
+  </li>
+);
+
 const ProfileSection = ({ form }: { form: any }) => (
-  <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+  <section className="profileSection">
     <div className="imgPerson">
       <ButtonUploadPhoto
         name="image"
@@ -89,19 +171,23 @@ const FormSection = ({ form }: { form: any }) => (
     <div className="info-section">
       <p className="info-section__title">INFORMAÇÕES PESSOAIS</p>
     </div>
-
     <div className="inputArticle">
-      {/* Campos pessoais */}
-      <PersonalInfoFields form={form} />
-
-      {/* Divisor visual - mantido pixel-perfect */}
+      <InputText {...configFields.name} register={form.register} error={form.formState.errors[configFields.name.name as keyof saveConfig]} />
+      <InputText {...configFields.phoneNumber} register={form.register} error={form.formState.errors[configFields.phoneNumber.name as keyof saveConfig]} />
+      <InputText {...configFields.cpf} register={form.register} error={form.formState.errors[configFields.cpf.name as keyof saveConfig]} disabled className="disabled-input" />
+      <InputText {...configFields.email} register={form.register} error={form.formState.errors[configFields.email.name as keyof saveConfig]} />
+      <InputText {...configFields.cellphone} register={form.register} error={form.formState.errors[configFields.cellphone.name as keyof saveConfig]} />
+      <InputText {...configFields.birthdate} register={form.register} error={form.formState.errors[configFields.birthdate.name as keyof saveConfig]} disabled className="disabled-input" />
       <div style={{ width: "100%", margin: "30px 0" }} />
-
-      {/* Campos de endereço */}
-      <AddressInfoFields form={form} />
+      <InputText {...configFields.cep} register={form.register} error={form.formState.errors[configFields.cep.name as keyof saveConfig]} />
+      <InputDropdown {...dropdownFields.city} register={form.register} error={form.formState.errors[dropdownFields.city.name as keyof saveConfig]} />
+      <InputDropdown {...dropdownFields.state} register={form.register} error={form.formState.errors[dropdownFields.state.name as keyof saveConfig]} />
+      <InputDropdown {...dropdownFields.neighborhood} register={form.register} error={form.formState.errors[dropdownFields.neighborhood.name as keyof saveConfig]} />
+      <InputText {...configFields.propertyNumber} register={form.register} error={form.formState.errors[configFields.propertyNumber.name as keyof saveConfig]} />
+      <InputText {...configFields.street} register={form.register} error={form.formState.errors[configFields.street.name as keyof saveConfig]} />
+      <InputText {...configFields.complement} register={form.register} error={form.formState.errors[configFields.complement.name as keyof saveConfig]} />
     </div>
-
-    <div className="divButtonsAceptCancelForms">
+    <div className="divButtonSaveForms">
       <div className="changeButton">
         <ButtonBackAPoint
           point=""
@@ -114,107 +200,6 @@ const FormSection = ({ form }: { form: any }) => (
       </div>
     </div>
   </article>
-);
-
-const PersonalInfoFields = ({ form }: { form: any }) => (
-  <>
-    <InputText
-      {...configFields.name}
-      register={form.register}
-      error={form.formState.errors[configFields.name.name as keyof saveConfig]}
-    />
-    <InputText
-      {...configFields.phoneNumber}
-      register={form.register}
-      error={
-        form.formState.errors[configFields.phoneNumber.name as keyof saveConfig]
-      }
-    />
-    <InputText
-      {...configFields.cpf}
-      register={form.register}
-      error={form.formState.errors[configFields.cpf.name as keyof saveConfig]}
-      disabled
-      className="disabled-input"
-    />
-    <InputText
-      {...configFields.email}
-      register={form.register}
-      error={form.formState.errors[configFields.email.name as keyof saveConfig]}
-    />
-    <InputText
-      {...configFields.cellphone}
-      register={form.register}
-      error={
-        form.formState.errors[configFields.cellphone.name as keyof saveConfig]
-      }
-    />
-    <InputText
-      {...configFields.birthdate}
-      register={form.register}
-      error={
-        form.formState.errors[configFields.birthdate.name as keyof saveConfig]
-      }
-      disabled
-      className="disabled-input"
-    />
-  </>
-);
-
-const AddressInfoFields = ({ form }: { form: any }) => (
-  <>
-    <InputText
-      {...configFields.cep}
-      register={form.register}
-      error={form.formState.errors[configFields.cep.name as keyof saveConfig]}
-    />
-    <InputDropdown
-      {...dropdownFields.city}
-      register={form.register}
-      error={
-        form.formState.errors[dropdownFields.city.name as keyof saveConfig]
-      }
-    />
-    <InputDropdown
-      {...dropdownFields.state}
-      register={form.register}
-      error={
-        form.formState.errors[dropdownFields.state.name as keyof saveConfig]
-      }
-    />
-    <InputDropdown
-      {...dropdownFields.neighborhood}
-      register={form.register}
-      error={
-        form.formState.errors[
-          dropdownFields.neighborhood.name as keyof saveConfig
-        ]
-      }
-    />
-    <InputText
-      {...configFields.propertyNumber}
-      register={form.register}
-      error={
-        form.formState.errors[
-          configFields.propertyNumber.name as keyof saveConfig
-        ]
-      }
-    />
-    <InputText
-      {...configFields.street}
-      register={form.register}
-      error={
-        form.formState.errors[configFields.street.name as keyof saveConfig]
-      }
-    />
-    <InputText
-      {...configFields.complement}
-      register={form.register}
-      error={
-        form.formState.errors[configFields.complement.name as keyof saveConfig]
-      }
-    />
-  </>
 );
 
 const ConfirmationModal = ({
