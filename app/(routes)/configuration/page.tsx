@@ -66,7 +66,7 @@ export default function Configuration() {
   return (
     <>
       <HeaderAdm />
-      <Title tag="h1" text="configuração" />
+      <Title tag="h1" text="configurações" />
 
       <div className="configurationLayout">
         <div className="formContainer">

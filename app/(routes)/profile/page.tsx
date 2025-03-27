@@ -64,7 +64,7 @@ export default function ProfilePage() {
                 <div className="menuContent">
                   <div className="menuTextWrapper">
                     <span className="menuIconPlaceholder"></span>
-                    <a href="#">CONFIGURAÇÕES</a>
+                    <a href="/configuration">CONFIGURAÇÕES</a>
                   </div>
                   <div className="lineSpacing">
                     <ArrowNextSlide height={40} width={25} color="#5F1E2A" />
