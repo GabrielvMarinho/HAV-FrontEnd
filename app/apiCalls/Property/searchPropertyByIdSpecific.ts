@@ -15,16 +15,17 @@ export default async function (
 
     const data = await response.json();
 
-    const { realtors, address, taxes, propertyFeature, additional, ...rest } = data;
+    const {address, taxes, propertyFeature, additionals, realtorPropertySpecific, ...rest } = data;
 
     const property: PropertySpecific = {
       ...rest,
       address,
       taxes,
       propertyFeature, 
-      additional,
-      realtors
+      additionals,
+      realtorPropertySpecific,
     };
+
     return property;
 
   } catch {
