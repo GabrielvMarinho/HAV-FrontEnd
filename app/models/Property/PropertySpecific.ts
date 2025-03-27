@@ -1,11 +1,3 @@
-// interface AddressPropertySpecific{
-
-// }
-
-// interface FeaturesPropertySpecific{
-
-// }
-
 interface PropertySpecific {
     id: number;
     address: {

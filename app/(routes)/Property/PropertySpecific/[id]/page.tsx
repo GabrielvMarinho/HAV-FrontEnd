@@ -49,9 +49,8 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
             additional: apiData.additional?.name ?? "Não informado"
         },
     });
-    
 
-    // Chamando a formatação antes de definir o estado
+
     useEffect(() => {
         async function fetchProperty() {
             if (!propertyId) return;
@@ -74,7 +73,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
 
 
     if (!property) {
-        return <p>carregando...</p>
+        return <p>Carregando...</p>
     }
 
 
@@ -124,7 +123,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                             obj={{
                                 propertyType: property.propertyType,
                                 propertyCode: property.propertyCode,
-                                propertyFeature: property.propertyFeature, 
+                                propertyFeature: property.propertyFeature,
                                 address: property.address,
                                 purpose: property.purpose
                             }}
@@ -136,11 +135,11 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                             taxes: property.taxes,
                             PromotionalPrice: props.obj?.promotionalPrice
                         }} />
-                        <RealtorAssociated objPropertyList={{ realtorPropertySpecific: property?.realtorPropertySpecific ?? [] }} />
+                        <RealtorAssociated objPropertyList={{ realtorPropertySpecific: property?.realtorPropertySpecific ?? [] }} WhatsappLink="adad" />
                     </div>
                 </article>
                 <article className="enviroments-interestPoint">
-                    <OtherEnvironmentsProperty obj={{ additionals: property.additionals}} />
+                    <OtherEnvironmentsProperty obj={{ additionals: property.additionals }} />
                     <DescriptionTitlePropertySpecific text="pontos de interesse" />
                 </article>
                 <DescriptionProperty obj={{ propertyDescription: property.propertyDescription }} />
@@ -215,7 +214,9 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                 ]} />
             </div>
             <div style={{ margin: "200px 0 100px 0" }}>
-                <RealterAssociatedVertical obj={{ name: "KAUANI DA SILVA", cellphone: "+55 (47) 11111-1111" }} />
+                <RealterAssociatedVertical objPropertyList={{ realtorPropertySpecific: property?.realtorPropertySpecific ?? [] }}
+                    WhatsappLink="aaadw"
+                    InstagramLink="https://www.instagram.com/accounts/login/?next=%2Fnathanj.oao%2F&source=omni_redirect" />
             </div>
         </>
     );

@@ -28,12 +28,6 @@ export default function InputText<T>({
     error?: FieldError;
 }) {
 
-
-
-    
-    
-    
-    
     return (
         <div className="inputContainer">
             <label className="label" htmlFor={id}>{text}</label>
