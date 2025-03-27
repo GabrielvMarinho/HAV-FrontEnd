@@ -1,11 +1,3 @@
-// interface AddressPropertySpecific{
-
-// }
-
-// interface FeaturesPropertySpecific{
-
-// }
-
 interface PropertySpecific {
     id: number;
     address: {
@@ -20,19 +12,16 @@ interface PropertySpecific {
         garageSpace: number;
         livingRoom: number;
         areaProperty: number;
+        isFurnished: boolean;
     };
-    additional: { 
-        name: string;
-    } 
-    bedRoom: number;
+    additionals: AdditionalsPropertySpecific[];
     propertyCode: string;
     promotionalPrice: number;
     actualPrice: number;
     taxes: number;
     purpose: string; // venda, vendaPromocao, locacao
     propertyDescription: string,
-    isFurnished: boolean;
     propertyType: string;
-    realtors: Realtor[];
+    realtorPropertySpecific: realtorPropertySpecific[];
     price: number; //botei esse pra ver se ta funcionando (sim)
 }
