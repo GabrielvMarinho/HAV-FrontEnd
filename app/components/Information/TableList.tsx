@@ -192,8 +192,19 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
                 <ActionButton onClick={selected.length==1?editFunction:""} className={`${selected.length==1?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Pencil}  />
                 <ActionButton onClick={selected.length>0?openDeleteModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Trashcan} />
                 <ActionButton onClick={selected.length>0?openArchiveModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={ArchiveIn}  />
-                <Modal content={<div>delete modal</div>} id="deleteModal" isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onConfirm={confirmDelete} />
-                <Modal content={<div>arquivar modal</div>} id="archiveModal" isOpen={isArchiveModalOpen} onClose={() => setIsArchiveModalOpen(false)} onConfirm={changeArchivedStatus} />
+                <Modal content={
+                    <div className="containerModal">
+                        <h1 className="titleModal">DESEJA REMOVER? </h1>
+                        <p className="descModal"> Ao confirmar, os dados selecionados serão excluídos.</p>
+                    </div>
+                } id="deleteModal" isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onConfirm={confirmDelete} />
+                
+                <Modal content={
+                    <div className="containerModal">
+                        <h1 className="titleModal">DESEJA DESARQUIVAR? </h1>
+                        <p className="descModal"> Ao confirmar, os dados arquivados serão desarquivados.</p>
+                    </div>
+                } id="archiveModal" isOpen={isArchiveModalOpen} onClose={() => setIsArchiveModalOpen(false)} onConfirm={changeArchivedStatus} />
 
                 </>
             ) : (
@@ -203,8 +214,18 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
                 <ActionButton onClick={selected.length>0?openDeleteModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Trashcan} />
                 <ActionButton onClick={selected.length>0?openArchiveModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={ArchiveOut}  />
                 
-                <Modal content={<div>desarquivar modal</div>} id="archiveModal" isOpen={isArchiveModalOpen} onClose={() => setIsArchiveModalOpen(false)} onConfirm={changeArchivedStatus} />
-                <Modal content={<div>delete modal</div>} id="deleteModal" isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onConfirm={confirmDelete} />
+                <Modal content={
+                    <div className="containerModal">
+                        <h1 className="titleModal">DESEJA DESARQUIVAR? </h1>
+                        <p className="descModal"> Ao confirmar, os dados arquivados serão desarquivados.</p>
+                    </div>
+                } id="archiveModal" isOpen={isArchiveModalOpen} onClose={() => setIsArchiveModalOpen(false)} onConfirm={changeArchivedStatus} />
+                <Modal content={
+                    <div className="containerModal">
+                        <h1 className="titleModal">DESEJA REMOVER? </h1>
+                        <p className="descModal"> Ao confirmar, os dados selecionados serão excluídos.</p>
+                    </div>
+                } id="deleteModal" isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} onConfirm={confirmDelete} />
                 </>
                 )}
             

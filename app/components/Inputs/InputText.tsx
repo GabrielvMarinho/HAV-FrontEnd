@@ -23,6 +23,7 @@ export default function InputText<T extends FieldValues>({
     error?: FieldError;
     disabled?: boolean;
 }) {
+    
     return (
         <div className="inputContainer">
             <label className="label" htmlFor={id}>{text}</label>

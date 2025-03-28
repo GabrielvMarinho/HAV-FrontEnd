@@ -45,7 +45,7 @@
     border-radius: 15px;
     z-index: 3; /* Fica acima da diagonal */
     width: 290px;
-    height: 380px;
+    height: 420px;
 }
 
 .tituloLogin{
@@ -71,9 +71,7 @@
 }
 
 .ou{
-    margin-top: 5px;
-    display: flex;
-    justify-content: center;
+    margin-top: 10px;
     font-size: var(--text-xs); 
     color: var(--box-dark-red-option);
 }
@@ -112,6 +110,17 @@
 
 }
 
+.containerGoogle{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.LogoClara{
+    display: none;
+}
+
 @media (max-width: 992px) {
     .logo {
         display: none; 
@@ -120,6 +129,18 @@
     .diagonal{
         clip-path: none !important;
         background-color: var(--box-mid-dark-red);
+    }
+    
+    .form-box{
+        margin-top: 100px;
+        width: 250px;
+        margin-left: 20%;
+    }
+
+    .LogoClara{
+        margin-top: 70px;
+        display: flex;
+        justify-content: center;
     }
 }
 

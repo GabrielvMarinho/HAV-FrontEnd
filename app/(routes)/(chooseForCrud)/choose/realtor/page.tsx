@@ -54,8 +54,7 @@ export default async function page({searchParams}: {searchParams: {
         />
         <TableListChoose  action={action || ""} type={"many"} archived={false} size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
           data={realtors} totalPages={totalPages} />
-
-      
+          
       </div>
       </div>
 

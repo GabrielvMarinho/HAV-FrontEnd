@@ -242,6 +242,14 @@ summary {
 .extraLargeInput{
     width: 460px;
 }
+
+.extenseInput{
+    width: 290px;
+    height: 180px;
+    
+}
+
+
 .smallInputDropdown{
     width: 120px;
 }
@@ -344,7 +352,14 @@ summary {
     font-size: var(--text-s);
     color: var(--text-white)
 }
-.divInputFooter input::placeholder{
+
+.labelLogin{
+    font-weight: 400;
+    font-size: var(--text-xs);
+    color: var(--arrow-page-manager)
+}
+
+.divInputFooter input::{
     color: var(--text-white);
     opacity: 0.6;
 }
@@ -519,6 +534,30 @@ background-color: var(--text-white);
     justify-content: center;
 }
 
+.inputWrapper {
+    position: relative; /* Permite o posicionamento absoluto do ícone dentro do input */
+}
+
+.inputWrapper input {
+    padding-right: 30px;
+    margin-bottom: 10px;
+}
+
+.inputWrapperLogin input{
+    padding-right: 105px;
+    margin-bottom: 10px;
+}
+
+.inputIcon {
+    position: absolute;
+    top: 60%;
+    right: 10px; 
+    transform: translateY(-50%); 
+    pointer-events: none; 
+    display: flex;
+    justify-content: center;
+}
+
 @media (width <992px) {
     .actionButtons{
         flex-direction: row;
@@ -526,6 +565,20 @@ background-color: var(--text-white);
 
     .largeInput{
         width: 170px;
+    }
+
+    .inputWrapperLogin input{
+        padding-right: 68px;
+    }
+
+    .smallButton{
+        padding-inline: 25px;
+    }
+
+    .extenseInput{
+        width: 250px;
+        height: 200px;
+        
     }
 }
 

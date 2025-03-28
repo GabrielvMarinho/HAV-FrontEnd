@@ -251,8 +251,9 @@ export default function FormAddRealter() {
                 <Modal
                     id="idModal"
                     content={
-                        <div>
-                            <h1>Deseja confirmar o cadastro do proprietário?</h1>
+                        <div className="containerModal">
+                            <h1 className="titleModal">DESEJA ADICIONAR O CORRETOR ? </h1>
+                            <p className="descModal"> Ao confirmar, os dados inseridos no formulário serão adicionados no sistema </p>
                         </div>
                     }
                     isOpen={isModalOpen}
