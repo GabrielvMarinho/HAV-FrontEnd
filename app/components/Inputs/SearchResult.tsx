@@ -1,9 +1,10 @@
+
 "use client"
 import { useRouter } from "next/navigation";
 import ArrowBack from "../IconsTSX/ArrowBack";
 import "./css/style.css"; 
 
-export default function SearchResult(props :{typeSearch:string}){
+export default function SearchFavorite(props :{typeSearch:string}){
     const router = useRouter();
 
     const BackAPoint = function(){
@@ -13,7 +14,7 @@ export default function SearchResult(props :{typeSearch:string}){
         <>
         <div className="searchResult" style={{display: "flex", flexDirection:"row"}}>
             <div onClick={BackAPoint} style={{display: "flex", justifyContent:"center", alignItems:"center", marginRight:"10px"}}>
-                <ArrowBack width={35} height={35} color="var(--box-mid-dark-red)"/>    
+                <ArrowBack width={35} height={35} color="var(--text--mid-dark-red)"/>    
             </div>
 
             <div>

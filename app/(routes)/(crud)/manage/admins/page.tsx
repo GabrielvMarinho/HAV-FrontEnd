@@ -34,8 +34,6 @@ export default async function page({ searchParams }: {
   const { cpf = null, name = null, email = null, cellphone = null, phoneNumber = null, page = null } = params
 
   const { admins, totalPages } = await getByParamsAdms(cpf, name, email, cellphone, phoneNumber, false, page ?? 0)
-
-    
     
     return (
         <>

@@ -1,0 +1,285 @@
+@import "../../../variables.css";
+
+.profileConfig {
+    padding: 8px;
+    background-color: var(--box-red-pink);
+    border-radius: var(--border-box);
+    width: 1060px;
+    max-height: 552px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 30px;
+    justify-content: center;
+    position: relative;
+    overflow: visible;
+}
+
+.info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 2rem;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.info-section__title {
+    font-size: var(--text-m);
+    font-weight: 700;
+    color: var(--text-white);
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+.personName {
+    color: var(--text-white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.userType {
+    color: #D99FA8;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 500;
+}
+
+.addProprietorsRealtors {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.propertyForm {
+    max-width: 1000px;
+    display: flex;
+    gap: 5%;
+    background-color: var(--box-red-pink);
+    padding: 60px;
+    border-radius: var(--border-box);
+}
+
+.propertyFormGroup {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.inputArticle {
+    display: flex;
+    flex-wrap: wrap;
+    width: 700px;
+    gap: 17px;
+}
+
+.disabled-input {
+    background-color: #D69CA6 !important;
+    cursor: not-allowed;
+}
+
+.input.disabled-input, 
+.input:disabled {
+    color: #CD6778 !important;
+    background-color: #D69CA6 !important;
+}
+
+.imgPerson, 
+.imgProperty {
+    width: 250px;
+    height: 250px;
+    border-radius: 1.864px;
+    background-color: black;
+    position: relative;
+    margin-top: -9.5rem;
+}
+
+.imgProperty {
+    margin-bottom: 100px;
+}
+
+.articleDataForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 80px;
+}
+
+.divButtonSaveForms {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    margin: 0 !important;
+    z-index: 10;
+}
+
+.changeButton {
+    display: flex;
+    border: 1px solid #F9F9F9;
+    border-radius: 30px;
+    width: 160px;
+    height: 25px;
+    overflow: hidden;
+    justify-content: center;
+}
+
+.changeButton .button-content {
+    font-size: var(--text-xxs);
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-white);
+    text-align: center;
+    width: 100%;
+    padding: 4px 0;
+    line-height: 1;
+    margin: 0;
+}
+
+.changeButton:hover {
+    border-color: #FFFFFF;
+    box-shadow: 0 0 0 1px #FFFFFF;
+}
+
+.configurationLayout {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .formContainer {
+    background: var(--bg-red);
+    border-radius: 8px;
+    padding: 25px;
+  }
+  
+  .menuColumns {
+    display: flex;
+    gap: 65px;
+    border-radius: 8px;
+    padding: 25px;
+  }
+  
+  .menuColumn {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .columnTitle {
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    font-size: var(--text-m);
+    text-transform: uppercase;
+  }
+  
+  .menuList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menuItem {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+    position: relative;
+  }
+  
+  .menuContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 15px;
+  }
+  
+  /* Container do texto + ícone */
+  .menuTextWrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-grow: 1;
+    justify-content: flex-start; /* Alinha ícone e texto à esquerda */
+    max-width: calc(100% - 60px); /* Espaço para o ToggleButton */
+  }
+  
+  /* Centraliza o ToggleButton na linha */
+  .toggleButtonWrapper {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px; /* Largura fixa para alinhamento */
+  }
+  
+  /* Ajuste para mobile */
+ 
+  
+  
+  /* Remove estilos antigos */
+  .booleanButtonWrapper, .radioButtonWrapper, .arrowWrapper {
+    display: none;
+  }
+  
+@media (max-width: 992px) {
+    .profileConfig {
+        width: 305px;
+        height: 1450px;
+        flex-direction: column;
+        gap: 40px;
+        margin: 0 auto;
+    }
+    
+    .inputArticleDesktop {
+        display: none;
+    }
+
+    .inputArticle {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        margin-top: 40px;
+    }
+    
+    .imgPerson, 
+    .imgProperty {
+        width: 210px;
+        height: 209px;
+        border-radius: 1.864px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
+    
+    .divButtonsAceptCancelForms {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        justify-content: center;
+        margin-top: 20px !important;
+    }
+
+    .menuColumns {
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .menuContent {
+        flex-direction: row;
+        align-items: center;
+      }
+      
+      .menuTextWrapper {
+        max-width: calc(100% - 50px);
+      }
+      
+      .toggleButtonWrapper {
+        width: 50px;
+      }
+
+}

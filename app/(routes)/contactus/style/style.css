@@ -1,0 +1,153 @@
+.containerContactUs{
+
+    display: flex;
+    gap: 80px;
+}
+
+.subContainer{
+    width: 450px;
+    height: 420px;
+    display: flex;
+    background-color: var(--button-color);
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+.contatoTitle{
+    margin-top: 25px;
+    font-weight: 800;
+    font-size: var(--text-l);
+    color: var(--box-yello-light);
+    display: flex;
+    justify-content: center;
+}
+
+.subContainerContactUs{
+    width: 430px;
+    height: 680px;
+    border-radius: 5px;
+    background-color: var(--button-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 100px;
+}
+
+.containerIcons{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 30px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.containerIconText{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 25px;
+}
+
+.text{
+    color: var(--box-yello-light);
+    font-size: var(--text-sm);
+    font-weight: 400;
+}
+
+.containerInputs{
+    margin-top: 30px;
+}
+
+.inputsContactUs{
+    margin-bottom: 25px;
+}
+
+.inputMensageContactUs{
+    margin-bottom:35px;
+    
+}
+
+@media (width < 634px){
+    
+    .containerContactUs{
+        flex-direction: column;
+        align-items: center ;
+    }
+    
+    .subContainerContactUs{
+        width: 340px;
+        height: 680px;
+    }
+
+    .contatoTitle{
+        display: flex;
+        justify-content: center;
+        font-size: var(--text-ml);
+    }
+
+    .subContainer{
+        width: 340px;
+        height: 420px;
+        display: flex;
+        background-color: var(--button-color);
+        flex-direction: column;
+        border-radius: 5px;
+    }
+
+    .inputsContactUs{
+        justify-content: center;
+        display: flex;
+    }
+
+    .containerIcons{
+        margin-left: 30px;
+        margin-right: 20px;
+    }
+
+    .inputContainer{
+    }
+}
+
+@media (min-width: 625px) and (max-width: 992px){
+    .containerContactUs{
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .subContainerContactUs{
+        width: 400px;
+    }
+
+    .subContainer{
+        width: 440px;
+        height: 420px;
+        display: flex;
+        background-color: var(--button-color);
+        flex-direction: column;
+        border-radius: 5px;
+    }
+
+    .inputsContactUs{
+        justify-content: center;
+        display: flex;
+    }
+}
+
+
+@media (min-width: 992px) and (max-width: 1205px){
+    .subContainerContactUs{
+    width: 380px;
+    height: 680px;
+    }
+
+    .subContainer {
+        width: 400px;
+        height: 420px;
+        display: flex;
+        background-color: var(--button-color);
+        flex-direction: column;
+        border-radius: 5px;
+    }
+}

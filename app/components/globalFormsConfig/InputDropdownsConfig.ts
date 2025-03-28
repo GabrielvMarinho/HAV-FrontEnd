@@ -228,6 +228,50 @@ export const dropdownFields = {
             ["1", "Permitido"],
             ["0", "Não Permitido"]
         ]
+    },
+    order: {
+        name: "order",
+        size: "medium",
+        title: "ORDENAR",
+        id: "order",
+        options: [
+            [1, "Maior Valor"],
+            [2, "Menor Valor"],
+            [3, "Lançamento"]
+        ]
+    },
+    visualization: {
+        name: "visualization",
+        size: "medium",
+        title: "VISUALIZAÇÃO",
+        id: "visualization",
+        options: [
+            [1, "Card"],
+            [2, "Lista"],
+            [3, "Mapa"]
+        ]
+    },
+    statusHistoric: {
+        name: "status",
+        size: "medium",
+        title: "STATUS",
+        id: "status",
+        options: [
+            [1, "Confirmado"],
+            [2, "Cancelado"],
+            [3, "Pendente"]
+        ]
+    },
+    data: {
+        name: "data",
+        size: "medium",
+        title: "DATA",
+        id: "data",
+        options: [
+            [1, "Ultima Semana"],
+            [2, "Ultimo Mês"],
+            [3, "Ultimo Ano"]
+        ]
     }
 }
 

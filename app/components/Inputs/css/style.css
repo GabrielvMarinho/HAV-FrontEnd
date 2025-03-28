@@ -24,7 +24,7 @@
     align-items: center;
 }
 .searchResult{
-    color: var(--box-dark-red);
+    color: var(--text--mid-dark-red);
     gap: 2px;
     display: flex;
     justify-content: left;
@@ -130,7 +130,7 @@ summary {
 .searchResultLine{
     height: 2px;
     width: 70vw;
-    background-color: var(--box-mid-dark-red);
+    background-color: var(--button-color);
     margin-top: 10px;
     margin-left: 100px;
 }
@@ -203,6 +203,26 @@ summary {
     background-size: 16px; 
 }
 
+.inputDropdownNoLabel{
+    cursor: pointer;
+    padding: 10px;
+    padding-inline: 15px;
+    padding-right: 30px;
+    text-align: left;
+    border-radius: var(--border-box);
+    color: var(--text-light-red);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("/Icons/ArrowIcon.svg");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 8px);
+    background-size: 16px; 
+    background-color: var(--bg-color);
+    border: 1px solid var(--button-color);
+    
+}
+
 .input::placeholder{
     font-size: var(--text-xs);
     color: var(--text-light-red);
@@ -222,6 +242,14 @@ summary {
 .extraLargeInput{
     width: 460px;
 }
+
+.extenseInput{
+    width: 290px;
+    height: 180px;
+    
+}
+
+
 .smallInputDropdown{
     width: 120px;
 }
@@ -248,22 +276,17 @@ summary {
 .smallButton{
     font-size: var(--text-xs);
     padding: 7px;
-    padding-inline: 25px;
-    width: fit-content;
-
+    padding-inline: 50px;
 }
 .mediumButton{
     font-size: var(--text-xs);
     padding: 9px;
-    padding-inline: 25px;
-    width: fit-content;
+    padding-inline: 50px;
 }
 .largeButton{
     font-size: var(--text-s);
     padding: 11px;
-    padding-inline: 25px;
-    width: fit-content;
-
+    padding-inline: 50px;
 }
 
 
@@ -330,7 +353,14 @@ summary {
     font-size: var(--text-s);
     color: var(--text-white)
 }
-.divInputFooter input::placeholder{
+
+.labelLogin{
+    font-weight: 400;
+    font-size: var(--text-xs);
+    color: var(--arrow-page-manager)
+}
+
+.divInputFooter input::{
     color: var(--text-white);
     opacity: 0.6;
 }
@@ -505,6 +535,30 @@ background-color: var(--text-white);
     justify-content: center;
 }
 
+.inputWrapper {
+    position: relative; /* Permite o posicionamento absoluto do ícone dentro do input */
+}
+
+.inputWrapper input {
+    padding-right: 30px;
+    margin-bottom: 10px;
+}
+
+.inputWrapperLogin input{
+    padding-right: 105px;
+    margin-bottom: 10px;
+}
+
+.inputIcon {
+    position: absolute;
+    top: 60%;
+    right: 10px; 
+    transform: translateY(-50%); 
+    pointer-events: none; 
+    display: flex;
+    justify-content: center;
+}
+
 @media (width <992px) {
     .actionButtons{
         flex-direction: row;
@@ -512,6 +566,20 @@ background-color: var(--text-white);
 
     .largeInput{
         width: 170px;
+    }
+
+    .inputWrapperLogin input{
+        padding-right: 68px;
+    }
+
+    .smallButton{
+        padding-inline: 25px;
+    }
+
+    .extenseInput{
+        width: 250px;
+        height: 200px;
+        
     }
 }
 

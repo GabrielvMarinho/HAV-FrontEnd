@@ -699,9 +699,10 @@ export default function FormAddProperty(props :{objectData :any;}) {
                 <Modal
                     id="idModal"
                     content={
-                        <div>
-                            <h1>Deseja confirmar o cadastro da propriedade?</h1>
-                        </div>
+                        <div className="containerModal">
+                        <h1 className="titleModal">DESEJA ADICIONAR O IMÓVEL ? </h1>
+                        <p className="descModal"> Ao confirmar, os dados inseridos no formulário serão adicionados no sistema </p>
+                    </div>
                     }
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}

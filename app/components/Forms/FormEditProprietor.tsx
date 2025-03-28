@@ -244,9 +244,10 @@ export default function FormEditProprietor(props :{id :any }) {
                 <Modal
                     id="idModal"
                     content={
-                        <div>
-                            <h1>Deseja confirmar o editar do customer?</h1>
-                        </div>
+                    <div className="containerModal">
+                        <h1 className="titleModal">DESEJA EDITAR O PROPRIETÁRIO? </h1>
+                        <p className="descModal"> Ao confirmar, todos os dados alterados serão salvos no novo formato, está ação não pode ser desfeita!</p>
+                    </div>
                     }
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}

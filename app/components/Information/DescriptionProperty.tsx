@@ -1,10 +1,10 @@
 import "./css/style.css"
-import DescriptionTitlePropertySpecific from "../NonInteractable/DescriptionTitlePropertySpecific";
+import InterestPointsPropertySpecific from "../NonInteractable/InterestPoints";
 
 export default function DescriptionProperty(props: { obj: Pick<PropertySpecific, "propertyDescription"> }) {
     return (
-        <div id="divDescriptionProperty">
-            <DescriptionTitlePropertySpecific text="Descrição" />
+        <div className="divDescriptionProperty">
+            <InterestPointsPropertySpecific text="Descrição" />
             <p id="descriptionProperty">{props.obj.propertyDescription}</p>
         </div>
     );

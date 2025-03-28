@@ -1,6 +1,7 @@
-export default function CategoryCardImovel(props: {text: string}){
-    const keywords = ["venda", "locação", "misto", "compra"];
-    const backgroundColor = keywords.some(keywords => props.text.toLocaleLowerCase().includes(keywords))
+export default function CategoryCardImovel(props: {text: string}){  
+    const text = props.text || ""
+    const keywords = ["venda", "locacao", "misto", "compra"];
+    const backgroundColor = keywords.some(keywords => text.toLocaleLowerCase().includes(keywords))
     ? "var(--box-mid-dark-red)"
     : "var(--box-dark-red-option)"
     return(
@@ -12,7 +13,7 @@ export default function CategoryCardImovel(props: {text: string}){
         borderRadius: "30px", 
         backgroundColor: backgroundColor, 
         fontSize: "var(--text-xs)"}}>
-            <p style={{color: "var(--text-white)"}}>{props.text.toUpperCase()}</p>
+            <p style={{color: "var(--text-white)"}}>{props.text?.toUpperCase()}</p>
         </div>  
     );
 }
