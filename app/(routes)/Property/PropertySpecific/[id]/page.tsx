@@ -1,7 +1,6 @@
 "use client"
 import "../css/style.css"
 import RealtorAssociated from "@/app/components/Information/RealtorAssociated";
-import Furnished from "@/app/components/NonInteractable/Furnished";
 import PropertyPageDatasAdm from "@/app/components/Information/PropertyPageDatas-Adm";
 import PropertyPrice from "@/app/components/NonInteractable/PropertyPrice";
 import OtherEnvironmentsProperty from "@/app/components/Information/OtherEnvironmentsProperty";
@@ -9,14 +8,14 @@ import Button from "@/app/components/Inputs/Button";
 import Cubes from "@/app/components/IconsTSX/Cubes";
 import Gear from "@/app/components/IconsTSX/Gear";
 import Balanca from "@/app/components/IconsTSX/Balanca";
-import DescriptionTitlePropertySpecific from "@/app/components/NonInteractable/DescriptionTitlePropertySpecific";
+import InterestPointsPropertySpecific from "@/app/components/NonInteractable/InterestPoints";
 import DescriptionProperty from "@/app/components/Information/DescriptionProperty";
 import HorizontalPropertySpecific from "@/app/components/NonInteractable/HorizontalTitlePropertySpecific";
 import Title from "@/app/components/NonInteractable/Title";
 import SliderContent from "@/app/components/Information/SliderContent";
 import CardImovel from "@/app/components/Cards/CardImovel";
 import RealterAssociatedVertical from "@/app/components/Information/RealterAssociatedVertical";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import searchPropertyByIdSpecific from "@/app/apiCalls/Property/searchPropertyByIdSpecific";
 
@@ -80,7 +79,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
     return (
         <>
             <div style={{ width: "var(--width-page)" }}>
-                <article style={{ display: "flex", flexDirection: "row", gap: "83px" }}>
+                <article className="articleFirstContent">
                     <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                         <div style={{ width: "450px", height: "462px", backgroundColor: "black" }}></div>
                         <div style={{ display: "flex", flexDirection: "row", gap: "110px" }}>
@@ -140,7 +139,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                 </article>
                 <article className="enviroments-interestPoint">
                     <OtherEnvironmentsProperty obj={{ additionals: property.additionals }} />
-                    <DescriptionTitlePropertySpecific text="pontos de interesse" />
+                    <InterestPointsPropertySpecific text="pontos de interesse" />
                 </article>
                 <DescriptionProperty obj={{ propertyDescription: property.propertyDescription }} />
                 <section className="sectionPriceProperty">

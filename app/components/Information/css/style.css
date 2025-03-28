@@ -242,34 +242,12 @@
     font-weight: 500;
 }
 
-@media (max-width: 992px) { 
-    .mainHomeInfoContainer {
-        background: var(--box-mid-dark-red);
-        height: 65vh; 
-        min-height: 250px; 
-        flex-direction: column;
-        /* gap: 0; */
-    }
-
-    .mainHomeInfoSubContainer{
-        margin-top: -70px;
-        margin-bottom: 40px
-    }
-
-    .textBehind{
-        width: 150px;
-        text-wrap: wrap ;
-    }
-  
-
-}
-
-
 .divDescriptionPropertySpecific {
     display: flex;
     flex-direction: column;
     align-items: start;
     gap: 36px;
+    white-space: nowrap;
 }
 
 .enviromentLi {
@@ -297,7 +275,7 @@
     font-weight: 500;
 }
 
-#divDescriptionProperty{
+.divDescriptionProperty{
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -307,4 +285,28 @@
     color: var(--box-dark-red-option);
     font-size: var(--text-ml);
     font-weight: 500;
+}
+
+@media (max-width: 992px) {
+    .divDescriptionPropertySpecific{
+        align-items: center;
+    }
+
+    .mainHomeInfoContainer {
+        background: var(--box-mid-dark-red);
+        height: 65vh; 
+        min-height: 250px; 
+        flex-direction: column;
+        /* gap: 0; */
+    }
+
+    .mainHomeInfoSubContainer{
+        margin-top: -70px;
+        margin-bottom: 40px
+    }
+
+    .textBehind{
+        width: 150px;
+        text-wrap: wrap ;
+    }
 }

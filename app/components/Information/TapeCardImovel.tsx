@@ -17,7 +17,7 @@
                         alignItems: "center",
                         fontSize: "13px"
                     }}>
-                    <p style={{color: "var(--text-white)"}}>{props.text.toUpperCase()}</p>
+                    <p style={{color: "var(--text-white)"}}>{props.text?.toUpperCase()}</p>
                 </div>
             </div>
         );
