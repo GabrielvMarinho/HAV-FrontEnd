@@ -7,7 +7,6 @@ import SchedulingCard from "../Information/SchedulingCard";
 
 export default function selectHour(props :{day: Date; ids :Record<string, number>, selectHours: string[],
      saveHours: (hoursAdd: string[], hoursRemove: string[]) => void, cards :Record<string, string | string[]>[]}){
-    console.log(props.cards)
     
     if(!props.day){
         return(
