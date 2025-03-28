@@ -1,3 +1,4 @@
+"use client"
 import { useState, useEffect } from "react";  
 import searchPropertyByIdSpecific from "@/app/apiCalls/Property/searchPropertyByIdSpecific";
 import Image from "next/image";
