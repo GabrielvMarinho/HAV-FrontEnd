@@ -13,6 +13,7 @@ import TapeCardImovel from "../Information/TapeCardImovel";
 import CategoryCardImovel from "../Information/CategoryCardImovel";
 import "./css/style.css";
 
+
 export default function CardImovel(props:{ obj: PropertySpecific | null }) {
     
     const [property, setProperty] = useState<PropertySpecific | null>(props.obj);
@@ -30,7 +31,7 @@ export default function CardImovel(props:{ obj: PropertySpecific | null }) {
             }
         }
 
-        fetchProperty();
+        // fetchProperty();
     }, [props.obj?.id]);
 
     const defaultProperty: PropertySpecific = {
