@@ -1,11 +1,11 @@
 @import "../../../variables.css";
 
-.ownerForm {
+.profileConfig {
     padding: 8px;
     background-color: var(--box-red-pink);
     border-radius: var(--border-box);
     width: 1060px;
-    min-height: 552px;
+    max-height: 552px;
     display: flex;
     align-items: center;
     flex-direction: row;
@@ -108,7 +108,7 @@
     padding-bottom: 80px;
 }
 
-.divButtonsAceptCancelForms {
+.divButtonSaveForms {
     position: absolute;
     right: 30px;
     bottom: 30px;
@@ -142,8 +142,92 @@
     box-shadow: 0 0 0 1px #FFFFFF;
 }
 
+.configurationLayout {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .formContainer {
+    background: var(--bg-red);
+    border-radius: 8px;
+    padding: 25px;
+  }
+  
+  .menuColumns {
+    display: flex;
+    gap: 65px;
+    border-radius: 8px;
+    padding: 25px;
+  }
+  
+  .menuColumn {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .columnTitle {
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    font-size: var(--text-m);
+    text-transform: uppercase;
+  }
+  
+  .menuList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menuItem {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0;
+    position: relative;
+  }
+  
+  .menuContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 15px;
+  }
+  
+  /* Container do texto + ícone */
+  .menuTextWrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-grow: 1;
+    justify-content: flex-start; /* Alinha ícone e texto à esquerda */
+    max-width: calc(100% - 60px); /* Espaço para o ToggleButton */
+  }
+  
+  /* Centraliza o ToggleButton na linha */
+  .toggleButtonWrapper {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px; /* Largura fixa para alinhamento */
+  }
+  
+  /* Ajuste para mobile */
+ 
+  
+  
+  /* Remove estilos antigos */
+  .booleanButtonWrapper, .radioButtonWrapper, .arrowWrapper {
+    display: none;
+  }
+  
 @media (max-width: 992px) {
-    .ownerForm {
+    .profileConfig {
         width: 305px;
         height: 1450px;
         flex-direction: column;
@@ -179,4 +263,23 @@
         justify-content: center;
         margin-top: 20px !important;
     }
+
+    .menuColumns {
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .menuContent {
+        flex-direction: row;
+        align-items: center;
+      }
+      
+      .menuTextWrapper {
+        max-width: calc(100% - 50px);
+      }
+      
+      .toggleButtonWrapper {
+        width: 50px;
+      }
+
 }

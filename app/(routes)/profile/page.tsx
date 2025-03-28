@@ -4,7 +4,6 @@ import Title from "@/app/components/NonInteractable/Title";
 import Button from "@/app/components/Inputs/Button";
 import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 import ArrowNextSlide from "@/app/components/IconsTSX/ArrowNextSlide";
-import sinoSolido from "@/app/components/IconsTSX/sinoSolido"
 
 export default function ProfilePage() {
   return (
@@ -28,7 +27,7 @@ export default function ProfilePage() {
                 <div className="menuContent">
                   <div className="menuTextWrapper">
                     <span className="menuIconPlaceholder"></span>
-                    <a href="#">NOTIFICAÇÕES</a>
+                    <a href="/notification">NOTIFICAÇÕES</a>
                   </div>
                   <div className="lineSpacing">
                     <ArrowNextSlide height={40} width={25} color="#5F1E2A" />
@@ -64,7 +63,7 @@ export default function ProfilePage() {
                 <div className="menuContent">
                   <div className="menuTextWrapper">
                     <span className="menuIconPlaceholder"></span>
-                    <a href="#">CONFIGURAÇÕES</a>
+                    <a href="/configuration">CONFIGURAÇÕES</a>
                   </div>
                   <div className="lineSpacing">
                     <ArrowNextSlide height={40} width={25} color="#5F1E2A" />
