@@ -1,7 +1,7 @@
 import Icon from "./IconInterface";
 import "./css/style.css"
 
-export default function ChamadaTelefonica({ width, height, color }: Icon) {
+export default function Cellphone({ width, height, color }: Icon) {
     return (
             <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 25 25" fill="none">
                 <g opacity="1" clipPath="url(#clip0_1808_86993)">

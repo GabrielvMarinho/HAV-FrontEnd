@@ -242,6 +242,14 @@ summary {
 .extraLargeInput{
     width: 460px;
 }
+
+.extenseInput{
+    width: 290px;
+    height: 180px;
+    
+}
+
+
 .smallInputDropdown{
     width: 120px;
 }
@@ -351,7 +359,7 @@ summary {
     color: var(--arrow-page-manager)
 }
 
-.divInputFooter input::placeholder{
+.divInputFooter input::{
     color: var(--text-white);
     opacity: 0.6;
 }
@@ -565,6 +573,12 @@ background-color: var(--text-white);
 
     .smallButton{
         padding-inline: 25px;
+    }
+
+    .extenseInput{
+        width: 250px;
+        height: 200px;
+        
     }
 }
 
