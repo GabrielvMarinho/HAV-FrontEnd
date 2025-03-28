@@ -4,6 +4,7 @@ import HavLogoAboutUs1 from "@/app/components/IconsTSX/havLogoAboutUs1";
 import HavTextAboutUs from "@/app/components/IconsTSX/HAVTextAboutUs";
 import "../aboutus/css/style.css"
 import Title from "@/app/components/NonInteractable/Title";
+import ProfileCard from "@/app/components/Information/ProfileCard";
 
 export default function page() {
 
@@ -11,7 +12,7 @@ export default function page() {
         <>
             <HeaderAdm />
             <Title tag={"h1"} text={"sobre a hav"} />
-            <div style={{ display: "flex", flexDirection: "column", gap: "20px", width: "60%" }}>
+            <div className="textStart" style={{ textAlign: "justify" }}>
                 <p>
                     A Hav é uma imobiliária dedicada a transformar a experiência de compra, venda e locação de
                     imóveis em algo simples, confiável e transparente.
@@ -29,35 +30,31 @@ export default function page() {
                     valorização.
                 </p>
             </div>
-            <div style={{ width: "60%", marginTop: "20px" }}>
+            <div className="sentenceHav" style={{ marginTop: "20px", marginBottom: "50px" }}>
                 <p style={{ color: "var(--box-red-pink)", fontWeight: "bolder" }}>
                     HAV, O SEU SONHO COMEÇA AQUI!
                 </p>
             </div>
-            <div className="logoAboutus" style={{
-                backgroundColor: "var(--text-light-red)",
-                borderRadius: "100%", padding: "15px", marginLeft: "500px"
-            }}>
+
+            <div className="logoAboutus">
                 <HavLogoAboutUs1 width={75} height={75} color={"var(--icon-footer-color)"}></HavLogoAboutUs1>
             </div>
-            <div className="textAboutus" style={{
-                backgroundColor: "var(--text-light-red)",
-                borderRadius: "100%", padding: "10px", marginLeft: "200px"
-            }}>
+            <div className="textAboutus">
                 <HavTextAboutUs width={60} height={60} color={"var(--icon-footer-color)"}></HavTextAboutUs>
             </div>
 
-            <div style={{
-                display: "flex", flexDirection: "column", gap: "20px", width: "100%",
-                marginTop: "120px", marginBottom: "200px"
-            }}>
+            <div className="textAboutus2">
+                <HavTextAboutUs width={40} height={40} color={"var(--icon-footer-color)"}></HavTextAboutUs>
+            </div>
+            <div className="logoAboutus2">
+                <HavLogoAboutUs1 width={65} height={65} color={"var(--icon-footer-color)"}></HavLogoAboutUs1>
+            </div>
 
-                <div style={{ display: "flex", flexDirection: "row", gap: "50px" }}>
+            <div className="containerMVVC">
 
-                    <div style={{
-                        display: "flex", flexDirection: "column", gap: "20px",
-                        marginLeft: "166px"
-                    }}>
+                <div className="missionAndValues">
+
+                    <div className="mission">
                         <div className="titleContainer">
                             <h3 className="titleAboutus">MISSÃO</h3>
                             <div className="titleLineAboutus"></div>
@@ -69,11 +66,7 @@ export default function page() {
                             </p>
                         </div>
                     </div>
-                    <div style={{
-                        display: "flex", flexDirection: "column", gap: "20px",
-                        backgroundColor: "var(--back-ground-light-red)", borderRadius: "5px",
-                        padding: "10px 166px 10px 40px"
-                    }}>
+                    <div className="values">
                         <div className="titleContainer">
                             <h3 className="titleAboutus">VALORES</h3>
                             <div className="titleLineAboutus"></div>
@@ -87,13 +80,9 @@ export default function page() {
                     </div>
                 </div>
 
-                <div style={{ display: "flex", flexDirection: "row", gap: "75px" }}>
+                <div className="visionAndConfident">
 
-                    <div style={{
-                        display: "flex", flexDirection: "column", gap: "20px",
-                        backgroundColor: "var(--back-ground-light-red)", borderRadius: "5px",
-                        padding: "10px 0px 10px 166px"
-                    }}>
+                    <div className="vision">
                         <div className="titleContainer">
                             <h3 className="titleAboutus">VISÃO</h3>
                             <div className="titleLineAboutus"></div>
@@ -105,9 +94,7 @@ export default function page() {
                             </p>
                         </div>
                     </div>
-                    <div style={{
-                        display: "flex", flexDirection: "column", gap: "20px", marginRight: "166px"
-                    }}>
+                    <div className="confident">
                         <div className="titleContainer">
                             <h3 className="titleAboutus">CONFIANÇA</h3>
                             <div className="titleLineAboutus"></div>
@@ -121,13 +108,15 @@ export default function page() {
                     </div>
                 </div>
             </div >
-            <div style={{ gap: "30px" }}>
-                <div>
-                    <div className="titleContainer" style={{ width: "60%" }}>
+
+
+            <div className="containerAchievements">
+                <div className="containerTitleAndTexts">
+                    <div className="titleContainer2">
                         <h3 className="titleAboutus">NOSSAS CONQUISTAS</h3>
                         <div className="titleLineAboutus"></div>
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "40px" }}>
+                    <div className="textsAchievements" style={{ textAlign: "justify" }}>
                         <p>
                             Nos tornamos uma das imobiliárias mais confiáveis e respeitadas da região,
                             consolidando nossa marca e ampliando nosso impacto no mercado.
@@ -146,10 +135,65 @@ export default function page() {
                     </div>
                 </div>
 
-                <div>
-
+                <div className="imageAchievements">
+                    <img className="towerImage" src="/image/ImagemEdificioAboutUs.png" alt="Imagem edifício da página about us" />
                 </div>
             </div>
+
+            <Title tag={"h1"} text={"conheça nossa equipe"} />
+
+            <div className="containerProfiles">
+                <div className="cardProfileUnique">
+                    <div>
+                        <h2 className="cardTitle">
+                            SÓCIO DIRETOR
+                        </h2>
+                    </div>
+                    <div>
+                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
+                    </div>
+                </div>
+
+                <div className="cardProfile">
+                    <div>
+                        <h2>
+                            GERENTES
+                        </h2>
+                    </div>
+                    <div className="cardsGroup">
+                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
+                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
+                    </div>
+                </div>
+
+                <div className="cardProfile">
+                    <div>
+                        <h2>
+                            COORDENADORES
+                        </h2>
+                    </div>
+                    <div className="cardsGroup">
+                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
+                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
+                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
+                    </div>
+                </div>
+
+                <div className="cardProfile">
+                    <div>
+                        <h2 className="titlesProfiles">
+                            CORRETORES
+                        </h2>
+                    </div>
+                    <div className="cardsGroup">
+                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
+                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
+                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
+                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
+                    </div>
+                </div>
+            </div>
+
             <Footer />
         </>
     )
