@@ -41,6 +41,7 @@ export default async function page({searchParams}: {searchParams: {
         options: [['locacao', "Locação"], ["venda", 'Venda'], ["misto", 'Misto']]
       }
     ]
+    
   
   
     return (

@@ -8,7 +8,7 @@ import ArrowNextSlide from "@/app/components/IconsTSX/ArrowNextSlide";
 export default function ProfilePage() {
   return (
     <>
-      <HeaderAdm />
+      <HeaderAdm/>
       <Title tag={"h1"} text={"perfil"} />
       <div className="profileContainer">
         <div className="profileHeader">
