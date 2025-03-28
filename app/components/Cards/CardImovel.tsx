@@ -17,7 +17,7 @@ export default function CardImovel(props:{ obj: PropertySpecific | null }) {
     
     const [property, setProperty] = useState<PropertySpecific | null>(props.obj);
 
-    useEffect(() => {-
+    useEffect(() => {
                 async function fetchProperty() {
             if (!props.obj?.id) return; // Se não tiver um ID válido, não faz a requisição
 
