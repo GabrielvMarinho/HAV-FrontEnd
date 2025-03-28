@@ -11,6 +11,7 @@
 
 }
 .cardContainer{
+    max-width: fit-content;
     display: flex;
     background-color: var(--box-white);
     border-radius: var(--mborder-box);
@@ -72,7 +73,7 @@
     font-weight: var(--text-xs);
     color: var(--text-dark-red);
 }
-.mainContentContainerTop .addressData .neighbourhood{
+.mainContentContainerTop .addressData .neighborhood{
     font-weight: var(--text-m);
     font-weight: 800;
     color: var(--text-dark-red);

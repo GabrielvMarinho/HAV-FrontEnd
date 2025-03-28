@@ -5,10 +5,11 @@ import "./css/style.css";
 import "../../variables.css"
 import "../../GeneralPages.css"
 import Modal from "../Modal/Modal";
+import globalDatabaseNameConverter from "@/app/globalDatabaseNameConverter";
 
-export default function SchedulingCard(props: {obj :Record<string, string>}) {
-    const { city, neighbourhood, start_hour, end_hour, name, phone } = props.obj;
-
+export default function SchedulingCard(props: {obj :Record<string, string | string[]>}) {
+    const { city, neighborhood, hours, name, phone } = props.obj;
+    console.log(hours)
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const toggleModal = function(){
@@ -23,11 +24,14 @@ export default function SchedulingCard(props: {obj :Record<string, string>}) {
             <div className="mainContentContainer">
                 <div className="mainContentContainerTop">
                     <div className="addressData">
-                        <p className="city">{city}</p>
-                        <p className="neighbourhood">{neighbourhood}</p>
+                        <p className="city">{globalDatabaseNameConverter[city]}</p>
+                        <p className="neighborhood">{globalDatabaseNameConverter[neighborhood].toUpperCase()}</p>
                     </div>
                     <div className="styleCustomerInfo"></div>
-                    <p className="hour">{start_hour} - {end_hour}</p>
+                    <p className="hour">{hours[0]} - {hours[hours.length - 1].slice(3) === "00" ? 
+                                                `${hours[hours.length - 1].slice(0, 2)}:30` : 
+                                                `${(parseInt(hours[hours.length - 1].slice(0, 2)) + 1).toString().padStart(2, '0')}:00`}
+                                            </p>
                 </div>
                 <div className="mainContentContainerBottom">
                     <div className="customerInfo">

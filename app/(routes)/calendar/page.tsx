@@ -22,9 +22,10 @@ export default function calendar(){
     const [selected, setSelected] = useState<Date>();
     const [data, setData] = useState();
 
-    const realtorId = "1"
+    const realtorId = "5"
 
 
+    const formatTime = (time :string) => time.slice(0, 5);
 
     useEffect(() => {
         async function fetch(){
@@ -107,7 +108,7 @@ export default function calendar(){
         window.location.href = window.location.href 
     }
     const getCardsData = function(date :Date){
-        var arrayOfCardsData :Record<string, string>[] = []
+        var arrayOfCardsData :Record<string, string | string[]>[] = []
         var index =0;
         if(date != undefined){
             data?.map((schedule) =>{
@@ -128,29 +129,62 @@ export default function calendar(){
                                 record["property_id"] === schedule.property.id
                             );
                             if (indexArray !== -1) {
-                                arrayOfCardsData[indexArray]["end_hour"] = schedule.start_hour;
+                                arrayOfCardsData[indexArray]["hours"].push(formatTime(schedule.start_hour));
+                                //sorting hours
+                                const times = arrayOfCardsData[indexArray]["hours"];
+
+                                const sortedTimes = times.sort((a, b) => {
+                                // Convert time strings (HH:mm) to Date objects for proper comparison
+                                const [aHour, aMinute] = a.split(':').map(Number);
+                                const [bHour, bMinute] = b.split(':').map(Number);
+            
+                                // Compare hours first, then minutes
+                                if (aHour === bHour) {
+                                    return aMinute - bMinute;
+                                }
+                                return aHour - bHour;
+                                });
+                                arrayOfCardsData[indexArray]["hours"] = sortedTimes
+
                             }else{
-                                console.log(arrayOfCardsData[index])
-                                arrayOfCardsData[index] = {}
+                                console.log("new")
+                                arrayOfCardsData[index] = {["hours"]: []}
+
                                 arrayOfCardsData[index]["customer_id"] = schedule.customer.id
                                 arrayOfCardsData[index]["property_id"] = schedule.property.id
                                 arrayOfCardsData[index]["name"] = schedule.customer.name
                                 arrayOfCardsData[index]["city"] = schedule.property.address.city
-                                arrayOfCardsData[index]["neighbourhood"] = schedule.property.address.neighbourhood
+                                arrayOfCardsData[index]["neighborhood"] = schedule.property.address.neighborhood
                                 arrayOfCardsData[index]["phone"] = schedule.customer.celphone
-                                arrayOfCardsData[index]["start_hour"] = schedule.start_hour
-                                arrayOfCardsData[index]["end_hour"] = schedule.start_hour
+                                arrayOfCardsData[index]["hours"].push(formatTime(schedule.start_hour))
+                                //sorting hours
+                                const times = arrayOfCardsData[index]["hours"];
 
-                                index = index+1
+                                const sortedTimes = times.sort((a, b) => {
+                                // Convert time strings (HH:mm) to Date objects for proper comparison
+                                const [aHour, aMinute] = a.split(':').map(Number);
+                                const [bHour, bMinute] = b.split(':').map(Number);
+            
+                                // Compare hours first, then minutes
+                                if (aHour === bHour) {
+                                    return aMinute - bMinute;
+                                }
+                                return aHour - bHour;
+                                });
+                                arrayOfCardsData[index]["hours"] = sortedTimes
+                                    
+                                index = index +1
+                                console.log(index)
 
                             }
                         }
                     }
+                    
                 }
             })
         }
         
-
+        console.log(arrayOfCardsData)
         return arrayOfCardsData
     }
 
