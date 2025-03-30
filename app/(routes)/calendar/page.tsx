@@ -23,8 +23,9 @@ export default function calendar(){
     const [selected, setSelected] = useState<Date>();
     const [data, setData] = useState();
 
-    const realtorId = "1"
-    const propertyId = "1"
+    const realtorId = "9"
+    const customerId = "8"
+    const propertyId = "29"
 
     const formatTime = (time :string) => time.slice(0, 5);
 
@@ -192,7 +193,7 @@ export default function calendar(){
         <HeaderAdm/>
         <Title tag="h1" text="Agenda" /> 
         
-        <NewScheduleModal propertyId={propertyId}/>
+        <NewScheduleModal userId ={customerId} propertyId={propertyId}/>
 
         <NavBarAdm options={NavBarPath.historic} />
         <div style={{display:"flex", gap:"50px", margin:"100px"}}>

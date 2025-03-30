@@ -169,7 +169,7 @@
 .modalNewScheduleBigContent{
     display: flex;
     flex-direction: column;
-    gap:35px;
+    gap:25px;
     flex-grow: 1;
 }
 .modalNewSchedule{
@@ -193,12 +193,23 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-height: 105px;
+    max-height: 125px;
     overflow-y: scroll;
     scrollbar-color: var(--box-white) transparent;
     padding-right: 20px;
-
-
+}
+.datesList div p{
+    font-size: var(--text-m);
+    color: var(--text-white);
+}
+.datesList{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 125px;
+    overflow-y: scroll;
+    scrollbar-color: var(--box-white) transparent;
+    padding-right: 20px;
 }
 .photoArrowRight{
     

@@ -24,7 +24,8 @@ export default {
     "boa_vista": "Boa Vista",
     "braco_ribeirao_cavalo": "Braço Ribeirão Cavalo",
     "centenario": "Centenário",
-    "centro": "Centro",
+    //ta errado o centro, troquei para teste
+    "Centro": "Centro",
     "chico_de_paulo": "Chico de Paulo",
     "czerniewicz": "Czerniewicz",
     "estrada_nova": "Estrada Nova",
