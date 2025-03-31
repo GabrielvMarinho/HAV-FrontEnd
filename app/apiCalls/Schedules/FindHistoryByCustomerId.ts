@@ -1,6 +1,15 @@
-export default async function FindHistoryByCustomerId(id :any, page :number){
-    const url = `http://localhost:9090/schedules/history/customer/${id}?page=${page}`;
+export default async function FindHistoryByCustomerId(id: any, page: string, latestDate: string | null = null, status: string | null = null) {
+    let url = `http://localhost:9090/schedules/history/customer/${id}?page=${page}`;
+
+    if (status !== null) {
+        url += `&status=${encodeURIComponent(status)}`;
+    }
+    if (latestDate !== null) {
+        url += `&latestDate=${encodeURIComponent(latestDate)}`;
+    }
+
     const response = await fetch(url)
+    
     const data = await response.json()
     const schedulesHistoryCustomerDto: schedulesHistoryCustomerDTO[] = data.content.map((schdto :any) => {
         return {

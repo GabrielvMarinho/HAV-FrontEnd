@@ -1,30 +1,48 @@
-"use client"
+"use client";
 
-import './css/style.css';
-import { FieldError, UseFormRegister } from 'react-hook-form';
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
+import "./css/style.css";
 
-export default function inputDropdownNoLabel<T>({
+export default function InputDropdownNoLabel({
     name,
     options,
     id,
     title
-
 }: {
     name: string;
     options: [string, string][];
-    size: string;
     title: string;
     id: string;
-    
 }) {
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const { replace } = useRouter();
+
+    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        if(event.target.value ==""){
+            const params = new URLSearchParams(searchParams.toString());
+            params.delete(name)
+            replace(`${pathname}?${params.toString()}`);
+        }else{
+            const params = new URLSearchParams(searchParams.toString());
+            params.set(name, event.target.value);
+            replace(`${pathname}?${params.toString()}`);
+        }
+        
+    };
+
     return (
-        <div style={{ width: "fit-content", display: "flex", flexDirection: "column", gap: "8px"}}>
-            <select name={name} id={id} className="inputDropdownNoLabel">
-                <option value="" disabled selected>{title}</option>
-                {options.map(([value, label]) => (
-                    <option key={value} value={value}>{label.toUpperCase()}</option>
-                ))}
-            </select>
-        </div>
+        <select 
+            name={name} 
+            id={id} 
+            className="inputDropdownNoLabel" 
+            onChange={handleChange}
+            value={searchParams.get(name) || ""}
+        >
+            <option value="" disabled>{title}</option>
+            {options.map(([value, label]) => (
+                <option key={value} value={value}>{label.toUpperCase()}</option>
+            ))}
+        </select>
     );
 }
