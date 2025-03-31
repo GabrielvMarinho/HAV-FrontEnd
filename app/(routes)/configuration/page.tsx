@@ -179,7 +179,7 @@ const FormSection = ({ form }: { form: any }) => (
       <InputText {...configFields.email} register={form.register} error={form.formState.errors[configFields.email.name as keyof saveConfig]} />
       <InputText {...configFields.cellphone} register={form.register} error={form.formState.errors[configFields.cellphone.name as keyof saveConfig]} />
       <InputText {...configFields.birthdate} register={form.register} error={form.formState.errors[configFields.birthdate.name as keyof saveConfig]} disabled className="disabled-input" />
-      <div style={{ width: "100%", margin: "30px 0" }} />
+      <div style={{ width: "100%", margin: "15px 0" }} />
       <InputText {...configFields.cep} register={form.register} error={form.formState.errors[configFields.cep.name as keyof saveConfig]} />
       <InputDropdown {...dropdownFields.city} register={form.register} error={form.formState.errors[dropdownFields.city.name as keyof saveConfig]} />
       <InputDropdown {...dropdownFields.state} register={form.register} error={form.formState.errors[dropdownFields.state.name as keyof saveConfig]} />
