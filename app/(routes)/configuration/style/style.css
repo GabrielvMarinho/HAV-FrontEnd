@@ -170,15 +170,17 @@
   }
   
   .columnTitle {
-    font-weight: 700;
+    font-weight: 500;
     color: var(--text-dark);
     margin-bottom: 25px;
-    font-size: var(--text-m);
+    font-size: var(--text-sm);
     text-transform: uppercase;
   }
   
   .menuList {
     list-style: none;
+    font-weight: 500;
+    font-size: 15px;
     padding: 0;
     margin: 0;
   }
@@ -186,19 +188,16 @@
   .menuItem {
     display: flex;
     flex-direction: column;
-    padding: 12px 0;
     position: relative;
   }
   
   .menuContent {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    width: 100%;
-    gap: 15px;
+    align-items: center;
+    padding: 10px 16px;
   }
   
-  /* Container do texto + ícone */
   .menuTextWrapper {
     display: flex;
     align-items: center;
@@ -208,7 +207,6 @@
     max-width: calc(100% - 60px); /* Espaço para o ToggleButton */
   }
   
-  /* Centraliza o ToggleButton na linha */
   .toggleButtonWrapper {
     margin-left: auto;
     display: flex;
@@ -216,12 +214,7 @@
     justify-content: center;
     width: 60px; /* Largura fixa para alinhamento */
   }
-  
-  /* Ajuste para mobile */
- 
-  
-  
-  /* Remove estilos antigos */
+   
   .booleanButtonWrapper, .radioButtonWrapper, .arrowWrapper {
     display: none;
   }

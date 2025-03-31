@@ -16,14 +16,16 @@ import Button from "@/app/components/Inputs/Button";
 import AddSchedules from "@/app/apiCalls/Schedules/AddSchedules";
 import RemoveSchedules from "@/app/apiCalls/Schedules/RemoveSchedules";
 import SchedulingCard from "@/app/components/Information/SchedulingCard";
+import NewScheduleModal from "@/app/components/Forms/NewScheduleModal";
 
 
 export default function calendar(){
     const [selected, setSelected] = useState<Date>();
     const [data, setData] = useState();
 
-    const realtorId = "5"
-
+    const realtorId = "9"
+    const customerId = "8"
+    const propertyId = "29"
 
     const formatTime = (time :string) => time.slice(0, 5);
 
@@ -174,7 +176,6 @@ export default function calendar(){
                                 arrayOfCardsData[index]["hours"] = sortedTimes
                                     
                                 index = index +1
-                                console.log(index)
 
                             }
                         }
@@ -184,7 +185,6 @@ export default function calendar(){
             })
         }
         
-        console.log(arrayOfCardsData)
         return arrayOfCardsData
     }
 
@@ -192,6 +192,9 @@ export default function calendar(){
         <> 
         <HeaderAdm/>
         <Title tag="h1" text="Agenda" /> 
+        
+        <NewScheduleModal userId ={customerId} propertyId={propertyId}/>
+
         <NavBarAdm options={NavBarPath.historic} />
         <div style={{display:"flex", gap:"50px", margin:"100px"}}>
         <DayPicker

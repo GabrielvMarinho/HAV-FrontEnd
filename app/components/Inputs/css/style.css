@@ -272,16 +272,19 @@ summary {
     background-color: var(--button-color);
     color: var(--text-white);
     font-weight:800;
+    width: fit-content;
 }
 .smallButton{
     font-size: var(--text-xs);
     padding: 7px;
     padding-inline: 50px;
+    flex-grow: 0;
 }
 .mediumButton{
     font-size: var(--text-xs);
     padding: 9px;
     padding-inline: 50px;
+    
 }
 .largeButton{
     font-size: var(--text-s);

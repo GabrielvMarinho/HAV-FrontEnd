@@ -1,0 +1,17 @@
+
+
+.containerPropertyComparison{
+    display: flex;
+    flex-direction: row;
+    gap: 180px;
+}
+
+.iconsTextPropertyComparison{
+    align-items: center;
+    text-align: center;
+}
+
+.textPropertyComparison{
+    font-size: var( --text-s);
+    color: var(--box-white-gray);
+}

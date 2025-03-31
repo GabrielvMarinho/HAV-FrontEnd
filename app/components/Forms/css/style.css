@@ -122,6 +122,95 @@
     left: -35px;
     bottom: -60px;
 }
+.topContentModal{
+    display: flex;
+    height: 10%;
+    justify-content: space-between;
+}
+.topContentModal p{
+    font-size: var(--text-m);
+    font-weight: 600;
+    color: var(--text-white);
+}
+.modalNewScheduleBig{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 200px;
+    background-color: var(--box-red-pink);
+    padding: 30px;
+    border-radius: var(--xborder-box);
+}
+.bottomContentModal{
+    
+    display: flex;
+    gap: 25px;
+    justify-content: space-around;
+    align-items: center;
+}
+.bottomContentModalData label{
+    font-size: var(--text-m);
+    color: var(--text-white);
+    font-weight: 600;
+}
+.bottomContentModalData p{
+    font-size: var(--text-s);
+    font-weight: 200;
+    color: var(--text-white);
+    max-width: 100px;
+    text-wrap: wrap;
+
+}
+.bottomContentModalData{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.modalNewScheduleBigContent{
+    display: flex;
+    flex-direction: column;
+    gap:25px;
+    flex-grow: 1;
+}
+.modalNewSchedule{
+    width: 250px;
+    height: 150px;
+    background-color: var(--box-red-pink);
+    padding: 30px;
+    border-radius: var(--xborder-box);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+}
+.realtorsList div p{
+    font-size: var(--text-m);
+    color: var(--text-white);
+}
+.realtorsList{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 125px;
+    overflow-y: scroll;
+    scrollbar-color: var(--box-white) transparent;
+    padding-right: 20px;
+}
+.datesList div p{
+    font-size: var(--text-m);
+    color: var(--text-white);
+}
+.datesList{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 125px;
+    overflow-y: scroll;
+    scrollbar-color: var(--box-white) transparent;
+    padding-right: 20px;
+}
 .photoArrowRight{
     
     right: -35px;

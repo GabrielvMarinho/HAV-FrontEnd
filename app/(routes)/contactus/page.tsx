@@ -2,21 +2,20 @@ import Footer from "@/app/components/Footer/Footer";
 import HeaderAdm from "@/app/components/Header/HeaderAdm";
 import "../faq/style/style.css";
 import Title from "@/app/components/NonInteractable/Title";
-import SearchBarDesktop from "@/app/components/Filters/SearchBar";
-import HavLogo from "@/app/components/IconsTSX/HavLogoLight";
 import Button from "@/app/components/Inputs/Button";
-
 import "../contactus/style/style.css";
 import Cellphone from "@/app/components/IconsTSX/CellPhone";
 import Envelope from "@/app/components/IconsTSX/Envelope";
 import MarcadorDeMapa from "@/app/components/IconsTSX/MarcadorDeMapa";
 import InputText from "@/app/components/Inputs/InputText";
+import StatusScheduling from "@/app/components/Information/StatusScheduling";
 
 export default function contactus() {
     return (
         <>
         <HeaderAdm />
-           <Title tag="h1" text="fale conosco"> </Title>
+           <Title tag="h1" text="fale conosco"/>
+           {/* <StatusScheduling text="confirmado"/> */}
            <div className="containerContactUs">
                 <div className="subContainer">
                     <h2 className="contatoTitle"> CONTATO </h2>
@@ -63,7 +62,6 @@ export default function contactus() {
                     <Button type="button" size="large" text="ENVIAR" hover="darken" color="#B23F52" background="white"/>
                 </div>
            </div>
-            
         <Footer />
         </>
     );

@@ -80,7 +80,8 @@ export default function Configuration() {
           <div className="menuColumn">
             <h3 className="columnTitle">PREFERÊNCIAS</h3>
             <ul className="menuList">
-              <MenuItem 
+              <MenuItem
+  
                 label="TEMA" 
                 isToggled={toggleStates.tema}
                 onToggle={() => handleToggle('tema')}
