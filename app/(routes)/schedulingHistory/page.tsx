@@ -9,6 +9,9 @@ import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdown
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 
 export default function schedulingHistory(){
+    const realtorId = "9"
+    const customerId = "8"
+
     return(
         <> 
         <HeaderAdm/>
@@ -34,7 +37,7 @@ export default function schedulingHistory(){
         />
         </div>
         </div>
-        <TableListHistory totalPages={2} titles={["Data/Hora", "Corretor", "Finalidade", "tipo imovel", "status" ]}  data={[]}/>
+        <TableListHistory id={customerId} for={"customer"} titles={["Data/Hora", "Corretor", "Finalidade", "tipo imovel", "status" ]} />
         <Footer/>
         </>
     )

@@ -26,6 +26,9 @@ import SliderContent from "@/app/components/Information/SliderContent";
 import ChamadaTelefonica from "../../components/IconsTSX/CellPhone";
 import Button from "@/app/components/Inputs/Button";
 import PropertyPrice from "@/app/components/NonInteractable/PropertyPrice"
+import TableList from "@/app/components/Information/TableList";
+import TableListChoose from "@/app/components/Information/TableListChoose";
+import TableListHistory from "@/app/components/Information/TableListHistory";
 
 export default function Home() {
 
@@ -215,6 +218,7 @@ export default function Home() {
       ]
       }/>      
     </section>
+    <TableListHistory totalPages={1} titles={["asd", "asdad"]} data={[["3", "dsa"], ["2", "dsa"]]}/>
     <CardImovel 
         bairro="Barra do rio molha" 
         cidade="Jaraguá do Sul" 
