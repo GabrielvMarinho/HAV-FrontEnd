@@ -15,7 +15,7 @@ import { InputChooseQuantity } from "../globalFormsConfig/InputChooseQuantity";
 import ToggleRentOrBuy from "../Inputs/ToggleRentOrBuy";
 import { InputFilterConfig } from "../globalFormsConfig/InputFilterConfig";
 
-export default function Filter(props: {admin? :string, size :string, property :boolean, inputs :any[], inputsDropdown :any[], inputChooseQuantites:any[] | null}){
+export default function Filter(props: {size :string, property :boolean, inputs :any[], inputsDropdown :any[], inputChooseQuantites:any[] | null}){
 
     const inputChooseQuantites = props.inputChooseQuantites ?? [];
     const inputsDropdown = props.inputsDropdown ?? [];

@@ -17,11 +17,10 @@ export default async function(
     purpose?: string
 
     ): Promise<{
-      properties: Property[];
+      properties: PropertySpecificCard[];
       totalPages: number;
     }>{
-      const url = `http://localhost:9090/property/card/filter?page=${page}`
-      
+      const url = `http://localhost:9090/property/filter/card?page=${page}`
 
       if(purpose==="venda"){
         if(minPrice===null){
@@ -80,9 +79,24 @@ export default async function(
         })
       });
   
-  
+      
       const data = await response.json();
-      const properties: Property[] = data.content.map((property: Property) => property);
+      console.log(data)
+      const properties: PropertySpecificCard[] = data.content.map((property: PropertySpecificCard) => ({
+
+          id:property.id,
+          neighborhood:property.address.neighborhood,
+          city:property.address.city,
+          bedRoom:property.propertyFeatures.bedRoom,
+          bathRoom:property.propertyFeatures.bathRoom,
+          livingRoom:property.propertyFeatures.livingRoom,
+          propertyStatus:property.propertyStatus,
+          promotionalPrice:property.promotionalPrice,
+          price:property.price,
+          purpose:property.purpose
+
+      }));
+      console.log(properties)
       return {properties: properties, totalPages: data.totalPages}
 
     }catch{

@@ -1,5 +1,6 @@
 import getByParamsProperties from "@/app/apiCalls/Property/getByParamsPropertiesCard";
 import Filter from "@/app/components/Filters/Filter";
+import CardContainer from "@/app/components/Information/CardContainer";
 import ChooseQuantity from "@/app/components/Inputs/ChooseQuantity";
 import SearchResult from "@/app/components/Inputs/SearchResult";
 import ToggleRentOrBuy from "@/app/components/Inputs/ToggleRentOrBuy";
@@ -8,29 +9,49 @@ import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdown
 import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 
-export default async function(){
+export default async function({searchParams} :{searchParams: {
+    propertyCode?: string; 
+    minPrice?: number;
+    maxPrice?: number;
+    propertyType?: string;
+    propertyStatus?: string;
+    page?: number;
+    bedRoom?: boolean,
+    bathRoom?: boolean,
+    garageSpace?: boolean,
+    suite?: boolean,
+    purpose?: string
+}}){
     
-    const data = getByParamsProperties()
-    console.log(data)
+    const params = await searchParams;
+    const {propertyCode=null, minPrice=null, maxPrice=null, propertyType=null, 
+       propertyStatus=null, page=0, bedRoom=null, 
+      bathRoom=null, garageSpace=null, suite=null, purpose=null} = params
+
+    const {properties, totalPages} = await getByParamsProperties(propertyCode, propertyType, propertyStatus, 
+        minPrice, maxPrice, false, page, bedRoom, bathRoom, garageSpace, suite, purpose)
+
     
     return (
         <>
         <SearchResult typeSearch="locacao"/>
-        
-        <Filter 
-            size="medium" 
-            inputs={
-             []
-            }
-            inputsDropdown={[
-                dropdownFields.propertyType,                
-            ]}
-            property={true}
-            inputChooseQuantites={[InputChooseQuantity.bedRoom,InputChooseQuantity.bathRoom, 
-                InputChooseQuantity.garageSpace,InputChooseQuantity.suite ]}
-            admin={true}
-            />
-            
+        <div className={"cardsAndFilter"}>
+            <Filter 
+                size="medium" 
+                
+                inputs={
+                []
+                }
+                inputsDropdown={[
+                    dropdownFields.propertyType,                
+                ]}
+                property={true}
+                inputChooseQuantites={[InputChooseQuantity.bedRoom,InputChooseQuantity.bathRoom, 
+                    InputChooseQuantity.garageSpace,InputChooseQuantity.suite ]}
+                />
+            <CardContainer cards={properties} totalPages={totalPages}/>
+        </div>
         </>
+
     )
 }
