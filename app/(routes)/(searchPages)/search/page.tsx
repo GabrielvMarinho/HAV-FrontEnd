@@ -36,19 +36,19 @@ export default async function({searchParams} :{searchParams: {
         <>
         <SearchResult typeSearch="locacao"/>
         <div className={"cardsAndFilter"}>
-            <Filter 
-                size="medium" 
-                
-                inputs={
-                []
-                }
-                inputsDropdown={[
-                    dropdownFields.propertyType,                
-                ]}
-                property={true}
-                inputChooseQuantites={[InputChooseQuantity.bedRoom,InputChooseQuantity.bathRoom, 
-                    InputChooseQuantity.garageSpace,InputChooseQuantity.suite ]}
-                />
+                <Filter 
+                    size="medium" 
+                    
+                    inputs={
+                    []
+                    }
+                    inputsDropdown={[
+                        dropdownFields.propertyType,                
+                    ]}
+                    property={true}
+                    inputChooseQuantites={[InputChooseQuantity.bedRoom,InputChooseQuantity.bathRoom, 
+                        InputChooseQuantity.garageSpace ]}
+                    />
             <CardContainer cards={properties} totalPages={totalPages}/>
         </div>
         </>
