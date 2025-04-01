@@ -1,53 +1,51 @@
-"use client"
+"use client";
 
-import Filter from "@/app/components/Filters/Filter";
-import Footer from "@/app/components/Footer/Footer";
-import HeaderAdm from "@/app/components/Header/HeaderAdm";
-import TableList from "@/app/components/Information/TableList";
-import InputDropdown from "@/app/components/Inputs/InputDropdownNoLabel";
-import PageManager from "@/app/components/Inputs/PageManager";
-import SearchFavorite from "@/app/components/Inputs/SearchFavorite";
-import Favorites from "@/app/components/Inputs/SearchFavorite";
-import SearchResult from "@/app/components/Inputs/SearchResult";
-import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdownsConfig";
+import { useEffect, useState } from "react";
 import CardImovel from "@/app/components/Cards/CardImovel";
-import { useState } from "react";
-import "./css/style.css"
-import StarFavorite from "@/app/components/Inputs/StarFavorite";
-import ListaImoveis from "@/app/components/Cards/ListaImoveis";
+import getByParamsPropertiesCard from "@/app/apiCalls/Property/getByParamsPropertiesCard";
 
+export default function Favorite(props: { propertyId: number }) {
+    const propertyId = props.propertyId; // Recebe o propertyId via props
+    const [property, setProperty] = useState<PropertySpecificCard | null>(null);
+    const [loading, setLoading] = useState(true);
 
-export default function favorite() {
+    useEffect(() => {
+        async function fetchProperty() {
+            if (!propertyId){
+                console.log("propertyId não encontrado");
+                return;
+            }
+            console.log("Iniciando requisição para o ID:", propertyId);
+            try {
+                const data = await getByParamsPropertiesCard(propertyId.toString());
+                const selectedProperty = data.properties.find(prop => prop.id === propertyId);
+                if (selectedProperty) {
+                    setProperty(selectedProperty);
+                } else {
+                    console.warn("Propriedade não encontrada para o ID:", propertyId);
+                    setProperty(null);
+                }
+            } catch (error) {
+                console.error("Erro ao buscar propriedade:", error);
+            } finally {
+                setLoading(false);
+            }
+        }
 
-    const idUser = 1;
+        fetchProperty();
+    }, [propertyId]);
+
+    if (loading) {
+        return <p>Carregando imóvel...</p>;
+    }
 
     return (
-        <>
-            <div style={{display: "flex", flexDirection: "column", alignItems: "left", gap: "83px"}}>
-                <SearchFavorite />
-                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "21px" }}>
-                    <InputDropdown
-                        key={dropdownFields.order.id}
-                        name={dropdownFields.order.name}
-                        size={dropdownFields.order.size}
-                        title={dropdownFields.order.title}
-                        id={dropdownFields.order.id}
-                        options={dropdownFields.order.options}
-                    />
-                    <InputDropdown
-                        key={dropdownFields.visualization.id}
-                        name={dropdownFields.visualization.name}
-                        size={dropdownFields.visualization.size}
-                        title={dropdownFields.visualization.title}
-                        id={dropdownFields.visualization.id}
-                        options={dropdownFields.visualization.options}
-                    />
-                </div>
-
-            </div>
-            <ListaImoveis idUser={idUser}/>
-        </>
-    )
-
+        <div>
+            {property ? (
+                <CardImovel obj={property} /> // Passando a propriedade carregada para o CardImovel
+            ) : (
+                <p>Propriedade não encontrada.</p>
+            )}
+        </div>
+    );
 }
-

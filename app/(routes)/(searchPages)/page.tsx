@@ -59,7 +59,7 @@ export default function Home() {
     
     <div className="bannerHomeLine"></div>
     <section className="homeHiglightProperties">
-      
+
       <h3>IMÓVEIS EM</h3>
       <h2>DESTAQUE</h2>
       <SliderContent items={
