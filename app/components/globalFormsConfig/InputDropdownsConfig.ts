@@ -1,4 +1,18 @@
-
+const getLastWeekDate = () => {
+    const today = new Date();
+    today.setDate(today.getDate() - 7);
+    return today.toISOString().split('T')[0];
+};
+const getLastMonthDate = () => {
+    const today = new Date();
+    today.setDate(today.getDate() - 30);
+    return today.toISOString().split('T')[0];
+};
+const getLastYearDate = () => {
+    const today = new Date();
+    today.setDate(today.getDate() - 365);
+    return today.toISOString().split('T')[0];
+};
 export const dropdownFields = {
     state: {
         name: "state",
@@ -257,22 +271,27 @@ export const dropdownFields = {
         title: "STATUS",
         id: "status",
         options: [
-            [1, "Confirmado"],
-            [2, "Cancelado"],
-            [3, "Pendente"]
+            ["confirmado", "Confirmado"],
+            ["cancelado", "Cancelado"],
+            ["pendente", "Pendente"],
+            ["", "Todos"],
+
         ]
     },
-    data: {
+    date: {
         name: "data",
         size: "medium",
         title: "DATA",
         id: "data",
         options: [
-            [1, "Ultima Semana"],
-            [2, "Ultimo Mês"],
-            [3, "Ultimo Ano"]
+            [getLastWeekDate(), "Ultima Semana"],
+            [getLastMonthDate(), "Ultimo Mês"],
+            [getLastYearDate(), "Ultimo Ano"],
+            ["", "Todos"],
+
         ]
     }
 }
+
 
 ///satus e data

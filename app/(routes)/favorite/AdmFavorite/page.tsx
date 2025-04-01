@@ -13,11 +13,10 @@ import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdown
 import CardImovel from "@/app/components/Cards/CardImovel";
 import { useState } from "react";
 import "../css/style.css"
+import StarFavorite from "@/app/components/Inputs/StarFavorite";
 
 
 export default function favorite() {
-
-    const [property, setProperty] = useState<PropertySpecific | null>(null);
 
     return (
         <>
@@ -41,9 +40,9 @@ export default function favorite() {
                         options={dropdownFields.visualization.options}
                     />
                 </div>
-            </div>
-            <CardImovel obj={property}/>
 
+            </div>
+            <CardImovel />
         </>
     )
 

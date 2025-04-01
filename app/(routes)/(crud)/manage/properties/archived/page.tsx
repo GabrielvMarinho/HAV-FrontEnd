@@ -15,7 +15,6 @@ export default async function page({searchParams}: {searchParams: {
     minPrice?: number;
     maxPrice?: number;
     propertyType?: string;
-    propertyCategory?: string;
     propertyStatus?: string;
     page?: number;
     bedRoom?: boolean,
@@ -27,10 +26,10 @@ export default async function page({searchParams}: {searchParams: {
     }}){
       const params = await searchParams;
       const {propertyCode=null, minPrice=null, maxPrice=null, propertyType=null, 
-        propertyCategory=null, propertyStatus=null, page=0, bedRoom=null, 
+         propertyStatus=null, page=0, bedRoom=null, 
         bathRoom=null, garageSpace=null, suite=null, purpose=null} = params
 
-      const {properties, totalPages} = await getByParamsProperties(propertyCode, propertyType, propertyCategory, propertyStatus, 
+      const {properties, totalPages} = await getByParamsProperties(propertyCode, propertyType, propertyStatus, 
       minPrice, maxPrice, false, page, bedRoom, bathRoom, garageSpace, suite, purpose)
     
       const inputs = [
@@ -72,7 +71,7 @@ export default async function page({searchParams}: {searchParams: {
               <Filter 
               size="medium" 
               inputs={inputs}
-              inputsDropdown={InputDropdown}
+              nputsDropdown={[dropdownFields.propertyType, dropdownFields.status, dropdownFields.purpose]}
               inputPriceRanges={priceRanges}
               inputChooseQuantites={[]}
 

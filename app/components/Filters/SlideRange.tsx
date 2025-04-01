@@ -2,15 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import './css/style.css';
 
-const PriceRangeSlider = (props: {min :number, max :number, step :number, id :number, onChange: (min: number, max: number) =>void}) => {
-
+export default function PriceRangeSlider(props: {min :number, max :number, step :number, id :number, onChange: (min: number, max: number) =>void}) {
+  
   const [minPrice, setMinPrice] = useState(props.min);
   const [maxPrice, setMaxPrice] = useState(props.max);
   const [rangeProgress, setRangeProgress] = useState({ left: props.min, right: props.max });
 
   const priceGap = props.max*0.1;
 
-  
+  useEffect(() => {
+    setMinPrice(props.min);
+    setMaxPrice(props.max);
+  }, [props.min, props.max]);
 
   useEffect(() => {
     
@@ -25,13 +28,13 @@ const PriceRangeSlider = (props: {min :number, max :number, step :number, id :nu
       
     });
 
-
+   
     //atualiza para o componente que ele esta
-  if (minPrice !== props.min || maxPrice !== props.max) {
-    props.onChange(minPrice, maxPrice)
-  
+    if (minPrice !== props.min || maxPrice !== props.max) {
+      props.onChange(minPrice, maxPrice)
+      
     }
-  }, [minPrice, maxPrice]);
+  }, [minPrice, maxPrice, props.max, props.min]);
   
 
   const handleRangeInputChange = (e) => {
@@ -52,7 +55,7 @@ const PriceRangeSlider = (props: {min :number, max :number, step :number, id :nu
             <p>R${minPrice.toLocaleString('en-US').replace(/,/g, '.')}</p>
           </div>
           <div>
-            <p>R${maxPrice.toLocaleString('en-US').replace(/,/g, '.')}{maxPrice==2000000?<span>+</span>:<span></span>}</p>          
+            <p>R${maxPrice.toLocaleString('en-US').replace(/,/g, '.')}{maxPrice==2000000 || maxPrice==10000?<span>+</span>:<span></span>}</p>          
           </div>
         </div>
         <div className="slider">
@@ -85,4 +88,3 @@ const PriceRangeSlider = (props: {min :number, max :number, step :number, id :nu
   );
 };
 
-export default PriceRangeSlider;

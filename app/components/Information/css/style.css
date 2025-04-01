@@ -11,6 +11,7 @@
     height: 0.5px;
 
 }
+
 .cardContainer{
     max-width: fit-content;
     display: flex;
@@ -469,6 +470,45 @@
 
 .pendente {
     background-color: var(--box-white-gray);
+}
+
+.cardsContainer{
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+.cardsAndFilter{
+    display: flex;
+    gap: 40px;
+    margin-top: 60px;
+
+}
+@media (width >1600px){
+    .cardsContainer{
+        width: 1200px;
+    }
+}
+@media (width <=1600px){
+    .cardsContainer{
+        width: 880px;
+    }
+}
+@media (width <1200px){
+    .cardsContainer{
+        width: 570px;
+    }
+}
+@media (width <900px){
+    .cardsContainer{
+        width: 270px;
+    }
+}
+@media (width <650px){
+    .cardsAndFilter{
+        align-items: center;
+
+        flex-direction: column;
+    }
 }
 
 

@@ -5,7 +5,6 @@ import './css/style.css';
 
 export default function PageManager(props: {totalPages :number}){
 
-    console.log("apareceu")
     
 
     const [page, setPage] = useState<number>(0);

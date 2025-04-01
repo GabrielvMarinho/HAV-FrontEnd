@@ -25,7 +25,6 @@ export default async function(
       "price": formData?.price,
       "promotionalPrice": formData?.promotionalPrice,
       "highlight": formData?.highlight==="1"?true:false,
-      "propertyCategory": "",
       "floors":formData?.floors,
       "additionals":formData?.additionals,
       "address": {

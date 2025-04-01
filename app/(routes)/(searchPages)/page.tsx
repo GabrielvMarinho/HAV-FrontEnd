@@ -26,6 +26,9 @@ import SliderContent from "@/app/components/Information/SliderContent";
 import ChamadaTelefonica from "../../components/IconsTSX/CellPhone";
 import Button from "@/app/components/Inputs/Button";
 import PropertyPrice from "@/app/components/NonInteractable/PropertyPrice"
+import TableList from "@/app/components/Information/TableList";
+import TableListChoose from "@/app/components/Information/TableListChoose";
+import TableListHistory from "@/app/components/Information/TableListHistory";
 
 export default function Home() {
 
@@ -215,35 +218,15 @@ export default function Home() {
       ]
       }/>      
     </section>
-    <CardImovel 
-        bairro="Barra do rio molha" 
-        cidade="Jaraguá do Sul" 
-        valor="2000000" 
-        sell={true} 
-        quantQuartos={2} 
-        quantSala={3} 
-        quantBanheiros={5} 
-        informationStatus="string" 
-        category="string" 
-      />
-
-      <CardImovel 
-        bairro="Barra do rio molha" 
-        cidade="Jaraguá do Sul" 
-        valor="20" 
-        sell={false} 
-        quantQuartos={2} 
-        quantSala={3} 
-        quantBanheiros={5} 
-        informationStatus="LANÇAMENTO" 
-        category="VENDA" 
-      />
+  
 
       
       <MainHomeInfo/>
       
       
-      <Link href="/Imoveis">clique aqui</Link>
+
+      
+
       <SelectedStar width={54} height={54} color={"#001111"}/>
       <NotSelectedStar width={54} height={54} color={"#001111"}/>
       <DocumentIcon width={211} height={211} color={"#501010"}/>
