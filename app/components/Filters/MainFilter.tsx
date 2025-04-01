@@ -23,15 +23,26 @@ export default function MainFilter(){
 
 
     
-    
+   
     const [isOpen, setIsOpen] = useState(false)
-    const [priceRangeSell, setPriceRangeSell] = useState({ min: 10000, max: 2000000});
 
     
+
+    const [selected, setSelected] = useState<'sell' | 'rent'>('sell');
+
+    const getPriceRange = (purpose: 'sell' | 'rent') => {
+        return purpose === 'sell'
+            ? { min: InputFilterConfig.priceRangesSell.min ?? 0, max: InputFilterConfig.priceRangesSell.max }
+            : { min: InputFilterConfig.priceRangesRent.min ?? 0, max: InputFilterConfig.priceRangesRent.max };
+    };
+
+    const [priceRange, setPriceRange] = useState(getPriceRange(selected));
+
+
 
     const handlePriceChange = (min: number, max: number) => {
 
-        setPriceRangeSell({ min, max });
+        setPriceRange({ min, max });
     };
 
 
@@ -43,7 +54,7 @@ export default function MainFilter(){
         <form action={pathname} className="filterMain">
             
             <div className="mainSection">
-                <ToggleRentOrBuy/>
+                <ToggleRentOrBuy selected={selected} onChange={(purpose) => setSelected(purpose)}/>
                 <InputDropdown 
                     text={dropdownFields.propertyType.text}
                     name = {dropdownFields.propertyType.name}
@@ -51,15 +62,29 @@ export default function MainFilter(){
                     size={"large"}
                     id={dropdownFields.propertyType.id}
                 />
-                <PriceRangeSlider
-                    name = {InputFilterConfig.priceRangesSell.name}
-                    min={InputFilterConfig.priceRangesSell.min}
-                    max={InputFilterConfig.priceRangesSell.max}
-                    step={InputFilterConfig.priceRangesSell.step}
-                    id={InputFilterConfig.priceRangesSell.id}
-                    onChange={handlePriceChange}
-                    
-                />
+                {
+                selected==="rent"? 
+                            
+                    <PriceRangeSlider
+                        name = {InputFilterConfig.priceRangesRent.name}
+                        min={InputFilterConfig.priceRangesRent.min}
+                        max={InputFilterConfig.priceRangesRent.max}
+                        step={InputFilterConfig.priceRangesRent.step}
+                        id={InputFilterConfig.priceRangesRent.id}
+                        onChange={handlePriceChange}
+                                    
+                    />
+                    :
+                    <PriceRangeSlider
+                        name = {InputFilterConfig.priceRangesSell.name}
+                        min={InputFilterConfig.priceRangesSell.min}
+                        max={InputFilterConfig.priceRangesSell.max}
+                        step={InputFilterConfig.priceRangesSell.step}
+                        id={InputFilterConfig.priceRangesSell.id}
+                        onChange={handlePriceChange}
+                                    
+                    />
+                    }
                 <InputDropdown 
                     text={dropdownFields.neighborhood.text}
                     name = {dropdownFields.neighborhood.name}

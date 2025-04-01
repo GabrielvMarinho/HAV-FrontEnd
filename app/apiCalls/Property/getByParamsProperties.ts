@@ -5,7 +5,6 @@ export default async function(
 
     propertyCode?: string, 
     propertyType?: string, 
-    propertyCategory?: string,
     propertyStatus?: string,
     minPrice?: number,
     maxPrice?: number,
@@ -53,7 +52,6 @@ export default async function(
           "minPric":minPrice, 
           "maxPric":maxPrice,
           "propertyType":propertyType===""?null:propertyType,
-          "propertyCategory":propertyCategory===""?null:propertyCategory,
           "propertyStatus":propertyStatus===""?null:propertyStatus,
           "archived":archived,
           "propertyFeatures":{
