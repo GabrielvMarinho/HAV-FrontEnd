@@ -117,7 +117,7 @@ export default function Filter(props: {size :string, property :boolean, inputs :
                     />
                     :""
                 }
-                <button type="submit" className="buttonBuscaClaro lightHover">
+                <button type="submit" className="buttonBuscaClaro lightHover pointer">
                     <SearchIcon height={35} width={35} color={"var(--box-red-pink)"}/>
                 </button>
             </form> 

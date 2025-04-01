@@ -73,7 +73,7 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
                 />
             ))}
             
-            <button type="submit" className="buttonBuscaClaro lightHover">
+            <button type="submit" className="buttonBuscaClaro pointer lightHover">
                 <SearchIcon height={35} width={35} color={"var(--box-red-pink)"}/>
             </button>
         </form>
