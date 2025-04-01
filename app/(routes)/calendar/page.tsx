@@ -20,6 +20,7 @@ import NewScheduleModal from "@/app/components/Forms/NewScheduleModal";
 
 
 export default function calendar(){
+
     const [selected, setSelected] = useState<Date>();
     const [data, setData] = useState();
 
@@ -193,7 +194,6 @@ export default function calendar(){
         <HeaderAdm/>
         <Title tag="h1" text="Agenda" /> 
         
-        <NewScheduleModal userId ={customerId} propertyId={propertyId}/>
 
         <NavBarAdm options={NavBarPath.historic} />
         <div style={{display:"flex", gap:"50px", margin:"100px"}}>
