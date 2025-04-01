@@ -12,12 +12,12 @@ import MarcadorDeMapa from "../IconsTSX/MarcadorDeMapa";
 import "./css/style.css";
 
 interface CardImovelProps {
-    obj: PropertySpecific | null;
+    obj: PropertySpecificCard | null;
     idUser: number;
 }
 
 export default function CardImovel({ obj, idUser }: CardImovelProps) {
-    const [property, setProperty] = useState<PropertySpecific | null>(obj);
+    const [property, setProperty] = useState<PropertySpecificCard | null>(obj);
 
     useEffect(() => {
         async function fetchProperty() {

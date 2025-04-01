@@ -25,6 +25,8 @@ export default function TableListHistorySchedule(props: {
   const [customerHistory, setCustomerHistory] = useState<{}[]>([]);
   const [realtorDetails, setRealtorDetails] = useState(false);
   const [realtorHistory, setRealtorHistory] = useState<{}[]>([]);
+  const [customerDetails, setCustomerDetails] = useState<{}[]>([]);
+
   const [totalPage, setTotalPage] = useState(0); 
 
 

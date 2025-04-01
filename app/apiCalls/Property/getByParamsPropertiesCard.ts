@@ -20,7 +20,7 @@ export default async function(
       properties: Property[];
       totalPages: number;
     }>{
-      const url = `http://localhost:9090/property/filter?page=${page}`
+      const url = `http://localhost:9090/property/card/filter?page=${page}`
       
 
       if(purpose==="venda"){

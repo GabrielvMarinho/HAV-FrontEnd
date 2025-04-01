@@ -218,36 +218,15 @@ export default function Home() {
       ]
       }/>      
     </section>
-    <TableListHistory totalPages={1} titles={["asd", "asdad"]} data={[["3", "dsa"], ["2", "dsa"]]}/>
-    <CardImovel 
-        bairro="Barra do rio molha" 
-        cidade="Jaraguá do Sul" 
-        valor="2000000" 
-        sell={true} 
-        quantQuartos={2} 
-        quantSala={3} 
-        quantBanheiros={5} 
-        informationStatus="string" 
-        category="string" 
-      />
-
-      <CardImovel 
-        bairro="Barra do rio molha" 
-        cidade="Jaraguá do Sul" 
-        valor="20" 
-        sell={false} 
-        quantQuartos={2} 
-        quantSala={3} 
-        quantBanheiros={5} 
-        informationStatus="LANÇAMENTO" 
-        category="VENDA" 
-      />
+  
 
       
       <MainHomeInfo/>
       
       
-      <Link href="/Imoveis">clique aqui</Link>
+
+      
+
       <SelectedStar width={54} height={54} color={"#001111"}/>
       <NotSelectedStar width={54} height={54} color={"#001111"}/>
       <DocumentIcon width={211} height={211} color={"#501010"}/>

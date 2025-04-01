@@ -1,4 +1,4 @@
-import getByParamsProperties from "@/app/apiCalls/Property/getByParamsProperties";
+import getByParamsProperties from "@/app/apiCalls/Property/getByParamsPropertiesCard";
 import Filter from "@/app/components/Filters/Filter";
 import PriceRangeSlider from "@/app/components/Filters/SlideRange";
 import ChooseQuantity from "@/app/components/Inputs/ChooseQuantity";
@@ -11,8 +11,8 @@ import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 export default async function(){
     
     const data = getByParamsProperties()
+    console.log(data)
     
-
     return (
         <>
         <SearchResult typeSearch="locacao"/>
