@@ -19,12 +19,13 @@ import "../configuration/style/style.css";
 import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 import Button from "@/app/components/Inputs/Button";
 import ToggleButton from "@/app/components/Inputs/ToggleButton";
+import editCustomer from "@/app/apiCalls/Customer/editCustomer";
 
 type FormData = {
   [key: string]: FormDataEntryValue;
 };
 
-export default function Configuration() {
+export default function Configuration(props :{id :any}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [pendingFormData, setPendingFormData] = useState<FormData | null>(null);
   const [toggleStates, setToggleStates] = useState({
@@ -55,13 +56,31 @@ export default function Configuration() {
   const saveChanges = async () => {
     if (!pendingFormData) return;
     setIsModalOpen(false);
-    try {
-      const response = await postCustomer(pendingFormData);
-      if (response) router.back();
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    try{
+      const customer :CustomerEditDto= {
+          cpf: pendingFormData.cpf as string,
+          name: pendingFormData.name as string,
+          email: pendingFormData.email as string,
+          celphone: Number(pendingFormData.celphone),
+          phoneNumber: pendingFormData.phoneNumber as string,
+          cep: pendingFormData.cep as string,
+          street: pendingFormData.street as string,
+          propertyNumber: pendingFormData.propertyNumber as string,
+          complement: pendingFormData.complement as string,
+          state: pendingFormData.state as string,
+          city: pendingFormData.city as string,
+          neighborhood: pendingFormData.neighborhood as string
+
+      };
+
+      await editCustomer(props.id, customer); 
+
+      router.back(); //volta um point sem ter que escrever a barra
+  }
+  catch(err){
+  }
+
+};
 
   return (
     <>
