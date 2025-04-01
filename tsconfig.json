@@ -33,7 +33,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, ".next/types/app/(routes)/Property/PropertySpecific/[id]/page.tsx"  ],
   "exclude": [
     "node_modules"
   ]
