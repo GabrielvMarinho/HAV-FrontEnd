@@ -15,11 +15,11 @@ import TapeCardImovel from "../Information/TapeCardImovel";
 import CategoryCardImovel from "../Information/CategoryCardImovel";
 
 
-export default function CardImovel(props: { obj: PropertyCard; idUser: number; }) {
+export default function CardImovel(props: { obj: PropertySpecificCard; idUser: number; }) {
 
     const propertyId = props.obj?.id;
 
-    const [property, setProperty] = useState<PropertyCard | null>(null);
+    const [property, setProperty] = useState<PropertySpecificCard | null>(null);
 
 
     useEffect(() => {
@@ -48,17 +48,17 @@ export default function CardImovel(props: { obj: PropertyCard; idUser: number; }
         <div style={{ width: "269px", display: "flex", flexDirection: "column" }}>
 
             <section style={{ position: "relative", display: "inline-block" }}>
-                {/* Container para os elementos sobrepostos */}
+            
                 <div
                     style={{
                         position: "absolute",
-                        top: "10px", // Ajuste conforme necessário
-                        left: "10px", // Ajuste conforme necessário
+                        top: "10px", 
+                        left: "10px", 
                         display: "flex",
                         flexDirection: "row",
                         alignItems: "center",
                         gap: "20px",
-                        zIndex: 2, // Garante que fique sobre a imagem
+                        zIndex: 2, 
                     }}
                 >
                     <div style={{ marginLeft: "-26px" }}>
@@ -69,7 +69,7 @@ export default function CardImovel(props: { obj: PropertyCard; idUser: number; }
                     </div>
                 </div>
 
-                {/* Imagem */}
+              
                 <Image
                     src={ImageCasa}
                     alt="imagem da casa"
