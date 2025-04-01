@@ -10,40 +10,17 @@ import StarFavorite from "../Inputs/StarFavorite";
 import MarcadorDeMapa from "../IconsTSX/MarcadorDeMapa";
 import { useEffect, useState } from "react";
 import "./css/style.css";
-import FavoriteProperty from "@/app/apiCalls/Property/FavoriteProperty";
-import TapeCardImovel from "../Information/TapeCardImovel";
-import CategoryCardImovel from "../Information/CategoryCardImovel";
+import { useRouter } from "next/navigation";
 
 
-export default function CardImovel(props: { obj: PropertyCard; idUser: number; }) {
-
-    const propertyId = props.obj?.id;
-
-    const [property, setProperty] = useState<PropertyCard | null>(null);
-
-
-    useEffect(() => {
-        async function fetchProperty() {
-            if (!props.obj?.id) return;
-
-            try {
-                const response = await FavoriteProperty(props.obj.id, props.idUser);
-                if (!response.ok) {
-                    throw new Error(`Erro na API: ${response.status}`);
-                }
-                const data = await response.json();
-                setProperty(data)
-                console.log("Resposta da API:", data);
-            } catch (error) {
-                console.log("Erro ao buscar propriedade:", error);
-            }
-        }
-
-        fetchProperty();
-    }, [props.obj?.id]);
-
-
+export default function CardImovel({ obj, idUser }: CardImovelProps) {
+    const router = useRouter();
     
+    function goToSpecificProperty(id: number | undefined) {
+        console.log(id)
+        router.push(`property/${id}`)
+    }
+
     return (
         <div style={{ width: "269px", display: "flex", flexDirection: "column" }}>
 
@@ -99,7 +76,8 @@ export default function CardImovel(props: { obj: PropertyCard; idUser: number; }
                 </div>
                 <div style={{ width: "235px", height: "1px", backgroundColor: "var(--text-white)", opacity: "0.20", margin: "5px auto" }} />
                 <article style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <Button size="small" text="saiba mais" background="var(--text-white)" color="var(--box-red-pink)" hover="lightHover" type="button" />
+                    <Button size="small" text="saiba mais" background="var(--text-white)" color="var(--box-red-pink)" 
+                    hover="lightHover" type="button" onClick={() => goToSpecificProperty(obj?.id)} />
                     <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                         <StarFavorite idUser={props.idUser} idProperty={props.obj?.id} width={27} height={27} color="#FFFF" selected={false} />
                         <MarcadorDeMapa width={22} height={22} color="" />
