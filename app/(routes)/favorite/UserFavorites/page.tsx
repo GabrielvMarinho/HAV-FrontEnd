@@ -1,8 +1,6 @@
-import CardImovel from "@/app/components/Cards/CardImovel";
 import CardContainer from "@/app/components/Information/CardContainer"
 import getByParamsPropertiesCard from "@/app/apiCalls/Property/getByParamsPropertiesCard";
-import SearchFavorite from "@/app/components/Inputs/SearchResult";
-import InputDropdown from "@/app/components/Inputs/InputDropdown";
+import HeaderFavoritesPage from "@/app/components/Header/HeaderFavoritesPage";
 
 export default async function Favorite({ searchParams }: {
     searchParams: {
@@ -31,7 +29,10 @@ export default async function Favorite({ searchParams }: {
 
     return (
         <>
-            <CardContainer cards={properties} totalPages={totalPages} />
+            <HeaderFavoritesPage />
+            <section style={{marginTop: "80px"}}>
+                <CardContainer cards={properties} totalPages={totalPages} />
+            </section>
         </>
     )
 }
