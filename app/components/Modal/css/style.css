@@ -32,17 +32,19 @@
     flex-direction: column;
     background-color: var(--text-white);
     width: 430px;
-    height: 470px;
+    height: 490px;
 }
 
 .containerModalScheduling .imageMainContainer{
     height: 120px;
     background-color: black;
+    border-top-left-radius: 15px; 
+    border-top-right-radius: 15px;
 }
 
 .idPropertyModalScheduling{
     font-size: var(--text-xs);
-    color: var(--text-red-pink);
+    font-weight: 500;
     margin-top: 10px;
     margin-right: 10px;
     display: flex;
@@ -51,12 +53,14 @@
 
 .cityName{
     font-size: var(--text-xs);
-    color: var(--text-red-pink);
+    color: var(--box-dark-red);
+    font-weight: 500;
+    letter-spacing: 1px;
     margin-left: 20px;
 }
 
 .neighborhoodName{
-    color: var(--text--mid-dark-red);
+    color: var(--box-dark-red);
     font-size: var(--text-m);
     margin-left: 20px;
 }
@@ -65,6 +69,7 @@
     margin-top: 10px;
     margin-left: 20px;
     font-size: var(--text-ml);
+    color: var(--text-red-pink);
 }
 
 .containerPriceCategory{
@@ -83,9 +88,9 @@
 }
 
 .lineModalScheduling{
-    width: 70%;
+    width: 60%;
     margin-top: 10px;
-    margin-left: 65px;
+    margin-left: 80px;
     padding: 0.5px;
     background-color: var(--text-red-pink);
 }
@@ -119,6 +124,7 @@
 .informationsModalScheduling{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .informationsrealtor{
@@ -128,28 +134,177 @@
 }
 
 .caixinha{
-    padding: 3.5px;
+    width: 85px;
+    height: 16px;
+    /* padding: 2px; */
     border-radius: 5px;
     text-align: center;
     background-color:aquamarine;
     font-size: var(--text-xs);
+    margin-top: 6px;
 }
 
 .realtor{
     font-size: var(--text-xs);
     margin-left: -80px;
+    color: var(--text-red-pink);
 }
 
 .localization{
     font-size: var(--text-xs);
+    color: var(--text-red-pink);
 }
 
 .nameRealtor{
-    font-size: var(--text-xs);
+    font-size: var(--text-s);
+    color: var(--box-dark-red);
+    font-weight: 800;
 }
 
 .cellphoneRealtor{
+    font-weight: 500;
+    color: var(--box-dark-red);
+    font-size: var(--text-xxs);
+}
+
+.locationiInformations{
+    width: 143px;
+    margin-top: 10px;
+    height: 70px;
+    margin-right: 30px;
+    background-color: var(--text-light-red);
+}
+
+.dateModalScheduling{
+    justify-content: space-around;
+    margin-top: 20px;
+    display: flex;
+}
+
+.date{
+    margin-top: 15px;
     font-size: var(--text-xs);
+    color: var(--text-red-pink);
+    margin-left: 20px;
+}
+
+.containerDateAndHour{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.dateHour{
+    font-weight: 500;
+    margin-left: 10px;
+    font-size: var(--text-s);
+}
+
+.buttonsModalScheduling{
+    margin-top: 25px;
+    gap: 20px;
+    display: flex;
+    justify-content: end;
+    margin-right: 20px;
+}
+
+.buttonModal{
+    border-radius: 15px;
+    border: 1px solid var(--text-red-pink);
+}
+
+.containerPriceCategoryModalScheduling{
+    display: none;
+}
+
+.containerinformationsModalSchedulingMobile{
+    display: none;
+}
+
+@media (width < 625px){
+    
+.containerModalScheduling{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--text-white);
+    width: 300px;
+    height: 630px;
+    }
+
+    .containerPriceCategory{
+        display: none;
+    }
+
+    .lineModalScheduling{
+        display: none;
+    }
+
+    .containerPriceMobile{
+        
+        display: flex;
+        align-items: center;
+    }
+
+    .lineModalSchedulingMobile{
+        width: 38%;
+        height: 0.5px;
+        margin-top: 10px;
+        margin-left: 15px;
+        background-color: var(--text-red-pink);
+    }
+
+    .containerPriceCategoryModalScheduling{
+       display: block;
+    }
+
+    .containerCategoryModalScheduling{
+        gap: 15px;
+        justify-content: center;
+        display: flex;
+    }
+
+    .CategoryCardImovelModalSchedulingMobile{
+        margin-top: 15px;
+    }
+
+    .titleModalScheduling{
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .informationsModalScheduling {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .containerinformationsModalScheduling{
+        display: none;
+    }
+
+    .containerinformationsModalSchedulingMobile{
+        display: block;
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+
+    .locationiInformations{
+        width: 250px;
+    }
+
+    .realtor{
+        margin-top: 25px;
+        margin-left: 0px;
+    }
+
+    .dateHour{
+        font-size: var(--text-xs);
+    }
+
+    .buttonsModalScheduling{
+        margin-top: 30px;
+        gap: 10px;  
+        margin-right: 10px;
+    }
 }
 
 @media (max-width: 992px){
