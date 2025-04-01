@@ -54,71 +54,73 @@ export default function Filter(props: {size :string, property :boolean, inputs :
       
     
     return(
-        <form action={pathname} className="filterSide">
-            {props.property ?
-                <ToggleRentOrBuy selected={selected} onChange={(purpose) => setSelected(purpose)}/>:""
-            }
-            {inputs.map((input) => (
-                input &&
-                <InputText
-                    key={input.id}
-                    name = {input.name}
-                    size={"medium"}
-                    placeholder={input.placeholder}
-                    text={input.text}
-                    id={input.id}
-                />
-            ))}
-            {inputsDropdown.map((input) => (
-                input &&
-                <InputDropdown
-                    key={input.id}
-                    name = {input.name}
-                    options={input.options}
-                    size={"large"}
-                    text={input.text}
-                    id={input.id}
-                />
-            ))}
-            {inputChooseQuantites.map((input) =>(
-                input && 
-                <ChooseQuantity
-                    key={input.id}
-                    name={input.name}
-                    id ={input.id}
-                    text={input.text}
-                />
-            ))
+        <div className="divRangeSlider">
+            <form action={pathname} className="filterSide">
+                {props.property ?
+                    <ToggleRentOrBuy selected={selected} onChange={(purpose) => setSelected(purpose)}/>:""
+                }
+                {inputs.map((input) => (
+                    input &&
+                    <InputText
+                        key={input.id}
+                        name = {input.name}
+                        size={"medium"}
+                        placeholder={input.placeholder}
+                        text={input.text}
+                        id={input.id}
+                    />
+                ))}
+                {inputsDropdown.map((input) => (
+                    input &&
+                    <InputDropdown
+                        key={input.id}
+                        name = {input.name}
+                        options={input.options}
+                        size={"large"}
+                        text={input.text}
+                        id={input.id}
+                    />
+                ))}
+                {inputChooseQuantites.map((input) =>(
+                    input && 
+                    <ChooseQuantity
+                        key={input.id}
+                        name={input.name}
+                        id ={input.id}
+                        text={input.text}
+                    />
+                ))
 
-            }
-            {props.property ?
-            
-            selected==="rent"? 
-            
-                <PriceRangeSlider
-                    name = {InputFilterConfig.priceRangesRent.name}
-                    min={InputFilterConfig.priceRangesRent.min}
-                    max={InputFilterConfig.priceRangesRent.max}
-                    step={InputFilterConfig.priceRangesRent.step}
-                    id={InputFilterConfig.priceRangesRent.id}
-                    onChange={handlePriceChange}
-                    
-                />
-                :
-                <PriceRangeSlider
-                    name = {InputFilterConfig.priceRangesSell.name}
-                    min={InputFilterConfig.priceRangesSell.min}
-                    max={InputFilterConfig.priceRangesSell.max}
-                    step={InputFilterConfig.priceRangesSell.step}
-                    id={InputFilterConfig.priceRangesSell.id}
-                    onChange={handlePriceChange}
-                    
-                />
-                :""
-            }
-            <button type="submit" className="buttonBuscaClaro lightHover">
-                <SearchIcon height={35} width={35} color={"var(--box-red-pink)"}/>
-            </button>
-        </form>
+                }
+                {props.property ?
+                
+                selected==="rent"? 
+                
+                    <PriceRangeSlider
+                        name = {InputFilterConfig.priceRangesRent.name}
+                        min={InputFilterConfig.priceRangesRent.min}
+                        max={InputFilterConfig.priceRangesRent.max}
+                        step={InputFilterConfig.priceRangesRent.step}
+                        id={InputFilterConfig.priceRangesRent.id}
+                        onChange={handlePriceChange}
+                        
+                    />
+                    :
+                    <PriceRangeSlider
+                        name = {InputFilterConfig.priceRangesSell.name}
+                        min={InputFilterConfig.priceRangesSell.min}
+                        max={InputFilterConfig.priceRangesSell.max}
+                        step={InputFilterConfig.priceRangesSell.step}
+                        id={InputFilterConfig.priceRangesSell.id}
+                        onChange={handlePriceChange}
+                        
+                    />
+                    :""
+                }
+                <button type="submit" className="buttonBuscaClaro lightHover">
+                    <SearchIcon height={35} width={35} color={"var(--box-red-pink)"}/>
+                </button>
+            </form> 
+        </div>
     );
 }

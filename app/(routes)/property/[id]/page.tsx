@@ -18,12 +18,13 @@ import RealterAssociatedVertical from "@/app/components/Information/RealterAssoc
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import searchPropertyByIdSpecific from "@/app/apiCalls/Property/searchPropertyByIdSpecific";
+import NewScheduleModal from "@/app/components/Forms/NewScheduleModal";
 
 export default function PropertySpecific(props: { obj: PropertySpecific; }) {
 
     const { id } = useParams(); // Pegando o ID da URL
     const propertyId = props.obj?.id ?? id; // Prioriza props.obj.id, mas usa o ID da URL se necessário
-
+    const customerId = "3"
     const [property, setProperty] = useState<PropertySpecific | null>(null);
 
     const formatProperty = (apiData: any): PropertySpecific => ({
@@ -136,7 +137,10 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                         }} />
                         <RealtorAssociated objPropertyList={{ realtorPropertySpecific: property?.realtorPropertySpecific ?? [] }} WhatsappLink="adad" />
                     </div>
+
                 </article>
+                <NewScheduleModal propertyId={String(propertyId)} userId={customerId} />
+
                 <article className="enviroments-interestPoint">
                     <OtherEnvironmentsProperty obj={{ additionals: property.additionals }} />
                     <InterestPointsPropertySpecific text="pontos de interesse" />
@@ -212,6 +216,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                         category="3 " />
                 ]} />
             </div>
+            
             <div style={{ margin: "200px 0 100px 0" }}>
                 <RealterAssociatedVertical objPropertyList={{ realtorPropertySpecific: property?.realtorPropertySpecific ?? [] }}
                     WhatsappLink="aaadw"

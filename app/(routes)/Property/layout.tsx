@@ -12,10 +12,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <><HeaderAdm />
-    {children}
-    <Footer /></>
-        
-     
+         <>
+        <HeaderAdm/>
+        {children}
+        <Footer/>
+        </>
+
   )
 }

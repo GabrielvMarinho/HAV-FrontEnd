@@ -30,7 +30,18 @@ export default function NewScheduleModal(props :{propertyId :string, userId :str
     const [realtorDataFirst, setRealtorDataFirst] = useState({});
 
 
+    const [noHours, setNoHours] = useState(true)
 
+    useEffect(() =>{
+        const fetch = async function(){
+            const data = await FetchScheduleFutureByPropertyId(props.propertyId)
+            console.log(data)
+            if(data.length>0){
+                setNoHours(false)
+            }
+        }
+        fetch()
+    }) 
 
     const [hour, setHour] = useState<string | null>(null);
     const [day, setDay] = useState<string | null>(null);
@@ -51,7 +62,7 @@ export default function NewScheduleModal(props :{propertyId :string, userId :str
           const fetchData = async () => {
             try {
                 const data = await GetRealtorsPropertySpecific(parseInt(props.propertyId)) ?? [];
-                
+                console.log(data)
                 return data;
             } catch (error) {
                 console.error("Erro ao obter os corretores:", error);
@@ -97,6 +108,13 @@ export default function NewScheduleModal(props :{propertyId :string, userId :str
         }
     }, [realtor])
 
+
+
+
+    if(noHours){
+        return 
+        <></>
+    }
     if(page==0){
         return(
             <div className="modalNewSchedule">

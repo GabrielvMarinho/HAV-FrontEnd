@@ -8,11 +8,18 @@ import Shower from "../IconsTSX/Shower";
 import Button from "../Inputs/Button";
 import StarFavorite from "../Inputs/StarFavorite";
 import MarcadorDeMapa from "../IconsTSX/MarcadorDeMapa";
-import TapeCardImovel from "../Information/TapeCardImovel";
-import CategoryCardImovel from "../Information/CategoryCardImovel";
+import { useEffect, useState } from "react";
+import "./css/style.css";
+import { useRouter } from "next/navigation";
 
-export default function CardImovel(props: { obj: PropertySpecificCard }) {
-    const property = props.obj; // Recebe o objeto da propriedade via props
+
+export default function CardImovel({ obj, idUser }: CardImovelProps) {
+    const router = useRouter();
+    
+    function goToSpecificProperty(id: number | undefined) {
+        console.log(id)
+        router.push(`property/${id}`)
+    }
 
     return (
         <div style={{ width: "269px", display: "flex", flexDirection: "column" }}>
@@ -74,8 +81,16 @@ export default function CardImovel(props: { obj: PropertySpecificCard }) {
                     <StarFavorite idUser={props.idUser} idProperty={property?.id} width={27} height={27} color="#FFFF" selected={false} />
                     <MarcadorDeMapa width={22} height={22} color="" />
                 </div>
-            </article>
-        </section>
-    </div>
-);
+                <div style={{ width: "235px", height: "1px", backgroundColor: "var(--text-white)", opacity: "0.20", margin: "5px auto" }} />
+                <article style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <Button size="small" text="saiba mais" background="var(--text-white)" color="var(--box-red-pink)" 
+                    hover="lightHover" type="button" onClick={() => goToSpecificProperty(obj?.id)} />
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                        <StarFavorite idUser={props.idUser} idProperty={props.obj?.id} width={27} height={27} color="#FFFF" selected={false} />
+                        <MarcadorDeMapa width={22} height={22} color="" />
+                    </div>
+                </article>
+            </section>
+        </div>
+    );
 }

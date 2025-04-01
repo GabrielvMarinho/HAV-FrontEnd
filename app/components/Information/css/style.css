@@ -477,6 +477,15 @@
     gap: 30px;
     flex-wrap: wrap;
 }
+.modal {
+    position: sticky;
+    top: 100px; /* Distância inicial do topo */
+    width: 80%;
+    max-height: 10vh;
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
 .cardsAndFilter{
     display: flex;
     gap: 40px;
