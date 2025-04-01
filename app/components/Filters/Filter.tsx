@@ -1,6 +1,6 @@
 "use client"
 
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import SearchIcon from "../IconsTSX/SearchIcon";
 import "../../variables.css"
 import './css/style.css';
@@ -12,10 +12,11 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import ButtonComprarAlugar from "../Inputs/ToggleRentOrBuy";
 import ChooseQuantity from "../Inputs/ChooseQuantity";
 import { InputChooseQuantity } from "../globalFormsConfig/InputChooseQuantity";
+import ToggleRentOrBuy from "../Inputs/ToggleRentOrBuy";
+import { InputFilterConfig } from "../globalFormsConfig/InputFilterConfig";
 
-export default function Filter(props: {size :string, inputs :any[], inputsDropdown :any[], inputPriceRanges :any[] | null, inputChooseQuantites:any[] | null}){
-    
-    const inputPriceRanges = props.inputPriceRanges ?? [];
+export default function Filter(props: {admin? :string, size :string, property :boolean, inputs :any[], inputsDropdown :any[], inputChooseQuantites:any[] | null}){
+
     const inputChooseQuantites = props.inputChooseQuantites ?? [];
     const inputsDropdown = props.inputsDropdown ?? [];
     const inputs = props.inputs ?? [];
@@ -31,23 +32,32 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
     }, {})
     );
 
-    
-    const [priceRange, setPriceRange] = useState({ min: inputPriceRanges?.[0]?.min ?? 0, max: inputPriceRanges?.[0]?.max });
+    const [selected, setSelected] = useState<'sell' | 'rent'>('sell');
+
     
 
-    const handlePriceChange = (min: number, max: number) => {
-        if(!inputPriceRanges) return 
-        if(max==2000000) max = 100000000
-        setPriceRange({ min, max });
+    const getPriceRange = (purpose: 'sell' | 'rent') => {
+        return purpose === 'sell'
+            ? { min: InputFilterConfig.priceRangesSell.min ?? 0, max: InputFilterConfig.priceRangesSell.max }
+            : { min: InputFilterConfig.priceRangesRent.min ?? 0, max: InputFilterConfig.priceRangesRent.max };
     };
 
+    const [priceRange, setPriceRange] = useState(getPriceRange(selected));
+
+    const handlePriceChange = (min: number, max: number) => {
+        setPriceRange({ min, max });
+    };
+    
+    
     const pathname = usePathname()
     
       
     
     return(
         <form action={pathname} className="filterSide">
-
+            {props.property ?
+                <ToggleRentOrBuy selected={selected} onChange={(purpose) => setSelected(purpose)}/>:""
+            }
             {inputs.map((input) => (
                 input &&
                 <InputText
@@ -81,18 +91,31 @@ export default function Filter(props: {size :string, inputs :any[], inputsDropdo
             ))
 
             }
-            {inputPriceRanges.map((input) => (
-                input &&
+            {props.property ?
+            
+            selected==="rent"? 
+            
                 <PriceRangeSlider
-                    name = {input.name}
-                    min={input.min}
-                    max={input.max}
-                    step={input.step}
-                    id={input.id}
+                    name = {InputFilterConfig.priceRangesRent.name}
+                    min={InputFilterConfig.priceRangesRent.min}
+                    max={InputFilterConfig.priceRangesRent.max}
+                    step={InputFilterConfig.priceRangesRent.step}
+                    id={InputFilterConfig.priceRangesRent.id}
                     onChange={handlePriceChange}
                     
                 />
-            ))}
+                :
+                <PriceRangeSlider
+                    name = {InputFilterConfig.priceRangesSell.name}
+                    min={InputFilterConfig.priceRangesSell.min}
+                    max={InputFilterConfig.priceRangesSell.max}
+                    step={InputFilterConfig.priceRangesSell.step}
+                    id={InputFilterConfig.priceRangesSell.id}
+                    onChange={handlePriceChange}
+                    
+                />
+                :""
+            }
             <button type="submit" className="buttonBuscaClaro lightHover">
                 <SearchIcon height={35} width={35} color={"var(--box-red-pink)"}/>
             </button>

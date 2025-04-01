@@ -2,6 +2,6 @@ interface Property {
     id: string;
     price: string;
     propertyType: string;
-    propertyCategory: string;
+    purpose: string;
     propertyStatus: string;
 }

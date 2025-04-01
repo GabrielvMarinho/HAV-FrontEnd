@@ -34,7 +34,7 @@ export default async function page({searchParams}: {searchParams: {
        propertyStatus=null, page=0, bedRoom=null, 
       bathRoom=null, garageSpace=null, suite=null, purpose=null} = params
     
-    const {properties, totalPages} = await getByParamsProperties(propertyCode, propertyType, propertyStatus, 
+    const {properties, totalPages} = await getByParamsProperties(propertyCode, propertyType,  propertyStatus, 
       minPrice, maxPrice, false, page, bedRoom, bathRoom, garageSpace, suite, purpose)
     
 
@@ -63,7 +63,7 @@ export default async function page({searchParams}: {searchParams: {
             <Filter 
             size="medium" 
             inputs={inputs}
-            inputsDropdown={[dropdownFields.propertyType, dropdownFields.purpose, dropdownFields.status]}
+            inputsDropdown={[dropdownFields.propertyType, dropdownFields.status, dropdownFields.purpose]}
             inputPriceRanges={priceRanges}
             inputChooseQuantites={[]}
 
