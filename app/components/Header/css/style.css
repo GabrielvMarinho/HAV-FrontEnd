@@ -141,3 +141,17 @@
 .rotateIcon{
     rotate: 180deg;
 }
+
+.favoritesP1{
+    font-size: var(--text-ml);
+    font-weight: 400;
+    color: var(--box-mid-dark-red);
+    text-transform: uppercase;
+}
+
+.favoritesP2{
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text--mid-dark-red);
+    text-transform: uppercase;
+}
