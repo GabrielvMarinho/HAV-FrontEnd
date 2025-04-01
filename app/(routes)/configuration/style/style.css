@@ -5,14 +5,12 @@
     background-color: var(--box-red-pink);
     border-radius: var(--border-box);
     width: 1060px;
-    max-height: 552px;
+    height: 552px;
     display: flex;
     align-items: center;
     flex-direction: row;
     gap: 30px;
     justify-content: center;
-    position: relative;
-    overflow: visible;
 }
 
 .info-section {
@@ -31,6 +29,10 @@
     margin: 0;
     padding: 0;
     text-transform: uppercase;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    display: flex;
 }
 
 .personName {
@@ -110,11 +112,10 @@
 }
 
 .divButtonSaveForms {
-    position: absolute;
-    right: 30px;
-    bottom: 30px;
-    margin: 0 !important;
-    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 2rem 0 -4rem 34rem;
 }
 
 .changeButton {
@@ -240,22 +241,30 @@
         margin-top: 40px;
     }
     
-    .imgPerson, 
-    .imgProperty {
+    .imgPerson, .imgProperty {
         width: 210px;
         height: 209px;
         border-radius: 1.864px;
+        background-color: black;
         display: flex;
         align-items: flex-end;
         justify-content: flex-end;
     }
     
     .divButtonsAceptCancelForms {
-        position: relative;
-        right: auto;
-        bottom: auto;
-        justify-content: center;
-        margin-top: 20px !important;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+
+    .divInputs{
+        flex-direction: "column"; 
+    }
+
+    .titleModal{
+        font-size: var(--text-m);
     }
 
     .menuColumns {
