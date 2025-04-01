@@ -9,12 +9,10 @@ import globalDatabaseNameConverter from "@/app/globalDatabaseNameConverter";
 
 export default function SchedulingCard(props: {obj :Record<string, string | string[]>}) {
     const { city, neighborhood, hours, name, phone } = props.obj;
-    console.log(hours)
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const toggleModal = function(){
         setIsModalOpen(!isModalOpen)
-        console.log(isModalOpen)
     }
     return(
         <div className="cardContainer">

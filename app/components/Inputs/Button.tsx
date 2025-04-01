@@ -1,7 +1,7 @@
 import './css/style.css';
 
-export default function Button(props: {type :"button"|"submit"|"reset"; 
-    size: string; text:string; hover :string; color :string, background :string; onClick?: () => void}) {
+export default function Button(props: {type? :"button"|"submit"|"reset"; 
+    size?: string; text?:string; hover? :string; color? :string, background? :string; onClick?: () => void}) {
 
     return (
         <button 
