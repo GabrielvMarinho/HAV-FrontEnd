@@ -12,11 +12,14 @@ import SearchResult from "@/app/components/Inputs/SearchResult";
 import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdownsConfig";
 import CardImovel from "@/app/components/Cards/CardImovel";
 import { useState } from "react";
-import "../css/style.css"
+import "./css/style.css"
 import StarFavorite from "@/app/components/Inputs/StarFavorite";
+import ListaImoveis from "@/app/components/Cards/ListaImoveis";
 
 
 export default function favorite() {
+
+    const idUser = 1;
 
     return (
         <>
@@ -42,7 +45,7 @@ export default function favorite() {
                 </div>
 
             </div>
-            <CardImovel />
+            <ListaImoveis idUser={idUser}/>
         </>
     )
 
