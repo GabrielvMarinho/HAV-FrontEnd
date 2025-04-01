@@ -9,6 +9,9 @@ import Envelope from "@/app/components/IconsTSX/Envelope";
 import MarcadorDeMapa from "@/app/components/IconsTSX/MarcadorDeMapa";
 import InputText from "@/app/components/Inputs/InputText";
 import StatusScheduling from "@/app/components/Information/StatusScheduling";
+import InputTextArea from "@/app/components/Inputs/InputTextArea";
+import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
+import ContactUsForm from "@/app/components/Forms/ContactUseForm";
 
 export default function contactus() {
     return (
@@ -43,24 +46,7 @@ export default function contactus() {
                     </div>
                 </div>
                 
-                <div className="subContainerContactUs">
-                    <h2 className="contatoTitle"> FORMULÁRIO DE CONTATO </h2>
-                    <div className="containerInputs">
-                        <div className="inputsContactUs">
-                            <InputText name="name" size="large" id="User" text="Nome" placeholder="Digite seu nome"/>
-                        </div>
-                        <div className="inputsContactUs">
-                            <InputText name="name" size="large" id="User" text="Telefone" placeholder="Digite seu telefone"/>
-                        </div>
-                        <div className="inputsContactUs">
-                            <InputText name="name" size="large" id="User" text="E-mail" placeholder="Digite seu e-mail"/>
-                        </div>
-                        <div className="inputMensageContactUs">
-                            <InputText name="name" size="extense" id="User" text="Mensagem" placeholder="Digite seu e-mail"/>
-                        </div>
-                    </div>
-                    <Button type="button" size="large" text="ENVIAR" hover="darken" color="#B23F52" background="white"/>
-                </div>
+                <ContactUsForm />
            </div>
         <Footer />
         </>
