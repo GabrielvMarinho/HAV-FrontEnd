@@ -7,12 +7,15 @@ import "../../pageStructure.css";
 import Title from "@/app/components/NonInteractable/Title";
 import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdownsConfig";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
+import ModalScheduling from "@/app/components/Modal/ModalScheduling";
 
 export default function schedulingHistory(){
     return(
         <> 
         <HeaderAdm/>
         <Title tag="h1" text="Histórico" /> 
+        <ModalScheduling/>
+
         <NavBarAdm options={NavBarPath.historic} />
         <div className="dropdownSchedulingHistory">
         <InputDropdown

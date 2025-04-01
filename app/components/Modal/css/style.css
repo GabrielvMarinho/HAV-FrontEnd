@@ -27,6 +27,131 @@
     gap: 30px;
 }
 
+.containerModalScheduling{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--text-white);
+    width: 430px;
+    height: 470px;
+}
+
+.containerModalScheduling .imageMainContainer{
+    height: 120px;
+    background-color: black;
+}
+
+.idPropertyModalScheduling{
+    font-size: var(--text-xs);
+    color: var(--text-red-pink);
+    margin-top: 10px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: end;
+}
+
+.cityName{
+    font-size: var(--text-xs);
+    color: var(--text-red-pink);
+    margin-left: 20px;
+}
+
+.neighborhoodName{
+    color: var(--text--mid-dark-red);
+    font-size: var(--text-m);
+    margin-left: 20px;
+}
+
+.priceModalScheduling{
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: var(--text-ml);
+}
+
+.containerPriceCategory{
+    display: flex;
+    align-items: center;
+}
+
+.CategoryCardImovelModalScheduling{
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+.CategoryCardImovelModalSchedulingType{
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+.lineModalScheduling{
+    width: 70%;
+    margin-top: 10px;
+    margin-left: 65px;
+    padding: 0.5px;
+    background-color: var(--text-red-pink);
+}
+
+.circulo{
+    margin-top: 10px;
+    width: 20px;
+    height: 20px;
+    padding: 20px;
+    border-radius: 50px;
+    background-color: var(--text-dark-red);
+}
+
+.titleModalScheduling{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.realtorInformation{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.containerinformationsModalScheduling{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.informationsModalScheduling{
+    display: flex;
+    flex-direction: row;
+}
+
+.informationsrealtor{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.caixinha{
+    padding: 3.5px;
+    border-radius: 5px;
+    text-align: center;
+    background-color:aquamarine;
+    font-size: var(--text-xs);
+}
+
+.realtor{
+    font-size: var(--text-xs);
+    margin-left: -80px;
+}
+
+.localization{
+    font-size: var(--text-xs);
+}
+
+.nameRealtor{
+    font-size: var(--text-xs);
+}
+
+.cellphoneRealtor{
+    font-size: var(--text-xs);
+}
+
 @media (max-width: 992px){
     .modal{
        width: 200px;
