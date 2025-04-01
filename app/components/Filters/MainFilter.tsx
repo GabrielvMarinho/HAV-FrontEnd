@@ -92,7 +92,7 @@ export default function MainFilter(){
                     size={"large"}
                     id={dropdownFields.neighborhood.id}
                 />
-                <button type="submit" className="buttonBuscaClaro lightHover">
+                <button type="submit" className="pointer buttonBuscaClaro lightHover">
                 <SearchIcon height={35} width={35} color={"var(--box-red-pink)"}/>
                 </button>
             </div>
