@@ -1,5 +1,6 @@
 "use client";
-
+import { useState, useEffect } from "react";
+import searchPropertyByIdSpecific from "@/app/apiCalls/Property/searchPropertyByIdSpecific";
 import Image from "next/image";
 import ImageCasa from "@/public/Image/ImagemCasa.png";
 import Bed from "../IconsTSX/Bed";
@@ -8,48 +9,46 @@ import Shower from "../IconsTSX/Shower";
 import Button from "../Inputs/Button";
 import StarFavorite from "../Inputs/StarFavorite";
 import MarcadorDeMapa from "../IconsTSX/MarcadorDeMapa";
-import { useEffect, useState } from "react";
 import "./css/style.css";
-import FavoriteProperty from "@/app/apiCalls/Property/FavoriteProperty";
+import { useRouter } from "next/navigation";
 import TapeCardImovel from "../Information/TapeCardImovel";
 import CategoryCardImovel from "../Information/CategoryCardImovel";
-import { useRouter } from "next/navigation";
 
+interface CardImovelProps {
+    obj: PropertySpecificCard | null;
+    idUser: number;
+}
 
 export default function CardImovel({ obj, idUser }: CardImovelProps) {
     const router = useRouter();
-    
     function goToSpecificProperty(id: number | undefined) {
         console.log(id)
-        router.push(`property/${id}`)
+        router.push (`/Property/${id}`)
     }
 
     return (
         <div style={{ width: "269px", display: "flex", flexDirection: "column" }}>
-
             <section style={{ position: "relative", display: "inline-block" }}>
-                {/* Container para os elementos sobrepostos */}
+               
                 <div
                     style={{
                         position: "absolute",
-                        top: "10px", // Ajuste conforme necessário
-                        left: "10px", // Ajuste conforme necessário
+                        top: "10px", 
+                        left: "10px", 
                         display: "flex",
                         flexDirection: "row",
                         alignItems: "center",
-                        gap: "20px",
-                        zIndex: 2, // Garante que fique sobre a imagem
+                        gap: "24px",
+                        zIndex: 2, 
                     }}
                 >
                     <div style={{ marginLeft: "-26px" }}>
-                        <TapeCardImovel text={props.obj?.propertyStatus || "Não informado"} />
+                        <TapeCardImovel text={obj?.propertyStatus || "Não informado"} />
                     </div>
                     <div style={{ marginTop: "15px" }}>
-                        <CategoryCardImovel text={props.obj?.purpose || "Sem dados"} />
+                        <CategoryCardImovel text={obj?.purpose || "Sem dados"} />
                     </div>
-                </div>
-
-                {/* Imagem */}
+                </div>  
                 <Image
                     src={ImageCasa}
                     alt="imagem da casa"
@@ -57,32 +56,31 @@ export default function CardImovel({ obj, idUser }: CardImovelProps) {
                 />
             </section>
 
-
             <section className="cardImovelSection" style={{ backgroundColor: "var(--button-color)", color: "var(--text-white)", borderRadius: "0 0 10px 10px" }}>
                 <div>
-                    <p className="bairro">{props.obj?.address.neighborhood || "Não informado"}</p>
-                    <p className="cidade">{props.obj?.address.city || "Não informado"}</p>
+                    <p className="bairro">{obj?.neighborhood}</p>
+                    <p className="cidade">{obj?.city}</p>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                     <p className="valorImovel">
-                        R${props.obj?.price}
-                        {props.obj?.purpose === "locacao" && <span className="rentingText">/mês</span>}
+                        R${obj?.price}
+                        {obj?.purpose === "locacao" && <span className="rentingText">/mês</span>}
                     </p>
                     <div className="infoImovel">
                         <Bed width={18} height={18} color="" />
-                        <p>{props.obj?.propertyFeatures.bedRoom || 0}</p>
+                        <p>{obj?.bedRoom}</p>
                         <Sofa width={18} height={18} color="" />
-                        <p>{props.obj?.propertyFeatures.livingRoom || 0}</p>
+                        <p>{obj?.livingRoom}</p>
                         <Shower width={18} height={18} color="" />
-                        <p>{props.obj?.propertyFeatures.bathRoom || 0}</p>
+                        <p>{obj?.bathRoom}</p>
                     </div>
                 </div>
                 <div style={{ width: "235px", height: "1px", backgroundColor: "var(--text-white)", opacity: "0.20", margin: "5px auto" }} />
                 <article style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <Button size="small" text="saiba mais" background="var(--text-white)" color="var(--box-red-pink)" 
-                    hover="lightHover" type="button" onClick={() => goToSpecificProperty(obj?.id)} />
+                    <Button size="small" text="saiba mais" background="var(--text-white)" color="var(--box-red-pink)"
+                        hover="lightHover" type="button" onClick={() => goToSpecificProperty(obj?.id)} />
                     <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                        <StarFavorite idUser={props.idUser} idProperty={props.obj?.id} width={27} height={27} color="#FFFF" selected={false} />
+                        <StarFavorite idUser={idUser} idProperty={obj?.id} width={27} height={27} color="#FFFF" selected={false} />
                         <MarcadorDeMapa width={22} height={22} color="" />
                     </div>
                 </article>

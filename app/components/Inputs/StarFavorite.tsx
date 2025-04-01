@@ -2,8 +2,8 @@
 import { useState } from "react";
 import SelectedStar from "../IconsTSX/SelectedStar";
 import NotSelectedStar from "../IconsTSX/NotSelectedStar";
-import favoriteProperty from "@/app/apiCalls/Property/FavoriteProperty";
-import unfavoriteProperty from "@/app/apiCalls/Property/UnFavoriteProperty";
+import { favoriteProperty} from "@/app/apiCalls/Property/FavoriteProperty";
+import { unfavoriteProperty}  from "@/app/apiCalls/Property/UnFavoriteProperty";
 
 interface StarFavoriteProps {
     idUser: number;
@@ -14,7 +14,7 @@ interface StarFavoriteProps {
     color: string;
 }
 
-export default function StarFavorite({ idUser, idProperty, selected, width, height, color }: StarFavoriteProps) {
+export default function StarFavorite({ idUser, idProperty, selected, width, height, color}: StarFavoriteProps) {
     const [isFavorite, setIsFavorite] = useState(selected);
 
     const toggleStar = async () => {
@@ -37,7 +37,7 @@ export default function StarFavorite({ idUser, idProperty, selected, width, heig
             {isFavorite ? (
                 <SelectedStar width={width} height={height} color={color} />
             ) : (
-                <NotSelectedStar width={width} height={height} color={color} />
+                <NotSelectedStar width={width} height={height} color={"#000000"} />
             )}
         </div>
     );

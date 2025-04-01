@@ -1,5 +1,5 @@
-export default async function unfavoriteProperty(idUser: number, idProperty: number): Promise<void> {
-    const url = `http://localhost:9090/favorites/${idUser}/${idProperty}`;
+export async function unfavoriteProperty(idUser: number, idProperty: number): Promise<void> {
+    const url = `http://localhost:9090/favorites/desfavoritar/${idUser}/${idProperty}`;
 
     try {
         const response = await fetch(url, { method: "DELETE" });
