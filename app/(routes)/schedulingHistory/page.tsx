@@ -24,7 +24,7 @@ export default async function schedulingHistory({searchParams}: {searchParams:{
         <> 
         <HeaderAdm/>
         <Title tag="h1" text="Histórico" /> 
-        <ModalScheduling/>
+        {/* <ModalScheduling/> */}
 
         <NavBarAdm options={NavBarPath.historic} />
         <div className="dropdownSchedulingHistory">
