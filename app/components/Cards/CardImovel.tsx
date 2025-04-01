@@ -1,5 +1,5 @@
-"use client"
-import { useState, useEffect } from "react";  
+"use client";
+import { useState, useEffect } from "react";
 import searchPropertyByIdSpecific from "@/app/apiCalls/Property/searchPropertyByIdSpecific";
 import Image from "next/image";
 import ImageCasa from "@/public/Image/ImagemCasa.png";
@@ -9,33 +9,37 @@ import Shower from "../IconsTSX/Shower";
 import Button from "../Inputs/Button";
 import StarFavorite from "../Inputs/StarFavorite";
 import MarcadorDeMapa from "../IconsTSX/MarcadorDeMapa";
-import TapeCardImovel from "../Information/TapeCardImovel";
-import CategoryCardImovel from "../Information/CategoryCardImovel";
 import "./css/style.css";
 
+interface CardImovelProps {
+    obj: PropertySpecific | null;
+    idUser: number;
+}
 
-export default function CardImovel(props:{ obj: PropertySpecific | null }) {
-    
-    const [property, setProperty] = useState<PropertySpecific | null>(props.obj);
+export default function CardImovel({ obj, idUser }: CardImovelProps) {
+    const [property, setProperty] = useState<PropertySpecific | null>(obj);
 
     useEffect(() => {
-                async function fetchProperty() {
-            if (!props.obj?.id) return; // Se não tiver um ID válido, não faz a requisição
+        async function fetchProperty() {
+            if (!obj?.id) return;
 
             try {
-                const response = await searchPropertyByIdSpecific(props.obj?.id);
+                const response = await searchPropertyByIdSpecific(obj.id);
                 console.log("Resposta da API:", response);
-                setProperty(response); // Atualiza o estado com os dados reais
+                setProperty(response); 
+                console.log(obj);
             } catch (error) {
                 console.log("Erro ao buscar propriedade:", error);
             }
         }
-
-        // fetchProperty();
-    }, [props.obj?.id]);
+        
+        if (obj?.id) {
+            fetchProperty();
+        }
+    }, [obj?.id]);  
 
     const defaultProperty: PropertySpecific = {
-        id: 0,
+        id: 1,  // Forçar um id válido para evitar erros
         address: {
             neighborhood: "Não informado",
             city: "Não informado",
@@ -51,64 +55,51 @@ export default function CardImovel(props:{ obj: PropertySpecific | null }) {
             isFurnished: false,
         },
         propertyStatus: "Indisponível",
+        purpose: "Desconhecido",
+        price: 0,
         additionals: [],
-        propertyCode: "N/A",
+        propertyCode: "0000",
         promotionalPrice: 0,
         actualPrice: 0,
         taxes: 0,
-        purpose: "Desconhecido",
         propertyDescription: "Descrição não disponível",
         propertyType: "Desconhecido",
         realtorPropertySpecific: [],
-        price: 0,
     };
 
-    const finalProperty = property ?? defaultProperty; // Usa `defaultProperty` caso `property` seja null
+    // Usando os dados da propriedade ou o valor padrão
+    const finalProperty = property ? property : defaultProperty;
 
     return (
         <div style={{ width: "269px", display: "flex", flexDirection: "column" }}>
             <section style={{ position: "relative", display: "inline-block" }}>
-                <div style={{
-                    position: "absolute",
-                    top: "5px",
-                    left: "-16px",
-                    display: "flex",
-                    alignItems: "center",
-                }}>
-                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "22px" }}>
-                        <TapeCardImovel text={finalProperty.propertyStatus} />
-                        <CategoryCardImovel text={finalProperty.purpose} />
-                    </div>
-                </div>
-
                 <Image src={ImageCasa} alt="imagem da casa" style={{ display: "block", width: "100%", height: "auto" }} />
             </section>
 
-            <section className="cardImovelSection" style={{ backgroundColor: "var(--button-color)", color: "var(--text-white)", height: "fit-content", borderRadius: "0 0 10px 10px" }}>
-                <div style={{ display: "flex", textAlign: "left", flexDirection: "column" }}>
+            <section className="cardImovelSection" style={{ backgroundColor: "var(--button-color)", color: "var(--text-white)", borderRadius: "0 0 10px 10px" }}>
+                <div>
                     <p className="bairro">{finalProperty.address.neighborhood}</p>
                     <p className="cidade">{finalProperty.address.city}</p>
                 </div>
-                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: "12px" }}>
-                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-                        <p className="valorImovel">R${finalProperty.price}{finalProperty.purpose === "locacao" && <span className="rentingText">/mês</span>}</p>
-                    </div>
-                    <div style={{ display: "flex" }}>
-                        <div className="infoImovel">
-                            <Bed width={18} height={18} color="" />
-                            <p className="infoQuantity">{finalProperty.propertyFeature.bedRoom}</p>
-                            <Sofa width={18} height={18} color="" />
-                            <p className="infoQuantity">{finalProperty.propertyFeature.livingRoom}</p>
-                            <Shower width={18} height={18} color="" />
-                            <p className="infoQuantity">{finalProperty.propertyFeature.bathRoom}</p>
-                        </div>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <p className="valorImovel">
+                        R${finalProperty.price}
+                        {finalProperty.purpose === "locacao" && <span className="rentingText">/mês</span>}
+                    </p>
+                    <div className="infoImovel">
+                        <Bed width={18} height={18} color="" />
+                        <p>{finalProperty.propertyFeature.bedRoom}</p>
+                        <Sofa width={18} height={18} color="" />
+                        <p>{finalProperty.propertyFeature.livingRoom}</p>
+                        <Shower width={18} height={18} color="" />
+                        <p>{finalProperty.propertyFeature.bathRoom}</p>
                     </div>
                 </div>
                 <div style={{ width: "235px", height: "1px", backgroundColor: "var(--text-white)", opacity: "0.20", margin: "5px auto" }} />
-                <article style={{ display: "flex", flexDirection: "row", gap: "55px", alignItems: "center" }}>
-                    <Button size="small" text="saiba mais" background="var(--text-white)" color="var(--box-red-pink)" hover="lightHover" />
-                    <div style={{ display: "flex", flexDirection: "row", gap: "7.92px", opacity: 0.6, alignItems: "center" }}>
-                        <StarFavorite width={27} height={27} color="#FFFF" selected={false} />
+                <article style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                    <Button size="small" text="saiba mais" background="var(--text-white)" color="var(--box-red-pink)" hover="lightHover" type="button" />
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                        <StarFavorite idUser={idUser} idProperty={finalProperty.id} width={27} height={27} color="#FFFF" selected={false} />
                         <MarcadorDeMapa width={22} height={22} color="" />
                     </div>
                 </article>

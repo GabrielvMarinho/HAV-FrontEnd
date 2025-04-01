@@ -34,7 +34,7 @@ export default function FormAddRealter() {
     
 
     function onSubmit(data: NewRealtor) {
-        console.log("asd")
+        console.log(data)
         if (Object.keys(form.formState.errors).length > 0) {
             return;
         }

@@ -8,7 +8,17 @@ import Title from "@/app/components/NonInteractable/Title";
 import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdownsConfig";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 
-export default function schedulingHistory(){
+export default async function schedulingHistory({searchParams}: {searchParams:{
+    page?: string;
+    data?: string;
+    status?: string;
+
+}}){
+    const realtorId = "1"
+    const customerId = "4"
+
+    const params = await searchParams;
+    const {page=0, data=null, status=null} = params
     return(
         <> 
         <HeaderAdm/>
@@ -16,12 +26,12 @@ export default function schedulingHistory(){
         <NavBarAdm options={NavBarPath.historic} />
         <div className="dropdownSchedulingHistory">
         <InputDropdown
-            key={dropdownFields.data.id}
-            name={dropdownFields.data.name}
-            size={dropdownFields.data.size}
-            title={dropdownFields.data.title}
-            id={dropdownFields.data.id}
-            options={dropdownFields.data.options}
+            key={dropdownFields.date.id}
+            name={dropdownFields.date.name}
+            size={dropdownFields.date.size}
+            title={dropdownFields.date.title}
+            id={dropdownFields.date.id}
+            options={dropdownFields.date.options}
         />
         <div className="dropdownSegundo">
         <InputDropdown
@@ -34,7 +44,7 @@ export default function schedulingHistory(){
         />
         </div>
         </div>
-        <TableListHistory totalPages={2} titles={["Data/Hora", "Corretor", "Finalidade", "tipo imovel", "status" ]}  data={[]}/>
+        <TableListHistory data={data} status={status} page={page} id={customerId} for={"customer"} titles={["Data/Hora", "Corretor", "Finalidade", "tipo imovel", "status" ]} />
         <Footer/>
         </>
     )
