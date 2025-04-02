@@ -24,7 +24,7 @@ export default function calendar(){
     const [selected, setSelected] = useState<Date>();
     const [data, setData] = useState();
 
-    const realtorId = "9"
+    const realtorId = "1"
     const customerId = "8"
     const propertyId = "29"
 

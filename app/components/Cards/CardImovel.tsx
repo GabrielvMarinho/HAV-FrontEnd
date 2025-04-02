@@ -23,7 +23,7 @@ export default function CardImovel({ obj, idUser }: CardImovelProps) {
     const router = useRouter();
     function goToSpecificProperty(id: number | undefined) {
         console.log(id)
-        router.push (`/Property/${id}`)
+        router.push (`/property/${id}`)
     }
 
     return (
