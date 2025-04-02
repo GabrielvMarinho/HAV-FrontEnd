@@ -37,7 +37,7 @@ export default function StarFavorite({ idUser, idProperty, selected, width, heig
             {isFavorite ? (
                 <SelectedStar width={width} height={height} color={color} />
             ) : (
-                <NotSelectedStar width={width} height={height} color={"#000000"} />
+                <NotSelectedStar width={width} height={height} color={color} />
             )}
         </div>
     );

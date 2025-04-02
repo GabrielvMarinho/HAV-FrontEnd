@@ -12,4 +12,6 @@ export default function Construcao({ width, height, color }: Icon) {
         </clipPath>
         </defs>
         </svg>
-    )}
+    );
+}
+
