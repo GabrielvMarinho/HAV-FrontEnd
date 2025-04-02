@@ -2,15 +2,16 @@ interface PropertySpecificCard {
     id: number;
     propertyStatus: string;
     promotionalPrice: number;
+    area: number;
+    image: Base64URLString
     price: number; 
     purpose: string; 
-    address: {
-        neighborhood: string;
-        city: string;
-    }
-    propertyFeatures: {
-        bathRoom: number;
-        bedRoom: number;
-        livingRoom: number
-    }
+    neighborhood: string;
+    city: string;
+    suite: number;
+    garageSpace: number;
+    bathRoom: number;
+    bedRoom: number;
+    livingRoom: number
+    
 }
