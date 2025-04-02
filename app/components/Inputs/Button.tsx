@@ -6,7 +6,7 @@ export default function Button(props: {type? :"button"|"submit"|"reset";
     return (
         <button 
             type={props.type}
-            className={`${props.size}Button button ${props.hover}`}
+            className={`${props.size}Button button pointer ${props.hover}`}
             style={{color: props.color, backgroundColor: props.background }}
             onClick={props.onClick}
         >

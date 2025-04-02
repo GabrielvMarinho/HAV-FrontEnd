@@ -64,7 +64,7 @@ export default function PriceRangeSlider(props: {min :number, max :number, step 
         <div className="range-input">
           <input
             name="minPrice"
-            type="range"
+            type="range" 
             className="range-min"
             min={props.min}
             max={props.max}

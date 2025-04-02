@@ -1,11 +1,10 @@
-export default async function (idUser: number, idProperty: number): Promise<void> {
-
-    const url = `https://localhost9090/favorites/${idUser}/${idProperty}`
+export async function favoriteProperty(idUser: number, idProperty: number): Promise<Response> {
+    const url = `http://localhost:9090/favorites/favoritar/${idUser}/${idProperty}`;
     try {
         const response = await fetch(url, {
-            method: "post",
+            method: "POST", 
             headers: {
-                "Content-Type": "applications/json",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 userId: idUser,
@@ -14,11 +13,13 @@ export default async function (idUser: number, idProperty: number): Promise<void
         });
 
         if (!response.ok) {
-            throw new Error(`Erro na api ${response.status}`)
+            throw new Error(`Erro na API ${response.status}`);
         }
 
         console.log("Propriedade favoritada com sucesso");
+        return response;
     } catch (error) {
         console.log("Erro ao favoritar a propriedade ", error);
+        throw error;
     }
 }

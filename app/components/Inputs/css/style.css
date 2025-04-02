@@ -245,7 +245,6 @@ summary {
 
 .extenseInput{
     width: 290px;
-    height: 180px;
     
 }
 
@@ -583,7 +582,6 @@ background-color: var(--text-white);
 
     .extenseInput{
         width: 250px;
-        height: 200px;
         
     }
 }

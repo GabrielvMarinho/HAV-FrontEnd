@@ -10,6 +10,9 @@ import Button from "../Inputs/Button";
 import StarFavorite from "../Inputs/StarFavorite";
 import MarcadorDeMapa from "../IconsTSX/MarcadorDeMapa";
 import "./css/style.css";
+import { useRouter } from "next/navigation";
+import TapeCardImovel from "../Information/TapeCardImovel";
+import CategoryCardImovel from "../Information/CategoryCardImovel";
 
 interface CardImovelProps {
     obj: PropertySpecificCard | null;
@@ -17,14 +20,40 @@ interface CardImovelProps {
 }
 
 export default function CardImovel({ obj, idUser }: CardImovelProps) {
+    const router = useRouter();
+    function goToSpecificProperty(id: number | undefined) {
+        console.log(id)
+        router.push (`/Property/${id}`)
+    }
 
-    console.log(obj)
-
-    
     return (
         <div style={{ width: "269px", display: "flex", flexDirection: "column" }}>
             <section style={{ position: "relative", display: "inline-block" }}>
-                <Image src={ImageCasa} alt="imagem da casa" style={{ display: "block", width: "100%", height: "auto" }} />
+               
+                <div
+                    style={{
+                        position: "absolute",
+                        top: "10px", 
+                        left: "10px", 
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        gap: "24px",
+                        zIndex: 2, 
+                    }}
+                >
+                    <div style={{ marginLeft: "-26px" }}>
+                        <TapeCardImovel text={obj?.propertyStatus || "Não informado"} />
+                    </div>
+                    <div style={{ marginTop: "15px" }}>
+                        <CategoryCardImovel text={obj?.purpose || "Sem dados"} />
+                    </div>
+                </div>  
+                <Image
+                    src={ImageCasa}
+                    alt="imagem da casa"
+                    style={{ display: "block", width: "100%", height: "auto" }}
+                />
             </section>
 
             <section className="cardImovelSection" style={{ backgroundColor: "var(--button-color)", color: "var(--text-white)", borderRadius: "0 0 10px 10px" }}>
@@ -48,7 +77,8 @@ export default function CardImovel({ obj, idUser }: CardImovelProps) {
                 </div>
                 <div style={{ width: "235px", height: "1px", backgroundColor: "var(--text-white)", opacity: "0.20", margin: "5px auto" }} />
                 <article style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <Button size="small" text="saiba mais" background="var(--text-white)" color="var(--box-red-pink)" hover="lightHover" type="button" />
+                    <Button size="small" text="saiba mais" background="var(--text-white)" color="var(--box-red-pink)"
+                        hover="lightHover" type="button" onClick={() => goToSpecificProperty(obj?.id)} />
                     <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                         <StarFavorite idUser={idUser} idProperty={obj?.id} width={27} height={27} color="#FFFF" selected={false} />
                         <MarcadorDeMapa width={22} height={22} color="" />

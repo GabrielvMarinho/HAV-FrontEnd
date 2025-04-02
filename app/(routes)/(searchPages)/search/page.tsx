@@ -1,6 +1,7 @@
 import getByParamsProperties from "@/app/apiCalls/Property/getByParamsPropertiesCard";
 import Filter from "@/app/components/Filters/Filter";
 import CardContainer from "@/app/components/Information/CardContainer";
+import NoRegistration from "@/app/components/Information/NoRegistration";
 import ChooseQuantity from "@/app/components/Inputs/ChooseQuantity";
 import SearchResult from "@/app/components/Inputs/SearchResult";
 import ToggleRentOrBuy from "@/app/components/Inputs/ToggleRentOrBuy";
@@ -31,25 +32,31 @@ export default async function({searchParams} :{searchParams: {
     const {properties, totalPages} = await getByParamsProperties(propertyCode, propertyType, propertyStatus, 
         minPrice, maxPrice, false, page, bedRoom, bathRoom, garageSpace, suite, purpose)
 
-    
+    console.log(properties.length)
     return (
         <>
         <SearchResult typeSearch="locacao"/>
         <div className={"cardsAndFilter"}>
-            <Filter 
-                size="medium" 
-                
-                inputs={
-                []
-                }
-                inputsDropdown={[
-                    dropdownFields.propertyType,                
-                ]}
-                property={true}
-                inputChooseQuantites={[InputChooseQuantity.bedRoom,InputChooseQuantity.bathRoom, 
-                    InputChooseQuantity.garageSpace,InputChooseQuantity.suite ]}
-                />
-            <CardContainer cards={properties} totalPages={totalPages}/>
+                <Filter 
+                    size="medium" 
+                    
+                    inputs={
+                    []
+                    }
+                    inputsDropdown={[
+                        dropdownFields.propertyType,                
+                    ]}
+                    property={true}
+                    inputChooseQuantites={[InputChooseQuantity.bedRoom,InputChooseQuantity.bathRoom, 
+                        InputChooseQuantity.garageSpace ]}
+                    />
+            {properties.length>0?
+                        <CardContainer cards={properties} totalPages={totalPages}/>
+
+            :
+                        <NoRegistration/>
+
+            }
         </div>
         </>
 
