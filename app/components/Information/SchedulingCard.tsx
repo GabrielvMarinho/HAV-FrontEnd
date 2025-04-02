@@ -4,7 +4,6 @@ import Button from "../Inputs/Button";
 import "./css/style.css";
 import "../../variables.css"
 import "../../GeneralPages.css"
-import Modal from "../Modal/Modal";
 import globalDatabaseNameConverter from "@/app/globalDatabaseNameConverter";
 
 export default function SchedulingCard(props: {obj :Record<string, string | string[]>}) {
