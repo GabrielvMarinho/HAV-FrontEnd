@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,18 +14,21 @@ import { configFields } from "@/app/components/globalFormsConfig/InputProfileCon
 import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdownsConfig";
 import { saveConfig } from "@/app/Validators/ProfileConfigValidator";
 import editCustomer from "@/app/apiCalls/Customer/editCustomer";
-import searchCustomerById from "@/app/apiCalls/Customer/searchCustomerById";
 import "../../variables.css";
 import "../configuration/style/style.css";
 import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 import Button from "@/app/components/Inputs/Button";
 import ToggleButton from "@/app/components/Inputs/ToggleButton";
-import { CustomerEditDto } from "@/app/types/Customer";
 
-export default function CustomerProfileEdit(props :{id :any }) {
-  const [customer, setCustomer] = useState<CustomerEditDto>();
+type FormData = {
+  [key: string]: FormDataEntryValue;
+};
+
+export default function Configuration() {
+
+  const [customer, setCustomer] = useState<CustomerEditDto>()
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [pendingFormData, setPendingFormData] = useState<CustomerEditDto | null>(null);
+  const [pendingFormData, setPendingFormData] = useState<FormData | null>(null);
   const [toggleStates, setToggleStates] = useState({
     tema: false,
     idioma: false,
@@ -36,22 +39,7 @@ export default function CustomerProfileEdit(props :{id :any }) {
   });
   const router = useRouter();
 
-  // Busca os dados do customer logado
-  useEffect(() => {
-    async function fetchCustomer() {
-      try {
-        const customer = await searchCustomerById(props.id);
-        setCustomer(customer)
-      } catch (error) {
-      }
-    }
-
-    if (props.id) {
-      fetchCustomer();
-    }
-  }, [props.id]);
-
-  const form = useForm<CustomerEditDto>({
+  const form = useForm<saveConfig>({
     resolver: zodResolver(saveConfig),
     mode: "onSubmit",
   });
@@ -60,33 +48,33 @@ export default function CustomerProfileEdit(props :{id :any }) {
     setToggleStates(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const onSubmit = (data: CustomerEditDto) => {
+  const onSubmit = (data: saveConfig) => {
     if (Object.keys(form.formState.errors).length > 0) return;
     setPendingFormData(data);
     setIsModalOpen(true);
   };
 
   const saveChanges = async () => {
-    if (!pendingFormData || !customer) return;
+    if (!pendingFormData) return;
     setIsModalOpen(false);
     try {
-      await editCustomer(customer.cpf, pendingFormData);
-      router.back();
+      const response = await postCustomer(pendingFormData);
+      if (response) router.back();
     } catch (err) {
-      console.error("Erro ao editar cliente:", err);
+      console.error(err);
     }
   };
 
   return (
     <>
       <HeaderAdm />
-      <Title tag="h1" text="Meu Perfil" />
+      <Title tag="h1" text="configurações" />
 
       <div className="configurationLayout">
         <div className="formContainer">
           <form className="profileConfig" onSubmit={form.handleSubmit(onSubmit)}>
-            <ProfileSection form={form} customer={customer} />
-            <FormSection form={form} customer={customer} />
+            <ProfileSection form={form} />
+            <FormSection form={form} />
           </form>
         </div>
 
@@ -95,6 +83,7 @@ export default function CustomerProfileEdit(props :{id :any }) {
             <h3 className="columnTitle">PREFERÊNCIAS</h3>
             <ul className="menuList">
               <MenuItem
+  
                 label="TEMA" 
                 isToggled={toggleStates.tema}
                 onToggle={() => handleToggle('tema')}
@@ -144,30 +133,49 @@ export default function CustomerProfileEdit(props :{id :any }) {
   );
 }
 
-// Componentes atualizados para receber os dados do customer
-const ProfileSection = ({ form, customer }: { form: any, customer?: CustomerEditDto }) => (
+const MenuItem = ({ 
+  label,
+  isToggled = false,
+  onToggle = () => {}
+}: {
+  label: string;
+  isToggled?: boolean;
+  onToggle?: () => void;
+}) => (
+  <li className="menuItem">
+    <HorizontalLine size={500} color="#0F0F0F80" />
+    <div className="menuContent">
+      <span className="menuLabel">{label}</span>
+      <div className="toggleWrapper">
+        <ToggleButton toggled={isToggled} onChange={onToggle} />
+      </div>
+    </div>
+  </li>
+);
+
+const ProfileSection = ({ form }: { form: any }) => (
   <section className="profileSection">
     <div className="imgPerson">
       <ButtonUploadPhoto
         name="image"
         register={form.register}
-        error={form.formState.errors["image"]}
+        error={form.formState.errors["image" as keyof saveConfig]}
       />
     </div>
     <div>
-      <p className="personName">{customer?.name || "Carregando..."}</p>
-      <p className="userType">Cliente</p>
+      <p className="personName">KAUANI DA SILVA</p>
+      <p className="userType">Administrador</p>
     </div>
   </section>
 );
 
-const FormSection = ({ form, customer }: { form: any, customer?: CustomerEditDto }) => (
+const FormSection = ({ form }: { form: any }) => (
   <article className="articleDataForm">
     <div className="info-section">
       <p className="info-section__title">INFORMAÇÕES PESSOAIS</p>
     </div>
     <div className="inputArticle">
-    <InputText {...configFields.name} register={form.register} error={form.formState.errors[configFields.name.name as keyof saveConfig]} />
+      <InputText {...configFields.name} register={form.register} error={form.formState.errors[configFields.name.name as keyof saveConfig]} />
       <InputText {...configFields.phoneNumber} register={form.register} error={form.formState.errors[configFields.phoneNumber.name as keyof saveConfig]} />
       <InputText {...configFields.cpf} register={form.register} error={form.formState.errors[configFields.cpf.name as keyof saveConfig]} disabled className="disabled-input" />
       <InputText {...configFields.email} register={form.register} error={form.formState.errors[configFields.email.name as keyof saveConfig]} />
@@ -197,28 +205,6 @@ const FormSection = ({ form, customer }: { form: any, customer?: CustomerEditDto
   </article>
 );
 
-// (Mantido igual)
-const MenuItem = ({ 
-  label,
-  isToggled = false,
-  onToggle = () => {}
-}: {
-  label: string;
-  isToggled?: boolean;
-  onToggle?: () => void;
-}) => (
-  <li className="menuItem">
-    <HorizontalLine size={500} color="#0F0F0F80" />
-    <div className="menuContent">
-      <span className="menuLabel">{label}</span>
-      <div className="toggleWrapper">
-        <ToggleButton toggled={isToggled} onChange={onToggle} />
-      </div>
-    </div>
-  </li>
-);
-
-// (Mantido igual)
 const ConfirmationModal = ({
   isOpen,
   onClose,
