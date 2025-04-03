@@ -241,7 +241,7 @@
     background: var(--box-mid-dark-red);
     width: 100%;
     min-width: 100vw;
-    height: 34vh;
+    height: 230px;
     min-height: 150px;
     display: flex;
     flex-direction: row;
@@ -451,7 +451,7 @@
     font-size: var(--text-s);
 } */
 
-.containerStatusScheduling {
+.containerStatusScheduling, .containerStatusSchedulingSmaller {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -460,6 +460,14 @@
     border-radius: 10px;
     font-size: var(--text-s);
     color: var(--text-white);
+}
+.containerStatusSchedulingSmaller{
+    width: 80px;
+    height: 25px;
+    font-size: var(--text-xs);
+    border-radius: 5px;
+
+
 }
 
 /* Cores baseadas no status */

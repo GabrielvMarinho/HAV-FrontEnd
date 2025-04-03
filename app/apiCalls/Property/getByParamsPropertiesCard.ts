@@ -93,9 +93,12 @@ export default async function(
           propertyStatus:property.propertyStatus,
           promotionalPrice:property.promotionalPrice,
           price:property.price,
-          purpose:property.purpose
+          purpose:property.purpose,
+          area:property.area,
+          propertyType: property.propertyType
 
       }));
+        
       console.log(properties)
       return {properties: properties, totalPages: data.totalPages}
 

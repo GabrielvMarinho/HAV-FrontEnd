@@ -13,6 +13,8 @@ import "./css/style.css";
 import { useRouter } from "next/navigation";
 import TapeCardImovel from "../Information/TapeCardImovel";
 import CategoryCardImovel from "../Information/CategoryCardImovel";
+import globalDatabaseNameConverter from "@/app/globalDatabaseNameConverter";
+import Rule from "../IconsTSX/Rule";
 
 interface CardImovelProps {
     obj: PropertySpecificCard | null;
@@ -43,10 +45,10 @@ export default function CardImovel({ obj, idUser }: CardImovelProps) {
                     }}
                 >
                     <div style={{ marginLeft: "-26px" }}>
-                        <TapeCardImovel text={obj?.propertyStatus || "Não informado"} />
+                        <TapeCardImovel text={globalDatabaseNameConverter[obj?.propertyStatus] || "Não informado"} />
                     </div>
                     <div style={{ marginTop: "15px" }}>
-                        <CategoryCardImovel text={obj?.purpose || "Sem dados"} />
+                        <CategoryCardImovel text={globalDatabaseNameConverter[obj?.purpose] || "Sem dados"} />
                     </div>
                 </div>  
                 <Image
@@ -58,8 +60,8 @@ export default function CardImovel({ obj, idUser }: CardImovelProps) {
 
             <section className="cardImovelSection" style={{ backgroundColor: "var(--button-color)", color: "var(--text-white)", borderRadius: "0 0 10px 10px" }}>
                 <div>
-                    <p className="bairro">{obj?.neighborhood}</p>
-                    <p className="cidade">{obj?.city}</p>
+                    <p className="bairro">{globalDatabaseNameConverter[obj?.neighborhood]}</p>
+                    <p className="cidade">{globalDatabaseNameConverter[obj?.city]}</p>
                 </div>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                     <p className="valorImovel">
@@ -67,12 +69,22 @@ export default function CardImovel({ obj, idUser }: CardImovelProps) {
                         {obj?.purpose === "locacao" && <span className="rentingText">/mês</span>}
                     </p>
                     <div className="infoImovel">
-                        <Bed width={18} height={18} color="" />
-                        <p>{obj?.bedRoom}</p>
-                        <Sofa width={18} height={18} color="" />
-                        <p>{obj?.livingRoom}</p>
-                        <Shower width={18} height={18} color="" />
-                        <p>{obj?.bathRoom}</p>
+                        {obj?.propertyType=="terreno"?
+                            <>
+                            <Rule width={18} height={18} color="var(--text-white)" />
+                            <p>{obj?.area}m²</p>
+                            </>
+                            :
+                            <>
+                            <Bed width={18} height={18} color="var(--text-white)" />
+                            <p>{obj?.bedRoom}</p>
+                            <Sofa width={18} height={18} color="var(--text-white)" />
+                            <p>{obj?.livingRoom}</p>
+                            <Shower width={18} height={18} color="var(--text-white)" />
+                            <p>{obj?.bathRoom}</p>
+                        </>
+                        }
+                        
                     </div>
                 </div>
                 <div style={{ width: "235px", height: "1px", backgroundColor: "var(--text-white)", opacity: "0.20", margin: "5px auto" }} />

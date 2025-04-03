@@ -3,6 +3,7 @@
 
 
 .overlay{
+    all: unset;
     position: fixed;
     top: 0;
     left: 0;
@@ -12,6 +13,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1000;
+
+}
+body:has(.overlay) {
+    overflow: hidden;
 }
 .no-scroll{
     overflow: hidden;
@@ -28,11 +34,28 @@
 }
 
 .containerModalScheduling{
+    position: relative; 
+
+    border-radius: var(--xborder-box);
+    min-width: fit-content;
+    z-index: 1000;
     display: flex;
     flex-direction: column;
     background-color: var(--text-white);
     width: 430px;
-    height: 490px;
+    height: fit-content;
+}
+.containerModalSchedulingX{
+    height: 40px;
+    width: 40px;
+    position:absolute;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0px;    
+    border-radius: var(--border-box);
+    background-color: var(--box-white);
 }
 
 .containerModalScheduling .imageMainContainer{
@@ -66,26 +89,19 @@
 }
 
 .priceModalScheduling{
-    margin-top: 10px;
-    margin-left: 20px;
     font-size: var(--text-ml);
     color: var(--text-red-pink);
 }
 
 .containerPriceCategory{
     display: flex;
+    justify-content: space-evenly;
+    gap: 5px;
     align-items: center;
 }
 
-.CategoryCardImovelModalScheduling{
-    margin-top: 15px;
-    margin-left: 20px;
-}
 
-.CategoryCardImovelModalSchedulingType{
-    margin-left: 10px;
-    margin-top: 15px;
-}
+
 
 .lineModalScheduling{
     width: 60%;
@@ -131,6 +147,7 @@
     display: flex;
     flex-direction: column;
     margin-left: 10px;
+    gap: 2px;
 }
 
 .caixinha{
@@ -164,7 +181,7 @@
 .cellphoneRealtor{
     font-weight: 500;
     color: var(--box-dark-red);
-    font-size: var(--text-xxs);
+    font-size: var(--text-xs);
 }
 
 .locationiInformations{
@@ -179,6 +196,7 @@
     justify-content: space-around;
     margin-top: 20px;
     display: flex;
+    margin-bottom: 30px;
 }
 
 .date{
@@ -201,11 +219,12 @@
 }
 
 .buttonsModalScheduling{
-    margin-top: 25px;
-    gap: 20px;
+    margin: 20px;
+    margin-top: 0px;
+    gap: clamp(5px, 1.5vw, 20px);
     display: flex;
     justify-content: end;
-    margin-right: 20px;
+
 }
 
 .buttonModal{
@@ -358,9 +377,10 @@
     }
 
     .containerPriceMobile{
-        
+        margin-top: 10px;
         display: flex;
         align-items: center;
+        justify-content: center;
     }
 
     .lineModalSchedulingMobile{

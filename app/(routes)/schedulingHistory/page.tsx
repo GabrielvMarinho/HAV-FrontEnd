@@ -16,7 +16,7 @@ export default async function schedulingHistory({searchParams}: {searchParams:{
 
 }}){
     const realtorId = "1"
-    const customerId = "4"
+    const customerId = "3"
 
     const params = await searchParams;
     const {page=0, data=null, status=null} = params
