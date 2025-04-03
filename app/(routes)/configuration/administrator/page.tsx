@@ -21,8 +21,8 @@ import ToggleButton from "@/app/components/Inputs/ToggleButton";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 import NonEditableInputText from "@/app/components/Inputs/NonEditableInputText";
 
-export default function FormEditCustomer({ id }: { id: number }) {
-  const [adm, setAdm] = useState<AdmEditDto>();
+export default function FormEditCustomer(props :{id :any }) {
+  const [adm, setAdm] = useState<AdmEditDto | null>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toggleStates, setToggleStates] = useState({
     tema: false,
@@ -43,7 +43,7 @@ export default function FormEditCustomer({ id }: { id: number }) {
   useEffect(() => {
     async function fetchAdm() {
       try {
-        const customerData = await searchAdmDtoById(id);
+        const customerData = await searchAdmDtoById(props.id);
         setAdm(customerData);
         form.reset(customerData);
       } catch (error) {
@@ -51,8 +51,8 @@ export default function FormEditCustomer({ id }: { id: number }) {
       }
     }
 
-    if (id) fetchAdm();
-  }, [id, form]);
+    if (props.id) fetchAdm();
+  }, [props.id, form]);
 
   const handleToggle = (key: string) => {
     setToggleStates((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -68,7 +68,7 @@ export default function FormEditCustomer({ id }: { id: number }) {
 
   const handleConfirmEdit = async () => {
     try {
-      await editAdm(id, form.getValues());
+      await editAdm(props.id, form.getValues());
       router.back();
     } catch (err) {
       console.error("Erro ao editar Administrador:", err);
