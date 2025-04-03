@@ -13,6 +13,7 @@ export default async function FindHistoryByCustomerId(id: any, page: string, lat
     const data = await response.json()
     const schedulesHistoryCustomerDto: schedulesHistoryCustomerDTO[] = data.content.map((schdto :any) => {
         return {
+            id: schdto.id,
             day: schdto.day,
             start_hour: schdto.start_hour,
             realtorId: schdto.realtor.id,
@@ -22,6 +23,10 @@ export default async function FindHistoryByCustomerId(id: any, page: string, lat
             realtorEmail: schdto.realtor.email,
             purpose: schdto.property.purpose,
             propertyType: schdto.property.propertyType,
+            price: schdto.property.price,
+            city: schdto.property.address.city,
+            state: schdto.property.address.state,
+            neighborhood: schdto.property.address.neighborhood,
             status: schdto.status,
 
         }

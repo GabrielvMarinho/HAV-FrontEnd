@@ -4,6 +4,9 @@
     transform: scaleX(-1);
 
 }
+.borderLightButton{
+    border: 1px solid var(--button-color);
+}
 .toggleRentOrBuyLabel{
     color: var(--text-white);
     font-size: var(--text-s);

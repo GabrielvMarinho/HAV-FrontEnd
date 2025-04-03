@@ -13,7 +13,7 @@
 }  
 
 .dropdownSchedulingHistory{
-    width: 78vw;
+    width: 70vw;
     display: flex;
     justify-content:"start";
     margin-top: 30px; 
@@ -50,6 +50,7 @@
     }
 
     .dropdownSchedulingHistory{
+        width: 100vw;
         display: flex;
         align-items: center;      
         justify-content: center;  

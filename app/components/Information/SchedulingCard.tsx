@@ -5,14 +5,17 @@ import "./css/style.css";
 import "../../variables.css"
 import "../../GeneralPages.css"
 import globalDatabaseNameConverter from "@/app/globalDatabaseNameConverter";
+import ModalScheduling from "../Modal/ModalScheduling";
 
-export default function SchedulingCard(props: {obj :Record<string, string | string[]>}) {
+export default function SchedulingCard(props: {obj :Record<string, string | string[]>, modalInfo :schedulesModalInfo}) {
     const { city, neighborhood, hours, name, phone } = props.obj;
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const toggleModal = function(){
         setIsModalOpen(!isModalOpen)
     }
+    console.log("modal", props.modalInfo)
+
     return(
         <div className="cardContainer">
             <div className="mainImageContainer">
@@ -41,13 +44,11 @@ export default function SchedulingCard(props: {obj :Record<string, string | stri
                             <p className="phone">{phone}</p>
                         </div>
                     </div>
-                    <Button onClick={() =>{toggleModal()}}type="submit" size={"small"} text="Mais Dados" hover="lightHover" color="var(--text-white)"
+                    <Button onClick={() =>{toggleModal()}} type="submit" size={"small"} text="Mais Dados" hover="lightHover" color="var(--text-white)"
                     background="var(--button-color)" />
-                    {isModalOpen ?
+                    {isModalOpen ==true?
                     <div className={"overlay"}>
-                            <div>
-                                <h1>dados do imóvel</h1>
-                            </div>
+                            <ModalScheduling onClose={() =>{toggleModal()}} obj ={props.modalInfo}/>
                     </div>:<></>
                     }
 

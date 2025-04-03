@@ -17,6 +17,7 @@ import AddSchedules from "@/app/apiCalls/Schedules/AddSchedules";
 import RemoveSchedules from "@/app/apiCalls/Schedules/RemoveSchedules";
 import SchedulingCard from "@/app/components/Information/SchedulingCard";
 import NewScheduleModal from "@/app/components/Forms/NewScheduleModal";
+import ModalScheduling from "@/app/components/Modal/ModalScheduling";
 
 
 export default function calendar(){
@@ -33,6 +34,7 @@ export default function calendar(){
     useEffect(() => {
         async function fetch(){
             const data = await FetchScheduleFutureByIdAndFuture(realtorId)
+            console.log(data)
             setData(data);
         }
         fetch();
@@ -122,9 +124,7 @@ export default function calendar(){
                 
 
                 // Comparando apenas ano, mês e dia
-                if (scheduleDate.getFullYear() === date.getFullYear() && 
-                    scheduleDate.getMonth() === date.getMonth() && 
-                    scheduleDate.getDate() === date.getDate()) {
+                
                     if(schedule.customer && schedule.property){
                         if(schedule.customer.id && schedule.property.id){
                             const indexArray = arrayOfCardsData.findIndex(record => 
@@ -182,18 +182,63 @@ export default function calendar(){
                         }
                     }
                     
-                }
+                
             })
         }
         
         return arrayOfCardsData
     }
+   
+    const getCardsDataModal = function(date :Date){
+        var arrayOfCardsDataModal :schedulesModalInfo[] = []
+        var index =0;
+        if(date != undefined){
+            data?.map((schedule) =>{
 
+                const [year, month, day] = schedule.day.split("-").map(Number);
+                const scheduleDate = new Date(year, month - 1, day);
+    
+                
+
+                // Comparando apenas ano, mês e dia
+                
+                    if(schedule.customer && schedule.property){
+                        if(schedule.customer.id && schedule.property.id){
+                            const obj :schedulesModalInfo={
+                                id: schedule.id,
+                                day :schedule.day,
+                                propertyCode :schedule.property.propertyCode,
+
+                                start_hour :schedule.start_hour,
+                                realtorId :schedule.realtor.id,
+                                realtorName :schedule.realtor.name,
+                                realtorCreci :schedule.realtor.creco,
+                                realtorCelphone :schedule.realtor.celphone,
+                                realtorEmail :schedule.realtor.email,
+                                purpose :schedule.property.purpose,
+                                propertyType :schedule.property.propertyType,
+                                status :schedule.status,
+                                city :schedule.property.address.city,
+                                state :schedule.property.address.state,
+                                price :schedule.property.price,
+                                neighborhood :schedule.property.address.neighborhood
+                            } 
+                            arrayOfCardsDataModal.push(obj);
+                            
+                        }
+                    }
+                    
+                
+            })
+        }
+        
+        return arrayOfCardsDataModal
+    }
     return(
         <> 
         <HeaderAdm/>
         <Title tag="h1" text="Agenda" /> 
-        
+
 
         <NavBarAdm options={NavBarPath.historic} />
         <div style={{display:"flex", gap:"50px", margin:"100px"}}>
@@ -213,7 +258,8 @@ export default function calendar(){
             }}
             locale={pt}
             />
-            <SelectHour cards={getCardsData(selected)} saveHours={saveHours} ids={getIdsFromDay(selected)} day={selected} selectHours={getHoursFromDay(selected)}/>
+            
+            <SelectHour cardsModal={getCardsDataModal(selected)} cards={getCardsData(selected)} saveHours={saveHours} ids={getIdsFromDay(selected)} day={selected} selectHours={getHoursFromDay(selected)}/>
             </div>
             
         <Footer/>
