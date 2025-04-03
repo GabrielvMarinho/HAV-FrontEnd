@@ -1,6 +1,7 @@
 import NewScheduleModal from "@/app/components/Forms/NewScheduleModal";
 import HeaderAdm from "@/app/components/Header/HeaderAdm";
 import SchedulingCard from "@/app/components/Information/SchedulingCard";
+import Map from "@/app/components/Maps/Map";
 import ModalConfirmPassword from "@/app/components/Modal/ModalConfirmPassword";
 import ModalConfirmationPassword from "@/app/components/Modal/ModalConfirmationCellphone";
 import ModalEmailConfirmation from "@/app/components/Modal/ModalEmailConfirmation";
@@ -15,7 +16,15 @@ export default function notification (){
         {/* <SchedulingConfirmationModal /> */}
         {/* <ModalEmailConfirmation/> */}
         {/* <ModalConfirmPassword/> */}
-        <ModalConfirmationPassword/>
+        {/* <ModalConfirmationPassword/> */}
+        <div className="">
+            <main>
+                <div className="">
+                    <h1> home</h1>
+                    <Map />    
+                </div>
+            </main>
+        </div>
         </>
     )
 }
