@@ -241,7 +241,7 @@
     background: var(--box-mid-dark-red);
     width: 100%;
     min-width: 100vw;
-    height: 34vh;
+    height: 230px;
     min-height: 150px;
     display: flex;
     flex-direction: row;
