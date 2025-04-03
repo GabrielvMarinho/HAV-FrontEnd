@@ -21,6 +21,13 @@ export default function ModalEmailConfirmation () {
                         <div> linha </div>
                         <div> textoooooooooooooooooo </div>
 
+                        <div className="modalNewSchedule">
+                    
+                    <Calendar width={80} height={80} color="var(--box-white)"></Calendar>
+                    <Button size={"small"} hover={"lightHover"} background={"var(--button-color-reverse)"} color={"var(--text-red-pink)"} text={"Agende sua visita"} onClick={() =>{setPage(1)}}></Button>
+    
+                </div>
+
                    
                 </div>
             )
@@ -28,12 +35,9 @@ export default function ModalEmailConfirmation () {
         if(page==1){
             
             return(
-                <div className="modalNewSchedule">
-                    
-                    <Calendar width={80} height={80} color="var(--box-white)"></Calendar>
-                    <Button size={"small"} hover={"lightHover"} background={"var(--button-color-reverse)"} color={"var(--text-red-pink)"} text={"Agende sua visita"} onClick={() =>{setPage(1)}}></Button>
-    
-                </div>
+               <div>
+                oiiiieeeeeeeeeeee
+               </div>
             )
         }
         
