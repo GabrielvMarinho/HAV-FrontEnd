@@ -1,5 +1,5 @@
-interface schedulesHistoryCustomerDTO{
-    
+interface schedulesModalInfo{
+    id :string;
     day :string;
     price :string;
     propertyCode: string;
@@ -15,6 +15,6 @@ interface schedulesHistoryCustomerDTO{
     status :string;
     city :string;
     state :string;
-    
+
 
 }
