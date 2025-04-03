@@ -6,7 +6,8 @@ import { record } from "zod";
 import SchedulingCard from "../Information/SchedulingCard";
 
 export default function selectHour(props :{day: Date; ids :Record<string, number>, selectHours: string[],
-     saveHours: (hoursAdd: string[], hoursRemove: string[]) => void, cards :Record<string, string | string[]>[]}){
+     saveHours: (hoursAdd: string[], hoursRemove: string[]) => void, cards :Record<string, string | string[]>[],
+    cardsModal :schedulesModalInfo[]}){
     
     if(!props.day){
         return(
@@ -118,7 +119,7 @@ export default function selectHour(props :{day: Date; ids :Record<string, number
                     <div className={minutes === "00" ? "hourLineCustomer" : "hourLineCustomer"}></div>
                     <div className="hourContentCustomer">{time}</div>
                     <div style={{display:"flex", justifyContent:"center", marginBottom:"30px", marginTop:"15px"}}>
-                    <SchedulingCard obj = {props.cards[indexArray]}/>
+                    <SchedulingCard modalInfo={props.cardsModal[indexArray]} obj={props.cards[indexArray]}/>
                     </div>
                   </div>
                 )
@@ -132,7 +133,7 @@ export default function selectHour(props :{day: Date; ids :Record<string, number
               }
 
               return (
-                <button
+                <button 
                   key={time}
                   className={`${(selectedHours.includes(time) || addHours.includes(time)) && !removeHours.includes(time) ? "hourButtonSelect" : "hourButton"}`}
                   onClick={() => selectedHours.includes(time) ? toggleRemoveHour(time, props.ids[time]) : toggleAddHour(time)}
