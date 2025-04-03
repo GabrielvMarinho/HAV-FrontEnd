@@ -3,14 +3,14 @@ import PageManager from "../Inputs/PageManager";
 import "./css/style.css"
 
 
-export default function FavoriteCardContainer(props: { cards: PropertySpecificCard[], totalPages: number }) {
+export default function FavoriteCardContainer(props: { cards: PropertySpecificCard[], totalPages: number, userId: number }) {
 
     return (
         <>
             <div>
                 <div className="cardsContainer">
                     {props.cards.map((card) => (
-                        <CardImovel obj={card} idUser={1} />
+                        <CardImovel obj={card} idUser={props.userId} />
                     ))}
                 </div>
                 <PageManager totalPages={props.totalPages} />
