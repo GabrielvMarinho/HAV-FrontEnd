@@ -1,6 +1,7 @@
 interface PropertySpecificCard {
     id: number;
     propertyStatus: string;
+    propertyType: string;
     promotionalPrice: number;
     area: number;
     image: Base64URLString

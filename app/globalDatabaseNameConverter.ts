@@ -1,6 +1,12 @@
 export default {
+    
+    
+    //estados
+    "sc": "Santa Catarina",
+    "pr": "Paraná",
+    "rs": "Rio Grande do Sul",
+    
     //cidades
-
     "joinville": "Joinville",
     "blumenau": "Blumenau",
     "sao_francisco_do_sul": "São Francisco do Sul",
@@ -12,9 +18,6 @@ export default {
     "indaial": "Indaial",
     "pomerode": "Pomerode",
     
-
-    
-
     //bairros jaragua
     "agua_verde": "Água Verde",
     "aguas_claras": "Águas Claras",
@@ -24,8 +27,9 @@ export default {
     "boa_vista": "Boa Vista",
     "braco_ribeirao_cavalo": "Braço Ribeirão Cavalo",
     "centenario": "Centenário",
+
     //ta errado o centro, troquei para teste
-    "Centro": "Centro",
+    "centro": "Centro",
     "chico_de_paulo": "Chico de Paulo",
     "czerniewicz": "Czerniewicz",
     "estrada_nova": "Estrada Nova",
