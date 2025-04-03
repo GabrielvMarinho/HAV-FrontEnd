@@ -1,48 +1,51 @@
 'use client';
 
+import { useForm } from "react-hook-form";
 import Button from "../Inputs/Button";
+import Dropdown from "../Inputs/Dropdown";
+import InputDropdown from "../Inputs/InputDropdown";
 import InputText from "../Inputs/InputText";
 import InputTextArea from "../Inputs/InputTextArea";
+import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
+import { newContactUsEmail } from "@/app/Validators/ContactUseValidator";
+import { zodResolver } from "@hookform/resolvers/zod";
+import sendContactUsEmail from "@/app/apiCalls/Email/sendContactUsEmail";
 
-export default function ContactUsForm() {
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const data = Object.fromEntries(formData);
-        console.log("Enviou", data);
+export default function ContactUsForm(props :{customerId: string}) {
+ 
+    const form = useForm<newContactUsEmail>({
+        resolver: zodResolver(newContactUsEmail),
+        mode: "onSubmit",
+    });
+    function onSubmit(data: newContactUsEmail) {
+        console.log(data)
+        async function fetch(){
+            const response = await sendContactUsEmail(props.customerId, data.reason, data.contactUsDescription)
+            return response;
+        }
+        fetch()
+        window.location.href= window.location.href
+
     };
 
     return (
         <div className="subContainerContactUs">
             <h2 className="contatoTitle">FORMULÁRIO DE CONTATO</h2>
             <div className="containerInputs">
-                <form onSubmit={handleSubmit}>
-                    <div className="inputsContactUs">
-                        <InputText 
-                            name="name"
-                            size="large"
-                            id="name"
-                            text="Nome"
-                            placeholder="Digite seu nome"
-                        />
-                    </div>
-                    <div className="inputsContactUs">
-                        <InputText 
-                            name="cellphone"
-                            size="large"
-                            id="cellphone"
-                            text="Celular"
-                            placeholder="Digite seu celular"
-                        />
-                    </div>
-                    <div className="inputsContactUs">
-                        <InputText 
-                            name="email"
-                            size="large"
-                            id="email"
-                            text="Email"
-                            placeholder="Digite seu email"
-                        />
+                <form onSubmit={form.handleSubmit(onSubmit)}>
+                    <h3>Um email será enviado para o suporte da hav, que responderão com um email o mais cedo possível.</h3>
+                    <div className="inputDropdownContact">
+                    <InputDropdown
+                        key={dropdownFields.reasonContactUs.id}
+                        name={dropdownFields.reasonContactUs.name}
+                        size={dropdownFields.reasonContactUs.size}
+                        text={dropdownFields.reasonContactUs.text}
+                        id={dropdownFields.reasonContactUs.id}
+                        register={form.register}
+                        error={form.formState.errors[dropdownFields.reasonContactUs.name as keyof newContactUsEmail]}
+                        
+                        options={dropdownFields.reasonContactUs.options}
+                    />
                     </div>
                     <div className="inputMensageContactUs">
                         <InputTextArea 
@@ -51,6 +54,9 @@ export default function ContactUsForm() {
                             size="extense" 
                             id="contactUsDescription"
                             text="Mensagem"
+                            register={form.register}
+                            error={form.formState.errors["contactUsDescription" as keyof newContactUsEmail]}
+                        
                             placeholder="Digite sua mensagem"
                         />
                     </div>

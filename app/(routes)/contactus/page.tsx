@@ -14,6 +14,7 @@ import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 import ContactUsForm from "@/app/components/Forms/ContactUseForm";
 
 export default function contactus() {
+    const customerId = "3";
     return (
         <>
         <HeaderAdm />
@@ -46,7 +47,7 @@ export default function contactus() {
                     </div>
                 </div>
                 
-                <ContactUsForm />
+                <ContactUsForm customerId={customerId}/>
            </div>
         <Footer />
         </>

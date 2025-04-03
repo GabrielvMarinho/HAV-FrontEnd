@@ -518,6 +518,14 @@ background-color: var(--text-white);
     margin-top: 65px;
     opacity: 0.8;
 }
+.errorTextArea {  
+    color: #eead2d;
+    font-weight: 600;
+    font-size: var(--text-xs);
+    position: absolute;
+    margin-top: 208px;
+    opacity: 0.8;
+}
 
 .inputContainer{
     position: relative;
