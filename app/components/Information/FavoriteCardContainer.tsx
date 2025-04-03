@@ -3,7 +3,7 @@ import PageManager from "../Inputs/PageManager";
 import "./css/style.css"
 
 
-export default function CardContainer(props: { cards: PropertySpecificCard[], totalPages: number }) {
+export default function FavoriteCardContainer(props: { cards: PropertySpecificCard[], totalPages: number }) {
 
     return (
         <>
