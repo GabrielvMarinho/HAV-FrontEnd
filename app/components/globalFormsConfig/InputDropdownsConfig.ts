@@ -63,7 +63,7 @@ export const dropdownFields = {
         options: [
             ["centro", "Centro"],
             ["vila_nova", "Vila Nova"],
-            ["três_rios_do_norte", "Três Rios do Norte"]
+            ["tres_rios_do_norte", "Três Rios do Norte"]
         ]
     },
     purpose: { //this component has dependencies, (toggle rent or buy)
