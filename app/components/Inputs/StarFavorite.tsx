@@ -1,21 +1,39 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SelectedStar from "../IconsTSX/SelectedStar";
 import NotSelectedStar from "../IconsTSX/NotSelectedStar";
-import { favoriteProperty} from "@/app/apiCalls/Property/FavoriteProperty";
-import { unfavoriteProperty}  from "@/app/apiCalls/Property/UnFavoriteProperty";
+import { favoriteProperty } from "@/app/apiCalls/Property/FavoriteProperty";
+import { unfavoriteProperty } from "@/app/apiCalls/Property/UnFavoriteProperty";
 
 interface StarFavoriteProps {
     idUser: number;
     idProperty: number;
-    selected: boolean;
+    selected: boolean; // Esse valor pode não estar atualizado corretamente ao carregar a página
     width: number;
     height: number;
     color: string;
 }
 
-export default function StarFavorite({ idUser, idProperty, selected, width, height, color}: StarFavoriteProps) {
+export default function StarFavorite({ idUser, idProperty, selected, width, height, color }: StarFavoriteProps) {
     const [isFavorite, setIsFavorite] = useState(selected);
+
+    //verificar se já está favoritada pra ficar com estilização certa
+    useEffect(() => {
+        const checkFavoriteStatus = async () => {
+            try{
+                const response = await fetch(`http://localhost:9090/favorites/${idUser}`);
+                const data = await response.json();
+
+                const isPropertyFavorited = data.content.some((property: any) => property.id === idProperty);
+                setIsFavorite(isPropertyFavorited);
+            }catch(e){
+                console.log(e);
+            }
+        };
+
+        checkFavoriteStatus();
+    }, [idUser, idProperty]);
+
 
     const toggleStar = async () => {
         try {
