@@ -25,6 +25,20 @@ export const dropdownFields = {
             ["rs", "Rio Grande do Sul"]
         ]
     },
+    reasonContactUs: {
+        name: "reason",
+        size: "medium",
+        text: "Motivo Contato",
+        id: "reason",
+        options: [
+            ["Dúvida", "Dúvida"],
+            ["Reclamação", "Reclamação"],
+            ["Feedback", "Feedback"],
+            ["Interesse Em Imóvel", "Interesse Em Imóvel"],
+            ["Outro", "Outro"]
+
+        ]
+    },
     floors: {
         name: "floors",
         size: "medium",
