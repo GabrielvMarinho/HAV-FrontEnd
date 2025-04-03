@@ -1,5 +1,6 @@
 import NotSelectedStar from "@/app/components/IconsTSX/NotSelectedStar"
 import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine"
+import "./css/style.css"
 
 export default function HeaderFavoritesPage() {
     return (
