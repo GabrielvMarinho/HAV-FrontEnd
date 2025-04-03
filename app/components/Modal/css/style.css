@@ -43,7 +43,7 @@ body:has(.overlay) {
     flex-direction: column;
     background-color: var(--text-white);
     width: 430px;
-    height: 490px;
+    height: fit-content;
 }
 .containerModalSchedulingX{
     height: 40px;
@@ -147,6 +147,7 @@ body:has(.overlay) {
     display: flex;
     flex-direction: column;
     margin-left: 10px;
+    gap: 2px;
 }
 
 .caixinha{
@@ -195,6 +196,7 @@ body:has(.overlay) {
     justify-content: space-around;
     margin-top: 20px;
     display: flex;
+    margin-bottom: 30px;
 }
 
 .date{
@@ -218,7 +220,7 @@ body:has(.overlay) {
 
 .buttonsModalScheduling{
     margin: 20px;
-    
+    margin-top: 0px;
     gap: clamp(5px, 1.5vw, 20px);
     display: flex;
     justify-content: end;
