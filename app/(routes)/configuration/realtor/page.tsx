@@ -19,8 +19,9 @@ import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 import ToggleButton from "@/app/components/Inputs/ToggleButton";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 import NonEditableInputText from "@/app/components/Inputs/NonEditableInputText";
+import editRealtor from "@/app/apiCalls/Realtor/editRealtor";
 
-export default function FormEditRealtor({ id }: { id: number }) {
+export default function FormEditCustomer(props :{id :any }) {
   const [realtor, setRealtor] = useState<RealtorEditDto>();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toggleStates, setToggleStates] = useState({
@@ -42,7 +43,7 @@ export default function FormEditRealtor({ id }: { id: number }) {
   useEffect(() => {
     async function fetchRealtor() {
       try {
-        const customerData = await searchRealtorById(id);
+        const customerData = await searchRealtorById(props.id);
         setRealtor(customerData);
         form.reset(customerData);
       } catch (error) {
@@ -50,8 +51,8 @@ export default function FormEditRealtor({ id }: { id: number }) {
       }
     }
 
-    if (id) fetchRealtor();
-  }, [id, form]);
+    if (props.id) fetchRealtor();
+  }, [props.id, form]);
 
   const handleToggle = (key: string) => {
     setToggleStates((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -67,7 +68,7 @@ export default function FormEditRealtor({ id }: { id: number }) {
 
   const handleConfirmEdit = async () => {
     try {
-      await editRealtor(id, form.getValues());
+      await editRealtor(props.id, form.getValues());
       router.back();
     } catch (err) {
       console.error("Erro ao editar corretor:", err);

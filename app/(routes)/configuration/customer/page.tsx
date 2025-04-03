@@ -21,7 +21,7 @@ import ToggleButton from "@/app/components/Inputs/ToggleButton";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 import NonEditableInputText from "@/app/components/Inputs/NonEditableInputText";
 
-export default function FormEditCustomer({ id }: { id: number }) {
+export default function FormEditCustomer(props :{id :any }) {
   const [customer, setCustomer] = useState<CustomerEditDto | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toggleStates, setToggleStates] = useState({
@@ -43,7 +43,7 @@ export default function FormEditCustomer({ id }: { id: number }) {
   useEffect(() => {
     async function fetchCustomer() {
       try {
-        const customerData = await searchCustomerById(id);
+        const customerData = await searchCustomerById(props.id);
         setCustomer(customerData);
         form.reset(customerData);
       } catch (error) {
@@ -51,8 +51,8 @@ export default function FormEditCustomer({ id }: { id: number }) {
       }
     }
 
-    if (id) fetchCustomer();
-  }, [id, form]);
+    if (props.id) fetchCustomer();
+  }, [props.id, form]);
 
   const handleToggle = (key: string) => {
     setToggleStates((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -68,7 +68,7 @@ export default function FormEditCustomer({ id }: { id: number }) {
 
   const handleConfirmEdit = async () => {
     try {
-      await editCustomer(id, form.getValues());
+      await editCustomer(props.id, form.getValues());
       router.back();
     } catch (err) {
       console.error("Erro ao editar cliente:", err);
