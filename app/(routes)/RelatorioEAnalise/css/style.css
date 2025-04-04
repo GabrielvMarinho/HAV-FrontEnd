@@ -1,0 +1,7 @@
+.boxAllRegistredProperties{
+    width: 214px;
+    height: 148px;
+    border-radius: 5px;
+    background-color: var(--box-red-pink);
+    color: white;
+}
