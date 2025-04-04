@@ -1,6 +1,13 @@
 export default {
     
-    
+
+    //type
+    "Venda": "Venda",
+    "Disponível": "Disponível",
+    "Locacao": "Locação",
+    "São Paulo": "São Paulo",
+    "Centro": "Centro",
+
     //estados
     "sc": "Santa Catarina",
     "pr": "Paraná",
