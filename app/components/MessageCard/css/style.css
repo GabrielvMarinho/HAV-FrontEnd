@@ -1,0 +1,31 @@
+.message-card {
+    padding: 0.5rem;
+    /* py-2 px-2 */
+    border-radius: 0.375rem;
+    /* rounded-md */
+    max-width: 50%;
+    /* max-w-[50%] */
+    margin-bottom: 0.5rem;
+    /* espaço entre mensagens */
+}
+
+.message-card.request {
+    align-self: flex-start;
+    /* self-start */
+    background-color: white;
+    /* bg-white */
+}
+
+.message-card.response {
+    align-self: flex-end;
+    /* self-end */
+    background-color: #d9fdd3;
+    /* bg-[#d9fdd3] */
+}
+
+.message-card p {
+    margin: 0;
+    /* reset margin do parágrafo */
+    word-wrap: break-word;
+    /* quebra de linha longa */
+}
