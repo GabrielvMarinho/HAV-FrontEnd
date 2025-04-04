@@ -26,7 +26,7 @@ export default function notification (){
                 </div>
             </main>
         </div> */}
-        <Chat/>
+        {/* <Chat/> */}
         </>
     )
 }
