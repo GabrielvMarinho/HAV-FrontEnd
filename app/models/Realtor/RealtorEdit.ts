@@ -11,5 +11,5 @@ interface RealtorEditDto {
     state: string;
     city: string;
     neighborhood: string;
-    creci: string;
+    creci: number;
 }

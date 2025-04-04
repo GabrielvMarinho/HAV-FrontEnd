@@ -43,9 +43,9 @@ export default function FormEditCustomer(props :{id :any }) {
   useEffect(() => {
     async function fetchEditor() {
       try {
-        const customerData = await searchEditorById(props.id);
-        setEditor(customerData);
-        form.reset(customerData);
+        const editorData = await searchEditorById(props.id);
+        setEditor(editorData);
+        form.reset(editorData);
       } catch (error) {
         console.error("Erro ao carregar cliente:", error);
       }

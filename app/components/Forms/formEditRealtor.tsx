@@ -20,7 +20,7 @@ import searchCustomerById from "@/app/apiCalls/Customer/searchCustomerById";
 import editEditor from "@/app/apiCalls/Editor/editEditor";
 import editCustomer from "@/app/apiCalls/Customer/editCustomer";
 import searchRealtorById from "@/app/apiCalls/Realtor/searchRealtorById";
-import editRealtor from "@/app/apiCalls/Realtor/Realtor";
+import editRealtor from "@/app/apiCalls/Realtor/editRealtor";
 import { textFields } from "../globalFormsConfig/InputTextConfig";
 import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
 
