@@ -28,9 +28,9 @@ export default function login(){
                 <div className="containerLinha">
                     <h2 className="linha"> </h2>
                 </div>
-                <form>
+                <form className="loginForm">
                     <InputTextLogin name="name" size="medium" id="user" text="E-mail" placeholder="Digite seu e-mail" icon={<Envelope width="18" height="18" color="var(--text-light-red)"/>}/>
-                    <InputTextLogin name="name" size="medium" id="user" text="Senha" placeholder="Digite sua senha" icon={<Eye width="18" height="18" color="var(--text-light-red)"/>}/>
+                    <InputTextLogin password={true} name="name" size="medium" id="user" text="Senha" placeholder="Digite sua senha" icon={<Eye width="18" height="18" color="var(--text-light-red)"/>}/>
                     
                    
                     <p className="EsqueceuSenha">Esqueceu a senha?</p>
