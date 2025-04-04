@@ -11,6 +11,7 @@ import { textFields } from '../globalFormsConfig/InputTextConfig';
 import { NewEditorOrAdm } from '@/app/Validators/EditorOrAdmValidator';
 import InputTextLogin from '../Inputs/InputTextLogin';
 import Envelope from '../IconsTSX/Envelope';
+import XButton from '../IconsTSX/XButton';
 
 
 export default function ModalEmailConfirmation () {
@@ -21,7 +22,9 @@ export default function ModalEmailConfirmation () {
         if(page==0){
             return(
                 <div className='containerModalEmailConfirmation'>
-                    
+                    <div className='XButtonModalEmailConfirmation'>
+                        <XButton width={16} height={16} color='var(--text-white)'/>
+                    </div>
                     <div className='subContainerModalEmailConfirmation'>
                         <h2 className='titleModalEmailConfirmation'> Alteração do E-mail</h2>
                         <div className='lineModalEmailConfirmation'>  </div>
@@ -42,8 +45,10 @@ export default function ModalEmailConfirmation () {
             
             return(
                 <div className='containerModalEmailConfirmation'>
-                    
                 <div className='subContainerModalEmailConfirmation'>
+                    <div className='XButtonModalEmailConfirmation'>
+                        <XButton width={16} height={16} color='var(--text-white)'/>
+                    </div>
                     <h2 className='titleModalEmailConfirmationSecond'> Insira o código de 6 dígitos</h2>
                     <div className='lineModalEmailConfirmation'>  </div>
                     <div className='textModalEmailConfirmationSecond'> Verifique se há um código de verificação para ex*****@gmail.com.  <a className='mudarModalEmail'> Mudar </a> </div>
@@ -62,9 +67,6 @@ export default function ModalEmailConfirmation () {
             )
         }
         
-
-
-
 
     return (
         <>

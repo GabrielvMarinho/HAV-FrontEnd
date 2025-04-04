@@ -367,18 +367,33 @@ body:has(.overlay) {
     padding: 25px ;
 }
 
+.containerModalPasswordConfirmation{
+    width: 330px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--text-red-pink);
+    padding: 25px ;
+}
+
 .subContainerModalEmailConfirmation{
     text-align: center;
 }
 
 .titleModalEmailConfirmation{
-    margin-top: 35px;
+    margin-top: 25px;
     color: var(--text-white);
     font-size: var(--text-ml);
 }
 
 .titleModalEmailConfirmationSecond{
-    margin-top: 25px;
+    margin-top: 15px;
+    color: var(--text-white);
+    font-size: var(--text-ml);
+}
+
+.titleModalPasswordConfirmation{
+    margin-top: 8px;
     color: var(--text-white);
     font-size: var(--text-ml);
 }
@@ -397,6 +412,11 @@ body:has(.overlay) {
     font-size: var(--text-s);
 }
 
+.textModalPasswordConfirmation{
+    margin-top: 15px;
+    color: var(--text-white);
+    font-size: var(--text-s);
+}
 .textModalEmailConfirmationSecond{
     margin-top: 35px;
     color: var(--text-white);
@@ -409,16 +429,28 @@ body:has(.overlay) {
     justify-content: center;
 }
 
+.inputModalPasswordConfirmation{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
 .buttonModalEmailConfirmation{
     display: flex;
     justify-content: center;
     margin-top: 60px;
 }
 
+.buttonModalPasswordConfirmation{
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+}
+
 .buttonModalEmailConfirmationSecond{
     display: flex;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 .codigoModalEmailConfirmation{
@@ -445,6 +477,11 @@ body:has(.overlay) {
     padding-right: 20px;
     padding-left: 20px;
     text-align: justify;
+}
+
+.XButtonModalEmailConfirmation{
+    display: flex;
+    justify-content: end;
 }
 
 @media (width < 625px){
