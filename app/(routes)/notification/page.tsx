@@ -1,3 +1,4 @@
+import Chat from "@/app/components/Chatbot/Chat";
 import NewScheduleModal from "@/app/components/Forms/NewScheduleModal";
 import HeaderAdm from "@/app/components/Header/HeaderAdm";
 import SchedulingCard from "@/app/components/Information/SchedulingCard";
@@ -17,14 +18,15 @@ export default function notification (){
         {/* <ModalEmailConfirmation/> */}
         {/* <ModalConfirmPassword/> */}
         {/* <ModalConfirmationPassword/> */}
-        <div className="">
+        {/* <div className="">
             <main>
                 <div className="">
                     <h1> home</h1>
                     <Map />    
                 </div>
             </main>
-        </div>
+        </div> */}
+        <Chat/>
         </>
     )
 }
