@@ -4,24 +4,25 @@ import HeaderAdm from "@/app/components/Header/HeaderAdm";
 import ArrowIcon from "@/app/components/IconsTSX/ArrowIcon";
 import HavLogo from "@/app/components/IconsTSX/HavLogoLight";
 import MenuDotsVertical from "@/app/components/IconsTSX/MenuDotsVertical";
+import Microfone from "@/app/components/IconsTSX/Microfone";
 import QuadradoMais from "@/app/components/IconsTSX/QuadradoMais";
 import SearchIcon from "@/app/components/IconsTSX/SearchIcon";
 import SmileEmoji from "@/app/components/IconsTSX/smileEmoji";
 import MessageCard from "@/app/components/MessageCard/MessageCard";
 import Google from "next-auth/providers/google";
 import { useState } from "react";
+import "./css/style.css"
 
 export default function chat() {
 
     const [querys, setQuerys] = useState(null);
-
-    const handleSearch = () => []
-
-    const [currentChat, setCurrentChat] = useState();
-
+    const [currentChat, setCurrentChat] = useState(false);
+    const [content, setContent] = useState("");
+    const handleSearch = () => { }
     const handleClickOnChatCard = () => [
         setCurrentChat(true)
     ]
+    const handleCreateNewMessage = () => { }
 
     return (
         <>
@@ -33,29 +34,13 @@ export default function chat() {
                 <div style={{
                     width: "35%", backgroundColor: "var(--text-red-pink)", marginTop: "24px"
                 }}>
-
                     <div style={{ display: "flex", width: "100%", margin: "10px" }}>
+
+                        {/* home */}
                         <div style={{
                             display: "flex", width: "100%", justifyContent: "space-between",
                             alignItems: "center"
                         }}>
-                            <div style={{
-                                display: "flex", justifyContent: "space-between", alignItems: "center", gap: "10px"
-                            }}>
-                                <img src="https://cdn.pixabay.com/photo/2025/03/17/14/43/bird-9476034_960_720.png"
-                                    alt=""
-                                    style={{
-                                        borderRadius: "100%", width: "3rem", height: "3rem",
-                                        cursor: "pointer"
-                                    }} />
-
-                                <div style={{ display: "flex" }}>
-                                    <p style={{ color: "var(--text-white)" }}>Username</p>
-                                    <div style={{ marginLeft: "15.85vw" }}>
-                                        <ArrowIcon width={20} height={20} color={'var(--text-white)'} />
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -184,28 +169,61 @@ export default function chat() {
                         <div>
                             <div style={{
                                 display: "flex", flexDirection: "column", justifyContent: "center",
-                                marginTop: "5rem", overflowY: "scroll", paddingRight: "2.5rem", paddingLeft: "2.5rem"
+                                marginTop: "6rem", overflowY: "scroll", paddingRight: "2.5rem", paddingLeft: "2.5rem",
+
                             }}>
-                                {[1, 1, 1, 1, 1].map((item, i) => <MessageCard isRequestMessage={i % 2 === 0} content={"message"} />)}
+                                {[1, 1, 1, 1, 1].map((item, i) => <MessageCard isRequestMessage={i % 2 === 0}
+                                    content={"message"} />)}
                             </div>
                         </div>
 
                         {/* footer section */}
                         <div style={{
-                            backgroundColor: "var(--text-red-pink)"
+                            backgroundColor: "var(--text-red-pink)", position: "absolute", width: "100%",
+                            bottom: "0", fontSize: "1.5rem", fontWeight: "2rem", paddingTop: "0.75rem",
+                            paddingBottom: "0.75rem"
                         }}>
                             <div style={{
-                                cursor: "pointer"
+                                display: "flex", justifyContent: "space-between", alignItems: "center",
+                                paddingLeft: "1.25rem", paddingRight: "1.25rem", position: "relative"
                             }}>
-                                <SmileEmoji width={20} height={20} color="var(--text-white)" />
-                                <QuadradoMais width={20} height={20} color="var(--text-white)" />
+                                <div style={{
+                                    cursor: "pointer"
+                                }}>
+                                    <SmileEmoji width={20} height={20} color="var(--text-white)" />
+                                </div>
+                                <div style={{
+                                    cursor: "pointer"
+                                }}>
+                                    <QuadradoMais width={20} height={20} color="var(--text-white)" />
+                                </div>
+
+                                <input style={{
+                                    width: "85%", paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "1rem",
+                                    borderRadius: "0.375rem", border: "none", outline: "none", backgroundColor: "white"
+                                }}
+                                    type="text" onChange={(e) => setContent(e.target.value)}
+                                    placeholder="Type message"
+                                    value={content}
+                                    onKeyPress={(e) => {
+                                        if (e.key === "Enter") {
+                                            handleCreateNewMessage();
+                                            setContent("")
+                                        }
+                                    }} />
+                                <div style={{
+                                    cursor: "pointer"
+                                }}>
+                                    <Microfone width={20} height={20} color="var(--text-white)" />
+                                </div>
                             </div>
+
                         </div>
 
                     </div>
                 }
 
-            </div>
+            </div >
 
         </>
     )
