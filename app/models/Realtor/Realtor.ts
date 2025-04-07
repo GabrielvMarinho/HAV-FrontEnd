@@ -1,4 +1,5 @@
-interface Realtor {
+export interface Realtor {
+    type: 'realtor';
     id :string;
     cpf: string;
     name: string;

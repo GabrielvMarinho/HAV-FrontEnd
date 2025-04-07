@@ -1,4 +1,5 @@
-interface Customer {
+export interface Customer {
+    type: 'customer';
     cpf: string;
     name: string;
     email: string;

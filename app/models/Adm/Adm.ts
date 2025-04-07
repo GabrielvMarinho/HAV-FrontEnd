@@ -1,4 +1,5 @@
-interface Adm {
+export interface Adm {
+    type: 'admin';
     cpf: string;
     name: string;
     email: string;
