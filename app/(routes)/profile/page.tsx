@@ -7,6 +7,7 @@ import ArrowNextSlide from "@/app/components/IconsTSX/ArrowNextSlide";
 import { useEffect, useState } from "react";
 import searchCustomerById from "@/app/apiCalls/Customer/searchCustomerById";
 import { useRouter } from "next/router";
+import ButtonUploadPhoto from "@/app/components/Inputs/ButtonUploadPhoto";
 
 export default function ProfilePage(props :{id :any, personName :string, userType :string  }) {
   const [customer, setCustomer] = useState<CustomerEditDto | null>(null);
