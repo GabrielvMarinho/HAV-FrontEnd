@@ -1,5 +1,5 @@
+import { ReduxProvider } from "@/app/redux/providers"
 import { store } from "@/app/redux/store"
-import { Provider } from "react-redux"
 
 export const metadata = {
   title: 'Next.js',
@@ -14,7 +14,9 @@ export default function RootLayout({
   return (
 
     <>
-      {children}
+      <ReduxProvider>
+        {children}
+      </ReduxProvider>
     </>
   )
 }
