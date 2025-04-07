@@ -43,11 +43,11 @@ export default function FormEditCustomer(props :{id :any }) {
   useEffect(() => {
     async function fetchRealtor() {
       try {
-        const customerData = await searchRealtorById(props.id);
-        setRealtor(customerData);
-        form.reset(customerData);
+        const RealtorData = await searchRealtorById(props.id);
+        setRealtor(RealtorData);
+        form.reset(RealtorData);
       } catch (error) {
-        console.error("Erro ao carregar cliente:", error);
+        console.error("Erro ao carregar corretor:", error);
       }
     }
 
@@ -107,6 +107,7 @@ export default function FormEditCustomer(props :{id :any }) {
       <div>
         <p className="personName">{realtor?.name || "Carregando..."}</p>
         <p className="userType">Corretor</p>
+        <p className="realtorCreci">CRECI {realtor?.creci}</p>
       </div>
     </section>
   );
