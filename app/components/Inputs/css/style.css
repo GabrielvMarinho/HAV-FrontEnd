@@ -250,6 +250,9 @@ summary {
     width: 290px;
     
 }
+.loginInput{
+    width: 200px;
+}
 
 
 .smallInputDropdown{
@@ -523,6 +526,17 @@ background-color: var(--text-white);
     margin-top: 65px;
     opacity: 0.8;
 }
+.errorContainerLogin{
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: var(--border-box);
+    text-align: center;
+    background-color: var(--login-container-red);
+}
+.ErrorLogin{
+    color: var(--text-white);
+    font-size: var(--text-s);
+}
 .errorTextArea {  
     color: #eead2d;
     font-weight: 600;
@@ -560,16 +574,19 @@ background-color: var(--text-white);
 }
 
 .inputWrapperLogin input{
-    padding-right: 105px;
+    padding-right: 40px;
     margin-bottom: 10px;
 }
 
+.loginForm{
+    width: fit-content;
+}
 .inputIcon {
     position: absolute;
     top: 60%;
     right: 10px; 
     transform: translateY(-50%); 
-    pointer-events: none; 
+    z-index: 1000;
     display: flex;
     justify-content: center;
 }
@@ -584,7 +601,7 @@ background-color: var(--text-white);
     }
 
     .inputWrapperLogin input{
-        padding-right: 68px;
+        padding-right: 40px;
     }
 
     .smallButton{
