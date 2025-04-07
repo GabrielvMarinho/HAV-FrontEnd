@@ -45,7 +45,7 @@
     border-radius: 15px;
     z-index: 3; /* Fica acima da diagonal */
     width: 290px;
-    height: 380px;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -55,7 +55,6 @@
     font-size: 26px;
     display: flex;
     justify-content: center;
-    margin-top: 10px;
     color:var(--box-mid-dark-red);
 }
 

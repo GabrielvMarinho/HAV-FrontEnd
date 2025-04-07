@@ -9,9 +9,9 @@
     --breakpoint-mobile: 992px;
     --big-component-distance: 60px;
     --margin-top-header: 24px;  
-
     --breakpoint-mobile: 992px;
     /*CORES*/
+    --login-container-red:#ee40408e;
     --bg-color: #F2EBE3;
     --light-blue: rgba(45, 143, 255, 0.219);
     --dark-blue:rgba(45, 143, 255, 0.505);

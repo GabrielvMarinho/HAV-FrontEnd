@@ -250,6 +250,9 @@ summary {
     width: 290px;
     
 }
+.loginInput{
+    width: 200px;
+}
 
 
 .smallInputDropdown{
@@ -522,6 +525,17 @@ background-color: var(--text-white);
     position: absolute;
     margin-top: 65px;
     opacity: 0.8;
+}
+.errorContainerLogin{
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: var(--border-box);
+    text-align: center;
+    background-color: var(--login-container-red);
+}
+.ErrorLogin{
+    color: var(--text-white);
+    font-size: var(--text-s);
 }
 .errorTextArea {  
     color: #eead2d;
