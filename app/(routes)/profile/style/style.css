@@ -65,13 +65,40 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 16px;
+  padding: 15px 16px;
+}
+
+.IconProfile{
+
 }
 
 .menuTextWrapper {
   display: flex;
   align-items: center;
-  gap: 12px;
+  margin-left: 27px;
+  margin-right: 230px;
+  /* gap: 12px; */
+}
+
+.menuTextWrapperFav{
+  display: flex;
+  align-items: center;
+  margin-left: -25px;
+  margin-right: 230px;
+}
+
+.menuTextWrapperMens{
+  display: flex;
+  align-items: center;
+  margin-left: -12px;
+  margin-right: 230px;
+}
+
+.menuTextWrapperNot{
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 230px;
 }
 
 .menuIconPlaceholder {
@@ -86,10 +113,10 @@
   height: 25px;
 }
 
+
 .hamburgerMenu a {
   text-decoration: none;
   color: black;
-  font-size: 18px;
   font-weight: 500;
 }
 
