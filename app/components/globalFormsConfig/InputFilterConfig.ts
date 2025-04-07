@@ -7,7 +7,7 @@ export const InputFilterConfig = {
     cellphone:{ name: "cellphone", size: "medium", text: "Celular", placeholder: "+55 ( )", id: "celular" },
     cnpj:{ name: "cnpj", size: "medium", text: "CNPJ", placeholder: "ex: 123-123-123/0001-22", id: "cnpj" },
     
-    priceRangesSell:{name: "price",key: "price", min: 0, max: 2000000, step: 10000, id: "priceRanger"},
-    priceRangesRent:{name: "price",key: "price", min: 0, max: 10000, step: 100, id: "priceRanger"},
+    priceRangesSell:{name: "price",key: "price", min: 0, max: "2000000", step: 10000, id: "priceRanger"},
+    priceRangesRent:{name: "price",key: "price", min: 0, max: "10000", step: 100, id: "priceRanger"},
 
 }

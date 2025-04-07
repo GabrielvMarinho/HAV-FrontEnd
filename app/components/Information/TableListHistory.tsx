@@ -12,6 +12,7 @@ import CategoryCardImovel from "./CategoryCardImovel";
 import RetangleStatusImovel from "./RetangleStatusImovel";
 import StatusScheduling from "./StatusScheduling";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import ModalScheduling from "../Modal/ModalScheduling";
 
 export default function TableListHistorySchedule(props: {
   for: string;
@@ -22,14 +23,14 @@ export default function TableListHistorySchedule(props: {
   status :string,
 
 }) {
-  const [customerHistory, setCustomerHistory] = useState<{}[]>([]);
+   const [customerHistory, setCustomerHistory] = useState<schedulesHistoryCustomerDTO[]>([]);
   const [realtorDetails, setRealtorDetails] = useState(false);
   const [realtorHistory, setRealtorHistory] = useState<{}[]>([]);
   const [customerDetails, setCustomerDetails] = useState<{}[]>([]);
 
   const [totalPage, setTotalPage] = useState(0); 
 
-
+  const [modalId, changeModalId] = useState<string | null>(null)
 
   const findCustomer = async () => {
     try {
@@ -47,8 +48,12 @@ export default function TableListHistorySchedule(props: {
       console.error("Erro ao buscar histórico", error);
     }
   };
+  console.log(customerHistory)
+  const setChangeModalId = function (id :string){
 
-
+    changeModalId(id)
+  }
+ 
   useEffect(() => {
     if (props.for === "customer") {
       findCustomer();
@@ -71,17 +76,24 @@ export default function TableListHistorySchedule(props: {
         {history.map((obj: any, index) => (
           <>
           <div className='tableListLine'></div>
-          <tr className="tableRows" key={index}>
+          <tr className="tableRows pointer" onClick ={() =>{setChangeModalId(obj.id)}} key={index}>
             <td>{obj?.day} - {obj?.start_hour}</td>
-            <td onClick={()=>{setRealtorDetails(true)}}>{obj?.realtorName}</td>
+            <td >{obj?.realtorName}</td>
             <td><CategoryCardImovel text={obj?.purpose} /></td>
             <td><CategoryCardImovel text={obj?.propertyType} /></td>
             <td><StatusScheduling text={obj?.status}/></td>            
             
           </tr>
+          {modalId && modalId==obj?.id?
+            <div className="overlay">
+            <ModalScheduling onClose={() =>{setChangeModalId("-1")}} obj={obj}/>
+            </div>
+            :""
+          }  
           </>
           
         ))}
+
       </tbody>
     </table>
     

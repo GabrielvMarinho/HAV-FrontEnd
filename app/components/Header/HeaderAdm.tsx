@@ -1,14 +1,19 @@
 "use client"
 import HavLogo from "../IconsTSX/HavLogoLight";
 import Language from "../IconsTSX/Language";
-import Hamburger from "../IconsTSX/Hamburguer";
 import Link from "next/link";
-import { ReactNode } from "react";
 import { useState, useEffect, useRef } from "react";
 import HeaderOptions from "./HeaderOptions";
 import ChamadaTelefonica from "../IconsTSX/CellPhone";
 import User from "../IconsTSX/User";
 import Construcao from "../IconsTSX/Construcao";
+import Money from "../IconsTSX/Money";
+import Range from "../IconsTSX/Range";
+import Comments from "../IconsTSX/Comments";
+import StarFavorite from "../Inputs/StarFavorite";
+import Profile from "../IconsTSX/Profile";
+import StarIcon from "../IconsTSX/StarIcon";
+import Bell from "../IconsTSX/Bell";
 
 export default function HeaderAdm() {
 
@@ -30,28 +35,43 @@ export default function HeaderAdm() {
             <div style={{ display: "flex", gap: "30px" }}>
                 <div className="HeaderOptions">
 
-                    <Link href={"/"}>Home</Link>
+                    <Link href={"/"}>Início</Link>
 
                     <div onClick={() => toggleDropdown(1)}>
                         <HeaderOptions
                             isOpen={openDropdownId === 1}
                             close={() => setOpenDropdownId(null)}
-                            title={"Área do Admin"}
-                            options={["vazio", "vazio"]}
-                            optionsLinks={["/", "/"]}
+                            title={"Imóveis"}
+                            options={["Compra", "Locação"]}
+                            optionsLinks={["/search?purpose=venda", "/search?purpose=locacao"]}
                             optionsIcons=
-                            {[<ChamadaTelefonica width={17} height={17} color={"var(--text-white)"} />,
-                            <ChamadaTelefonica width={17} height={17} color={"var(--text-white)"} />,
-                            <ChamadaTelefonica width={17} height={17} color={"var(--text-white)"} />]} />
+                            {[<Money width={17} height={17} color={"var(--text-white)"} />,
+                            <Range width={17} height={17} color={"var(--text-white)"} />]} />
+                    </div>
+
+                    <Link href={"/aboutus"}>Sobre Nós</Link>
+
+                    <div onClick={() => toggleDropdown(2)}>
+                        <HeaderOptions
+                            isOpen={openDropdownId === 2}
+                            close={() => setOpenDropdownId(null)}
+                            title={"Área do Administrador"}
+                            options={["Mensagens", "Perfil", "Favoritos", "Notificações"]}
+                            optionsLinks={["/chat", "/profile", "/favorite", "/notification"]}
+                            optionsIcons=
+                            {[<Comments width={17} height={17} color={"var(--text-white)"} />,
+                            <Profile width={17} height={17} color={"var(--text-white)"} />,
+                            <StarIcon width={17} height={17} color={"var(--text-white)"} idUser={0} idProperty={0} selected={false} />,
+                            <Bell width={17} height={17} color={"var(--text-white)"} />]} />
                     </div>
 
 
 
-                    <div onClick={() => toggleDropdown(2)}>
+                    <div onClick={() => toggleDropdown(3)}>
 
 
                         <HeaderOptions
-                            isOpen={openDropdownId === 2}
+                            isOpen={openDropdownId === 3}
                             close={() => setOpenDropdownId(null)}
                             title={"Gestão"}
                             options={["Usuários", "Ímoveis"]}

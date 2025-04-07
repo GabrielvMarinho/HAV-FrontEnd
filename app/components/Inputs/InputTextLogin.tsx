@@ -1,7 +1,10 @@
+"use client"
+import { useState } from 'react';
 import './css/style.css';
 import { FieldError, UseFormRegister } from "react-hook-form";
 
 export default function InputTextLogin<T>({
+    password,
     name,
     size,
     text,
@@ -12,6 +15,8 @@ export default function InputTextLogin<T>({
     error,
     icon,  // Prop para passar o ícone
 }: {
+
+    password?: boolean;
     name: keyof T;
     size: string;
     text: string;
@@ -22,20 +27,26 @@ export default function InputTextLogin<T>({
     error?: FieldError;
     icon?: React.ReactNode;  // Definindo o tipo para ícone
 }) {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const toggleSee = function(){
+        console.log("asdas")
+        setShowPassword(!showPassword)
+    }
     return (
         <div className="inputContainer">
             <label className="labelLogin" htmlFor={id}>{text}</label>
             <div className="inputWrapperLogin">
                 <input 
                     id={id}
-                    type="text"
+                    type={password?showPassword?"text":"password":"text"}
                     name={name}
                     {...(register ? register(name) : {})} 
                     className={`${size}Input input`}
                     placeholder={placeholder}
                     defaultValue={defaultValue}
                 />
-                {icon && <span className="inputIcon">{icon}</span>} 
+                {icon && <div onClick={password?()=>{toggleSee()}:()=>{}}className={`inputIcon ${password?"pointer":""}`}>{icon}</div>} 
             </div>
             {error && <p className="errorText">{error.message}</p>}
         </div>

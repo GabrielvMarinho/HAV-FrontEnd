@@ -4,19 +4,43 @@ import Title from "@/app/components/NonInteractable/Title";
 import Button from "@/app/components/Inputs/Button";
 import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 import ArrowNextSlide from "@/app/components/IconsTSX/ArrowNextSlide";
+import { useEffect, useState } from "react";
+import searchCustomerById from "@/app/apiCalls/Customer/searchCustomerById";
+import { useRouter } from "next/router";
 
-export default function ProfilePage() {
+export default function ProfilePage(props :{id :any, personName :string, userType :string  }) {
+  const [customer, setCustomer] = useState<CustomerEditDto | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    async function fetchCustomer() {
+      try {
+        const customerData = await searchCustomerById(props.id);
+        setCustomer(customerData);
+      } catch (error) {
+        console.error("Erro ao carregar cliente:", error);
+      }
+    }
+
+    if (props.id) fetchCustomer();
+  });
+
   return (
     <>
       <HeaderAdm/>
       <Title tag={"h1"} text={"perfil"} />
       <div className="profileContainer">
         <div className="profileHeader">
-          <div className="imageProfile">
-          </div>
+        <div className="imgPerson">
+        <ButtonUploadPhoto
+          name="profileImage"
+          register={form.register}
+          error={form.formState.errors.profileImage}
+        />
+      </div>
           <div className="profileInfo">
-            <p className="personName">KAUANI DA SILVA</p>
-            <p className="userType">Administrador</p>
+            <p className="personName">{customer?.name || "Carregando..."}</p>
+            <p className="userType">Cliente</p>
           </div>
         </div>
         <div className="menuContainer">

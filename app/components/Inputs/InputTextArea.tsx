@@ -42,13 +42,17 @@ export default function InputTextArea<T extends FieldValues>({
                 rows={rows}
                 id={id}
                 name={name as string}
+
                 {...(register ? register(name) : {})} 
                 className={`${size}Input input ${disabled ? 'disabled-input' : ''}`}
                 placeholder={placeholder}
                 disabled={disabled}
                 defaultValue={defaultValue}
             />
-            {error && <p className="errorText">{error.message}</p>}
+            {error && <p className="errorTextArea">{error.message}</p>}
+
         </div>
+                   
+                    
     );
 }
