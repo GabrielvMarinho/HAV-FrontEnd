@@ -13,12 +13,6 @@ interface PropertySpecificCard {
     garageSpace: number;
     bathRoom: number;
     bedRoom: number;
-    livingRoom: number;
-    // Address fields for geocoding
-    street?: string;
-    propertyNumber?: string;
-    state?: string;
-    cep?: string;
+    livingRoom: number
+    
 }
-
-export type { PropertySpecificCard };
