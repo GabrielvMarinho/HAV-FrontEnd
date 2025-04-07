@@ -98,7 +98,7 @@ export default function ProfilePage() {
             />
           </div>
           <div className="profileInfo">
-            <p className="personName">{user?.name || "Usuário"}</p>
+            <p className="personName">{user?.name || "Carregando..."}</p>
             <p className="userType">
               {user?.role === 'admin' ? 'Administrador' :
                user?.role === 'realtor' ? 'Corretor' :
