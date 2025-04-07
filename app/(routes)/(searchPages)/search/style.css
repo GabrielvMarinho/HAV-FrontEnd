@@ -1,0 +1,57 @@
+.cardsAndFilter {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.viewToggleContainer {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+  gap: 15px;
+}
+
+.viewToggleButton {
+  padding: 10px 20px;
+  border-radius: 30px;
+  background-color: var(--button-color);
+  color: var(--text-white);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  min-width: 180px;
+  text-align: center;
+}
+
+.viewToggleButton:hover {
+  background-color: var(--box-dark-red);
+  transform: translateY(-2px);
+}
+
+.viewToggleButton.active {
+  background-color: var(--box-dark-red);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .cardsAndFilter {
+    padding: 10px;
+  }
+
+  .viewToggleContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .viewToggleButton {
+    width: 100%;
+    max-width: 300px;
+  }
+} 

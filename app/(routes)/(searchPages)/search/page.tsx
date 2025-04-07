@@ -9,6 +9,8 @@ import { InputChooseQuantity } from "@/app/components/globalFormsConfig/InputCho
 import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdownsConfig";
 import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
+import PropertyMapView from "@/app/components/Maps/PropertyMapView";
+import "./style.css";
 
 export default async function({searchParams} :{searchParams: {
     propertyCode?: string; 
@@ -21,28 +23,32 @@ export default async function({searchParams} :{searchParams: {
     bathRoom?: boolean,
     garageSpace?: boolean,
     suite?: boolean,
-    purpose?: string
+    purpose?: string,
+    viewMode?: string
 }}){
     
     const params = await searchParams;
     const {propertyCode=null, minPrice=null, maxPrice=null, propertyType=null, 
        propertyStatus=null, page=0, bedRoom=null, 
-      bathRoom=null, garageSpace=null, suite=null, purpose=null} = params
+      bathRoom=null, garageSpace=null, suite=null, purpose=null, viewMode="cards"} = params
 
     const {properties, totalPages} = await getByParamsProperties(propertyCode, propertyType, propertyStatus, 
         minPrice, maxPrice, false, page, bedRoom, bathRoom, garageSpace, suite, purpose)
 
-    console.log(properties.length)
+    // Criar URLs para os botões de alternância mantendo os parâmetros existentes
+    const createToggleUrl = (mode: string) => {
+        const currentParams = new URLSearchParams(searchParams as any);
+        currentParams.set('viewMode', mode);
+        return `?${currentParams.toString()}`;
+    };
+
     return (
         <>
-        <SearchResult typeSearch="locacao"/>
+        <SearchResult typeSearch={purpose || "locacao"}/>
         <div className={"cardsAndFilter"}>
                 <Filter 
                     size="medium" 
-                    
-                    inputs={
-                    []
-                    }
+                    inputs={[]}
                     inputsDropdown={[
                         dropdownFields.propertyType,                
                     ]}
@@ -50,15 +56,27 @@ export default async function({searchParams} :{searchParams: {
                     inputChooseQuantites={[InputChooseQuantity.bedRoom,InputChooseQuantity.bathRoom, 
                         InputChooseQuantity.garageSpace ]}
                     />
-            {properties.length>0?
+            {properties.length>0 ? (
+                <>
+                    <div className="viewToggleContainer">
+                        <a href={createToggleUrl('cards')} className={`viewToggleButton ${viewMode === "cards" ? "active" : ""}`}>
+                            Visualização em Cards
+                        </a>
+                        <a href={createToggleUrl('map')} className={`viewToggleButton ${viewMode === "map" ? "active" : ""}`}>
+                            Visualização em Mapa
+                        </a>
+                    </div>
+                    
+                    {viewMode === "cards" ? (
                         <CardContainer cards={properties} totalPages={totalPages}/>
-
-            :
-                        <NoRegistration/>
-
-            }
+                    ) : (
+                        <PropertyMapView properties={properties} />
+                    )}
+                </>
+            ) : (
+                <NoRegistration/>
+            )}
         </div>
         </>
-
     )
 }
