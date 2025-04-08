@@ -29,7 +29,7 @@ export default function FormAddAdm() {
     const addAdm = async function () {
         if (!pendingFormData) return;
         setIsModalOpen(false);
-
+        console.log("tentativa")
         try {
             const response = await postAdm(pendingFormData);
             if (response) {
@@ -243,7 +243,7 @@ export default function FormAddAdm() {
                             <p className="descModal"> Ao confirmar, os dados inseridos no formulário serão adicionados no sistema </p>
                         </div>
                     }
-                    isOpen={true} //isModalOpen
+                    isOpen={isModalOpen} //isModalOpen
                     onClose={() => setIsModalOpen(false)}
                     onConfirm={addAdm}
                 />

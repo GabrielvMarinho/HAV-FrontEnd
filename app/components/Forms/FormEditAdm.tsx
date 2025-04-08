@@ -18,6 +18,10 @@ import searchAdmDtoById from "@/app/apiCalls/Adm/searchAdmDtoById";
 import editAdm from "@/app/apiCalls/Adm/editAdm";
 import { textFields } from "../globalFormsConfig/InputTextConfig";
 import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { NewEditorOrAdm, newEditorOrAdm } from "@/app/Validators/EditorOrAdmValidator";
+import { useForm } from "react-hook-form";
+import { editEditorOrAdm } from "@/app/Validators/EditEditorOrAdmValidator";
 
 export default function FormEditAdm(props :{id :any }) {
     
@@ -37,55 +41,91 @@ export default function FormEditAdm(props :{id :any }) {
         }
       }, [props.id]);
             
-    
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
     const router = useRouter(); 
 
 
 
-
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.currentTarget as HTMLFormElement);
-
-        const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
-
+    const form = useForm<editEditorOrAdm>({
+        resolver: zodResolver(editEditorOrAdm),
+        mode: "onTouched",
+        
+    });
+    useEffect(() => {
+        console.log(adm)
+        if (adm) {
+          form.reset({
+            doc: adm.doc,
+            name: adm.name,
+            email: adm.email,
+            cellphone: adm?.celphone,
+            phoneNumber: adm?.phoneNumber,
+            cep: adm.cep,
+            street: adm.street,
+            propertyNumber: adm.propertyNumber.toString(),
+            complement: adm.complement,
+            state: adm.state,
+            city: adm.city,
+            neighborhood: adm.neighborhood,
+          });
+        }
+      }, [adm]);
+    function onSubmit(data: editEditorOrAdm) {
+        console.log(data)
+        if (Object.keys(form.formState.errors).length > 0) {
+            return;
+        }
+        setPendingFormData(data),
+        setIsModalOpen(true)
+    }
     
-        setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
-        setIsModalOpen(true); // Abre o modal
-    };
-
-
     const edit = async function () {
 
         if (!pendingFormData) return;
         
         setIsModalOpen(false);
 
-        try{
-            const adm :AdmEditDto= {
-                cpf: pendingFormData.cpf as string,
-                name: pendingFormData.name as string,
-                email: pendingFormData.email as string,
-                celphone: Number(pendingFormData.celphone),
-                phoneNumber: pendingFormData.phoneNumber as string,
-                cep: pendingFormData.cep as string,
-                street: pendingFormData.street as string,
-                propertyNumber: pendingFormData.propertyNumber as string,
-                complement: pendingFormData.complement as string,
-                state: pendingFormData.state as string,
-                city: pendingFormData.city as string,
-                neighborhood: pendingFormData.neighborhood as string
+        try {
+            const response = await editAdm(props.id, pendingFormData);
+            if (response) {
+                router.back(); // Volta um ponto sem ter que escrever a barra
+            }
+        } catch (err: any) {
 
-            };
+            // Verifica se a resposta do backend está disponível
+            if (err.response?.data) {
+                const { message, errors } = err.response.data;
 
-            await editAdm(props.id, adm); 
+                // Limpa erros anteriores
+                form.clearErrors();
 
-            router.back(); //volta um point sem ter que escrever a barra
-        }
-        catch(err){
+                // Mapear os erros do backend para os campos do formulário
+                if (errors && Array.isArray(errors)) {
+                    errors.forEach((errorMessage: string) => {
+                        const [fieldName, message] = errorMessage.split(": ");
+                        if (fieldName && message) {
+                            form.setError(fieldName.toLowerCase() as keyof NewEditorOrAdm, {
+                                type: "manual",
+                                message: message.trim(),
+                            });
+                        }
+                    });
+                } else {
+                    // Erro genérico caso a mensagem de erro não esteja disponível
+                    form.setError("root", {
+                        type: "manual",
+                        message: message || "Ocorreu um erro ao processar a solicitação.",
+                    });
+                }
+            } else {
+                // Erro de rede ou outro erro inesperado
+                form.setError("root", {
+                    type: "manual",
+                    message: "Erro de conexão. Tente novamente mais tarde.",
+                });
+            }
         }
 
     };
@@ -95,10 +135,12 @@ export default function FormEditAdm(props :{id :any }) {
     return (
         
         <>
-            <form className="ownerForm" onSubmit={handleFormSubmit}>
+            <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
-                        <ButtonUploadPhoto />
+                    <ButtonUploadPhoto name={"image"} 
+                            register={form.register}
+                            error={form.formState.errors["image" as keyof editEditorOrAdm]}/>
                     </div>
                     <p style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text-white)" }}>STATUS CONTA</p>
                     <ToggleButton />
@@ -114,8 +156,9 @@ export default function FormEditAdm(props :{id :any }) {
                                     name={textFields.name.name}
                                     size={textFields.name.size}
                                     placeholder={textFields.name.placeholder}
-                                    defaultValue={adm?.name??""}
                                     text={textFields.name.text}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.name.name as keyof editEditorOrAdm]}
                                     id={textFields.name.id}
                                 />
                                 <NonEditableInputText
@@ -124,6 +167,8 @@ export default function FormEditAdm(props :{id :any }) {
                                     size={textFields.cpf.size}
                                     text={textFields.cpf.text}
                                     value={adm?.cpf??""}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.cpf.name as keyof editEditorOrAdm]}
                                     id={textFields.cpf.id}
                                 />
                                 
@@ -131,64 +176,76 @@ export default function FormEditAdm(props :{id :any }) {
                                     key={textFields.email.id}
                                     name={textFields.email.name}
                                     size={textFields.email.size}
-                                    defaultValue={adm?.email??""}
                                     placeholder={textFields.email.placeholder}
                                     text={textFields.email.text}
                                     id={textFields.email.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.email.name as keyof editEditorOrAdm]}
                                 />
                                 <InputText
                                     key={textFields.cep.id}
                                     name={textFields.cep.name}
                                     size={textFields.cep.size}
-                                    defaultValue={adm?.cep??""}
                                     placeholder={textFields.cep.placeholder}
                                     text={textFields.cep.text}
                                     id={textFields.cep.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.cep.name as keyof editEditorOrAdm]}
                                 />
                                 <InputText
                                     key={textFields.street.id}
                                     name={textFields.street.name}
                                     size={textFields.street.size}
-                                    defaultValue={adm?.street??""}
                                     placeholder={textFields.street.placeholder}
                                     text={textFields.street.text}
                                     id={textFields.street.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.street.name as keyof editEditorOrAdm]}
+                               
                                 />
                                 <InputText
                                     key={textFields.phoneNumber.id}
                                     name={textFields.phoneNumber.name}
                                     size={textFields.phoneNumber.size}
-                                    defaultValue={adm?.phoneNumber??""}
                                     placeholder={textFields.phoneNumber.placeholder}
                                     text={textFields.phoneNumber.text}
                                     id={textFields.phoneNumber.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.phoneNumber.name as keyof editEditorOrAdm]}
+                               
                                 />
                                 <InputText
                                     key={textFields.cellphone.id}
                                     name={textFields.cellphone.name}
-                                    defaultValue={adm?.celphone??""}
                                     size={textFields.cellphone.size}
                                     placeholder={"+55 ( )"}
                                     text={textFields.cellphone.text}
                                     id={textFields.cellphone.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.cellphone.name as keyof editEditorOrAdm]}
+                               
                                 />
                                 <InputText
                                     key={textFields.propertyNumber.id}
                                     name={textFields.propertyNumber.name}
                                     size={textFields.propertyNumber.size}
-                                    defaultValue={adm?.propertyNumber??""}
                                     placeholder={textFields.propertyNumber.placeholder}
                                     text={textFields.propertyNumber.text}
                                     id={textFields.propertyNumber.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.propertyNumber.name as keyof editEditorOrAdm]}
+                               
                                 />
                                 <InputText
                                     key={textFields.complement.id}
                                     name={textFields.complement.name}
                                     size={textFields.complement.size}
                                     placeholder={textFields.complement.placeholder}
-                                    defaultValue={adm?.complement??""}
                                     text={textFields.complement.text}
                                     id={textFields.complement.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.complement.name as keyof editEditorOrAdm]}
+                               
                                 />
 
                                 <InputDropdown
@@ -197,7 +254,9 @@ export default function FormEditAdm(props :{id :any }) {
                                     size={dropdownFields.state.size}
                                     text={dropdownFields.state.text}
                                     id={dropdownFields.state.id}
-                                    defaultValue={adm?.state??""}
+                                    register={form.register}
+                                    error={form.formState.errors[dropdownFields.state.name as keyof editEditorOrAdm]}
+                               
 
                                     options={dropdownFields.state.options}
                                 />
@@ -208,7 +267,9 @@ export default function FormEditAdm(props :{id :any }) {
                                    size={dropdownFields.city.size}
                                    text={dropdownFields.city.text}
                                    id={dropdownFields.city.id}
-                                   defaultValue={adm?.city??""}
+                                   register={form.register}
+                                    error={form.formState.errors[dropdownFields.city.name as keyof editEditorOrAdm]}
+                               
 
                                    options={dropdownFields.city.options}
                                 />
@@ -219,8 +280,9 @@ export default function FormEditAdm(props :{id :any }) {
                                     size={dropdownFields.neighborhood.size}
                                     text={dropdownFields.neighborhood.text}
                                     id={dropdownFields.neighborhood.id}
-                                    defaultValue={adm?.neighborhood??""}
-
+                                    register={form.register}
+                                    error={form.formState.errors[dropdownFields.neighborhood.name as keyof editEditorOrAdm]}
+                               
                                     options={dropdownFields.neighborhood.options}
                                 />
 
@@ -230,14 +292,14 @@ export default function FormEditAdm(props :{id :any }) {
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                         <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
                             background="var(--text-white)"
-                            onClick={() => setIsModalOpen(true)} />
+                            />
                     </div>
                 </article>
                 <Modal
                     id="idModal"
                     content={
                          <div className="containerModal">
-                            <h1 className="titleModal">DESEJA ADICIONAR O EDITOR ? </h1>
+                            <h1 className="titleModal">DESEJA EDITAR O ADMIN ? </h1>
                             <p className="descModal"> Ao confirmar, os dados inseridos no formulário serão adicionados no sistema </p>
                         </div>
                     }

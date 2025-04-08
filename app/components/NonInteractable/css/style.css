@@ -7,14 +7,36 @@
     color: var(--text-dark-red);
     margin-bottom: var(--big-component-distance);
 }
+
+.sideTitle{
+    width: fit-content;
+    font-size: 23px;
+    font-weight: 900;
+    gap: 2px;
+    color: var(--text-dark-red);
+    margin-bottom: var(--big-component-distance);
+}
+
 .titleLine, .subtitleLine{
     width: 75px;
     height: 3px;
     margin-inline: auto;
     background-color: var(--box-red-pink);
 }
+
+.sideTitleLine {
+    width: 75px;
+    height: 3px;
+    margin-inline: start;
+    background-color: var(--box-red-pink);
+}
 .sizeTitle{
     font-size: var(--text-xl);
+    font-weight: 900;
+}
+
+.sizeSideTitle {
+    font-size: 23px;
     font-weight: 900;
 }
 
