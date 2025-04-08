@@ -4,7 +4,7 @@ interface PropertySpecificCard {
     propertyType: string;
     promotionalPrice: number;
     area: number;
-    image: Base64URLString
+    image: Base64URLString;
     price: number; 
     purpose: string; 
     neighborhood: string;
