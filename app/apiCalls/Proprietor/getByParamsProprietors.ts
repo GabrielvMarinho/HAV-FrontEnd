@@ -35,10 +35,11 @@ export default async function(
         "archived":archived
       })
     });
-
+    
     const data = await response.json();
 
     const proprietors: Proprietor[] = data.content.map((proprietor: Proprietor) => proprietor);
+    console.log(proprietors)
     return {proprietors: proprietors, totalPages: data.totalPages}
 
     }catch{

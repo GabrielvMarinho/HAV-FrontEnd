@@ -2,7 +2,7 @@ interface RealtorEditDto {
     cpf: string;
     name: string;
     email: string;
-    celphone: number;
+    celphone: string;
     phoneNumber: string;
     cep: string;
     street: string;

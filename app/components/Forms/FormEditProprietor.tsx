@@ -23,6 +23,10 @@ import searchProprietorById from "@/app/apiCalls/Proprietor/searchProprietorById
 import editProprietor from "@/app/apiCalls/Proprietor/editProprietor";
 import { textFields } from "../globalFormsConfig/InputTextConfig";
 import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
+import { EditProprietor } from "@/app/Validators/EditProprietor";
+import { editEditorOrAdm } from "@/app/Validators/EditEditorOrAdmValidator";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function FormEditProprietor(props :{id :any }) {
     
@@ -51,21 +55,39 @@ export default function FormEditProprietor(props :{id :any }) {
 
 
 
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-
-        e.preventDefault();
-
-        const formData = new FormData(e.currentTarget as HTMLFormElement);
+    const form = useForm<editEditorOrAdm>({
+        resolver: zodResolver(editEditorOrAdm),
+        mode: "onTouched",
         
-        const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
-
+    });
+    useEffect(() => {
+        console.log(proprietor)
+        if (proprietor) {
+          form.reset({
+            name: proprietor.name,
+            email: proprietor.email,
+            cellphone: proprietor?.celphone,
+            phoneNumber: proprietor?.phoneNumber,
+            cep: proprietor.cep,
+            street: proprietor.street,
+            propertyNumber: proprietor.propertyNumber.toString(),
+            complement: proprietor.complement,
+            state: proprietor.state,
+            city: proprietor.city,
+            neighborhood: proprietor.neighborhood,
+          });
+        }
+      }, [proprietor]);
 
     
-        setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
-
-        setIsModalOpen(true); // Abre o modal
-    };
-
+      function onSubmit(data: EditProprietor) {
+        console.log(data)
+        if (Object.keys(form.formState.errors).length > 0) {
+            return;
+        }
+        setPendingFormData(data),
+        setIsModalOpen(true)
+    }
 
     const edit = async function () {
 
@@ -73,40 +95,58 @@ export default function FormEditProprietor(props :{id :any }) {
         
         setIsModalOpen(false);
 
-        try{
-            const proprietor :ProprietorEditDto= {
-                cpf: pendingFormData.cpf as string,
-                name: pendingFormData.name as string,
-                email: pendingFormData.email as string,
-                celphone: Number(pendingFormData.celphone),
-                phoneNumber: pendingFormData.phoneNumber as string,
-                cep: pendingFormData.cep as string,
-                street: pendingFormData.street as string,
-                propertyNumber: pendingFormData.propertyNumber as string,
-                complement: pendingFormData.complement as string,
-                state: pendingFormData.state as string,
-                city: pendingFormData.city as string,
-                neighborhood: pendingFormData.neighborhood as string
+        try {
+            const response = await editProprietor(props.id, pendingFormData);
+            if (response) {
+                router.back(); // Volta um ponto sem ter que escrever a barra
+            }
+        } catch (err: any) {
 
-            };
+            // Verifica se a resposta do backend está disponível
+            if (err.response?.data) {
+                const { message, errors } = err.response.data;
 
-            await editProprietor(props.id, proprietor); 
+                // Limpa erros anteriores
+                form.clearErrors();
 
-            router.back(); //volta um point sem ter que escrever a barra
+                // Mapear os erros do backend para os campos do formulário
+                if (errors && Array.isArray(errors)) {
+                    errors.forEach((errorMessage: string) => {
+                        const [fieldName, message] = errorMessage.split(": ");
+                        if (fieldName && message) {
+                            form.setError(fieldName.toLowerCase() as keyof EditProprietor, {
+                                type: "manual",
+                                message: message.trim(),
+                            });
+                        }
+                    });
+                } else {
+                    // Erro genérico caso a mensagem de erro não esteja disponível
+                    form.setError("root", {
+                        type: "manual",
+                        message: message || "Ocorreu um erro ao processar a solicitação.",
+                    });
+                }
+            } else {
+                // Erro de rede ou outro erro inesperado
+                form.setError("root", {
+                    type: "manual",
+                    message: "Erro de conexão. Tente novamente mais tarde.",
+                });
+            }
         }
-        catch(err){
-        }
-
     };
    
 
     return (
         
         <>
-            <form className="ownerForm" onSubmit={handleFormSubmit}>
+            <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
-                        <ButtonUploadPhoto />
+                    <ButtonUploadPhoto name={"image"} 
+                            register={form.register}
+                            error={form.formState.errors["image" as keyof EditProprietor]}/>
                     </div>
                     <p style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text-white)" }}>STATUS CONTA</p>
                     <ToggleButton />
@@ -125,6 +165,9 @@ export default function FormEditProprietor(props :{id :any }) {
                                     defaultValue={proprietor?.name??""}
                                     text={textFields.name.text}
                                     id={textFields.name.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.name.name as keyof EditProprietor]}
+                                    
                                 />
                                 <NonEditableInputText
                                    key={textFields.cpf.id}
@@ -143,6 +186,9 @@ export default function FormEditProprietor(props :{id :any }) {
                                     placeholder={textFields.email.placeholder}
                                     text={textFields.email.text}
                                     id={textFields.email.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.email.name as keyof EditProprietor]}
+                                    
                                 />
                                 <InputText
                                    key={textFields.cep.id}
@@ -152,6 +198,9 @@ export default function FormEditProprietor(props :{id :any }) {
                                    placeholder={textFields.cep.placeholder}
                                    text={textFields.cep.text}
                                    id={textFields.cep.id}
+                                   register={form.register}
+                                    error={form.formState.errors[textFields.cep.name as keyof EditProprietor]}
+                                    
                                 />
                                 <InputText
                                     key={textFields.street.id}
@@ -161,6 +210,9 @@ export default function FormEditProprietor(props :{id :any }) {
                                     placeholder={textFields.street.placeholder}
                                     text={textFields.street.text}
                                     id={textFields.street.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.street.name as keyof EditProprietor]}
+                                    
                                 />
                                 <InputText
                                    key={textFields.phoneNumber.id}
@@ -170,6 +222,9 @@ export default function FormEditProprietor(props :{id :any }) {
                                    placeholder={textFields.phoneNumber.placeholder}
                                    text={textFields.phoneNumber.text}
                                    id={textFields.phoneNumber.id}
+                                   register={form.register}
+                                    error={form.formState.errors[textFields.phoneNumber.name as keyof EditProprietor]}
+                                    
                                 />
                                 <InputText
                                      key={textFields.cellphone.id}
@@ -179,6 +234,9 @@ export default function FormEditProprietor(props :{id :any }) {
                                      placeholder={textFields.cellphone.placeholder}
                                      text={textFields.cellphone.text}
                                      id={textFields.cellphone.id}
+                                     register={form.register}
+                                    error={form.formState.errors[textFields.cellphone.name as keyof EditProprietor]}
+                                    
                                 />
                                 <InputText
                                    key={textFields.propertyNumber.id}
@@ -188,6 +246,9 @@ export default function FormEditProprietor(props :{id :any }) {
                                    placeholder={textFields.propertyNumber.placeholder}
                                    text={textFields.propertyNumber.text}
                                    id={textFields.propertyNumber.id}
+                                   register={form.register}
+                                    error={form.formState.errors[textFields.propertyNumber.name as keyof EditProprietor]}
+                                    
                                 />
                                 <InputText
                                      key={textFields.complement.id}
@@ -196,7 +257,10 @@ export default function FormEditProprietor(props :{id :any }) {
                                      placeholder={textFields.complement.placeholder}
                                      defaultValue={proprietor?.complement??""}
                                      text={textFields.complement.text}
-                                     id={textFields.complement.id}v
+                                     id={textFields.complement.id}
+                                     register={form.register}
+                                    error={form.formState.errors[textFields.complement.name as keyof EditProprietor]}
+                                    
                                 />
 
                                 <InputDropdown
@@ -207,6 +271,9 @@ export default function FormEditProprietor(props :{id :any }) {
                                     id={dropdownFields.state.id}
                                     defaultValue={proprietor?.state??""}
 
+                                    register={form.register}
+                                    error={form.formState.errors[dropdownFields.state.name as keyof EditProprietor]}
+                                    
                                     options={dropdownFields.state.options}
                                 />
 
@@ -217,7 +284,9 @@ export default function FormEditProprietor(props :{id :any }) {
                                    text={dropdownFields.city.text}
                                    id={dropdownFields.city.id}
                                    defaultValue={proprietor?.city??""}
-
+                                   register={form.register}
+                                   error={form.formState.errors[dropdownFields.city.name as keyof EditProprietor]}
+                                   
                                    options={dropdownFields.city.options}
                                 />
 
@@ -228,7 +297,9 @@ export default function FormEditProprietor(props :{id :any }) {
                                     text={dropdownFields.neighborhood.text}
                                     id={dropdownFields.neighborhood.id}
                                     defaultValue={proprietor?.neighborhood??""}
-
+                                    register={form.register}
+                                    error={form.formState.errors[dropdownFields.neighborhood.name as keyof EditProprietor]}
+                                    
                                     options={dropdownFields.neighborhood.options}
                                 />
 
@@ -238,7 +309,7 @@ export default function FormEditProprietor(props :{id :any }) {
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                         <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
                             background="var(--text-white)"
-                            onClick={() => setIsModalOpen(true)} />
+                            />
                     </div>
                 </article>
                 <Modal
