@@ -1,6 +1,6 @@
 import { CREATE_CHAT, GET_USERS_CHAT } from "./actionType";
 
-export const createChat = (chatData) => async (dispatch) => {
+export const createChat = (chatData: { token: any; data: any; }) => async (dispatch: (arg0: { type: string; payload: any; }) => void) => {
 
     try {
 
@@ -22,7 +22,7 @@ export const createChat = (chatData) => async (dispatch) => {
     }
 }
 
-export const getUsersChat = (chatData) => async (dispatch) => {
+export const getUsersChat = (chatData: { token: any; }) => async (dispatch: (arg0: { type: string; payload: any; }) => void) => {
 
     try {
 

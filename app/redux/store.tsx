@@ -1,20 +1,13 @@
 import { applyMiddleware, combineReducers, legacy_createStore } from "redux";
 import { thunk } from "redux-thunk";
-
-const initialValue = {
-
-}
-
-const authReducer = (store = initialValue, { type, payload }) => {
-
-    if (type === REGISTER) {
-        
-    }
-}
+import { authReducer } from "./Auth/Reducer";
+import { chatReducer } from "./Chat/Reducer";
+import { messageReducer } from "./Message/Reducer";
 
 const rootReducer = combineReducers({
-    // auth: authReducer,
-
+    auth: authReducer,
+    chat: chatReducer,
+    message: messageReducer
 })
 
 export const store = legacy_createStore(rootReducer, applyMiddleware(thunk))
