@@ -80,12 +80,12 @@ export default function FormAddEditor() {
     });
 
     function onSubmit(data: NewEditorOrAdm) {
-
+        console.log("data")
         if (Object.keys(form.formState.errors).length > 0) {
             return;
         }
         setPendingFormData(data),
-            setIsModalOpen(true)
+        setIsModalOpen(true)
     }
 
     
@@ -238,7 +238,7 @@ export default function FormAddEditor() {
                     <div className="divButtonsAceptCancelForms">
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                         <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
-                            background="var(--text-white)" />
+                           background="var(--text-white)" />
                     </div>
                 </article>
                 <Modal

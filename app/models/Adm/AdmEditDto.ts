@@ -1,8 +1,9 @@
 interface AdmEditDto {
+    doc: any;
     cpf: string;
     name: string;
     email: string;
-    celphone: number;
+    celphone: string;
     phoneNumber: string;
     cep: string;
     street: string;
