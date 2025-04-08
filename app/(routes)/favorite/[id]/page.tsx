@@ -4,6 +4,7 @@ import HeaderFavoritesPage from "@/app/components/Header/HeaderFavoritesPage";
 import FavoriteCardContainer from "@/app/components/Information/FavoriteCardContainer";
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import Dropdown from "@/app/components/Inputs/Dropdown";
 
 export default function Favorite() {
     const { id: idUser } = useParams();
