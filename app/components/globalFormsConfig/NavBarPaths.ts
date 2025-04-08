@@ -19,6 +19,13 @@ export const NavBarPath = {
         [
             { label: "POLÍTICA", path: "/privacyPolicy" },
             { label: "TERMOS", path: "/termsOfService" },
+        ],
+
+    reports:
+        [
+            { label: "CORRETOR", path: "./reports/realtorReports"},
+            { label: "USUÁRIO", path: "/calendar"},
+            { label: "IMÓVEL", path: "/reports/propertyReports"},
         ]
   
 }

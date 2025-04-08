@@ -1,0 +1,154 @@
+@import "../../../variables.css"; /* Se necessário, importando as variáveis */
+
+.title {
+  width: 5px;
+  text-align: center;
+}
+
+.sizeTitle {
+  width: 540px;
+}
+
+.reports-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alinha o conteúdo ao topo */
+  width: 62.063rem;
+}
+
+.reports-title {
+  width: 57.938rem;
+  height: 59rem;
+  background-color: var(--FundoCor, #f2ebe3);
+  box-shadow: 0px 15px 40px 8px rgba(0, 0, 0, 0.1);
+  padding: 3.125rem 2.5rem 0.3rem 2.5rem;
+  border-radius: 15px;
+  margin: 0 25px;
+  line-height: 28px;
+}
+
+.reports-subtitle {
+  color: var(--text--mid-dark-red);
+  opacity: 0.7;
+  font-weight: 700;
+  text-decoration-line: underline;
+}
+
+.data-Title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+}
+
+.sideTitle {
+    display: flex;
+    width: 90%; 
+}
+
+.reports-graphTitle {
+  color: var(--text--mid-dark-red);
+  opacity: 0.7;
+  font-weight: 700;
+}
+
+.users-section {
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.reports-graphTitle p {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.users-section {
+    width: 100%;
+    max-width: 62.063rem;
+    margin: 0 auto;
+  }
+  
+  .reports-graphTitle p {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  
+  .users-data-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .users-data-box {
+    background: var(--box-red-pink);
+    padding: 1.5rem;
+    border-radius: 5px;
+    width: 200px;
+    height: 120px;
+  }
+  
+  .users-big-number {
+    color: var(--box-white);
+    text-align: center;
+    margin: 1rem 0 0 -5rem;
+    font-size: 35px;
+    font-weight: 700;
+  }
+  
+  .users-small-text {
+    color: var(--back-ground-light-red);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 18px;
+  }
+  
+  .users-graph-container {
+    flex: 1;
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .placeholder-graph {
+    height: 200px;
+    display: grid;
+    place-items: center;
+    background: #f5f5f5;
+  }
+
+.terms-of-use-container h1 {
+  font-size: 22px;
+  color: var(--text-dark-red);
+  font-weight: 700;
+  line-height: 30px;
+}
+
+.terms-of-use-container h2 {
+  font-size: 17px;
+  margin-top: 30px;
+  font-weight: 700;
+  line-height: 30px;
+  color: var(--text-dark-red);
+}
+
+.terms-of-use-container p {
+  text-align: justify;
+  font-size: 17px;
+  color: var(--text-dark-red);
+  margin-bottom: 15px;
+  margin-bottom: -2px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+section {
+  margin-bottom: 25px;
+}
