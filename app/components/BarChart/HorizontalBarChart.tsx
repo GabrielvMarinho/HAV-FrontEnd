@@ -1,3 +1,5 @@
+import "./css/style.css"
+
 import {
   Chart as ChartJS,
   BarElement,
@@ -15,16 +17,17 @@ ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend)
 interface HorizontalBarChartProps {
   labels: string[];
   data: number[];
+  backGroundColors: string[]
 }
 
-const HorizontalBarChart: React.FC<HorizontalBarChartProps> = ({ labels, data }) => {
+const HorizontalBarChart: React.FC<HorizontalBarChartProps> = ({ labels, data, backGroundColors }) => {
   const chartData = {
     labels,
     datasets: [
       {
         label: 'Imóveis',
         data,
-        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        backgroundColor: backGroundColors,
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
       },

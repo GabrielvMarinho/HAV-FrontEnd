@@ -65,7 +65,10 @@ export default function RelatorioEAnalise() {
         `${percentageForSale}% Venda`,
         `${PercentageArchived}% Arquivados`
     ];
+    
     const data = [totalRent, totalForSale, totalArchived];
+
+    const barColors = ["#B23F52"]
 
     return (
         <>
@@ -88,7 +91,7 @@ export default function RelatorioEAnalise() {
             </div>
             <div style={{ width: '80%', margin: '2rem auto' }}>
                 <h2>Gráfico de Propriedades</h2>
-                <HorizontalBarChart labels={labels} data={data} />
+                <HorizontalBarChart labels={labels} data={data} backGroundColors={barColors} />
             </div>
         </>
     );
