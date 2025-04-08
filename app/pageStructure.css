@@ -36,6 +36,7 @@
 @media (width <992px) {
     .containerFilterListAction {
         flex-direction: column;
+        align-items: center;
     }
 
     .noHeaderPage {

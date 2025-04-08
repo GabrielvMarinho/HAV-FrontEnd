@@ -2,6 +2,7 @@ import getByParamsProperties from "@/app/apiCalls/Property/getByParamsProperties
 import Filter from "@/app/components/Filters/Filter";
 import CardContainer from "@/app/components/Information/CardContainer";
 import NoRegistration from "@/app/components/Information/NoRegistration";
+import Button from "@/app/components/Inputs/Button";
 import ChooseQuantity from "@/app/components/Inputs/ChooseQuantity";
 import SearchResult from "@/app/components/Inputs/SearchResult";
 import ToggleRentOrBuy from "@/app/components/Inputs/ToggleRentOrBuy";
@@ -60,5 +61,6 @@ export default async function({searchParams} :{searchParams: {
         </div>
         </>
 
+        // falta os botões de ordenar e de visualização
     )
 }

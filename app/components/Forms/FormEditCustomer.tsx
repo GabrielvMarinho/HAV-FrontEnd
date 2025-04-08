@@ -24,6 +24,7 @@ import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
 import { NewCustomer, newCustomer } from "@/app/Validators/CustomerValidator";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { EditCustomer } from "@/app/Validators/EditCustomer";
 
 export default function FormEditCustomer(props :{id :any }) {
     
@@ -36,12 +37,12 @@ export default function FormEditCustomer(props :{id :any }) {
 
 
 
-    const form = useForm<NewCustomer>({
+    const form = useForm<EditCustomer>({
         resolver: zodResolver(newCustomer),
         mode: "onSubmit",
     });
 
-    function onSubmit(data: NewCustomer) {
+    function onSubmit(data: EditCustomer) {
         console.log("entro")
 
         if (Object.keys(form.formState.errors).length > 0) {
@@ -71,50 +72,71 @@ export default function FormEditCustomer(props :{id :any }) {
     const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
     const router = useRouter(); 
 
-
-
-
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.currentTarget as HTMLFormElement);
-
-        const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
-
+    useEffect(() => {
+        console.log(customer)
+        if (customer) {
+          form.reset({
+            doc: customer.doc,
+            name: customer.name,
+            email: customer.email,
+            cellphone: customer?.celphone,
+            phoneNumber: customer?.phoneNumber,
+            cep: customer.cep,
+            street: customer.street,
+            propertyNumber: customer.propertyNumber.toString(),
+            complement: customer.complement,
+            state: customer.state,
+            city: customer.city,
+            neighborhood: customer.neighborhood,
+          });
+        }
+      }, [customer]);
     
-        setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
-        setIsModalOpen(true); // Abre o modal
-    };
-
-
     const edit = async function () {
 
         if (!pendingFormData) return;
         
         setIsModalOpen(false);
 
-        try{
-            const customer :CustomerEditDto= {
-                cpf: pendingFormData.cpf as string,
-                name: pendingFormData.name as string,
-                email: pendingFormData.email as string,
-                celphone: Number(pendingFormData.celphone),
-                phoneNumber: pendingFormData.phoneNumber as string,
-                cep: pendingFormData.cep as string,
-                street: pendingFormData.street as string,
-                propertyNumber: pendingFormData.propertyNumber as string,
-                complement: pendingFormData.complement as string,
-                state: pendingFormData.state as string,
-                city: pendingFormData.city as string,
-                neighborhood: pendingFormData.neighborhood as string
+        try {
+            const response = await editCustomer(props.id, pendingFormData);
+            if (response) {
+                router.back(); // Volta um ponto sem ter que escrever a barra
+            }
+        } catch (err: any) {
 
-            };
+            // Verifica se a resposta do backend está disponível
+            if (err.response?.data) {
+                const { message, errors } = err.response.data;
 
-            await editCustomer(props.id, customer); 
+                // Limpa erros anteriores
+                form.clearErrors();
 
-            router.back(); //volta um point sem ter que escrever a barra
-        }
-        catch(err){
+                // Mapear os erros do backend para os campos do formulário
+                if (errors && Array.isArray(errors)) {
+                    errors.forEach((errorMessage: string) => {
+                        const [fieldName, message] = errorMessage.split(": ");
+                        if (fieldName && message) {
+                            form.setError(fieldName.toLowerCase() as keyof EditCustomer, {
+                                type: "manual",
+                                message: message.trim(),
+                            });
+                        }
+                    });
+                } else {
+                    // Erro genérico caso a mensagem de erro não esteja disponível
+                    form.setError("root", {
+                        type: "manual",
+                        message: message || "Ocorreu um erro ao processar a solicitação.",
+                    });
+                }
+            } else {
+                // Erro de rede ou outro erro inesperado
+                form.setError("root", {
+                    type: "manual",
+                    message: "Erro de conexão. Tente novamente mais tarde.",
+                });
+            }
         }
 
     };
@@ -127,7 +149,9 @@ export default function FormEditCustomer(props :{id :any }) {
             <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
-                        <ButtonUploadPhoto />
+                    <ButtonUploadPhoto name={"image"} 
+                            register={form.register}
+                            error={form.formState.errors["image" as keyof EditCustomer]}/>
                     </div>
                     <p style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text-white)" }}>STATUS CONTA</p>
                     <ToggleButton />
@@ -146,6 +170,8 @@ export default function FormEditCustomer(props :{id :any }) {
                                     defaultValue={customer?.name??""}
                                     text={textFields.name.text}
                                     id={textFields.name.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.name.name as keyof EditCustomer]}
                                 />
                                 <NonEditableInputText
                                     key={textFields.cpf.id}
@@ -154,6 +180,8 @@ export default function FormEditCustomer(props :{id :any }) {
                                     text={textFields.cpf.text}
                                     value={customer?.cpf??""}
                                     id={textFields.cpf.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.cpf.name as keyof EditCustomer]}
                                 />
                                 
                                 <InputText
@@ -164,6 +192,8 @@ export default function FormEditCustomer(props :{id :any }) {
                                     placeholder={textFields.email.placeholder}
                                     text={textFields.email.text}
                                     id={textFields.email.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.email.name as keyof EditCustomer]}
                                 />
                                 <InputText
                                     key={textFields.cep.id}
@@ -173,6 +203,8 @@ export default function FormEditCustomer(props :{id :any }) {
                                     placeholder={textFields.cep.placeholder}
                                     text={textFields.cep.text}
                                     id={textFields.cep.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.cep.name as keyof EditCustomer]}
                                 />
                                 <InputText
                                     key={textFields.street.id}
@@ -182,6 +214,8 @@ export default function FormEditCustomer(props :{id :any }) {
                                     placeholder={textFields.street.placeholder}
                                     text={textFields.street.text}
                                     id={textFields.street.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.street.name as keyof EditCustomer]}
                                 />
                                 <InputText
                                     key={textFields.phoneNumber.id}
@@ -191,6 +225,8 @@ export default function FormEditCustomer(props :{id :any }) {
                                     placeholder={textFields.phoneNumber.placeholder}
                                     text={textFields.phoneNumber.text}
                                     id={textFields.phoneNumber.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.phoneNumber.name as keyof EditCustomer]}
                                 />
                                 <InputText
                                     key={textFields.cellphone.id}
@@ -200,6 +236,8 @@ export default function FormEditCustomer(props :{id :any }) {
                                     placeholder={textFields.cellphone.placeholder}
                                     text={textFields.cellphone.text}
                                     id={textFields.cellphone.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.cellphone.name as keyof EditCustomer]}
                                 />
                                 <InputText
                                     key={textFields.propertyNumber.id}
@@ -209,6 +247,8 @@ export default function FormEditCustomer(props :{id :any }) {
                                     placeholder={textFields.propertyNumber.placeholder}
                                     text={textFields.propertyNumber.text}
                                     id={textFields.propertyNumber.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.propertyNumber.name as keyof EditCustomer]}
                                 />
                                 <InputText
                                     key={textFields.complement.id}
@@ -218,6 +258,8 @@ export default function FormEditCustomer(props :{id :any }) {
                                     defaultValue={customer?.complement??""}
                                     text={textFields.complement.text}
                                     id={textFields.complement.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.complement.name as keyof EditCustomer]}
                                 />
 
                                 <InputDropdown
@@ -227,7 +269,8 @@ export default function FormEditCustomer(props :{id :any }) {
                                     text={dropdownFields.state.text}
                                     id={dropdownFields.state.id}
                                     defaultValue={customer?.state??""}
-
+                                    register={form.register}
+                                    error={form.formState.errors[dropdownFields.state.name as keyof EditCustomer]}
                                     options={dropdownFields.state.options}
                                 />
 
@@ -238,7 +281,8 @@ export default function FormEditCustomer(props :{id :any }) {
                                    text={dropdownFields.city.text}
                                    id={dropdownFields.city.id}
                                    defaultValue={customer?.city??""}
-
+                                   register={form.register}
+                                   error={form.formState.errors[dropdownFields.city.name as keyof EditCustomer]}
                                    options={dropdownFields.city.options}
                                 />
 
@@ -249,7 +293,8 @@ export default function FormEditCustomer(props :{id :any }) {
                                     text={dropdownFields.neighborhood.text}
                                     id={dropdownFields.neighborhood.id}
                                     defaultValue={customer?.neighborhood??""}
-
+                                    register={form.register}
+                                    error={form.formState.errors[dropdownFields.neighborhood.name as keyof EditCustomer]}
                                     options={dropdownFields.neighborhood.options}
                                 />
 

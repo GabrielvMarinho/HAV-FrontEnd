@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import "./style/style.css";
 import ChatUser from "../IconsTSX/ChatUser";
 import Send from "../IconsTSX/Send";
+import XButton from "../IconsTSX/XButton";
 
 interface Message {
     text: string;
@@ -12,7 +13,11 @@ interface Message {
     timestamp: string;
 }
 
-export default function ChatBot() {
+interface ChatProps {
+    onClose: () => void;
+  }
+
+export default function Chat({ onClose }: ChatProps) {
     const [messages, setMessages] = useState<Message[]>([
         {
             text: "Olá! Como posso te ajudar hoje?",
@@ -150,6 +155,9 @@ export default function ChatBot() {
                             <ChatUser width={30} height={30} color="var(--box-dark-red)" />
                         </div>
                         <span className="chat-title">Chatbot</span>
+                        <div className="x-button" onClick={onClose}>
+                            <XButton width={16} height={16} color="var(--box-dark-red)" />
+                        </div>
                     </div>
                     <div ref={chatRef} className="chat-box">
                         {messages.map((msg, i) => (

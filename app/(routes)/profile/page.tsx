@@ -1,3 +1,5 @@
+"use client"
+
 import HeaderAdm from "@/app/components/Header/HeaderAdm";
 import "../profile/style/style.css";
 import Title from "@/app/components/NonInteractable/Title";
@@ -6,8 +8,12 @@ import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 import ArrowNextSlide from "@/app/components/IconsTSX/ArrowNextSlide";
 import { useEffect, useState } from "react";
 import searchCustomerById from "@/app/apiCalls/Customer/searchCustomerById";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import ButtonUploadPhoto from "@/app/components/Inputs/ButtonUploadPhoto";
+import Bell from "@/app/components/IconsTSX/Bell";
+import Comments from "@/app/components/IconsTSX/Comments";
+import StarIcon from "@/app/components/IconsTSX/StarIcon";
+import Definition from "@/app/components/IconsTSX/Definitions";
 
 export default function ProfilePage(props :{id :any, personName :string, userType :string  }) {
   const [customer, setCustomer] = useState<CustomerEditDto | null>(null);
@@ -35,8 +41,8 @@ export default function ProfilePage(props :{id :any, personName :string, userTyp
         <div className="imgPerson">
         <ButtonUploadPhoto
           name="profileImage"
-          register={form.register}
-          error={form.formState.errors.profileImage}
+          // register={form.register}
+          // error={form.formState.errors.profileImage}
         />
       </div>
           <div className="profileInfo">
@@ -50,48 +56,56 @@ export default function ProfilePage(props :{id :any, personName :string, userTyp
               <li className="menuItem">
                 <HorizontalLine size={500} color="#0F0F0F80" />
                 <div className="menuContent">
-                  <div className="menuTextWrapper">
-                    <span className="menuIconPlaceholder"></span>
+                  <div className="IconProfile">
+                    <Bell width={20} height={20} color="var(--text--mid-dark-red)"/>
+                  </div>
+                  <div className="menuTextWrapperNot">
                     <a href="/notification">NOTIFICAÇÕES</a>
                   </div>
                   <div className="lineSpacing">
-                    <ArrowNextSlide height={40} width={25} color="#5F1E2A" />
+                    <ArrowNextSlide height={40} width={25} color="var(--text--mid-dark-red)" />
                   </div>
                 </div>
               </li>
               <li className="menuItem">
                 <HorizontalLine size={500} color="#0F0F0F80" />
                 <div className="menuContent">
-                  <div className="menuTextWrapper">
-                    <span className="menuIconPlaceholder"></span>
+                  <div className="IconProfile">
+                    <Comments width={20} height={20} color="var(--text--mid-dark-red)"/>
+                  </div>
+                  <div className="menuTextWrapperMens">
                     <a href="#">MENSAGENS</a>
                   </div>
                   <div className="lineSpacing">
-                    <ArrowNextSlide height={40} width={25} color="#5F1E2A" />
+                    <ArrowNextSlide height={40} width={25} color="var(--text--mid-dark-red)" />
                   </div>
                 </div>
               </li>
               <li className="menuItem">
                 <HorizontalLine size={500} color="#0F0F0F80" />
                 <div className="menuContent">
-                  <div className="menuTextWrapper">
-                    <span className="menuIconPlaceholder"></span>
+                  <div className="IconProfile">
+                    <StarIcon width={20} height={20} color="var(--text--mid-dark-red)"/>
+                  </div>
+                  <div className="menuTextWrapperFav">
                     <a href="#">FAVORITOS</a>
                   </div>
                   <div className="lineSpacing">
-                    <ArrowNextSlide height={40} width={25} color="#5F1E2A" />
+                    <ArrowNextSlide height={40} width={25} color="var(--text--mid-dark-red)" />
                   </div>
                 </div>
               </li>
               <li className="menuItem">
                 <HorizontalLine size={500} color="#0F0F0F80" />
                 <div className="menuContent">
+                  <div className="IconProfile">
+                    <Definition width={20} height={20} color="var(--text--mid-dark-red)"/>
+                  </div>
                   <div className="menuTextWrapper">
-                    <span className="menuIconPlaceholder"></span>
                     <a href="/configuration">CONFIGURAÇÕES</a>
                   </div>
                   <div className="lineSpacing">
-                    <ArrowNextSlide height={40} width={25} color="#5F1E2A" />
+                    <ArrowNextSlide height={40} width={25} color="var(--text--mid-dark-red)" />
                   </div>
                 </div>
               </li>

@@ -2,8 +2,17 @@
 import getByParamsPropertiesCard from "@/app/apiCalls/Property/getByParamsPropertiesCard";
 import HeaderFavoritesPage from "@/app/components/Header/HeaderFavoritesPage";
 import FavoriteCardContainer from "@/app/components/Information/FavoriteCardContainer";
+import Dropdown from "@/app/components/Inputs/Dropdown";
+import InputDropdown from "@/app/components/Inputs/InputDropdown";
+import InputDropdownNoLabel from "@/app/components/Inputs/InputDropdownNoLabel";
+import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdownsConfig";
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import "../style/style.css"
+import Button from "@/app/components/Inputs/Button";
+import ButtonBackAPoint from "@/app/components/Inputs/ButtonBackAPoint";
+import ButtonComparison from "@/app/components/Inputs/ButtonComparison";
+import StarIcon from "@/app/components/IconsTSX/StarIcon";
 
 export default function Favorite() {
     const { id: idUser } = useParams();
@@ -93,6 +102,34 @@ export default function Favorite() {
     return (
         <>
             <HeaderFavoritesPage />
+            <div className="containerFavoriteButtons">
+                <div className="dropDonwFavorite">
+                    <InputDropdownNoLabel 
+                        key={dropdownFields.order.id}
+                        name={dropdownFields.order.name}
+                        size={dropdownFields.order.size}
+                        title={dropdownFields.order.title}
+                        id={dropdownFields.order.id}
+                        options={dropdownFields.order.options}
+                    />
+                    <InputDropdownNoLabel 
+                        key={dropdownFields.visualization.id}
+                        name={dropdownFields.visualization.name}
+                        size={dropdownFields.visualization.size}
+                        title={dropdownFields.visualization.title}
+                        id={dropdownFields.visualization.id}
+                        options={dropdownFields.visualization.options}
+                    />
+                </div>
+
+                <div className="buttonFavorite">
+                    <ButtonComparison size={"small"} text="comparação" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" point={"/comparison"} />
+                </div>
+                
+            </div>
+        
+            
+            
             <section style={{ marginTop: "80px" }}>
                 <FavoriteCardContainer
                     cards={favorites}

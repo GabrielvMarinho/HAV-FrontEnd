@@ -4,6 +4,7 @@ import SelectedStar from "../IconsTSX/SelectedStar";
 import NotSelectedStar from "../IconsTSX/NotSelectedStar";
 import { favoriteProperty } from "@/app/apiCalls/Property/FavoriteProperty";
 import { unfavoriteProperty } from "@/app/apiCalls/Property/UnFavoriteProperty";
+import { tr } from "react-day-picker/locale";
 
 interface StarFavoriteProps {
     idUser: number;
@@ -38,11 +39,15 @@ export default function StarFavorite({ idUser, idProperty, selected, width, heig
     const toggleStar = async () => {
         try {
             if (isFavorite) {
+                
                 await unfavoriteProperty(idUser, idProperty);
                 console.log("Propriedade removida dos favoritos.");
+                setIsFavorite(false); 
+               
             } else {
                 await favoriteProperty(idUser, idProperty);
                 console.log("Propriedade favoritada.");
+                setIsFavorite(true); 
             }
             setIsFavorite(!isFavorite);
         } catch (error) {
@@ -52,7 +57,7 @@ export default function StarFavorite({ idUser, idProperty, selected, width, heig
 
     return (
         <div onClick={toggleStar} style={{ cursor: "pointer" }}>
-            {isFavorite ? (
+            {!isFavorite ? (
                 <SelectedStar width={width} height={height} color={color} />
             ) : (
                 <NotSelectedStar width={width} height={height} color={color} />

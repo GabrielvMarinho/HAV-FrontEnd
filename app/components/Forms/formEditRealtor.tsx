@@ -20,9 +20,13 @@ import searchCustomerById from "@/app/apiCalls/Customer/searchCustomerById";
 import editEditor from "@/app/apiCalls/Editor/editEditor";
 import editCustomer from "@/app/apiCalls/Customer/editCustomer";
 import searchRealtorById from "@/app/apiCalls/Realtor/searchRealtorById";
-import editRealtor from "@/app/apiCalls/Realtor/editRealtor";
 import { textFields } from "../globalFormsConfig/InputTextConfig";
 import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
+import { editEditorOrAdm } from "@/app/Validators/EditEditorOrAdmValidator";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { editRealtor } from "@/app/Validators/EditRealtor";
+import editRealtorFetch from "@/app/apiCalls/Realtor/editRealtor";
 
 export default function FormEditRealtor(props :{id :any }) {
     
@@ -49,49 +53,87 @@ export default function FormEditRealtor(props :{id :any }) {
 
 
 
+    const form = useForm<editRealtor>({
+        resolver: zodResolver(editRealtor),
+        mode: "onTouched",
+        
+    });
+    useEffect(() => {
+        console.log(realtor)
+        if (realtor) {
+          form.reset({
+            doc: realtor.doc,
+            name: realtor.name,
+            email: realtor.email,
+            cellphone: realtor?.celphone,
+            phoneNumber: realtor?.phoneNumber,
+            cep: realtor.cep,
+            street: realtor.street,
+            propertyNumber: realtor.propertyNumber.toString(),
+            complement: realtor.complement,
+            state: realtor.state,
+            city: realtor.city,
+            creci: realtor.creci,
 
-    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.currentTarget as HTMLFormElement);
-
-        const formObject = Object.fromEntries(formData.entries()); // Converte para objeto
+            neighborhood: realtor.neighborhood,
+          });
+        }
+      }, [realtor]);
 
     
-        setPendingFormData(formObject); // Atualiza o estado com os dados preenchidos
-        setIsModalOpen(true); // Abre o modal
-    };
-
-
+      function onSubmit(data: editRealtor) {
+        console.log(data)
+        if (Object.keys(form.formState.errors).length > 0) {
+            return;
+        }
+        setPendingFormData(data),
+        setIsModalOpen(true)
+    }
     const edit = async function () {
 
         if (!pendingFormData) return;
         
         setIsModalOpen(false);
 
-        try{
-            const realtor :RealtorEditDto= {
-                cpf: pendingFormData.cpf as string,
-                name: pendingFormData.name as string,
-                email: pendingFormData.email as string,
-                celphone: Number(pendingFormData.celphone),
-                phoneNumber: pendingFormData.phoneNumber as string,
-                creci: pendingFormData.creci as string,
-                cep: pendingFormData.cep as string,
-                street: pendingFormData.street as string,
-                propertyNumber: pendingFormData.propertyNumber as string,
-                complement: pendingFormData.complement as string,
-                state: pendingFormData.state as string,
-                city: pendingFormData.city as string,
-                neighborhood: pendingFormData.neighborhood as string
+        try {
+            const response = await editRealtorFetch(props.id, pendingFormData);
+            if (response) {
+                router.back(); // Volta um ponto sem ter que escrever a barra
+            }
+        } catch (err: any) {
 
-            };
+            // Verifica se a resposta do backend está disponível
+            if (err.response?.data) {
+                const { message, errors } = err.response.data;
 
-            await editRealtor(props.id, realtor); 
+                // Limpa erros anteriores
+                form.clearErrors();
 
-            router.back(); //volta um point sem ter que escrever a barra
-        }
-        catch(err){
+                // Mapear os erros do backend para os campos do formulário
+                if (errors && Array.isArray(errors)) {
+                    errors.forEach((errorMessage: string) => {
+                        const [fieldName, message] = errorMessage.split(": ");
+                        if (fieldName && message) {
+                            form.setError(fieldName.toLowerCase() as keyof editRealtor, {
+                                type: "manual",
+                                message: message.trim(),
+                            });
+                        }
+                    });
+                } else {
+                    // Erro genérico caso a mensagem de erro não esteja disponível
+                    form.setError("root", {
+                        type: "manual",
+                        message: message || "Ocorreu um erro ao processar a solicitação.",
+                    });
+                }
+            } else {
+                // Erro de rede ou outro erro inesperado
+                form.setError("root", {
+                    type: "manual",
+                    message: "Erro de conexão. Tente novamente mais tarde.",
+                });
+            }
         }
 
     };
@@ -101,10 +143,12 @@ export default function FormEditRealtor(props :{id :any }) {
     return (
         
         <>
-            <form className="ownerForm" onSubmit={handleFormSubmit}>
+            <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
-                        <ButtonUploadPhoto />
+                    <ButtonUploadPhoto name={"image"} 
+                            register={form.register}
+                            error={form.formState.errors["image" as keyof editRealtor]}/>
                     </div>
                     <p style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text-white)" }}>STATUS CONTA</p>
                     <ToggleButton />
@@ -123,6 +167,9 @@ export default function FormEditRealtor(props :{id :any }) {
                                     defaultValue={realtor?.name??""}
                                     text={textFields.name.text}
                                     id={textFields.name.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.name.name as keyof editEditorOrAdm]}
+                            
                                 />
                                 <NonEditableInputText
                                    key={textFields.cpf.id}
@@ -131,6 +178,9 @@ export default function FormEditRealtor(props :{id :any }) {
                                    text={textFields.cpf.text}
                                    value={realtor?.cpf??""}
                                    id={textFields.cpf.id}
+                                   register={form.register}
+                                    error={form.formState.errors[textFields.cpf.name as keyof editEditorOrAdm]}
+                                    
                                 />
                                 
                                 <InputText
@@ -141,6 +191,9 @@ export default function FormEditRealtor(props :{id :any }) {
                                     placeholder={textFields.email.placeholder}
                                     text={textFields.email.text}
                                     id={textFields.email.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.email.name as keyof editEditorOrAdm]}
+                                    
                                 />
                                 <InputText
                                    key={textFields.cep.id}
@@ -150,6 +203,9 @@ export default function FormEditRealtor(props :{id :any }) {
                                    placeholder={textFields.cep.placeholder}
                                    text={textFields.cep.text}
                                    id={textFields.cep.id}
+                                   register={form.register}
+                                    error={form.formState.errors[textFields.cep.name as keyof editEditorOrAdm]}
+                                    
                                 />
                                 <InputText
                                     key={textFields.street.id}
@@ -159,6 +215,9 @@ export default function FormEditRealtor(props :{id :any }) {
                                     placeholder={textFields.street.placeholder}
                                     text={textFields.street.text}
                                     id={textFields.street.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.street.name as keyof editEditorOrAdm]}
+                                    
                                 />
                                 <InputText
                                    key={textFields.phoneNumber.id}
@@ -168,6 +227,9 @@ export default function FormEditRealtor(props :{id :any }) {
                                    placeholder={textFields.phoneNumber.placeholder}
                                    text={textFields.phoneNumber.text}
                                    id={textFields.phoneNumber.id}
+                                   register={form.register}
+                                    error={form.formState.errors[textFields.phoneNumber.name as keyof editEditorOrAdm]}
+                                    
                                 />
                                 <InputText
                                      key={textFields.cellphone.id}
@@ -177,6 +239,9 @@ export default function FormEditRealtor(props :{id :any }) {
                                      placeholder={textFields.cellphone.placeholder}
                                      text={textFields.cellphone.text}
                                      id={textFields.cellphone.id}
+                                     register={form.register}
+                                    error={form.formState.errors[textFields.cellphone.name as keyof editEditorOrAdm]}
+                                    
                                 />
                                 <InputText
                                    key={textFields.propertyNumber.id}
@@ -186,6 +251,9 @@ export default function FormEditRealtor(props :{id :any }) {
                                    placeholder={textFields.propertyNumber.placeholder}
                                    text={textFields.propertyNumber.text}
                                    id={textFields.propertyNumber.id}
+                                   register={form.register}
+                                    error={form.formState.errors[textFields.propertyNumber.name as keyof editEditorOrAdm]}
+                                    
                                 />
                                 <InputText
                                      key={textFields.complement.id}
@@ -194,7 +262,10 @@ export default function FormEditRealtor(props :{id :any }) {
                                      placeholder={textFields.complement.placeholder}
                                      defaultValue={realtor?.complement??""}
                                      text={textFields.complement.text}
-                                     id={textFields.complement.id}v
+                                     id={textFields.complement.id}
+                                     register={form.register}
+                                    error={form.formState.errors[textFields.complement.name as keyof editEditorOrAdm]}
+                                    
                                 />
 
                                 <InputDropdown
@@ -206,7 +277,11 @@ export default function FormEditRealtor(props :{id :any }) {
                                     defaultValue={realtor?.state??""}
 
                                     options={dropdownFields.state.options}
+                                    register={form.register}
+                                    error={form.formState.errors[dropdownFields.state.name as keyof editEditorOrAdm]}
+                                    
                                 />
+
 
                                 <InputDropdown
                                    key={dropdownFields.city.id}
@@ -217,8 +292,23 @@ export default function FormEditRealtor(props :{id :any }) {
                                    defaultValue={realtor?.city??""}
 
                                    options={dropdownFields.city.options}
+                                   register={form.register}
+                                    error={form.formState.errors[dropdownFields.city.name as keyof editEditorOrAdm]}
+                                    
                                 />
-
+                                
+                                <InputText
+                                    key={textFields.creci.id}
+                                    name={textFields.creci.name}
+                                    size={textFields.creci.size}
+                                    defaultValue={realtor?.creci??""}
+                                    placeholder={textFields.creci.placeholder}
+                                    text={textFields.creci.text}
+                                    id={textFields.creci.id}
+                                    register={form.register}
+                                    error={form.formState.errors[textFields.creci.name as keyof editEditorOrAdm]}
+                                    
+                                />
                                 <InputDropdown
                                     key={dropdownFields.neighborhood.id}
                                     name={dropdownFields.neighborhood.name}
@@ -228,6 +318,9 @@ export default function FormEditRealtor(props :{id :any }) {
                                     defaultValue={realtor?.neighborhood??""}
 
                                     options={dropdownFields.neighborhood.options}
+                                    register={form.register}
+                                    error={form.formState.errors[dropdownFields.neighborhood.name as keyof editEditorOrAdm]}
+                                    
                                 />
 
                     </div>
@@ -235,7 +328,7 @@ export default function FormEditRealtor(props :{id :any }) {
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                         <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
                             background="var(--text-white)"
-                            onClick={() => setIsModalOpen(true)} />
+                             />
                     </div>
                 </article>
                 <Modal
