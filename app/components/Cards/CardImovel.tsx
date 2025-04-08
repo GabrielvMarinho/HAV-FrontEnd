@@ -50,7 +50,7 @@ export default function CardImovel({ obj, idUser }: CardImovelProps) {
                     <div style={{ marginTop: "15px" }}>
                         <CategoryCardImovel text={globalDatabaseNameConverter[obj?.purpose] || "Sem dados"} />
                     </div>
-                </div>  
+                </div>   
                 <Image
                     src={ImageCasa}
                     alt="imagem da casa"
