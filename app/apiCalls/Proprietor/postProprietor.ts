@@ -4,13 +4,14 @@ export default async function postProprietor(
   const url = "http://localhost:9090/proprietor";
 
   const file = formData?.image[0];
-
+  console.log(formData)
   try {
     const form = new FormData();
   
     form.append("proprietor", new Blob([JSON.stringify({
       name: formData?.name,
-      cpf: formData?.cpf,
+      ...(formData?.cpf && formData.cpf.length > 1 && { cpf: formData.cpf }),
+      ...(formData?.cnpj && formData.cnpj.length > 1 && { cnpj: formData.cnpj }),
       email: formData?.email,
       celphone: formData?.cellphone,
       phoneNumber: formData?.phoneNumber,
