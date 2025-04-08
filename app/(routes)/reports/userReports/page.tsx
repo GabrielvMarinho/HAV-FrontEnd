@@ -70,6 +70,52 @@ export default function page() {
           </div>
         </div>
       </section>
+
+      <section className="properties-section">
+  <div className="properties-table-container">
+    <table className="properties-table">
+      <thead>
+        <tr>
+          <th>ID IMÓVEL</th>
+          <th>PROPRIETÁRIO</th>
+          <th>TIPO IMÓVEL</th>
+          <th>CATEGORIA</th>
+          <th>STATUS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2357U4</td>
+          <td>Bianca Isabela Vaz</td>
+          <td>CASA</td>
+          <td>LOCAÇÃO</td>
+          <td className="status-pending">PENDENTE</td>
+        </tr>
+        <tr>
+          <td>2357U4</td>
+          <td>Bianca Isabela Vaz</td>
+          <td>CASA</td>
+          <td>LOCAÇÃO</td>
+          <td className="status-launch">LANÇAMENTO</td>
+        </tr>
+        <tr>
+          <td>2357U4</td>
+          <td>Bianca Isabela Vaz</td>
+          <td>CASA</td>
+          <td>LOCAÇÃO</td>
+          <td className="status-launch">LANÇAMENTO</td>
+        </tr>
+        <tr>
+          <td>2357U4</td>
+          <td>Bianca Isabela Vaz</td>
+          <td>CASA</td>
+          <td>LOCAÇÃO</td>
+          <td className="status-launch">LANÇAMENTO</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
       <Footer />
     </>
   );
