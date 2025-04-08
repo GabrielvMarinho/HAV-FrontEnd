@@ -11,6 +11,8 @@ import TableListChoose from "@/app/components/Information/TableListChoose";
 import "@/app/pageStructure.css"
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import FilterToAddProperty from "@/app/components/Filters/FilterToAddProperty";
+import '../../style/style.css';
+import BackPage from "@/app/components/Inputs/BackPage";
 
 export default async function page({searchParams}: {searchParams: {
 
@@ -40,9 +42,19 @@ export default async function page({searchParams}: {searchParams: {
 
   return (
       <div className="noHeaderPage">
+        
+       <div className="divBackandTitle">
+          <BackPage/>
 
-      <Title tag="h1" text="Selecionar Proprietário" />
-      <SearchBar placeholder="Busca:" />
+          <div className="titleChooseRealtor"> 
+            <Title tag="h1" text="Selecionar Proprietário" />
+          </div>
+       </div>
+
+      <div className="searchBarChooseRealtor">
+        <SearchBar placeholder="Busca:" />
+      </div>
+
       <div className="containerFilterListAction">
         <FilterToAddProperty
           size="medium"

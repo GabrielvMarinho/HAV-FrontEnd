@@ -1,0 +1,28 @@
+.titleChooseRealtor{
+    margin-top: 50px;
+    margin-left: 280px;
+}
+
+.searchBarChooseRealtor{
+    display: flex;
+    justify-content: center;
+}
+
+.divBackandTitle{
+    display: flex;
+    /* justify-content:space-around; */
+    margin-left: 80px
+}
+
+@media (width < 992px){
+
+    .titleChooseRealtor{
+        margin-top: 50px;
+        margin-left: 150px;
+    }
+
+    .divBackandTitle{
+        display: flex;
+        margin-left: -120px
+    }
+}

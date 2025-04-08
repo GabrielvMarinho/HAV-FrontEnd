@@ -12,6 +12,8 @@ import "@/app/pageStructure.css"
 import { useParams, usePathname, useSearchParams } from "next/navigation";
 import FilterToAddProperty from "@/app/components/Filters/FilterToAddProperty";
 import getByParamsRealtors from "@/app/apiCalls/Realtor/getByParamsRealtors";
+import '../../style/style.css';
+import BackPage from "@/app/components/Inputs/BackPage";
   
 export default async function page({searchParams}: {searchParams: {
 
@@ -33,18 +35,27 @@ export default async function page({searchParams}: {searchParams: {
 
   ];
 
-  
-
   const queryString = new URLSearchParams(params);
 
   const action = queryString.get("action")
 
   
   return (
+
       <div className="noHeaderPage">
 
-      <Title tag="h1" text="Selecionar Corretores" />
-      <SearchBar placeholder="Busca:" />
+        <div className="divBackandTitle">
+          <BackPage/>
+
+          <div className="titleChooseRealtor"> 
+            <Title tag="h1" text="Selecionar Corretores" />
+          </div>
+       </div>
+      <div className="searchBarChooseRealtor">
+        <SearchBar placeholder="Busca:" />
+      </div>
+
+
       <div className="containerFilterListAction">
         <FilterToAddProperty
           size="medium"
