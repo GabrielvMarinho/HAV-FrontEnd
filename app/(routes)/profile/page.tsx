@@ -105,3 +105,4 @@ export default function ProfilePage(props :{id :any, personName :string, userTyp
     </>
   );
 }
+
