@@ -62,7 +62,7 @@ export default async function page({searchParams}: {searchParams: {
           inputsDropdown={[]}
           inputPriceRanges={[]}
         />
-        <TableListChoose action={action} add={true} type ={"one"}archived={false} size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
+        <TableListChoose action={action} add={true} type ={"one"}archived={false} size="large" titles={["cpf/cnpj", "nome", "email", "n. imóveis", "objetivo"]}
           data={proprietors} totalPages={totalPages} />
 
       
