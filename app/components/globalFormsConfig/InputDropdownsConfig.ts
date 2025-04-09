@@ -128,6 +128,7 @@ export const dropdownFields = {
         text: "Quartos",
         id: "bedRoom",
         options: [
+            ["0", "0"],
             ["1", "1"],
             ["2", "2"],
             ["3", "3"],
@@ -151,6 +152,7 @@ export const dropdownFields = {
         text: "Salas",
         id: "livingRoom",
         options: [
+            ["0", "0"],
             ["1", "1"],
             ["2", "2"],
             ["3", "3"],
@@ -174,6 +176,7 @@ export const dropdownFields = {
         text: "Suítes",
         id: "suite",
         options: [
+            ["0", "0"],
             ["1", "1"],
             ["2", "2"],
             ["3", "3"],
@@ -197,6 +200,8 @@ export const dropdownFields = {
         text: "Banheiros",
         id: "bathRoom",
         options: [
+        
+            ["0", "0"],
             ["1", "1"],
             ["2", "2"],
             ["3", "3"],
@@ -220,6 +225,7 @@ export const dropdownFields = {
         text: "Garagens",
         id: "garageSpace",
         options: [
+            ["0", "0"],
             ["1", "1"],
             ["2", "2"],
             ["3", "3"],

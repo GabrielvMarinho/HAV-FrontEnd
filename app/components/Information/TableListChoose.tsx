@@ -26,15 +26,16 @@ export default function TableListChoose(props: {id? :any; action :string; type :
     //tem que chamar antes para ele não salvar acidentalmente no state antes de 
     //deletar pois o useefect carrega dps do usestate
     const previousPathname = localStorage.getItem('previousPathname');
+
     if (previousPathname && previousPathname !== pathname) {
         localStorage.removeItem('selectedManage');
     }
 
-    
     localStorage.setItem('previousPathname', pathname);
-        useEffect(() =>{
-            localStorage.removeItem('selectedManage')
-        }, [pathname])
+
+    useEffect(() =>{
+        localStorage.removeItem('selectedManage')
+    }, [pathname])
 
     const [selected, setSelected] = useState<string[]>(() => {
         const saved = localStorage.getItem('selectedManage');
@@ -42,13 +43,33 @@ export default function TableListChoose(props: {id? :any; action :string; type :
         return saved ? JSON.parse(saved) : [];
     });
 
+    const [selectedExtra, setSelectedExtra] = useState<[string, string][]>(() => {
+        const saved = localStorage.getItem('selectedManageExtra');
+        return saved ? JSON.parse(saved) : [];
+    });
+
     useEffect(() => {
+        console.log("usereefct1")
+        console.log(JSON.stringify(selected))
         localStorage.setItem('selectedManage', JSON.stringify(selected));
+        
+        console.log("usereefct")
+        console.log(JSON.stringify(selectedExtra))
+        localStorage.setItem('selectedManageExtra', JSON.stringify(selectedExtra));
+
     }, [selected]);
+    
+   
 
 
+    const handleSelect = (option: string, firstData :string, secondData :string) => {
+        const newItem: [string, string] = [firstData, secondData];
 
-    const handleSelect = (option: string) => {
+        setSelectedExtra((prev: [string, string][]) =>
+            prev.some(([f, s]) => f === firstData && s === secondData)
+                ? prev.filter(([f, s]) => !(f === firstData && s === secondData))
+                : [...prev, newItem]
+        );
         setSelected((prev: string[]) =>
             prev.includes(option) ? prev.filter((item) => item !== option) : [...prev, option]
         );
@@ -62,22 +83,23 @@ export default function TableListChoose(props: {id? :any; action :string; type :
         
 
         const parsedData = JSON.parse(localStorage.getItem("selectedManage") || "");  
+        const parsedDataExtra = JSON.parse(localStorage.getItem("selectedManageExtra") || "[]");  
 
 
         params["proprietor"] = parsedData[0]
-
+        params["proprietorsData"]=encodeURIComponent(parsedDataExtra[0])
         const queryString = new URLSearchParams(params);
         const id = queryString.get("id"); // "123"
         queryString.delete("id");
 
         const finalQuery = queryString.toString()
         localStorage.removeItem("selectedManage")
+        localStorage.removeItem("selectedManageExtra")
         if(props.action==="add"){
             window.location.href = `/manage/properties/add?${finalQuery}`
         }
         else{
             window.location.href = `/manage/properties/edit/${id}?${finalQuery}`
-
         }
 
 
@@ -88,10 +110,12 @@ export default function TableListChoose(props: {id? :any; action :string; type :
         
 
         const parsedData = JSON.parse(localStorage.getItem("selectedManage") || "[]");  
-        
+        const parsedDataExtra = JSON.parse(localStorage.getItem("selectedManageExtra") || "[]");  
 
         params["realtors"] = parsedData
-        
+
+        params["realtorsData"] = encodeURIComponent(parsedDataExtra)
+
         const queryString = new URLSearchParams(params);
         const id = queryString.get("id"); // "123"
         queryString.delete("id");
@@ -99,6 +123,8 @@ export default function TableListChoose(props: {id? :any; action :string; type :
         const finalQuery = queryString.toString()
 
         localStorage.removeItem("selectedManage")
+        localStorage.removeItem("selectedManageExtra")
+
         if(props.action==="add"){
 
             window.location.href = `/manage/properties/add?${finalQuery}`
@@ -140,7 +166,7 @@ export default function TableListChoose(props: {id? :any; action :string; type :
                             className='checkbox'
                                 type="checkbox"
                                 checked={selected.includes(Object.values(obj)[0])}
-                                onChange={() => handleSelect(Object.values(obj)[0])}
+                                onChange={() => handleSelect(Object.values(obj)[0], Object.values(obj)[1], Object.values(obj)[2])}
                             />
 
 

@@ -13,9 +13,50 @@
     justify-content: center;
 }
 .addProprietorsRealtors{
-    margin-top: 50px;
+    display: flex;
+    gap: 10px;
+
+    flex-direction: column;
+}
+.chooseReponsible{
+    width: fit-content;
+    padding: 10px;
+    padding-inline: 25px;
+    border-radius: var(--border-box);
+
+    background-color: var( --box-white-25);
+}
+.subtitleResponsibles{
+    font-size: var(--text-s);
+    font-weight: 400;
+    color: var(--text-white-opacity-85);
+}
+
+.proprietorsContainer{
+    all: unset;
     display: flex;
     flex-direction: column;
+}
+.realtorsContainer{
+    overflow-y: auto;        
+    display: flex;
+    height: 60px;
+    gap: 15px;
+    scrollbar-width: 10px;
+    flex-direction: column;
+    scrollbar-color: #e2e2e2 #f1f1f100;
+}
+  
+.realtorsContainer div h3, .proprietorsContainer h3{
+    all: unset !important;
+    font-weight: 600 !important;
+    font-size: var(--text-sm) !important;
+    color: var(--text-white) !important;
+}
+.realtorsContainer div p, .proprietorsContainer p{
+    all: unset;
+    font-size: var(--text-s);
+    color: var(--text-white);
 }
 .customerBox{
     background-color: var(--box-realtor-non-available)
@@ -40,7 +81,7 @@
     color: var(--text-white);
 }
 .propertyForm h3{
-    margin-top: 60px;
+    margin-top: 50px;
 
 }
 .propertyForm #smallerSection{
@@ -252,7 +293,8 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
-    margin: 96px 0 0 220px;
+    justify-content: right;
+    margin-top: 50px;
 }
 
 .inputArticleMobile{
