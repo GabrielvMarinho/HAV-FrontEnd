@@ -4,6 +4,7 @@ import NewScheduleModal from "@/app/components/Forms/NewScheduleModal";
 import HeaderAdm from "@/app/components/Header/HeaderAdm";
 import SchedulingCard from "@/app/components/Information/SchedulingCard";
 import Map from "@/app/components/Maps/Map";
+import MapSearchResult from "@/app/components/Maps/MapSearchResult";
 import ModalConfirmPassword from "@/app/components/Modal/ModalConfirmPassword";
 import ModalConfirmationPassword from "@/app/components/Modal/ModalConfirmationCellphone";
 import ModalEmailConfirmation from "@/app/components/Modal/ModalEmailConfirmation";
@@ -29,6 +30,8 @@ export default function notification (){
             </main>
         </div> */}
         {/* <Chat/> */}
+
+        <MapSearchResult/>
         
         </>
     )
