@@ -15,6 +15,8 @@ import "./css/style.css"
 import { searchUser } from "@/app/redux/Auth/action";
 import { useDispatch, useSelector } from "react-redux";
 import { createChat, getUsersChat } from "@/app/redux/Chat/action";
+import { createMessage, getAllMessage } from "@/app/redux/Message/action";
+import { data } from "react-router-dom";
 
 export default function Chat() {
 
@@ -34,11 +36,18 @@ export default function Chat() {
         setQuerys("")
     };
 
-    const handleCreateNewMessage = () => { }
+    const handleCreateNewMessage = () => {
+        dispatch(createMessage({ token, data: { chatId: currentChat.id, content: content, } }))
+    }
 
     const handleCurrentChat = (item) => {
         setCurrentChat(item)
     }
+
+    useEffect(() => {
+        if (currentChat?.id)
+            dispatch(getAllMessage({ chatId: currentChat.id, token }))
+    }, [currentChat])
 
     useEffect(() => {
         dispatch(getUsersChat({ token }))
@@ -117,7 +126,7 @@ export default function Chat() {
                         {
                             querys &&
                             auth.searchUser?.map((item) => (
-                                <div onClick={() => handleClickOnChatCard(item.id)}>
+                                <div key={item.id} onClick={() => handleClickOnChatCard(item.id)}>
                                     {""}
                                     <hr />
                                     <ChatCard name={item.full_name}
@@ -134,7 +143,7 @@ export default function Chat() {
                         {
                             chat.chats.length > 0 && !querys &&
                             chat.chats?.map((item) => (
-                                <div onClick={(item) => handleCurrentChat(item)}>
+                                <div key={item.id} onClick={() => handleCurrentChat(item)}>
                                     <hr />
                                     {
                                         item.is_group ? (
@@ -150,13 +159,13 @@ export default function Chat() {
                                                 name={
                                                     auth.reqUser?.id !== item.users[0]?.id
                                                         ? item.users[0].full_name
-                                                        : item.users[0].full_name
+                                                        : item.users[1].full_name
                                                 }
                                                 userImg={
-                                                    auth.reqUser.id !== item.users[0].id
-                                                        ? item.users.profile_picture ||
+                                                    auth.reqUser?.id !== item.users[0].id
+                                                        ? item.users[0]?.profile_picture ||
                                                         "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
-                                                        : item.users[1].profile.picture ||
+                                                        : item.users[1]?.profile_picture ||
                                                         "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
                                                 }
                                             // notification={notifications.length}
@@ -240,9 +249,16 @@ export default function Chat() {
                                         style={{
                                             borderRadius: "100%", width: "3rem", height: "3rem",
                                         }}
-                                        src="https://cdn.pixabay.com/photo/2025/03/17/14/43/bird-9476034_960_720.png"
+                                        src={
+                                            auth.reqUser?.id !== currentChat.users[0].id
+                                                ? currentChat.users[0]?.profile_picture ||
+                                                "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
+                                                : currentChat.users[1]?.profile_picture ||
+                                                "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
+                                        }
                                         alt="" />
-                                    <p>Username</p>
+                                    <p>{currentChat && auth.reqUser?.id ===
+                                        currentChat.users[0].id ? currentChat.users[1].full_name : currentChat.users[0].full_name}</p>
                                 </div>
                                 <div style={{
                                     display: "flex", paddingTop: "0.75rem", paddingBottom: "0.75rem", marginLeft: "1rem",
