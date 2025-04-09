@@ -25,6 +25,7 @@ import postProperty from "@/app/apiCalls/Property/postProperty";
 import searchPropertyById from "@/app/apiCalls/Property/searchPropertyById";
 import MultiSelectDropdown from "../Inputs/MultiSelectDropdown";
 import GetAdditionals from "@/app/apiCalls/Property/GetAdditionals";
+import ButtonUploadPhotos from "../Inputs/buttonUploadPhotos";
 
 export default function FormEditProperty(props :{id :any, objectData :any}) {
 
@@ -42,6 +43,32 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
     const [selectedItems, setSelectedItems] = useState<string[]>([]); 
     const [additionals, setAdditionals] = useState()
 
+
+
+    //dados extra proprietor e realtor
+    props.objectData.proprietorsData = decodeURIComponent(props.objectData.proprietorsData)
+    props.objectData.proprietorsData = props.objectData.proprietorsData.split(",");
+
+
+    props.objectData.realtorsData = decodeURIComponent(props.objectData.realtorsData)
+    
+    props.objectData.realtorsData = props.objectData.realtorsData.split(",");
+    const grouped = [];
+
+    for (let i = 0; i < props.objectData.realtorsData.length; i += 2) {
+    grouped.push([props.objectData.realtorsData[i], props.objectData.realtorsData[i + 1]]);
+    }
+
+    props.objectData.realtorsData = grouped;
+
+
+
+
+
+
+
+
+
     const handleSelect = (id: string, name: string) => {
         if (selectedItems.includes(id)) {
         setSelectedItems(selectedItems.filter((item) => item !== id));
@@ -56,7 +83,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
         async function fetchProperty() {
           try {
             const property :PropertyEditDto = await searchPropertyById(props.id);
-            console.log(property)
             setProperty(property)
             changePurpose(props.objectData.purpose== null || props.objectData.purpose==undefined?property?.purpose:props.objectData.purpose)
             changeStatus(props.objectData.status== null || props.objectData.status==undefined?property?.propertyStatus:props.objectData.status)
@@ -78,12 +104,13 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
             setHasIptu(true)
             return;
         }
-        if(type != "locacao"){
-            setHasIptu(true)
-        }
-        else{
+        if(type == "locacao"){
             setHasIptu(false)
         }
+        else if(type =="venda"){
+            setHasIptu(true)
+        }
+        
     }
 
     const changeStatus = function(type :string){
@@ -93,10 +120,17 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
         }
         if(type == "promocao"){
             setIsPromotional(true)
+            return;
         }
-        else{
+        else if(type =="lancamento"){
             setIsPromotional(false)
+
         }
+        else if(type =="comum"){
+            setIsPromotional(false)
+
+        }
+        
     }   
     const changeType = function(type :string){
         if(type == undefined){
@@ -106,34 +140,37 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
         if(type == "terreno"){
             setIsLand(true)
             setIsCondominiumFree(true)
+            return;
         }
-        if(type != "apartamento"){
-            setIsCondominiumFree(true)
-        }
-        else{
-            setIsCondominiumFree(false)
-
+        else if(type == "casa"){
             setIsLand(false)
+            setIsCondominiumFree(true)
+            return;
         }
+        else if(type == "apartamento"){
+            setIsLand(false)
+            setIsCondominiumFree(false)
+        }
+        
     }   
     useEffect(() =>{
         setSelectedItems(
-            props.objectData?.additionals ? JSON.parse(props.objectData.additionals) : []
+            props.objectData.additionals ?? property?.additionals ?? []
           );
         changePurpose(props.objectData.purpose== null || props.objectData.purpose==undefined?property?.purpose:props.objectData.purpose)
         changeStatus(props.objectData.status== null || props.objectData.status==undefined?property?.propertyStatus:props.objectData.status)
         changeType(props.objectData.propertyType== null || props.objectData.propertyType==undefined?property?.propertyType:props.objectData.propertyType)
-    }, [])
+    }, [property])
     
     
 
-    const addProperty = async function () {
+    const editProperty = async function () {
 
         if (!pendingFormData) return;
 
         setIsModalOpen(false);
 
-        try {
+        try {//muda o método
             const response = await postProperty(pendingFormData)
             window.location.href = "/manage/properties"
         }
@@ -147,15 +184,49 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
         setPendingFormData(data),
         setIsModalOpen(true)
     }
-    console.log(props.objectData.iptu== null || props.objectData.iptu==undefined?property?.iptu:props.objectData.iptu)
+    useEffect(() => {
+        console.log("asdasdas",props.objectData.additionals)
+        console.log(property?.additionals)
+        if (property) {
+          form.reset({
+            complement: String(props.objectData.complement ?? property?.complement),
+            neighborhood: String(props.objectData.neighborhood ?? property?.neighborhood),
+            state: String(props.objectData.state ?? property?.state),
+            city: String(props.objectData.city ?? property?.city),
+            cep: String(props.objectData.cep ?? property?.cep),
+            propertyNumber: String(props.objectData.propertyNumber ?? property?.propertyNumber),
+            street: String(props.objectData.street ?? property?.street),
+            highlight: String(props.objectData.highlight ?? property?.highlight),
+            promotionalPrice: String(props.objectData.propertyPromotionalPrice ?? property?.promotionalPrice),
+            price: String(props.objectData.price ?? property?.price),
+            iptu: String(props.objectData.iptu ?? property?.iptu),
+
+            area: String(props.objectData.area ?? property?.area),
+            title: String(props.objectData.title ?? property?.title),
+            propertyDescription: String(props.objectData.propertyDescription ?? property?.propertyDescription),
+            propertyType: String(props.objectData.propertyType ?? property?.propertyType),
+            status: String(props.objectData.status ?? property?.propertyStatus),
+            purpose: String(props.objectData.purpose ?? property?.purpose),
+            allowsPet: String(props.objectData.allowsPet ?? property?.allowsPet),
+            isFurnished: String(props.objectData.isFurnished ?? property?.isFurnished),
+            condominiumFee: String(props.objectData.condominiumFee ?? property?.condominiumFee),
+            garageSpace: String(props.objectData.garageSpace ?? property?.garageSpace),
+            suite: String(props.objectData.suite ?? property?.suite),
+            floors: String(props.objectData.floors ?? property?.floors),
+            bathRoom: String(props.objectData.bathRoom ?? property?.bathRoom),
+            livingRoom: String(props.objectData.livingRoom ?? property?.livingRoom),
+            bedRoom: String(props.objectData.bedRoom ?? property?.bedRoom),
+            additionals: String(props.objectData.additionals ?? property?.additionals),
+            realtors: String(props.objectData.realtors ?? property?.realtors),
+            proprietor: String(props.objectData.proprietor ?? property?.proprietor),
+          });
+        }
+      }, [property]);
     const form = useForm<newProperty>({
-        defaultValues:{
-            iptu:"21343",
-            price:"34234"
-        },
         resolver: zodResolver(newProperty),
-        mode: "onTouched"
-    });
+        mode: "onTouched",
+        
+      });
     
 
     const findAdditionals = async function (): Promise<[]> {
@@ -207,7 +278,10 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
 
         <section id="smallerSection">
             <div className="imgPerson">
-                                    <ButtonUploadPhoto />
+                                   <ButtonUploadPhotos name={"images"} 
+                                   register={form.register}
+                                   error={form.formState.errors["images" as keyof newProperty]}
+                                   />
                                 </div>
             <h3>CARACTERÍSTICAS DO IMÓVEL</h3>
             <div className="propertyFormGroup">
@@ -220,7 +294,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     size={dropdownFields.bedRoom.size}
                     text={dropdownFields.bedRoom.text}
                     id={dropdownFields.bedRoom.id}
-                    defaultValue={props.objectData.bedRoom== null || props.objectData.bedRoom==undefined?property?.bedRoom:props.objectData.bedRoom}
                     register={form.register}
                     error={form.formState.errors[dropdownFields.bedRoom.name as keyof newProperty]}
                     options={dropdownFields.bedRoom.options}
@@ -233,7 +306,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     text={dropdownFields.livingRoom.text}
                     id={dropdownFields.livingRoom.id}
                     register={form.register}
-                    defaultValue={props.objectData.livingRoom== null || props.objectData.livingRoom==undefined?property?.livingRoom:props.objectData.livingRoom}
 
                     error={form.formState.errors[dropdownFields.livingRoom.name as keyof newProperty]}
                     options={dropdownFields.livingRoom.options}
@@ -244,7 +316,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     size={dropdownFields.bathRoom.size}
                     text={dropdownFields.bathRoom.text}
                     id={dropdownFields.bathRoom.id}
-                    defaultValue={props.objectData.bathRoom== null || props.objectData.bathRoom==undefined?property?.bathRoom:props.objectData.bathRoom}
 
                     register={form.register}
                     error={form.formState.errors[dropdownFields.bathRoom.name as keyof newProperty]}
@@ -256,7 +327,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     size={dropdownFields.floors.size}
                     text={dropdownFields.floors.text}
                     id={dropdownFields.floors.id}
-                    defaultValue={props.objectData.floors== null || props.objectData.floors==undefined?property?.floors:props.objectData.floors}
 
                     register={form.register}
                     error={form.formState.errors[dropdownFields.floors.name as keyof newProperty]}
@@ -268,7 +338,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     size={dropdownFields.suite.size}
                     text={dropdownFields.suite.text}
                     id={dropdownFields.suite.id}
-                    defaultValue={props.objectData.suite== null || props.objectData.suite==undefined?property?.suite:props.objectData.suite}
 
                     register={form.register}
                     error={form.formState.errors[dropdownFields.suite.name as keyof newProperty]}
@@ -280,7 +349,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     size={dropdownFields.garageSpace.size}
                     text={dropdownFields.garageSpace.text}
                     id={dropdownFields.garageSpace.id}
-                    defaultValue={props.objectData.garageSpace== null || props.objectData.garageSpace==undefined?property?.garageSpace:props.objectData.garageSpace}
 
                     register={form.register}
                     error={form.formState.errors[dropdownFields.garageSpace.name as keyof newProperty]}
@@ -393,7 +461,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     size={textFields.condominiumFee.size}
                     placeholder={textFields.condominiumFee.placeholder}
                     text={textFields.condominiumFee.text}
-                    defaultValue={props.objectData.condominiumFee== null || props.objectData.condominiumFee==undefined?property?.condominiumFee:props.objectData.condominiumFee}
 
                     id={textFields.condominiumFee.id}
                     register={form.register}
@@ -410,7 +477,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     size={dropdownFields.isFurnished.size}
                     text={dropdownFields.isFurnished.text}
                     id={dropdownFields.isFurnished.id}
-                    defaultValue={props.objectData.isFurnished== null || props.objectData.isFurnished==undefined?property?.isFurnished:props.objectData.isFurnished}
 
                     register={form.register}
                     error={form.formState.errors[dropdownFields.isFurnished.name as keyof newProperty]}
@@ -423,7 +489,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     size={dropdownFields.allowsPet.size}
                     text={dropdownFields.allowsPet.text}
                     id={dropdownFields.allowsPet.id}
-                    defaultValue={props.objectData.allowsPet== null || props.objectData.allowsPet==undefined?property?.allowsPet:props.objectData.allowsPet}
 
                     
                     register={form.register}
@@ -454,7 +519,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     size={dropdownFields.purpose.size}
                     text={dropdownFields.purpose.text}
                     id={dropdownFields.purpose.id}
-                    defaultValue={props.objectData.purpose== null || props.objectData.purpose==undefined?property?.purpose:props.objectData.purpose}
                     register={form.register}
                     error={form.formState.errors[dropdownFields.purpose.name as keyof newProperty]}
                     options={dropdownFields.purpose.options}
@@ -470,7 +534,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     register={form.register}
                     error={form.formState.errors[dropdownFields.status.name as keyof newProperty]}
 
-                    defaultValue={props.objectData.status== null || props.objectData.status==undefined?property?.propertyStatus:props.objectData.status}
 
                     options={dropdownFields.status.options}
                     onChange={changeStatus}
@@ -482,7 +545,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     size={dropdownFields.propertyType.size}
                     text={dropdownFields.propertyType.text}
                     id={dropdownFields.propertyType.id}
-                    defaultValue={props.objectData.propertyType== null || props.objectData.propertyType==undefined?property?.propertyType:props.objectData.propertyType}
                     register={form.register}
                     error={form.formState.errors[dropdownFields.propertyType.name as keyof newProperty]}
                     options={dropdownFields.propertyType.options}
@@ -498,7 +560,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     placeholder={textFields.propertyDescription.placeholder}
                     text={textFields.propertyDescription.text}
                     id={textFields.propertyDescription.id}
-                    defaultValue={props.objectData.propertyDescription== null || props.objectData.propertyDescription==undefined?property?.propertyDescription:props.objectData.propertyDescription}
 
                     register={form.register}
                     error={form.formState.errors[textFields.propertyDescription.name as keyof newProperty]}
@@ -510,7 +571,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     placeholder={textFields.propertyTitle.placeholder}
                     text={textFields.propertyTitle.text}
                     id={textFields.propertyTitle.id}
-                    defaultValue={props.objectData.title== null || props.objectData.title==undefined?property?.title:props.objectData.title}
 
                     register={form.register}
                     error={form.formState.errors[textFields.propertyTitle.name as keyof newProperty]}
@@ -522,7 +582,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     placeholder={textFields.propertyArea.placeholder}
                     text={textFields.propertyArea.text}
                     id={textFields.propertyArea.id}
-                    defaultValue={props.objectData.area== null || props.objectData.area==undefined?property?.area:props.objectData.area}
 
                     register={form.register}
                     error={form.formState.errors[textFields.propertyArea.name as keyof newProperty]}
@@ -533,7 +592,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     size={textFields.propertyPrice.size}
                     placeholder={textFields.propertyPrice.placeholder}
                     text={textFields.propertyPrice.text}
-                    defaultValue={props.objectData.price== null || props.objectData.price==undefined?property?.price:props.objectData.price}
 
                     id={textFields.propertyPrice.id}
                     register={form.register}
@@ -547,7 +605,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     placeholder={textFields.propertyPromotionalPrice.placeholder}
                     text={textFields.propertyPromotionalPrice.text}
                     id={textFields.propertyPromotionalPrice.id}
-                    defaultValue={props.objectData.propertyPromotionalPrice== null || props.objectData.propertyPromotionalPrice==undefined?property?.promotionalPrice:props.objectData.propertyPromotionalPrice}
 
                     register={form.register}
                     error={form.formState.errors[textFields.propertyPromotionalPrice.name as keyof newProperty]}/>
@@ -567,7 +624,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     size={dropdownFields.propertyHighlight.size}
                     text={dropdownFields.propertyHighlight.text}
                     id={dropdownFields.propertyHighlight.id}
-                    defaultValue={props.objectData.highlight== null || props.objectData.highlight==undefined?property?.highlight:props.objectData.highlight}
 
                     register={form.register}
                     error={form.formState.errors[dropdownFields.propertyHighlight.name as keyof newProperty]}
@@ -586,7 +642,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     placeholder={textFields.street.placeholder}
                     text={textFields.street.text}
                     id={textFields.street.id}
-                    defaultValue={props.objectData.street== null || props.objectData.street==undefined?property?.street:props.objectData.street}
                     register={form.register}
                     error={form.formState.errors[textFields.street.name as keyof newProperty]}
                 />
@@ -596,7 +651,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     size={textFields.propertyNumber.size}
                     placeholder={textFields.propertyNumber.placeholder}
                     text={textFields.propertyNumber.text}
-                    defaultValue={props.objectData.propertyNumber== null || props.objectData.propertyNumber==undefined?property?.propertyNumber:props.objectData.propertyNumber}
 
                     id={textFields.propertyNumber.id}
                     register={form.register}
@@ -609,7 +663,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     placeholder={textFields.cep.placeholder}
                     text={textFields.cep.text}
                     id={textFields.cep.id}
-                    defaultValue={props.objectData.cep== null || props.objectData.cep==undefined?property?.cep:props.objectData.cep}
 
                     register={form.register}
                     error={form.formState.errors[textFields.cep.name as keyof newProperty]}
@@ -621,7 +674,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     text={dropdownFields.city.text}
                     id={dropdownFields.city.id}
                     options={dropdownFields.city.options}
-                    defaultValue={props.objectData.city== null || props.objectData.city==undefined?property?.city:props.objectData.city}
 
                     register={form.register}
                     error={form.formState.errors[dropdownFields.city.name as keyof newProperty]}
@@ -632,7 +684,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     size={dropdownFields.state.size}
                     text={dropdownFields.state.text}
                     id={dropdownFields.state.id}
-                    defaultValue={props.objectData.state== null || props.objectData.state==undefined?property?.state:props.objectData.state}
 
                     options={dropdownFields.state.options}
                     register={form.register}
@@ -644,7 +695,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     size={dropdownFields.neighborhood.size}
                     text={dropdownFields.neighborhood.text}
                     id={dropdownFields.neighborhood.id}
-                    defaultValue={props.objectData.neighborhood== null || props.objectData.neighborhood==undefined?property?.neighborhood:props.objectData.neighborhood}
 
                     options={dropdownFields.neighborhood.options}
                     register={form.register}
@@ -654,7 +704,6 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     key={textFields.complement.id}
                     name={textFields.complement.name}
                     size={textFields.complement.size}
-                    defaultValue={props.objectData.complement== null || props.objectData.complement==undefined?property?.complement:props.objectData.complement}
 
                     placeholder={textFields.complement.placeholder}
                     text={textFields.complement.text}
@@ -665,34 +714,104 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                 
 
                 </div>
-                <div className="addProprietorsRealtors">
-                
-                
-                    <button onClick={handleAddRealtor}>adicionar corretor</button>  
-                    {props.objectData.realtors || property?.realtors[0].name  &&
-                
-                        <>
+                    <h3>RESPONSÁVEIS</h3>
+    
+                    <div className="addProprietorsRealtors" style={{opacity:"0.9"}}>
+                        <h4 className="subtitleResponsibles">CORRETORES</h4>
+    
+                        <div className={"chooseReponsible"} style={{display:"flex", gap:"10px", alignItems:"center"}}>
+                        {props.objectData.realtors ? (
+                            // Caso seja da URL
+                            <div style={{ width: "200px", height: "60px" }}>
+                                <input
+                                hidden={true}
+                                {...(form.register ? form.register("realtors") : {})}
+                                name="realtors"
+                                />
+
+                                {form.formState.errors.realtors && (
+                                <p className="errorText">{form.formState.errors.realtors.message}</p>
+                                )}
+
+                                <input hidden={true} name="realtorsData" value={props.objectData.realtorsData} />
+
+                                <div className="realtorsContainer">
+                                {props.objectData.realtorsData?.map((item: string[], index: number) => (
+                                    <div key={index} style={{ display: "flex", flexDirection: "column" }}>
+                                    <h3>{item[1]}</h3>
+                                    <p>{item[0]}</p>
+                                    </div>
+                                ))}
+                                </div>
+                            </div>
+                            ) : property?.realtors ? (
+                            // Caso seja do property
+                            <div style={{ width: "200px", height: "60px" }}>
+                                <input
+                                hidden={true}
+                                {...(form.register ? form.register("realtors") : {})}
+                                name="realtors"
+                                />
+
+                                {form.formState.errors.realtors && (
+                                <p className="errorText">{form.formState.errors.realtors.message}</p>
+                                )}
+
+                                <input hidden={true} name="realtorsData" value={property.realtorsData} />
+                                
+                                <div className="realtorsContainer">
+                                {property && Array.isArray(property.realtorsExtraData) && (
+                                property.realtorsExtraData.map((item: string[], index: number) => (
+                                    <div key={index} style={{ display: "flex", flexDirection: "column" }}>
+                                    <h3>{item.name}</h3>
+                                    <p>{item.cpf}</p>
+                                    </div>
+                                ))
+                                )}
+                                </div>
+                            </div>
+                            ) : null}
+                        <Button type={"button"} color={"Var(--text-red-pink)"} size={"small"} background="var(--box-white)" text="alterar" onClick={handleAddRealtor}></Button>  
+                        </div>
+                        <h4 className="subtitleResponsibles">PROPRIETÁRIO</h4>
                         
-                        <input hidden={true} value ={props.objectData.realtors== null || props.objectData.realtors==undefined?property?.realtors:props.objectData.realtors} {...(form.register ? form.register("realtors") : {})} name = {"realtors"}/>
-                        
-                        {form.formState.errors.realtors &&(
-                            <p className="errorText">{form.formState.errors.realtors.message}</p>
+                        <div className={"chooseReponsible"} style={{display:"flex", gap:"10px", alignItems:"center"}}>
+                        {props.objectData.proprietor ? (
+                        // Caso seja da URL
+                        <div style={{ width: "200px", height: "50px", display: "flex", alignItems: "center" }}>
+                            <input
+                            hidden={true}
+                            {...(form.register ? form.register("proprietor") : {})}
+                            name="proprietor"
+                            />
+                            <input hidden={true} name="proprietorsData" value={props.objectData.proprietorsData} />
+
+                            <div className="proprietorsContainer">
+                            <h3>{props.objectData.proprietorsData[1]}</h3>
+                            <p>{props.objectData.proprietorsData[0]}</p>
+                            </div>
+                        </div>
+                        ) : property?.proprietor ? (
+                        // Caso seja do property
+                        <div style={{ width: "200px", height: "50px", display: "flex", alignItems: "center" }}>
+                            <input
+                            hidden={true}
+                            {...(form.register ? form.register("proprietor") : {})}
+                            name="proprietor"
+                            />
+                            <input hidden={true} name="proprietorsData" value={property.proprietorsData} />
+                            {property && (
+                            <div className="proprietorsContainer">
+                                
+                            <h3>{property.proprietorExtraData?.name}</h3>
+                            <p>{property.proprietorExtraData?.cpf}</p>
+                            </div>
                             )}
-                            
-
-                        <div>{props.objectData.realtors== null || props.objectData.realtors==undefined?property?.realtors[0].name:props.objectData.realtors}</div>
-                        
-                        </>//falta fazer para validar se tem algum corretor e proprietor
-                        }
-                    <button onClick={handleAddProprietor}>adicionar proprietario</button>                 
-                    {props.objectData.proprietor || property?.proprietor &&
-                        <>
-
-                        <input hidden={true} {...(form.register ? form.register("proprietor") : {})} value ={props.objectData.proprietor== null || props.objectData.proprietor==undefined?property?.proprietor.name:props.objectData.proprietor} name = {"proprietor"}/>
-                        <div>{props.objectData.proprietor== null || props.objectData.proprietor==undefined?property?.proprietor.name:props.objectData.proprietor}</div>
-                        </>
-                        }
-                </div>
+                        </div>
+                        ) : null}
+                        <Button type={"button"} color={"Var(--text-red-pink)"} size={"small"} background="var(--box-white)" text="alterar" onClick={handleAddProprietor}></Button>                 
+                        </div>
+                    </div>
                 <div className="divButtonsAceptCancelForms">
                     <ButtonBackAPoint point = {"/manage/properties"} size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                     <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
@@ -708,7 +827,7 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     }
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
-                    onConfirm={addProperty}
+                    onConfirm={editProperty}
                 />
         </section>
 
