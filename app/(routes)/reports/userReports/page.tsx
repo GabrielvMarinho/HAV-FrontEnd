@@ -27,8 +27,8 @@ export default function page() {
         <div className="reports-graphTitle">
           <p>USUÁRIOS</p>
         </div>
-        <div className="users-data-row">
-          <div className="users-data-box">
+        <div className="users-data-rowRight">
+        <div className="users-data-box">
             <h3 className="users-big-number">3.2 MIL</h3>
             <p className="users-small-text">Desde 2025</p>
           </div>
@@ -71,51 +71,7 @@ export default function page() {
         </div>
       </section>
 
-      <section className="properties-section">
-  <div className="properties-table-container">
-    <table className="properties-table">
-      <thead>
-        <tr>
-          <th>ID IMÓVEL</th>
-          <th>PROPRIETÁRIO</th>
-          <th>TIPO IMÓVEL</th>
-          <th>CATEGORIA</th>
-          <th>STATUS</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>2357U4</td>
-          <td>Bianca Isabela Vaz</td>
-          <td>CASA</td>
-          <td>LOCAÇÃO</td>
-          <td className="status-pending">PENDENTE</td>
-        </tr>
-        <tr>
-          <td>2357U4</td>
-          <td>Bianca Isabela Vaz</td>
-          <td>CASA</td>
-          <td>LOCAÇÃO</td>
-          <td className="status-launch">LANÇAMENTO</td>
-        </tr>
-        <tr>
-          <td>2357U4</td>
-          <td>Bianca Isabela Vaz</td>
-          <td>CASA</td>
-          <td>LOCAÇÃO</td>
-          <td className="status-launch">LANÇAMENTO</td>
-        </tr>
-        <tr>
-          <td>2357U4</td>
-          <td>Bianca Isabela Vaz</td>
-          <td>CASA</td>
-          <td>LOCAÇÃO</td>
-          <td className="status-launch">LANÇAMENTO</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
+      
       <Footer />
     </>
   );

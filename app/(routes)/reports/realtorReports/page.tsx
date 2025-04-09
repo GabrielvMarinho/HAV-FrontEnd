@@ -28,7 +28,7 @@ export default function page() {
           <p>USUÁRIOS</p>
         </div>
         <div className="users-data-row">
-          <div className="users-data-box">
+        <div className="users-data-box">
             <h3 className="users-big-number">3.2 MIL</h3>
             <p className="users-small-text">Desde 2025</p>
           </div>

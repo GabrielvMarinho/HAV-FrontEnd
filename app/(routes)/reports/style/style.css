@@ -11,9 +11,9 @@
 
 .reports-container {
   display: flex;
-  justify-content: center;
-  align-items: flex-start; /* Alinha o conteúdo ao topo */
-  width: 62.063rem;
+  justify-content: space-between;
+  align-items: flex-start; 
+  width: 62rem;
 }
 
 .reports-title {
@@ -42,12 +42,21 @@
   width: 90%;
 }
 
+  .data-TitleRight {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 6.25rem;
+  width: 90%;
+}
+
 .sideTitle {
     display: flex;
     width: 100%; 
 }
 
-.reports-graphTitle {
+.reports-graphTitle, .reports-graphTitleRight  {
   color: var(--text--mid-dark-red);
   opacity: 0.7;
   font-weight: 700;
@@ -59,6 +68,13 @@
 }
 
 .reports-graphTitle p {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.reports-graphTitleRight p {
   text-align: center;
   font-weight: bold;
   margin-bottom: 1.5rem;
@@ -92,13 +108,82 @@
     min-width: 0; /* Isso evita que o flex item estoure o container */
   }
   
-  .users-data-box {
+  .users-data-box{
     background: var(--box-red-pink);
     padding: 1.5rem;
     border-radius: 5px;
     width: 200px;
     height: 120px;
   }
+
+  /* Remova ou ajuste esta regra (está causando o desalinhamento) */
+.reports-graphTitleRight p {
+  text-align: start;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  margin-right: 17rem;
+  font-size: 1.2rem;
+}
+
+/* Container principal (opcional) */
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Títulos acima das caixas (nova classe) */
+.info-data-box-text {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Ajuste conforme necessário */
+  max-width: 64rem; /* Mantém a largura máxima */
+  gap: 30px; /* Mesmo gap que .row-boxes */
+  margin-bottom: 1rem; /* Espaço entre títulos e caixas */
+}
+
+/* Caixas de dados */
+.row-boxes {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 64rem;
+  gap: 30px;
+  margin-bottom: 5.188rem;
+}
+.info-textTitle {
+  text-align: center;
+  color: var(--text--mid-dark-red);
+  padding: 0 0 1.375rem 0;
+  opacity: 0.7;
+  font-weight: 700;
+}
+
+.info-data-box {
+  background: var(--box-red-pink);
+  padding: 1.5rem;
+  border-radius: 5px;
+  width: 279px; /* Largura fixa para alinhamento */
+  height: 148px;
+}
+
+.info-big-number {
+  color: var(--box-white);
+  font-size: 35px;
+  font-weight: 700;
+  text-align: center;
+  margin: 1rem 0 0 -4rem; /* Remove a margem negativa */
+  padding: 0 10px; /* Opcional: evita que números muito grandes vazem */
+  width: 100%; /* Ocupa toda a largura da caixa pai */
+  box-sizing: border-box; /* Garante que padding não aumente a largura */
+}
+
+.info-small-text {
+  color: var(--back-ground-light-red);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 18px;
+}
   
   .users-big-number {
     color: var(--box-white);
@@ -158,4 +243,52 @@
 
 section {
   margin-bottom: 25px;
+}
+
+..properties-section {
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.properties-table-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.properties-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.properties-table th {
+  color: var(--box-dark-red);
+  font-size: 20px;
+  font-weight: 700;
+  padding: 0 2.25rem 1rem 2.25rem;
+}
+
+.table-row td {
+  padding: 12px 15px;
+  text-align: center;
+}
+
+.table-divider td {
+  padding: 0;
+  height: 1px;
+}
+
+.status-pending {
+  color: #FFA500;
+  font-weight: bold;
+}
+
+.status-launch {
+  color: #008000;
+  font-weight: bold;
+}
+
+.data-Container {
+  margin-bottom: 8.75rem;
+
 }
