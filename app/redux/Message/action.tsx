@@ -25,7 +25,6 @@ export const createMessage = (messageData) => async (dispatch) => {
 export const getAllMessage = (reqData) => async (dispatch) => {
 
     try {
-
         const res = await fetch(`localhost:9090/api/messages/chat/${reqData.chatId}`, {
             method: "GET",
             headers: {

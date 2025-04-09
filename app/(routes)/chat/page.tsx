@@ -10,19 +10,52 @@ import SearchIcon from "@/app/components/IconsTSX/SearchIcon";
 import SmileEmoji from "@/app/components/IconsTSX/smileEmoji";
 import MessageCard from "@/app/components/MessageCard/MessageCard";
 import Google from "next-auth/providers/google";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./css/style.css"
+import { searchUser } from "@/app/redux/Auth/action";
+import { useDispatch, useSelector } from "react-redux";
+import { createChat, getUsersChat } from "@/app/redux/Chat/action";
 
-export default function chat() {
+export default function Chat() {
 
-    const [querys, setQuerys] = useState(null);
+    const [querys, setQuerys] = useState("");
     const [currentChat, setCurrentChat] = useState(false);
     const [content, setContent] = useState("");
-    const handleSearch = () => { }
-    const handleClickOnChatCard = () => [
-        setCurrentChat(true)
-    ]
+    const { auth, chat, message } = useSelector(store => store);
+    const dispatch = useDispatch();
+    const token = localStorage.getItem("token");
+
+    const handleSearch = (keyword) => {
+        dispatch(searchUser({ keyword, token }))
+    };
+
+    const handleClickOnChatCard = (userId) => {
+        dispatch(createChat({ token, data: { userId } }))
+        setQuerys("")
+    };
+
     const handleCreateNewMessage = () => { }
+
+    const handleCurrentChat = (item) => {
+        setCurrentChat(item)
+    }
+
+    useEffect(() => {
+        dispatch(getUsersChat({ token }))
+    }, [chat.createdChat])
+
+    useEffect(() => {
+        const userStorage = localStorage.getItem('user');
+
+        if (userStorage) {
+            try {
+                const user = JSON.parse(userStorage);
+                console.log("Usuário logado:", user);
+            } catch (error) {
+                console.log("Erro ao fazer parse do user:", error);
+            }
+        }
+    }, []);
 
     return (
         <>
@@ -81,13 +114,70 @@ export default function chat() {
                         overflow: "scroll", height: "70vh", paddingLeft: "0.75rem",
                         paddingRight: "0.75rem"
                     }}>
-                        {querys && [1, 1, 1, 1, 1].map((iten) => (
-                            <div onClick={handleClickOnChatCard}>
-                                {""}
-                                <hr /> <ChatCard />
-                                {""}
-                            </div>
-                        ))}
+                        {
+                            querys &&
+                            auth.searchUser?.map((item) => (
+                                <div onClick={() => handleClickOnChatCard(item.id)}>
+                                    {""}
+                                    <hr />
+                                    <ChatCard name={item.full_name}
+                                        userImg={
+                                            item.profile_picture ||
+                                            "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
+                                        }
+                                    />
+                                    {""}
+                                </div>
+                            ))
+                        }
+
+                        {
+                            chat.chats.length > 0 && !querys &&
+                            chat.chats?.map((item) => (
+                                <div onClick={(item) => handleCurrentChat(item)}>
+                                    <hr />
+                                    {
+                                        item.is_group ? (
+                                            <ChatCard name={item.chat_name}
+                                                userImg={
+                                                    item.chat_image ||
+                                                    "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
+                                                }
+                                            />
+                                        ) : (
+                                            <ChatCard
+                                                isChat={true}
+                                                name={
+                                                    auth.reqUser?.id !== item.users[0]?.id
+                                                        ? item.users[0].full_name
+                                                        : item.users[0].full_name
+                                                }
+                                                userImg={
+                                                    auth.reqUser.id !== item.users[0].id
+                                                        ? item.users.profile_picture ||
+                                                        "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
+                                                        : item.users[1].profile.picture ||
+                                                        "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
+                                                }
+                                            // notification={notifications.length}
+                                            /* isNotification={
+                                                notification[0]?.chat?.id === item.id
+                                            } */
+
+                                            /* message={
+                                                (item.id ===
+                                                    messages[messages.length - 1]?.chat?.id &&
+                                                    messages[messages.length - 1]?.content) ||
+                                                (item.id ===
+                                                    notifications[0]?.chat?.id &&
+                                                    notifications[0]?.content)
+                                            } */
+                                            />
+                                        )
+                                    }
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
 

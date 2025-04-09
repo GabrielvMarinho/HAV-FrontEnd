@@ -1,3 +1,5 @@
+"use client"
+
 import HeaderAdm from "@/app/components/Header/HeaderAdm";
 import "../profile/style/style.css";
 import Title from "@/app/components/NonInteractable/Title";

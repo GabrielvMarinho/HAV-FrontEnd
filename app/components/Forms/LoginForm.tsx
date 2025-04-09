@@ -10,7 +10,8 @@ import LoginAttempt from "@/app/apiCalls/Auth/LoginAttempt";
 import { useState } from "react";
 import "@/app/variables.css"
 import { useDispatch } from "react-redux";
-import { loginUser } from "@/app/redux/Auth/Action";
+import { loginUser } from "@/app/redux/Auth/action";
+
 export default function FormLogin() {
 
     const dispatch = useDispatch();
@@ -18,10 +19,18 @@ export default function FormLogin() {
     const [errorLogin, setErrorLogin] = useState<string | null>(null);
 
     const handleLogin = async (data: Login) => {
-        const response = await dispatch(loginUser(data.email, data.password));
+        const response = await dispatch<any>(loginUser(data.email, data.password));
 
         if (response.success) {
-            window.location.href = "/";
+            console.log("Usuário logado:", response.user);
+
+            localStorage.setItem('token', response.jwt);
+
+            if (response.user) {
+                localStorage.setItem('user', JSON.stringify(response.user));
+            }
+
+            window.location.href = "/chat";
         } else {
             setErrorLogin(response.message);
         }

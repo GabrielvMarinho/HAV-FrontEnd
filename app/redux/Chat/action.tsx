@@ -4,7 +4,7 @@ export const createChat = (chatData: { token: any; data: any; }) => async (dispa
 
     try {
 
-        const res = await fetch(`localhost:9090/api/single`, {
+        const res = await fetch(`http://localhost:9090/api/chats/single`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export const getUsersChat = (chatData: { token: any; }) => async (dispatch: (arg
 
     try {
 
-        const res = await fetch(`localhost:9090/api/chats/user`, {
+        const res = await fetch(`http://localhost:9090/api/chats/user`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export const getUsersChat = (chatData: { token: any; }) => async (dispatch: (arg
         })
 
         const data = await res.json();
-        console.log("create chat", data)
+        console.log("users chat", data)
         dispatch({ type: GET_USERS_CHAT, payload: data })
 
     } catch (error) {

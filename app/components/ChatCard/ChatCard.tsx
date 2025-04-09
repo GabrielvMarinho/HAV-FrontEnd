@@ -1,7 +1,7 @@
 import React from "react";
 import "./css/style.css";
 
-export default function ChatCard() {
+export default function ChatCard({ name, userImg }) {
     return (
         <div className="chatContainner" style={{
             display: "flex", justifyContent: "center", alignItems: "center", paddingTop: "0.5rem",
@@ -13,7 +13,8 @@ export default function ChatCard() {
                 <img style={{
                     borderRadius: "100%", width: "3rem", height: "3rem"
                 }}
-                    src="https://cdn.pixabay.com/photo/2025/03/17/14/43/bird-9476034_960_720.png" alt="" />
+                    src={userImg}
+                    alt="" />
             </div>
             <div style={{ paddingLeft: "1.25rem", width: "80%" }}>
                 <div style={{
@@ -22,7 +23,7 @@ export default function ChatCard() {
                     <p style={{
                         fontSize: "1.125rem",
                         lineHeight: "1.75rem"
-                    }}>Username</p>
+                    }}>{name}</p>
                     <p style={{
                         fontSize: "0.875rem",
                         lineHeight: "1.25rem"
