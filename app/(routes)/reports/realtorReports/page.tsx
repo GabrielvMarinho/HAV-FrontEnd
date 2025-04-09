@@ -25,11 +25,11 @@ export default function page() {
 
       <section className="users-section">
         <div className="reports-graphTitle">
-          <p>CORRETORES</p>
+          <p>USUÁRIOS</p>
         </div>
         <div className="users-data-row">
           <div className="users-data-box">
-            <h3 className="users-big-number">421</h3>
+            <h3 className="users-big-number">3.2 MIL</h3>
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
@@ -44,7 +44,7 @@ export default function page() {
         </div>
         <div className="users-data-row">
           <div className="users-data-box">
-            <h3 className="users-big-number">421</h3>
+            <h3 className="users-big-number">3.2 MIL</h3>
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
@@ -52,6 +52,8 @@ export default function page() {
           </div>
         </div>
       </section>
+
+      
       <Footer />
     </>
   );
