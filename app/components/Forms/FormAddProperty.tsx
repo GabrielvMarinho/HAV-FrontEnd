@@ -57,7 +57,8 @@ export default function FormAddProperty(props :{objectData :any;}) {
 
     
     const [selectedItems, setSelectedItems] = useState<string[]>([]); 
-
+    
+    
     const handleSelect = (id: string, name: string) => {
         if (selectedItems.includes(id)) {
         setSelectedItems(selectedItems.filter((item) => item !== id));
@@ -72,9 +73,11 @@ export default function FormAddProperty(props :{objectData :any;}) {
             setHasIptu(true)
             return;
         }
-        else if(type == "locacao"){
+        if(type == "locacao"){
             setHasIptu(false)
-            return;
+        }
+        else if(type =="venda"){
+            setHasIptu(true)
         }
         
     }
@@ -124,8 +127,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
         setSelectedItems(
             props.objectData?.additionals ? JSON.parse(props.objectData.additionals) : []
           );
-                  changePurpose(props.objectData.purpose)
-        console.log(props.objectData.status)
+        changePurpose(props.objectData.purpose)
         changeStatus(props.objectData.status)
         changeType(props.objectData.propertyType)
         setIsReady(true); 
@@ -254,7 +256,7 @@ export default function FormAddProperty(props :{objectData :any;}) {
                 <div className="imgProperty">
                                         <ButtonUploadPhotos name={"images"} 
                                             register={form.register}
-                                            error={form.formState.errors["images" as keyof NewEditorOrAdm]}
+                                            error={form.formState.errors["images" as keyof newProperty]}
                                         />
                                     </div>
                 <h3>CARACTERÍSTICAS DO IMÓVEL</h3>

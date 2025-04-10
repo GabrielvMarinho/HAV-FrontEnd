@@ -84,7 +84,7 @@ export default function FormEditCustomer(props :{id :any }) {
             cep: customer.cep,
             street: customer.street,
             propertyNumber: customer.propertyNumber.toString(),
-            complement: customer.complement,
+            complement: customer.complement ?? "",
             state: customer.state,
             city: customer.city,
             neighborhood: customer.neighborhood,
