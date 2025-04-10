@@ -29,7 +29,7 @@ export default function Chat() {
     const { auth, chat, message } = useSelector(store => store);
     const dispatch = useDispatch();
     const token = localStorage.getItem("token");
-    const [stompClient, setStompClient] = useState();
+    const [stompClient, setStompClient] = useState(null);
     const [isConnected, setIsConnected] = useState(false);
     const [messages, setMessages] = useState([]);
 
@@ -42,15 +42,30 @@ export default function Chat() {
         setQuerys("")
     };
 
-    const handleCreateNewMessage = () => {
+    /*const handleCreateNewMessage = () => {
         dispatch(createMessage({ token, data: { chatId: currentChat.id, content: content, } }))
-    }
+    }*/
+    const handleCreateNewMessage = () => {
+        if (content.trim() && currentChat) {
+            dispatch(createMessage({ token, data: { chatId: currentChat.id, content } }));
+            setContent("");
+        }
+    };
 
-    const handleCurrentChat = (item) => {
+    /*const handleCurrentChat = (item) => {
         setCurrentChat(item)
-    }
+    }*/
+    const handleCurrentChat = (item) => {
+        setCurrentChat(item);
+        setMessages([]); // Limpa as mensagens ao trocar de chat
 
-    const connect = () => {
+        if (stompClient) {
+            stompClient.unsubscribe("chat-subscription"); // Evita múltiplas subscrições
+            stompClient.subscribe(`/group/${item.id}`, onMessageReceived, { id: "chat-subscription" });
+        }
+    };
+
+    /*const connect = () => {
         const sock = new SockJS("http://localhost:3000/ws");
         const temp = over(sock);
         setStompClient(temp);
@@ -61,19 +76,46 @@ export default function Chat() {
         }
 
         temp.connect(headers, onConnect, onError);
-    }
+    }*/
+    const connect = () => {
+        const sock = new SockJS("http://localhost:3000/ws");
+        const client = over(sock);
+        setStompClient(client);
 
-    function getCookie(name) {
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN"),
+        };
+
+        client.connect(headers, onConnect, onError);
+    };
+
+    /*function getCookie(name) {
         const value = `; ${document.cookie}`;
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) {
             return parts.pop()?.split(";").shift();
         }
+    }*/
+    const getCookie = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) {
+            return parts.pop()?.split(";").shift();
+        }
+    };
+
+    function formatTime(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
     }
 
-    const onError = (error) => {
+    /*const onError = (error) => {
         console.log("no error", error)
-    }
+    }*/
+    const onError = (error) => {
+        console.error("WebSocket error:", error);
+    };
 
     const onConnect = () => {
         setIsConnected(true);
@@ -86,13 +128,17 @@ export default function Chat() {
         }
     }, message.newMessage)
 
-    const onMessageReceive = (payload) => {
+    /*const onMessageReceive = (payload) => {
         console.log("receive message", JSON.parse(payload.body))
         const receivedMessage = JSON.parse(payload.body);
         setMessages([...messages, receivedMessage]);
-    }
+    }*/
+    const onMessageReceived = (payload) => {
+        const newMessage = JSON.parse(payload.body);
+        setMessages(prevMessages => [...prevMessages, newMessage]);
+    };
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (isConnected && stompClient && auth.reqUser && currentChat) {
             const subscription = stompClient.subscribe("/group/" + currentChat.id.toString, onMessageReceive);
 
@@ -100,11 +146,21 @@ export default function Chat() {
                 subscription.unsubscribe();
             }
         }
-    })
-
+    })*/
     useEffect(() => {
+        if (message.newMessage && stompClient && currentChat) {
+            stompClient.send("/app/message", {}, JSON.stringify(message.newMessage));
+        }
+    }, [message, stompClient, currentChat]);
+
+    /*useEffect(() => {
         connect();
-    }, [])
+    }, [])*/
+    useEffect(() => {
+        if (auth.user) {
+            connect();
+        }
+    }, [auth.user]);
 
     useEffect(() => {
         setMessages(message.messages)
@@ -355,7 +411,7 @@ export default function Chat() {
                                 {
                                     message.messages.length > 0 && message.messages?.map((item) =>
                                         <MessageCard isSentMessage={item.user?.id === auth.reqUser?.id}
-                                            content={item.content}
+                                            content={item.content} currentTime={formatTime(item.createdAt)}
                                         />)
                                 }
                             </div>
