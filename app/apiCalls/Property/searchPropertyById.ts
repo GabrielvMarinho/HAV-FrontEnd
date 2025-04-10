@@ -16,7 +16,15 @@ export default async function(
 
     const property = { ...rest, ...address, ...taxes, ...propertyFeatures, proprietor, realtors };
 
-    return property as PropertyEditDto
+    const transformedProperty = Object.fromEntries(
+      Object.entries(property).map(([key, value]) => {
+        if (value === true) return [key, 1];
+        if (value === false) return [key, 0];
+        return [key, value];
+      })
+    ) as PropertyEditDto;
+
+    return transformedProperty;
 
     }catch{
         return {} as PropertyEditDto;
