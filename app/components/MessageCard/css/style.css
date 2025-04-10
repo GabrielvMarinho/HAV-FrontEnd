@@ -7,25 +7,25 @@
     /* max-w-[50%] */
     margin-bottom: 0.5rem;
     /* espaço entre mensagens */
+    word-wrap: break-word;
+    /* quebra de linha longa */
 }
 
-.message-card.request {
-    align-self: flex-start;
-    /* self-start */
-    background-color: white;
-    /* bg-white */
-}
-
-.message-card.response {
+.message-card.sent {
     align-self: flex-end;
-    /* self-end */
+    /* mensagem enviada fica à direita */
     background-color: #d9fdd3;
-    /* bg-[#d9fdd3] */
+    /* verde claro tipo WhatsApp */
+}
+
+.message-card.received {
+    align-self: flex-start;
+    /* mensagem recebida fica à esquerda */
+    background-color: white;
+    /* fundo branco */
 }
 
 .message-card p {
     margin: 0;
-    /* reset margin do parágrafo */
-    word-wrap: break-word;
-    /* quebra de linha longa */
+    /* remove margin padrão do <p> */
 }

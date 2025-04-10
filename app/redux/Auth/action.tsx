@@ -17,8 +17,10 @@ export const loginUser = (email: string, password: string) => async (dispatch) =
 
         if (response.ok) {
             const data = await response.json();
-            if (data.jwt) localStorage.setItem("token", data.jwt)
+            if (data.jwt)
+                localStorage.setItem("token", data.jwt)
             dispatch({ type: LOGIN, payload: data });
+            dispatch(currentUser(data.jwt));
 
             return {
                 success: true,

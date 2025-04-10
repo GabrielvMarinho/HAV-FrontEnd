@@ -12,11 +12,14 @@ import MessageCard from "@/app/components/MessageCard/MessageCard";
 import Google from "next-auth/providers/google";
 import { useEffect, useState } from "react";
 import "./css/style.css"
-import { searchUser } from "@/app/redux/Auth/action";
+import { currentUser, searchUser } from "@/app/redux/Auth/action";
 import { useDispatch, useSelector } from "react-redux";
 import { createChat, getUsersChat } from "@/app/redux/Chat/action";
 import { createMessage, getAllMessage } from "@/app/redux/Message/action";
 import { data } from "react-router-dom";
+// import SockJS from "sockjs-client/dist/sockjs";
+import SockJS from "sockjs-client";
+import { over } from "stompjs";
 
 export default function Chat() {
 
@@ -26,6 +29,9 @@ export default function Chat() {
     const { auth, chat, message } = useSelector(store => store);
     const dispatch = useDispatch();
     const token = localStorage.getItem("token");
+    const [stompClient, setStompClient] = useState();
+    const [isConnected, setIsConnected] = useState(false);
+    const [messages, setMessages] = useState([]);
 
     const handleSearch = (keyword) => {
         dispatch(searchUser({ keyword, token }))
@@ -44,14 +50,81 @@ export default function Chat() {
         setCurrentChat(item)
     }
 
+    const connect = () => {
+        const sock = new SockJS("http://localhost:3000/ws");
+        const temp = over(sock);
+        setStompClient(temp);
+
+        const headers = {
+            Authorization: `Bearer ${token}`,
+            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN")
+        }
+
+        temp.connect(headers, onConnect, onError);
+    }
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) {
+            return parts.pop()?.split(";").shift();
+        }
+    }
+
+    const onError = (error) => {
+        console.log("no error", error)
+    }
+
+    const onConnect = () => {
+        setIsConnected(true);
+    }
+
+    useEffect(() => {
+        if (message.newMessage && stompClient) {
+            setMessages([...messages, message.newMessage])
+            stompClient?.send("/app/message", {}, JSON.stringify(message.newMessage));
+        }
+    }, message.newMessage)
+
+    const onMessageReceive = (payload) => {
+        console.log("receive message", JSON.parse(payload.body))
+        const receivedMessage = JSON.parse(payload.body);
+        setMessages([...messages, receivedMessage]);
+    }
+
+    useEffect(() => {
+        if (isConnected && stompClient && auth.reqUser && currentChat) {
+            const subscription = stompClient.subscribe("/group/" + currentChat.id.toString, onMessageReceive);
+
+            return () => {
+                subscription.unsubscribe();
+            }
+        }
+    })
+
+    useEffect(() => {
+        connect();
+    }, [])
+
+    useEffect(() => {
+        setMessages(message.messages)
+    }, message.messages)
+
     useEffect(() => {
         if (currentChat?.id)
             dispatch(getAllMessage({ chatId: currentChat.id, token }))
-    }, [currentChat])
+    }, [currentChat, message.newMessage])
 
     useEffect(() => {
         dispatch(getUsersChat({ token }))
     }, [chat.createdChat])
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            dispatch(currentUser(token));
+        }
+    }, []);
 
     useEffect(() => {
         const userStorage = localStorage.getItem('user');
@@ -258,7 +331,8 @@ export default function Chat() {
                                         }
                                         alt="" />
                                     <p>{currentChat && auth.reqUser?.id ===
-                                        currentChat.users[0].id ? currentChat.users[1].full_name : currentChat.users[0].full_name}</p>
+                                        currentChat.users[0].id ? currentChat.users[1].full_name :
+                                        currentChat.users[0].full_name}</p>
                                 </div>
                                 <div style={{
                                     display: "flex", paddingTop: "0.75rem", paddingBottom: "0.75rem", marginLeft: "1rem",
@@ -278,8 +352,12 @@ export default function Chat() {
                                 marginTop: "6rem", overflowY: "scroll", paddingRight: "2.5rem", paddingLeft: "2.5rem",
 
                             }}>
-                                {[1, 1, 1, 1, 1].map((item, i) => <MessageCard isRequestMessage={i % 2 === 0}
-                                    content={"message"} />)}
+                                {
+                                    message.messages.length > 0 && message.messages?.map((item) =>
+                                        <MessageCard isSentMessage={item.user?.id === auth.reqUser?.id}
+                                            content={item.content}
+                                        />)
+                                }
                             </div>
                         </div>
 
@@ -306,7 +384,7 @@ export default function Chat() {
 
                                 <input style={{
                                     width: "85%", paddingTop: "0.5rem", paddingBottom: "0.5rem", paddingLeft: "1rem",
-                                    borderRadius: "0.375rem", border: "none", outline: "none", backgroundColor: "white"
+                                    borderRadius: "30px 30px 15px 15px", border: "none", outline: "none", backgroundColor: "white"
                                 }}
                                     type="text" onChange={(e) => setContent(e.target.value)}
                                     placeholder="Type message"

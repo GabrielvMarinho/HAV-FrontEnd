@@ -1,11 +1,9 @@
 import React from "react";
 import "./css/style.css";
 
-export default function MessageCard({ isRequestMessage, content }) {
+export default function MessageCard({ isSentMessage, content }) {
     return (
-        <div
-            className={isRequestMessage ? "message-card request" : "message-card response"}
-        >
+        <div className={isSentMessage ? "message-card sent" : "message-card received"}>
             <p>{content}</p>
         </div>
     );
