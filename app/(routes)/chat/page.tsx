@@ -147,7 +147,7 @@ export default function Chat() {
                 height: "90vh", gap: "20px"
             }}>
                 <div style={{
-                    width: "35%", backgroundColor: "var(--text-red-pink)", marginTop: "24px"
+                    width: "35%", backgroundColor: "var(--text-red-pink)", marginTop: "24px", borderRadius: "15px"
                 }}>
                     <div style={{ display: "flex", width: "100%", margin: "10px" }}>
 
@@ -160,7 +160,7 @@ export default function Chat() {
                     </div>
 
                     <div style={{ marginLeft: "10px" }}>
-                        <h2 style={{ fontWeight: "bolder", color: "var(--text-white)" }}>CONVERSAS</h2>
+                        <h2 style={{ fontWeight: "bolder", color: "var(--text-white)", marginLeft:"25px" }}>CONVERSAS</h2>
                     </div>
 
                     <div style={{
@@ -267,7 +267,7 @@ export default function Chat() {
                 {
                     !currentChat && <div style={{
                         width: "65%", display: "flex", flexDirection: "column", alignItems: "center",
-                        justifyContent: "center", position: "relative"
+                        justifyContent: "center", position: "relative",
                     }}>
                         {/* Div do logo (agora posicionada corretamente) */}
                         <div style={{
@@ -296,7 +296,7 @@ export default function Chat() {
                         </div>
                         <div style={{
                             top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-                            opacity: 0.5, position: "absolute"
+                            opacity: 0.3, position: "absolute"
                         }}>
                             <HavLogo width={500} height={500} />
                         </div>
