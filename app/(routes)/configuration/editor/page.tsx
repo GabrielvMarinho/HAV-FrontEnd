@@ -36,7 +36,7 @@ export default function FormEditCustomer(props :{id :any }) {
 
   const form = useForm<EditorEditDto>({
     resolver: zodResolver(saveConfig),
-    mode: "onSubmit",
+    mode: "onTouched",
   });
 
   // Carrega os dados do cliente
