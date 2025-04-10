@@ -1,4 +1,5 @@
 interface PropertyEditDto {
+    additionals: any;
     allowsPet: number;
     area: number;
     bathRoom: number;
@@ -11,7 +12,7 @@ interface PropertyEditDto {
     garageSpace: number;
     highlight: number;
     iptu: number;
-    isFurnished: number;
+    isFurnished: string;
     livingRoom: number;
     neighborhood: string;
     price: number;
@@ -27,5 +28,8 @@ interface PropertyEditDto {
     street: string;
     suite: number;
     title: string;
+    realtorsExtraData: any[];
+    proprietorsExtraData: any;
+
   }
   
