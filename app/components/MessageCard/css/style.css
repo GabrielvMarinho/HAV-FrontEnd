@@ -1,0 +1,31 @@
+.message-card {
+    padding: 0.5rem;
+    /* py-2 px-2 */
+    border-radius: 0.375rem;
+    /* rounded-md */
+    max-width: 50%;
+    /* max-w-[50%] */
+    margin-bottom: 0.5rem;
+    /* espaço entre mensagens */
+    word-wrap: break-word;
+    /* quebra de linha longa */
+}
+
+.message-card.sent {
+    align-self: flex-end;
+    /* mensagem enviada fica à direita */
+    background-color: #d9fdd3;
+    /* verde claro tipo WhatsApp */
+}
+
+.message-card.received {
+    align-self: flex-start;
+    /* mensagem recebida fica à esquerda */
+    background-color: white;
+    /* fundo branco */
+}
+
+.message-card p {
+    margin: 0;
+    /* remove margin padrão do <p> */
+}
