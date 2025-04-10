@@ -8,9 +8,9 @@ import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine"
 import "./css/style.css"
 
 type MessageDTO = {
-    recipient: number
-    senderName: string
-    content: string
+    title: string;
+    content: string;
+    read: boolean;
 }
 
 const Notification = () => {
@@ -25,7 +25,7 @@ const Notification = () => {
             webSocketFactory: () => new SockJS('http://localhost:9090/ws'),
             onConnect: () => {
                 console.log('Conectado ao WebSocket');
-                stompClient.subscribe(`/topic/mensagens${idUser}`, (mensagem) => {
+                stompClient.subscribe(`/topic/notifications/${idUser}`, (mensagem) => {
                     const body: MessageDTO = JSON.parse(mensagem.body);
                     console.log('Mensagem recebida:', body);
                     setMessages(prev => [...prev, body]);
@@ -58,7 +58,7 @@ const Notification = () => {
                                 <div className='groupInfos'>
                                     <div className='bola'></div>
                                     <div style={{ display: 'flex', flexDirection: "column", gap: "5px" }}>
-                                        <p className='identificator'>{message.senderName}</p>
+                                        <p className='identificator'>{message.title}</p>
                                         <p>{message.content}</p>
                                     </div>
                                 </div>
