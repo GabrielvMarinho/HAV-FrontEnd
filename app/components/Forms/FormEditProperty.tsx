@@ -26,6 +26,7 @@ import searchPropertyById from "@/app/apiCalls/Property/searchPropertyById";
 import MultiSelectDropdown from "../Inputs/MultiSelectDropdown";
 import GetAdditionals from "@/app/apiCalls/Property/GetAdditionals";
 import ButtonUploadPhotos from "../Inputs/buttonUploadPhotos";
+import editProperty from "@/app/apiCalls/Property/editProperty";
 
 export default function FormEditProperty(props :{id :any, objectData :any}) {
 
@@ -46,22 +47,28 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
 
 
     //dados extra proprietor e realtor
-    props.objectData.proprietorsData = decodeURIComponent(props.objectData.proprietorsData)
-    props.objectData.proprietorsData = props.objectData.proprietorsData.split(",");
-
-
-    props.objectData.realtorsData = decodeURIComponent(props.objectData.realtorsData)
-    
-    props.objectData.realtorsData = props.objectData.realtorsData.split(",");
-    const grouped = [];
-
-    for (let i = 0; i < props.objectData.realtorsData.length; i += 2) {
-    grouped.push([props.objectData.realtorsData[i], props.objectData.realtorsData[i + 1]]);
+    if(props.objectData.proprietorsData){
+        props.objectData.proprietorsData = decodeURIComponent(props.objectData.proprietorsData)
+        props.objectData.proprietorsData = props.objectData.proprietorsData.split(",");
     }
+    
 
-    props.objectData.realtorsData = grouped;
 
 
+    if(props.objectData.realtorsData){
+        props.objectData.realtorsData = decodeURIComponent(props.objectData.realtorsData)
+
+        props.objectData.realtorsData = props.objectData.realtorsData.split(",");
+        const grouped = [];
+    
+        for (let i = 0; i < props.objectData.realtorsData.length; i += 2) {
+        grouped.push([props.objectData.realtorsData[i], props.objectData.realtorsData[i + 1]]);
+        }
+    
+        props.objectData.realtorsData = grouped;
+    
+    }
+    
 
 
 
@@ -164,14 +171,18 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
     
     
 
-    const editProperty = async function () {
+    const editPropertyFetch = async function () {
 
         if (!pendingFormData) return;
 
         setIsModalOpen(false);
 
         try {//muda o método
-            const response = await postProperty(pendingFormData)
+            console.log("----000-----")
+
+            const response = await editProperty(props.id, pendingFormData)
+            console.log("----000-----")
+            console.log(response)
             window.location.href = "/manage/properties"
         }
         catch (err) {
@@ -185,40 +196,37 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
         setIsModalOpen(true)
     }
     useEffect(() => {
-        console.log("asdasdas",props.objectData.additionals)
-        console.log(property?.additionals)
         if (property) {
           form.reset({
-            complement: String(props.objectData.complement ?? property?.complement),
-            neighborhood: String(props.objectData.neighborhood ?? property?.neighborhood),
-            state: String(props.objectData.state ?? property?.state),
-            city: String(props.objectData.city ?? property?.city),
-            cep: String(props.objectData.cep ?? property?.cep),
-            propertyNumber: String(props.objectData.propertyNumber ?? property?.propertyNumber),
-            street: String(props.objectData.street ?? property?.street),
-            highlight: String(props.objectData.highlight ?? property?.highlight),
-            promotionalPrice: String(props.objectData.propertyPromotionalPrice ?? property?.promotionalPrice),
-            price: String(props.objectData.price ?? property?.price),
-            iptu: String(props.objectData.iptu ?? property?.iptu),
-
-            area: String(props.objectData.area ?? property?.area),
-            title: String(props.objectData.title ?? property?.title),
-            propertyDescription: String(props.objectData.propertyDescription ?? property?.propertyDescription),
-            propertyType: String(props.objectData.propertyType ?? property?.propertyType),
-            status: String(props.objectData.status ?? property?.propertyStatus),
-            purpose: String(props.objectData.purpose ?? property?.purpose),
-            allowsPet: String(props.objectData.allowsPet ?? property?.allowsPet),
-            isFurnished: String(props.objectData.isFurnished ?? property?.isFurnished),
-            condominiumFee: String(props.objectData.condominiumFee ?? property?.condominiumFee),
-            garageSpace: String(props.objectData.garageSpace ?? property?.garageSpace),
-            suite: String(props.objectData.suite ?? property?.suite),
-            floors: String(props.objectData.floors ?? property?.floors),
-            bathRoom: String(props.objectData.bathRoom ?? property?.bathRoom),
-            livingRoom: String(props.objectData.livingRoom ?? property?.livingRoom),
-            bedRoom: String(props.objectData.bedRoom ?? property?.bedRoom),
-            additionals: String(props.objectData.additionals ?? property?.additionals),
-            realtors: String(props.objectData.realtors ?? property?.realtors),
-            proprietor: String(props.objectData.proprietor ?? property?.proprietor),
+            complement: String(props.objectData.complement ?? property?.complement ?? ""),
+            neighborhood: String(props.objectData.neighborhood ?? property?.neighborhood ?? ""),
+            state: String(props.objectData.state ?? property?.state ?? ""),
+            city: String(props.objectData.city ?? property?.city ?? ""),
+            cep: String(props.objectData.cep ?? property?.cep ?? ""),
+            propertyNumber: String(props.objectData.propertyNumber ?? property?.propertyNumber ?? ""),
+            street: String(props.objectData.street ?? property?.street ?? ""),
+            highlight: String(props.objectData.highlight ?? property?.highlight ?? ""),
+            promotionalPrice: String(props.objectData.propertyPromotionalPrice ?? property?.promotionalPrice ?? ""),
+            price: String(props.objectData.price ?? property?.price ?? ""),
+            iptu: String(props.objectData.iptu ?? property?.iptu ?? ""),
+            area: String(props.objectData.area ?? property?.area ?? ""),
+            title: String(props.objectData.title ?? property?.title ?? ""),
+            propertyDescription: String(props.objectData.propertyDescription ?? property?.propertyDescription ?? ""),
+            propertyType: String(props.objectData.propertyType ?? property?.propertyType ?? ""),
+            status: String(props.objectData.status ?? property?.propertyStatus ?? ""),
+            purpose: String(props.objectData.purpose ?? property?.purpose ?? ""),
+            allowsPet: String(props.objectData.allowsPet ?? property?.allowsPet ?? ""),
+            isFurnished: String(props.objectData.isFurnished ?? property?.isFurnished ?? ""),
+            condominiumFee: String(props.objectData.condominiumFee ?? property?.condominiumFee ?? ""),
+            garageSpace: String(props.objectData.garageSpace ?? property?.garageSpace ?? ""),
+            suite: String(props.objectData.suite ?? property?.suite ?? ""),
+            floors: String(props.objectData.floors ?? property?.floors ?? ""),
+            bathRoom: String(props.objectData.bathRoom ?? property?.bathRoom ?? ""),
+            livingRoom: String(props.objectData.livingRoom ?? property?.livingRoom ?? ""),
+            bedRoom: String(props.objectData.bedRoom ?? property?.bedRoom ?? ""),
+            additionals: String(props.objectData.additionals ?? property?.additionals ?? ""),
+            realtors: String(props.objectData.realtors ?? property?.realtors ?? ""),
+            proprietor: String(props.objectData.proprietor ?? property?.proprietor ?? ""),
           });
         }
       }, [property]);
@@ -266,7 +274,7 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
         formData.forEach((value, key) => {
         params.append(key, value.toString());
         });
-        const url = `/choose/proprietor?action=edit&id=${props.id}${params.toString()}`;
+        const url = `/choose/proprietor?action=edit&id=${props.id}&${params.toString()}`;
         window.location.href = url
     }
 
@@ -720,7 +728,7 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                         <h4 className="subtitleResponsibles">CORRETORES</h4>
     
                         <div className={"chooseReponsible"} style={{display:"flex", gap:"10px", alignItems:"center"}}>
-                        {props.objectData.realtors ? (
+                        {props.objectData.realtors && props.objectData.realtorsData ? (
                             // Caso seja da URL
                             <div style={{ width: "200px", height: "60px" }}>
                                 <input
@@ -732,7 +740,7 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                                 {form.formState.errors.realtors && (
                                 <p className="errorText">{form.formState.errors.realtors.message}</p>
                                 )}
-
+                                
                                 <input hidden={true} name="realtorsData" value={props.objectData.realtorsData} />
 
                                 <div className="realtorsContainer">
@@ -744,7 +752,7 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                                 ))}
                                 </div>
                             </div>
-                            ) : property?.realtors ? (
+                            ) : property?.realtors? (
                             // Caso seja do property
                             <div style={{ width: "200px", height: "60px" }}>
                                 <input
@@ -757,11 +765,11 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                                 <p className="errorText">{form.formState.errors.realtors.message}</p>
                                 )}
 
-                                <input hidden={true} name="realtorsData" value={property.realtorsData} />
+                                {/* <input hidden={true} name="realtorsData" value={property.realtorsExtraData} /> */}
                                 
                                 <div className="realtorsContainer">
                                 {property && Array.isArray(property.realtorsExtraData) && (
-                                property.realtorsExtraData.map((item: string[], index: number) => (
+                                    property.realtorsExtraData.map((item: string[], index: number) => (
                                     <div key={index} style={{ display: "flex", flexDirection: "column" }}>
                                     <h3>{item.name}</h3>
                                     <p>{item.cpf}</p>
@@ -776,7 +784,7 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                         <h4 className="subtitleResponsibles">PROPRIETÁRIO</h4>
                         
                         <div className={"chooseReponsible"} style={{display:"flex", gap:"10px", alignItems:"center"}}>
-                        {props.objectData.proprietor ? (
+                        {props.objectData.proprietor && props.objectData.proprietorsData? (
                         // Caso seja da URL
                         <div style={{ width: "200px", height: "50px", display: "flex", alignItems: "center" }}>
                             <input
@@ -827,7 +835,7 @@ export default function FormEditProperty(props :{id :any, objectData :any}) {
                     }
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
-                    onConfirm={editProperty}
+                    onConfirm={editPropertyFetch}
                 />
         </section>
 

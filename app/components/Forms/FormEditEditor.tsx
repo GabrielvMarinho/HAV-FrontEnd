@@ -67,7 +67,7 @@ export default function FormEditEditor(props :{id :any }) {
             cep: editor.cep,
             street: editor.street,
             propertyNumber: editor.propertyNumber.toString(),
-            complement: editor.complement,
+            complement: editor.complement ?? "",
             state: editor.state,
             city: editor.city,
             neighborhood: editor.neighborhood,

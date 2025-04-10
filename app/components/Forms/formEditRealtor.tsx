@@ -70,7 +70,7 @@ export default function FormEditRealtor(props :{id :any }) {
             cep: realtor.cep,
             street: realtor.street,
             propertyNumber: realtor.propertyNumber.toString(),
-            complement: realtor.complement,
+            complement: realtor.complement ?? "",
             state: realtor.state,
             city: realtor.city,
             creci: realtor.creci,
