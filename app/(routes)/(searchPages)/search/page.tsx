@@ -4,12 +4,15 @@ import CardContainer from "@/app/components/Information/CardContainer";
 import NoRegistration from "@/app/components/Information/NoRegistration";
 import Button from "@/app/components/Inputs/Button";
 import ChooseQuantity from "@/app/components/Inputs/ChooseQuantity";
+import InputDropdown from "@/app/components/Inputs/InputDropdown";
+import InputDropdownNoLabel from "@/app/components/Inputs/InputDropdownNoLabel";
 import SearchResult from "@/app/components/Inputs/SearchResult";
 import ToggleRentOrBuy from "@/app/components/Inputs/ToggleRentOrBuy";
 import { InputChooseQuantity } from "@/app/components/globalFormsConfig/InputChooseQuantity";
 import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdownsConfig";
 import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
+import { Dropdown } from "react-day-picker";
 
 export default async function({searchParams} :{searchParams: {
     propertyCode?: string; 
@@ -51,6 +54,27 @@ export default async function({searchParams} :{searchParams: {
                     inputChooseQuantites={[InputChooseQuantity.bedRoom,InputChooseQuantity.bathRoom, 
                         InputChooseQuantity.garageSpace ]}
                     />
+            <div className="buttonsAndCards">
+                <div className="buttonsSearch">
+                    <InputDropdownNoLabel 
+                            key={dropdownFields.order.id}
+                            name={dropdownFields.order.name}
+                            size={dropdownFields.order.size}
+                            title={dropdownFields.order.title}
+                            id={dropdownFields.order.id}
+                            options={dropdownFields.order.options}
+                        />
+
+                        <InputDropdownNoLabel 
+                            key={dropdownFields.visualization.id}
+                            name={dropdownFields.visualization.name}
+                            size={dropdownFields.visualization.size}
+                            title={dropdownFields.visualization.title}
+                            id={dropdownFields.visualization.id}
+                            options={dropdownFields.visualization.options}
+                        />
+                </div>
+
             {properties.length>0?
                         <CardContainer cards={properties} totalPages={totalPages}/>
 
@@ -58,6 +82,7 @@ export default async function({searchParams} :{searchParams: {
                         <NoRegistration/>
 
             }
+            </div>
         </div>
         </>
 
