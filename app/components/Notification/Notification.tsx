@@ -20,15 +20,31 @@ const Notification = () => {
 
     useEffect(() => {
         if (!idUser) return;
-
+        {/*Método de getNotifications do back ->*/}
+        fetch(`http://localhost:9090/api/getNotifications/${idUser}`)
+            .then(res => res.json())
+            .then((data: MessageDTO[]) => {
+                setMessages(Array.isArray(data) ? data : [])
+            }).catch(e => {
+                console.log("Erro ao buscar notificações", e);
+            })
         const stompClient = new Client({
             webSocketFactory: () => new SockJS('http://localhost:9090/ws'),
             onConnect: () => {
                 console.log('Conectado ao WebSocket');
-                stompClient.subscribe(`/topic/notifications/${idUser}`, (mensagem) => {
+                const topic = `/topic/api/${idUser}`
+                console.log("Topico:", topic);
+                stompClient.subscribe(topic, (mensagem) => {
                     const body: MessageDTO = JSON.parse(mensagem.body);
                     console.log('Mensagem recebida:', body);
-                    setMessages(prev => [...prev, body]);
+                    setMessages(prev => {
+                        const jaExiste = prev.some(msg =>
+                            msg.title === body.title &&
+                            msg.content === body.content &&
+                            msg.read === body.read
+                            );
+                            return jaExiste ? prev : [...prev, body]
+                    });
                 });
             },
             onStompError: (frame) => {
