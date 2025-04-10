@@ -26,7 +26,7 @@ export default function page() {
 
       <section className="users-section">
         <div className="reports-graphTitle">
-          <p>USUÁRIOS</p>
+          <p>IMÓVEIS</p>
         </div>
         <div className="users-data-row">
           <div className="users-data-box">
@@ -104,32 +104,14 @@ export default function page() {
                 <th>CATEGORIA</th>
                 <th>STATUS</th>
               </tr>
-              <td colSpan="5">
-                  <HorizontalLine size={1000} color="#0F0F0F80" />
-                </td>
             </thead>
-
             <tbody>
               {/* Linha 1 */}
               <tr className="table-row">
                 <td>2357U4</td>
                 <td>Bianca Isabela Vaz</td>
-                <td>CASA</td>
-                <td>LOCAÇÃO</td>
-                <td className="status-pending">PENDENTE</td>
-              </tr>
-              <tr className="table-divider">
-                <td colSpan="5">
-                  <HorizontalLine size={1000} color="#0F0F0F80" />
-                </td>
-              </tr>
-
-              {/* Linha 2 */}
-              <tr className="table-row">
-                <td>8A729I</td>
-                <td>Gabriel Volles Marinho</td>
-                <td>CASA</td>
-                <td>COMPRA</td>
+                <td className="house-type">CASA</td>
+                <td className="status-type">COMPRA</td>
                 <td className="status-launch">LANÇAMENTO</td>
               </tr>
               <tr className="table-divider">
@@ -137,13 +119,25 @@ export default function page() {
                   <HorizontalLine size={1000} color="#0F0F0F80" />
                 </td>
               </tr>
-
+              {/* Linha 2 */}
+              <tr className="table-row">
+                <td>8A729I</td>
+                <td>Gabriel Volles Marinho</td>
+                <td className="house-type">CASA</td>
+                <td className="status-type">COMPRA</td>
+                <td className="status-launch">LANÇAMENTO</td>
+              </tr>
+              <tr className="table-divider">
+                <td colSpan="5">
+                  <HorizontalLine size={1000} color="#0F0F0F80" />
+                </td>
+              </tr>
               {/* Linha 3 */}
               <tr className="table-row">
                 <td>1KS328</td>
                 <td>Nathan João Lima</td>
-                <td>APARTAMENTO</td>
-                <td>LOCAÇÃO</td>
+                <td className="house-type">APARTAMENTO</td>
+                <td className="status-type">LOCAÇÃO</td>
                 <td className="status-launch">PENDENTE</td>
               </tr>
               <tr className="table-divider">
@@ -151,13 +145,12 @@ export default function page() {
                   <HorizontalLine size={1000} color="#0F0F0F80" />
                 </td>
               </tr>
-
               {/* Linha 4 */}
               <tr className="table-row">
                 <td>762OP9</td>
                 <td>Rafael da Rosa</td>
-                <td>APARTAMENTO</td>
-                <td>LOCAÇÃO</td>
+                <td className="house-type">CASA</td>
+                <td className="status-type">COMPRA</td>
                 <td className="status-launch">LANÇAMENTO</td>
               </tr>
               <tr className="table-divider">
@@ -169,8 +162,8 @@ export default function page() {
               <tr className="table-row">
                 <td>38J925</td>
                 <td>Eduardo Vizoni do Prado</td>
-                <td>CASA</td>
-                <td>LOCAÇÃO</td>
+                <td className="house-type">CASA</td>
+                <td className="status-type">COMPRA</td>
                 <td className="status-launch">LANÇAMENTO</td>
               </tr>
               <tr className="table-divider">

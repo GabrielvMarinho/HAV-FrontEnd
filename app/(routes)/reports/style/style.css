@@ -256,6 +256,10 @@ section {
   margin: 0 auto;
 }
 
+.margin-vizoni{
+  margin-top: 10px;
+}
+
 .properties-table {
   width: 100%;
   border-collapse: collapse;
@@ -269,7 +273,7 @@ section {
 }
 
 .table-row td {
-  padding: 12px 15px;
+  padding: 25px 15px;
   text-align: center;
 }
 
@@ -291,4 +295,34 @@ section {
 .data-Container {
   margin-bottom: 8.75rem;
 
+}
+
+.house-type {
+  border-radius: 30px;
+  color: white;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: var(--box-dark-red-option);
+  margin: 60px 0px;
+}
+
+.status-type {
+  border-radius: 30px;
+  color: white;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: var(--box-mid-dark-red);
+  margin: 60px 0px;
+}
+
+.status-launch {
+  border-radius: 4px;
+  color: white;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: var(--box-red-pink);
+  margin: 60px 0px; 
 }

@@ -5,6 +5,7 @@ import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 import Footer from "@/app/components/Footer/Footer";
 import SideTitle from "@/app/components/NonInteractable/SideTitle";
+import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 
 export default function page() {
   return (
@@ -25,11 +26,11 @@ export default function page() {
 
       <section className="users-section">
         <div className="reports-graphTitle">
-          <p>USUÁRIOS</p>
+          <p>CORRETORES</p>
         </div>
         <div className="users-data-row">
-        <div className="users-data-box">
-            <h3 className="users-big-number">3.2 MIL</h3>
+          <div className="users-data-box">
+            <h3 className="users-big-number">421</h3>
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
@@ -44,7 +45,7 @@ export default function page() {
         </div>
         <div className="users-data-row">
           <div className="users-data-box">
-            <h3 className="users-big-number">3.2 MIL</h3>
+            <h3 className="users-big-number">1.2 MIL</h3>
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
@@ -53,8 +54,42 @@ export default function page() {
         </div>
       </section>
 
-      
-      <Footer />
+      <section className="users-section">
+        <div className="data-TitleRight">
+          <SideTitle tag={"h2"} text={"DADOS RECENTES"} />
+        </div>
+        <div className="reports-graphTitleRight">
+          <p>NOVOS CORRETORES</p>
+        </div>
+        <div className="users-data-row">
+          <div className="users-graph-container">
+            <div className="placeholder-graph">Gráfico</div>
+          </div>
+          <div className="users-data-box">
+            <h3 className="users-big-number">21</h3>
+            <p className="users-small-text">
+            100% se manteram ativos desde então
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="users-section">
+        <div className="reports-graphTitleRight">
+          <p>VISIATAS AO SITE</p>
+        </div>
+        <div className="users-data-row">
+          <div className="users-graph-container">
+            <div className="placeholder-graph">Gráfico</div>
+          </div>
+          <div className="users-data-box">
+            <h3 className="users-big-number">123</h3>
+            <p className="users-small-text">
+            93% agendamentos para imóvel de moradia
+            </p>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

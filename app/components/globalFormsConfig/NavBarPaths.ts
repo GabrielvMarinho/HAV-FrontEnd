@@ -23,9 +23,9 @@ export const NavBarPath = {
 
     reports:
         [
-            { label: "CORRETOR", path: "./reports/realtorReports"},
-            { label: "USUÁRIO", path: "/calendar"},
-            { label: "IMÓVEL", path: "/reports/propertyReports"},
-        ]
+            { label: "CORRETOR", path: "./realtorReports" },
+            { label: "USUÁRIO", path: "./userReports" },
+            { label: "IMÓVEL", path: "/propertyReports" },
+        ],
   
 }

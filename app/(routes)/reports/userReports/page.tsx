@@ -5,6 +5,7 @@ import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 import Footer from "@/app/components/Footer/Footer";
 import SideTitle from "@/app/components/NonInteractable/SideTitle";
+import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 
 export default function page() {
   return (
@@ -27,8 +28,8 @@ export default function page() {
         <div className="reports-graphTitle">
           <p>USUÁRIOS</p>
         </div>
-        <div className="users-data-rowRight">
-        <div className="users-data-box">
+        <div className="users-data-row">
+          <div className="users-data-box">
             <h3 className="users-big-number">3.2 MIL</h3>
             <p className="users-small-text">Desde 2025</p>
           </div>
@@ -39,40 +40,41 @@ export default function page() {
       </section>
 
       <section className="users-section">
-      <div className="data-Title">
-          <SideTitle tag={"h1"} text={"DADOS RECENTES"} />
-          </div>
-        <div className="reports-graphTitle">
+        <div className="data-TitleRight">
+          <SideTitle tag={"h2"} text={"DADOS RECENTES"} />
+        </div>
+        <div className="reports-graphTitleRight">
           <p>NOVOS USUÁRIOS</p>
         </div>
         <div className="users-data-row">
-          <div className="users-data-box">
-            <h3 className="users-big-number">123</h3>
-            <p className="users-small-text">65% usuários comuns sem propriedade á venda</p>
-          </div>
           <div className="users-graph-container">
             <div className="placeholder-graph">Gráfico</div>
+          </div>
+          <div className="users-data-box">
+            <h3 className="users-big-number">123</h3>
+            <p className="users-small-text">
+              65% usuários comuns sem propriedade á venda
+            </p>
           </div>
         </div>
       </section>
 
       <section className="users-section">
-        <div className="reports-graphTitle">
-          <p>VISITAS AO SITE</p>
+        <div className="reports-graphTitleRight">
+          <p>VISIATAS AO SITE</p>
         </div>
         <div className="users-data-row">
-          <div className="users-data-box">
-            <h3 className="users-big-number">143.2 MIL</h3>
-            <p className="users-small-text">40% feitas por usuários sem uma conta</p>
-          </div>
           <div className="users-graph-container">
             <div className="placeholder-graph">Gráfico</div>
           </div>
+          <div className="users-data-box">
+            <h3 className="users-big-number">143.2 MIL</h3>
+            <p className="users-small-text">
+            40% feitas por usuários sem uma conta
+            </p>
+          </div>
         </div>
       </section>
-
-      
-      <Footer />
     </>
   );
 }
