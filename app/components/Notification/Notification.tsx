@@ -5,9 +5,11 @@ import { useParams } from 'next/navigation';
 import SockJS from 'sockjs-client';
 import { Client } from '@stomp/stompjs';
 import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine"
+import readNotification from '@/app/apiCalls/Notification/setRead';
 import "./css/style.css"
 
 type MessageDTO = {
+    id: number;
     title: string;
     content: string;
     read: boolean;
@@ -20,11 +22,13 @@ const Notification = () => {
 
     useEffect(() => {
         if (!idUser) return;
-        {/*Método de getNotifications do back ->*/}
+        {/*Método de getNotifications do back ->*/ }
         fetch(`http://localhost:9090/api/getNotifications/${idUser}`)
             .then(res => res.json())
             .then((data: MessageDTO[]) => {
-                setMessages(Array.isArray(data) ? data : [])
+                {/*Filtrando para aparecer só as mensagens não lidas*/ }
+                const mensagensNaoLidas = data.filter(m => m.read === false);
+                setMessages(Array.isArray(mensagensNaoLidas) ? mensagensNaoLidas : [])
             }).catch(e => {
                 console.log("Erro ao buscar notificações", e);
             })
@@ -42,8 +46,8 @@ const Notification = () => {
                             msg.title === body.title &&
                             msg.content === body.content &&
                             msg.read === body.read
-                            );
-                            return jaExiste ? prev : [...prev, body]
+                        );
+                        return jaExiste ? prev : [...prev, body]
                     });
                 });
             },
@@ -58,6 +62,18 @@ const Notification = () => {
             stompClient.deactivate();
         };
     }, [idUser]);
+
+    const marcarComoLida = async (id: number,) => {
+        try {
+            await readNotification({ id });
+            setMessages(prev =>
+                prev.map(m => m.id === id ? { ...m, read: true } : m)
+            );
+            console.log("Marcado como lida");
+        } catch (e) {
+            console.log("Erro ao marcar como lida:", e);
+        }
+    };
 
     return (
         <div>
@@ -79,10 +95,21 @@ const Notification = () => {
                                     </div>
                                 </div>
                                 <label className='newMessageLabel'>nova mensagem</label>
+                                <button
+                                    onClick={async () => {
+                                        const sucesso = await readNotification({ id: message.id });
+                                        if (sucesso) {
+                                            setMessages(prevMessages => prevMessages.filter(msg => msg.id != message.id)
+                                            );
+                                        }
+                                    }}>
+                                    Marcar como Lida
+                                </button>
                             </section>
                             <HorizontalLine size={930} color='#0F0F0F ' />
                         </li>
-                    ))}
+                    )
+                    )}
 
                 </ul>
             )}
