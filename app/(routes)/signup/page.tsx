@@ -30,10 +30,10 @@ export default function signup(){
                     <h2 className="linha"> </h2>
                 </div>
                 <form>
-                <InputTextLogin name="name" size="medium" id="user" text="Nome" placeholder="Digite seu nome" icon={<User width="18" height="18" color="var(--text-light-red)"/>}/>
-                <InputTextLogin name="name" size="medium" id="user" text="E-mail" placeholder="Digite seu e-mail" icon={<Envelope width="18" height="18" color="var(--text-light-red)"/>}/>
-                <InputTextLogin name="name" size="medium" id="user" text="Senha" placeholder="Digite sua senha" icon={<Eye width="18" height="18" color="var(--text-light-red)"/>}/>
-                <InputTextLogin name="name" size="medium" id="user" text="Confirmar senha" placeholder="Digite sua senha" icon={<Eye width="18"  height="18" color="var(--text-light-red)"/>}/>
+                <InputTextLogin name="name" size="mediumLarge" id="user" text="Nome" placeholder="Digite seu nome" icon={<User width="18" height="18" color="var(--text-light-red)"/>}/>
+                <InputTextLogin name="name" size="mediumLarge" id="user" text="E-mail" placeholder="Digite seu e-mail" icon={<Envelope width="18" height="18" color="var(--text-light-red)"/>}/>
+                <InputTextLogin name="name" size="mediumLarge" id="user" text="Senha" placeholder="Digite sua senha" icon={<Eye width="18" height="18" color="var(--text-light-red)"/>}/>
+                <InputTextLogin name="name" size="mediumLarge" id="user" text="Confirmar senha" placeholder="Digite sua senha" icon={<Eye width="18"  height="18" color="var(--text-light-red)"/>}/>
                     <div className="botao">
                         <Button name="button" size="small" text="Entrar" /> 
                     </div>

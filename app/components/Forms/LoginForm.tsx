@@ -11,6 +11,7 @@ import { useState } from "react";
 import "@/app/variables.css"
 import { useDispatch } from "react-redux";
 import { loginUser } from "@/app/redux/Auth/action";
+import Link from "next/link";
 
 export default function FormLogin() {
 
@@ -61,7 +62,12 @@ export default function FormLogin() {
                         <p className="ou">ou</p>
                         <img className={"Google"} src="/Image/Google.png"/>
                     </div> */}
-            <p className="naoPossuiConta"> Não possui conta? <p className="cadastrarConta"> Cadastrar </p></p>
+            <div className="textSignup">
+                <p className="naoPossuiConta"> Não possui conta?  </p>
+            
+                    <Link href={"/signup"} className="linkSignup"> cadastrar </Link>
+            </div>
+            
         </form>
     )
 }
