@@ -114,6 +114,10 @@
     border-radius: 5px;
     width: 200px;
     height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
 
   /* Remova ou ajuste esta regra (está causando o desalinhamento) */
@@ -209,7 +213,7 @@ section {
   }
   
   .placeholder-graph {
-    height: 200px;
+    height: 250px;
     display: grid;
     place-items: center;
     background: #f5f5f5;
