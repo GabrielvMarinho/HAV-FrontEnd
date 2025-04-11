@@ -7,16 +7,26 @@ import SearchBarDesktop from "@/app/components/Filters/SearchBar";
 import HavLogo from "@/app/components/IconsTSX/HavLogoLight";
 import Button from "@/app/components/Inputs/Button";
 import { useAuth } from "@/app/context/AuthContext";
+import AuthGuard from "@/app/context/AuthGuard";
 
 export default function page() {
 
     // const { usuario } = useAuth();
-
     // if (!usuario) return <p>Carregando...</p>;
     
+
+    // header(){
+    //     const {usuario} = useAuth()
+    //     return (
+    //         {usuario.role = "ADMIN"?? <HeaderAdm/>}
+    //         {usuario.role = "CUSTOMER"?? <HeaderCustomer/>}
+
+    //     )
+    // }
+
     return (
         <>
-
+        <AuthGuard requiredRole="CUSTOMER">
             <HeaderAdm />
             <Title tag={"h1"} text={"Perguntas Frequentes"} />
             <div className="navSubtitle">
@@ -58,6 +68,8 @@ export default function page() {
 
             {/* {usuario.role === 'ADMIN' }
             {usuario.role === 'COSTUMER' && <Button/>} */}
+        </AuthGuard>
         </>
+    
     );
 }

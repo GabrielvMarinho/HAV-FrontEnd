@@ -1,3 +1,4 @@
+"use client"
 import "./variables.css";
 import Loader from "./components/IconsTSX/Loader"; // Importando o Loader
 import montserrat from "@/app/Fonts"
