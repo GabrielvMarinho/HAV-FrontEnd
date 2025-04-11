@@ -36,6 +36,7 @@ export default function HeaderRealtor() {
                 <div className="HeaderOptions">
 
                     <Link href={"/"}>Início</Link>
+                    <Link href={"/"}>Meus Imóveis</Link>
 
                     <div onClick={() => toggleDropdown(1)}>
                         <HeaderOptions
@@ -50,12 +51,14 @@ export default function HeaderRealtor() {
                     </div>
 
                     <Link href={"/aboutus"}>Sobre Nós</Link>
+                    
+                    <Link href={"/calendar"}>Agenda</Link>
 
                     <div onClick={() => toggleDropdown(2)}>
                         <HeaderOptions
                             isOpen={openDropdownId === 2}
                             close={() => setOpenDropdownId(null)}
-                            title={"Área do Administrador"}
+                            title={"Área do Corretor"}
                             options={["Mensagens", "Perfil", "Favoritos", "Notificações"]}
                             optionsLinks={["/chat", "/profile", "/favorite", "/notification"]}
                             optionsIcons=
@@ -63,23 +66,6 @@ export default function HeaderRealtor() {
                             <Profile width={17} height={17} color={"var(--text-white)"} />,
                             <StarIcon width={17} height={17} color={"var(--text-white)"} idUser={0} idProperty={0} selected={false} />,
                             <Bell width={17} height={17} color={"var(--text-white)"} />]} />
-                    </div>
-
-
-
-                    <div onClick={() => toggleDropdown(3)}>
-
-
-                        <HeaderOptions
-                            isOpen={openDropdownId === 3}
-                            close={() => setOpenDropdownId(null)}
-                            title={"Gestão"}
-                            options={["Usuários", "Ímoveis"]}
-                            optionsLinks={["/manage/customers", "/manage/properties"]}
-                            optionsIcons=
-                            {[<User width={17} height={17} color={"var(--text-white)"} />,
-                            <Construcao width={17} height={17} color={"var(--text-white)"} />]} />
-
                     </div>
                 </div>
                 <Language width={30} height={30} color="" />

@@ -14,6 +14,7 @@ import StarFavorite from "../Inputs/StarFavorite";
 import Profile from "../IconsTSX/Profile";
 import StarIcon from "../IconsTSX/StarIcon";
 import Bell from "../IconsTSX/Bell";
+import Proprietor from "../IconsTSX/Proprietor";
 
 export default function HeaderEditor() {
 
@@ -55,12 +56,11 @@ export default function HeaderEditor() {
                         <HeaderOptions
                             isOpen={openDropdownId === 2}
                             close={() => setOpenDropdownId(null)}
-                            title={"Área do Administrador"}
-                            options={["Mensagens", "Perfil", "Favoritos", "Notificações"]}
-                            optionsLinks={["/chat", "/profile", "/favorite", "/notification"]}
+                            title={"Área do Editor"}
+                            options={["Perfil", "Favoritos", "Notificações"]}
+                            optionsLinks={["/profile", "/favorite", "/notification"]}
                             optionsIcons=
-                            {[<Comments width={17} height={17} color={"var(--text-white)"} />,
-                            <Profile width={17} height={17} color={"var(--text-white)"} />,
+                            {[<Profile width={17} height={17} color={"var(--text-white)"} />,
                             <StarIcon width={17} height={17} color={"var(--text-white)"} idUser={0} idProperty={0} selected={false} />,
                             <Bell width={17} height={17} color={"var(--text-white)"} />]} />
                     </div>
@@ -74,10 +74,10 @@ export default function HeaderEditor() {
                             isOpen={openDropdownId === 3}
                             close={() => setOpenDropdownId(null)}
                             title={"Gestão"}
-                            options={["Usuários", "Ímoveis"]}
-                            optionsLinks={["/manage/customers", "/manage/properties"]}
+                            options={["Proprietários", "Ímoveis"]}
+                            optionsLinks={["/manage/proprietors", "/manage/properties"]}
                             optionsIcons=
-                            {[<User width={17} height={17} color={"var(--text-white)"} />,
+                            {[<Proprietor width={17} height={17} color={"var(--text-white)"} />,
                             <Construcao width={17} height={17} color={"var(--text-white)"} />]} />
 
                     </div>

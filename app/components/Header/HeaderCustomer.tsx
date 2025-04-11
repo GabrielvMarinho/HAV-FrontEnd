@@ -12,6 +12,7 @@ import Comments from "../IconsTSX/Comments";
 import Profile from "../IconsTSX/Profile";
 import StarIcon from "../IconsTSX/StarIcon";
 import Bell from "../IconsTSX/Bell";
+import Calendar from "../IconsTSX/Calendar";
 
 export default function HeaderCustomer() {
 
@@ -35,6 +36,8 @@ export default function HeaderCustomer() {
 
                     <Link href={"/"}>Início</Link>
 
+                    <Link href={"/propertyComparison"}>Comparação Imovel</Link>
+
                     <div onClick={() => toggleDropdown(1)}>
                         <HeaderOptions
                             isOpen={openDropdownId === 1}
@@ -47,36 +50,25 @@ export default function HeaderCustomer() {
                             <Range width={17} height={17} color={"var(--text-white)"} />]} />
                     </div>
 
+                    <Link href={"/contactus"}>Fale Conosco</Link>
+
                     <Link href={"/aboutus"}>Sobre Nós</Link>
-
-                    <div onClick={() => toggleDropdown(2)}>
-                        <HeaderOptions
-                            isOpen={openDropdownId === 2}
-                            close={() => setOpenDropdownId(null)}
-                            title={"Área do Administrador"}
-                            options={["Mensagens", "Perfil", "Favoritos", "Notificações"]}
-                            optionsLinks={["/chat", "/profile", "/favorite", "/notification"]}
-                            optionsIcons=
-                            {[<Comments width={17} height={17} color={"var(--text-white)"} />,
-                            <Profile width={17} height={17} color={"var(--text-white)"} />,
-                            <StarIcon width={17} height={17} color={"var(--text-white)"} idUser={0} idProperty={0} selected={false} />,
-                            <Bell width={17} height={17} color={"var(--text-white)"} />]} />
-                    </div>
-
 
 
                     <div onClick={() => toggleDropdown(3)}>
 
-
                         <HeaderOptions
                             isOpen={openDropdownId === 3}
                             close={() => setOpenDropdownId(null)}
-                            title={"Gestão"}
-                            options={["Usuários", "Ímoveis"]}
-                            optionsLinks={["/manage/customers", "/manage/properties"]}
+                            title={"Área do cliente"}
+                            options={["Mensagens", "Perfil", "Favoritos", "Agendamentos", "Notificações"]}
+                            optionsLinks={["/chat", "/profile", "/favorite/id", "/calendar", "/notification"]}
                             optionsIcons=
-                            {[<User width={17} height={17} color={"var(--text-white)"} />,
-                            <Construcao width={17} height={17} color={"var(--text-white)"} />]} />
+                            {[<Comments width={17} height={17} color={"var(--text-white)"} />, 
+                            <User width={17} height={17} color={"var(--text-white)"} />,
+                            <StarIcon width={17} height={17} color={"var(--text-white)"} />,
+                            <Calendar width={17} height={17} color={"var(--text-white)"} />,
+                            <Bell width={17} height={17} color={"var(--text-white)"} />]} />
 
                     </div>
                 </div>
