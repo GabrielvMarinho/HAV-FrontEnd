@@ -1,7 +1,6 @@
 "use client"
 import ChatCard from "@/app/components/ChatCard/ChatCard";
 import HeaderAdm from "@/app/components/Header/HeaderAdm";
-import ArrowIcon from "@/app/components/IconsTSX/ArrowIcon";
 import HavLogo from "@/app/components/IconsTSX/HavLogoLight";
 import MenuDotsVertical from "@/app/components/IconsTSX/MenuDotsVertical";
 import Microfone from "@/app/components/IconsTSX/Microfone";
@@ -9,15 +8,12 @@ import QuadradoMais from "@/app/components/IconsTSX/QuadradoMais";
 import SearchIcon from "@/app/components/IconsTSX/SearchIcon";
 import SmileEmoji from "@/app/components/IconsTSX/smileEmoji";
 import MessageCard from "@/app/components/MessageCard/MessageCard";
-import Google from "next-auth/providers/google";
 import { useEffect, useState } from "react";
 import "./css/style.css"
 import { currentUser, searchUser } from "@/app/redux/Auth/action";
 import { useDispatch, useSelector } from "react-redux";
 import { createChat, getUsersChat } from "@/app/redux/Chat/action";
 import { createMessage, getAllMessage } from "@/app/redux/Message/action";
-import { data } from "react-router-dom";
-// import SockJS from "sockjs-client/dist/sockjs";
 import SockJS from "sockjs-client";
 import { over } from "stompjs";
 
