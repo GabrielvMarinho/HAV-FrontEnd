@@ -120,6 +120,28 @@
     display: none;
 }
 
+.textSignup{
+    display: flex;
+    align-Items: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+.naoPossuiConta{
+    font-size: 12px;
+    display: flex;
+    color: var(--box-dark-red-option);
+    justify-content: center;
+}
+
+.linkSignup{
+    margin-left:5px;
+    font-size: var(--text-xs);
+    color: var(--box-dark-red-option);
+    text-decoration: underline;
+}
+
 @media (max-width: 992px) {
     .logo {
         display: none; 

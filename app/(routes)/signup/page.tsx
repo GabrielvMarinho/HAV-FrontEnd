@@ -13,6 +13,7 @@ import Envelope from "@/app/components/IconsTSX/Envelope";
 import ClosedPadlock from "@/app/components/IconsTSX/ClosedPadlock";
 import Eye from "@/app/components/IconsTSX/Eye";
 import LogoClara from "@/app/components/IconsTSX/LogoClara";
+import Link from "next/link";
 
 export default function signup(){
     return(
@@ -41,7 +42,12 @@ export default function signup(){
                         <p className="ou">ou</p>
                         <img className={"Google"} src="/Image/Google.png"/>
                     </div>
-                    <p className="naoPossuiConta"> Já possui Conta? <p className="cadastrarConta"> Entrar </p></p>
+
+                    <div className="textSignup">
+                        <p className="naoPossuiConta"> Já possui Conta?  </p>
+            
+                        <Link href={"/login"} className="linkSignup"> Entrar </Link>
+                    </div>
                 </form>
              </div>
 
