@@ -28,7 +28,7 @@ export default function FormAddRealter() {
 
     const form = useForm<NewRealtor>({
         resolver: zodResolver(newRealtor),
-        mode: "onSubmit",
+        mode: "onTouched",
     });
 
     
