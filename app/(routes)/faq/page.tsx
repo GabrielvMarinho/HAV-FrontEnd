@@ -1,3 +1,4 @@
+
 import Footer from "@/app/components/Footer/Footer";
 import HeaderAdm from "@/app/components/Header/HeaderAdm";
 import "../faq/style/style.css";
@@ -5,10 +6,17 @@ import Title from "@/app/components/NonInteractable/Title";
 import SearchBarDesktop from "@/app/components/Filters/SearchBar";
 import HavLogo from "@/app/components/IconsTSX/HavLogoLight";
 import Button from "@/app/components/Inputs/Button";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function page() {
+
+    // const { usuario } = useAuth();
+
+    // if (!usuario) return <p>Carregando...</p>;
+    
     return (
         <>
+
             <HeaderAdm />
             <Title tag={"h1"} text={"Perguntas Frequentes"} />
             <div className="navSubtitle">
@@ -45,9 +53,11 @@ export default function page() {
             <Button type="button" size="large" text="ACESSE O CHAT" hover="darken" color="white" background="#B23F52"/>
             <span className="orText">OU</span><img src="/Image/whatsapp.png" alt="Whatsapp icon" />
             </div>
-
             
             <Footer />
+
+            {/* {usuario.role === 'ADMIN' }
+            {usuario.role === 'COSTUMER' && <Button/>} */}
         </>
     );
 }
