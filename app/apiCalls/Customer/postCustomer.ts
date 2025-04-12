@@ -17,8 +17,6 @@ export default async function postCustomer(
       celphone: formData?.cellphone,
       phoneNumber: formData?.phoneNumber,
       creci: formData?.creci,
-
-      archived: false,
       address: {
         cep: formData?.cep,
         street: formData?.street,

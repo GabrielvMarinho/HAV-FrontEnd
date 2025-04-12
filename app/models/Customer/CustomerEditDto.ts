@@ -1,5 +1,5 @@
 interface CustomerEditDto {
-    doc:string;
+    doc: string;
     cpf: string;
     name: string;
     email: string;
@@ -12,4 +12,5 @@ interface CustomerEditDto {
     state: string;
     city: string;
     neighborhood: string;
+    imageBase64?: string;
 }

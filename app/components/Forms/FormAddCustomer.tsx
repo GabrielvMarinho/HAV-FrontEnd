@@ -50,6 +50,7 @@ export default function FormAddCustomer() {
 
         try {
             const response = await postCustomer(pendingFormData);
+            console.log(response);
             if (response) {
                 router.back(); // Volta um ponto sem ter que escrever a barra
             }

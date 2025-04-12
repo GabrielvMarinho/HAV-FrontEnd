@@ -21,7 +21,7 @@ import ToggleButton from "@/app/components/Inputs/ToggleButton";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 import NonEditableInputText from "@/app/components/Inputs/NonEditableInputText";
 
-export default function FormEditCustomer(props :{id :any }) {
+export default function FormEditCustomer(props: { id: any }) {
   const [customer, setCustomer] = useState<CustomerEditDto | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toggleStates, setToggleStates] = useState({
@@ -81,7 +81,7 @@ export default function FormEditCustomer(props :{id :any }) {
   const MenuItem = ({
     label,
     isToggled = false,
-    onToggle = () => {},
+    onToggle = () => { },
   }: {
     label: string;
     isToggled?: boolean;
