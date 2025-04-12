@@ -501,8 +501,19 @@
     display: flex;
     gap: 40px;
     margin-top: 60px;
-
 }
+
+.buttonsSearch{
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.buttonsAndCards{
+    display: flex;
+    flex-direction: column;
+}
+
 @media (width >1600px){
     .cardsContainer{
         width: 1200px;

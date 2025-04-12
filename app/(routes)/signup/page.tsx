@@ -13,6 +13,7 @@ import Envelope from "@/app/components/IconsTSX/Envelope";
 import ClosedPadlock from "@/app/components/IconsTSX/ClosedPadlock";
 import Eye from "@/app/components/IconsTSX/Eye";
 import LogoClara from "@/app/components/IconsTSX/LogoClara";
+import Link from "next/link";
 
 export default function signup(){
     return(
@@ -29,7 +30,25 @@ export default function signup(){
                 <div className="containerLinha">
                     <h2 className="linha"> </h2>
                 </div>
-                <SignUpForm/>
+                <form>
+                <InputTextLogin name="name" size="mediumLarge" id="user" text="Nome" placeholder="Digite seu nome" icon={<User width="18" height="18" color="var(--text-light-red)"/>}/>
+                <InputTextLogin name="name" size="mediumLarge" id="user" text="E-mail" placeholder="Digite seu e-mail" icon={<Envelope width="18" height="18" color="var(--text-light-red)"/>}/>
+                <InputTextLogin name="name" size="mediumLarge" id="user" text="Senha" placeholder="Digite sua senha" icon={<Eye width="18" height="18" color="var(--text-light-red)"/>}/>
+                <InputTextLogin name="name" size="mediumLarge" id="user" text="Confirmar senha" placeholder="Digite sua senha" icon={<Eye width="18"  height="18" color="var(--text-light-red)"/>}/>
+                    <div className="botao">
+                        <Button name="button" size="small" text="Entrar" /> 
+                    </div>
+                    <div className="containerGoogle">
+                        <p className="ou">ou</p>
+                        <img className={"Google"} src="/Image/Google.png"/>
+                    </div>
+
+                    <div className="textSignup">
+                        <p className="naoPossuiConta"> Já possui Conta?  </p>
+            
+                        <Link href={"/login"} className="linkSignup"> Entrar </Link>
+                    </div>
+                </form>
              </div>
 
             <div className="logoFundo">
