@@ -238,6 +238,9 @@ summary {
 .mediumInput{
     width: 170px;
 }
+.mediumLargeInput{
+    width: 230px;
+}
 .largeInput{
     width: 290px;
 }
@@ -293,6 +296,13 @@ summary {
     padding-inline: 50px;
     
 }
+
+.mediumLargeButton{
+    font-size: var(--text-xs);
+    padding: 9px;
+    padding-inline: 50px;
+}
+
 .largeButton{
     font-size: var(--text-s);
     padding: 11px;
@@ -610,7 +620,10 @@ background-color: var(--text-white);
 
     .extenseInput{
         width: 250px;
-        
+    }
+
+    .mediumLargeInput{
+        width: 190px;
     }
 }
 

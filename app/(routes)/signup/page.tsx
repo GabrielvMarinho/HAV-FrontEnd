@@ -13,6 +13,7 @@ import Envelope from "@/app/components/IconsTSX/Envelope";
 import ClosedPadlock from "@/app/components/IconsTSX/ClosedPadlock";
 import Eye from "@/app/components/IconsTSX/Eye";
 import LogoClara from "@/app/components/IconsTSX/LogoClara";
+import Link from "next/link";
 
 export default function signup(){
     return(
