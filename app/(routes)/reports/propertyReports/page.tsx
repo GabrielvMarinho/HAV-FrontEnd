@@ -62,9 +62,9 @@ export default function page() {
   }, [])
 
   const labels = [
-    `${percentageRent}% Locação`,
-    `${percentageForSale}% Venda`,
-    `${PercentageArchived}% Arquivados`
+    `${percentageRent}% LOCAÇÃO`,
+    `${percentageForSale}% VENDA`,
+    `${PercentageArchived}% ARQUIVADOS`
   ];
 
   const data = [totalRent, totalForSale, totalArchived];

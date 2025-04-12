@@ -6,28 +6,61 @@ import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 import SideTitle from "@/app/components/NonInteractable/SideTitle";
 import getAllUsersNumber from "@/app/apiCalls/User/getAllRegistredNumber";
 import { useState, useEffect } from "react";
+import getQuantityProprietor from "@/app/apiCalls/Proprietor/getQuantityProprietor"; {/*Funcionando */ }
+import getPercentageProprietors from "@/app/apiCalls/Proprietor/getPercentageProprietors"; {/*Funcionando */ }
+import getQuantityCustomer from "@/app/apiCalls/Customer/getQuantityCustomer"; {/*Funcionando */ }
+import getPercentageCustomer from "@/app/apiCalls/Customer/getPercentageCustomer"; {/*Funcionando */ }
+import HorizontalBarChart from "@/app/components/BarChart/HorizontalBarChart";
+
 
 export default function page() {
 
   const [allUsersNumber, setAllUsersNumber] = useState(0);
+  const [allProprietors, setAllProprietors] = useState(0);
+  const [percentageProprietors, setPercentageProprietors] = useState(0);
+  const [allCustomers, setAllCustomers] = useState(0);
+  const [PercentageCustomer, setPercentageCustomer] = useState(0);
+
 
   useEffect(() => {
 
     const fetchData = async () => {
       try {
         const [
-          allUsersNumber
+          allUsersNumber,
+          allProprietors,
+          percentageProprietors,
+          allCustomers,
+          PercentageCustomer
         ] =
           await Promise.all([
-            getAllUsersNumber()
+            getAllUsersNumber(),
+            getQuantityProprietor(),
+            getPercentageProprietors(),
+            getQuantityCustomer(),
+            getPercentageCustomer()
           ])
-        setAllUsersNumber(allUsersNumber)
+          setAllUsersNumber(allUsersNumber),
+          setAllProprietors(allProprietors),
+          setPercentageProprietors(percentageProprietors),
+          setAllCustomers(allCustomers),
+          setPercentageCustomer(PercentageCustomer)
       } catch (e) {
         console.log(e, "Erro na api");
       }
     }
     fetchData()
   }, [])
+
+  const labels = [
+    `${percentageProprietors}% PROPRIETÁRIOS`,
+    `${PercentageCustomer}% USUÁRIOS COMUNS`,
+    `${"a fazer (bloqueados)"}% BLOQUEADOS`
+  ];
+
+  const data = [allProprietors, allCustomers]
+
+  const barColors = ["#B23F52"]
 
   return (
     <>
@@ -54,7 +87,7 @@ export default function page() {
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
-            <div className="placeholder-graph">Gráfico</div>
+          <HorizontalBarChart labels={labels} data={data} backGroundColors={barColors} />
           </div>
         </div>
       </section>
