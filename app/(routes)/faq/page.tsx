@@ -10,9 +10,6 @@ import { useAuth } from "@/app/context/AuthContext";
 import AuthGuard from "@/app/context/AuthGuard";
 
 export default function page() {
-
-    // const { usuario } = useAuth();
-    // if (!usuario) return <p>Carregando...</p>;
     
 
     // header(){
@@ -26,7 +23,7 @@ export default function page() {
 
     return (
         <>
-        <AuthGuard requiredRole="CUSTOMER">
+        {/* <AuthGuard requiredRole="CUSTOMER"> */}
             <HeaderAdm />
             <Title tag={"h1"} text={"Perguntas Frequentes"} />
             <div className="navSubtitle">
@@ -65,10 +62,7 @@ export default function page() {
             </div>
             
             <Footer />
-
-            {/* {usuario.role === 'ADMIN' }
-            {usuario.role === 'COSTUMER' && <Button/>} */}
-        </AuthGuard>
+        {/* </AuthGuard> */}
         </>
     
     );

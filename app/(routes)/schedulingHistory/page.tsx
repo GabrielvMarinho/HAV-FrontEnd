@@ -8,6 +8,9 @@ import Title from "@/app/components/NonInteractable/Title";
 import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdownsConfig";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 import ModalScheduling from "@/app/components/Modal/ModalScheduling";
+import AuthGuard from "@/app/context/AuthGuard";
+import HeaderCustomer from "@/app/components/Header/HeaderCustomer";
+import HeaderRealtor from "@/app/components/Header/HeaderRealtor";
 
 export default async function schedulingHistory({searchParams}: {searchParams:{
     page?: string;
@@ -20,35 +23,70 @@ export default async function schedulingHistory({searchParams}: {searchParams:{
 
     const params = await searchParams;
     const {page=0, data=null, status=null} = params
-    return(
-        <> 
-        <HeaderAdm/>
-        <Title tag="h1" text="Histórico" /> 
-        {/* <ModalScheduling/> */}
 
-        <NavBarAdm options={NavBarPath.historic} />
-        <div className="dropdownSchedulingHistory">
-        <InputDropdown
-            key={dropdownFields.date.id}
-            name={dropdownFields.date.name}
-            size={dropdownFields.date.size}
-            title={dropdownFields.date.title}
-            id={dropdownFields.date.id}
-            options={dropdownFields.date.options}
-        />
-        <div className="dropdownSegundo">
-        <InputDropdown
-            key={dropdownFields.statusHistoric.id}
-            name={dropdownFields.statusHistoric.name}
-            size={dropdownFields.statusHistoric.size}
-            title={dropdownFields.statusHistoric.title}
-            id={dropdownFields.statusHistoric.id}
-            options={dropdownFields.statusHistoric.options}
-        />
-        </div>
-        </div>
-        <TableListHistory data={data} status={status} page={page} id={customerId} for={"customer"} titles={["Data/Hora", "Corretor", "Finalidade", "tipo imovel", "status" ]} />
-        <Footer/>
+
+    return(
+        
+        <> 
+        <AuthGuard requiredRole="ROLE_REALTOR">
+            <HeaderRealtor/>
+            <Title tag="h1" text="Histórico" /> 
+            {/* <ModalScheduling/> */}
+
+            <NavBarAdm options={NavBarPath.historic} />
+            <div className="dropdownSchedulingHistory">
+            <InputDropdown
+                key={dropdownFields.date.id}
+                name={dropdownFields.date.name}
+                size={dropdownFields.date.size}
+                title={dropdownFields.date.title}
+                id={dropdownFields.date.id}
+                options={dropdownFields.date.options}
+            />
+            <div className="dropdownSegundo">
+            <InputDropdown
+                key={dropdownFields.statusHistoric.id}
+                name={dropdownFields.statusHistoric.name}
+                size={dropdownFields.statusHistoric.size}
+                title={dropdownFields.statusHistoric.title}
+                id={dropdownFields.statusHistoric.id}
+                options={dropdownFields.statusHistoric.options}
+            />
+            </div>
+            </div>
+            <TableListHistory data={data} status={status} page={page} id={customerId} for={"customer"} titles={["Data/Hora", "Corretor", "Finalidade", "tipo imovel", "status" ]} />
+            <Footer/>
+        </AuthGuard> 
+
+        <AuthGuard requiredRole="ROLE_CUSTOMER">
+            <HeaderCustomer/>
+            <Title tag="h1" text="Histórico" /> 
+            {/* <ModalScheduling/> */}
+
+            <NavBarAdm options={NavBarPath.historic} />
+            <div className="dropdownSchedulingHistory">
+            <InputDropdown
+                key={dropdownFields.date.id}
+                name={dropdownFields.date.name}
+                size={dropdownFields.date.size}
+                title={dropdownFields.date.title}
+                id={dropdownFields.date.id}
+                options={dropdownFields.date.options}
+            />
+            <div className="dropdownSegundo">
+            <InputDropdown
+                key={dropdownFields.statusHistoric.id}
+                name={dropdownFields.statusHistoric.name}
+                size={dropdownFields.statusHistoric.size}
+                title={dropdownFields.statusHistoric.title}
+                id={dropdownFields.statusHistoric.id}
+                options={dropdownFields.statusHistoric.options}
+            />
+            </div>
+            </div>
+            <TableListHistory data={data} status={status} page={page} id={customerId} for={"customer"} titles={["Data/Hora", "Corretor", "Finalidade", "tipo imovel", "status" ]} />
+            <Footer/>
+        </AuthGuard> 
         </>
     )
 }

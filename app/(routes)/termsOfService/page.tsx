@@ -12,13 +12,9 @@ export default function page() {
       <Title tag={"h1"} text={"POLÍTICA DE PRIVACIDADE E TERMOS DE USO"} />
       <NavBarAdm options={NavBarPath.policy} />
 
-      {/* Container principal para centralizar o conteúdo */}
       <div className="terms-of-use-container">
-        {/* Container para o conteúdo com o texto */}
         <div className="terms-of-use-text">
           <h1>TERMOS DE USO</h1>
-
-          {/* Seções de conteúdo */}
           <section>
             <h2>1. Introdução</h2>
             <p>
