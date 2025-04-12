@@ -145,7 +145,7 @@ export default function page() {
             <div className="containerProfiles">
                 <div className="cardProfileUnique">
                     <div>
-                        <h2 className="cardTitle">
+                        <h2 className="titlesProfiles">
                             SÓCIO DIRETOR
                         </h2>
                     </div>
@@ -156,7 +156,7 @@ export default function page() {
 
                 <div className="cardProfile">
                     <div>
-                        <h2>
+                        <h2 className="titlesProfiles">
                             GERENTES
                         </h2>
                     </div>
@@ -168,7 +168,7 @@ export default function page() {
 
                 <div className="cardProfile">
                     <div>
-                        <h2>
+                        <h2 className="titlesProfiles">
                             COORDENADORES
                         </h2>
                     </div>
