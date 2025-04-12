@@ -39,7 +39,7 @@ export default function FormEditCustomer(props :{id :any }) {
 
     const form = useForm<EditCustomer>({
         resolver: zodResolver(newCustomer),
-        mode: "onSubmit",
+        mode: "onTouched",
     });
 
     function onSubmit(data: EditCustomer) {

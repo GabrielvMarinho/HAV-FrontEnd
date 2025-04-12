@@ -15,7 +15,7 @@ export default function ContactUsForm(props :{customerId: string}) {
  
     const form = useForm<newContactUsEmail>({
         resolver: zodResolver(newContactUsEmail),
-        mode: "onSubmit",
+        mode: "onTouched",
     });
     function onSubmit(data: newContactUsEmail) {
         console.log(data)

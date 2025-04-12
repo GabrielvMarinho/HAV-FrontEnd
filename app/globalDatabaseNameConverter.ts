@@ -14,6 +14,7 @@ export default {
     "rs": "Rio Grande do Sul",
     
     //cidades
+    "jaragua_do_sul": "Jaraguá do Sul",
     "joinville": "Joinville",
     "blumenau": "Blumenau",
     "sao_francisco_do_sul": "São Francisco do Sul",

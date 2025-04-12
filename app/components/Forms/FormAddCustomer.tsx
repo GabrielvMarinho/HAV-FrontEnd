@@ -29,7 +29,7 @@ export default function FormAddCustomer() {
 
     const form = useForm<NewCustomer>({
         resolver: zodResolver(newCustomer),
-        mode: "onSubmit",
+        mode: "onTouched",
     });
 
     function onSubmit(data: NewCustomer) {

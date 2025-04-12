@@ -25,7 +25,7 @@ export const NavBarPath = {
         [
             { label: "CORRETOR", path: "./realtorReports" },
             { label: "USUÁRIO", path: "./userReports" },
-            { label: "IMÓVEL", path: "/propertyReports" },
+            { label: "IMÓVEL", path: "./propertyReports" },
         ],
   
 }

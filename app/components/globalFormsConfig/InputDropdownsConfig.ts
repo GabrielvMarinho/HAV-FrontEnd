@@ -77,7 +77,9 @@ export const dropdownFields = {
         options: [
             ["centro", "Centro"],
             ["vila_nova", "Vila Nova"],
-            ["tres_rios_do_norte", "Três Rios do Norte"]
+            ["tres_rios_do_norte", "Três Rios do Norte"],
+            ["jaragua_esquerdo", "Jaraguá Esquerdo"]
+
         ]
     },
     purpose: { //this component has dependencies, (toggle rent or buy)
@@ -280,9 +282,9 @@ export const dropdownFields = {
         title: "VISUALIZAÇÃO",
         id: "visualization",
         options: [
-            [1, "Card"],
-            [2, "Lista"],
-            [3, "Mapa"]
+            ["card", "Card"],
+            ["list", "Lista"],
+            ["map", "Mapa"]
         ]
     },
     statusHistoric: {

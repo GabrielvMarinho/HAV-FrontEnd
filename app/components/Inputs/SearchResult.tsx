@@ -21,7 +21,7 @@ export default function SearchFavorite(props :{typeSearch:string}){
                 <h2>RESULTADOS</h2>
                     <div style={{display: "flex", gap:"10px", alignItems:"center"}}>
                         <p>da sua pesquisa</p>
-                        <h3>{props.typeSearch === "venda"?"VENDA":props.typeSearch === "locacao"?"LOCAÇÃO":""}</h3>
+                        <h3>{props.typeSearch === "venda"?"VENDA":props.typeSearch === "locacao"?"LOCAÇÃO":props.typeSearch.toLocaleUpperCase()}</h3>
                     </div>
                 <div className="searchResultLine"></div>
             </div>

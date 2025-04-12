@@ -29,3 +29,16 @@
     margin: 0;
     /* remove margin padrão do <p> */
 }
+
+.message-card span {
+    display: block;
+    /* Faz ele ocupar linha própria */
+    font-size: 0.75rem;
+    /* Tamanho menor */
+    color: #888888;
+    /* Cinza claro */
+    text-align: right;
+    /* Alinha no canto direito */
+    margin-top: 0.25rem;
+    /* Espaço do texto pra hora */
+}

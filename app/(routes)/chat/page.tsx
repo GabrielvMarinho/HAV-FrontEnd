@@ -1,7 +1,6 @@
 "use client"
 import ChatCard from "@/app/components/ChatCard/ChatCard";
 import HeaderAdm from "@/app/components/Header/HeaderAdm";
-import ArrowIcon from "@/app/components/IconsTSX/ArrowIcon";
 import HavLogo from "@/app/components/IconsTSX/HavLogoLight";
 import MenuDotsVertical from "@/app/components/IconsTSX/MenuDotsVertical";
 import Microfone from "@/app/components/IconsTSX/Microfone";
@@ -9,15 +8,12 @@ import QuadradoMais from "@/app/components/IconsTSX/QuadradoMais";
 import SearchIcon from "@/app/components/IconsTSX/SearchIcon";
 import SmileEmoji from "@/app/components/IconsTSX/smileEmoji";
 import MessageCard from "@/app/components/MessageCard/MessageCard";
-import Google from "next-auth/providers/google";
 import { useEffect, useState } from "react";
 import "./css/style.css"
 import { currentUser, searchUser } from "@/app/redux/Auth/action";
 import { useDispatch, useSelector } from "react-redux";
 import { createChat, getUsersChat } from "@/app/redux/Chat/action";
 import { createMessage, getAllMessage } from "@/app/redux/Message/action";
-import { data } from "react-router-dom";
-// import SockJS from "sockjs-client/dist/sockjs";
 import SockJS from "sockjs-client";
 import { over } from "stompjs";
 
@@ -29,7 +25,7 @@ export default function Chat() {
     const { auth, chat, message } = useSelector(store => store);
     const dispatch = useDispatch();
     const token = localStorage.getItem("token");
-    const [stompClient, setStompClient] = useState();
+    const [stompClient, setStompClient] = useState(null);
     const [isConnected, setIsConnected] = useState(false);
     const [messages, setMessages] = useState([]);
 
@@ -51,7 +47,7 @@ export default function Chat() {
     }
 
     const connect = () => {
-        const sock = new SockJS("http://localhost:3000/ws");
+        const sock = new SockJS("http://localhost:9090/ws");
         const temp = over(sock);
         setStompClient(temp);
 
@@ -69,6 +65,11 @@ export default function Chat() {
         if (parts.length === 2) {
             return parts.pop()?.split(";").shift();
         }
+    }
+
+    function formatTime(dateString) {
+        const date = new Date(dateString);
+        return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
     }
 
     const onError = (error) => {
@@ -94,13 +95,14 @@ export default function Chat() {
 
     useEffect(() => {
         if (isConnected && stompClient && auth.reqUser && currentChat) {
-            const subscription = stompClient.subscribe("/group/" + currentChat.id.toString, onMessageReceive);
+            const subscription = stompClient.subscribe(`/group/${currentChat.id}`, onMessageReceive);
 
             return () => {
                 subscription.unsubscribe();
             }
         }
     })
+
 
     useEffect(() => {
         connect();
@@ -138,6 +140,7 @@ export default function Chat() {
             }
         }
     }, []);
+
 
     return (
         <>
@@ -355,7 +358,7 @@ export default function Chat() {
                                 {
                                     message.messages.length > 0 && message.messages?.map((item) =>
                                         <MessageCard isSentMessage={item.user?.id === auth.reqUser?.id}
-                                            content={item.content}
+                                            content={item.content} currentTime={formatTime(item.createdAt)}
                                         />)
                                 }
                             </div>
