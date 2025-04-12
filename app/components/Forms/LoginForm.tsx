@@ -12,7 +12,7 @@ import "@/app/variables.css"
 import { useDispatch } from "react-redux";
 import { loginUser } from "@/app/redux/Auth/action";
 
-export default function FormLogin() {
+export default function     FormLogin() {
 
     const dispatch = useDispatch();
 
@@ -30,7 +30,7 @@ export default function FormLogin() {
                 localStorage.setItem('user', JSON.stringify(response.user));
             }
 
-            window.location.href = "/chat";
+            window.location.href = "/faq";
         } else {
             setErrorLogin(response.message);
         }
