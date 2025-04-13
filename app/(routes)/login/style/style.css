@@ -1,4 +1,6 @@
-@import "../../../variables.css";
+@import "@/app/variables.css";
+
+
 
 .container {
     position: relative;

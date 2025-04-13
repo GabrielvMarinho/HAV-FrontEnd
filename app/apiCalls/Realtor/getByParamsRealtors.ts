@@ -1,4 +1,4 @@
-import page from "@/app/(routes)/(crud)/manage/admins/page";
+import page from "@/app/(routes)/(withHeader)/(crud)/manage/admins/page";
 
 export default async function(
 

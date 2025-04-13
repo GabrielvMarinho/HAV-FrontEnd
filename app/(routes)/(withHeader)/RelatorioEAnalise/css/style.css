@@ -1,0 +1,19 @@
+@import "@/app/variables.css";
+
+.boxAllRegistredProperties{
+    width: 214px;
+    height: 148px;
+    border-radius: 5px;
+    background-color: var(--box-red-pink);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.numberOfProperty{
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: white;
+}
+

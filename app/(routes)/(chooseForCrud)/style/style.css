@@ -1,6 +1,8 @@
 .titleChooseRealtor{
+    width: 90%;
+    display: flex;
+    justify-content: center;
     margin-top: 50px;
-    margin-left: 280px;
 }
 
 .searchBarChooseRealtor{

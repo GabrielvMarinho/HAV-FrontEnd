@@ -1,14 +1,32 @@
+"use client"
 import { useEffect, useState } from "react";
 import "../../variables.css"
 import "./css/style.css"
 import Button from "../Inputs/Button";
 import { record } from "zod";
 import SchedulingCard from "../Information/SchedulingCard";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function selectHour(props :{day: Date; ids :Record<string, number>, selectHours: string[],
      saveHours: (hoursAdd: string[], hoursRemove: string[]) => void, cards :Record<string, string | string[]>[],
     cardsModal :schedulesModalInfo[]}){
+
+      
+      const { usuario, loading } = useAuth();
     
+      if (loading) {
+        return null;
+      }
+    
+      if (!usuario) {
+        return null; 
+      }
+      if (usuario.role !="ROLE_REALTOR") {
+        return null; 
+      }
+
+
+
     if(!props.day){
         return(
             <h3>selecione um dia</h3>

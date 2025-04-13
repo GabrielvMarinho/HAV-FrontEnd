@@ -4,6 +4,8 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/app/context/AuthContext'
 
+const roleHierarchy = ['CUSTOMER', 'REALTOR', 'EDITOR', 'ADMIN']
+
 export default function AuthGuard({
   children,
   requiredRole,
@@ -11,21 +13,23 @@ export default function AuthGuard({
   children: React.ReactNode
   requiredRole?: string
 }) {
-  const { usuario, loading  } = useAuth()
-  const router = useRouter()  
+  const { usuario, loading } = useAuth()
+  const router = useRouter()
 
   useEffect(() => {
-    if (loading) return; // espera terminar de carregar
+    if (loading) return
 
     if (!usuario) {
       router.replace('/login')
-    } else if (requiredRole && usuario.role !== requiredRole) {
+    } else if (
+      requiredRole &&
+      roleHierarchy.indexOf(usuario.role) < roleHierarchy.indexOf(requiredRole)
+    ) {
       router.replace('/unauthorized')
     }
-    console.log("pode")
-  }, [usuario])
+  }, [usuario, loading, requiredRole, router])
 
-  if (!usuario) return null // ou loading...
+  if (!usuario || loading) return null // ou um loading spinner
 
   return <>{children}</>
 }

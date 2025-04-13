@@ -31,7 +31,7 @@ export default function Footer() {
                     </div>
                     <div className="iconInfos">
                         <Sobre width={25} height={25} color={"var(--icon-footer-color)"}></Sobre>
-                        <Link style={{ color: "var(--text-white)", opacity: "0.6"}} href={"/"}>Sobre nós</Link>
+                        <Link style={{ color: "var(--text-white)", opacity: "0.6"}} href={"/aboutus"}>Sobre nós</Link>
                     </div>
                     <div className="iconInfos">
                         <Folder width={25} height={25} color={"var(--icon-footer-color)"}></Folder>
