@@ -188,7 +188,7 @@ export default function ButtonUploadPhoto<T>({
     setValue && setValue(name as string, null);
 
     if (imageId) {
-      setValue("deletedImageId", imageId); // Prepara pro backend
+      setValue("imageId", imageId); // Prepara pro backend
     }
 
     console.log(imageId);

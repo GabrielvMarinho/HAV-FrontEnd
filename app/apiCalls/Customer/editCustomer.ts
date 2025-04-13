@@ -65,15 +65,17 @@ export default async function editCustomer(id: number, formData: { [key: string]
     cpf: formData.cpf,
     doc: formData.doc,
     phoneNumber: formData.phoneNumber,
-    celphone: formData.celphone,
+    cellphone: formData.cellphone,
     email: formData.email,
-    cep: formData.cep,
-    city: formData.city,
-    state: formData.state,
-    street: formData.street,
-    complement: formData.complement,
-    neighborhood: formData.neighborhood,
-    propertyNumber: formData.propertyNumber
+    address: {
+      cep: formData?.cep,
+      street: formData?.street,
+      neighborhood: formData?.neighborhood,
+      city: formData?.city,
+      state: formData?.state,
+      propertyNumber: formData?.propertyNumber,
+      complement: formData?.complement,
+    }
   })], { type: "application/json" }));
 
   // Adiciona imagem nova (se tiver)
@@ -81,11 +83,13 @@ export default async function editCustomer(id: number, formData: { [key: string]
     form.append("newImage", (formData.image as FileList)[0]);
   }
 
-  // Adiciona o ID da imagem deletada (se tiver)
+  // 3. Adiciona o ID da imagem deletada (corrigido o nome e tipo)
   if (formData.deletedImageId) {
-    form.append("deletedImageId", formData.deletedImageId);
+    form.append("deletedImageId", formData.deletedImageId.toString());
   }
 
+  // Debug: Mostra os pares chave-valor do FormData
+  console.log("Dados enviados:");
   for (let pair of form.entries()) {
     console.log(pair[0], pair[1]);
   }

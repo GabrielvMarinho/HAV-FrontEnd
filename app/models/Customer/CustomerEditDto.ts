@@ -3,11 +3,11 @@ interface CustomerEditDto {
     cpf: string;
     name: string;
     email: string;
-    celphone: number;
+    cellphone: string;
     phoneNumber: string;
     cep: string;
     street: string;
-    propertyNumber: string;
+    propertyNumber: number;
     complement: string;
     state: string;
     city: string;

@@ -40,6 +40,7 @@ export default function FormAddCustomer() {
         }
         setPendingFormData(data);
         setIsModalOpen(true);
+        console.log(data);
     };
 
     

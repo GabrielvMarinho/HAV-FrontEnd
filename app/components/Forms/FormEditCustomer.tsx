@@ -52,6 +52,7 @@ export default function FormEditCustomer(props: { id: any }) {
         }
         setPendingFormData(data);
         setIsModalOpen(true);
+        console.log(data);
     };
 
     useEffect(() => {
@@ -77,7 +78,7 @@ export default function FormEditCustomer(props: { id: any }) {
                 doc: customer.doc,
                 name: customer.name,
                 email: customer.email,
-                cellphone: customer?.celphone,
+                cellphone: customer?.cellphone,
                 phoneNumber: customer?.phoneNumber,
                 cep: customer.cep,
                 street: customer.street,
@@ -209,7 +210,8 @@ export default function FormEditCustomer(props: { id: any }) {
                             setValue={form.setValue}
                             imageId={imageId}
                             onDeleteImage={() => {
-                                setCustomer(prev => ({ ...prev, imageBase64: undefined })); // Limpa a imagem vinda da API
+                                setCustomer(prev => ({ ...prev, imageBase64: undefined }));
+                                form.setValue("deletedImageId", imageId); // Limpa a imagem vinda da API
                             }}
                         />
 
@@ -292,7 +294,7 @@ export default function FormEditCustomer(props: { id: any }) {
                         <InputText
                             key={textFields.cellphone.id}
                             name={textFields.cellphone.name}
-                            defaultValue={customer?.celphone ?? ""}
+                            defaultValue={customer?.cellphone ?? ""}
                             size={textFields.cellphone.size}
                             placeholder={textFields.cellphone.placeholder}
                             text={textFields.cellphone.text}
