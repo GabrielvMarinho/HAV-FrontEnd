@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 import NonEditableInputText from "../Inputs/NonEditableInputText";
 import searchAdmDtoById from "@/app/apiCalls/Adm/searchAdmDtoById";
 import editAdm from "@/app/apiCalls/Adm/editAdm";
-import searchCustomerById from "@/app/apiCalls/Customer/customerService";
+import searchCustomerById from "@/app/apiCalls/Customer/searchCustomerById";
 import editEditor from "@/app/apiCalls/Editor/editEditor";
 import editCustomer from "@/app/apiCalls/Customer/editCustomer";
 import { textFields } from "../globalFormsConfig/InputTextConfig";
@@ -59,7 +59,6 @@ export default function FormEditCustomer(props: { id: any }) {
         async function fetchCustomer() {
             try {
                 const { customer, imageId } = await searchCustomerById(props.id);
-                customer
                 setCustomer(customer);
                 setImageId(imageId);
             } catch (error) {
@@ -72,6 +71,9 @@ export default function FormEditCustomer(props: { id: any }) {
         }
     }, [props.id]);
 
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
+    const router = useRouter();
 
     useEffect(() => {
         if (customer) {
@@ -92,13 +94,6 @@ export default function FormEditCustomer(props: { id: any }) {
             });
         }
     }, [customer]);
-
-
-
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [pendingFormData, setPendingFormData] = useState<{ [key: string]: FormDataEntryValue } | null>(null);
-    const router = useRouter();
 
     /* const edit = async function () {
 

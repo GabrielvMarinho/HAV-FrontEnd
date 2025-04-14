@@ -1,24 +1,27 @@
+import fetchUserImage from "../Image/searchUserImageById";
 
-export default async function(
+export default async function searchProprietorById(id: number): Promise<{ proprietor: ProprietorEditDto, imageId?: number }> {
+  const url = `http://localhost:9090/proprietor/${id}`;
 
-    id: number
-  
-  ): Promise<
-    ProprietorEditDto>{
-    const url = `http://localhost:9090/proprietor/${id}`;
-    try{
-
+  try {
     const response = await fetch(url);
-  
-  
     const data = await response.json();
-    const { address, ...rest } = data;
-    const proprietor = { ...rest, ...address };
+    console.log("Resposta da API:", data);
 
-    return proprietor
-
-    }catch{
-        return {} as ProprietorEditDto;
+    let imageBase64;
+    if (data.imageId) {
+      imageBase64 = await fetchUserImage(data.imageId);
     }
+
+    const deletedImageId = data.imageId;
+
+    const { address, ...rest } = data;
+    const proprietor = { ...rest, ...address, imageBase64, deletedImageId };
+
+    return { proprietor, imageId: data.imageId };
+
+  } catch (error) {
+    console.log(error);
+    return { proprietor: {} as ProprietorEditDto };
   }
-  
+}
