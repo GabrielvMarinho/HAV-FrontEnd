@@ -78,17 +78,29 @@ export default async function editCustomer(id: number, formData: { [key: string]
     }
   })], { type: "application/json" }));
 
-  // Adiciona imagem nova (se tiver)
-  if (formData.image && (formData.image as FileList)[0]) {
-    form.append("newImage", (formData.image as FileList)[0]);
-  }
-
-  // 3. Adiciona o ID da imagem deletada (corrigido o nome e tipo)
-  if (formData.deletedImageId) {
+  /*if (formData.deletedImageId) {
     form.append("deletedImageId", formData.deletedImageId.toString());
   }
 
-  // Debug: Mostra os pares chave-valor do FormData
+  if (formData.image && (formData.image as FileList)[0]) {
+    form.append("newImage", (formData.image as FileList)[0]);
+  }*/
+  if (formData.deletedImageId) {
+    const deletedIdBlob = new Blob(
+      [JSON.stringify(formData.deletedImageId)],
+      { type: "application/json" }
+    );
+    form.append("deletedImageId", deletedIdBlob);
+  }
+
+
+  if (formData.image && (formData.image as FileList)[0]) {
+    const file = (formData.image as FileList)[0];
+    const imageBlob = new Blob([file], { type: "application/octet-stream" });
+    form.append("newImage", imageBlob, file.name);
+  }
+
+
   console.log("Dados enviados:");
   for (let pair of form.entries()) {
     console.log(pair[0], pair[1]);

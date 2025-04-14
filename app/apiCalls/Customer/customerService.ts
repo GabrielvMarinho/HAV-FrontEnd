@@ -26,8 +26,10 @@ export default async function searchCustomerById(id: number): Promise<{ customer
             imageBase64 = await fetchCustomerImage(data.imageId);
         }
 
+        const deletedImageId = data.imageId;
+
         const { address, ...rest } = data;
-        const customer = { ...rest, ...address, imageBase64 };
+        const customer = { ...rest, ...address, imageBase64, deletedImageId };
 
         return { customer, imageId: data.imageId };
 

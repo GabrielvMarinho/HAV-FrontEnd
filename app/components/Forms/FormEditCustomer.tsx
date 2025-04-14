@@ -45,20 +45,21 @@ export default function FormEditCustomer(props: { id: any }) {
 
     function onSubmit(data: EditCustomer) {
         console.log("entro")
-
+        console.log("Submit data:", data);
         if (Object.keys(form.formState.errors).length > 0) {
             console.log("erros")
             return;
         }
         setPendingFormData(data);
         setIsModalOpen(true);
-        console.log(data);
     };
+
 
     useEffect(() => {
         async function fetchCustomer() {
             try {
                 const { customer, imageId } = await searchCustomerById(props.id);
+                customer
                 setCustomer(customer);
                 setImageId(imageId);
             } catch (error) {
@@ -87,6 +88,7 @@ export default function FormEditCustomer(props: { id: any }) {
                 state: customer.state,
                 city: customer.city,
                 neighborhood: customer.neighborhood,
+                deletedImageId: customer.deletedImageId
             });
         }
     }, [customer]);
@@ -188,13 +190,11 @@ export default function FormEditCustomer(props: { id: any }) {
         }
     };
 
-
-
-
     return (
 
         <>
             <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
+
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
                         {/*{customer?.imageBase64 && (
@@ -211,7 +211,9 @@ export default function FormEditCustomer(props: { id: any }) {
                             imageId={imageId}
                             onDeleteImage={() => {
                                 setCustomer(prev => ({ ...prev, imageBase64: undefined }));
-                                form.setValue("deletedImageId", imageId); // Limpa a imagem vinda da API
+                                console.log(imageId);
+                                console.log("capturando custormer", customer);
+                                form.setValue("deletedImageId", imageId ?? null);
                             }}
                         />
 
@@ -360,7 +362,6 @@ export default function FormEditCustomer(props: { id: any }) {
                             error={form.formState.errors[dropdownFields.neighborhood.name as keyof EditCustomer]}
                             options={dropdownFields.neighborhood.options}
                         />
-
 
                     </div>
                     <div className="divButtonsAceptCancelForms">

@@ -154,7 +154,8 @@ export default function ButtonUploadPhoto<T>({
   error,
   initialImageUrl,
   setValue,
-  imageId
+  imageId,
+  onDeleteImage
 }: {
   name: keyof T;
   register?: UseFormRegister<T>;
@@ -162,6 +163,7 @@ export default function ButtonUploadPhoto<T>({
   initialImageUrl?: string;
   setValue?: (name: string, value: any) => void;
   imageId?: number;
+  onDeleteImage?: () => void;
 }) {
   const [preview, setPreview] = useState<string | null>(null);
 
@@ -192,6 +194,10 @@ export default function ButtonUploadPhoto<T>({
     }
 
     console.log(imageId);
+
+    if (onDeleteImage) {
+      onDeleteImage();
+    }
 
     const input = document.querySelector('.buttonUploadPhoto') as HTMLInputElement;
     if (input) {

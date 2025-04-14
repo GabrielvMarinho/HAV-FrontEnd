@@ -9,7 +9,7 @@ export default async function postCustomer(
 
   try {
     const form = new FormData();
-  
+
     form.append("customer", new Blob([JSON.stringify({
       name: formData?.name,
       cpf: formData?.cpf,
@@ -26,18 +26,21 @@ export default async function postCustomer(
         propertyNumber: formData?.propertyNumber,
         complement: formData?.complement,
       }
-      }
-      )],  { type: "application/json" }));
+    }
+    )], { type: "application/json" }));
 
     if (file) {
       form.append("image", file); // Agora enviando a imagem como base64
     }
 
-    
+    console.log("Dados enviados:");
+    for (let pair of form.entries()) {
+      console.log(pair[0], pair[1]);
+    }
 
     const response = await fetch(url, {
       method: "POST",
-      body:form,
+      body: form,
     });
 
     if (!response.ok) {

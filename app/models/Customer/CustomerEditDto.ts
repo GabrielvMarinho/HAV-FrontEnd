@@ -13,4 +13,5 @@ interface CustomerEditDto {
     city: string;
     neighborhood: string;
     imageBase64?: string;
+    deletedImageId?: number;
 }
