@@ -1,13 +1,55 @@
-import HeaderAdm from "@/app/components/Header/HeaderAdm";
-import "../style/style.css";
+"use client"
+import "../css/style.css";
 import Title from "@/app/components/NonInteractable/Title";
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
-import Footer from "@/app/components/Footer/Footer";
 import SideTitle from "@/app/components/NonInteractable/SideTitle";
-import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
+import HorizontalBarChart from "@/app/components/BarChart/HorizontalBarChart";
+import getPercentageArchived from "@/app/apiCalls/Property/getPercentageArchived"; {/*Funcionando */ }
+import getQuantityArchived from "@/app/apiCalls/Realtor/getQuantityArchived"; {/*Funcionando */ }
+import getAllNumber from "@/app/apiCalls/Realtor/getAllNumber";
+
+import { useState, useEffect } from "react";
 
 export default function page() {
+
+  const [allRealtors, setAllRealtors] = useState(0);
+  const [percentageArchived, setPercentageArchived] = useState(0);
+  const [quantityArchived, setQuantityArchived] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [
+          percentageArchived,
+          quantityArchived,
+          allProprietors
+        ] =
+          await Promise.all([
+            getPercentageArchived(),
+            getQuantityArchived(),
+            getAllNumber()
+          ])
+        setPercentageArchived(percentageArchived)
+        setQuantityArchived(quantityArchived)
+        setAllRealtors(allProprietors)
+      } catch (e) {
+        console.log(e);
+      }
+    }
+    fetchData();
+  }, [])
+
+  const labels = [
+    `${"a fazer (disponíveis)"}% LOCAÇÃO`,
+    `${"a fazer (indisponíveis)"}% VENDA`,
+    `${percentageArchived}% ARQUIVADOS`
+  ];
+
+  const data = [quantityArchived]
+
+  const barColors = ["#B23F52"]
+
   return (
     <>
       <Title tag={"h1"} text={"ESTATÍSTICAS E ANÁLISES"} />
@@ -29,11 +71,13 @@ export default function page() {
         </div>
         <div className="users-data-row">
           <div className="users-data-box">
-            <h3 className="users-big-number">421</h3>
+            <h3 className="users-big-number">{allRealtors}</h3>
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
-            <div className="placeholder-graph">Gráfico</div>
+            <div className="placeholder-graph">
+              <HorizontalBarChart labels={labels} data={data} backGroundColors={barColors} />
+            </div>
           </div>
         </div>
       </section>
@@ -67,7 +111,7 @@ export default function page() {
           <div className="users-data-box">
             <h3 className="users-big-number">21</h3>
             <p className="users-small-text">
-            100% se manteram ativos desde então
+              100% se manteram ativos desde então
             </p>
           </div>
         </div>
@@ -84,7 +128,7 @@ export default function page() {
           <div className="users-data-box">
             <h3 className="users-big-number">123</h3>
             <p className="users-small-text">
-            93% agendamentos para imóvel de moradia
+              93% agendamentos para imóvel de moradia
             </p>
           </div>
         </div>

@@ -41,10 +41,30 @@ const HorizontalBarChart: React.FC<HorizontalBarChartProps> = ({ labels, data, b
       x: {
         beginAtZero: true,
       },
+      y: {
+        ticks: {
+          color: '#B23F52',
+          font: {
+            size: 14,
+          },
+          padding: 8,
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        callbacks: {
+          label: (context: any) => `${context.label}: ${context.raw}`,
+        },
+      },
     },
   };
 
   return <Bar data={chartData} options={options} />;
 };
+
 
 export default HorizontalBarChart;

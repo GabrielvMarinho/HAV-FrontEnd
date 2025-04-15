@@ -1,13 +1,67 @@
-import HeaderAdm from "@/app/components/Header/HeaderAdm";
-import "../style/style.css";
+"use client"
+import "../css/style.css";
 import Title from "@/app/components/NonInteractable/Title";
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
-import Footer from "@/app/components/Footer/Footer";
 import SideTitle from "@/app/components/NonInteractable/SideTitle";
-import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
+import getAllUsersNumber from "@/app/apiCalls/User/getAllRegistredNumber";
+import { useState, useEffect } from "react";
+import getQuantityProprietor from "@/app/apiCalls/Proprietor/getQuantityProprietor"; {/*Funcionando */ }
+import getPercentageProprietors from "@/app/apiCalls/Proprietor/getPercentageProprietors"; {/*Funcionando */ }
+import getQuantityCustomer from "@/app/apiCalls/Customer/getQuantityCustomer"; {/*Funcionando */ }
+import getPercentageCustomer from "@/app/apiCalls/Customer/getPercentageCustomer"; {/*Funcionando */ }
+import HorizontalBarChart from "@/app/components/BarChart/HorizontalBarChart";
+
 
 export default function page() {
+
+  const [allUsersNumber, setAllUsersNumber] = useState(0);
+  const [allProprietors, setAllProprietors] = useState(0);
+  const [percentageProprietors, setPercentageProprietors] = useState(0);
+  const [allCustomers, setAllCustomers] = useState(0);
+  const [PercentageCustomer, setPercentageCustomer] = useState(0);
+
+
+  useEffect(() => {
+
+    const fetchData = async () => {
+      try {
+        const [
+          allUsersNumber,
+          allProprietors,
+          percentageProprietors,
+          allCustomers,
+          PercentageCustomer
+        ] =
+          await Promise.all([
+            getAllUsersNumber(),
+            getQuantityProprietor(),
+            getPercentageProprietors(),
+            getQuantityCustomer(),
+            getPercentageCustomer()
+          ])
+          setAllUsersNumber(allUsersNumber),
+          setAllProprietors(allProprietors),
+          setPercentageProprietors(percentageProprietors),
+          setAllCustomers(allCustomers),
+          setPercentageCustomer(PercentageCustomer)
+      } catch (e) {
+        console.log(e, "Erro na api");
+      }
+    }
+    fetchData()
+  }, [])
+
+  const labels = [
+    `${percentageProprietors}% PROPRIETÁRIOS`,
+    `${PercentageCustomer}% USUÁRIOS COMUNS`,
+    `${"a fazer (bloqueados)"}% BLOQUEADOS`
+  ];
+
+  const data = [allProprietors, allCustomers]
+
+  const barColors = ["#B23F52"]
+
   return (
     <>
       <Title tag={"h1"} text={"ESTATÍSTICAS E ANÁLISES"} />
@@ -29,11 +83,11 @@ export default function page() {
         </div>
         <div className="users-data-row">
           <div className="users-data-box">
-            <h3 className="users-big-number">3.2 MIL</h3>
+            <h3 className="users-big-number">{allUsersNumber}</h3>
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
-            <div className="placeholder-graph">Gráfico</div>
+          <HorizontalBarChart labels={labels} data={data} backGroundColors={barColors} />
           </div>
         </div>
       </section>
@@ -69,7 +123,7 @@ export default function page() {
           <div className="users-data-box">
             <h3 className="users-big-number">143.2 MIL</h3>
             <p className="users-small-text">
-            40% feitas por usuários sem uma conta
+              40% feitas por usuários sem uma conta
             </p>
           </div>
         </div>
