@@ -1,0 +1,121 @@
+/* comparison/style/style.css */
+.comparison-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Estilo dos botões */
+  .add-property-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 30px;
+    padding: 0 100px; /* Mesmo padding da tabela */
+  }
+  
+  .add-property-card {
+    width: 180px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .add-property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .add-property-card span {
+    font-weight: 600;
+    color: #000;
+    font-size: 13px;
+    opacity: 0.5;
+  }
+  
+  .comparison-table-container {
+    padding: 0 200px 0 0
+  }
+  
+  
+  .table-section {
+    width: 100%;
+  }
+  
+  .table-row {
+    display: flex;
+    min-height: 50px;
+    align-items: center;
+  }
+  
+  .header-cell {
+    width: 200px;
+    font-weight: 600;
+    color: #5F1E2A;
+    display: flex;
+    align-items: center;
+  }
+  
+  .property-cell-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .table-cell {
+    width: 250px;
+    height: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .add-property-row,
+    .comparison-table-container {
+      padding: 0 20px;
+      gap: 20px;
+    }
+    
+    .add-property-card {
+      width: 140px;
+      height: 140px;
+      padding: 15px;
+    }
+    
+    .table-cell {
+      width: 140px;
+    }
+    
+    .header-cell {
+      width: 150px;
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .add-property-row {
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .comparison-table-container {
+      overflow-x: auto;
+    }
+    
+    .table-row {
+      min-width: 600px;
+    }
+  }

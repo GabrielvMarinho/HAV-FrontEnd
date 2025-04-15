@@ -1,46 +1,30 @@
+"use client";
 
-import ChatBot from "@/app/components/Chatbot/ChatBot";
-import NewScheduleModal from "@/app/components/Forms/NewScheduleModal";
+import { useState } from "react";
 import HeaderAdm from "@/app/components/Header/HeaderAdm";
-import HeaderCustomer from "@/app/components/Header/HeaderCustomer";
-import HeaderEditor from "@/app/components/Header/HeaderEditor";
-import HeaderRealtor from "@/app/components/Header/HeaderRealtor";
-import NavBarAdm from "@/app/components/Header/NavBarAdm";
-import SchedulingCard from "@/app/components/Information/SchedulingCard";
-import Map from "@/app/components/Maps/Map";
-import MapSearchResult from "@/app/components/Maps/MapSearchResult";
-import ModalConfirmPassword from "@/app/components/Modal/ModalConfirmPassword";
-import ModalConfirmationPassword from "@/app/components/Modal/ModalConfirmationCellphone";
-import ModalEmailConfirmation from "@/app/components/Modal/ModalEmailConfirmation";
-import SchedulingConfirmationModal from "@/app/components/Modal/SchedulingConfirmationModal";
+import ToggleButton from "@/app/components/Inputs/ToggleButton";
+import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 import Title from "@/app/components/NonInteractable/Title";
-import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
-export default function notification (){
-    
-    return(
-        <>
-        <Title tag="h1" text="notificações"/>
-        {/* <ChatBot/> */}
-        {/* <SchedulingConfirmationModal /> */}
-        {/* <ModalEmailConfirmation/> */}
-        {/* <ModalConfirmPassword/> */}
-        {/* <ModalConfirmationPassword/> */}
-        {/* <div className="">
-            <main>
-                <div className="">
-                    <h1> home</h1>
-                    <Map />    
-                </div>
-            </main>
-        </div> */}
-        {/* <Chat/> */}
+import "./style/style.css";
 
-        {/* <MapSearchResult/> */}
-        
-        {/* <HeaderCustomer/>
-        <HeaderEditor/>
-        <HeaderRealtor/> */}
-        
+export default function Notification() {
+    const [notificationStatus, setNotificationStatus] = useState(false);
+
+    return (
+        <>
+            <HeaderAdm />
+            <Title tag={"h1"} text={"NOTIFICAÇÕES"} />
+            <div className="notification-container">                
+                <div className="notification-status">
+                    <span className="status-label">Status notificações</span>
+                    <ToggleButton 
+                        toggled={notificationStatus} 
+                        onChange={() => setNotificationStatus(!notificationStatus)} 
+                    />
+                </div>
+                
+                <HorizontalLine size={890} color="#0F0F0F80" />
+            </div>
         </>
-    )
+    );
 }
