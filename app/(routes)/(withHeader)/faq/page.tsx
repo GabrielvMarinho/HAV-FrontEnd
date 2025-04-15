@@ -11,9 +11,6 @@ import AuthGuard from "@/app/context/AuthGuard";
 import HeaderCustomer from "@/app/components/Header/HeaderCustomer";
 
 export default function page() {
-
-    // const { usuario } = useAuth();
-    // if (!usuario) return <p>Carregando...</p>;
     
 
     // header(){
