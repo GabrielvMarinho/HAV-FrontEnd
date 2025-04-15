@@ -13,6 +13,7 @@ import { useParams, usePathname, useSearchParams } from "next/navigation";
 import FilterToAddProperty from "@/app/components/Filters/FilterToAddProperty";
 import '../../style/style.css';
 import BackPage from "@/app/components/Inputs/BackPage";
+import AuthGuard from "@/app/context/AuthGuard";
 
 export default async function page({searchParams}: {searchParams: {
 
@@ -41,33 +42,34 @@ export default async function page({searchParams}: {searchParams: {
   const action = queryString.get("action")
 
   return (
+    <AuthGuard requiredRole="ROLE_EDITOR">
       <div className="noHeaderPage">
         
-       <div className="divBackandTitle">
-          <BackPage/>
+        <div className="divBackandTitle">
+            <BackPage/>
 
-          <div className="titleChooseRealtor"> 
-            <Title tag="h1" text="Selecionar Proprietário" />
-          </div>
-       </div>
+            <div className="titleChooseRealtor"> 
+              <Title tag="h1" text="Selecionar Proprietário" />
+            </div>
+        </div>
 
-      <div className="searchBarChooseRealtor">
-        <SearchBar placeholder="Busca:" />
-      </div>
+        <div className="searchBarChooseRealtor">
+          <SearchBar placeholder="Busca:" />
+        </div>
 
-      <div className="containerFilterListAction">
-        <FilterToAddProperty
-          size="medium"
-          inputs={inputs}
-          inputsDropdown={[]}
-          inputPriceRanges={[]}
-        />
+        <div className="containerFilterListAction">
+          <FilterToAddProperty
+            size="medium"
+            inputs={inputs}
+            inputsDropdown={[]}
+            inputPriceRanges={[]}
+          />
         <TableListChoose action={action} add={true} type ={"one"}archived={false} size="large" titles={["cpf/cnpj", "nome", "email", "n. imóveis", "objetivo"]}
           data={proprietors} totalPages={totalPages} />
 
-      
+        </div>
       </div>
-      </div>
+      </AuthGuard>
 
   )
 }

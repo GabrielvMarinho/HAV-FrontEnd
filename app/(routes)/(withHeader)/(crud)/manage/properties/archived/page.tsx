@@ -7,6 +7,7 @@ import Title from "@/app/components/NonInteractable/Title";
 import "@/app/pageStructure.css"
 import changeArchivedStatusProperty from "@/app/apiCalls/Property/changeArchivedStatusProperty";
 import deletePropertyList from "@/app/apiCalls/Property/deleteByListProperty";
+import AuthGuard from "@/app/context/AuthGuard";
 
 
 export default async function page({searchParams}: {searchParams: {
@@ -63,22 +64,22 @@ export default async function page({searchParams}: {searchParams: {
       return (
           <>
           
-          
-          
-          <Title tag="h1" text="Imóveis Arquivados"/>
-          <SearchBar placeholder="Busca:"/>   
-          <div className="containerFilterListAction">
-              <Filter 
-              size="medium" 
-              inputs={inputs}
-              nputsDropdown={[dropdownFields.propertyType, dropdownFields.status, dropdownFields.purpose]}
-              inputPriceRanges={priceRanges}
-              inputChooseQuantites={[]}
+            <AuthGuard requiredRole="ROLE_EDITOR"> 
+              <Title tag="h1" text="Imóveis Arquivados"/>
+              <SearchBar placeholder="Busca:"/>   
+              <div className="containerFilterListAction">
+                  <Filter 
+                  size="medium" 
+                  inputs={inputs}
+                  nputsDropdown={[dropdownFields.propertyType, dropdownFields.status, dropdownFields.purpose]}
+                  inputPriceRanges={priceRanges}
+                  inputChooseQuantites={[]}
 
-              />
-              <TableList deleteFunction ={deletePropertyList} changeArchivedStatus = {changeArchivedStatusProperty} archived={true} context="admin" size="large" titles={["id imóvel", "preço",  "tipo imóvel", "finalidade", "status"]} 
-              data={properties} totalPages={totalPages}/>
-          </div>
+                  />
+                  <TableList deleteFunction ={deletePropertyList} changeArchivedStatus = {changeArchivedStatusProperty} archived={true} context="admin" size="large" titles={["id imóvel", "preço",  "tipo imóvel", "finalidade", "status"]} 
+                  data={properties} totalPages={totalPages}/>
+              </div>
+            </AuthGuard>
           
           </>
       )

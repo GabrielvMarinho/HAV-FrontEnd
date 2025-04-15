@@ -7,6 +7,7 @@ import Title from "@/app/components/NonInteractable/Title";
 import "@/app/pageStructure.css"
 import deleteByListAdm from "@/app/apiCalls/Adm/deleteByListAdm";
 import changeArchivedStatusAdm from "@/app/apiCalls/Adm/changeArchivedStatusAdm";
+import AuthGuard from "@/app/context/AuthGuard";
 
 
 
@@ -40,22 +41,20 @@ export default async function page({searchParams}: {searchParams: {
     
     return (
         <>
-        
-        
-        
-        <Title tag="h1" text="Administradores Arquivados"/>
-        <SearchBar placeholder="Busca:"/>   
-        <div className="containerFilterListAction">
-            <Filter 
-            size="medium" 
-            inputs={inputs}
-            inputsDropdown={[]}
-            inputPriceRanges={[]}
-            />
-            <TableList changeArchivedStatus = {changeArchivedStatusAdm} deleteFunction={deleteByListAdm} archived={true} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
-            data={admins} totalPages={totalPages}/>
-        </div>
-        
+          <AuthGuard requiredRole="ROLE_ADM"> 
+              <Title tag="h1" text="Administradores Arquivados"/>
+              <SearchBar placeholder="Busca:"/>   
+              <div className="containerFilterListAction">
+                  <Filter 
+                  size="medium" 
+                  inputs={inputs}
+                  inputsDropdown={[]}
+                  inputPriceRanges={[]}
+                  />
+                  <TableList changeArchivedStatus = {changeArchivedStatusAdm} deleteFunction={deleteByListAdm} archived={true} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
+                  data={admins} totalPages={totalPages}/>
+              </div>
+          </AuthGuard>
         </>
     )
 }

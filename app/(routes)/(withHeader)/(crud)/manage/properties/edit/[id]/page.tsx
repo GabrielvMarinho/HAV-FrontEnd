@@ -2,6 +2,7 @@
 
 import searchPropertyById from "@/app/apiCalls/Property/searchPropertyById";
 import FormEditProperty from "@/app/components/Forms/FormEditProperty";
+import AuthGuard from "@/app/context/AuthGuard";
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -15,7 +16,9 @@ export default function page(){
     
     return (
         <>
-        <FormEditProperty id ={id} objectData={searchParamsObject} />
+            <AuthGuard requiredRole="ROLE_EDITOR"> 
+                <FormEditProperty id ={id} objectData={searchParamsObject} />
+            </AuthGuard>
         </>
     )
 }

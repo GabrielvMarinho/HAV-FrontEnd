@@ -3,6 +3,7 @@ import FormEditAdm from "@/app/components/Forms/FormEditAdm";
 import FormEditCustomer from "@/app/components/Forms/FormEditCustomer";
 import FormEditEditor from "@/app/components/Forms/FormEditEditor";
 import FormEditRealtor from "@/app/components/Forms/formEditRealtor";
+import AuthGuard from "@/app/context/AuthGuard";
 
 import { useParams } from "next/navigation";
 
@@ -15,7 +16,9 @@ export default function PropertyPage() {
 
 
   return (
-    <FormEditRealtor id={id}/>
+    <AuthGuard requiredRole="ROLE_ADM">
+      <FormEditRealtor id={id}/>
+    </AuthGuard>
     );
 
 }

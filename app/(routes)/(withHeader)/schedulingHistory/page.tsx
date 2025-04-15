@@ -26,10 +26,7 @@ export default async function schedulingHistory({searchParams}: {searchParams:{
 
 
     return(
-        
         <> 
-        <AuthGuard requiredRole="REALTOR">
-            <HeaderRealtor/>
             <Title tag="h1" text="Histórico" /> 
             {/* <ModalScheduling/> */}
 
@@ -52,41 +49,12 @@ export default async function schedulingHistory({searchParams}: {searchParams:{
                 id={dropdownFields.statusHistoric.id}
                 options={dropdownFields.statusHistoric.options}
             />
+
             </div>
             </div>
+            
             <TableListHistory data={data} status={status} page={page} id={customerId} for={"customer"} titles={["Data/Hora", "Corretor", "Finalidade", "tipo imovel", "status" ]} />
             <Footer/>
-        </AuthGuard> 
-
-        <AuthGuard requiredRole="CUSTOMER">
-            <HeaderCustomer/>
-            <Title tag="h1" text="Histórico" /> 
-            {/* <ModalScheduling/> */}
-
-            <NavBarAdm options={NavBarPath.historic} />
-            <div className="dropdownSchedulingHistory">
-            <InputDropdown
-                key={dropdownFields.date.id}
-                name={dropdownFields.date.name}
-                size={dropdownFields.date.size}
-                title={dropdownFields.date.title}
-                id={dropdownFields.date.id}
-                options={dropdownFields.date.options}
-            />
-            <div className="dropdownSegundo">
-            <InputDropdown
-                key={dropdownFields.statusHistoric.id}
-                name={dropdownFields.statusHistoric.name}
-                size={dropdownFields.statusHistoric.size}
-                title={dropdownFields.statusHistoric.title}
-                id={dropdownFields.statusHistoric.id}
-                options={dropdownFields.statusHistoric.options}
-            />
-            </div>
-            </div>
-            <TableListHistory data={data} status={status} page={page} id={customerId} for={"customer"} titles={["Data/Hora", "Corretor", "Finalidade", "tipo imovel", "status" ]} />
-            <Footer/>
-        </AuthGuard> 
         </>
     )
 }

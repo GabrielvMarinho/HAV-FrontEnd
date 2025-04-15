@@ -7,6 +7,7 @@ import Title from "@/app/components/NonInteractable/Title";
 import "@/app/pageStructure.css"
 import deleteProprietorList from "@/app/apiCalls/Proprietor/deleteByListProprietor";
 import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArchivedStatusProprietor";
+import AuthGuard from "@/app/context/AuthGuard";
 
 export default async function page({searchParams}: {searchParams: {
 
@@ -46,22 +47,22 @@ export default async function page({searchParams}: {searchParams: {
   
     return (
       <>
-  
-        <Title tag="h1" text="Proprietários Arquivados" />
-        <SearchBar placeholder="Busca:" />
-        <div className="containerFilterListAction">
-          <Filter
-            size="medium"
-            inputs={inputs}
-            inputsDropdown={inputDropdown}
-            inputPriceRanges={[]}
-            inputChooseQuantites={[]}
+        <AuthGuard requiredRole="ROLE_EDITOR">
+            <Title tag="h1" text="Proprietários Arquivados" />
+            <SearchBar placeholder="Busca:" />
+            <div className="containerFilterListAction">
+              <Filter
+                size="medium"
+                inputs={inputs}
+                inputsDropdown={inputDropdown}
+                inputPriceRanges={[]}
+                inputChooseQuantites={[]}
 
-          />
-          <TableList changeArchivedStatus = {changeArchivedStatusProprietor} deleteFunction={deleteProprietorList} archived={true} context="admin" archived={true} size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
-            data={proprietors} totalPages={totalPages} />
-        </div>
-  
+              />
+              <TableList changeArchivedStatus = {changeArchivedStatusProprietor} deleteFunction={deleteProprietorList} archived={true} context="admin" archived={true} size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
+                data={proprietors} totalPages={totalPages} />
+            </div>
+        </AuthGuard>
       </>
     )
   }

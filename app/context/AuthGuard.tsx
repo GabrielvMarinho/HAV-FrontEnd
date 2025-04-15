@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/app/context/AuthContext'
 
-const roleHierarchy = ['CUSTOMER', 'REALTOR', 'EDITOR', 'ADMIN']
+const roleHierarchy = ['ROLE_CUSTOMER', 'ROLE_REALTOR', 'ROLE_EDITOR', 'ROLE_ADMIN']
 
 export default function AuthGuard({
   children,

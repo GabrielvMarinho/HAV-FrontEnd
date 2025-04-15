@@ -8,6 +8,7 @@ import Title from "@/app/components/NonInteractable/Title";
 import "@/app/pageStructure.css"
 import deleteCustomerList from "@/app/apiCalls/Customer/deleteByListCustomer";
 import changeArchivedStatusCustomer from "@/app/apiCalls/Customer/changeArchivedStatusCustomer";
+import AuthGuard from "@/app/context/AuthGuard";
 
 
 export default async function page({searchParams}: {searchParams: {
@@ -49,20 +50,20 @@ export default async function page({searchParams}: {searchParams: {
   
     return (
       <>
-  
-        <Title tag="h1" text="Usuários Comuns Arquivados" />
-        <SearchBar placeholder="Busca:" />
-        <div className="containerFilterListAction">
-          <Filter
-            size="medium"
-            inputs={inputs}
-            inputsDropdown={inputDropdown}
-            inputPriceRanges={[]}
-          />
-          <TableList changeArchivedStatus = {changeArchivedStatusCustomer} deleteFunction={deleteCustomerList} archived={true} context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
-            data={customers} totalPages={totalPages}/>
-        </div>
-  
+      <AuthGuard requiredRole="ROLE_ADM">
+          <Title tag="h1" text="Usuários Comuns Arquivados" />
+          <SearchBar placeholder="Busca:" />
+          <div className="containerFilterListAction">
+            <Filter
+              size="medium"
+              inputs={inputs}
+              inputsDropdown={inputDropdown}
+              inputPriceRanges={[]}
+            />
+            <TableList changeArchivedStatus = {changeArchivedStatusCustomer} deleteFunction={deleteCustomerList} archived={true} context="admin" size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
+              data={customers} totalPages={totalPages}/>
+          </div>
+        </AuthGuard>
       </>
     )
   }
