@@ -1,5 +1,5 @@
 "use client"
-import "../style/style.css";
+import "../css/style.css";
 import Title from "@/app/components/NonInteractable/Title";
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
@@ -11,7 +11,6 @@ import getPercentageProprietors from "@/app/apiCalls/Proprietor/getPercentagePro
 import getQuantityCustomer from "@/app/apiCalls/Customer/getQuantityCustomer"; {/*Funcionando */ }
 import getPercentageCustomer from "@/app/apiCalls/Customer/getPercentageCustomer"; {/*Funcionando */ }
 import HorizontalBarChart from "@/app/components/BarChart/HorizontalBarChart";
-import VerticalBarChart from "@/app/components/BarChart/VerticalBarChart";
 
 
 export default function page() {
@@ -88,9 +87,7 @@ export default function page() {
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
-          <div className="placeholder-graph">
           <HorizontalBarChart labels={labels} data={data} backGroundColors={barColors} />
-          </div>
           </div>
         </div>
       </section>
@@ -104,9 +101,7 @@ export default function page() {
         </div>
         <div className="users-data-row">
           <div className="users-graph-container">
-            <div className="placeholder-graph">
-            <VerticalBarChart labels={labels} data={data} backGroundColors={barColors} />
-            </div>
+            <div className="placeholder-graph">Gráfico</div>
           </div>
           <div className="users-data-box">
             <h3 className="users-big-number">123</h3>
@@ -123,9 +118,7 @@ export default function page() {
         </div>
         <div className="users-data-row">
           <div className="users-graph-container">
-            <div className="placeholder-graph">
-            <VerticalBarChart labels={labels} data={data} backGroundColors={barColors} />
-            </div>
+            <div className="placeholder-graph">Gráfico</div>
           </div>
           <div className="users-data-box">
             <h3 className="users-big-number">143.2 MIL</h3>
