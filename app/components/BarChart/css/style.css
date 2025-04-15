@@ -1,3 +1,122 @@
 @import "@/app/variables.css";
 
+/* ===== ESTILOS BASE ===== */
+.chart-container {
+  width: 100%;
+  position: relative;
+  margin: 10px 0;
+}
 
+/* ===== GRÁFICO HORIZONTAL ===== */
+.horizontal-chart {
+  height: 180px;
+}
+
+/* Barras */
+.horizontal-chart .chartjs-render-monitor {
+  --bar-color: #B23F52;
+}
+
+/* Eixo X (valores) */
+.horizontal-chart .chartjs-scale-x {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+}
+
+/* Ticks do eixo X */
+.horizontal-chart .chartjs-tick {
+  color: #666;
+  font-size: 12px;
+  position: absolute;
+}
+
+/* Posicionamento dos ticks */
+.horizontal-chart .chartjs-tick:nth-child(1) { left: 0%; }    /* 0 */
+.horizontal-chart .chartjs-tick:nth-child(2) { left: 25%; }  /* 500 */
+.horizontal-chart .chartjs-tick:nth-child(3) { left: 50%; }   /* 1000 */
+.horizontal-chart .chartjs-tick:nth-child(4) { left: 75%; }   /* 1500 */
+.horizontal-chart .chartjs-tick:nth-child(5) { left: 100%; }  /* 2000 */
+
+/* Linhas de grade */
+.horizontal-chart .chartjs-grid-line-x {
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Posicionamento das linhas */
+.horizontal-chart .chartjs-grid-line-x:nth-child(1) { left: 25%; }
+.horizontal-chart .chartjs-grid-line-x:nth-child(2) { left: 50%; }
+.horizontal-chart .chartjs-grid-line-x:nth-child(3) { left: 75%; }
+
+/* Rótulos do eixo Y */
+.horizontal-chart .chartjs-scale-y-text {
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+  margin-right: 15px;
+}
+
+/* ===== GRÁFICO VERTICAL ===== */
+.vertical-chart {
+  height: 320px;
+}
+
+/* Barras */
+.vertical-chart .chartjs-render-monitor {
+  --bar-color: #B23F52;
+}
+
+/* Eixo Y (valores 0-75) */
+.vertical-chart .chartjs-scale-y {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Ticks do eixo Y */
+.vertical-chart .chartjs-tick {
+  color: #666;
+  font-size: 12px;
+  position: absolute;
+}
+
+/* Posicionamento dos ticks */
+.vertical-chart .chartjs-tick:nth-child(1) { top: 100%; }   /* 0 */
+.vertical-chart .chartjs-tick:nth-child(2) { top: 66.66%; } /* 25 */
+.vertical-chart .chartjs-tick:nth-child(3) { top: 33.33%; } /* 50 */
+.vertical-chart .chartjs-tick:nth-child(4) { top: 0%; }     /* 75 */
+
+/* Linhas de grade horizontais */
+.vertical-chart .chartjs-grid-line-y {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Posicionamento das linhas */
+.vertical-chart .chartjs-grid-line-y:nth-child(1) { top: 66.66%; } /* 25 */
+.vertical-chart .chartjs-grid-line-y:nth-child(2) { top: 33.33%; } /* 50 */
+.vertical-chart .chartjs-grid-line-y:nth-child(3) { top: 0%; }     /* 75 */
+
+/* Rótulos do eixo X (meses) */
+.vertical-chart .chartjs-scale-x-text {
+  font-weight: bold;
+  font-size: 12px;
+  color: #333;
+  padding-top: 10px;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+  .horizontal-chart {
+    height: 160px;
+  }
+  
+  .vertical-chart {
+    height: 280px;
+  }
+}
