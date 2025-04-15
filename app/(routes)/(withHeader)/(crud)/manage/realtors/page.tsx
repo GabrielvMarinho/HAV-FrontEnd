@@ -12,6 +12,7 @@ import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArch
 import changeArchivedStatusRealtor from "@/app/apiCalls/Realtor/changeArchivedStatusRealtor";
 import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
+import AuthGuard from "@/app/context/AuthGuard";
 
 
 
@@ -44,30 +45,30 @@ export default async function page({searchParams}: {searchParams: {
     
     return (
         <>
-        
-        <Title tag="h1" text="Corretores"/>
-        <NavBarAdm options={NavBarPath.users}/>
-        <SearchBar placeholder="Busca:"/>   
-        <div className="containerFilterListAction">
-            <Filter 
-            size="medium"
-            inputs={
-              [
-                InputFilterConfig.cpf, 
-                InputFilterConfig.name, 
-                InputFilterConfig.email, 
-                InputFilterConfig.cellphone,
-                InputFilterConfig.phoneNumber
-              ]
-            }
-            inputsDropdown={[]}
-            inputPriceRanges={[]}
-            inputChooseQuantites={[]}
-            />
-            <TableList changeArchivedStatus = {changeArchivedStatusRealtor} deleteFunction = {deleteRealtorList} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
-            data={realtors} totalPages={totalPages}/>
-        </div>
-        
+            <AuthGuard requiredRole="ROLE_ADM">
+              <Title tag="h1" text="Corretores"/>
+              <NavBarAdm options={NavBarPath.users}/>
+              <SearchBar placeholder="Busca:"/>   
+              <div className="containerFilterListAction">
+                  <Filter 
+                  size="medium"
+                  inputs={
+                    [
+                      InputFilterConfig.cpf, 
+                      InputFilterConfig.name, 
+                      InputFilterConfig.email, 
+                      InputFilterConfig.cellphone,
+                      InputFilterConfig.phoneNumber
+                    ]
+                  }
+                  inputsDropdown={[]}
+                  inputPriceRanges={[]}
+                  inputChooseQuantites={[]}
+                  />
+                  <TableList changeArchivedStatus = {changeArchivedStatusRealtor} deleteFunction = {deleteRealtorList} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
+                  data={realtors} totalPages={totalPages}/>
+              </div>
+            </AuthGuard>
         </>
     )
 }

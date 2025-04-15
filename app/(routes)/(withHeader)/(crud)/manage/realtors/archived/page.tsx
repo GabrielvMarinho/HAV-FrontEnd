@@ -8,6 +8,7 @@ import Title from "@/app/components/NonInteractable/Title";
 import "@/app/pageStructure.css"
 import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArchivedStatusProprietor";
 import changeArchivedStatusRealtor from "@/app/apiCalls/Realtor/changeArchivedStatusRealtor";
+import AuthGuard from "@/app/context/AuthGuard";
 
 export default async function page({searchParams}: {searchParams: {
 
@@ -37,25 +38,22 @@ export default async function page({searchParams}: {searchParams: {
         
         return (
             <>
-            
-            
-            
-            <Title tag="h1" text="Corretores Arquivados"/>
-            <SearchBar placeholder="Busca:"/>   
-            <div className="containerFilterListAction">
-                <Filter 
-                size="medium" 
-                inputs={inputs}
-                inputsDropdown={[]}
-                inputPriceRanges={[]}
-                inputChooseQuantites={[]}
+                <AuthGuard  requiredRole="ROLE_ADM">
+                    <Title tag="h1" text="Corretores Arquivados"/>
+                    <SearchBar placeholder="Busca:"/>   
+                    <div className="containerFilterListAction">
+                        <Filter 
+                        size="medium" 
+                        inputs={inputs}
+                        inputsDropdown={[]}
+                        inputPriceRanges={[]}
+                        inputChooseQuantites={[]}
 
-                />
-                <TableList changeArchivedStatus = {changeArchivedStatusRealtor}  deleteFunction = {deleteRealtorList} archived={true} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
-                data={realtors} totalPages={totalPages}/>
-            </div>
-            
+                        />
+                        <TableList changeArchivedStatus = {changeArchivedStatusRealtor}  deleteFunction = {deleteRealtorList} archived={true} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "creci"]} 
+                        data={realtors} totalPages={totalPages}/>
+                    </div>
+                </AuthGuard>
             </>
-
     )
 }

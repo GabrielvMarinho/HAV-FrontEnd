@@ -10,6 +10,7 @@ import deleteProprietorList from "@/app/apiCalls/Proprietor/deleteByListPropriet
 import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArchivedStatusProprietor";
 import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
+import AuthGuard from "@/app/context/AuthGuard";
 
 
 export default async function page({ searchParams }: {
@@ -44,31 +45,33 @@ export default async function page({ searchParams }: {
   ]
 
   return (
-<>
-      <Title tag="h1" text="Proprietários" />
-      <NavBarAdm options={NavBarPath.users}/>
-      <SearchBar placeholder="Busca:" />
-      <div className="containerFilterListAction">
-        <Filter
-          size="medium"
-          inputs={
-            [
-              InputFilterConfig.cpf, 
-              InputFilterConfig.cnpj, 
-              InputFilterConfig.name, 
-              InputFilterConfig.email, 
-              InputFilterConfig.cellphone,
-              InputFilterConfig.phoneNumber
-            ]
-          }
-          inputsDropdown={inputDropdown}
-          inputPriceRanges={[]}
-          inputChooseQuantites={[]}
+    <>
+      <AuthGuard requiredRole="ROLE_EDITOR"> 
+          <Title tag="h1" text="Proprietários" />
+          <NavBarAdm options={NavBarPath.users}/>
+          <SearchBar placeholder="Busca:" />
+          <div className="containerFilterListAction">
+            <Filter
+              size="medium"
+              inputs={
+                [
+                  InputFilterConfig.cpf, 
+                  InputFilterConfig.cnpj, 
+                  InputFilterConfig.name, 
+                  InputFilterConfig.email, 
+                  InputFilterConfig.cellphone,
+                  InputFilterConfig.phoneNumber
+                ]
+              }
+              inputsDropdown={inputDropdown}
+              inputPriceRanges={[]}
+              inputChooseQuantites={[]}
 
-        />
-        <TableList changeArchivedStatus = {changeArchivedStatusProprietor} deleteFunction={deleteProprietorList} archived={false} context="admin" size="large" titles={["cpf/cnpj", "nome", "email", "n. imóveis", "objetivo"]}
-          data={proprietors} totalPages={totalPages} />
-      </div>
+            />
+            <TableList changeArchivedStatus = {changeArchivedStatusProprietor} deleteFunction={deleteProprietorList} archived={false} context="admin" size="large" titles={["cpf/cnpj", "nome", "email", "n. imóveis", "objetivo"]}
+              data={proprietors} totalPages={totalPages} />
+          </div>
+        </AuthGuard>
       </>
   )
 }

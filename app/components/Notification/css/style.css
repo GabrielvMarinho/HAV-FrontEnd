@@ -23,14 +23,15 @@
     flex-direction: row;
     align-items: center;
     width: 890px;
-    padding: 20px;
-    gap: 70px;
+    padding-bottom: 20px;
+    padding-left: 20px;
 }
 .groupInfos{
     display: flex;
     flex-direction: row;
     gap: 15px;
     align-items: center;
+    width: 100%;
 }
 .bola{
     width: 50px;
@@ -43,4 +44,50 @@
     text-transform: uppercase;
     font-weight: 600;
     color: var(--box-dark-red-option);
+    width: fit-content;
 }
+
+.iconMensagem{
+    display: flex;
+    justify-content: end;
+}
+
+.conatinerTitulos{
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+
+}
+
+.containerNotification:hover,
+li:hover {
+  background-color: transparent !important;
+  outline: none;
+  box-shadow: none;
+}
+
+.conatinerCorpoMensagem{
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.conatinerTitulos{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.conatinerCorpoMensagem{
+    display: flex;
+    flex-direction: column;
+}
+
+.containerMesagemTitulos{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    
+}
+
+/* style={{ display: 'flex', flexDirection: "column", gap: "5px" }} */
