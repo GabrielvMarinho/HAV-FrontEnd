@@ -29,7 +29,7 @@ const Notification = () => {
                 {/*Filtrando para aparecer só as mensagens não lidas*/ }
                 const mensagensNaoLidas = data.filter(m => m.read === false);
                 setMessages(Array.isArray(mensagensNaoLidas) ? mensagensNaoLidas : [])
-            }).catch(e => {
+            }).catch(e => { 
                 console.log("Erro ao buscar notificações", e);
             })
         const stompClient = new Client({
@@ -43,10 +43,7 @@ const Notification = () => {
                     console.log('Mensagem recebida:', body);
                     setMessages(prev => {
                         const jaExiste = prev.some(msg =>
-                            msg.title === body.title &&
-                            msg.content === body.content &&
-                            msg.read === body.read
-                        );
+                            msg.id === body.id);
                         return jaExiste ? prev : [...prev, body]
                     });
                 });
