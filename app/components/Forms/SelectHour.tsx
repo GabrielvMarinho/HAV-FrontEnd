@@ -21,7 +21,7 @@ export default function selectHour(props :{day: Date; ids :Record<string, number
       if (!usuario) {
         return null; 
       }
-      if (usuario.role !="ROLE_REALTOR") {
+      if (usuario.role !="REALTOR") {
         return null; 
       }
 

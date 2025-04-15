@@ -3,7 +3,7 @@ import { LOGIN, REQ_USER, SEARCH_USER } from "./actionType";
 
 export const loginUser = (email: string, password: string) => async (dispatch) => {
 
-    const url = "http://localhost:9090/auth/singin";
+    const url = "http://localhost:9090/auth/signin";
 
     try {
         const response = await fetch(url, {
@@ -30,13 +30,51 @@ export const loginUser = (email: string, password: string) => async (dispatch) =
 
         } else {
             const errorText = await response.json();
-            return { success: false, message: errorText || "Login falhou" };
+            return errorText;
         }
 
     } catch (error) {
         return {
             success: false,
             message: "Erro ao tentar fazer login",
+        };
+    }
+};
+
+export const  SignUpFetch = async (name: string, email: string, password: string) => {
+
+    const url = "http://localhost:9090/auth/signup";
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({ name: name, email: email, password: password }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            if (data.jwt)
+                localStorage.setItem("token", data.jwt)
+
+            return {
+                success: true,
+                jwt: data.jwt,
+                user: data.user,
+            };
+
+        } else {
+            const errorText = await response.json();
+            return errorText;
+        }
+
+    } catch (error) {
+        return {
+            success: false,
+            message: "Erro ao tentar fazer cadastro",
         };
     }
 };

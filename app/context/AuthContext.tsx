@@ -31,7 +31,9 @@ export const AuthProvider = ({ children }) => {
       setLoading(false)
 
     }
+    
   }, []);
+
 
   return (
     <AuthContext.Provider value={{ usuario, setUsuario, loading }}>

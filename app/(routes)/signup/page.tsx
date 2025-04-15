@@ -14,8 +14,15 @@ import ClosedPadlock from "@/app/components/IconsTSX/ClosedPadlock";
 import Eye from "@/app/components/IconsTSX/Eye";
 import LogoClara from "@/app/components/IconsTSX/LogoClara";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import SignUpForm from "@/app/components/Forms/SignUpForm";
 
 export default function signup(){
+
+
+
+    
     return(
         <>
         <div className= "container">

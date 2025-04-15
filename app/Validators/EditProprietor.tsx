@@ -3,7 +3,7 @@ import { z } from "zod";
 export const EditProprietor = z.object({
     name: z.string().min(1, { message: "* Campo obrigatório" }),
     email: z.string().min(1, { message: "* Campo obrigatório" })
-        .email({ message: "* E-mail inválido" }).refine(email => email.includes("@"), { message: "O E-mal deve ser válido", path: ["email"], }),
+        .email({ message: "* E-mail inválido" }).refine(email => email.includes("@"), { message: "O E-mail deve ser válido", path: ["email"], }),
     phoneNumber: z.string().min(1, { message: "* Campo obrigatório" })
                 .regex(/^\d{10}$/, { message: "* 10 dígitos" }),
     cellphone: z.string().min(1, { message: "* Campo obrigatório" })

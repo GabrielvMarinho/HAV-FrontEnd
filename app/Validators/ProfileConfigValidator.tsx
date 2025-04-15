@@ -6,7 +6,7 @@ export const saveConfig = z.object({
         .regex(/^\d{10}$/, { message: "* 10 dígitos" }),
     email: z.string().min(1, { message: "* Campo obrigatório" })
         .email({ message: "* E-mail inválido" })
-        .refine(email => email.includes("@"), { message: "O E-mal deve ser válido", path: ["email"], }),
+        .refine(email => email.includes("@"), { message: "O E-mail deve ser válido", path: ["email"], }),
     cellphone: z.string().min(1, { message: "* Campo obrigatório" })
         .regex(/^\d{11}$/, { message: "* 11 dígitos" }),
     // cpf: z.string().min(11, { message: "* CPF deve ter 11 dígitos" })

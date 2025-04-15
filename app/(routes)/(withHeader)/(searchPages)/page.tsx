@@ -17,8 +17,8 @@ import Image from "next/image";
 import "@/public/Image/css/style.css"
 import MainFilter from "@/app/components/Filters/MainFilter";
 import HavLogo from "@/app/components/IconsTSX/HavLogoLight";
-import "../../GeneralPages.css"
-import "../../variables.css"
+import "@/app/GeneralPages.css"
+import "@/app/variables.css"
 
 import HavLogoDark from "@/app/components/IconsTSX/HavLogoDark";
 import MainHomeInfo from "@/app/components/Information/mainHomeInfo";

@@ -28,7 +28,7 @@ export default async function schedulingHistory({searchParams}: {searchParams:{
     return(
         
         <> 
-        <AuthGuard requiredRole="ROLE_REALTOR">
+        <AuthGuard requiredRole="REALTOR">
             <HeaderRealtor/>
             <Title tag="h1" text="Histórico" /> 
             {/* <ModalScheduling/> */}
@@ -58,7 +58,7 @@ export default async function schedulingHistory({searchParams}: {searchParams:{
             <Footer/>
         </AuthGuard> 
 
-        <AuthGuard requiredRole="ROLE_CUSTOMER">
+        <AuthGuard requiredRole="CUSTOMER">
             <HeaderCustomer/>
             <Title tag="h1" text="Histórico" /> 
             {/* <ModalScheduling/> */}
