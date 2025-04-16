@@ -94,11 +94,11 @@ export default function ProfileEditUser() {
     onToggle?: () => void;
   }) => (
     <li className="menuItem">
-      <HorizontalLine size={500} color="#0F0F0F80" />
+      <HorizontalLine size={500} color="var(--hour-gray)" />
       <div className="menuContent">
         <span className="menuLabel">{label}</span>
         <div className="toggleWrapper">
-          <ToggleButton toggled={isToggled} onChange={onToggle} />
+          <ToggleButton isToggled={isToggled} onChange={onToggle} />
 
         </div>
       </div>
@@ -292,11 +292,12 @@ export default function ProfileEditUser() {
           <div className="menuColumn">
             <h3 className="columnTitle">PREFERÊNCIAS</h3>
             <ul className="menuList">
-              <MenuItem
-                label="TEMA"
-                isToggled={toggleStates.tema}
-                onToggle={() => handleToggle("tema")}
-              />
+            <HorizontalLine size={500} color="var(--hour-gray)" />
+
+              <div className="menuContent">              
+                <label>TEMA</label>
+                <ThemeToggle isToggled={toggleStates.tema} onChange={() => handleToggle("tema")}/>
+              </div>
               <MenuItem
                 label="IDIOMA"
                 isToggled={toggleStates.idioma}

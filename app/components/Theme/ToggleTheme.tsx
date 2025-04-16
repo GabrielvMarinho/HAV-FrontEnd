@@ -12,7 +12,7 @@ export default function ToggleTheme() {
     localStorage.setItem('theme', next)
   }
   const toggled = localStorage.getItem('theme')==="darkPallete";
-  
+  console.log(toggled)
   
   
   return (
