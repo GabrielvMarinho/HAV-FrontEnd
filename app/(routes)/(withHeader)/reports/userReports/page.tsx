@@ -1,73 +1,45 @@
-"use client"
+"use client";
 import "../style/style.css";
 import Title from "@/app/components/NonInteractable/Title";
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 import SideTitle from "@/app/components/NonInteractable/SideTitle";
-import getAllUsersNumber from "@/app/apiCalls/User/getAllRegistredNumber";
-import { useState, useEffect } from "react";
-import getQuantityProprietor from "@/app/apiCalls/Proprietor/getQuantityProprietor";
-import getPercentageProprietors from "@/app/apiCalls/Proprietor/getPercentageProprietors";
-import getQuantityCustomer from "@/app/apiCalls/Customer/getQuantityCustomer";
-import getPercentageCustomer from "@/app/apiCalls/Customer/getPercentageCustomer";
+import { useState } from "react";
 import HorizontalBarChart from "@/app/components/BarChart/HorizontalBarChart";
 import VerticalBarChart from "@/app/components/BarChart/VerticalBarChart";
 
 export default function ReportsPage() {
-  const [allUsersNumber, setAllUsersNumber] = useState(0);
-  const [allProprietors, setAllProprietors] = useState(0);
-  const [percentageProprietors, setPercentageProprietors] = useState(0);
-  const [allCustomers, setAllCustomers] = useState(0);
-  const [percentageCustomer, setPercentageCustomer] = useState(0);
-
-  // Dados para os gráficos verticais
+  // Dados para os gráficos verticais (mantidos como no seu exemplo)
   const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN'];
-  const [novosUsuariosData, setNovosUsuariosData] = useState([25, 50, 30, 60, 45, 75]);
-  const [visitasData, setVisitasData] = useState([400, 800, 1200, 600, 900, 1500]);
+  const [novosUsuariosData] = useState([25, 50, 30, 60, 45, 75]);
+  const [visitasData] = useState([95000, 10000, 50000, 17000, 16000, 10000]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [
-          usersNumber,
-          proprietors,
-          proprietorsPercentage,
-          customers,
-          customersPercentage
-        ] = await Promise.all([
-          getAllUsersNumber(),
-          getQuantityProprietor(),
-          getPercentageProprietors(),
-          getQuantityCustomer(),
-          getPercentageCustomer()
-        ]);
-        
-        setAllUsersNumber(usersNumber);
-        setAllProprietors(proprietors);
-        setPercentageProprietors(proprietorsPercentage);
-        setAllCustomers(customers);
-        setPercentageCustomer(customersPercentage);
-        
-        // Aqui você pode setar os dados reais dos gráficos verticais
-        // quando tiver as APIs correspondentes:
-        // setNovosUsuariosData([...dadosDaAPI]);
-        // setVisitasData([...dadosDaAPI]);
-        
-      } catch (e) {
-        console.error("Erro na API:", e);
-      }
-    };
-    fetchData();
-  }, []);
+  // Dados para o gráfico horizontal no mesmo padrão
+  const [userStats] = useState({
+    proprietarios: 893,
+    usuariosComuns: 1750,
+    bloqueados: 486
+  });
 
-  // Dados para o gráfico horizontal
+  // Calculando totais e porcentagens
+  const totalUsers = userStats.proprietarios + userStats.usuariosComuns + userStats.bloqueados;
+  const percentageProprietors = Math.round((userStats.proprietarios / totalUsers) * 100);
+  const percentageCustomers = Math.round((userStats.usuariosComuns / totalUsers) * 100);
+  const percentageBlocked = Math.round((userStats.bloqueados / totalUsers) * 100);
+
+  // Preparando dados para o gráfico horizontal
   const horizontalLabels = [
     `${percentageProprietors}% PROPRIETÁRIOS`,
-    `${percentageCustomer}% USUÁRIOS COMUNS`,
-    `${"0"}% BLOQUEADOS`
+    `${percentageCustomers}% USUÁRIOS COMUNS`,
+    `${percentageBlocked}% BLOQUEADOS`
   ];
 
-  const horizontalData = [allProprietors, allCustomers];
+  const horizontalData = [
+    userStats.proprietarios,
+    userStats.usuariosComuns,
+    userStats.bloqueados
+  ];
+
   const barColors = ["#B23F52"];
 
   return (
@@ -91,7 +63,7 @@ export default function ReportsPage() {
         </div>
         <div className="users-data-row">
           <div className="users-data-box">
-            <h3 className="users-big-number">{allUsersNumber}</h3>
+            <h3 className="users-big-number">3.2 MIL</h3>
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
@@ -118,7 +90,7 @@ export default function ReportsPage() {
               months={meses}
               values={novosUsuariosData}
               title="Novos Usuários por Mês"
-              maxValue={75}
+              scaleType="default"
             />
           </div>
           <div className="users-data-box">
@@ -141,7 +113,7 @@ export default function ReportsPage() {
               months={meses}
               values={visitasData}
               title="Visitas por Mês"
-              maxValue={2000}
+              scaleType="thousands"
             />
           </div>
           <div className="users-data-box">

@@ -1,122 +1,95 @@
 @import "@/app/variables.css";
 
-/* ===== ESTILOS BASE ===== */
-.chart-container {
-  width: 100%;
-  position: relative;
-  margin: 10px 0;
+/* Container principal do gráfico horizontal */
+.chart-container.horizontal-chart {
+    width: 100%;
+    height: 250px;
+    margin: 20px 0;
+    overflow: visible;
+    position: relative;
 }
 
-/* ===== GRÁFICO HORIZONTAL ===== */
-.horizontal-chart {
-  height: 180px;
+/* Estilo do canvas */
+.chart-container.horizontal-chart canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
 }
 
-/* Barras */
-.horizontal-chart .chartjs-render-monitor {
-  --bar-color: #B23F52;
+/* Barras horizontais */
+.chart-container.horizontal-chart .chartjs-bar {
+    height: 40px !important; /* Altura aumentada */
+    margin: 8px 0 !important; /* Espaçamento vertical entre barras */
+    border-radius: 4px; /* Bordas arredondadas */
+    transition: all 0.3s ease;
 }
 
-/* Eixo X (valores) */
-.horizontal-chart .chartjs-scale-x {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 10px;
+/* Eixo Y (categorias) */
+.chart-container.horizontal-chart .chartjs-scale-y {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 15px;
+}
+
+/* Rótulos do eixo Y */
+.chart-container.horizontal-chart .chartjs-tick-y {
+    color: var(--box-red-pink);
+    font-size: 14px;
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+/* Eixo X (valores 0-2000) */
+.chart-container.horizontal-chart .chartjs-scale-x {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 /* Ticks do eixo X */
-.horizontal-chart .chartjs-tick {
-  color: #666;
-  font-size: 12px;
-  position: absolute;
+.chart-container.horizontal-chart .chartjs-tick-x {
+    color: var(--box-mid-dark-red);
+    font-size: 12px;
+    font-weight: 700;
+    transform: translateY(5px);
 }
 
-/* Posicionamento dos ticks */
-.horizontal-chart .chartjs-tick:nth-child(1) { left: 0%; }    /* 0 */
-.horizontal-chart .chartjs-tick:nth-child(2) { left: 25%; }  /* 500 */
-.horizontal-chart .chartjs-tick:nth-child(3) { left: 50%; }   /* 1000 */
-.horizontal-chart .chartjs-tick:nth-child(4) { left: 75%; }   /* 1500 */
-.horizontal-chart .chartjs-tick:nth-child(5) { left: 100%; }  /* 2000 */
-
-/* Linhas de grade */
-.horizontal-chart .chartjs-grid-line-x {
-  position: absolute;
-  height: 100%;
-  width: 1px;
-  background: rgba(0, 0, 0, 0.1);
+/* Linhas de grade verticais (apenas nos valores principais) */
+.chart-container.horizontal-chart .chartjs-grid-line-x {
+    position: absolute;
+    height: 100%;
+    width: 1px;
+    background: rgba(179, 63, 82, 0.2);
+    top: 0;
 }
 
-/* Posicionamento das linhas */
-.horizontal-chart .chartjs-grid-line-x:nth-child(1) { left: 25%; }
-.horizontal-chart .chartjs-grid-line-x:nth-child(2) { left: 50%; }
-.horizontal-chart .chartjs-grid-line-x:nth-child(3) { left: 75%; }
+/* Posicionamento das linhas de grade */
+.chart-container.horizontal-chart .chartjs-grid-line-x:nth-child(1) { left: 25%; }  /* 500 */
+.chart-container.horizontal-chart .chartjs-grid-line-x:nth-child(2) { left: 50%; }  /* 1000 */
+.chart-container.horizontal-chart .chartjs-grid-line-x:nth-child(3) { left: 75%; }  /* 1500 */
 
-/* Rótulos do eixo Y */
-.horizontal-chart .chartjs-scale-y-text {
-  font-weight: bold;
-  font-size: 14px;
-  color: #333;
-  margin-right: 15px;
+/* Container interno - ajustes de overflow */
+.chart-container.horizontal-chart .chartjs-size-monitor {
+    overflow: visible !important;
 }
 
-/* ===== GRÁFICO VERTICAL ===== */
-.vertical-chart {
-  height: 320px;
+/* Tooltip customizado */
+.chart-container.horizontal-chart .chartjs-tooltip {
+    background: var(--box-dark-red);
+    border-radius: 6px;
+    padding: 8px 12px;
+    color: white;
+    font-size: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-/* Barras */
-.vertical-chart .chartjs-render-monitor {
-  --bar-color: #B23F52;
-}
-
-/* Eixo Y (valores 0-75) */
-.vertical-chart .chartjs-scale-y {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-/* Ticks do eixo Y */
-.vertical-chart .chartjs-tick {
-  color: #666;
-  font-size: 12px;
-  position: absolute;
-}
-
-/* Posicionamento dos ticks */
-.vertical-chart .chartjs-tick:nth-child(1) { top: 100%; }   /* 0 */
-.vertical-chart .chartjs-tick:nth-child(2) { top: 66.66%; } /* 25 */
-.vertical-chart .chartjs-tick:nth-child(3) { top: 33.33%; } /* 50 */
-.vertical-chart .chartjs-tick:nth-child(4) { top: 0%; }     /* 75 */
-
-/* Linhas de grade horizontais */
-.vertical-chart .chartjs-grid-line-y {
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.1);
-}
-
-/* Posicionamento das linhas */
-.vertical-chart .chartjs-grid-line-y:nth-child(1) { top: 66.66%; } /* 25 */
-.vertical-chart .chartjs-grid-line-y:nth-child(2) { top: 33.33%; } /* 50 */
-.vertical-chart .chartjs-grid-line-y:nth-child(3) { top: 0%; }     /* 75 */
-
-/* Rótulos do eixo X (meses) */
-.vertical-chart .chartjs-scale-x-text {
-  font-weight: bold;
-  font-size: 12px;
-  color: #333;
-  padding-top: 10px;
-}
-
-/* ===== RESPONSIVIDADE ===== */
+/* Responsividade */
 @media (max-width: 768px) {
-  .horizontal-chart {
-    height: 160px;
-  }
-  
-  .vertical-chart {
-    height: 280px;
-  }
+    .chart-container.horizontal-chart {
+        height: 300px;
+    }
+    .chart-container.horizontal-chart .chartjs-bar {
+        height: 30px !important;
+    }
 }
