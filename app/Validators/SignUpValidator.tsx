@@ -15,9 +15,9 @@ export const SignUpValidator = z.object({
 
   confirmPassword: z.string()
     .min(1, { message: "* Campo obrigatório" }),
-}).refine((data) => data.senha === data.confirmarSenha, {
+}).refine((data) => data.password === data.confirmPassword, {
   message: "* As senhas não coincidem",
-  path: ["confirmarSenha"],
+  path: ["confirmPassword"],
 });
 
 export type SignUpValidator = z.infer<typeof SignUpValidator>;

@@ -8,16 +8,16 @@ import HeaderNotLogged from "./HeaderNotLogged";
 export default function HeadersAll(props : {usuario? :any}) {
   
 
-
+  console.log(props.usuario)
 
   let header = <HeaderNotLogged/>
-  if (props.usuario?.role === "CUSTOMER") {
+  if (props.usuario?.role === "ROLE_CUSTOMER") {
     header = <HeaderCustomer/>;
-  } else if (props.usuario?.role === "ADMIN") {
+  } else if (props.usuario?.role === "ROLE_ADMIN") {
     header = <HeaderAdm />;
-  } else if (props.usuario?.role === "EDITOR") {
+  } else if (props.usuario?.role === "ROLE_EDITOR") {
     header = <HeaderEditor />;
-  } else if (props.usuario?.role === "REALTOR") {
+  } else if (props.usuario?.role === "ROLE_REALTOR") {
     header = <HeaderRealtor />;
   }
   return header;

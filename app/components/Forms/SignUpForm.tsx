@@ -21,6 +21,9 @@ export default function SignUpForm(){
     const [errorLogin, setErrorLogin] = useState<string | null>(null);
     
     const handleSignUp = async (data: SignUpValidator) => {
+        if (Object.keys(form.formState.errors).length > 0) {
+            return;
+        }
             const response = await SignUpFetch(data.name, data.email, data.password);
             console.log(response)
             if (response.success) {

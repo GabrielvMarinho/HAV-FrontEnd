@@ -12,14 +12,7 @@ import HeaderCustomer from "@/app/components/Header/HeaderCustomer";
 export default function page() {
     
 
-    // header(){
-    //     const {usuario} = useAuth()
-    //     return (
-    //         {usuario.role = "ADMIN"?? <HeaderAdm/>}
-    //         {usuario.role = "CUSTOMER"?? <HeaderCustomer/>}
-
-    //     )
-    // }
+    /
 
     return (
         <>
