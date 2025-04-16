@@ -11,45 +11,41 @@ import getAllNumber from "@/app/apiCalls/Realtor/getAllNumber";
 
 import { useState, useEffect } from "react";
 import VerticalBarChart from "@/app/components/BarChart/VerticalBarChart";
+import AuthGuard from "@/app/context/AuthGuard";
 
-export default function page() {
+export default function ReportsPage() {
+  // Dados para os gráficos verticais (mantidos como no seu exemplo)
+  const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN'];
+  const [novosUsuariosData] = useState([25, 50, 30, 60, 45, 75]);
+  const [visitasData] = useState([95000, 10000, 50000, 17000, 16000, 10000]);
 
-  const [allRealtors, setAllRealtors] = useState(0);
-  const [percentageArchived, setPercentageArchived] = useState(0);
-  const [quantityArchived, setQuantityArchived] = useState(0);
+  // Dados para o gráfico horizontal no mesmo padrão
+  const [userStats] = useState({
+    proprietarios: 893,
+    usuariosComuns: 1750,
+    bloqueados: 486
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [
-          percentageArchived,
-          quantityArchived,
-          allProprietors
-        ] =
-          await Promise.all([
-            getPercentageArchived(),
-            getQuantityArchived(),
-            getAllNumber()
-          ])
-        setPercentageArchived(percentageArchived)
-        setQuantityArchived(quantityArchived)
-        setAllRealtors(allProprietors)
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    fetchData();
-  }, [])
+  // Calculando totais e porcentagens
+  const totalUsers = userStats.proprietarios + userStats.usuariosComuns + userStats.bloqueados;
+  const percentageProprietors = Math.round((userStats.proprietarios / totalUsers) * 100);
+  const percentageCustomers = Math.round((userStats.usuariosComuns / totalUsers) * 100);
+  const percentageBlocked = Math.round((userStats.bloqueados / totalUsers) * 100);
 
-  const labels = [
-    `${"a fazer (disponíveis)"}% LOCAÇÃO`,
-    `${"a fazer (indisponíveis)"}% VENDA`,
-    `${percentageArchived}% ARQUIVADOS`
+  // Preparando dados para o gráfico horizontal
+  const horizontalLabels = [
+    `${percentageProprietors}% PROPRIETÁRIOS`,
+    `${percentageCustomers}% USUÁRIOS COMUNS`,
+    `${percentageBlocked}% BLOQUEADOS`
   ];
 
-  const data = [quantityArchived]
+  const horizontalData = [
+    userStats.proprietarios,
+    userStats.usuariosComuns,
+    userStats.bloqueados
+  ];
 
-  const barColors = ["#B23F52"]
+  const barColors = ["#B23F52"];
 
   return (
     <>
@@ -73,24 +69,35 @@ export default function page() {
         </div>
         <div className="users-data-row">
           <div className="users-data-box">
-            <h3 className="users-big-number">{allRealtors}</h3>
+            <h3 className="users-big-number">421</h3>
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
-            <div className="placeholder-graph">
-              <HorizontalBarChart labels={labels} data={data} backGroundColors={barColors} />
-            </div>
+            <HorizontalBarChart 
+              labels={horizontalLabels} 
+              data={horizontalData} 
+              backGroundColors={barColors} 
+            />            
+          </div>
           </div>
         </section>
 
         <section className="users-section">
-          <div className="reports-graphTitle">
-            <p>AGENDAMENTOS</p>
+        <div className="reports-graphTitle">
+          <p>AGENDAMENTOS</p>
+        </div>
+        <div className="users-data-row">
+          <div className="users-data-box">
+            <h3 className="users-big-number">421</h3>
+            <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
-            <div className="placeholder-graph">
-            <HorizontalBarChart labels={labels} data={data} backGroundColors={barColors} />
-            </div>
+            <HorizontalBarChart 
+              labels={horizontalLabels} 
+              data={horizontalData} 
+              backGroundColors={barColors} 
+            />            
+          </div>
           </div>
         </section>
 
@@ -103,9 +110,12 @@ export default function page() {
         </div>
         <div className="users-data-row">
           <div className="users-graph-container">
-            <div className="placeholder-graph">
-            <VerticalBarChart labels={labels} data={data} backGroundColors={barColors}/>
-            </div>
+          <VerticalBarChart 
+              months={meses}
+              values={novosUsuariosData}
+              title="Novos Usuários por Mês"
+              scaleType="default"
+            />
           </div>
           <div className="users-data-box">
             <h3 className="users-big-number">21</h3>
@@ -113,16 +123,6 @@ export default function page() {
               100% se manteram ativos desde então
             </p>
           </div>
-          <div className="users-data-row">
-            <div className="users-graph-container">
-              <div className="placeholder-graph">Gráfico</div>
-            </div>
-            <div className="users-data-box">
-              <h3 className="users-big-number">21</h3>
-              <p className="users-small-text">
-              100% se manteram ativos desde então
-              </p>
-            </div>
           </div>
         </section>
 
@@ -133,7 +133,12 @@ export default function page() {
         <div className="users-data-row">
           <div className="users-graph-container">
             <div className="placeholder-graph">
-            <VerticalBarChart labels={labels} data={data} backGroundColors={barColors}/>
+            <VerticalBarChart 
+              months={meses}
+              values={visitasData}
+              title="Visitas por Mês"
+              scaleType="thousands"
+            />            
             </div>
           </div>
           <div className="users-data-box">
@@ -141,6 +146,7 @@ export default function page() {
             <p className="users-small-text">
               93% agendamentos para imóvel de moradia
             </p>
+          </div>
           </div>
         </section>
       </AuthGuard>

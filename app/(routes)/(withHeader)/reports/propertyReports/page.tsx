@@ -16,61 +16,42 @@ import getPercentageArchived from "@/app/apiCalls/Property/getPercentageArchived
 
 import { useEffect, useState } from "react";
 import VerticalBarChart from "@/app/components/BarChart/VerticalBarChart";
+import AuthGuard from "@/app/context/AuthGuard";
 
-export default function page() {
+export default function ReportsPage() {
+  // Dados para os gráficos verticais (mantidos como no seu exemplo)
+  const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN'];
+  const [novosUsuariosData] = useState([25, 50, 30, 60, 45, 75]);
+  const [visitasData] = useState([95000, 10000, 50000, 17000, 16000, 10000]);
 
-  const [totalProperties, setTotalProperties] = useState(0);
-  const [percentageRent, setPercentageRent] = useState(0);
-  const [totalRent, setTotalRent] = useState(0);
-  const [totalForSale, setTotalForSale] = useState(0);
-  const [totalArchived, setTotalArchived] = useState(0)
-  const [percentageForSale, setPercentageForSale] = useState(0);
-  const [PercentageArchived, setPercentageArchived] = useState(0)
+  // Dados para o gráfico horizontal no mesmo padrão
+  const [userStats] = useState({
+    proprietarios: 893,
+    usuariosComuns: 1750,
+    bloqueados: 486
+  });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [
-          percentageRent,
-          totalRent,
-          totalProperties,
-          totalForSale,
-          totalArchived,
-          percentageForSale,
-          PercentageArchived
-        ] =
-          await Promise.all([
-            getPercentageRent(),
-            getTotalRentProperties(),
-            getTotalProperties(),
-            getTotalForSaleProperties(),
-            getTotalArchivedProperties(),
-            getPercentageForSale(),
-            getPercentageArchived()
-          ]);
-        setPercentageRent(percentageRent)
-        setTotalRent(totalRent)
-        setTotalProperties(totalProperties)
-        setTotalForSale(totalForSale)
-        setTotalArchived(totalArchived)
-        setPercentageForSale(percentageForSale)
-        setPercentageArchived(PercentageArchived)
-      } catch (e) {
-        console.log(e, "Erro no fetch");
-      }
-    }
-    fetchData()
-  }, [])
+  // Calculando totais e porcentagens
+  const totalUsers = userStats.proprietarios + userStats.usuariosComuns + userStats.bloqueados;
+  const percentageProprietors = Math.round((userStats.proprietarios / totalUsers) * 100);
+  const percentageCustomers = Math.round((userStats.usuariosComuns / totalUsers) * 100);
+  const percentageBlocked = Math.round((userStats.bloqueados / totalUsers) * 100);
 
-  const labels = [
-    `${percentageRent}% LOCAÇÃO`,
-    `${percentageForSale}% VENDA`,
-    `${PercentageArchived}% ARQUIVADOS`
+  // Preparando dados para o gráfico horizontal
+  const horizontalLabels = [
+    `${percentageProprietors}% PROPRIETÁRIOS`,
+    `${percentageCustomers}% USUÁRIOS COMUNS`,
+    `${percentageBlocked}% BLOQUEADOS`
   ];
 
-  const data = [totalRent, totalForSale, totalArchived];
+  const horizontalData = [
+    userStats.proprietarios,
+    userStats.usuariosComuns,
+    userStats.bloqueados
+  ];
 
-  const barColors = ["#B23F52"]
+  const barColors = ["#B23F52"];
+
 
   return (
     <>
@@ -94,15 +75,17 @@ export default function page() {
         </div>
         <div className="users-data-row">
           <div className="users-data-box">
-            <h3 className="users-big-number">{totalProperties}</h3>
+            <h3 className="users-big-number">3.2 </h3>
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
-            <div className="placeholder-graph">
-              <HorizontalBarChart labels={labels} data={data} backGroundColors={barColors} />
+          <HorizontalBarChart 
+              labels={horizontalLabels} 
+              data={horizontalData} 
+              backGroundColors={barColors} 
+            />            
             </div>
           </div>
-        </div>
       </section>
 
       <section className="users-section">
@@ -114,10 +97,12 @@ export default function page() {
         </div>
         <div className="users-data-row">
           <div className="users-graph-container">
-            <div className="placeholder-graph">
-            <VerticalBarChart labels={labels} data={data} backGroundColors={barColors}/>
-            </div>
-          </div>
+          <VerticalBarChart 
+              months={meses}
+              values={novosUsuariosData}
+              title="Novos Usuários por Mês"
+              scaleType="default"
+            />          </div>
           <div className="users-data-box">
             <h3 className="users-big-number">123</h3>
             <p className="users-small-text">
@@ -255,7 +240,8 @@ export default function page() {
               </tbody>
             </table>
           </div>
-        </div>
+          </div>
+          </div>
       </section>
     </>
   );

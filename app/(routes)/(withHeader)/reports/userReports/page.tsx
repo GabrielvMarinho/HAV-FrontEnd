@@ -7,6 +7,7 @@ import SideTitle from "@/app/components/NonInteractable/SideTitle";
 import { useState } from "react";
 import HorizontalBarChart from "@/app/components/BarChart/HorizontalBarChart";
 import VerticalBarChart from "@/app/components/BarChart/VerticalBarChart";
+import AuthGuard from "@/app/context/AuthGuard";
 
 export default function ReportsPage() {
   // Dados para os gráficos verticais (mantidos como no seu exemplo)
@@ -55,6 +56,7 @@ export default function ReportsPage() {
             <p>EXPORTAR DADOS</p>
           </div>
         </div>
+        </div>
 
       {/* Seção de Usuários (gráfico horizontal) */}
       <section className="users-section">
@@ -72,6 +74,7 @@ export default function ReportsPage() {
               data={horizontalData} 
               backGroundColors={barColors} 
             />
+          </div>
           </div>
         </section>
 
@@ -91,6 +94,7 @@ export default function ReportsPage() {
               title="Novos Usuários por Mês"
               scaleType="default"
             />
+          </div>
           </div>
           <div className="users-data-box">
             <h3 className="users-big-number">123</h3>
@@ -130,6 +134,7 @@ export default function ReportsPage() {
             <p className="users-small-text">
               40% feitas por usuários sem uma conta
             </p>
+          </div>
           </div>
         </section>
       </AuthGuard>

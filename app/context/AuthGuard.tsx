@@ -1,4 +1,5 @@
 // app/components/auth-wrapper.tsx
+
 import { cookies } from 'next/headers';
 import ClientAuthGuard from './ClienteAuthGuard';
 
