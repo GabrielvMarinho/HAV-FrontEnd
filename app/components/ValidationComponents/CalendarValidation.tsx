@@ -4,6 +4,7 @@ import './css/style.css';
 import Button from "../Inputs/Button";
 import { Content } from "next/font/google";
 import SelectHour from "../Forms/SelectHour";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function CalendarValidation(props :{day: Date; ids :Record<string, number>, selectHours: string[],
     saveHours: (hoursAdd: string[], hoursRemove: string[]) => void, cards :Record<string, string | string[]>[],
