@@ -12,13 +12,16 @@ import InterestPointsPropertySpecific from "@/app/components/NonInteractable/Int
 import DescriptionProperty from "@/app/components/Information/DescriptionProperty";
 import HorizontalPropertySpecific from "@/app/components/NonInteractable/HorizontalTitlePropertySpecific";
 import Title from "@/app/components/NonInteractable/Title";
-import SliderContent from "@/app/components/Information/SliderContent";
-import CardImovel from "@/app/components/Cards/CardImovel";
+import SliderContentOfThree from "@/app/components/Information/SliderContentOfThree";
 import RealterAssociatedVertical from "@/app/components/Information/RealterAssociatedVertical";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import searchPropertyByIdSpecific from "@/app/apiCalls/Property/searchPropertyByIdSpecific";
 import NewScheduleModal from "@/app/components/Forms/NewScheduleModal";
+import GetSimilarThreeByPrice from "@/app/apiCalls/Property/GetSimilarThreeByPrice";
+import "@/app/GeneralPages.css"
+import "@/app/variables.css"
+import "@/public/Image/css/style.css"
 
 export default function PropertySpecific(props: { obj: PropertySpecific; }) {
 
@@ -72,10 +75,21 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
     }, [propertyId]);
 
 
+    const [similarProperties, setSimilarProperties] = useState<PropertySpecificCard[]>([])
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await GetSimilarThreeByPrice();
+            setSimilarProperties(data);
+        }
+        fetchData()
+    }, [])
+
     if (!property) {
         return <p>Carregando...</p>
     }
 
+    
 
     return (
         <>
@@ -153,68 +167,9 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                 <div style={{ display: "flex", justifyContent: "center", width: "100%", marginTop: "115px" }}>
                     <Title text="imóveis semelhantes" tag="h1" />
                 </div>
-                <SliderContent items={[
-                    <CardImovel
-                        bairro="a"
-                        cidade="a"
-                        valor="2000000"
-                        sell={true}
-                        quantQuartos={2}
-                        quantSala={3}
-                        quantBanheiros={5}
-                        informationStatus="a"
-                        category="a" />,
-                    <CardImovel
-                        bairro="b"
-                        cidade="b"
-                        valor="2000000"
-                        sell={true}
-                        quantQuartos={2}
-                        quantSala={3}
-                        quantBanheiros={5}
-                        informationStatus="b"
-                        category="b" />,
-                    <CardImovel
-                        bairro="c"
-                        cidade="c"
-                        valor="2000000"
-                        sell={true}
-                        quantQuartos={2}
-                        quantSala={3}
-                        quantBanheiros={5}
-                        informationStatus="c"
-                        category="c " />,
-                    <CardImovel
-                        bairro="1"
-                        cidade="1"
-                        valor="2000000"
-                        sell={true}
-                        quantQuartos={2}
-                        quantSala={3}
-                        quantBanheiros={5}
-                        informationStatus="1"
-                        category="1 " />,
-                    <CardImovel
-                        bairro="2"
-                        cidade="2"
-                        valor="2000000"
-                        sell={true}
-                        quantQuartos={2}
-                        quantSala={3}
-                        quantBanheiros={5}
-                        informationStatus="2"
-                        category="2 " />,
-                    <CardImovel
-                        bairro="3"
-                        cidade="3"
-                        valor="2000000"
-                        sell={true}
-                        quantQuartos={2}
-                        quantSala={3}
-                        quantBanheiros={5}
-                        informationStatus="3"
-                        category="3 " />
-                ]} />
+                <SliderContentOfThree items={
+                    similarProperties
+                } />
             </div>
             
             <div style={{ margin: "200px 0 100px 0" }}>

@@ -51,7 +51,6 @@ export default function ReportsPage() {
     <>
     <AuthGuard requiredRole="ROLE_ADMIN">
         <Title tag={"h1"} text={"ESTATÍSTICAS E ANÁLISES"} />
-        <NavBarAdm options={NavBarPath.reports} />
 
         {/* Container principal para centralizar o conteúdo */}
         <div className="reports-container">

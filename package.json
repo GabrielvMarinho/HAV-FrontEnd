@@ -22,7 +22,7 @@
     "next": "^15.1.7",
     "next-auth": "^4.24.11",
     "package": "^1.0.1",
-    "package.json": "^2.0.1",
+    "package.json": "^0.0.0",
     "pakage": "^1.0.0",
     "react-chartjs-2": "^5.3.0",
     "react-day-picker": "^9.6.3",

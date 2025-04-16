@@ -1,5 +1,4 @@
-'use client';
-
+'use client'
 import "../style/style.css";
 import Title from "@/app/components/NonInteractable/Title";
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
@@ -48,8 +47,6 @@ export default function ReportsPage() {
     <>
     <AuthGuard requiredRole="ROLE_ADMIN">
         <Title tag={"h1"} text={"ESTATÍSTICAS E ANÁLISES"} />
-        <NavBarAdm options={NavBarPath.reports} />
-
       <div className="reports-container">
         <div className="data-Title">
           <SideTitle tag={"h1"} text={"DADOS TOTAIS"} />
