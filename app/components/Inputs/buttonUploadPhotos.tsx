@@ -1,19 +1,21 @@
 import MoreSignal from "../IconsTSX/MoreSignal"
 import "./css/style.css";
 import "@/app/variables.css"
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FieldError, UseFormRegister, FieldValues } from "react-hook-form";
 import ArrowBack from "../IconsTSX/ArrowBack";
 import Trashcan from "../IconsTSX/Trashcan";
 
-export default function ButtonUploadPhotos<T>({
+/* export default function ButtonUploadPhotos<T>({
     name,
     register,
-    error
+    error,
+    initialImages
 }: {
     name: keyof T;
     register?: UseFormRegister<T>;
     error?: FieldError;
+    initialImages?: string[];
 }) {
 
     const [preview, setPreview] = useState<string[]>([]);
@@ -84,6 +86,129 @@ export default function ButtonUploadPhotos<T>({
 
             {error && <p className="errorText">{error.message}</p>}
 
+        </>
+    );
+} */
+
+export default function ButtonUploadPhotos<T>({
+    name,
+    register,
+    error,
+    initialImages = [],
+    setValue
+}: {
+    name: keyof T;
+    register?: UseFormRegister<T>;
+    error?: FieldError;
+    initialImages?: string[];
+    setValue?: (name: keyof T, value: any) => void;
+}) {
+    const [preview, setPreview] = useState<string[]>(initialImages);
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    // Atualiza o form toda vez que o preview mudar
+    useEffect(() => {
+        if (setValue) {
+            setValue(name, preview);
+        }
+    }, [preview]);
+
+    const prevIndex = () => {
+        setCurrentIndex((prev) => Math.max(prev - 1, 0));
+    };
+
+    const nextIndex = () => {
+        setCurrentIndex((prev) => Math.min(prev + 1, preview.length - 1));
+    };
+
+    const deleteIndex = () => {
+        setPreview((prev) => {
+            const newPreview = prev.filter((_, i) => i !== currentIndex);
+            const newIndex = currentIndex > 0 ? currentIndex - 1 : 0;
+            setCurrentIndex(newIndex);
+            return newPreview;
+        });
+    };
+
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const files = event.target.files;
+        if (files) {
+            const fileArray = Array.from(files);
+
+            fileArray.forEach((file) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    if (e.target?.result) {
+                        setPreview((prev) => [...prev, e.target!.result as string]);
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
+
+            // Limpa o input após seleção para permitir recarregar o mesmo arquivo se necessário
+            event.target.value = '';
+        }
+    };
+
+    return (
+        <>
+            {preview.length > 0 && (
+                <>
+                    <button className="trashcanPhoto" type="button" onClick={deleteIndex}>
+                        <Trashcan width={23} height={23} color="var(--box-white)" />
+                    </button>
+                    <button
+                        className="photoArrow photoArrowLeft"
+                        type="button"
+                        onClick={prevIndex}
+                        disabled={currentIndex === 0}
+                    >
+                        <ArrowBack width={23} height={23} color="var(--box-white)" />
+                    </button>
+                    <button
+                        className="mirrored photoArrow photoArrowRight"
+                        type="button"
+                        onClick={nextIndex}
+                        disabled={currentIndex >= preview.length - 1}
+                    >
+                        <ArrowBack width={23} height={23} color="var(--box-white)" />
+                    </button>
+
+                    <img src={preview[currentIndex]} alt="Preview" className="previewImg" />
+
+                    <div style={{ display: 'flex' }}>
+                        {preview
+                            .slice(Math.max(0, Math.min(currentIndex, preview.length - 4)), Math.min(currentIndex + 4, preview.length))
+                            .map((image, index) => {
+                                const absoluteIndex = index + Math.max(0, Math.min(currentIndex, preview.length - 4));
+                                return (
+                                    <img
+                                        key={absoluteIndex}
+                                        onClick={() => setCurrentIndex(absoluteIndex)}
+                                        className={
+                                            absoluteIndex === currentIndex ? 'markedImage subPreviewImg' : 'subPreviewImg'
+                                        }
+                                        src={image}
+                                    />
+                                );
+                            })}
+                    </div>
+                </>
+            )}
+
+            <div className="buttonUploadPhotoIcon">
+                <MoreSignal width={30} height={22} color="var(--box-white)" />
+            </div>
+
+            <input
+                className="buttonUploadPhoto"
+                type="file"
+                multiple
+                {...(register ? register(name) : {})}
+                onChange={handleFileChange}
+            />
+
+            {error && <p className="errorText">{error.message}</p>}
         </>
     );
 }

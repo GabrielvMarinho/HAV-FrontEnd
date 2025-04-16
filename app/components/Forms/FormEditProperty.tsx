@@ -91,6 +91,7 @@ export default function FormEditProperty(props: { id: any, objectData: any }) {
             try {
                 const property: PropertyEditDto = await searchPropertyById(props.id);
                 setProperty(property)
+                console.log("imageBase64List:", property.imageBase64List);
                 console.log("Api response:", property);
                 changePurpose(props.objectData.purpose == null || props.objectData.purpose == undefined ? property?.purpose : props.objectData.purpose)
                 changeStatus(props.objectData.status == null || props.objectData.status == undefined ? property?.propertyStatus : props.objectData.status)
@@ -287,10 +288,14 @@ export default function FormEditProperty(props: { id: any, objectData: any }) {
 
                 <section id="smallerSection">
                     <div className="imgPerson">
-                        <ButtonUploadPhotos name={"images"}
+                        <ButtonUploadPhotos
+                            name={"images"}
                             register={form.register}
                             error={form.formState.errors["images" as keyof newProperty]}
+                            setValue={form.setValue}
+                            initialImages={property?.imageBase64List}
                         />
+
                     </div>
                     <h3>CARACTERÍSTICAS DO IMÓVEL</h3>
                     <div className="propertyFormGroup">
