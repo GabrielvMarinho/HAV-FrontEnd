@@ -58,6 +58,7 @@ export default async function editProperty(id :any, formData: { [key: string]: F
           
     const response = await fetch(url, {
       method: "PUT",
+      credentials:"include",
       body:form,
     });
     console.log("asdasd", response)

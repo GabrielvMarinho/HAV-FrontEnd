@@ -12,14 +12,12 @@ export default function selectHour(props :{usuario :any; day: Date; ids :Record<
 
       
     
-      if (props.usuario) {
-        return null;
-      }
+      console.log(props.usuario)
     
       if (!props.usuario) {
         return null; 
       }
-      if (props.usuario.role !="REALTOR") {
+      if (props.usuario.role !="ROLE_REALTOR") {
         return null; 
       }
 

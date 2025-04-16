@@ -58,3 +58,4 @@ export default async function schedulingHistory({searchParams}: {searchParams:{
         </>
     )
 }
+

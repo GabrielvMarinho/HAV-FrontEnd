@@ -6,6 +6,7 @@ export default async function deleteRealtorList(list: string[]) {
   try {
       const response = await fetch(url, {
           method: "DELETE",
+          credentials:"include",
           headers: {
             "Content-Type": "application/json", // Garante que está enviando JSON
           },

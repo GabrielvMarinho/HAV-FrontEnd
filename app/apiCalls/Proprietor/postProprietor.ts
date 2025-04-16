@@ -36,6 +36,7 @@ export default async function postProprietor(
 
     const response = await fetch(url, {
       method: "POST",
+      credentials:"include",
       body:form,
     });
 

@@ -6,6 +6,8 @@ export default async function changeArchivedStatusEditor(list: string[]) {
   try {
       const response = await fetch(url, {
           method: "PATCH",
+          
+          credentials:"include",
           headers: {
             "Content-Type": "application/json", // Garante que está enviando JSON
           },

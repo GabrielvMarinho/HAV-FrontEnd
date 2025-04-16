@@ -67,6 +67,7 @@ export default async function(
   
       const response = await fetch(url, {
         method: "POST",
+        credentials:"include",
         body:form,
       });
   

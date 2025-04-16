@@ -39,6 +39,8 @@ export default async function postCustomer(
 
     const response = await fetch(url, {
       method: "POST",
+      
+      credentials:"include",
       body:form,
     });
 
