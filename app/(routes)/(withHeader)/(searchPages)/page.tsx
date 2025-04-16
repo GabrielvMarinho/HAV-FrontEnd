@@ -22,7 +22,7 @@ import "@/app/variables.css"
 
 import HavLogoDark from "@/app/components/IconsTSX/HavLogoDark";
 import MainHomeInfo from "@/app/components/Information/mainHomeInfo";
-import SliderContent from "@/app/components/Information/SliderContent";
+import SliderPropertyHighlights from "@/app/components/Information/SliderPropertyHighlights";
 import ChamadaTelefonica from "../../../components/IconsTSX/CellPhone";
 import Button from "@/app/components/Inputs/Button";
 import PropertyPrice from "@/app/components/NonInteractable/PropertyPrice"
@@ -30,8 +30,12 @@ import TableList from "@/app/components/Information/TableList";
 import TableListChoose from "@/app/components/Information/TableListChoose";
 import TableListHistory from "@/app/components/Information/TableListHistory";
 import GetRandomPropertiesHighlightRandom from "@/app/apiCalls/Property/GetRandomPropertiesHighlightRandom";
+import GetMostRecentProperties from "@/app/apiCalls/Property/GetMostRecentProperties";
+import SliderContentOfThree from "@/app/components/Information/SliderContentOfThree";
 
 export default async function Home() {
+
+  const mostRecentProperties = await GetMostRecentProperties()
 
   const properties = await GetRandomPropertiesHighlightRandom()
   console.log(properties)
@@ -54,7 +58,7 @@ export default async function Home() {
          
       <h3>IMÓVEIS EM</h3>
       <h2>DESTAQUE</h2>
-      <SliderContent items={properties}/>   
+      <SliderPropertyHighlights items={properties}/>   
       </section>
 
     </>
@@ -74,6 +78,7 @@ export default async function Home() {
       <NotSelectedStar width={54} height={54} color={"#001111"}/>
       <DocumentIcon width={211} height={211} color={"#501010"}/>
       <Title tag="h1" text="titulo"/>
+      <SliderContentOfThree items={mostRecentProperties}/>
       <Footer/>
 
 

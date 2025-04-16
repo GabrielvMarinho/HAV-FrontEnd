@@ -17,18 +17,18 @@ export default function SliderContent(props :{ items: PropertySpecificCard[] }){
 
     const [page, setPage] = useState(0)
     const nextPage = () => {
-        setPage((prevPage) => (prevPage + 1) % props.items.length);
+        setPage((prevPage) => (prevPage + 3) % props.items.length);
       };
     
       const prevPage = () => {
-        setPage((prevPage) => (prevPage - 1 + props.items.length) % props.items.length);
+        setPage((prevPage) => (prevPage - 3 + props.items.length) % props.items.length);
       };
       
 
       const router = useRouter();
           function goToSpecificProperty(id: number | undefined) {
               console.log(id)
-              router.push (`/property/${id}`)
+              router.push(`/property/${id}`)
           }
           
       return (
@@ -41,7 +41,7 @@ export default function SliderContent(props :{ items: PropertySpecificCard[] }){
               <div className="sliderHidden sliderItemHiddenLeft">
               <div className="highlightProperty">
                           <img src={`data:image/png;base64,${props.items[(page - 1 + props.items.length) % props.items.length]?.image}`}/>
-                          <div className="highlightPropertyBox">
+                          <div className="">
                             <div>
                               <h3>{props.items[(page - 1 + props.items.length) % props.items.length]?.city}</h3>
                               <h2>{props.items[(page - 1 + props.items.length) % props.items.length]?.neighborhood}</h2>
@@ -130,7 +130,7 @@ export default function SliderContent(props :{ items: PropertySpecificCard[] }){
                               background={"var(--button-color-reverse)"} color={"var(--text-red-pink)"} 
                               text="SAIBA MAIS" onClick={() => goToSpecificProperty(props.items[page]?.id)} />
                               </div>
-                          </div>
+                          </div>  
                 
                         </div>
 

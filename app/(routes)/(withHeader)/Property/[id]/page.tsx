@@ -12,13 +12,16 @@ import InterestPointsPropertySpecific from "@/app/components/NonInteractable/Int
 import DescriptionProperty from "@/app/components/Information/DescriptionProperty";
 import HorizontalPropertySpecific from "@/app/components/NonInteractable/HorizontalTitlePropertySpecific";
 import Title from "@/app/components/NonInteractable/Title";
-import SliderContent from "@/app/components/Information/SliderContent";
+import SliderContentOfThree from "@/app/components/Information/SliderContentOfThree";
 import RealterAssociatedVertical from "@/app/components/Information/RealterAssociatedVertical";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import searchPropertyByIdSpecific from "@/app/apiCalls/Property/searchPropertyByIdSpecific";
 import NewScheduleModal from "@/app/components/Forms/NewScheduleModal";
 import GetSimilarThreeByPrice from "@/app/apiCalls/Property/GetSimilarThreeByPrice";
+import "@/app/GeneralPages.css"
+import "@/app/variables.css"
+import "@/public/Image/css/style.css"
 
 export default function PropertySpecific(props: { obj: PropertySpecific; }) {
 
@@ -164,7 +167,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                 <div style={{ display: "flex", justifyContent: "center", width: "100%", marginTop: "115px" }}>
                     <Title text="imóveis semelhantes" tag="h1" />
                 </div>
-                <SliderContent items={
+                <SliderContentOfThree items={
                     similarProperties
                 } />
             </div>

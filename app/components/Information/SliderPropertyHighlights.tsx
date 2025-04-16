@@ -17,11 +17,11 @@ export default function SliderContent(props :{ items: PropertySpecificCard[] }){
 
     const [page, setPage] = useState(0)
     const nextPage = () => {
-        setPage((prevPage) => (prevPage + 3) % props.items.length);
+        setPage((prevPage) => (prevPage + 1) % props.items.length);
       };
     
       const prevPage = () => {
-        setPage((prevPage) => (prevPage - 3 + props.items.length) % props.items.length);
+        setPage((prevPage) => (prevPage - 1 + props.items.length) % props.items.length);
       };
       
 

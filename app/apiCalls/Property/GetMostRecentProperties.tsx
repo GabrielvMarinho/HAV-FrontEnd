@@ -1,11 +1,11 @@
-export default async function getSimilarThreeByPrice() {
-    const url = "http://localhost:9090/property/getSliderContentOfThree"
+export default async function getMostRecentProperties() {
+    const url = "http://localhost:9090/property/getMostRecentProperties"   
 
     try{
         const response = await fetch(url)
-        const data = await response.json()
-        console.log("Propriedades similares: ", data);
-        
+        const data = await response.json();
+        console.log("Mais recentes: ", data);
+
         const properties: PropertySpecificCard[] = data.map((property: PropertySpecificCard) =>({
             id:property.id,
             neighborhood:property.address.neighborhood,
@@ -23,7 +23,7 @@ export default async function getSimilarThreeByPrice() {
         }))
         return properties
     }catch(e){
-        console.log(e, "Erro ao buscar propriedades similares");
+        console.log(e, "Erro ao buscar propriedades mais recentes");
         return []
     }
 }
