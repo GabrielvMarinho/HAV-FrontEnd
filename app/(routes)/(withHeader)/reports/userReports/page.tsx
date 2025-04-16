@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import "../style/style.css";
 import Title from "@/app/components/NonInteractable/Title";
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
@@ -7,7 +8,7 @@ import SideTitle from "@/app/components/NonInteractable/SideTitle";
 import { useState } from "react";
 import HorizontalBarChart from "@/app/components/BarChart/HorizontalBarChart";
 import VerticalBarChart from "@/app/components/BarChart/VerticalBarChart";
-import AuthGuard from "@/app/context/AuthGuard";
+import AuthGuard from "@/app/context/AuthGuard"
 
 export default function ReportsPage() {
   // Dados para os gráficos verticais (mantidos como no seu exemplo)
