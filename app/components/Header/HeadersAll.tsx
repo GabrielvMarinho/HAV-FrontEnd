@@ -5,10 +5,8 @@ import HeaderEditor from "./HeaderEditor";
 import HeaderRealtor from "./HeaderRealtor";
 import HeaderNotLogged from "./HeaderNotLogged";
 
-export default function HeadersAll(props : {usuario? :any}) {
+export default function HeadersAll(props : {usuario :any}) {
   
-
-  console.log(props.usuario)
 
   let header = <HeaderNotLogged/>
   if (props.usuario?.role === "ROLE_CUSTOMER") {

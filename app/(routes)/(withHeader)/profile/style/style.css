@@ -69,7 +69,8 @@
 }
 
 .IconProfile{
-
+  display: flex;
+  gap: 35px;
 }
 
 .menuTextWrapper {
@@ -80,27 +81,7 @@
   /* gap: 12px; */
 }
 
-.menuTextWrapperFav{
-  display: flex;
-  align-items: center;
-  margin-left: -25px;
-  margin-right: 230px;
-}
-
-.menuTextWrapperMens{
-  display: flex;
-  align-items: center;
-  margin-left: -12px;
-  margin-right: 230px;
-}
-
-.menuTextWrapperNot{
-  display: flex;
-  align-items: center;
-  margin-left: 10px;
-  margin-right: 230px;
-}
-
+.
 .menuIconPlaceholder {
   width: 24px;
   height: 24px;

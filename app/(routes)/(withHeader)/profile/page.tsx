@@ -36,7 +36,7 @@ export default async function ProfilePage() {
             <p className="userType">Cliente</p>
           </div>
         </div>
-        <ProfileValidation/>
+        <ProfileValidation usuario={usuario}/>
       </div>
     </>
   );
