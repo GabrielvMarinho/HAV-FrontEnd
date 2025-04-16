@@ -3,7 +3,6 @@ export default async function (){
     try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data)
         const properties: PropertySpecificCard[] = data.map((property: PropertySpecificCard) => ({
 
             id:property.id,

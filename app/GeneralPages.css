@@ -20,10 +20,12 @@
 }
 .homeHiglightProperties{
     height: 100vh;
+    margin-top: 100px;
 }
 .homeHiglightProperties h2{
     font-size: var(--text-xl);
     font-weight: 700;
+    color: var(--box-mid-dark-red);
 }
 .homeHiglightProperties h3{
     font-size: var(--text-m);
@@ -76,4 +78,18 @@
     color: var(--text-white);
     display: flex;
     align-items: center;
+}
+
+.highlightsCards{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+}
+
+.recentProperties{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 220px;
 }

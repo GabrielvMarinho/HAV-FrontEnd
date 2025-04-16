@@ -1,4 +1,3 @@
-
 import DocumentIcon from "../../../components/IconsTSX/DocumentIcon"
 import SelectedStar from "../../../components/IconsTSX/SelectedStar"
 import NotSelectedStar from "../../../components/IconsTSX/NotSelectedStar"
@@ -32,57 +31,65 @@ import TableListHistory from "@/app/components/Information/TableListHistory";
 import GetRandomPropertiesHighlightRandom from "@/app/apiCalls/Property/GetRandomPropertiesHighlightRandom";
 import GetMostRecentProperties from "@/app/apiCalls/Property/GetMostRecentProperties";
 import SliderContentOfThree from "@/app/components/Information/SliderContentOfThree";
+import HomeHighlightsCardContainer from "@/app/components/Information/HomeHighlightsCardContainer";
+import { GetHighlightsHome } from "@/app/apiCalls/Property/GetHighlightedHome"
+import RadioButton from "@/app/components/Inputs/RadioButton";
+
 
 export default async function Home() {
 
   const mostRecentProperties = await GetMostRecentProperties()
-
   const properties = await GetRandomPropertiesHighlightRandom()
-  console.log(properties)
+  const highlightHome = await GetHighlightsHome()
+
   return (
     <>
-      <img className={"bannerHome"} src="/Image/BannerHome.png"/>
-    <section className="homeMainSection">
-      <div className={"bannerHomeTitle"} style={{display: "flex", alignItems: "center", marginBottom:"60px"}}>
-        <h1 className="mainTitleHome">CONECTANDO VOCÊ AO SEU NOVO LAR</h1>
-        <HavLogoDark height={160} width={160}/>
-      </div>
-      
-      <MainFilter/>
-    </section>
-    
-    <div className="bannerHomeLine"></div>
-    {properties.length>0?
-    <>
-    <section className="homeHiglightProperties">
-         
-      <h3>IMÓVEIS EM</h3>
-      <h2>DESTAQUE</h2>
-      <SliderPropertyHighlights items={properties}/>   
+      <img className={"bannerHome"} src="/Image/BannerHome.png" />
+      <section className="homeMainSection">
+        <div className={"bannerHomeTitle"} style={{ display: "flex", alignItems: "center", marginBottom: "60px" }}>
+          <h1 className="mainTitleHome">CONECTANDO VOCÊ AO SEU NOVO LAR</h1>
+          <HavLogoDark height={160} width={160} />
+        </div>
+
+        <MainFilter />
       </section>
 
+      <div className="bannerHomeLine"></div>
+      {properties.length > 0 ?
+        <>
+          <section className="homeHiglightProperties">
+
+            <h3>IMÓVEIS EM</h3>
+            <h2>DESTAQUE</h2>
+            <SliderPropertyHighlights items={properties} />
+          </section>
+
+        </>
+        : ""
+      }
+
+
+
+      <Title text="transformando sonhos em endereços" tag="h1" />
+      <MainHomeInfo />
+
+      {/*Imóveis em destaque card*/}
+      <section className="highlightsCards">
+        <Title tag="h1" text="Imóveis em destaques" />
+        <HomeHighlightsCardContainer cards={highlightHome} totalPages={highlightHome.pages} />
+      </section>
+
+
+      {/*Adicionados recentementes*/}
+      <section className="recentProperties">
+        <Title tag="h1" text="Imóveis adicionados recentemente" />
+        <SliderContentOfThree items={mostRecentProperties} />
+      </section>
+
+      <Footer />
+
+
     </>
-      :""
-    }
-    
-  
-
-      
-      <MainHomeInfo/>
-      
-      
-
-      
-
-      <SelectedStar width={54} height={54} color={"#001111"}/>
-      <NotSelectedStar width={54} height={54} color={"#001111"}/>
-      <DocumentIcon width={211} height={211} color={"#501010"}/>
-      <Title tag="h1" text="titulo"/>
-      <SliderContentOfThree items={mostRecentProperties}/>
-      <Footer/>
-
-
-      </>
   )
 
 }

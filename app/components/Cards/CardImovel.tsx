@@ -18,7 +18,7 @@ import Rule from "../IconsTSX/Rule";
 
 interface CardImovelProps {
     obj: PropertySpecificCard | null;
-    idUser: number;
+    idUser?: number;
 }
 
 export default function CardImovel({ obj, idUser }: CardImovelProps) {

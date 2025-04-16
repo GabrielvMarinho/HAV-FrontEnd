@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./css/style.css";
 import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
 
-export default function ToggleRentOrBuy (props :{selected :string, onChange :(purpose :string)=>{}}) {
+export default function ToggleRentOrBuy (props :{selected? :string, onChange? :(purpose :string)=>{}}) {
 
     
 

@@ -4,8 +4,6 @@ export default async function getMostRecentProperties() {
     try{
         const response = await fetch(url)
         const data = await response.json();
-        console.log("Mais recentes: ", data);
-
         const properties: PropertySpecificCard[] = data.map((property: PropertySpecificCard) =>({
             id:property.id,
             neighborhood:property.address.neighborhood,
