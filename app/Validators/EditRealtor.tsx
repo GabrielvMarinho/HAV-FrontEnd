@@ -25,8 +25,8 @@ export const editRealtor = z.object({
     neighborhood: z.string().nonempty("* Campo obrigatório"),
     state: z.string().nonempty("* Campo obrigatório"),
     complement: z.string().optional(),
-    image: z.any().optional().nullable()
-
+    image: z.any().optional().nullable(),
+    deletedImageId: z.any().optional().nullable()
 });
 
-export type editRealtor = z.infer<typeof editRealtor>;
+export type EditRealtor = z.infer<typeof editRealtor>;

@@ -20,6 +20,7 @@ import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 import ToggleButton from "@/app/components/Inputs/ToggleButton";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 import NonEditableInputText from "@/app/components/Inputs/NonEditableInputText";
+import { newCustomer } from "@/app/Validators/CustomerValidator";
 
 export default function FormEditCustomer(props: { id: any }) {
   const [customer, setCustomer] = useState<CustomerEditDto | null>(null);
@@ -35,7 +36,7 @@ export default function FormEditCustomer(props: { id: any }) {
   const router = useRouter();
 
   const form = useForm<CustomerEditDto>({
-    resolver: zodResolver(saveConfig),
+    resolver: zodResolver(newCustomer),
     mode: "onTouched",
   });
 
@@ -43,9 +44,9 @@ export default function FormEditCustomer(props: { id: any }) {
   useEffect(() => {
     async function fetchCustomer() {
       try {
-        const customerData = await searchCustomerById(props.id);
-        setCustomer(customerData);
-        form.reset(customerData);
+        const { customer, imageId } = await searchCustomerById(props.id);
+        setCustomer(customer);
+        form.reset(customer);
       } catch (error) {
         console.error("Erro ao carregar cliente:", error);
       }
@@ -160,7 +161,7 @@ export default function FormEditCustomer(props: { id: any }) {
         <InputText
           key={textFields.cellphone.id}
           name={textFields.cellphone.name}
-          defaultValue={customer?.celphone ?? ""}
+          defaultValue={customer?.cellphone ?? ""}
           size={textFields.cellphone.size}
           placeholder={textFields.cellphone.placeholder}
           text={textFields.cellphone.text}

@@ -6,9 +6,13 @@ export const editEditorOrAdm = z.object({
         .email({ message: "* E-mail inválido" })
         .refine(email => email.includes("@"), { message: "O E-mal deve ser válido", path: ["email"], }),
     phoneNumber: z.string().min(1, { message: "* Campo obrigatório" })
-            .regex(/^\d{10}$/, { message: "* 10 dígitos" }),
+        .regex(/^\d{10}$/, { message: "* 10 dígitos" }),
     cellphone: z.string().min(1, { message: "* Campo obrigatório" })
         .regex(/^\d{11}$/, { message: "* 11 dígitos" }),
+    cpf: z.string().min(11, { message: "* CPF deve ter 11 dígitos" })
+        .max(11, { message: "* CPF deve ter 11 dígitos" })
+        .regex(/^\d{11}$/, { message: "* CPF deve conter apenas números" }),
+
     cep: z.string().min(1, { message: "* Campo obrigatório" })
         .regex(/^\d{8}$/, { message: "* 8 dígitos numéricos" }),
     street: z.string().min(1, { message: "* Campo obrigatório" }),
@@ -23,15 +27,8 @@ export const editEditorOrAdm = z.object({
     neighborhood: z.string().nonempty("* Campo obrigatório"),
     state: z.string().nonempty("* Campo obrigatório"),
     complement: z.string().optional(),
+    image: z.any().optional().nullable(),
+    deletedImageId: z.any().optional().nullable()
+});
 
-    image: z.any().optional().nullable()
-    
-   
-
-    
-
-    }
-        
-        );
-
-export type editEditorOrAdm = z.infer<typeof editEditorOrAdm>;
+export type EditEditorOrAdm = z.infer<typeof editEditorOrAdm>;

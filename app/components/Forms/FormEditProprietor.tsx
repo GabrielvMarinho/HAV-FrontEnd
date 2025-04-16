@@ -7,24 +7,15 @@ import Button from "../Inputs/Button";
 import Modal from "../Modal/Modal";
 import { useState, useEffect } from "react";
 import ToggleButton from "../Inputs/ToggleButton";
-import RadioButton from "../Inputs/RadioButton";
 import ButtonUploadPhoto from "../Inputs/ButtonUploadPhoto";
 import ButtonBackAPoint from "../Inputs/ButtonBackAPoint";
-import postProprietor from "@/app/apiCalls/Proprietor/postProprietor";
-import postAdm from "@/app/apiCalls/Adm/postAdm";
 import { useRouter } from "next/navigation";
 import NonEditableInputText from "../Inputs/NonEditableInputText";
-import searchAdmDtoById from "@/app/apiCalls/Adm/searchAdmDtoById";
-import editAdm from "@/app/apiCalls/Adm/editAdm";
-import searchCustomerById from "@/app/apiCalls/Customer/searchCustomerById";
-import editEditor from "@/app/apiCalls/Editor/editEditor";
-import editCustomer from "@/app/apiCalls/Customer/editCustomer";
 import searchProprietorById from "@/app/apiCalls/Proprietor/searchProprietorById";
 import editProprietor from "@/app/apiCalls/Proprietor/editProprietor";
 import { textFields } from "../globalFormsConfig/InputTextConfig";
 import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
 import { EditProprietor } from "@/app/Validators/EditProprietor";
-import { editEditorOrAdm } from "@/app/Validators/EditEditorOrAdmValidator";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { newUser } from "@/app/Validators/ProprietorValidator";
@@ -37,10 +28,10 @@ export default function FormEditProprietor(props: { id: any }) {
     const form = useForm<EditProprietor>({
         resolver: zodResolver(newUser),
         mode: "onTouched",
-
     });
 
     function onSubmit(data: EditProprietor) {
+        console.log("entro")
         console.log("Submit data:", data);
         if (Object.keys(form.formState.errors).length > 0) {
             console.log("errors")
@@ -48,7 +39,7 @@ export default function FormEditProprietor(props: { id: any }) {
         }
         setPendingFormData(data);
         setIsModalOpen(true);
-    }
+    };
 
     useEffect(() => {
         async function fetchProprietor() {
@@ -76,6 +67,7 @@ export default function FormEditProprietor(props: { id: any }) {
         console.log(proprietor)
         if (proprietor) {
             form.reset({
+                doc: proprietor.doc,
                 name: proprietor.name,
                 email: proprietor.email,
                 cellphone: proprietor?.cellphone,
@@ -322,8 +314,7 @@ export default function FormEditProprietor(props: { id: any }) {
                     <div className="divButtonsAceptCancelForms">
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                         <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
-                            background="var(--text-white)"
-                        />
+                            background="var(--text-white)" />
                     </div>
                 </article>
                 <Modal

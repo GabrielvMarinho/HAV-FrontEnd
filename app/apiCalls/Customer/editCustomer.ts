@@ -100,7 +100,6 @@ export default async function editCustomer(id: number, formData: { [key: string]
     form.append("newImage", imageBlob, file.name);
   }
 
-
   console.log("Dados enviados:");
   for (let pair of form.entries()) {
     console.log(pair[0], pair[1]);

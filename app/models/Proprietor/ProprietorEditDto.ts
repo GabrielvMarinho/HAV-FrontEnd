@@ -1,4 +1,5 @@
 interface ProprietorEditDto {
+    doc: string;
     cpf: string;
     name: string;
     email: string;

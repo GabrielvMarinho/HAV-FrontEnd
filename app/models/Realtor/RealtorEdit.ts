@@ -1,15 +1,18 @@
 interface RealtorEditDto {
+    doc: string;
     cpf: string;
     name: string;
     email: string;
-    celphone: string;
+    cellphone: string;
     phoneNumber: string;
     cep: string;
     street: string;
-    propertyNumber: string;
+    propertyNumber: number;
     complement: string;
     state: string;
     city: string;
     neighborhood: string;
-    creci: number;
+    creci: string;
+    imageBase64?: string;
+    deletedImageId?: number;
 }
