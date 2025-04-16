@@ -21,6 +21,8 @@ import ToggleButton from "@/app/components/Inputs/ToggleButton";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 import NonEditableInputText from "@/app/components/Inputs/NonEditableInputText";
 import getUserConfigurationInfo from "@/app/apiCalls/User/getUserConfigurationInfo";
+import ThemeToggle from "@/app/components/Theme/ToggleTheme";
+import ToggleTheme from "@/app/components/Theme/ToggleTheme";
 
 export default function ProfileEditUser() {
   const [user, setUser] = useState<CustomerEditDto | null>(null);
@@ -97,6 +99,7 @@ export default function ProfileEditUser() {
         <span className="menuLabel">{label}</span>
         <div className="toggleWrapper">
           <ToggleButton toggled={isToggled} onChange={onToggle} />
+
         </div>
       </div>
     </li>
@@ -116,6 +119,7 @@ export default function ProfileEditUser() {
         <p className="personName">{user?.name || "Carregando..."}</p>
         <p className="userType">Cliente</p>
       </div>
+      
     </section>
   );
 
@@ -319,6 +323,7 @@ export default function ProfileEditUser() {
                 isToggled={toggleStates.leitorTela}
                 onToggle={() => handleToggle("leitorTela")}
               />
+
               <MenuItem
                 label="TAMANHO FONTE"
                 isToggled={toggleStates.tamanhoFonte}
