@@ -8,6 +8,7 @@ export const loginUser = (email: string, password: string) => async (dispatch) =
     try {
         const response = await fetch(url, {
             method: "POST",
+            credentials:"include",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -48,6 +49,7 @@ export const  SignUpFetch = async (name: string, email: string, password: string
     try {
         const response = await fetch(url, {
             method: "POST",
+            credentials:"include",
             headers: {
                 "Content-Type": "application/json",
             },

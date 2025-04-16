@@ -32,6 +32,7 @@ export default async function editEditor(id :any, formData: { [key: string]: For
     }
     const response = await fetch(url, {
       method: "PUT",
+      credentials:"include",
       body:form,
     });
         if (!response.ok) {

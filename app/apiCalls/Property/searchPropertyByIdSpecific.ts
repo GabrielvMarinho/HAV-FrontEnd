@@ -8,7 +8,10 @@ export default async function (
   try {
 
     console.log(url)
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      
+      credentials:"include"
+    });
     if (!response.ok) {
       throw new Error(`Erro na API: ${response.status}`);
     }

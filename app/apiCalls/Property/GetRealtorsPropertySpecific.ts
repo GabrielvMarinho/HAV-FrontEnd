@@ -8,7 +8,10 @@ export default async function(
     console.log(url)
     try{
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      
+      credentials:"include"
+    });
   
     const data = await response.json();
     

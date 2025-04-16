@@ -6,6 +6,7 @@ export default async function changeArchivedStatusRealtor(list: string[]) {
   try {
       const response = await fetch(url, {
           method: "PATCH",
+          credentials:"include",
           headers: {
             "Content-Type": "application/json", // Garante que está enviando JSON
           },

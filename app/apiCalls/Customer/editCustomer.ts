@@ -33,6 +33,8 @@ export default async function editCustomer(id :any, formData: { [key: string]: F
     }
     const response = await fetch(url, {
       method: "PUT",
+      
+      credentials:"include",
       body:form,
     });
         if (!response.ok) {

@@ -40,6 +40,7 @@ export default async function postEditor(
 
     const response = await fetch(url, {
       method: "POST",
+      credentials:"include",
       body:form,
     });
 
