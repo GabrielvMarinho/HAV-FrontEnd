@@ -2,12 +2,16 @@
 
 import { useState } from "react";
 
-export default function ToggleButton() {
-  const [isOn, setIsOn] = useState(false);
+export default function ToggleButton(props :{isToggled?: boolean, onChange?: any}) {
 
+  const [isOn, setIsOn] = useState(props.isToggled || false);
+  console.log(props.onChange);
   return (
     <button type="button"
-      onClick={() => setIsOn(!isOn)}
+      onClick={() => {
+        setIsOn(!isOn);
+        props.onChange();
+      }}
       style={{
         width: "75px",
         height: "30px",

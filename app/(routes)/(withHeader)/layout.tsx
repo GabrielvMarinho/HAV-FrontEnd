@@ -4,6 +4,8 @@ import montserrat from "@/app/Fonts"
 import findUserOnCookie from "@/app/utils/findUserOnCookie"
 import { jwtDecode } from "jwt-decode"
 import { cookies } from "next/headers"
+import ThemeToggle from "../../components/Theme/ToggleTheme"
+import InitTheme from "../../components/Theme/InitTheme"
 
 
 export const metadata = {
@@ -29,8 +31,9 @@ export default async function RootLayout({
 
   return (
     <>
-      <HeadersAll usuario={usuario} />
-      {children}
+    <InitTheme/>
+    <HeadersAll usuario={usuario}/>
+    {children}
     </>
   );
 }
