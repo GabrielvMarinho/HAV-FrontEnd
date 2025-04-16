@@ -1,3 +1,4 @@
+"use client"
 import MoreSignal from "../IconsTSX/MoreSignal"
 import "./css/style.css";
 import "@/app/variables.css"
