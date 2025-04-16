@@ -44,8 +44,9 @@ export default function ReportsPage() {
 
   return (
     <>
-      <Title tag={"h1"} text={"ESTATÍSTICAS E ANÁLISES"} />
-      <NavBarAdm options={NavBarPath.reports} />
+    <AuthGuard requiredRole="ROLE_ADMIN">
+        <Title tag={"h1"} text={"ESTATÍSTICAS E ANÁLISES"} />
+        <NavBarAdm options={NavBarPath.reports} />
 
       <div className="reports-container">
         <div className="data-Title">
@@ -54,7 +55,6 @@ export default function ReportsPage() {
             <p>EXPORTAR DADOS</p>
           </div>
         </div>
-      </div>
 
       {/* Seção de Usuários (gráfico horizontal) */}
       <section className="users-section">
@@ -73,8 +73,7 @@ export default function ReportsPage() {
               backGroundColors={barColors} 
             />
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* Seção de Novos Usuários (gráfico vertical) */}
       <section className="users-section">
@@ -99,8 +98,18 @@ export default function ReportsPage() {
               65% usuários comuns sem propriedade à venda
             </p>
           </div>
-        </div>
-      </section>
+          <div className="users-data-row">
+            <div className="users-graph-container">
+              <div className="placeholder-graph">Gráfico</div>
+            </div>
+            <div className="users-data-box">
+              <h3 className="users-big-number">123</h3>
+              <p className="users-small-text">
+                65% usuários comuns sem propriedade á venda
+              </p>
+            </div>
+          </div>
+        </section>
 
       {/* Seção de Visitas (gráfico vertical) */}
       <section className="users-section">
@@ -122,8 +131,8 @@ export default function ReportsPage() {
               40% feitas por usuários sem uma conta
             </p>
           </div>
-        </div>
-      </section>
+        </section>
+      </AuthGuard>
     </>
   );
 }

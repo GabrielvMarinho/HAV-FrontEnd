@@ -1,7 +1,10 @@
 import FormAddEditor from "@/app/components/Forms/FormAddEditor";
+import AuthGuard from "@/app/context/AuthGuard";
 
 export default function page(){
     return (
-        <FormAddEditor />
+        <AuthGuard requiredRole="ROLE_ADMIN">
+            <FormAddEditor/>
+        </AuthGuard>
     )
 }

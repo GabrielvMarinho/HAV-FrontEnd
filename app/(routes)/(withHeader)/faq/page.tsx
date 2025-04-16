@@ -6,21 +6,13 @@ import Title from "@/app/components/NonInteractable/Title";
 import SearchBarDesktop from "@/app/components/Filters/SearchBar";
 import HavLogo from "@/app/components/IconsTSX/HavLogoLight";
 import Button from "@/app/components/Inputs/Button";
-import { useAuth } from "@/app/context/AuthContext";
 import AuthGuard from "@/app/context/AuthGuard";
 import HeaderCustomer from "@/app/components/Header/HeaderCustomer";
 
 export default function page() {
     
 
-    // header(){
-    //     const {usuario} = useAuth()
-    //     return (
-    //         {usuario.role = "ADMIN"?? <HeaderAdm/>}
-    //         {usuario.role = "CUSTOMER"?? <HeaderCustomer/>}
-
-    //     )
-    // }
+    /
 
     return (
         <>

@@ -1,6 +1,7 @@
 "use client"
 import FormEditAdm from "@/app/components/Forms/FormEditAdm";
 import FormEditCustomer from "@/app/components/Forms/FormEditCustomer";
+import AuthGuard from "@/app/context/AuthGuard";
 
 import { useParams } from "next/navigation";
 
@@ -13,7 +14,10 @@ export default function PropertyPage() {
 
 
   return (
-    <FormEditCustomer id={id}/>
+    <AuthGuard requiredRole="ROLE_ADMIN"> 
+      <FormEditCustomer id={id}/>
+    </AuthGuard>
+    
     );
 
 }

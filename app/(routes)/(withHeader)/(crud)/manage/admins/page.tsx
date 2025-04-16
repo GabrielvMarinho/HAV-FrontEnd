@@ -14,8 +14,8 @@ import changeArchivedStatusAdm from "@/app/apiCalls/Adm/changeArchivedStatusAdm"
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
-
-
+import AuthGuard from "@/app/context/AuthGuard";
+import { cookies } from "next/headers";
 
 
 export default async function page({ searchParams }: {
@@ -34,32 +34,34 @@ export default async function page({ searchParams }: {
   const { cpf = null, name = null, email = null, cellphone = null, phoneNumber = null, page = null } = params
 
   const { admins, totalPages } = await getByParamsAdms(cpf, name, email, cellphone, phoneNumber, false, page ?? 0)
-    
+  
+  
+
     return (
         <>
-        
-        <Title tag="h1" text="Administradores"/>
-        <NavBarAdm options={NavBarPath.users}/>
-        <SearchBar placeholder="Busca:"/>   
-        <div className="containerFilterListAction">
-            <Filter 
-            size="medium" 
-            inputs={
-              [
-                InputFilterConfig.cpf, 
-                InputFilterConfig.name, 
-                InputFilterConfig.email, 
-                InputFilterConfig.cellphone,
-                InputFilterConfig.phoneNumber
-              ]
-            }
-            inputsDropdown={[]}
-            inputPriceRanges={[]}
-            />
-            <TableList changeArchivedStatus = {changeArchivedStatusAdm} deleteFunction={deleteByListAdm} type={"user"} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
-            data={admins} totalPages={totalPages}/>
-        </div>
-        
+          <AuthGuard requiredRole="ROLE_ADMIN"> 
+              <Title tag="h1" text="Administradores"/>
+              <NavBarAdm options={NavBarPath.users}/>
+              <SearchBar placeholder="Busca:"/>   
+              <div className="containerFilterListAction">
+                  <Filter 
+                  size="medium" 
+                  inputs={
+                    [
+                      InputFilterConfig.cpf, 
+                      InputFilterConfig.name, 
+                      InputFilterConfig.email, 
+                      InputFilterConfig.cellphone,
+                      InputFilterConfig.phoneNumber
+                    ]
+                  }
+                  inputsDropdown={[]}
+                  inputPriceRanges={[]}
+                  />
+                  <TableList changeArchivedStatus = {changeArchivedStatusAdm} deleteFunction={deleteByListAdm} type={"user"} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
+                  data={admins} totalPages={totalPages}/>
+              </div>
+          </AuthGuard>
         </>
     )
 }

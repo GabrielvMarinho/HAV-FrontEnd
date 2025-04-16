@@ -9,6 +9,7 @@ import changeArchivedStatusProperty from "@/app/apiCalls/Property/changeArchived
 import deleteProprertyList from "@/app/apiCalls/Property/deleteByListProperty";
 import deletePropertyList from "@/app/apiCalls/Property/deleteByListProperty";
 import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdownsConfig";
+import AuthGuard from "@/app/context/AuthGuard";
 
 
 
@@ -56,22 +57,22 @@ export default async function page({searchParams}: {searchParams: {
 
     return (
         <>
-        
-        <Title tag="h1" text="Imóveis"/>
-        <SearchBar placeholder="Busca:"/>   
-        <div className="containerFilterListAction">
-            <Filter 
-            size="medium" 
-            inputs={inputs}
-            inputsDropdown={[dropdownFields.propertyType, dropdownFields.status, dropdownFields.purpose]}
-            inputPriceRanges={priceRanges}
-            inputChooseQuantites={[]}
+          <AuthGuard requiredRole="ROLE_EDITOR"> 
+            <Title tag="h1" text="Imóveis"/>
+            <SearchBar placeholder="Busca:"/>   
+            <div className="containerFilterListAction">
+                <Filter 
+                size="medium" 
+                inputs={inputs}
+                inputsDropdown={[dropdownFields.propertyType, dropdownFields.status, dropdownFields.purpose]}
+                inputPriceRanges={priceRanges}
+                inputChooseQuantites={[]}
 
-            />
-            <TableList deleteFunction ={deletePropertyList} changeArchivedStatus = {changeArchivedStatusProperty} archived={false} context="admin" size="large" titles={["id imóvel", "preço",  "tipo imóvel", "finalidade", "status"]} 
-            data={properties} totalPages={totalPages}/>
-        </div>
-        
+                />
+                <TableList deleteFunction ={deletePropertyList} changeArchivedStatus = {changeArchivedStatusProperty} archived={false} context="admin" size="large" titles={["id imóvel", "preço",  "tipo imóvel", "finalidade", "status"]} 
+                data={properties} totalPages={totalPages}/>
+            </div>
+          </AuthGuard>
         </>
     )
 }

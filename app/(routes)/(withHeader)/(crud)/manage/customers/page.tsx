@@ -11,6 +11,7 @@ import deleteCustomerList from "@/app/apiCalls/Customer/deleteByListCustomer";
 import changeArchivedStatusCustomer from "@/app/apiCalls/Customer/changeArchivedStatusCustomer";
 import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
+import AuthGuard from "@/app/context/AuthGuard";
 
 interface DropdownOption {
   name: string;
@@ -63,33 +64,35 @@ export default async function page({ searchParams }: {
 
   return (
     <>
-      <Title tag="h1" text="Usuários Comuns" />
-      <NavBarAdm options={NavBarPath.users} /> 
-      <SearchBar placeholder="Busca:" />
-      <div className="containerFilterListAction">
-        <Filter
-          size="medium"
-          inputs={[
-            InputFilterConfig.cpf, 
-            InputFilterConfig.name, 
-            InputFilterConfig.email, 
-            InputFilterConfig.cellphone,
-            InputFilterConfig.phoneNumber
-          ]}
-          inputsDropdown={inputDropdown}
-          inputPriceRanges={[]}
-        />
-        <TableList 
-          changeArchivedStatus={changeArchivedStatusCustomer}
-          deleteFunction={deleteCustomerList}
-          archived={false}
-          context="admin"
-          size="large"
-          titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
-          data={customers}
-          totalPages={totalPages}
-        />
-      </div>
+    <AuthGuard requiredRole="ROLE_ADMIN">
+        <Title tag="h1" text="Usuários Comuns" />
+        <NavBarAdm options={NavBarPath.users} /> 
+        <SearchBar placeholder="Busca:" />
+        <div className="containerFilterListAction">
+          <Filter
+            size="medium"
+            inputs={[
+              InputFilterConfig.cpf, 
+              InputFilterConfig.name, 
+              InputFilterConfig.email, 
+              InputFilterConfig.cellphone,
+              InputFilterConfig.phoneNumber
+            ]}
+            inputsDropdown={inputDropdown}
+            inputPriceRanges={[]}
+          />
+          <TableList 
+            changeArchivedStatus={changeArchivedStatusCustomer}
+            deleteFunction={deleteCustomerList}
+            archived={false}
+            context="admin"
+            size="large"
+            titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
+            data={customers}
+            totalPages={totalPages}
+          />
+        </div>
+      </AuthGuard>
     </>
   );
 }

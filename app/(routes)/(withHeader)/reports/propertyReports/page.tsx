@@ -74,8 +74,9 @@ export default function page() {
 
   return (
     <>
-      <Title tag={"h1"} text={"ESTATÍSTICAS E ANÁLISES"} />
-      <NavBarAdm options={NavBarPath.reports} />
+    <AuthGuard requiredRole="ROLE_ADMIN"> 
+        <Title tag={"h1"} text={"ESTATÍSTICAS E ANÁLISES"} />
+        <NavBarAdm options={NavBarPath.reports} />
 
       {/* Container principal para centralizar o conteúdo */}
       <div className="reports-container">
@@ -154,12 +155,25 @@ export default function page() {
             </div>
           </div>
         </div>
-      </section>
 
-      <section className="properties-section">
-        <div className="properties-table-container">
+        <section className="users-section">
+          <div className="reports-graphTitle">
+            <p>IMÓVEIS</p>
+          </div>
+          <div className="users-data-row">
+            <div className="users-data-box">
+              <h3 className="users-big-number">3.2 MIL</h3>
+              <p className="users-small-text">Desde 2025</p>
+            </div>
+            <div className="users-graph-container">
+              <div className="placeholder-graph">Gráfico</div>
+            </div>
+          </div>
+        </section>
+
+        <section className="users-section">
           <div className="data-TitleRight">
-            <SideTitle tag={"h2"} text={"IMÓVEIS MAIS ACESSADOS"} />
+            <SideTitle tag={"h2"} text={"DADOS RECENTES"} />
           </div>
           <div className="data-Container">
             <table className="properties-table">

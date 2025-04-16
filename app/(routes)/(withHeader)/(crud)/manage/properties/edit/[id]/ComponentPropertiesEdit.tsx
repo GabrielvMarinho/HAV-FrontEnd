@@ -5,16 +5,18 @@ import FormEditProperty from "@/app/components/Forms/FormEditProperty";
 import AuthGuard from "@/app/context/AuthGuard";
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import ComponentPropertiesEdit from "./ComponentPropertiesEdit";
 
-export default function page(){
- 
+export default function ComponentPropertiesEdit(){
+    const params = useParams();
+    const id = params.id as string;
+    const searchParams = useSearchParams();  
+    const searchParamsObject = Object.fromEntries(searchParams.entries());
+
+
     
     return (
         <>
-            <AuthGuard requiredRole="ROLE_EDITOR"> 
-                <ComponentPropertiesEdit/>
-            </AuthGuard>
+            <FormEditProperty id ={id} objectData={searchParamsObject} />
         </>
     )
 }
