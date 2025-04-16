@@ -12,17 +12,19 @@ import ButtonBackAPoint from "@/app/components/Inputs/ButtonBackAPoint";
 import Modal from "@/app/components/Modal/Modal";
 import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdownsConfig";
 import { saveConfig } from "@/app/Validators/ProfileConfigValidator";
-import editEditor from "@/app/apiCalls/Editor/editEditor";
-import searchEditorById from "@/app/apiCalls/Editor/searchEditorById";
+import editCustomer from "@/app/apiCalls/Customer/editCustomer";
+import searchCustomerById from "@/app/apiCalls/Customer/searchCustomerById";
 import "@/app/variables.css";
-import "@/app/(routes)/configuration/style/style.css";
+import "@/app/(routes)/(withHeader)/configuration/style/style.css";
 import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 import ToggleButton from "@/app/components/Inputs/ToggleButton";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 import NonEditableInputText from "@/app/components/Inputs/NonEditableInputText";
+import getUserConfigurationInfo from "@/app/apiCalls/User/getUserConfigurationInfo";
 
-export default function FormEditCustomer(props :{id :any }) {
-  const [editor, setEditor] = useState<EditorEditDto>()
+export default function ProfileEditUser() {
+  const [user, setUser] = useState<CustomerEditDto | null>(null);
+  const [userData, setUserData] = useState<CustomerEditDto | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toggleStates, setToggleStates] = useState({
     tema: false,
@@ -34,44 +36,46 @@ export default function FormEditCustomer(props :{id :any }) {
   });
   const router = useRouter();
 
-  const form = useForm<EditorEditDto>({
+  const form = useForm<CustomerEditDto>({
     resolver: zodResolver(saveConfig),
     mode: "onTouched",
   });
 
   // Carrega os dados do cliente
   useEffect(() => {
-    async function fetchEditor() {
+    async function fetchCustomer() {
       try {
-        const editorData = await searchEditorById(props.id);
-        setEditor(editorData);
-        form.reset(editorData);
+        //replace
+        const userData = await getUserConfigurationInfo();
+        setUser(userData);
+        form.reset(userData);
       } catch (error) {
         console.error("Erro ao carregar cliente:", error);
       }
     }
 
-    if (props.id) fetchEditor();
-  }, [props.id, form]);
+    fetchCustomer();
+  }, [form]);
 
   const handleToggle = (key: string) => {
     setToggleStates((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const onSubmit = (data: EditorEditDto) => {
+  const onSubmit = (data: CustomerEditDto) => {
     if (Object.keys(form.formState.errors).length > 0) {
       console.error("Erros no formulário:", form.formState.errors);
       return;
     }
+    setUserData(form.getValues());
     setIsModalOpen(true);
   };
 
   const handleConfirmEdit = async () => {
     try {
-      await editEditor(props.id, form.getValues());
+      await editUserConfigurationInfo(props.token, userData);
       router.back();
     } catch (err) {
-      console.error("Erro ao editar editor:", err);
+      console.error("Erro ao editar cliente:", err);
     } finally {
       setIsModalOpen(false);
     }
@@ -102,11 +106,15 @@ export default function FormEditCustomer(props :{id :any }) {
   const ProfileSection = () => (
     <section className="profileSection">
       <div className="imgPerson">
-        <ButtonUploadPhoto />
+        <ButtonUploadPhoto
+          name="profileImage"
+          register={form.register}
+          error={form.formState.errors.profileImage}
+        />
       </div>
       <div>
-        <p className="personName">{editor?.name || "Carregando..."}</p>
-        <p className="userType">Editor</p>
+        <p className="personName">{user?.name || "Carregando..."}</p>
+        <p className="userType">Cliente</p>
       </div>
     </section>
   );
@@ -123,7 +131,7 @@ export default function FormEditCustomer(props :{id :any }) {
           name={textFields.name.name}
           size={textFields.name.size}
           placeholder={textFields.name.placeholder}
-          defaultValue={editor?.name ?? ""}
+          defaultValue={user?.name ?? ""}
           text={textFields.name.text}
           id={textFields.name.id}
         />
@@ -131,7 +139,7 @@ export default function FormEditCustomer(props :{id :any }) {
           key={textFields.phoneNumber.id}
           name={textFields.phoneNumber.name}
           size={textFields.phoneNumber.size}
-          defaultValue={editor?.phoneNumber ?? ""}
+          defaultValue={user?.phoneNumber ?? ""}
           placeholder={textFields.phoneNumber.placeholder}
           text={textFields.phoneNumber.text}
           id={textFields.phoneNumber.id}
@@ -141,14 +149,14 @@ export default function FormEditCustomer(props :{id :any }) {
           name={textFields.cpf.name}
           size={textFields.cpf.size}
           text={textFields.cpf.text}
-          value={editor?.cpf ?? ""}
+          value={user?.cpf ?? ""}
           id={textFields.cpf.id}
         />
         <InputText
           key={textFields.email.id}
           name={textFields.email.name}
           size={textFields.email.size}
-          defaultValue={editor?.email ?? ""}
+          defaultValue={user?.email ?? ""}
           placeholder={textFields.email.placeholder}
           text={textFields.email.text}
           id={textFields.email.id}
@@ -156,7 +164,7 @@ export default function FormEditCustomer(props :{id :any }) {
         <InputText
           key={textFields.cellphone.id}
           name={textFields.cellphone.name}
-          defaultValue={editor?.celphone ?? ""}
+          defaultValue={user?.celphone ?? ""}
           size={textFields.cellphone.size}
           placeholder={textFields.cellphone.placeholder}
           text={textFields.cellphone.text}
@@ -167,7 +175,7 @@ export default function FormEditCustomer(props :{id :any }) {
           key={textFields.cep.id}
           name={textFields.cep.name}
           size={textFields.cep.size}
-          defaultValue={editor?.cep ?? ""}
+          defaultValue={user?.cep ?? ""}
           placeholder={textFields.cep.placeholder}
           text={textFields.cep.text}
           id={textFields.cep.id}
@@ -178,7 +186,7 @@ export default function FormEditCustomer(props :{id :any }) {
           size={dropdownFields.city.size}
           text={dropdownFields.city.text}
           id={dropdownFields.city.id}
-          defaultValue={editor?.city ?? ""}
+          defaultValue={user?.city ?? ""}
           options={dropdownFields.city.options}
         />
         <InputDropdown
@@ -187,7 +195,7 @@ export default function FormEditCustomer(props :{id :any }) {
           size={dropdownFields.state.size}
           text={dropdownFields.state.text}
           id={dropdownFields.state.id}
-          defaultValue={editor?.state ?? ""}
+          defaultValue={user?.state ?? ""}
           options={dropdownFields.state.options}
         />
         <InputDropdown
@@ -196,14 +204,14 @@ export default function FormEditCustomer(props :{id :any }) {
           size={dropdownFields.neighborhood.size}
           text={dropdownFields.neighborhood.text}
           id={dropdownFields.neighborhood.id}
-          defaultValue={editor?.neighborhood ?? ""}
+          defaultValue={user?.neighborhood ?? ""}
           options={dropdownFields.neighborhood.options}
         />
         <InputText
           key={textFields.propertyNumber.id}
           name={textFields.propertyNumber.name}
           size={textFields.propertyNumber.size}
-          defaultValue={editor?.propertyNumber ?? ""}
+          defaultValue={user?.propertyNumber ?? ""}
           placeholder={textFields.propertyNumber.placeholder}
           text={textFields.propertyNumber.text}
           id={textFields.propertyNumber.id}
@@ -212,7 +220,7 @@ export default function FormEditCustomer(props :{id :any }) {
           key={textFields.street.id}
           name={textFields.street.name}
           size={textFields.street.size}
-          defaultValue={editor?.street ?? ""}
+          defaultValue={user?.street ?? ""}
           placeholder={textFields.street.placeholder}
           text={textFields.street.text}
           id={textFields.street.id}
@@ -222,7 +230,7 @@ export default function FormEditCustomer(props :{id :any }) {
           name={textFields.complement.name}
           size={textFields.complement.size}
           placeholder={textFields.complement.placeholder}
-          defaultValue={editor?.complement ?? ""}
+          defaultValue={user?.complement ?? ""}
           text={textFields.complement.text}
           id={textFields.complement.id}
         />
@@ -248,7 +256,7 @@ export default function FormEditCustomer(props :{id :any }) {
       id="idModal"
       content={
         <div className="containerModal">
-          <h1 className="titleModal">DESEJA EDITAR O EDITOR?</h1>
+          <h1 className="titleModal">DESEJA EDITAR O CLIENTE?</h1>
           <p className="descModal">
             Ao confirmar, todos os dados alterados serão salvos no novo formato,
             está ação não pode ser desfeita!

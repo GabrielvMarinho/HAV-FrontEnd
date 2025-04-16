@@ -1,4 +1,3 @@
-import { useAuth } from "@/app/context/AuthContext";
 import ArrowNextSlide from "../IconsTSX/ArrowNextSlide";
 import Bell from "../IconsTSX/Bell";
 import Comments from "../IconsTSX/Comments";
@@ -6,19 +5,11 @@ import Definition from "../IconsTSX/Definitions";
 import StarIcon from "../IconsTSX/StarIcon";
 import Button from "../Inputs/Button";
 import HorizontalLine from "../NonInteractable/HorizontalLine";
+import findUserOnCookie from "@/app/utils/findUserOnCookie";
 
-
-export default function ProfileValidation() {
-      const { usuario, loading } = useAuth();
+export default async function ProfileValidation() {
     
-      if (loading) {
-        return null; // ou um spinner, esqueleto, etc.
-      }
-    
-      if (!usuario) {
-        return null; // ou um fallback caso o usuário não esteja logado
-      }
-      console.log(usuario.role)
+    const usuario = await findUserOnCookie();
 
     return (
         <>
@@ -296,7 +287,7 @@ export default function ProfileValidation() {
                     <Button type="button" size="large" text="SAIR" hover="darken" color="white" background="#B23F52" />
                     </div>
                     </div>
-            </>}
+            </>} 
         </>
     )
 }
