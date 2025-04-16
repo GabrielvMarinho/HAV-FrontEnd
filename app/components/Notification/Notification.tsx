@@ -29,14 +29,10 @@ const Notification = () => {
         fetch(`http://localhost:9090/api/getNotifications/${idUser}`)
             .then(res => res.json())
             .then((data: MessageDTO[]) => {
-                const mensagensNaoLidas = data
-                    .filter(m => m.read === false)
-                    .map(m => ({
-                        ...m,
-                        timestamp: m.timestamp || new Date().toISOString()
-                    }));
-                setMessages(mensagensNaoLidas);
-            }).catch(e => {
+                {/*Filtrando para aparecer só as mensagens não lidas*/ }
+                const mensagensNaoLidas = data.filter(m => m.read === false);
+                setMessages(Array.isArray(mensagensNaoLidas) ? mensagensNaoLidas : [])
+            }).catch(e => { 
                 console.log("Erro ao buscar notificações", e);
             })
 
@@ -52,11 +48,8 @@ const Notification = () => {
                     };
                     setMessages(prev => {
                         const jaExiste = prev.some(msg =>
-                            msg.title === body.title &&
-                            msg.content === body.content &&
-                            msg.read === body.read
-                        );
-                        return jaExiste ? prev : [...prev, messageComHorario];
+                            msg.id === body.id);
+                        return jaExiste ? prev : [...prev, body]
                     });
                 });
             },
