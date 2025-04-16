@@ -15,6 +15,7 @@ import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 import AuthGuard from "@/app/context/AuthGuard";
+import { cookies } from "next/headers";
 
 
 export default async function page({ searchParams }: {
@@ -33,10 +34,12 @@ export default async function page({ searchParams }: {
   const { cpf = null, name = null, email = null, cellphone = null, phoneNumber = null, page = null } = params
 
   const { admins, totalPages } = await getByParamsAdms(cpf, name, email, cellphone, phoneNumber, false, page ?? 0)
-    
+  
+  
+
     return (
         <>
-          <AuthGuard requiredRole="ROLE_ADM"> 
+          <AuthGuard requiredRole="ROLE_ADMIN"> 
               <Title tag="h1" text="Administradores"/>
               <NavBarAdm options={NavBarPath.users}/>
               <SearchBar placeholder="Busca:"/>   

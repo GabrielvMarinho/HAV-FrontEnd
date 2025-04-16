@@ -5,23 +5,21 @@ import "./css/style.css"
 import Button from "../Inputs/Button";
 import { record } from "zod";
 import SchedulingCard from "../Information/SchedulingCard";
-import { useAuth } from "@/app/context/AuthContext";
 
-export default function selectHour(props :{day: Date; ids :Record<string, number>, selectHours: string[],
+export default function selectHour(props :{usuario :any; day: Date; ids :Record<string, number>, selectHours: string[],
      saveHours: (hoursAdd: string[], hoursRemove: string[]) => void, cards :Record<string, string | string[]>[],
     cardsModal :schedulesModalInfo[]}){
 
       
-      const { usuario, loading } = useAuth();
     
-      if (loading) {
+      if (props.usuario) {
         return null;
       }
     
-      if (!usuario) {
+      if (!props.usuario) {
         return null; 
       }
-      if (usuario.role !="REALTOR") {
+      if (props.usuario.role !="REALTOR") {
         return null; 
       }
 

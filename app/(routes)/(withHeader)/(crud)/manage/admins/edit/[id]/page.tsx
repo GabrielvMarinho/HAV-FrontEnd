@@ -13,7 +13,7 @@ export default function PropertyPage() {
 
 
   return (
-    <AuthGuard requiredRole="ROLE_ADM">
+    <AuthGuard requiredRole="ROLE_ADMIN">
       <FormEditAdm id={id}/>
     </AuthGuard>
     );
