@@ -1,8 +1,10 @@
-import HeaderAdm from "@/app/components/Header/HeaderAdm";
-import HeadersAll from "@/app/components/Header/HeadersAll";
-import montserrat from "@/app/Fonts";
-import { jwtDecode } from "jwt-decode";
-import { cookies } from "next/headers";
+import HeaderAdm from "@/app/components/Header/HeaderAdm"
+import HeadersAll from "@/app/components/Header/HeadersAll"
+import montserrat from "@/app/Fonts"
+import findUserOnCookie from "@/app/utils/findUserOnCookie"
+import { jwtDecode } from "jwt-decode"
+import { cookies } from "next/headers"
+
 
 export const metadata = {
   title: 'Next.js',
@@ -23,20 +25,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const cookieStore = cookies(); // Removed await - cookies() is synchronous
-  const token = cookieStore.get('token')?.value;
-  
-  let usuario: Usuario | null = null;
-
-  try {
-    if (token) {
-      usuario = jwtDecode<Usuario>(token);
-    }
-  } catch (error) {
-    console.error('Failed to decode token:', error);
-    // Optionally clear invalid token here
-    // cookies().delete('token');
-  }
+  const usuario = await findUserOnCookie();
 
   return (
     <>
