@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import ClientAuthGuard from './ClienteAuthGuard';
+import findTokeOnCookie from '../utils/findTokenOnCookie';
 
 export default function AuthGuard({
   children,
@@ -10,14 +11,8 @@ export default function AuthGuard({
   children: React.ReactNode;
   requiredRole?: string;
 }) {
-  const [token, setToken] = useState<string | undefined>();
-
-  useEffect(() => {
-    // Usando js-cookie para client-side
-    const token = Cookies.get('token');
-    setToken(token);
-  }, []);
   
+  const token = findTokeOnCookie();
   return (
     <ClientAuthGuard 
       initialToken={token}

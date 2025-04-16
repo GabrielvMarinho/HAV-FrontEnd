@@ -23,10 +23,13 @@ import NonEditableInputText from "@/app/components/Inputs/NonEditableInputText";
 import getUserConfigurationInfo from "@/app/apiCalls/User/getUserConfigurationInfo";
 import ThemeToggle from "@/app/components/Theme/ToggleTheme";
 import ToggleTheme from "@/app/components/Theme/ToggleTheme";
+import { UserConfigurationDtoForm } from "@/app/Validators/UserConfigurationDtoForm";
+import editUserConfigurationInfo from "@/app/apiCalls/User/editUserConfigurationInfo";
+import Button from "@/app/components/Inputs/Button";
 
-export default function ProfileEditUser() {
-  const [user, setUser] = useState<CustomerEditDto | null>(null);
-  const [userData, setUserData] = useState<CustomerEditDto | null>(null);
+export default function ProfileEditUser(props: {role: string}) {
+  const [user, setUser] = useState<UserConfigurationDto | null>(null);
+  const [userData, setUserData] = useState<UserConfigurationDto | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toggleStates, setToggleStates] = useState({
     tema: false,
@@ -38,8 +41,8 @@ export default function ProfileEditUser() {
   });
   const router = useRouter();
 
-  const form = useForm<CustomerEditDto>({
-    resolver: zodResolver(saveConfig),
+  const form = useForm<UserConfigurationDtoForm>({
+    resolver: zodResolver(UserConfigurationDtoForm),
     mode: "onTouched",
   });
 
@@ -63,19 +66,22 @@ export default function ProfileEditUser() {
     setToggleStates((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const onSubmit = (data: CustomerEditDto) => {
+  function onSubmit(data: UserConfigurationDto) {
+    console.log(data)
     if (Object.keys(form.formState.errors).length > 0) {
       console.error("Erros no formulário:", form.formState.errors);
       return;
     }
-    setUserData(form.getValues());
+    console.log(data)
+    setUserData(data)
     setIsModalOpen(true);
   };
+  
 
   const handleConfirmEdit = async () => {
     try {
-      await editUserConfigurationInfo(props.token, userData);
-      router.back();
+      await editUserConfigurationInfo(userData);
+      // router.back();
     } catch (err) {
       console.error("Erro ao editar cliente:", err);
     } finally {
@@ -117,7 +123,11 @@ export default function ProfileEditUser() {
       </div>
       <div>
         <p className="personName">{user?.name || "Carregando..."}</p>
-        <p className="userType">Cliente</p>
+
+        <p className="userType">{props.role=="ROLE_ADMIN" ? "Administrador" : ""}</p>
+        <p className="userType">{props.role=="ROLE_REALTOR" ? "Corretor" : ""}</p>
+        <p className="userType">{props.role=="ROLE_EDITOR" ? "Editor" : ""}</p>
+        <p className="userType">{props.role=="ROLE_CUSTOMER" ? "Cliente" : ""}</p>
       </div>
       
     </section>
@@ -135,7 +145,8 @@ export default function ProfileEditUser() {
           name={textFields.name.name}
           size={textFields.name.size}
           placeholder={textFields.name.placeholder}
-          defaultValue={user?.name ?? ""}
+          register={form.register}
+          error={form.formState.errors.name}
           text={textFields.name.text}
           id={textFields.name.id}
         />
@@ -143,7 +154,8 @@ export default function ProfileEditUser() {
           key={textFields.phoneNumber.id}
           name={textFields.phoneNumber.name}
           size={textFields.phoneNumber.size}
-          defaultValue={user?.phoneNumber ?? ""}
+          register={form.register}
+          error={form.formState.errors.phoneNumber}
           placeholder={textFields.phoneNumber.placeholder}
           text={textFields.phoneNumber.text}
           id={textFields.phoneNumber.id}
@@ -154,13 +166,15 @@ export default function ProfileEditUser() {
           size={textFields.cpf.size}
           text={textFields.cpf.text}
           value={user?.cpf ?? ""}
+          error={form.formState.errors.cpf}
           id={textFields.cpf.id}
         />
         <InputText
           key={textFields.email.id}
           name={textFields.email.name}
           size={textFields.email.size}
-          defaultValue={user?.email ?? ""}
+          register={form.register}
+          error={form.formState.errors.email}
           placeholder={textFields.email.placeholder}
           text={textFields.email.text}
           id={textFields.email.id}
@@ -168,7 +182,8 @@ export default function ProfileEditUser() {
         <InputText
           key={textFields.cellphone.id}
           name={textFields.cellphone.name}
-          defaultValue={user?.celphone ?? ""}
+          register={form.register}
+          error={form.formState.errors.celphone}
           size={textFields.cellphone.size}
           placeholder={textFields.cellphone.placeholder}
           text={textFields.cellphone.text}
@@ -179,7 +194,8 @@ export default function ProfileEditUser() {
           key={textFields.cep.id}
           name={textFields.cep.name}
           size={textFields.cep.size}
-          defaultValue={user?.cep ?? ""}
+          register={form.register}
+          error={form.formState.errors.cep}
           placeholder={textFields.cep.placeholder}
           text={textFields.cep.text}
           id={textFields.cep.id}
@@ -190,7 +206,8 @@ export default function ProfileEditUser() {
           size={dropdownFields.city.size}
           text={dropdownFields.city.text}
           id={dropdownFields.city.id}
-          defaultValue={user?.city ?? ""}
+          register={form.register}
+          error={form.formState.errors.city}
           options={dropdownFields.city.options}
         />
         <InputDropdown
@@ -199,23 +216,27 @@ export default function ProfileEditUser() {
           size={dropdownFields.state.size}
           text={dropdownFields.state.text}
           id={dropdownFields.state.id}
-          defaultValue={user?.state ?? ""}
+          register={form.register}
+          error={form.formState.errors.state}
           options={dropdownFields.state.options}
         />
         <InputDropdown
           key={dropdownFields.neighborhood.id}
           name={dropdownFields.neighborhood.name}
           size={dropdownFields.neighborhood.size}
+          error={form.formState.errors.neighborhood}
           text={dropdownFields.neighborhood.text}
           id={dropdownFields.neighborhood.id}
-          defaultValue={user?.neighborhood ?? ""}
+          register={form.register}
           options={dropdownFields.neighborhood.options}
         />
         <InputText
           key={textFields.propertyNumber.id}
           name={textFields.propertyNumber.name}
           size={textFields.propertyNumber.size}
-          defaultValue={user?.propertyNumber ?? ""}
+          register={form.register}
+          error={form.formState.errors.propertyNumber}
+
           placeholder={textFields.propertyNumber.placeholder}
           text={textFields.propertyNumber.text}
           id={textFields.propertyNumber.id}
@@ -224,9 +245,11 @@ export default function ProfileEditUser() {
           key={textFields.street.id}
           name={textFields.street.name}
           size={textFields.street.size}
-          defaultValue={user?.street ?? ""}
+          register={form.register}
           placeholder={textFields.street.placeholder}
           text={textFields.street.text}
+          error={form.formState.errors.street}
+
           id={textFields.street.id}
         />
         <InputText
@@ -234,23 +257,15 @@ export default function ProfileEditUser() {
           name={textFields.complement.name}
           size={textFields.complement.size}
           placeholder={textFields.complement.placeholder}
-          defaultValue={user?.complement ?? ""}
+          register={form.register}
+          error={form.formState.errors.complement}
           text={textFields.complement.text}
           id={textFields.complement.id}
         />
       </div>
-      <div className="divButtonSaveForms">
-        <div className="changeButton">
-          <ButtonBackAPoint
-            point=""
-            size=""
-            text="Mudar dados"
-            hover="darkHover"
-            color="var(--text-white)"
-            background="var(--text-red-pink)"
-          />
-        </div>
-      </div>
+      <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
+                            background="var(--text-white)"
+                            />
     </article>
   );
 
@@ -260,7 +275,7 @@ export default function ProfileEditUser() {
       id="idModal"
       content={
         <div className="containerModal">
-          <h1 className="titleModal">DESEJA EDITAR O CLIENTE?</h1>
+          <h1 className="titleModal">DESEJA EDITAR O SEU PERFIL?</h1>
           <p className="descModal">
             Ao confirmar, todos os dados alterados serão salvos no novo formato,
             está ação não pode ser desfeita!

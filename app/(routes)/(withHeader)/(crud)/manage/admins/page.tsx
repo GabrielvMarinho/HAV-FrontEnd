@@ -36,7 +36,7 @@ export default async function page({ searchParams }: {
   const { admins, totalPages } = await getByParamsAdms(cpf, name, email, cellphone, phoneNumber, false, page ?? 0)
   
   
-
+  
     return (
         <>
           <AuthGuard requiredRole="ROLE_ADMIN"> 

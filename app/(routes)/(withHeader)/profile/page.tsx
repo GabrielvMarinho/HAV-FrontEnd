@@ -18,7 +18,6 @@ export default async function ProfilePage() {
 
   const usuario = await findUserOnCookie();
   
-  
   return (
     <>
       <Title tag={"h1"} text={"perfil"} />
