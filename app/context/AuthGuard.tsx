@@ -1,17 +1,23 @@
-// app/components/auth-wrapper.tsx
-
-import { cookies } from 'next/headers';
+'use client';
+import { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 import ClientAuthGuard from './ClienteAuthGuard';
 
-export default async function AuthGuard({
+export default function AuthGuard({
   children,
   requiredRole 
 }: {
   children: React.ReactNode;
   requiredRole?: string;
 }) {
-  const cookieStore = await cookies();
-  const token = cookieStore.get('token')?.value;
+  const [token, setToken] = useState<string | undefined>();
+
+  useEffect(() => {
+    // Usando js-cookie para client-side
+    const token = Cookies.get('token');
+    setToken(token);
+  }, []);
+  
   return (
     <ClientAuthGuard 
       initialToken={token}

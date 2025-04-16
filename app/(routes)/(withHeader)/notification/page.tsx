@@ -12,7 +12,6 @@ export default function Notification() {
 
     return (
         <>
-            <HeaderAdm />
             <Title tag={"h1"} text={"NOTIFICAÇÕES"} />
             <div className="notification-container">                
                 <div className="notification-status">
