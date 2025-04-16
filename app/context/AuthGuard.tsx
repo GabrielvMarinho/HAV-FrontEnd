@@ -1,6 +1,7 @@
 // app/components/auth-wrapper.tsx
 import { cookies } from 'next/headers';
 import ClientAuthGuard from './ClienteAuthGuard';
+import findTokeOnCookie from '../utils/findTokenOnCookie';
 
 export default async function AuthGuard({
   children,
@@ -9,8 +10,8 @@ export default async function AuthGuard({
   children: React.ReactNode;
   requiredRole?: string;
 }) {
-  const cookieStore = await cookies();
-  const token = cookieStore.get('token')?.value;
+  
+  const token = findTokeOnCookie();
   return (
     <ClientAuthGuard 
       initialToken={token}

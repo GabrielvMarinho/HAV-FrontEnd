@@ -1,6 +1,7 @@
 import HeaderAdm from "@/app/components/Header/HeaderAdm"
 import HeadersAll from "@/app/components/Header/HeadersAll"
 import montserrat from "@/app/Fonts"
+import findUserOnCookie from "@/app/utils/findUserOnCookie"
 import { jwtDecode } from "jwt-decode"
 import { cookies } from "next/headers"
 
@@ -15,9 +16,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const cookieStore = await cookies();
-  const token = cookieStore.get('token')?.value;
-  const usuario = jwtDecode(token);
+
+  const usuario = await findUserOnCookie();
 
   return (
     

@@ -4,12 +4,13 @@ import { useParams } from "next/navigation";
 import ProfileEditUser from "./ProfileEditUser";
 import findUserOnCookie from "@/app/utils/findUserOnCookie";
 
-export default function PropertyPage() {
+export default async function PropertyPage() {
   
+  const user = await findUserOnCookie();
   
 
   return (
-    <ProfileEditUser/>
+    <ProfileEditUser role={user?.role}/>
   );
 
 }

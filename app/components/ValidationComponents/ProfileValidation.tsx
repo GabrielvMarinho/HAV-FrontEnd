@@ -220,7 +220,7 @@ export default async function ProfileValidation() {
                     </div>
             </>}
 
-            {usuario.role === "ROLE_ADM" && <>
+            {usuario.role === "ROLE_ADMIN" && <>
                 <div className="menuContainer">
                     <div className="hamburgerMenu">
                     <ul>
