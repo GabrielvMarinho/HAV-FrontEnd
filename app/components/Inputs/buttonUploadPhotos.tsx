@@ -251,6 +251,12 @@ export default function ButtonUploadPhotos<T>({
     }, [initialImages]);
 
     useEffect(() => {
+        if (preview.length > 0 && currentIndex >= 0 && currentIndex < preview.length) {
+            console.log("Imagem atual:", preview[currentIndex]);
+        }
+    }, [preview, currentIndex]);
+
+    useEffect(() => {
         if (setValue) {
             setValue(name, preview);
         }
