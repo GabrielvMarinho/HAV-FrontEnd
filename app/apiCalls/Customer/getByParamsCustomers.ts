@@ -1,3 +1,4 @@
+import findTokenOnCookie from "@/app/utils/findTokenOnCookie";
 
 export default async function(
 
@@ -16,7 +17,8 @@ export default async function(
   }>
    {
     const url = `http://localhost:9090/customer/filter?page=${page}`;
-    
+    const token = await findTokenOnCookie();
+
     try{
       
       const response = await fetch(url,{
@@ -25,6 +27,7 @@ export default async function(
         credentials:"include",
         headers: {
           "Content-Type": "application/json", // Garante que está enviando JSON
+          "Cookie": `token=${token}`
         },
         body:JSON.stringify({
           "cpf":cpf===""?null:cpf, 

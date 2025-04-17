@@ -81,7 +81,7 @@ export default function ProfileEditUser(props: {role: string}) {
   const handleConfirmEdit = async () => {
     try {
       await editUserConfigurationInfo(userData);
-      // router.back();
+
     } catch (err) {
       console.error("Erro ao editar cliente:", err);
     } finally {
