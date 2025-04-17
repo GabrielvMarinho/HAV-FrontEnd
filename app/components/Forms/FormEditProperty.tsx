@@ -91,8 +91,7 @@ export default function FormEditProperty(props: { id: any, objectData: any }) {
             try {
                 const property: PropertyEditDto = await searchPropertyById(props.id);
                 setProperty(property)
-                console.log("imageBase64List:", property.imageBase64List);
-                console.log("Api response:", property);
+                console.log("Vericação recebimento property", property);
                 changePurpose(props.objectData.purpose == null || props.objectData.purpose == undefined ? property?.purpose : props.objectData.purpose)
                 changeStatus(props.objectData.status == null || props.objectData.status == undefined ? property?.propertyStatus : props.objectData.status)
                 changeType(props.objectData.propertyType == null || props.objectData.propertyType == undefined ? property?.propertyType : props.objectData.propertyType)
@@ -162,6 +161,7 @@ export default function FormEditProperty(props: { id: any, objectData: any }) {
         }
 
     }
+
     useEffect(() => {
         setSelectedItems(
             props.objectData.additionals ?? property?.additionals ?? []
@@ -178,14 +178,16 @@ export default function FormEditProperty(props: { id: any, objectData: any }) {
         if (!pendingFormData) return;
 
         setIsModalOpen(false);
+        console.log("verificação", pendingFormData);
 
         try {//muda o método
             console.log("----000-----")
 
             const response = await editProperty(props.id, pendingFormData)
-            console.log("----000-----")
-            console.log(response)
-            window.location.href = "/manage/properties"
+            console.log("----000-----");
+            console.log(response);
+            router.back();
+            // window.location.href = "/manage/properties"
         }
         catch (err) {
         }
@@ -194,9 +196,11 @@ export default function FormEditProperty(props: { id: any, objectData: any }) {
         if (Object.keys(form.formState.errors).length > 0) {
             return;
         }
-        setPendingFormData(data),
-            setIsModalOpen(true)
+        console.log(data);
+        setPendingFormData(data);
+        setIsModalOpen(true);
     }
+
     useEffect(() => {
         if (property) {
             form.reset({
@@ -232,6 +236,7 @@ export default function FormEditProperty(props: { id: any, objectData: any }) {
             });
         }
     }, [property]);
+
     const form = useForm<newProperty>({
         resolver: zodResolver(newProperty),
         mode: "onTouched",
@@ -813,7 +818,7 @@ export default function FormEditProperty(props: { id: any, objectData: any }) {
                                         {...(form.register ? form.register("proprietor") : {})}
                                         name="proprietor"
                                     />
-                                    <input hidden={true} name="proprietorsData" value={property.proprietorsData} />
+                                    <input hidden={true} name="proprietorsData" value={property.proprietor} />
                                     {property && (
                                         <div className="proprietorsContainer">
 

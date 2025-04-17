@@ -150,12 +150,13 @@ export default function FormAddProperty(props: { objectData: any; }) {
         }
     };
     function onSubmit(data: newProperty) {
+        console.log(data);
         if (Object.keys(form.formState.errors).length > 0) {
             return;
         }
         data.additionals = selectedItems
-        setPendingFormData(data),
-            setIsModalOpen(true)
+        setPendingFormData(data);
+        setIsModalOpen(true);
     }
     const form = useForm<newProperty>({
         resolver: zodResolver(newProperty),
@@ -254,9 +255,12 @@ export default function FormAddProperty(props: { objectData: any; }) {
 
                 <section id="smallerSection">
                     <div className="imgProperty">
-                        <ButtonUploadPhotos name={"images"}
+                        <ButtonUploadPhotos
+                            name={"images"}
                             register={form.register}
                             error={form.formState.errors["images" as keyof newProperty]}
+                            setValue={form.setValue}
+                            initialImages={undefined}
                         />
                     </div>
                     <h3>CARACTERÍSTICAS DO IMÓVEL</h3>
