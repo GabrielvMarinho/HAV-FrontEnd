@@ -30,9 +30,10 @@ export default function FormAddEditor() {
     const addEditor = async function () {
         if (!pendingFormData) return;
         setIsModalOpen(false);
-        
+        console.log(pendingFormData);
+
         try {
-            
+
             const response = await postEditor(pendingFormData);
             if (response) {
                 router.back(); // Volta um ponto sem ter que escrever a barra
@@ -80,15 +81,15 @@ export default function FormAddEditor() {
     });
 
     function onSubmit(data: NewEditorOrAdm) {
-        console.log("data")
+        console.log("data", data)
         if (Object.keys(form.formState.errors).length > 0) {
             return;
         }
         setPendingFormData(data),
-        setIsModalOpen(true)
+            setIsModalOpen(true)
     }
 
-    
+
 
     return (
 
@@ -97,7 +98,7 @@ export default function FormAddEditor() {
             <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
-                        <ButtonUploadPhoto name={"image"} 
+                        <ButtonUploadPhoto name={"image"}
                             register={form.register}
                             error={form.formState.errors["image" as keyof NewEditorOrAdm]}
                         />
@@ -111,8 +112,8 @@ export default function FormAddEditor() {
                     </div>
                     <div className="inputArticle">
 
-                        
-                    <InputText
+
+                        <InputText
                             key={textFields.name.id}
                             name={textFields.name.name}
                             size={textFields.name.size}
@@ -123,14 +124,14 @@ export default function FormAddEditor() {
                             error={form.formState.errors[textFields.name.name as keyof NewEditorOrAdm]}
                         />
                         <InputText
-                          key={textFields.phoneNumber.id}
-                          name={textFields.phoneNumber.name}
-                          size={textFields.phoneNumber.size}
-                          placeholder={textFields.phoneNumber.placeholder}
-                          text={textFields.phoneNumber.text}
-                          id={textFields.phoneNumber.id}
-                          register={form.register}
-                          error={form.formState.errors[textFields.phoneNumber.name as keyof NewEditorOrAdm]}
+                            key={textFields.phoneNumber.id}
+                            name={textFields.phoneNumber.name}
+                            size={textFields.phoneNumber.size}
+                            placeholder={textFields.phoneNumber.placeholder}
+                            text={textFields.phoneNumber.text}
+                            id={textFields.phoneNumber.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.phoneNumber.name as keyof NewEditorOrAdm]}
                         />
                         <InputText
                             key={textFields.email.id}
@@ -169,7 +170,7 @@ export default function FormAddEditor() {
                             placeholder={textFields.cep.placeholder}
                             text={textFields.cep.text}
                             id={textFields.cep.id}
-                            
+
                             register={form.register}
                             error={form.formState.errors[textFields.cep.name as keyof NewEditorOrAdm]}
                         />
@@ -203,7 +204,7 @@ export default function FormAddEditor() {
                             register={form.register}
                             error={form.formState.errors[dropdownFields.neighborhood.name as keyof NewEditorOrAdm]}
                         />
-                         <InputText
+                        <InputText
                             key={textFields.propertyNumber.id}
                             name={textFields.propertyNumber.name}
                             size={textFields.propertyNumber.size}
@@ -238,7 +239,7 @@ export default function FormAddEditor() {
                     <div className="divButtonsAceptCancelForms">
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />
                         <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
-                           background="var(--text-white)" />
+                            background="var(--text-white)" />
                     </div>
                 </article>
                 <Modal

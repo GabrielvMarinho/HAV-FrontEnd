@@ -14,7 +14,7 @@ export default async function postRealtor(
       name: formData?.name,
       cpf: formData?.cpf,
       email: formData?.email,
-      celphone: formData?.cellphone,
+      cellphone: formData?.cellphone,
       phoneNumber: formData?.phoneNumber,
       creci: formData?.creci,
 

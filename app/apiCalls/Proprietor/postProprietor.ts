@@ -13,7 +13,7 @@ export default async function postProprietor(
       ...(formData?.cpf && formData.cpf.length > 1 && { cpf: formData.cpf }),
       ...(formData?.cnpj && formData.cnpj.length > 1 && { cnpj: formData.cnpj }),
       email: formData?.email,
-      celphone: formData?.cellphone,
+      cellphone: formData?.cellphone,
       phoneNumber: formData?.phoneNumber,
       archived: false,
       address: {

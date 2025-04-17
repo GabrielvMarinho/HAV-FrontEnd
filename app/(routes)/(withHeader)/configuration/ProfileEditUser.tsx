@@ -20,12 +20,10 @@ import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 import ToggleButton from "@/app/components/Inputs/ToggleButton";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 import NonEditableInputText from "@/app/components/Inputs/NonEditableInputText";
-import getUserConfigurationInfo from "@/app/apiCalls/User/getUserConfigurationInfo";
-import ThemeToggle from "@/app/components/Theme/ToggleTheme";
-import ToggleTheme from "@/app/components/Theme/ToggleTheme";
-import { UserConfigurationDtoForm } from "@/app/Validators/UserConfigurationDtoForm";
-import editUserConfigurationInfo from "@/app/apiCalls/User/editUserConfigurationInfo";
-import Button from "@/app/components/Inputs/Button";
+import { newCustomer } from "@/app/Validators/CustomerValidator";
+
+export default function FormEditCustomer(props: { id: any }) {
+  const [customer, setCustomer] = useState<CustomerEditDto | null>(null);
 
 export default function ProfileEditUser(props: {role: string}) {
   const [user, setUser] = useState<UserConfigurationDto | null>(null);
@@ -93,7 +91,7 @@ export default function ProfileEditUser(props: {role: string}) {
   const MenuItem = ({
     label,
     isToggled = false,
-    onToggle = () => {},
+    onToggle = () => { },
   }: {
     label: string;
     isToggled?: boolean;
@@ -182,6 +180,7 @@ export default function ProfileEditUser(props: {role: string}) {
         <InputText
           key={textFields.cellphone.id}
           name={textFields.cellphone.name}
+          defaultValue={customer?.cellphone ?? ""}
           register={form.register}
           error={form.formState.errors.celphone}
           size={textFields.cellphone.size}

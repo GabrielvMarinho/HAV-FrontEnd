@@ -12,7 +12,7 @@ export default async function postAdm(
       name: formData?.name,
       cpf: formData?.cpf,
       email: formData?.email,
-      celphone: formData?.cellphone,
+      cellphone: formData?.cellphone,
       phoneNumber: formData?.phoneNumber,
       archived: false,
       address: {

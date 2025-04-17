@@ -6,10 +6,6 @@ export default async function postEditor(
 
   const file = formData?.image[0];
 
-  
-
-
-
   try {
     const form = new FormData();
   
@@ -17,7 +13,7 @@ export default async function postEditor(
       name: formData?.name,
       cpf: formData?.cpf,
       email: formData?.email,
-      celphone: formData?.cellphone,
+      cellphone: formData?.cellphone,
       phoneNumber: formData?.phoneNumber,
       archived: false,
       address: {
@@ -35,8 +31,6 @@ export default async function postEditor(
     if (file) {
       form.append("image", file); // Agora enviando a imagem como base64
     }
-
-    
 
     const response = await fetch(url, {
       method: "POST",

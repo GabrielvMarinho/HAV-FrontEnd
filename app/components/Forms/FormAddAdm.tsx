@@ -81,11 +81,12 @@ export default function FormAddAdm() {
         if (Object.keys(form.formState.errors).length > 0) {
             return;
         }
-        setPendingFormData(data),
-        setIsModalOpen(true)
+        console.log(data);
+        setPendingFormData(data);
+        setIsModalOpen(true);
     }
 
-    
+
 
     return (
 
@@ -94,9 +95,9 @@ export default function FormAddAdm() {
             <form className="ownerForm" onSubmit={form.handleSubmit(onSubmit)}>
                 <section style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="imgPerson">
-                        <ButtonUploadPhoto name={"image"} 
+                        <ButtonUploadPhoto name={"image"}
                             register={form.register}
-                            error={form.formState.errors["image" as keyof NewEditorOrAdm]}/>
+                            error={form.formState.errors["image" as keyof NewEditorOrAdm]} />
                     </div>
                     <p style={{ fontSize: "var(--text-sm)", fontWeight: 700, color: "var(--text-white)" }}>STATUS CONTA</p>
                     <ToggleButton />
@@ -118,14 +119,14 @@ export default function FormAddAdm() {
                             error={form.formState.errors[textFields.name.name as keyof NewEditorOrAdm]}
                         />
                         <InputText
-                          key={textFields.phoneNumber.id}
-                          name={textFields.phoneNumber.name}
-                          size={textFields.phoneNumber.size}
-                          placeholder={textFields.phoneNumber.placeholder}
-                          text={textFields.phoneNumber.text}
-                          id={textFields.phoneNumber.id}
-                          register={form.register}
-                          error={form.formState.errors[textFields.phoneNumber.name as keyof NewEditorOrAdm]}
+                            key={textFields.phoneNumber.id}
+                            name={textFields.phoneNumber.name}
+                            size={textFields.phoneNumber.size}
+                            placeholder={textFields.phoneNumber.placeholder}
+                            text={textFields.phoneNumber.text}
+                            id={textFields.phoneNumber.id}
+                            register={form.register}
+                            error={form.formState.errors[textFields.phoneNumber.name as keyof NewEditorOrAdm]}
                         />
                         <InputText
                             key={textFields.email.id}
@@ -197,7 +198,7 @@ export default function FormAddAdm() {
                             register={form.register}
                             error={form.formState.errors[dropdownFields.neighborhood.name as keyof NewEditorOrAdm]}
                         />
-                         <InputText
+                        <InputText
                             key={textFields.propertyNumber.id}
                             name={textFields.propertyNumber.name}
                             size={textFields.propertyNumber.size}
@@ -227,7 +228,7 @@ export default function FormAddAdm() {
                             register={form.register}
                             error={form.formState.errors[textFields.complement.name as keyof NewEditorOrAdm]}
                         />
-                        
+
                     </div>
                     <div className="divButtonsAceptCancelForms">
                         <ButtonBackAPoint size={"small"} text="Cancelar" hover="darkHover" color="var(--text-white)" background="var(--text-light-red)" />

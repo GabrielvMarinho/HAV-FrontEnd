@@ -6,7 +6,7 @@ export const newUser = z.object({
     email: z.string().min(1, { message: "* Campo obrigatório" })
         .email({ message: "* E-mail inválido" }).refine(email => email.includes("@"), { message: "O E-mail deve ser válido", path: ["email"], }),
     phoneNumber: z.string().min(1, { message: "* Campo obrigatório" })
-                .regex(/^\d{10}$/, { message: "* 10 dígitos" }),
+        .regex(/^\d{10}$/, { message: "* 10 dígitos" }),
     cellphone: z.string().min(1, { message: "* Campo obrigatório" })
         .regex(/^\d{11}$/, { message: "* 11 dígitos" }), // Apenas números
     cpf: z.string().optional()
@@ -34,8 +34,8 @@ export const newUser = z.object({
     neighborhood: z.string().nonempty("* Campo obrigatório"),
     state: z.string().nonempty("* Campo obrigatório"),
     complement: z.string().optional(),
-    image: z.any().optional().nullable()
-
+    image: z.any().optional().nullable(),
+    deletedImageId: z.any().optional().nullable()
 
 }).superRefine((data, ctx) => {
     if (data.type === "pf" && (!data.cpf || data.cpf.trim().length !== 11)) {
@@ -45,7 +45,7 @@ export const newUser = z.object({
             path: ["cpf"],
         });
     }
-    
+
     if (data.type === "pj" && (!data.cnpj || data.cnpj.trim().length !== 14)) {
         ctx.addIssue({
             code: "custom",

@@ -9,16 +9,14 @@ export default async function postCustomer(
 
   try {
     const form = new FormData();
-  
+
     form.append("customer", new Blob([JSON.stringify({
       name: formData?.name,
       cpf: formData?.cpf,
       email: formData?.email,
-      celphone: formData?.cellphone,
+      cellphone: formData?.cellphone,
       phoneNumber: formData?.phoneNumber,
       creci: formData?.creci,
-
-      archived: false,
       address: {
         cep: formData?.cep,
         street: formData?.street,
@@ -28,14 +26,17 @@ export default async function postCustomer(
         propertyNumber: formData?.propertyNumber,
         complement: formData?.complement,
       }
-      }
-      )],  { type: "application/json" }));
+    }
+    )], { type: "application/json" }));
 
     if (file) {
       form.append("image", file); // Agora enviando a imagem como base64
     }
 
-    
+    console.log("Dados enviados:");
+    for (let pair of form.entries()) {
+      console.log(pair[0], pair[1]);
+    }
 
     const response = await fetch(url, {
       method: "POST",
