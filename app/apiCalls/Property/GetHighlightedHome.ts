@@ -1,4 +1,4 @@
-export async function GetHighlightsHome() {
+export async function GetHighlightsHome(purpose?: string) {
     try {
       const response = await fetch("http://localhost:9090/property/getHighlightedHome", {
         cache: "no-store", // importante se estiver em Server Component

@@ -27,5 +27,11 @@ export const NavBarPath = {
             { label: "USUÁRIO", path: "./userReports" },
             { label: "IMÓVEL", path: "./propertyReports" },
         ],
+
+    purpose:
+    [
+        {label: "VENDA", path: ""},
+        {label: "LOCAÇÃO", path: ""}
+    ]
   
 }
