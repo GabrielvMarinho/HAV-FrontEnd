@@ -4,7 +4,11 @@ export default async function searchCustomerById(id: number): Promise<{ customer
   const url = `http://localhost:9090/customer/${id}`;
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      credentials:"include"
+    });
+  
+  
     const data = await response.json();
     console.log("Resposta da API:", data);
 

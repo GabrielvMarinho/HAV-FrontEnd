@@ -4,7 +4,12 @@ export default async function searchProprietorById(id: number): Promise<{ propri
   const url = `http://localhost:9090/proprietor/${id}`;
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url,{
+      
+      credentials:"include"
+    });
+  
+  
     const data = await response.json();
     console.log("Resposta da API:", data);
 

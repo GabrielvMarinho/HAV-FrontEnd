@@ -3,6 +3,7 @@ export default async function RemoveSchedules(ids :string[]){
     const url = `http://localhost:9090/schedules`;
     const response = await fetch(url, {
         method: "DELETE",
+        credentials:"include",
           headers: {
             "Content-Type": "application/json", // Garante que está enviando JSON
           },

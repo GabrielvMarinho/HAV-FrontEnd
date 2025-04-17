@@ -55,7 +55,8 @@
 
     const response = await fetch(url, {
       method: "PUT",
-      body: form,
+      credentials:"include",
+      body:form,
     });
     console.log("asdasd", response)
     if (!response.ok) {

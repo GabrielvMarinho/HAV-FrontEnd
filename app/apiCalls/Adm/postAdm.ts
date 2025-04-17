@@ -36,6 +36,7 @@ export default async function postAdm(
     const response = await fetch(url, {
       method: "POST",
       body:form,
+      credentials:"include"
     });
 
     if (!response.ok) {

@@ -8,7 +8,10 @@ export default async function FindHistoryByCustomerId(id: any, page: string, lat
         url += `&latestDate=${encodeURIComponent(latestDate)}`;
     }
 
-    const response = await fetch(url)
+    const response = await fetch(url, {
+        
+        credentials:"include"
+    })
     
     const data = await response.json()
     const schedulesHistoryCustomerDto: schedulesHistoryCustomerDTO[] = data.content.map((schdto :any) => {

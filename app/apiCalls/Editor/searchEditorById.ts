@@ -4,7 +4,12 @@ export default async function searchEditorById(id: number): Promise<{ editor: Ed
   const url = `http://localhost:9090/editor/${id}`;
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      
+      credentials:"include"
+    });
+  
+  
     const data = await response.json();
     console.log("Resposta da API:", data);
 

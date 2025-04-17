@@ -67,7 +67,8 @@ export default async function (
 
     const response = await fetch(url, {
       method: "POST",
-      body: form,
+      credentials:"include",
+      body: form
     });
 
     if (!response.ok) {

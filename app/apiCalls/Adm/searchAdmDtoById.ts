@@ -3,8 +3,11 @@ import fetchUserImage from "../Image/searchUserImageById";
 export default async function (id: number): Promise<{ adm: AdmEditDto, imageId?: number }> {
   const url = `http://localhost:9090/adm/${id}`;
 
-  try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      credentials:"include"
+    });
+  
+  
     const data = await response.json();
     console.log("Resposta da API:", data);
 

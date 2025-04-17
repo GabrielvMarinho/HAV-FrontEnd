@@ -32,7 +32,9 @@ export default async function editCustomer(id: any, formData: { [key: string]: F
     }
     const response = await fetch(url, {
       method: "PUT",
-      body: form,
+      
+      credentials:"include",
+      body:form,
     });
     if (!response.ok) {
       const errorData = await response.json(); // Captura a resposta de erro do backend

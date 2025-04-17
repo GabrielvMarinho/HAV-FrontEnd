@@ -1,4 +1,4 @@
-import page from "@/app/(routes)/(crud)/manage/admins/page";
+import page from "@/app/(routes)/(withHeader)/(crud)/manage/admins/page";
 
 export default async function(
 
@@ -14,8 +14,8 @@ export default async function(
     totalPages: number;
 
   }>{
-    const url = `http://localhost:9090/realtor/filter?page=${page}`;
-
+    console.log(page)
+    const url = `/realtor/filter?page=${page}`;
    
     try{
     const response = await fetch(url,{
@@ -30,16 +30,20 @@ export default async function(
         "cellphone":cellphone,
         "creci":creci,
         "archived":archived
-      })
+      }),
+      credentials: "include"
+
     });
+    
   
   
     const data = await response.json();
-  
+    console.log("000000000000",data)
     const realtors: Realtor[] = data.content.map((realtor: Realtor) => realtor);
     return {realtors: realtors, totalPages: data.totalPages}
 
-    }catch{
+    }catch(err){
+      console.log(err)
       return {realtors: [], totalPages: 0};
     }
   

@@ -11,6 +11,7 @@ export default async function(id :string, reason :string, description :string){
             "Content-Type": "application/json", // Garante que está enviando JSON
           },
         method: "POST",
+        credentials:"include",
         body: JSON.stringify({
             id: id,
             subject: reason,

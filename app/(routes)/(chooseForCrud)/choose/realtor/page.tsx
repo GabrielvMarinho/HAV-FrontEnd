@@ -14,6 +14,7 @@ import FilterToAddProperty from "@/app/components/Filters/FilterToAddProperty";
 import getByParamsRealtors from "@/app/apiCalls/Realtor/getByParamsRealtors";
 import '../../style/style.css';
 import BackPage from "@/app/components/Inputs/BackPage";
+import AuthGuard from "@/app/context/AuthGuard";
   
 export default async function page({searchParams}: {searchParams: {
 
@@ -42,32 +43,34 @@ export default async function page({searchParams}: {searchParams: {
   
   return (
 
-      <div className="noHeaderPage">
+    <AuthGuard requiredRole="ROLE_EDITOR">
+        <div className="noHeaderPage">
 
-        <div className="divBackandTitle">
-          <BackPage/>
+          <div className="divBackandTitle">
+            <BackPage/>
 
-          <div className="titleChooseRealtor"> 
-            <Title tag="h1" text="Selecionar Corretores" />
-          </div>
-       </div>
-      <div className="searchBarChooseRealtor">
-        <SearchBar placeholder="Busca:" />
-      </div>
+            <div className="titleChooseRealtor"> 
+              <Title tag="h1" text="Selecionar Corretores" />
+            </div>
+        </div>
+        <div className="searchBarChooseRealtor">
+          <SearchBar placeholder="Busca:" />
+        </div>
 
 
-      <div className="containerFilterListAction">
-        <FilterToAddProperty
-          size="medium"
-          inputs={inputs}
-          inputsDropdown={[]}
-          inputPriceRanges={[]}
-        />
-        <TableListChoose  action={action || ""} type={"many"} archived={false} size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
-          data={realtors} totalPages={totalPages} />
-          
-      </div>
-      </div>
+        <div className="containerFilterListAction">
+          <FilterToAddProperty
+            size="medium"
+            inputs={inputs}
+            inputsDropdown={[]}
+            inputPriceRanges={[]}
+          />
+          <TableListChoose  action={action || ""} type={"many"} archived={false} size="large" titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
+            data={realtors} totalPages={totalPages} />
+            
+        </div>
+        </div>
+      </AuthGuard>
 
   )
 }

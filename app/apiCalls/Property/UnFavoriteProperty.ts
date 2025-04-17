@@ -2,7 +2,8 @@ export async function unfavoriteProperty(idUser: number, idProperty: number): Pr
     const url = `http://localhost:9090/favorites/desfavoritar/${idUser}/${idProperty}`;
 
     try {
-        const response = await fetch(url, { method: "DELETE" });
+        const response = await fetch(url, { method: "DELETE", 
+        credentials:"include" });
 
         if (!response.ok) {
             throw new Error(`Erro ao desfavoritar: ${response.status}`);

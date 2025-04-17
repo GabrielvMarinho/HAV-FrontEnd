@@ -4,7 +4,12 @@ export default async function searchRealtorById(id: number): Promise<{ realtor: 
   const url = `http://localhost:9090/realtor/${id}`;
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      
+      credentials:"include"
+    });
+  
+  
     const data = await response.json();
     console.log("Resposta da API:", data);
 

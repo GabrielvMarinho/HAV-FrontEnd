@@ -9,6 +9,7 @@ export default async function changeArchivedStatusAdm(list: string[]) {
           headers: {
             "Content-Type": "application/json", // Garante que está enviando JSON
           },
+          credentials:"include",
           body: JSON.stringify(list),
         });
 

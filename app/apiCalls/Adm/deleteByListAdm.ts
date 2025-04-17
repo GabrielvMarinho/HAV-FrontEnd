@@ -8,7 +8,8 @@ export default async function deleteAdmList(list: string[]) {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json", // Garante que está enviando JSON
-          },
+          }, 
+          credentials:"include",
           body: JSON.stringify(list),
         });
         const urlNew = new URL(window.location.href);

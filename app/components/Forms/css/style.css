@@ -1,4 +1,5 @@
-@import "../../../variables.css";
+@import "@/app/variables.css";
+
 
 .ownerForm {
     padding: 8px;
@@ -328,6 +329,7 @@
     color: var(--text-white-opacity-85);
     font-weight: 500;
 }
+
 
 @media(max-width: 992px){
 

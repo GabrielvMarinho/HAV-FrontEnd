@@ -6,8 +6,17 @@ const nextConfig: NextConfig = {
       test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
+    
     return config;
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:9090/:path*'
+      }
+    ]
+  }
 };
 
 export default nextConfig;

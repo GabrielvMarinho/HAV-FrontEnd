@@ -1,3 +1,4 @@
+import HeadersAll from "@/app/components/Header/HeadersAll"
 import montserrat from "@/app/Fonts"
 
 export const metadata = {

@@ -49,7 +49,8 @@ export default async function editAdm(id: any, formData: { [key: string]: FormDa
 
     const response = await fetch(url, {
       method: "PUT",
-      body: form,
+      body:form,
+      credentials:"include"
     });
     if (!response.ok) {
       const errorData = await response.json(); // Captura a resposta de erro do backend
