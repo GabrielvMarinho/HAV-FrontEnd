@@ -1,10 +1,8 @@
-'use client';
-import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import ClientAuthGuard from './ClienteAuthGuard';
-import findTokeOnCookie from '../utils/findTokenOnCookie';
+import findTokenOnCookie from '../utils/findTokenOnCookie';
 
-export default function AuthGuard({
+export default async function AuthGuard({
   children,
   requiredRole 
 }: {
@@ -12,7 +10,8 @@ export default function AuthGuard({
   requiredRole?: string;
 }) {
   
-  const token = findTokeOnCookie();
+  const token = await findTokenOnCookie();
+
   return (
     <ClientAuthGuard 
       initialToken={token}
