@@ -15,12 +15,19 @@ import ArchiveOut from '../IconsTSX/archiveOut';
 import ArrowBack from '../IconsTSX/ArrowBack';
 import PageManager from '../Inputs/PageManager';
 import React from 'react';
+import getByParamsRealtors from '@/app/apiCalls/Realtor/getByParamsRealtors';
 
 
 export default function TableList(props: {totalPages :number; changeArchivedStatus :(ids: string[]) => Promise<void>; deleteFunction: (ids: string[]) => Promise<void>; archived :boolean; context :string; size :string, titles :string[], data :any[]}){
 
     
-    
+    // useEffect(() => {
+    //     const fetch  = async () => {
+    //         const response = await getByParamsRealtors(undefined, undefined, undefined, undefined, undefined, false, 0);
+    //         console.log(response);
+    //     }
+    //     fetch();
+    // }, []);
     
     const confirmDelete = async () => {
         const selectedIds = JSON.parse(localStorage.getItem('selectedManage') || "[]");

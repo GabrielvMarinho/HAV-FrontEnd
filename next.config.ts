@@ -9,14 +9,14 @@ const nextConfig: NextConfig = {
     
     return config;
   },
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: 'http://localhost:9090/:path*'
-      }
-    ]
-  }
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: '/api/:path*',
+  //       destination: 'http://localhost:9090/:path*'
+  //     }
+  //   ]
+  // }
 };
 
 export default nextConfig;
