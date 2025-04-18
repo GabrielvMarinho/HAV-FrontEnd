@@ -1,4 +1,4 @@
-"use client";
+
 
 import searchPropertyById from "@/app/apiCalls/Property/searchPropertyById";
 import FormEditProperty from "@/app/components/Forms/FormEditProperty";

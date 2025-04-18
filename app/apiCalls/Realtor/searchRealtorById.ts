@@ -1,3 +1,5 @@
+//import fetchUserImage from "../Image/searchUserImageById";
+
 import fetchUserImage from "../Image/searchUserImageById";
 
 export default async function searchRealtorById(id: number): Promise<{ realtor: RealtorEditDto, imageId?: number }> {
@@ -5,11 +7,11 @@ export default async function searchRealtorById(id: number): Promise<{ realtor: 
 
   try {
     const response = await fetch(url, {
-      
-      credentials:"include"
+
+      credentials: "include"
     });
-  
-  
+
+
     const data = await response.json();
     console.log("Resposta da API:", data);
 
