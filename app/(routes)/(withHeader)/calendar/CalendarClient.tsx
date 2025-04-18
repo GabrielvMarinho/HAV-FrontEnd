@@ -21,45 +21,63 @@ import ModalScheduling from "@/app/components/Modal/ModalScheduling";
 import AuthGuard from "@/app/context/AuthGuard";
 import CalendarValidation from "@/app/components/ValidationComponents/CalendarValidation";
 import findUserOnCookie from "@/app/utils/findUserOnCookie";
+import FetchScheduleFutureByIdCustomerAndFuture from "@/app/apiCalls/Schedules/FetchScheduleFutureByIdCustomerAndFuture";
 
 
 export default function calendar(props: {usuario: any}){
 
     const [selected, setSelected] = useState<Date>();
     const [data, setData] = useState([]);
+    const [dataCustomer, setDataCustomer] = useState([]);
 
-    const realtorId = "1"
-    const customerId = "8"
-    const propertyId = "29"
 
     const formatTime = (time :string) => time.slice(0, 5);
 
     useEffect(() => {
         async function fetch(){
-            const data = await FetchScheduleFutureByIdAndFuture(realtorId)
+            const data = await FetchScheduleFutureByIdAndFuture()
             console.log(data)
-            setData(data);
+            setData(data || []);
+            const dataCustomer = await FetchScheduleFutureByIdCustomerAndFuture()
+            setDataCustomer(dataCustomer || []);
         }
         fetch();
       }, []);
         
-        const modifierList ={
-                freeDays: data?.map((schedule) => {
-                    const [year, month, day] = schedule.day.split("-").map(Number); // Divide e converte para número
+    console.log(props.usuario.role)
+    console.log("ROLEEEEEE")
+    var modifierList =[];
+    if(props.usuario.role == "ROLE_REALTOR"){
+        modifierList ={
+                
+            freeDays: data?.map((schedule) => {
+                const [year, month, day] = schedule.day.split("-").map(Number); // Divide e converte para número
+                return new Date(year, month -1, day)
+            }),
+            freeDaysWithCustomer: data?.map((schedule) => {
+                const [year, month, day] = schedule.day.split("-").map(Number); // Divide e converte para número
+                if(schedule.customer != null){
                     return new Date(year, month -1, day)
-                }),
-                freeDaysWithCustomer: data?.map((schedule) => {
-                    const [year, month, day] = schedule.day.split("-").map(Number); // Divide e converte para número
-                    if(schedule.customer != null){
-                        return new Date(year, month -1, day)
 
-                    }
+        }
+        
 
-                }),
+        }),
+                
+        }
+        console.log("---------------", modifierList)
+    }else{
+        modifierList ={
+            schedules: dataCustomer?.map((schedule) => {
+                const [year, month, day] = schedule.day.split("-").map(Number); // Divide e converte para número
+                return new Date(year, month -1, day)
+            }),
             
+        }
     }
 
     const getHoursFromDay = function(date :Date){
+
         var arrayOfHour :string[] = []
         if(data != null){
             data?.map((schedule) =>{
@@ -67,8 +85,9 @@ export default function calendar(props: {usuario: any}){
                 const [year, month, day] = schedule.day.split("-").map(Number); // Divide e converte para número
                 const scheduleDate = new Date(year, month - 1, day); // Cria um objeto Date para comparar
     
-
-
+                if(date == undefined){
+                    return
+                }
                 // Comparando apenas ano, mês e dia
                 if (scheduleDate.getFullYear() === date.getFullYear() && 
                     scheduleDate.getMonth() === date.getMonth() && 
@@ -111,7 +130,6 @@ export default function calendar(props: {usuario: any}){
             ? `${selected.getDate().toString().padStart(2, '0')}-${(selected.getMonth() + 1).toString().padStart(2, '0')}-${selected.getFullYear()}`
             : "",
             start_hour: hour,
-            realtor_id: realtorId, 
         }))
         AddSchedules(objects)
         window.location.href = window.location.href 
@@ -215,7 +233,6 @@ export default function calendar(props: {usuario: any}){
                                 propertyCode :schedule.property.propertyCode,
 
                                 start_hour :schedule.start_hour,
-                                realtorId :schedule.realtor.id,
                                 realtorName :schedule.realtor.name,
                                 realtorCreci :schedule.realtor.creco,
                                 realtorCelphone :schedule.realtor.celphone,
@@ -248,24 +265,43 @@ export default function calendar(props: {usuario: any}){
 
             <NavBarAdm options={NavBarPath.historic} />
             <div style={{display:"flex", gap:"50px", margin:"100px"}}>
-            <DayPicker
+                {props.usuario.role == "ROLE_REALTOR" && 
+                <DayPicker
 
-                showOutsideDays
-                fixedWeeks
-                mode="single"
-                selected={selected}
-                onSelect={setSelected}
-            
+                    showOutsideDays
+                    fixedWeeks
+                    mode="single"
+                    selected={selected}
+                    onSelect={setSelected}
                 
-                modifiers={modifierList}
-                modifiersClassNames={{
-                    freeDays:"free_day_style",
-                    freeDaysWithCustomer:"free_day_with_customer_style"
-                }}
-                locale={pt}
-                />
-                
-                <SelectHour usuario={props.usuario} cardsModal={getCardsDataModal(selected)} cards={getCardsData(selected)} saveHours={saveHours} ids={getIdsFromDay(selected)} day={selected} selectHours={getHoursFromDay(selected)}/>
+                    
+                    modifiers={modifierList}
+                    modifiersClassNames={{
+                        freeDays:"free_day_style",
+                        freeDaysWithCustomer:"free_day_with_customer_style"
+                    }}
+                    locale={pt}
+                    />
+                }
+
+                {props.usuario.role == "ROLE_CUSTOMER" && 
+                    <DayPicker
+                        showOutsideDays
+                        fixedWeeks
+                        mode="single"
+                        selected={selected}
+                        onSelect={setSelected}
+                        modifiers={modifierList}
+                        modifiersClassNames={{
+                            freeDays:"free_day_style",
+                            freeDaysWithCustomer:"free_day_with_customer_style"
+                        }}
+                        locale={pt}
+                    />
+                }
+                {props.usuario.role == "ROLE_REALTOR" && card simplesmente n ta desaparecendo
+                    <SelectHour usuario={props.usuario} cardsModal={getCardsDataModal(selected)} cards={getCardsData(selected)} saveHours={saveHours} ids={getIdsFromDay(selected)} day={selected} selectHours={getHoursFromDay(selected)}/>
+                }
                 
             
             </div>

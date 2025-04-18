@@ -6,13 +6,12 @@ import ArrowBackDraw from "../IconsTSX/ArrowBackDraw";
 import "../../variables.css"
 import Calendar from "../IconsTSX/Calendar";
 import GetRealtorsPropertySpecific from "@/app/apiCalls/Property/GetRealtorsPropertySpecific";
-import FetchScheduleFutureByIdAndFuture from "@/app/apiCalls/Schedules/FetchScheduleFutureByIdAndFuture";
 import PresenceSchedule from "@/app/apiCalls/Schedules/PresenceSchedule";
 import FetchScheduleFutureByIdAndFree from "@/app/apiCalls/Schedules/FetchScheduleFutureByIdAndFree";
 import FetchScheduleFutureByPropertyId from "@/app/apiCalls/Schedules/FetchScheduleFutureByPropertyId";
 import getRealtorsForDayAndHour from "@/app/apiCalls/Schedules/getRealtorsForDayAndHour";
 
-export default function NewScheduleModal(props :{propertyId :string, userId :string;}){
+export default function NewScheduleModal(props :{propertyId :string}){
     const [page, setPage] = useState(0);
     const [priority, setPriority] = useState<"data" | "corretor" | null>(null)
     const [realtor, setRealtor] = useState<string | null>(null);
@@ -384,7 +383,7 @@ export default function NewScheduleModal(props :{propertyId :string, userId :str
     }
     if(page==5){
         if(realtor){
-            PresenceSchedule(realtorHoursSelected, props.propertyId, props.userId)
+            PresenceSchedule(realtorHoursSelected, props.propertyId)
         }else{
             const ids: string[] = [];
             console.log(hourDataFirst)
@@ -394,7 +393,7 @@ export default function NewScheduleModal(props :{propertyId :string, userId :str
                 }
               });
               console.log("entrou")
-            PresenceSchedule(ids, props.propertyId, props.userId)
+            PresenceSchedule(ids, props.propertyId)
         }
         return(
             <div className="modalNewScheduleBig">

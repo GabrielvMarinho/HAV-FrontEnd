@@ -20,10 +20,12 @@ export default function selectHour(props :{usuario :any; day: Date; ids :Record<
       if (props.usuario.role !="ROLE_REALTOR") {
         return null; 
       }
+      console.log(props.day)
 
 
 
     if(!props.day){
+      console.log("entrou")
         return(
             <h3>selecione um dia</h3>
         )

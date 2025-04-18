@@ -27,7 +27,6 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
 
     const { id } = useParams(); // Pegando o ID da URL
     const propertyId = props.obj?.id ?? id; // Prioriza props.obj.id, mas usa o ID da URL se necessário
-    const customerId = "3"
     const [property, setProperty] = useState<PropertySpecific | null>(null);
 
     const formatProperty = (apiData: any): PropertySpecific => ({
@@ -153,7 +152,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                     </div>
 
                 </article>
-                <NewScheduleModal propertyId={String(propertyId)} userId={customerId} />
+                <NewScheduleModal propertyId={String(propertyId)} />
 
                 <article className="enviroments-interestPoint">
                     <OtherEnvironmentsProperty obj={{ additionals: property.additionals }} />
