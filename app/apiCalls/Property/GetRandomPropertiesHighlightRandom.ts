@@ -6,7 +6,6 @@ export default async function (){
           credentials:"include"
         });
         const data = await response.json();
-        console.log(data)
         const properties: PropertySpecificCard[] = data.map((property: PropertySpecificCard) => ({
 
             id:property.id,

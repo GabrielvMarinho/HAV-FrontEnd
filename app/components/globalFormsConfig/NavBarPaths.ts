@@ -1,3 +1,5 @@
+
+
 export const NavBarPath = {
 
     historic:
@@ -27,5 +29,11 @@ export const NavBarPath = {
             { label: "USUÁRIO", path: "./userReports" },
             { label: "IMÓVEL", path: "./propertyReports" },
         ],
+
+    purpose:
+    [
+        {label: "VENDA"},
+        {label: "LOCAÇÃO"}
+    ]
   
 }

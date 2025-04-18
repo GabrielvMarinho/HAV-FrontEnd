@@ -13,6 +13,8 @@ import Garage from "../IconsTSX/Garage";
 import Rule from "../IconsTSX/Rule";
 import Sofa from "../IconsTSX/Sofa";
 
+
+
 export default function SliderContent(props :{ items: PropertySpecificCard[] }){
 
     const [page, setPage] = useState(0)
