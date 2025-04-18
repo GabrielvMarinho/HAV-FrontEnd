@@ -21,9 +21,12 @@ import ToggleButton from "@/app/components/Inputs/ToggleButton";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 import NonEditableInputText from "@/app/components/Inputs/NonEditableInputText";
 import { newCustomer } from "@/app/Validators/CustomerValidator";
+import UserConfigurationDtoForm from "@/app/Validators/UserConfigurationDtoForm";
+import editUserConfigurationInfo from "@/app/apiCalls/User/editUserConfigurationInfo";
+import ToggleTheme from "@/app/components/Theme/ToggleTheme";
+import Button from "@/app/components/Inputs/Button";
+import getUserConfigurationInfo from "@/app/apiCalls/User/getUserConfigurationInfo";
 
-export default function FormEditCustomer(props: { id: any }) {
-  const [customer, setCustomer] = useState<CustomerEditDto | null>(null);
 
 export default function ProfileEditUser(props: {role: string}) {
   const [user, setUser] = useState<UserConfigurationDto | null>(null);
@@ -180,7 +183,6 @@ export default function ProfileEditUser(props: {role: string}) {
         <InputText
           key={textFields.cellphone.id}
           name={textFields.cellphone.name}
-          defaultValue={customer?.cellphone ?? ""}
           register={form.register}
           error={form.formState.errors.celphone}
           size={textFields.cellphone.size}
@@ -310,7 +312,7 @@ export default function ProfileEditUser(props: {role: string}) {
 
               <div className="menuContent">              
                 <label>TEMA</label>
-                <ThemeToggle isToggled={toggleStates.tema} onChange={() => handleToggle("tema")}/>
+                <ToggleTheme isToggled={toggleStates.tema} onChange={() => handleToggle("tema")}/>
               </div>
               <MenuItem
                 label="IDIOMA"
