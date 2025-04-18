@@ -11,7 +11,7 @@ interface PropertySpecificCard {
     propertyType: string;
     promotionalPrice: number;
     area: number;
-    image: Base64URLString;
+    image: String;
     price: number; 
     purpose: string; 
     neighborhood: string;
@@ -20,6 +20,6 @@ interface PropertySpecificCard {
     garageSpace: number;
     bathRoom: number;
     bedRoom: number;
-    livingRoom: number
-    
+    livingRoom: number;
+    mainImageId: number;
 }
