@@ -8,6 +8,7 @@ import "@/app/pageStructure.css"
 import changeArchivedStatusProperty from "@/app/apiCalls/Property/changeArchivedStatusProperty";
 import deletePropertyList from "@/app/apiCalls/Property/deleteByListProperty";
 import AuthGuard from "@/app/context/AuthGuard";
+import { dropdownFields } from "@/app/components/globalFormsConfig/InputDropdownsConfig";
 
 
 export default async function page({searchParams}: {searchParams: {
@@ -31,7 +32,7 @@ export default async function page({searchParams}: {searchParams: {
         bathRoom=null, garageSpace=null, suite=null, purpose=null} = params
 
       const {properties, totalPages} = await getByParamsProperties(propertyCode, propertyType, propertyStatus, 
-      minPrice, maxPrice, false, page, bedRoom, bathRoom, garageSpace, suite, purpose)
+      minPrice, maxPrice, true, page, bedRoom, bathRoom, garageSpace, suite, purpose)
     
       const inputs = [
           {name: "propertyCode", size: "medium", text: "Código", placeholder: "ex: P12334", id: "propertyCode",},
@@ -71,7 +72,7 @@ export default async function page({searchParams}: {searchParams: {
                   <Filter 
                   size="medium" 
                   inputs={inputs}
-                  nputsDropdown={[dropdownFields.propertyType, dropdownFields.status, dropdownFields.purpose]}
+                  inputsDropdown={[dropdownFields.propertyType, dropdownFields.status, dropdownFields.purpose]}
                   inputPriceRanges={priceRanges}
                   inputChooseQuantites={[]}
 

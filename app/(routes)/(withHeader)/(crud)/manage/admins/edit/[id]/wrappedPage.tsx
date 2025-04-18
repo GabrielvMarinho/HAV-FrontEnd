@@ -1,20 +1,18 @@
+"use client"
 import FormEditAdm from "@/app/components/Forms/FormEditAdm";
 import AuthGuard from "@/app/context/AuthGuard";
 
 import { useParams } from "next/navigation";
-import WrappedPageEditAdm from "./wrappedPage";
 
-export default function Page() {
+export default function WrappedPageEditAdm() {
   
+  const params = useParams();
   
+  const id = params.id ?? 0;
 
 
   return (
-    <AuthGuard requiredRole="ROLE_ADMIN">
-
-        <WrappedPageEditAdm/>
-
-    </AuthGuard>
+      <FormEditAdm id={id}/>
     );
 
 }

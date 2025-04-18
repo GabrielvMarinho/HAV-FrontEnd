@@ -52,7 +52,7 @@ export default function FormEditAdm(props: { id: any }) {
 
 
     const form = useForm<EditEditorOrAdm>({
-        resolver: zodResolver(newEditorOrAdm),
+        resolver: zodResolver(editEditorOrAdm),
         mode: "onTouched",
 
     });
@@ -77,7 +77,7 @@ export default function FormEditAdm(props: { id: any }) {
         }
     }, [adm]);
     function onSubmit(data: EditEditorOrAdm) {
-        console.log(data)
+        console.log("----", data)
         if (Object.keys(form.formState.errors).length > 0) {
             return;
         }

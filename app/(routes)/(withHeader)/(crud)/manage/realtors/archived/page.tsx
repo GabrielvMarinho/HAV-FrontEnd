@@ -38,7 +38,7 @@ export default async function page({searchParams}: {searchParams: {
         
         return (
             <>
-                <AuthGuard  requiredRole="ROLE_ADMIN">
+                <AuthGuard  requiredRole="ROLE_EDITOR">
                     <Title tag="h1" text="Corretores Arquivados"/>
                     <SearchBar placeholder="Busca:"/>   
                     <div className="containerFilterListAction">

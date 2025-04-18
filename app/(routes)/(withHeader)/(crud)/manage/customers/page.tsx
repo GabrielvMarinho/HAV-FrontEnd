@@ -64,7 +64,7 @@ export default async function page({ searchParams }: {
 
   return (
     <>
-    <AuthGuard requiredRole="ROLE_ADMIN">
+    <AuthGuard requiredRole="ROLE_EDITOR">
         <Title tag="h1" text="Usuários Comuns" />
         <NavBarAdm options={NavBarPath.users} /> 
         <SearchBar placeholder="Busca:" />

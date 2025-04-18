@@ -37,6 +37,8 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
             setIsDeleteModalOpen(false);
 
         }
+        window.location.reload();
+
     };
 
 
@@ -50,7 +52,6 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
     }
     const notArchiveRoute = function(){
         router.push(window.location.pathname.replace(/\/archived$/, ""));
-
     }
     //EDIT RELATED
     const editFunction = function(){
@@ -89,6 +90,8 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
             setIsArchiveModalOpen(false);
 
         }
+
+        window.location.reload();
     }
 
     //GRAPHS RELATED
@@ -172,7 +175,7 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
                             {Object.entries(obj).slice(1).map(([key, value]) => (
                                     <td key = {key}>
                                         <div>
-                                            {key === "price" ? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value}
+                                            {key === "price" ? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value==null?"----":value}
                                         </div>
                                     </td>
 
@@ -208,7 +211,7 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
                 
                 <Modal content={
                     <div className="containerModal">
-                        <h1 className="titleModal">DESEJA DESARQUIVAR? </h1>
+                        <h1 className="titleModal">DESEJA ARQUIVAR? </h1>
                         <p className="descModal"> Ao confirmar, os dados arquivados serão desarquivados.</p>
                     </div>
                 } id="archiveModal" isOpen={isArchiveModalOpen} onClose={() => setIsArchiveModalOpen(false)} onConfirm={changeArchivedStatus} />

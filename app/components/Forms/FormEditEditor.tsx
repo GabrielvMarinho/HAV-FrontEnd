@@ -55,7 +55,7 @@ export default function FormEditEditor(props: { id: any }) {
 
 
     const form = useForm<EditEditorOrAdm>({
-        resolver: zodResolver(newEditorOrAdm),
+        resolver: zodResolver(editEditorOrAdm),
         mode: "onTouched",
 
     });
