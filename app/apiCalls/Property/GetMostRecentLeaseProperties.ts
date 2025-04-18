@@ -1,7 +1,6 @@
-export default async function getMostRecentProperties(purpose?: string) {
-    const url = purpose
-      ? `http://localhost:9090/property/getMostRecentProperties?purpose=${purpose}`
-      : "http://localhost:9090/property/getMostRecentProperties";
+export default async function getMostRecentLeaseProperties() {
+    const url 
+      = "http://localhost:9090/property/getMostRecentLeaseProperties";
   
     try {
       const response = await fetch(url);

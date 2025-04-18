@@ -11,7 +11,7 @@ import HavLogoDark from "@/app/components/IconsTSX/HavLogoDark";
 import MainHomeInfo from "@/app/components/Information/mainHomeInfo";
 import SliderPropertyHighlights from "@/app/components/Information/SliderPropertyHighlights";
 import GetRandomPropertiesHighlightRandom from "@/app/apiCalls/Property/GetRandomPropertiesHighlightRandom";
-import GetMostRecentProperties from "@/app/apiCalls/Property/GetMostRecentProperties";
+import GetMostRecentProperties from "@/app/apiCalls/Property/GetMostRecentSellProperties";
 import SliderContentOfThree from "@/app/components/Information/SliderContentOfThree";
 import HomeHighlightsCardContainer from "@/app/components/Information/HomeHighlightsCardContainer";
 import { GetHighlightsHome } from "@/app/apiCalls/Property/GetHighlightedHome"

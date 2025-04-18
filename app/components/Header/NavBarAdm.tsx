@@ -3,7 +3,11 @@
 import { usePathname } from "next/navigation";
 import './css/style.css';
 
-export default function NavBarAdm(props: { options: { label: string; path?: string }[]; onSelect?: (label: string) => void }) {
+export default function NavBarAdm(props: {
+    options: { label: string; path?: string }[];
+    onSelect?: (label: string) => void;
+    selected?: string;
+}) {
     const pathname = usePathname();
 
     return (

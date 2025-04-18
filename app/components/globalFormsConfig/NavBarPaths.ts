@@ -1,3 +1,5 @@
+
+
 export const NavBarPath = {
 
     historic:
@@ -30,8 +32,8 @@ export const NavBarPath = {
 
     purpose:
     [
-        {label: "VENDA", path: ""},
-        {label: "LOCAÇÃO", path: ""}
+        {label: "VENDA"},
+        {label: "LOCAÇÃO"}
     ]
   
 }

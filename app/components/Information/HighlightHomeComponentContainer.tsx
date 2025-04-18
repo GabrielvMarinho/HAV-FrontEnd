@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import HomeHighlightsCardContainer from "./HomeHighlightsCardContainer";
 import NavBarAdm from "../Header/NavBarAdm";
 import { NavBarPath } from "../globalFormsConfig/navBarPaths";
-{/*Mudei porque esse componente não está funcionando*/}
-// import GetHighlightsHome from "@/app/apiCalls/Property/GetHighlightedHome";
+import { GetHighlightsHome } from "@/app/apiCalls/Property/GetHighlightedHome";
 
 export default function HighlightHomeComponentContainer() {
   const [purpose, setPurpose] = useState<string>("VENDA");
@@ -13,7 +12,7 @@ export default function HighlightHomeComponentContainer() {
 
   useEffect(() => {
     async function fetchHighlights() {
-    //   const response = await GetHighlightsHome(purpose);
+      const response = await GetHighlightsHome(purpose);
       setHighlightsCards(response.highlightsCards || []);
       setPages(response.pages || 1);
     }
