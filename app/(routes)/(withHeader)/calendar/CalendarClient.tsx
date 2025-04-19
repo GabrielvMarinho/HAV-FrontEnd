@@ -44,6 +44,7 @@ export default function calendar(props: {usuario: any}){
       }, []);
         
     var modifierList =[];
+
     if(props.usuario.role == "ROLE_REALTOR"){
         modifierList ={
                 
@@ -96,11 +97,53 @@ export default function calendar(props: {usuario: any}){
 
         return arrayOfHour
     }
+    const getHoursFromDayCustomer = function(date :Date){
+
+        var arrayOfHour :string[] = []
+        if(dataCustomer != null){
+            dataCustomer?.map((schedule) =>{
+
+                const [year, month, day] = schedule.day.split("-").map(Number); // Divide e converte para número
+                const scheduleDate = new Date(year, month - 1, day); // Cria um objeto Date para comparar
+    
+                if(date == undefined){
+                    return
+                }
+                // Comparando apenas ano, mês e dia
+                if (scheduleDate.getFullYear() === date.getFullYear() && 
+                    scheduleDate.getMonth() === date.getMonth() && 
+                    scheduleDate.getDate() === date.getDate()) {
+                    arrayOfHour.push(schedule.start_hour.slice(0, 5))
+                }
+            })
+        }
+        
+
+        return arrayOfHour
+    }
 
     const getIdsFromDay = function(date :Date){
         var objectId :Record<string, number> = {}
         if(date){
             data?.map((schedule) =>{
+
+                const [year, month, day] = schedule.day.split("-").map(Number); // Divide e converte para número
+                const compareDate = new Date(year, month-1, day)
+    
+                if (compareDate.getFullYear() === date.getFullYear() && 
+                    compareDate.getMonth() === date.getMonth() && 
+                        compareDate.getDate() === date.getDate()) {            
+                    objectId[schedule.start_hour.slice(0, 5)] = schedule.id
+                }
+            })
+        }
+       
+        return objectId
+    }
+    const getIdsFromDayCustomer = function(date :Date){
+        var objectId :Record<string, number> = {}
+        if(date){
+            dataCustomer?.map((schedule) =>{
 
                 const [year, month, day] = schedule.day.split("-").map(Number); // Divide e converte para número
                 const compareDate = new Date(year, month-1, day)
@@ -208,12 +251,91 @@ export default function calendar(props: {usuario: any}){
         console.log("arrayOfCardsData", arrayOfCardsData)
         return arrayOfCardsData
     }
+    const getCardsDataCustomer = function(date :Date){
+        var arrayOfCardsData :Record<string, string | string[]>[] = []
+        var index =0;
+        if(date != undefined){
+            dataCustomer?.map((schedule) =>{
+
+                const [year, month, day] = schedule.day.split("-").map(Number);
+                const scheduleDate = new Date(year, month - 1, day);
+    
+                
+
+                // Comparando apenas ano, mês e dia
+                //compare date
+                if(scheduleDate.getMonth() == date.getMonth() && scheduleDate.getFullYear() == date.getFullYear() && scheduleDate.getDate() == date.getDate()){
+                
+                    if(schedule.customer && schedule.property){
+                        if(schedule.customer.id && schedule.property.id){
+                            const indexArray = arrayOfCardsData.findIndex(record => 
+                                record["customer_id"] === schedule.customer.id &&
+                                record["property_id"] === schedule.property.id
+                            );
+                            if (indexArray !== -1) {
+                                arrayOfCardsData[indexArray]["hours"].push(formatTime(schedule.start_hour));
+                                //sorting hours
+                                const times = arrayOfCardsData[indexArray]["hours"];
+
+                                const sortedTimes = times.sort((a, b) => {
+                                // Convert time strings (HH:mm) to Date objects for proper comparison
+                                const [aHour, aMinute] = a.split(':').map(Number);
+                                const [bHour, bMinute] = b.split(':').map(Number);
+            
+                                // Compare hours first, then minutes
+                                if (aHour === bHour) {
+                                    return aMinute - bMinute;
+                                }
+                                return aHour - bHour;
+                                });
+                                arrayOfCardsData[indexArray]["hours"] = sortedTimes
+
+                            }else{
+                                arrayOfCardsData[index] = {["hours"]: []}
+
+                                arrayOfCardsData[index]["customer_id"] = schedule.customer.id
+                                arrayOfCardsData[index]["property_id"] = schedule.property.id
+                                arrayOfCardsData[index]["name"] = schedule.customer.name
+                                arrayOfCardsData[index]["city"] = schedule.property.address.city
+                                arrayOfCardsData[index]["neighborhood"] = schedule.property.address.neighborhood
+                                arrayOfCardsData[index]["phone"] = schedule.customer.celphone
+                                arrayOfCardsData[index]["hours"].push(formatTime(schedule.start_hour))
+                                //sorting hours
+                                const times = arrayOfCardsData[index]["hours"];
+
+                                const sortedTimes = times.sort((a, b) => {
+                                // Convert time strings (HH:mm) to Date objects for proper comparison
+                                const [aHour, aMinute] = a.split(':').map(Number);
+                                const [bHour, bMinute] = b.split(':').map(Number);
+            
+                                // Compare hours first, then minutes
+                                if (aHour === bHour) {
+                                    return aMinute - bMinute;
+                                }
+                                return aHour - bHour;
+                                });
+                                arrayOfCardsData[index]["hours"] = sortedTimes
+                                    
+                                index = index +1
+
+                            }
+                        }
+                    }
+                }
+                    
+                
+            })
+        }
+        console.log("arrayOfCardsData", arrayOfCardsData)
+        return arrayOfCardsData
+    }
    
     const getCardsDataModal = function(date :Date){
         console.log("novo")
         var arrayOfCardsDataModal :schedulesModalInfo[] = []
         var index =0;
         if(date != undefined){
+            
             data?.map((schedule) =>{
 
                 const [year, month, day] = schedule.day.split("-").map(Number);
@@ -256,6 +378,54 @@ export default function calendar(props: {usuario: any}){
         console.log("arrayOfCardsDataModal", arrayOfCardsDataModal)
         return arrayOfCardsDataModal
     }
+        const getCardsDataModalCustomer = function(date :Date){
+            console.log("novo")
+            var arrayOfCardsDataModal :schedulesModalInfo[] = []
+            var index =0;
+            if(date != undefined){
+                
+                dataCustomer?.map((schedule) =>{
+    
+                    const [year, month, day] = schedule.day.split("-").map(Number);
+                    const scheduleDate = new Date(year, month - 1, day);
+                    
+                    
+    
+                    // Comparando apenas ano, mês e dia
+                    if(scheduleDate.getMonth() == date.getMonth() && scheduleDate.getFullYear() == date.getFullYear() && scheduleDate.getDate() == date.getDate()){
+    
+                        if(schedule.customer && schedule.property){
+                            if(schedule.customer.id && schedule.property.id){
+                                const obj :schedulesModalInfo={
+                                    id: schedule.id,
+                                    day :schedule.day,
+                                    propertyCode :schedule.property.propertyCode,
+                                    start_hour :schedule.start_hour,
+                                    realtorName :schedule.realtor.name,
+                                    realtorCreci :schedule.realtor.creco,
+                                    realtorCelphone :schedule.realtor.celphone,
+                                    realtorEmail :schedule.realtor.email,
+                                    purpose :schedule.property.purpose,
+                                    propertyType :schedule.property.propertyType,
+                                    status :schedule.status,
+                                    city :schedule.property.address.city,
+                                    state :schedule.property.address.state,
+                                    price :schedule.property.price,
+                                    neighborhood :schedule.property.address.neighborhood
+                                } 
+                                arrayOfCardsDataModal.push(obj);
+                                
+                            }
+                        }
+                    }
+                    
+                        
+                    
+                })
+            }
+        console.log("arrayOfCardsDataModal", arrayOfCardsDataModal)
+        return arrayOfCardsDataModal
+    }
 
 
     return(
@@ -284,7 +454,7 @@ export default function calendar(props: {usuario: any}){
                     />
                 }
 
-                {props.usuario.role == "ROLE_CUSTOMER" && 
+                {props.usuario.role != "ROLE_REALTOR" && 
                     <DayPicker
                         showOutsideDays
                         fixedWeeks
@@ -293,14 +463,17 @@ export default function calendar(props: {usuario: any}){
                         onSelect={setSelected}
                         modifiers={modifierList}
                         modifiersClassNames={{
-                            freeDays:"free_day_style",
-                            freeDaysWithCustomer:"free_day_with_customer_style"
+
+                            schedules:"free_day_with_customer_style"
                         }}
                         locale={pt}
                     />
                 }
                 {props.usuario.role == "ROLE_REALTOR" &&
                     <SelectHour usuario={props.usuario} cardsModal={getCardsDataModal(selected)} cards={getCardsData(selected)} saveHours={saveHours} ids={getIdsFromDay(selected)} day={selected} selectHours={getHoursFromDay(selected)}/>
+                }
+                {props.usuario.role != "ROLE_REALTOR" &&
+                    <SelectHour usuario={props.usuario} cardsModal={getCardsDataModalCustomer(selected)} cards={getCardsDataCustomer(selected)} ids={getIdsFromDayCustomer(selected)} day={selected} selectHours={getHoursFromDayCustomer(selected)}/>
                 }
                 
             
