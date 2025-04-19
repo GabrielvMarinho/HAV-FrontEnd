@@ -36,7 +36,6 @@ export default function calendar(props: {usuario: any}){
     useEffect(() => {
         async function fetch(){
             const data = await FetchScheduleFutureByIdAndFuture()
-            console.log(data)
             setData(data || []);
             const dataCustomer = await FetchScheduleFutureByIdCustomerAndFuture()
             setDataCustomer(dataCustomer || []);
@@ -44,8 +43,6 @@ export default function calendar(props: {usuario: any}){
         fetch();
       }, []);
         
-    console.log(props.usuario.role)
-    console.log("ROLEEEEEE")
     var modifierList =[];
     if(props.usuario.role == "ROLE_REALTOR"){
         modifierList ={
@@ -65,7 +62,6 @@ export default function calendar(props: {usuario: any}){
         }),
                 
         }
-        console.log("---------------", modifierList)
     }else{
         modifierList ={
             schedules: dataCustomer?.map((schedule) => {
@@ -146,6 +142,8 @@ export default function calendar(props: {usuario: any}){
                 
 
                 // Comparando apenas ano, mês e dia
+                //compare date
+                if(scheduleDate.getMonth() == date.getMonth() && scheduleDate.getFullYear() == date.getFullYear() && scheduleDate.getDate() == date.getDate()){
                 
                     if(schedule.customer && schedule.property){
                         if(schedule.customer.id && schedule.property.id){
@@ -172,7 +170,6 @@ export default function calendar(props: {usuario: any}){
                                 arrayOfCardsData[indexArray]["hours"] = sortedTimes
 
                             }else{
-                                console.log("new")
                                 arrayOfCardsData[index] = {["hours"]: []}
 
                                 arrayOfCardsData[index]["customer_id"] = schedule.customer.id
@@ -203,35 +200,36 @@ export default function calendar(props: {usuario: any}){
                             }
                         }
                     }
+                }
                     
                 
             })
         }
-        
+        console.log("arrayOfCardsData", arrayOfCardsData)
         return arrayOfCardsData
     }
    
     const getCardsDataModal = function(date :Date){
+        console.log("novo")
         var arrayOfCardsDataModal :schedulesModalInfo[] = []
         var index =0;
-        console.log("asdasd")
         if(date != undefined){
             data?.map((schedule) =>{
 
                 const [year, month, day] = schedule.day.split("-").map(Number);
                 const scheduleDate = new Date(year, month - 1, day);
-    
+                
                 
 
                 // Comparando apenas ano, mês e dia
-                
+                if(scheduleDate.getMonth() == date.getMonth() && scheduleDate.getFullYear() == date.getFullYear() && scheduleDate.getDate() == date.getDate()){
+
                     if(schedule.customer && schedule.property){
                         if(schedule.customer.id && schedule.property.id){
                             const obj :schedulesModalInfo={
                                 id: schedule.id,
                                 day :schedule.day,
                                 propertyCode :schedule.property.propertyCode,
-
                                 start_hour :schedule.start_hour,
                                 realtorName :schedule.realtor.name,
                                 realtorCreci :schedule.realtor.creco,
@@ -249,11 +247,13 @@ export default function calendar(props: {usuario: any}){
                             
                         }
                     }
+                }
+                
                     
                 
             })
         }
-        
+        console.log("arrayOfCardsDataModal", arrayOfCardsDataModal)
         return arrayOfCardsDataModal
     }
 
@@ -299,7 +299,7 @@ export default function calendar(props: {usuario: any}){
                         locale={pt}
                     />
                 }
-                {props.usuario.role == "ROLE_REALTOR" && card simplesmente n ta desaparecendo
+                {props.usuario.role == "ROLE_REALTOR" &&
                     <SelectHour usuario={props.usuario} cardsModal={getCardsDataModal(selected)} cards={getCardsData(selected)} saveHours={saveHours} ids={getIdsFromDay(selected)} day={selected} selectHours={getHoursFromDay(selected)}/>
                 }
                 

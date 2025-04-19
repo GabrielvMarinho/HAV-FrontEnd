@@ -13,10 +13,10 @@ import RetangleStatusImovel from "./RetangleStatusImovel";
 import StatusScheduling from "./StatusScheduling";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ModalScheduling from "../Modal/ModalScheduling";
+import FindHistoryByRealtorId from "@/app/apiCalls/Schedules/FindHistoryByRealtorId";
 
 export default function TableListHistorySchedule(props: {
   for: string;
-  id: string;
   titles: string[];
   page: string;
   data :string,
@@ -25,7 +25,7 @@ export default function TableListHistorySchedule(props: {
 }) {
    const [customerHistory, setCustomerHistory] = useState<schedulesHistoryCustomerDTO[]>([]);
   const [realtorDetails, setRealtorDetails] = useState(false);
-  const [realtorHistory, setRealtorHistory] = useState<{}[]>([]);
+  const [realtorHistory, setRealtorHistory] = useState<schedulesHistoryCustomerDTO[]>([]);
   const [customerDetails, setCustomerDetails] = useState<{}[]>([]);
 
   const [totalPage, setTotalPage] = useState(0); 
@@ -35,7 +35,6 @@ export default function TableListHistorySchedule(props: {
   const findCustomer = async () => {
     try {
       const { schedules, totalPages } = await FindHistoryByCustomerId(
-        props.id,
         props.page,
         props.data,
         props.status
@@ -48,6 +47,22 @@ export default function TableListHistorySchedule(props: {
       console.error("Erro ao buscar histórico", error);
     }
   };
+  const findRealtor = async () => {
+    try {
+      const { schedules, totalPages } = await FindHistoryByRealtorId(
+        props.page,
+        props.data,
+        props.status
+      );
+
+      setRealtorHistory(schedules);
+      setTotalPage(totalPages);
+      
+    } catch (error) {
+      console.error("Erro ao buscar histórico", error);
+    }
+  };
+  
   console.log(customerHistory)
   const setChangeModalId = function (id :string){
 
@@ -55,14 +70,15 @@ export default function TableListHistorySchedule(props: {
   }
  
   useEffect(() => {
-    if (props.for === "customer") {
+    if (props.for === "user") {
       findCustomer();
     } else if (props.for === "realtor") {
+      findRealtor();
     }
-  }, [props.for, props.id, props.data, props.page, props.status]); 
+  }, [props.for, props.data, props.page, props.status]); 
 
   
-  const renderTable = (history) => (
+  const renderTable = (history: schedulesHistoryCustomerDTO[]) => (
     <>
     <table className="tableListData">
       <thead>
@@ -102,19 +118,25 @@ export default function TableListHistorySchedule(props: {
   
   return (
     <>
-      {customerHistory.length > 0 ? (
-        <div>
-          {renderTable(customerHistory)}
+    {props.for == "user" ?
+      <div>
+        {customerHistory.length > 0 ?
+          renderTable(customerHistory)
+        : <div>Nenhum histórico encontrado.</div>}
+        <PageManager totalPages={totalPage} />
+      </div>
+      :
+      <div>
+        {realtorHistory.length > 0 ?
+          renderTable(realtorHistory)
+        : <div>Nenhum histórico encontrado.</div>}
+
           <PageManager totalPages={totalPage} />
         </div>
-      ) : realtorHistory.length > 0 ? (
-        <div>
-          {renderTable(realtorHistory)}
-          <PageManager totalPages={totalPage} />
-        </div>
-      ) : (
-        <div>Nenhum histórico encontrado.</div>
-      )}
+        
+        
+      }
+      
     </>
   );
 }
