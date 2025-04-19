@@ -16,12 +16,14 @@ import SliderContentOfThree from "@/app/components/Information/SliderContentOfTh
 import HomeHighlightsCardContainer from "@/app/components/Information/HomeHighlightsCardContainer";
 import { GetHighlightsHome } from "@/app/apiCalls/Property/GetHighlightedHome"
 import HighlightsComponentContainer from "@/app/components/Information/RecentComponentContainer"
+import { Chela_One } from "next/font/google";
 
 export default async function Home() {
 
   const mostRecentProperties = await GetMostRecentProperties()
   const properties = await GetRandomPropertiesHighlightRandom()
   const highlightHome = await GetHighlightsHome()
+  console.log("destquesss: ", highlightHome);
 
   return (
     <>
@@ -65,7 +67,6 @@ export default async function Home() {
       {/*Adicionados recentementes*/}
       <section className="recentProperties">
         <Title tag="h1" text="Imóveis adicionados recentemente" />
-        {/*Pegar pelo propósito não está funcionando*/}
         <HighlightsComponentContainer />
       </section>
 

@@ -8,7 +8,7 @@ export default function HomeHighlightsCardContainer(props: { cards: PropertySpec
         <>
             <div>
                 <div className="cardsContainer">
-                    {props.cards.map((card) => (
+                    {(props.cards ?? []).map((card) => (
                         <CardImovel key={card.id} obj={card}/>
                     ))}
                 </div>
