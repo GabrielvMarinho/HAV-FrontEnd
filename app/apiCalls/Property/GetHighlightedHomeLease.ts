@@ -1,6 +1,6 @@
-export async function GetHighlightsHome(purpose?: string) {
+export default async function GetHighlightsHome() {
     try {
-      const response = await fetch("http://localhost:9090/property/getHighlightedHome")
+      const response = await fetch("http://localhost:9090/property/getHighlightedHomeLease")
       const data = await response.json();
       return data;
     } catch (e) {
