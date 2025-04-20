@@ -14,15 +14,13 @@ import GetRandomPropertiesHighlightRandom from "@/app/apiCalls/Property/GetRando
 import GetMostRecentProperties from "@/app/apiCalls/Property/GetMostRecentSellProperties";
 import SliderContentOfThree from "@/app/components/Information/SliderContentOfThree";
 import HomeHighlightsCardContainer from "@/app/components/Information/HomeHighlightsCardContainer";
-import { GetHighlightsHome } from "@/app/apiCalls/Property/GetHighlightedHome"
-import HighlightsComponentContainer from "@/app/components/Information/RecentComponentContainer"
+import RecentComponentContainer from "@/app/components/Information/RecentComponentContainer"
+import { Chela_One } from "next/font/google";
 
 export default async function Home() {
 
   const mostRecentProperties = await GetMostRecentProperties()
   const properties = await GetRandomPropertiesHighlightRandom()
-  const highlightHome = await GetHighlightsHome()
-
   return (
     <>
       <img className={"bannerHome"} src="/Image/BannerHome.png" />
@@ -58,15 +56,15 @@ export default async function Home() {
       <section className="highlightsCards">
         <Title tag="h1" text="Imóveis em destaques" />
         {/*Pegar pelo propósito não está funcionando*/}
-        <HomeHighlightsCardContainer cards={highlightHome} totalPages={highlightHome.pages} />
+        <HomeHighlightsCardContainer/>
+
       </section>
 
 
-      {/*Adicionados recentementes*/}
+      {/*Adicionados recentementes funcionando 100%*/}
       <section className="recentProperties">
         <Title tag="h1" text="Imóveis adicionados recentemente" />
-        {/*Pegar pelo propósito não está funcionando*/}
-        <HighlightsComponentContainer />
+        <RecentComponentContainer />
       </section>
 
       <Footer />

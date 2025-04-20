@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import HomeHighlightsCardContainer from "./HomeHighlightsCardContainer";
 import NavBarAdm from "../Header/NavBarAdm";
 import { NavBarPath } from "../globalFormsConfig/navBarPaths";
-import { GetHighlightsHome } from "@/app/apiCalls/Property/GetHighlightedHome";
+import { GetHighlightsHome } from "@/app/apiCalls/Property/GetHighlightedHomeLease";
 
 export default function HighlightHomeComponentContainer() {
   const [purpose, setPurpose] = useState<string>("VENDA");
