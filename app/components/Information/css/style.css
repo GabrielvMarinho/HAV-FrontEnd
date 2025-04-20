@@ -458,6 +458,7 @@
     align-items: center;
     width: 130px;
     height: 35px;
+    padding-inline: 10px;
     border-radius: 10px;
     font-size: var(--text-s);
     color: var(--text-white);
@@ -599,6 +600,7 @@
     .containerStatusScheduling {
         width: 105px;
         height: 25px;
+        padding-inline: 0px;
         border-radius: 5px;
         font-size: var(--text-xs);
     }

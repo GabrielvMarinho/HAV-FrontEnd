@@ -15,7 +15,8 @@ import ButtonComparison from "@/app/components/Inputs/ButtonComparison";
 import StarIcon from "@/app/components/IconsTSX/StarIcon";
 import MapSearchResult from "@/app/components/Maps/MapSearchResult";
 
-export default function Favorite() {
+
+export default function page() {
     const searchParams = useSearchParams();
     const idUser = 2;
     
@@ -27,7 +28,9 @@ export default function Favorite() {
 
         const fetchFavorites = async () => {
             try {
-                const response = await fetch(`http://localhost:9090/favorites/${idUser}`);
+                const response = await fetch(`http://localhost:9090/favorites`, {
+                    credentials:"include"
+                });
 
                 if (!response.ok) throw new Error("Erro ao buscar favoritos");
 
@@ -116,7 +119,7 @@ export default function Favorite() {
             
                 
                 
-                <MapSearchResult favoriteId={idUser.toString()} height="30vw" width="60vw"/>
+                <MapSearchResult favorite={true} height="30vw" width="60vw"/>
 
             </>
         ); 

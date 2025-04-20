@@ -10,7 +10,6 @@ export default function selectHour(props :{usuario :any; day: Date; ids :Record<
      saveHours: (hoursAdd: string[], hoursRemove: string[]) => void, cards :Record<string, string | string[]>[],
     cardsModal :schedulesModalInfo[]}){
 
-      console.log("cards=", props.cards)
     
     
       if (!props.usuario) {
@@ -132,7 +131,7 @@ export default function selectHour(props :{usuario :any; day: Date; ids :Record<
                     <div className={minutes === "00" ? "hourLineCustomer" : "hourLineCustomer"}></div>
                     <div className="hourContentCustomer">{time}</div>
                     <div style={{display:"flex", justifyContent:"center", marginBottom:"30px", marginTop:"15px"}}>
-                    <SchedulingCard modalInfo={props.cardsModal[indexArray]} obj={props.cards[indexArray]}/>
+                    <SchedulingCard usuario={props.usuario} modalInfo={props.cardsModal[indexArray]} obj={props.cards[indexArray]}/>
                     </div>
                   </div>
                 )

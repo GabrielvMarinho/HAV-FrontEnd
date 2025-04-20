@@ -3,6 +3,11 @@ interface schedulesModalInfo{
     day :string;
     price :string;
     propertyCode: string;
+    propertyNumber: string;
+    street: string;
+    city :string;
+    state :string;
+
     neighborhood:string;
     start_hour :string;
     realtorId :string; 
@@ -13,8 +18,8 @@ interface schedulesModalInfo{
     purpose :string;
     propertyType :string;
     status :string;
-    city :string;
-    state :string;
-
+    userEmail :string;
+    userName :string;
+    userCpf :string;
 
 }

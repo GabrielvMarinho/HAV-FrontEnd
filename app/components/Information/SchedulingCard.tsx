@@ -6,11 +6,12 @@ import "../../variables.css"
 import "../../GeneralPages.css"
 import globalDatabaseNameConverter from "@/app/globalDatabaseNameConverter";
 import ModalScheduling from "../Modal/ModalScheduling";
+import StatusScheduling from "./StatusScheduling";
 
-export default function SchedulingCard(props: {obj :Record<string, string | string[]>, modalInfo :schedulesModalInfo}) {
-    const { city, neighborhood, hours, name, phone } = props.obj;
+export default function SchedulingCard(props: {usuario? :any, obj :Record<string, string | string[]>, modalInfo :schedulesModalInfo}) {
+    const { city, neighborhood, hours, name, phone} = props.obj;
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    console.log("---------------", props.obj)
     const toggleModal = function(){
         setIsModalOpen(!isModalOpen)
     }
@@ -22,12 +23,17 @@ export default function SchedulingCard(props: {obj :Record<string, string | stri
 
             </div>
             <div className="mainContentContainer">
+                
                 <div className="mainContentContainerTop">
                     <div className="addressData">
+
                         <p className="city">{globalDatabaseNameConverter[city]}</p>
                         <p className="neighborhood">{globalDatabaseNameConverter[neighborhood].toUpperCase()}</p>
                     </div>
-                    <div className="styleCustomerInfo"></div>
+                    <div className="styleCustomerInfo">
+
+                    </div>
+
                     <p className="hour">{hours[0]} - {hours[hours.length - 1].slice(3) === "00" ? 
                                                 `${hours[hours.length - 1].slice(0, 2)}:30` : 
                                                 `${(parseInt(hours[hours.length - 1].slice(0, 2)) + 1).toString().padStart(2, '0')}:00`}
@@ -42,13 +48,15 @@ export default function SchedulingCard(props: {obj :Record<string, string | stri
                         <div className="textContentInfo">
                             <p className="name">{name}</p>
                             <p className="phone">{phone}</p>
+                            <StatusScheduling size={true} text={props.modalInfo.status}></StatusScheduling>
+
                         </div>
                     </div>
                     <Button onClick={() =>{toggleModal()}} type="submit" size={"small"} text="Mais Dados" hover="lightHover" color="var(--text-white)"
                     background="var(--button-color)" />
                     {isModalOpen ==true?
                     <div className={"overlay"}>
-                            <ModalScheduling onClose={() =>{toggleModal()}} obj ={props.modalInfo}/>
+                            <ModalScheduling usuario = {props.usuario}onClose={() =>{toggleModal()}} obj ={props.modalInfo}/>
                     </div>:<></>
                     }
 

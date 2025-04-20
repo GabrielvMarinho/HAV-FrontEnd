@@ -3,8 +3,7 @@ export default async function FetchScheduleFutureByIdAndFuture(){
     const response = await fetch(url, {
         credentials:"include"
     })
-    console.log(response)
     const data = await response.json()
-    console.log(data)
+    console.log("data", data)
     return data;
 }

@@ -217,10 +217,16 @@ export default function calendar(props: {usuario: any}){
 
                                 arrayOfCardsData[index]["customer_id"] = schedule.customer.id
                                 arrayOfCardsData[index]["property_id"] = schedule.property.id
-                                arrayOfCardsData[index]["name"] = schedule.customer.name
+                                if(props.usuario.role =="ROLE_REALTOR"){
+                                    arrayOfCardsData[index]["name"] = schedule.customer.name
+                                    arrayOfCardsData[index]["phone"] = schedule.customer.celphone
+
+                                }else{
+                                    arrayOfCardsData[index]["name"] = schedule.realtor.name
+                                    arrayOfCardsData[index]["phone"] = schedule.realtor.celphone
+                                }
                                 arrayOfCardsData[index]["city"] = schedule.property.address.city
                                 arrayOfCardsData[index]["neighborhood"] = schedule.property.address.neighborhood
-                                arrayOfCardsData[index]["phone"] = schedule.customer.celphone
                                 arrayOfCardsData[index]["hours"].push(formatTime(schedule.start_hour))
                                 //sorting hours
                                 const times = arrayOfCardsData[index]["hours"];
@@ -248,7 +254,6 @@ export default function calendar(props: {usuario: any}){
                 
             })
         }
-        console.log("arrayOfCardsData", arrayOfCardsData)
         return arrayOfCardsData
     }
     const getCardsDataCustomer = function(date :Date){
@@ -292,13 +297,18 @@ export default function calendar(props: {usuario: any}){
 
                             }else{
                                 arrayOfCardsData[index] = {["hours"]: []}
-
                                 arrayOfCardsData[index]["customer_id"] = schedule.customer.id
                                 arrayOfCardsData[index]["property_id"] = schedule.property.id
-                                arrayOfCardsData[index]["name"] = schedule.customer.name
+                                if(props.usuario.role =="ROLE_REALTOR"){
+                                    arrayOfCardsData[index]["name"] = schedule.customer.name
+                                    arrayOfCardsData[index]["phone"] = schedule.customer.celphone
+
+                                }else{
+                                    arrayOfCardsData[index]["name"] = schedule.realtor.name
+                                    arrayOfCardsData[index]["phone"] = schedule.realtor.celphone
+                                }
                                 arrayOfCardsData[index]["city"] = schedule.property.address.city
                                 arrayOfCardsData[index]["neighborhood"] = schedule.property.address.neighborhood
-                                arrayOfCardsData[index]["phone"] = schedule.customer.celphone
                                 arrayOfCardsData[index]["hours"].push(formatTime(schedule.start_hour))
                                 //sorting hours
                                 const times = arrayOfCardsData[index]["hours"];
@@ -326,12 +336,10 @@ export default function calendar(props: {usuario: any}){
                 
             })
         }
-        console.log("arrayOfCardsData", arrayOfCardsData)
         return arrayOfCardsData
     }
    
     const getCardsDataModal = function(date :Date){
-        console.log("novo")
         var arrayOfCardsDataModal :schedulesModalInfo[] = []
         var index =0;
         if(date != undefined){
@@ -354,12 +362,18 @@ export default function calendar(props: {usuario: any}){
                                 propertyCode :schedule.property.propertyCode,
                                 start_hour :schedule.start_hour,
                                 realtorName :schedule.realtor.name,
-                                realtorCreci :schedule.realtor.creco,
+                                realtorCreci :schedule.realtor.creci,
+                                userName :schedule.customer.name,
+                                userEmail :schedule.customer.email,
+                                userCpf :schedule.customer.cpf,
+                                
                                 realtorCelphone :schedule.realtor.celphone,
                                 realtorEmail :schedule.realtor.email,
                                 purpose :schedule.property.purpose,
                                 propertyType :schedule.property.propertyType,
                                 status :schedule.status,
+                                propertyNumber :schedule.property.address.propertyNumber,
+                                street :schedule.property.address.street,
                                 city :schedule.property.address.city,
                                 state :schedule.property.address.state,
                                 price :schedule.property.price,
@@ -375,11 +389,9 @@ export default function calendar(props: {usuario: any}){
                 
             })
         }
-        console.log("arrayOfCardsDataModal", arrayOfCardsDataModal)
         return arrayOfCardsDataModal
     }
         const getCardsDataModalCustomer = function(date :Date){
-            console.log("novo")
             var arrayOfCardsDataModal :schedulesModalInfo[] = []
             var index =0;
             if(date != undefined){
@@ -408,10 +420,13 @@ export default function calendar(props: {usuario: any}){
                                     purpose :schedule.property.purpose,
                                     propertyType :schedule.property.propertyType,
                                     status :schedule.status,
+                                    propertyNumber :schedule.property.address.propertyNumber,
+                                    street :schedule.property.address.street,
                                     city :schedule.property.address.city,
                                     state :schedule.property.address.state,
                                     price :schedule.property.price,
                                     neighborhood :schedule.property.address.neighborhood
+
                                 } 
                                 arrayOfCardsDataModal.push(obj);
                                 
@@ -423,7 +438,6 @@ export default function calendar(props: {usuario: any}){
                     
                 })
             }
-        console.log("arrayOfCardsDataModal", arrayOfCardsDataModal)
         return arrayOfCardsDataModal
     }
 
