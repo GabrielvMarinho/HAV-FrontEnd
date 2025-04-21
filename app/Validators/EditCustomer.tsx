@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const editCustomer = z.object({
+export const EditCustomer = z.object({
     name: z.string().min(1, { message: "* Campo obrigatório" }),
     email: z.string().min(1, { message: "* Campo obrigatório" })
         .email({ message: "* E-mail inválido" })
@@ -9,7 +9,7 @@ export const editCustomer = z.object({
         .regex(/^\d{10}$/, { message: "* 10 dígitos" }),
     cellphone: z.string().min(1, { message: "* Campo obrigatório" })
         .regex(/^\d{11}$/, { message: "* 11 dígitos" }),
-    cpf: z.string(),
+    cpf: z.string().nullable(),
 
     cep: z.string().min(1, { message: "* Campo obrigatório" })
         .regex(/^\d{8}$/, { message: "* 8 dígitos numéricos" }),
@@ -29,4 +29,4 @@ export const editCustomer = z.object({
     deletedImageId: z.any().optional().nullable()
 });
 
-export type EditCustomer = z.infer<typeof editCustomer>;
+export type EditCustomer = z.infer<typeof EditCustomer>;
