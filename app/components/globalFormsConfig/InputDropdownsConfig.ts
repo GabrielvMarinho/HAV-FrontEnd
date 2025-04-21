@@ -89,7 +89,9 @@ export const dropdownFields = {
         id: "purpose",
         options: [
             ["venda", "Venda"],
-            ["locacao", "Locação"]
+            ["locacao", "Locação"],
+            ["misto", "Misto"]
+
         ]
     },
     status: {

@@ -3,6 +3,12 @@
     import TapeTopCardImovel from "../IconsTSX/TapeTopCardImovel";
 
     export default function TapeCardImovel(props: {text :string}) {
+        if(props.text ==null || props.text ==undefined || props.text =="comum" ){
+            return (
+                <>
+                </>
+            );
+        }
         return (
             <div style={{ display: "flex", flexDirection: "column" }}>
                 <TapeTopCardImovel width={12} height={12} color="" />

@@ -9,7 +9,7 @@ export default async function page(){
     const usuario = await findUserOnCookie();
     
     return(
-        <AuthGuard requiredRole={usuario.role}>
+        <AuthGuard requiredRole={"ROLE_CUSTOMER"}>
             <CalendarClient usuario={usuario}/> 
         </AuthGuard>
     );

@@ -37,8 +37,9 @@ export default function calendar(props: {usuario: any}){
         async function fetch(){
             const data = await FetchScheduleFutureByIdAndFuture()
             setData(data || []);
-            const dataCustomer = await FetchScheduleFutureByIdCustomerAndFuture()
-            setDataCustomer(dataCustomer || []);
+            console.log("data----", data)
+            // const dataCustomer = await FetchScheduleFutureByIdCustomerAndFuture()
+            // setDataCustomer(dataCustomer || []);
         }
         fetch();
       }, []);
