@@ -20,7 +20,7 @@
 }
 .homeHiglightProperties{
     height: 100vh;
-    margin-top: 100px;
+    margin-top: 150px;
 }
 .homeHiglightProperties h2{
     font-size: var(--text-xl);
@@ -84,7 +84,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 200px;
+    margin-top: 250px;
+    gap: 60px;
 }
 
 .recentProperties{
@@ -92,4 +93,5 @@
     flex-direction: column;
     align-items: center;
     margin-top: 220px;
+    gap: 10vw;
 }

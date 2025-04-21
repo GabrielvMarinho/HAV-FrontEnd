@@ -47,21 +47,14 @@ export default async function Home() {
         : ""
       }
 
-
-
       <Title text="transformando sonhos em endereços" tag="h1" />
       <MainHomeInfo />
 
-      {/*Imóveis em destaque card*/}
       <section className="highlightsCards">
         <Title tag="h1" text="Imóveis em destaques" />
-        {/*Pegar pelo propósito não está funcionando*/}
-        <HomeHighlightsCardContainer/>
-
+        <HomeHighlightsCardContainer />
       </section>
 
-
-      {/*Adicionados recentementes funcionando 100%*/}
       <section className="recentProperties">
         <Title tag="h1" text="Imóveis adicionados recentemente" />
         <RecentComponentContainer />
