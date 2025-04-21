@@ -31,6 +31,8 @@ export default function HomeHighlightsCardContainer() {
     setPurpose(selectedLabel);
   };
 
+  const text  = `Nenhuma propriedade por ${purpose} foi encontrada `
+
   return (
     <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
       <NavBarAdm
@@ -39,16 +41,14 @@ export default function HomeHighlightsCardContainer() {
         selected={purpose}
       />
       <div className="cardsContainer">
-        {/* Aqui, substituímos props.cards por properties */}
         {properties.length > 0 ? (
           properties.map((card) => (
             <CardImovel key={card.id} obj={card} />
           ))
         ) : (
-          <p>Nenhuma propriedade encontrada.</p> // Mensagem caso não haja propriedades
+          <p style={{fontWeight: "700px", fontSize: "20px", margin: "0 auto"}}>{text}</p> 
         )}
       </div>
-      {/* Supondo que você tenha um total de páginas vindo do seu backend */}
       <PageManager totalPages={1} />
     </div>
   );
