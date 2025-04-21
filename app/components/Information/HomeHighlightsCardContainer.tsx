@@ -21,7 +21,7 @@ export default function HomeHighlightsCardContainer() {
   useEffect(() => {
     async function fetchProperties() {
       const response = await fetchFunctions[purpose]();
-      setProperties(response); // Aqui você está setando as propriedades no estado
+      setProperties(response);  
     }
 
     fetchProperties();
