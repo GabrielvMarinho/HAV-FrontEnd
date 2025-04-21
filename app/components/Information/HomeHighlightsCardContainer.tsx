@@ -32,7 +32,7 @@ export default function HomeHighlightsCardContainer() {
   };
 
   return (
-    <div>
+    <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
       <NavBarAdm
         options={NavBarPath.purpose}
         onSelect={handleSelectPurpose}
