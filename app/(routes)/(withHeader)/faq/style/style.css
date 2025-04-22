@@ -2,7 +2,7 @@
 
 .vendaBox, .aluguelBox {
     width: 300px;
-    height: 450px;
+    height: 500px;
     flex-shrink: 0;
     border-radius: 10px;
     background: var(--FundoCor, #F2EBE3);
@@ -55,7 +55,7 @@
     width: 300px;
     display: flex;
     flex-direction: column;  /* Certificando-se de que as perguntas ficam em coluna */
-    gap: 50px; 
+    gap: 35px; 
     margin: 0, 20, 0, 20;
     color: #5F1E2A;
     font-family: Montserrat;
@@ -69,4 +69,24 @@
 .searchAndBoxesContainer {
     display: flex;
     gap: 39px;
+}
+
+/* Esconde as respostas inicialmente */
+.question-answer {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding-top: 15px; /* Espaço entre pergunta e resposta */
+}
+
+/* Mostra a resposta ao passar o mouse no question-wrapper */
+.question-wrapper:hover .question-answer {
+    display: block;
+    opacity: 1;
+}
+
+/* Mantém o estilo original das perguntas (sem alterações) */
+.question-trigger p {
+    margin: 0; /* Remove margens padrão do <p> */
+    cursor: pointer; /* Opcional: muda cursor para indicar interatividade */
 }
