@@ -6,24 +6,7 @@ export default async function editAdm(id: any, formData: { [key: string]: FormDa
 
   try {
     const form = new FormData();
-    console.log("formData", JSON.stringify({
-      name: formData?.name,
-      cpf: formData?.cpf,
-      email: formData?.email,
-      cellphone: formData?.cellphone,
-      phoneNumber: formData?.phoneNumber,
-      archived: false,
-      address: {
-        cep: formData?.cep,
-        street: formData?.street,
-        neighborhood: formData?.neighborhood,
-        city: formData?.city,
-        state: formData?.state,
-        propertyNumber: formData?.propertyNumber,
-        complement: formData?.complement,
-      }
-    }
-    ))
+    
     form.append("adm", new Blob([JSON.stringify({
       name: formData?.name,
       email: formData?.email,
@@ -58,7 +41,6 @@ export default async function editAdm(id: any, formData: { [key: string]: FormDa
     }
 
 
-    console.log("Dados enviados:");
     for (let pair of form.entries()) {
       console.log(pair[0], pair[1]);
     }
@@ -70,7 +52,6 @@ export default async function editAdm(id: any, formData: { [key: string]: FormDa
     });
     if (!response.ok) {
       const errorData = await response.json(); // Captura a resposta de erro do backend
-      console.log(errorData)
       // Lança o erro com a estrutura completa
       throw {
         response: {

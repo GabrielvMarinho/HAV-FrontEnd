@@ -59,10 +59,8 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
 
             try {
                 const response = await searchPropertyByIdSpecific(propertyId);
-                console.log("Resposta completa da API:", response);
 
                 const formattedProperty = formatProperty(response);
-                console.log("Propriedade formatada:", formattedProperty);
 
                 setProperty(formattedProperty);
             } catch (error) {
@@ -87,7 +85,6 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
     if (!property) {
         return <p>Carregando...</p>
     }
-    console.log(props.user)
 
     
 

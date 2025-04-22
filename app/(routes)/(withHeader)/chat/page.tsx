@@ -88,7 +88,6 @@ export default function Chat() {
     }, message.newMessage)
 
     const onMessageReceive = (payload) => {
-        console.log("receive message", JSON.parse(payload.body))
         const receivedMessage = JSON.parse(payload.body);
         setMessages([...messages, receivedMessage]);
     }
@@ -134,9 +133,7 @@ export default function Chat() {
         if (userStorage) {
             try {
                 const user = JSON.parse(userStorage);
-                console.log("Usuário logado:", user);
             } catch (error) {
-                console.log("Erro ao fazer parse do user:", error);
             }
         }
     }, []);

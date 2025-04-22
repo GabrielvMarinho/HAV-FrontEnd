@@ -9,7 +9,6 @@ export default async function (id: number): Promise<{ adm: AdmEditDto, imageId?:
   
   
     const data = await response.json();
-    console.log("Resposta da API:", data);
 
     let imageBase64;
     if (data.imageId) {
@@ -24,7 +23,6 @@ export default async function (id: number): Promise<{ adm: AdmEditDto, imageId?:
     return { adm, imageId: data.imageId };
 
   } catch (error) {
-    console.log(error);
     return { adm: {} as AdmEditDto };
   }
 }

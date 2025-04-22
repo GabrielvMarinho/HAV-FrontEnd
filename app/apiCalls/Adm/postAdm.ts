@@ -41,7 +41,6 @@ export default async function postAdm(
 
     if (!response.ok) {
       const errorData = await response.json(); // Captura a resposta de erro do backend
-      console.log(errorData)
       // Lança o erro com a estrutura completa
       throw {
         response: {

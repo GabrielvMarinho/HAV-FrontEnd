@@ -39,12 +39,10 @@ export default async function getHighlightedProperties() {
             credentials: "include"
         });
         const data = await response.json();
-        console.log("data",data);
         const properties: PropertySpecificCard[] = await Promise.all(
             data.map(async (property: PropertySpecificCard) => {
                 try {
                     imageUrl = await fetchMainPropertyImage(property.id); // agora é URL
-                    console.log("imageUrl", imageUrl);
                 } catch (err) {
                     console.warn(`Erro ao carregar imagem do imóvel ${property.id}:`, err);
                 }

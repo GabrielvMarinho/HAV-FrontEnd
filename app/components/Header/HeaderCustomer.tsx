@@ -13,6 +13,7 @@ import Profile from "../IconsTSX/Profile";
 import StarIcon from "../IconsTSX/StarIcon";
 import Bell from "../IconsTSX/Bell";
 import Calendar from "../IconsTSX/Calendar";
+import Logout from "@/app/apiCalls/Auth/Logout";
 
 export default function HeaderCustomer() {
 
@@ -24,7 +25,13 @@ export default function HeaderCustomer() {
         setOpenDropdownId((prev) => (prev === id ? null : id)); // Close if already open, otherwise open
     };
 
-
+    const LogoutFetch = function(){
+        async function fetch(){
+            const data = await Logout()
+            console.log("logout", data)
+        }
+        fetch()
+    }
     return (
         <header className="headerContainer">
 
@@ -36,7 +43,7 @@ export default function HeaderCustomer() {
 
                     <Link href={"/"}>Início</Link>
 
-                    <Link href={"/propertyComparison"}>Comparação Imovel</Link>
+                    {/* <Link href={"/propertyComparison"}>Comparação Imovel</Link> */}
 
                     <div onClick={() => toggleDropdown(1)}>
                         <HeaderOptions
@@ -71,7 +78,12 @@ export default function HeaderCustomer() {
                             <Bell width={17} height={17} color={"var(--text-white)"} />]} />
 
                     </div>
+                    <div onClick={LogoutFetch()}>
+                        <Link  href={"/"}>Logout</Link>
+                    </div>
+                    
                 </div>
+
                 <Language width={30} height={30} color="" />
             </div>
 

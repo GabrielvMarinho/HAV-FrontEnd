@@ -68,12 +68,10 @@ export default function ProfileEditUser(props: {role: string}) {
   };
 
   function onSubmit(data: UserConfigurationDto) {
-    console.log(data)
     if (Object.keys(form.formState.errors).length > 0) {
       console.error("Erros no formulário:", form.formState.errors);
       return;
     }
-    console.log(data)
     setUserData(data)
     setIsModalOpen(true);
   };

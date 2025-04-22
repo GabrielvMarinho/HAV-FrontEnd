@@ -38,12 +38,10 @@ export default function calendar(props: {usuario: any}){
             try{
                 const data = await FetchScheduleFutureByIdAndFuture()
                 setData(data || []);
-                console.log("data----", data)
             }catch{}
             try{
                 const dataCustomer = await FetchScheduleFutureByIdCustomerAndFuture()
                 setDataCustomer(dataCustomer || []);
-                console.log("data----", dataCustomer)
             }catch{}
             
 
