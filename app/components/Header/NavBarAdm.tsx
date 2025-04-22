@@ -10,10 +10,11 @@ export default function NavBarAdm(props: {
   selected?: string;
 }) {
   const pathname = usePathname();
-
+  console.log(pathname)
   return (
     <div className="navBarAdm" style={{ display: "flex", flexDirection: "row" }}>
       {props.options.map((option, index) => {
+        console.log(option)
         // Se for navegação via <Link>, usamos pathname
         const isSelected = props.onSelect
           ? props.selected === option.label
