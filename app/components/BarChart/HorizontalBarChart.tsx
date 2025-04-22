@@ -22,14 +22,14 @@ interface HorizontalBarChartProps {
 const HorizontalBarChart: React.FC<HorizontalBarChartProps> = ({ 
   labels, 
   data,
-  maxValue = 2000
+  maxValue = 50
 }) => {
   // Configuração fixa do eixo X (0-2000)
   const getXAxisConfig = () => ({
     beginAtZero: true,
     max: maxValue,
     ticks: {
-      stepSize: 500,
+      stepSize: 25,
       color: '#B23F52',
       font: {
         size: 13,
@@ -38,22 +38,22 @@ const HorizontalBarChart: React.FC<HorizontalBarChartProps> = ({
       callback: (value: number) => {
         const ticks = {
           0: '0',
-          500: '500',
-          1000: '1000',
-          1500: '1500',
-          2000: '2000'
+          25: '25',
+          50: '50',
         };
         return ticks[value as keyof typeof ticks] || '';
       }
     },
     grid: {
       color: (ctx: any) => {
-        const showLinesAt = [0, 500, 1000, 1500, 2000];
-        return showLinesAt.includes(ctx.tick.value) 
-          ? 'rgba(179, 63, 82, 0.2)'
-          : 'transparent';
+        // Mostra linhas apenas nos valores de step (0, 25, 50)
+        return [0, 25, 50].includes(ctx.tick.value) 
+          ? 'rgba(179, 63, 82, 0.2)'  // Cor das linhas
+          : 'transparent';              // Linhas invisíveis para outros valores
       },
-      lineWidth: 1
+      lineWidth: 1,
+      drawTicks: true,                  // Garante que os ticks sejam desenhados
+      drawOnChartArea: true             // Garante que as linhas apareçam na área do gráfico
     }
   });
 
