@@ -148,7 +148,9 @@ export default async function editProperty(id: number, formData: { [key: string]
   try {
     const response = await fetch(url, {
       method: "PUT",
-      body: form
+      body: form,
+      credentials: "include"
+
     });
 
     if (!response.ok) {

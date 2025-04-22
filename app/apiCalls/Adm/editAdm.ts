@@ -26,7 +26,6 @@ export default async function editAdm(id: any, formData: { [key: string]: FormDa
     ))
     form.append("adm", new Blob([JSON.stringify({
       name: formData?.name,
-      cpf: formData?.cpf,
       email: formData?.email,
       cellphone: formData?.cellphone,
       phoneNumber: formData?.phoneNumber,

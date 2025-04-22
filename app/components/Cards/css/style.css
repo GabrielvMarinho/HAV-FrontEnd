@@ -4,6 +4,12 @@
 .valorImovel{
     font-weight: 800;
 }
+.valorImovelPromotional{
+    font-size: var(--text-s);
+    font-weight: 400;
+    opacity: 0.5;
+    text-decoration: line-through;
+}
 .bairro, .valorImovel{
     letter-spacing: 1.05px;
     text-transform: uppercase;
@@ -15,7 +21,7 @@
 }
 .cardImovelSection{
     padding: 15px;
-    gap: 10px;
+    gap: 6px;
     display: flex;
     flex-direction: column;
 }

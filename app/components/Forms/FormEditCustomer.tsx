@@ -19,6 +19,7 @@ import editAdm from "@/app/apiCalls/Adm/editAdm";
 import searchCustomerById from "@/app/apiCalls/Customer/searchCustomerById";
 import editEditor from "@/app/apiCalls/Editor/editEditor";
 import editCustomer from "@/app/apiCalls/Customer/editCustomer";
+
 import { textFields } from "../globalFormsConfig/InputTextConfig";
 import { dropdownFields } from "../globalFormsConfig/InputDropdownsConfig";
 import { NewCustomer, newCustomer } from "@/app/Validators/CustomerValidator";
@@ -39,7 +40,8 @@ export default function FormEditCustomer(props: { id: any }) {
 
 
     const form = useForm<EditCustomer>({
-        resolver: zodResolver(newCustomer),
+        
+        resolver: zodResolver(EditCustomer),
         mode: "onTouched",
     });
 

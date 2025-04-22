@@ -101,7 +101,8 @@ export default async function(
           price:property.price,
           purpose:property.purpose,
           area:property.area,
-          propertyType: property.propertyType
+          propertyType: property.propertyType,
+          mainImage: property.mainImage
 
       }));
         

@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import searchPropertyByIdSpecific from "@/app/apiCalls/Property/searchPropertyByIdSpecific";
-import Image from "next/image";
-import ImageCasa from "@/public/Image/ImagemCasa.png";
+import DefaultImage from "/Image/fotoSemPropriedade.png";
+
 import Bed from "../IconsTSX/Bed";
 import Sofa from "../IconsTSX/Sofa";
 import Shower from "../IconsTSX/Shower";
@@ -15,6 +15,7 @@ import TapeCardImovel from "../Information/TapeCardImovel";
 import CategoryCardImovel from "../Information/CategoryCardImovel";
 import globalDatabaseNameConverter from "@/app/globalDatabaseNameConverter";
 import Rule from "../IconsTSX/Rule";
+import decodeDoubleBase64 from "@/app/utils/decodeDoubleBase64";
 
 interface CardImovelProps {
     obj: PropertySpecificCard | null;
@@ -22,6 +23,13 @@ interface CardImovelProps {
 }
 
 export default function CardImovel({ obj, idUser }: CardImovelProps) {
+    console.log("_+_+_+_+_+_+", obj.mainImage)
+    console.log("Raw image data:", decodeDoubleBase64(obj?.mainImage));
+
+
+
+
+
     const router = useRouter();
     function goToSpecificProperty(id: number | undefined) {
         console.log(id)
@@ -40,22 +48,33 @@ export default function CardImovel({ obj, idUser }: CardImovelProps) {
                         display: "flex",
                         flexDirection: "row",
                         alignItems: "center",
+                        justifyContent: "end",
                         gap: "24px",
+                        width: "244px",
+                        
                         zIndex: 2, 
                     }}
                 >
                     <div style={{ marginLeft: "-26px" }}>
-                        <TapeCardImovel text={globalDatabaseNameConverter[obj?.propertyStatus] || "Não informado"} />
+                        <TapeCardImovel text={obj.propertyStatus} />
                     </div>
                     <div style={{ marginTop: "15px" }}>
-                        <CategoryCardImovel text={globalDatabaseNameConverter[obj?.purpose] || "Sem dados"} />
+                        <CategoryCardImovel text={obj.purpose} />
                     </div>
                 </div>   
-                <Image
-                    src={ImageCasa}
-                    alt="imagem da casa"
-                    style={{ display: "block", width: "100%", height: "auto" }}
-                />
+                {obj?.mainImage ?
+                        <img
+                        src={`${decodeDoubleBase64(obj.mainImage)}`} 
+                        alt="imagem da casa"
+                        style={{ borderTopLeftRadius:"10px", borderTopRightRadius:"10px", display: "block", width: "100%", height: "auto" }}/>
+                        :
+                        <img
+                        src={"/Image/fotoSemPropriedade.png"}
+                        alt="imagem da casa"
+                        style={{ borderTopLeftRadius:"10px", borderTopRightRadius:"10px", display: "block", width: "100%", height: "auto" }}/>
+                    }
+                    
+                    
             </section>
 
             <section className="cardImovelSection" style={{ backgroundColor: "var(--button-color)", color: "var(--text-white)", borderRadius: "0 0 10px 10px" }}>
@@ -63,11 +82,19 @@ export default function CardImovel({ obj, idUser }: CardImovelProps) {
                     <p className="bairro">{globalDatabaseNameConverter[obj?.neighborhood]}</p>
                     <p className="cidade">{globalDatabaseNameConverter[obj?.city]}</p>
                 </div>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <p className="valorImovel">
-                        R${obj?.price}
-                        {obj?.purpose === "locacao" && <span className="rentingText">/mês</span>}
-                    </p>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "35px" }}>
+                    <div >
+                        {obj?.promotionalPrice > 0 ?
+                            <p className="valorImovelPromotional">
+                                R${obj?.promotionalPrice}
+                                {obj?.purpose === "locacao" && <span style={{all:"unset"}} className="rentingText">/mês</span>}
+                            </p>:""
+                        }
+                        <p className="valorImovel">
+                            R${obj?.price}
+                            {obj?.purpose === "locacao" && <span className="rentingText">/mês</span>}
+                        </p>
+                    </div>
                     <div className="infoImovel">
                         {obj?.propertyType=="terreno"?
                             <>

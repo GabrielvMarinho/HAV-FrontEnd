@@ -10,16 +10,14 @@ export default function selectHour(props :{usuario :any; day: Date; ids :Record<
      saveHours: (hoursAdd: string[], hoursRemove: string[]) => void, cards :Record<string, string | string[]>[],
     cardsModal :schedulesModalInfo[]}){
 
-      
     
-      console.log(props.usuario)
     
       if (!props.usuario) {
         return null; 
       }
-      if (props.usuario.role !="ROLE_REALTOR") {
-        return null; 
-      }
+      // if (props.usuario.role !="ROLE_REALTOR") {
+      //   return null; 
+      // }
 
 
 
@@ -133,7 +131,7 @@ export default function selectHour(props :{usuario :any; day: Date; ids :Record<
                     <div className={minutes === "00" ? "hourLineCustomer" : "hourLineCustomer"}></div>
                     <div className="hourContentCustomer">{time}</div>
                     <div style={{display:"flex", justifyContent:"center", marginBottom:"30px", marginTop:"15px"}}>
-                    <SchedulingCard modalInfo={props.cardsModal[indexArray]} obj={props.cards[indexArray]}/>
+                    <SchedulingCard usuario={props.usuario} modalInfo={props.cardsModal[indexArray]} obj={props.cards[indexArray]}/>
                     </div>
                   </div>
                 )
@@ -147,7 +145,9 @@ export default function selectHour(props :{usuario :any; day: Date; ids :Record<
               }
 
               return (
-                <button 
+                <>
+                {props.usuario.role =="ROLE_REALTOR" ?
+                  <button 
                   key={time}
                   className={`${(selectedHours.includes(time) || addHours.includes(time)) && !removeHours.includes(time) ? "hourButtonSelect" : "hourButton"}`}
                   onClick={() => selectedHours.includes(time) ? toggleRemoveHour(time, props.ids[time]) : toggleAddHour(time)}
@@ -155,10 +155,19 @@ export default function selectHour(props :{usuario :any; day: Date; ids :Record<
                   <div className={minutes === "00" ? "hourLine" : "hourLineOpacity"}></div>
                   <div className="hourContent">{time}</div>
                 </button>
+                :<>
+                <div className={minutes === "00" ? "hourLine" : "hourLineOpacity"}></div>
+                <div className="hourContent">{time}</div>
+                </>
+                }
+                
+                  
+              
+              </>
               );
             })}
           </div>
-          {areArraysEqual() ? (
+          {props.usuario.role=="ROLE_REALTOR" ? areArraysEqual() ? (
             <div style={{ pointerEvents: "none", opacity: "0.5" }}>
               <Button
                 type="button"
@@ -178,7 +187,9 @@ export default function selectHour(props :{usuario :any; day: Date; ids :Record<
               color="var(--text-white)"
               background="var(--button-color)"
             />
-          )}
+          ):""
+          }
+          
         </div>
 
         

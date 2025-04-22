@@ -2,12 +2,12 @@ export default {
     
 
     //type
-    "Venda": "Venda",
-    "Disponível": "Disponível",
-    "Locacao": "Locação",
-    "São Paulo": "São Paulo",
-    "Centro": "Centro",
-
+    "venda": "Venda",
+    "disponivel": "Disponível",
+    "locacao": "Locação",
+    "apartamento":"Apartamento",
+    "casa": "Casa",
+    "terreno": "Terreno",
     //estados
     "sc": "Santa Catarina",
     "pr": "Paraná",

@@ -1,3 +1,4 @@
+import patchStatus from '@/app/apiCalls/Schedules/patchStatus';
 import Calendar from '../IconsTSX/Calendar';
 import Clock from '../IconsTSX/Clock';
 import ClosedPadlock from '../IconsTSX/ClosedPadlock';
@@ -7,23 +8,44 @@ import StatusScheduling from '../Information/StatusScheduling';
 import Button from '../Inputs/Button';
 import './css/style.css';
 import "@/app/variables.css"
+import MapSearchResult from '../Maps/MapSearchResult';
+import decodeDoubleBase64 from '@/app/utils/decodeDoubleBase64';
 
-export default function ModalScheduling (props :{obj :schedulesModalInfo, onClose :() =>void}) {
+export default function ModalScheduling (props :{usuario? :any, obj :schedulesModalInfo, onClose :() =>void}) {
 
     const scheduleDate = new Date(props.obj.day);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-
+    console.log("++++++++++++++", props.obj)
     const isPastDate = scheduleDate < today;
+
+    const confirmStatus = function(){
+        const fetch = async function(){
+            const data = await patchStatus(props.obj.id, "confirmado")
+            console.log(data)
+        }
+        fetch();
+        window.location.href=window.location.href
+    }
+    const cancelStatus = function(){
+        const fetch = async function(){
+            const data = await patchStatus(props.obj.id, "cancelado")
+            console.log(data)
+        }
+        fetch();
+        window.location.href=window.location.href
+    }
     return (
         <>
             <div className="containerModalScheduling">
                 <div onClick={props.onClose} className='pointer containerModalSchedulingX'>
                     <XButton width={20} height={20} color='var(--box-red-pink)'/>
                 </div>
-                <div className='imageMainContainer'>
-                    <img></img>
-                </div>
+                    <img
+                    src={`${decodeDoubleBase64(props.obj.propertyPhoto)}`} 
+                        alt="imagem user"
+                        className="imageMainContainer"/>     
+                    
 
                 <h2 className="idPropertyModalScheduling"> id: {props.obj.propertyCode} </h2>
 
@@ -63,22 +85,54 @@ export default function ModalScheduling (props :{obj :schedulesModalInfo, onClos
                 {/* desktop */}
                 <div className='containerinformationsModalScheduling'> 
                     <div className='titleModalScheduling'>
-                        <h2 className='realtor'> CORRETOR </h2>
+                        {props.usuario.role=="ROLE_REALTOR" ? 
+                           <h2 className='realtor'> CLIENTE </h2>
+                            :
+                            <h2 className='realtor'> CORRETOR </h2>
+                        }
                         <h2 className='localization'> LOCALIZAÇÃO </h2>
                     </div>
 
                     <div className='informationsModalScheduling'>
                         <div className="realtorInformation">
-                            <div className='circulo'> </div>
+                        {props.usuario.role=="ROLE_REALTOR" ? 
+
+                            <img
+                        src={`data:image/png;base64,${props.obj.customerPhoto}`} 
+                        alt="imagem user"
+                                className="circulo"/>    : 
+
+                                <img
+                        src={`data:image/png;base64,${props.obj.realtorPhoto}`} 
+                        alt="imagem user"
+                                className="circulo"/>
+                        }
                             <div className='informationsrealtor'>
-                                <h2 className='nameRealtor'>{props.obj.realtorName}</h2>
-                                <h2 className='cellphoneRealtor'> {props.obj.realtorCelphone} </h2>
+                                    {props.usuario.role=="ROLE_REALTOR" ? 
+                                    <>                                 
+                                        <h2 className='nameRealtor'>{props.obj.userName}</h2>
+                                        <h2 className='cellphoneRealtor'> {props.obj.userEmail} </h2>
+                                    </>
+                                        :                                            
+                                        <>                                 
+                                            <h2 className='nameRealtor'>{props.obj.realtorName}</h2>
+                                            <h2 className='cellphoneRealtor'> {props.obj.realtorCelphone} </h2>
+                                        </>
+                                        }
+                                
                                 <StatusScheduling size={true} text={props.obj.status}></StatusScheduling>
                             </div>
                         </div>
 
                         <div className='maps'>
-                            <div className='locationiInformations'> </div>
+                            
+                             <MapSearchResult width='150px' height='100px' addressSpecific={{
+                                state: props.obj.state,
+                                city: props.obj.city,
+                                street: props.obj.street,
+                                propertyNumber: props.obj.propertyNumber
+
+                            }} />
                         </div>
                     </div>
                 </div>
@@ -87,8 +141,21 @@ export default function ModalScheduling (props :{obj :schedulesModalInfo, onClos
                 <div className='containerinformationsModalSchedulingMobile'> 
                     <h2 className='localization'> LOCALIZAÇÃO </h2>
                     <div className='locationiInformations'> </div>
-
-                    <h2 className='realtor'> CORRETOR </h2>
+                    {props.usuario.role=="ROLE_REALTOR" ? 
+                    <>
+                    <h2 className='realtor'> CLIENTE </h2>
+                        <div className="realtorInformation">
+                            <div className='circulo'> </div>
+                            <div className='informationsrealtor'>
+                                <h2 className='nameRealtor'>{props.obj.userName}</h2>
+                                <h2 className='cellphoneRealtor'> {props.obj.userEmail} </h2>
+                                <div className='caixinha'> {props.obj.status} </div>
+                            </div>
+                        </div>
+                        </>
+                        :
+                        <>
+                        <h2 className='realtor'> CORRETOR </h2>
                         <div className="realtorInformation">
                             <div className='circulo'> </div>
                             <div className='informationsrealtor'>
@@ -97,7 +164,9 @@ export default function ModalScheduling (props :{obj :schedulesModalInfo, onClos
                                 <div className='caixinha'> {props.obj.status} </div>
                             </div>
                         </div>
-                    
+                        </>
+                        
+                    }
                 </div>
 
                 <h2 className='date'> DATA </h2>
@@ -117,9 +186,37 @@ export default function ModalScheduling (props :{obj :schedulesModalInfo, onClos
                     className='buttonsModalScheduling'
                     style={isPastDate ? { display: "none" } : props.obj.purpose === "venda" || props.obj.purpose === "aluguel" ? {} : { pointerEvents: "none", opacity: "0.5" }}
                 >
-                    <Button type='button' size='small' text='Confirmar' hover='lightHover'/>
-                    <Button type='button' size='small' text='Reagendar' hover='lightHover'/>
-                    <Button border={true} type='button' size='small' text='Cancelar' hover='darkHover' color='var(--arrow-page-manager)' background='var(--box-white)'/>
+                    {props.obj.status =="pendente" && props.usuario.role!="ROLE_REALTOR" ?
+                    <div style={{pointerEvents:"none", opacity:0.5, display:"flex", gap:"10px"}}>
+                        <Button type='button' onClick ={() =>{confirmStatus()}} size='small' text='Confirmar' hover='lightHover'/>
+                        <Button border={true} onClick ={() =>{cancelStatus()}} type='button' size='small' text='Cancelar' hover='darkHover' color='var(--arrow-page-manager)' background='var(--box-white)'/>
+
+                    </div>
+                    :
+                  
+                    
+                    props.obj.status =="confirmado" ?
+                        <>
+                        <div style={{pointerEvents:"none", opacity:0.5, display:"flex", gap:"10px"}}>
+                          <Button type='button' onClick ={() =>{confirmStatus()}} size='small' text='Confirmar' hover='lightHover'/>
+
+                        </div>
+                          <Button border={true} onClick ={() =>{cancelStatus()}} type='button' size='small' text='Cancelar' hover='darkHover' color='var(--arrow-page-manager)' background='var(--box-white)'/>
+                        </>
+                        :props.obj.status =="cancelado" ?
+                        <>
+                        <div style={{pointerEvents:"none", opacity:0.5, display:"flex", gap:"10px"}}>
+
+                            <Button type='button' onClick ={() =>{confirmStatus()}} size='small' text='Confirmar' hover='lightHover'/>
+                            <Button border={true} onClick ={() =>{cancelStatus()}} type='button' size='small' text='Cancelar' hover='darkHover' color='var(--arrow-page-manager)' background='var(--box-white)'/>
+                        </div>            
+                        </>
+                        :
+                        <>
+                            <Button type='button' onClick ={() =>{confirmStatus()}} size='small' text='Confirmar' hover='lightHover'/>
+                            <Button border={true} onClick ={() =>{cancelStatus()}} type='button' size='small' text='Cancelar' hover='darkHover' color='var(--arrow-page-manager)' background='var(--box-white)'/>
+                        </>
+                    }
                 </div>
                                 
             </div>

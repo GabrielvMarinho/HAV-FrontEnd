@@ -11,7 +11,6 @@ interface PropertySpecificCard {
     propertyType: string;
     promotionalPrice: number;
     area: number;
-    image: String;
     price: number; 
     purpose: string; 
     neighborhood: string;
@@ -21,5 +20,7 @@ interface PropertySpecificCard {
     bathRoom: number;
     bedRoom: number;
     livingRoom: number;
-    mainImageId: number;
+    mainImage: any;
+    images: string[]
+
 }
