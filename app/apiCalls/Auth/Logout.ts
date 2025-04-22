@@ -3,6 +3,8 @@ export default async function(){
 
     try {
         const response = await fetch(url, {
+            method:"POST",
+            credentials:"include",
         })
         if (response.ok) {
             const data = await response.text(); 

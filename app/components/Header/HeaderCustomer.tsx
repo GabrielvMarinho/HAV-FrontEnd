@@ -29,6 +29,7 @@ export default function HeaderCustomer() {
         async function fetch(){
             const data = await Logout()
             console.log("logout", data)
+            window.location.href = window.location.href
         }
         fetch()
     }
@@ -78,7 +79,7 @@ export default function HeaderCustomer() {
                             <Bell width={17} height={17} color={"var(--text-white)"} />]} />
 
                     </div>
-                    <div onClick={LogoutFetch()}>
+                    <div onClick={() => {LogoutFetch()}}>
                         <Link  href={"/"}>Logout</Link>
                     </div>
                     
