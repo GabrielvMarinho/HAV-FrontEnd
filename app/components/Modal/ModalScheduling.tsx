@@ -9,6 +9,7 @@ import Button from '../Inputs/Button';
 import './css/style.css';
 import "@/app/variables.css"
 import MapSearchResult from '../Maps/MapSearchResult';
+import decodeDoubleBase64 from '@/app/utils/decodeDoubleBase64';
 
 export default function ModalScheduling (props :{usuario? :any, obj :schedulesModalInfo, onClose :() =>void}) {
 
@@ -40,9 +41,11 @@ export default function ModalScheduling (props :{usuario? :any, obj :schedulesMo
                 <div onClick={props.onClose} className='pointer containerModalSchedulingX'>
                     <XButton width={20} height={20} color='var(--box-red-pink)'/>
                 </div>
-                <div className='imageMainContainer'>
-                    <img></img>
-                </div>
+                    <img
+                    src={`${decodeDoubleBase64(props.obj.propertyPhoto)}`} 
+                        alt="imagem user"
+                        className="imageMainContainer"/>     
+                    
 
                 <h2 className="idPropertyModalScheduling"> id: {props.obj.propertyCode} </h2>
 
@@ -92,7 +95,18 @@ export default function ModalScheduling (props :{usuario? :any, obj :schedulesMo
 
                     <div className='informationsModalScheduling'>
                         <div className="realtorInformation">
-                            <div className='circulo'> </div>
+                        {props.usuario.role=="ROLE_REALTOR" ? 
+
+                            <img
+                        src={`data:image/png;base64,${props.obj.customerPhoto}`} 
+                        alt="imagem user"
+                                className="circulo"/>    : 
+
+                                <img
+                        src={`data:image/png;base64,${props.obj.realtorPhoto}`} 
+                        alt="imagem user"
+                                className="circulo"/>
+                        }
                             <div className='informationsrealtor'>
                                     {props.usuario.role=="ROLE_REALTOR" ? 
                                     <>                                 

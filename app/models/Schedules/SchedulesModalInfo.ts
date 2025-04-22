@@ -7,6 +7,9 @@ interface schedulesModalInfo{
     street: string;
     city :string;
     state :string;
+    customerPhoto :any;
+    realtorPhoto :any;
+    propertyPhoto :any;
 
     neighborhood:string;
     start_hour :string;

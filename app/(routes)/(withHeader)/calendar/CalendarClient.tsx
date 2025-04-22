@@ -35,11 +35,18 @@ export default function calendar(props: {usuario: any}){
 
     useEffect(() => {
         async function fetch(){
-            const data = await FetchScheduleFutureByIdAndFuture()
-            setData(data || []);
-            console.log("data----", data)
-            // const dataCustomer = await FetchScheduleFutureByIdCustomerAndFuture()
-            // setDataCustomer(dataCustomer || []);
+            try{
+                const data = await FetchScheduleFutureByIdAndFuture()
+                setData(data || []);
+                console.log("data----", data)
+            }catch{}
+            try{
+                const dataCustomer = await FetchScheduleFutureByIdCustomerAndFuture()
+                setDataCustomer(dataCustomer || []);
+                console.log("data----", dataCustomer)
+            }catch{}
+            
+
         }
         fetch();
       }, []);
@@ -220,9 +227,12 @@ export default function calendar(props: {usuario: any}){
                                 arrayOfCardsData[index]["property_id"] = schedule.property.id
                                 if(props.usuario.role =="ROLE_REALTOR"){
                                     arrayOfCardsData[index]["name"] = schedule.customer.name
+                                    arrayOfCardsData[index]["photo"] = schedule.customer.mainImageCustomer
+
                                     arrayOfCardsData[index]["phone"] = schedule.customer.celphone
 
                                 }else{
+                                    arrayOfCardsData[index]["photo"] = schedule.realtor.mainImageRealtor
                                     arrayOfCardsData[index]["name"] = schedule.realtor.name
                                     arrayOfCardsData[index]["phone"] = schedule.realtor.celphone
                                 }
@@ -303,8 +313,12 @@ export default function calendar(props: {usuario: any}){
                                 if(props.usuario.role =="ROLE_REALTOR"){
                                     arrayOfCardsData[index]["name"] = schedule.customer.name
                                     arrayOfCardsData[index]["phone"] = schedule.customer.celphone
+                                    arrayOfCardsData[index]["photo"] = schedule.customer.mainImageCustomer
+
 
                                 }else{
+                                    arrayOfCardsData[index]["photo"] = schedule.realtor.mainImageRealtor
+
                                     arrayOfCardsData[index]["name"] = schedule.realtor.name
                                     arrayOfCardsData[index]["phone"] = schedule.realtor.celphone
                                 }
@@ -367,7 +381,10 @@ export default function calendar(props: {usuario: any}){
                                 userName :schedule.customer.name,
                                 userEmail :schedule.customer.email,
                                 userCpf :schedule.customer.cpf,
-                                
+                                realtorPhoto :schedule.realtor.mainImageRealtor,
+                                customerPhoto :schedule.customer.mainImageCustomer,
+                                propertyPhoto :schedule.property.mainImageProperty,
+
                                 realtorCelphone :schedule.realtor.celphone,
                                 realtorEmail :schedule.realtor.email,
                                 purpose :schedule.property.purpose,
@@ -421,6 +438,9 @@ export default function calendar(props: {usuario: any}){
                                     purpose :schedule.property.purpose,
                                     propertyType :schedule.property.propertyType,
                                     status :schedule.status,
+                                    realtorPhoto :schedule.realtor.mainImageRealtor,
+                                    customerPhoto :schedule.customer.mainImageCustomer,
+                                    propertyPhoto :schedule.property.mainImageProperty,
                                     propertyNumber :schedule.property.address.propertyNumber,
                                     street :schedule.property.address.street,
                                     city :schedule.property.address.city,

@@ -26,7 +26,8 @@
     border-top-left-radius: var(--mborder-box);
     border-bottom-left-radius: var(--mborder-box);
     width: 100px;
-    aspect-ratio: 3/4;
+    object-fit: cover;
+
 }
 
 .customerInfo{
@@ -91,7 +92,7 @@
 }
 .mainContentContainerTop{
     display: flex;
-    height: 40%;
+    height: fit-content;
     align-items: end;
     justify-content: space-between;
 }

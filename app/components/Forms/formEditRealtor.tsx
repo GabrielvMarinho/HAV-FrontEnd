@@ -49,7 +49,7 @@ export default function FormEditRealtor(props: { id: any }) {
 
 
     const form = useForm<EditRealtor>({
-        resolver: zodResolver(newRealtor),
+        resolver: zodResolver(editRealtor),
         mode: "onTouched",
 
     });

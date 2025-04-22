@@ -9,7 +9,6 @@ export default async function editEditor(id: any, formData: { [key: string]: For
 
     form.append("editor", new Blob([JSON.stringify({
       name: formData?.name,
-      cpf: formData?.cpf,
       email: formData?.email,
       cellphone: formData?.cellphone,
       phoneNumber: formData?.phoneNumber,

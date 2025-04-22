@@ -7,21 +7,24 @@ import "../../GeneralPages.css"
 import globalDatabaseNameConverter from "@/app/globalDatabaseNameConverter";
 import ModalScheduling from "../Modal/ModalScheduling";
 import StatusScheduling from "./StatusScheduling";
+import decodeDoubleBase64 from "@/app/utils/decodeDoubleBase64";
 
-export default function SchedulingCard(props: {usuario? :any, obj :Record<string, string | string[]>, modalInfo :schedulesModalInfo}) {
-    const { city, neighborhood, hours, name, phone} = props.obj;
+export default function SchedulingCard(props: {usuario? :any, obj :Record<string, string | string[] | any>, modalInfo :schedulesModalInfo}) {
+    const { city, neighborhood, hours, name, phone, photo} = props.obj;
     const [isModalOpen, setIsModalOpen] = useState(false);
-    console.log("---------------", props.obj)
     const toggleModal = function(){
         setIsModalOpen(!isModalOpen)
     }
-    console.log("modal", props.modalInfo)
+    console.log("realtorPhoto", props.modalInfo.propertyPhoto)
+    console.log("realtorPhoto", decodeDoubleBase64(props.modalInfo.propertyPhoto))
 
     return(
         <div className="cardContainer">
-            <div className="mainImageContainer">
+            <img
+                src={`${decodeDoubleBase64(props.modalInfo.propertyPhoto)}`} 
+                alt="imagem user"
+                className="mainImageContainer"/>     
 
-            </div>
             <div className="mainContentContainer">
                 
                 <div className="mainContentContainerTop">
@@ -41,9 +44,11 @@ export default function SchedulingCard(props: {usuario? :any, obj :Record<string
                 </div>
                 <div className="mainContentContainerBottom">
                     <div className="customerInfo">
-                        <div className="imageContentInfo">
-
-                        </div>
+                        <img
+                        src={`data:image/png;base64,${photo}`} 
+                        alt="imagem user"
+                        className="imageContentInfo"/>
+                            
                         
                         <div className="textContentInfo">
                             <p className="name">{name}</p>

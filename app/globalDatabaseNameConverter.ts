@@ -5,7 +5,9 @@ export default {
     "venda": "Venda",
     "disponivel": "Disponível",
     "locacao": "Locação",
-
+    "apartamento":"Apartamento",
+    "casa": "Casa",
+    "terreno": "Terreno",
     //estados
     "sc": "Santa Catarina",
     "pr": "Paraná",

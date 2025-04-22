@@ -24,7 +24,7 @@ interface CardImovelProps {
 
 export default function CardImovel({ obj, idUser }: CardImovelProps) {
     console.log("_+_+_+_+_+_+", obj.mainImage)
-    console.log("Raw image data:", obj?.mainImage != null);
+    console.log("Raw image data:", decodeDoubleBase64(obj?.mainImage));
 
 
 

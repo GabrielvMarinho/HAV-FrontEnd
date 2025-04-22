@@ -64,7 +64,6 @@ export default async function editCustomer(id: number, formData: { [key: string]
   // Adiciona o JSON do customer
   form.append("customer", new Blob([JSON.stringify({
     name: formData.name,
-    cpf: formData.cpf,
     doc: formData.doc,
     phoneNumber: formData.phoneNumber,
     cellphone: formData.cellphone,

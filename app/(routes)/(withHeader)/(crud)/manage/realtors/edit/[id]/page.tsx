@@ -10,7 +10,7 @@ import WrappedPageEditRealtor from "./wrappedPage";
 export default function page() {
 
   return (
-    <AuthGuard requiredRole="ROLE_ADMIN">
+    <AuthGuard requiredRole="ROLE_EDITOR">
       <WrappedPageEditRealtor/>
     </AuthGuard>
     );
