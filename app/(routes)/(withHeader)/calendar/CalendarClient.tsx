@@ -460,6 +460,7 @@ export default function calendar(props: {usuario: any}){
         return arrayOfCardsDataModal
     }
 
+    const today = new Date();
 
     return(
         <> 
@@ -470,6 +471,7 @@ export default function calendar(props: {usuario: any}){
             <div style={{display:"flex", gap:"50px", margin:"100px"}}>
                 {props.usuario.role == "ROLE_REALTOR" && 
                 <DayPicker
+                    disabled={{ before: today }}
 
                     showOutsideDays
                     fixedWeeks
@@ -489,6 +491,8 @@ export default function calendar(props: {usuario: any}){
 
                 {props.usuario.role != "ROLE_REALTOR" && 
                     <DayPicker
+                        disabled={{ before: today }}
+
                         showOutsideDays
                         fixedWeeks
                         mode="single"
