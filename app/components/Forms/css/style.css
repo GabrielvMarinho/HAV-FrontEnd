@@ -215,8 +215,9 @@
     flex-grow: 1;
 }
 .modalNewSchedule{
-    width: 250px;
+    width: 200px;
     height: 150px;
+    margin-bottom: 50px;
     background-color: var(--box-red-pink);
     padding: 30px;
     border-radius: var(--xborder-box);

@@ -66,12 +66,12 @@ export default function CardImovel({ obj, idUser }: CardImovelProps) {
                         <img
                         src={`${decodeDoubleBase64(obj.mainImage)}`} 
                         alt="imagem da casa"
-                        style={{ borderTopLeftRadius:"10px", borderTopRightRadius:"10px", display: "block", width: "100%", height: "auto" }}/>
+                        style={{ borderTopLeftRadius:"10px", borderTopRightRadius:"10px", display: "block", width: "269px", height: "240px" }}/>
                         :
                         <img
                         src={"/Image/fotoSemPropriedade.png"}
                         alt="imagem da casa"
-                        style={{ borderTopLeftRadius:"10px", borderTopRightRadius:"10px", display: "block", width: "100%", height: "auto" }}/>
+                        style={{ borderTopLeftRadius:"10px", borderTopRightRadius:"10px", display: "block", width: "269px", height: "240px" }}/>
                     }
                     
                     
