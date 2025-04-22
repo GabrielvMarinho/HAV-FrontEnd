@@ -4,7 +4,6 @@ import HeaderFavoritesPage from "@/app/components/Header/HeaderFavoritesPage";
 import FavoriteCardContainer from "@/app/components/Information/FavoriteCardContainer";
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import Dropdown from "@/app/components/Inputs/Dropdown";
 
 export default function Favorite() {
     const { id: idUser } = useParams();
@@ -18,17 +17,20 @@ export default function Favorite() {
 
         const fetchFavorites = async () => {
             try {
-                const response = await fetch(`http://localhost:9090/favorites/${idUser}`);
+                const response = await fetch(`http://localhost:9090/favorites/map`, {
+                    method: "GET",
+                    credentials: "include"
+                });
 
                 if (!response.ok) throw new Error("Erro ao buscar favoritos");
 
                 const data = await response.json();
-                const formattedProperty = data.content.map((property : any) => ({
+                const formattedProperty = data.content.map((property: any) => ({
                     ...property,
                     ...property.propertyFeatures,
                     ...property.address
                 }))
-    
+
                 setFavorites(formattedProperty);
                 setTotalPages(data.totalPages || 1);
 
@@ -54,7 +56,7 @@ export default function Favorite() {
             else params.page = 0;
             if (searchParams.has("purpose")) params.purpose = searchParams.get("purpose");
 
-          
+
             const propertyFeatures = {
                 bedRoom: searchParams.has("bedRoom") ? Number(searchParams.get("bedRoom")) : undefined,
                 bathRoom: searchParams.has("bathRoom") ? Number(searchParams.get("bathRoom")) : undefined,

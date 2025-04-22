@@ -4,7 +4,6 @@ import SelectedStar from "../IconsTSX/SelectedStar";
 import NotSelectedStar from "../IconsTSX/NotSelectedStar";
 import { favoriteProperty } from "@/app/apiCalls/Property/FavoriteProperty";
 import { unfavoriteProperty } from "@/app/apiCalls/Property/UnFavoriteProperty";
-import { tr } from "react-day-picker/locale";
 
 interface StarFavoriteProps {
     idUser: number;
