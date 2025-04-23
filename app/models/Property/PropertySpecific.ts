@@ -14,6 +14,8 @@ interface PropertySpecific {
         areaProperty: number;
         isFurnished: boolean;
     };
+    propertyId: string;
+
     propertyStatus: string;
     additionals: AdditionalsPropertySpecific[];
     propertyCode: string;

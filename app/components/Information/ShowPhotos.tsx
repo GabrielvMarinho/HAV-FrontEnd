@@ -312,7 +312,7 @@ export default function ShowPhotos<T>({
     };
 
     return (
-        <div>
+        <div style={{width:"300px", height:"300px"}}>
             {preview.length > 0 && (
                 <>
                     <button

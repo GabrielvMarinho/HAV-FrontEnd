@@ -7,19 +7,19 @@ import { unfavoriteProperty } from "@/app/apiCalls/Property/UnFavoriteProperty";
 import { tr } from "react-day-picker/locale";
 
 interface StarFavoriteProps {
-    idUser: number;
-    idProperty: number;
+    idProperty: any;
     selected: boolean; // Esse valor pode não estar atualizado corretamente ao carregar a página
     width: number;
     height: number;
     color: string;
 }
 
-export default function StarFavorite({ idUser, idProperty, selected, width, height, color }: StarFavoriteProps) {
+export default function StarFavorite({ idProperty, selected, width, height, color }: StarFavoriteProps) {
     const [isFavorite, setIsFavorite] = useState(selected);
 
     //verificar se já está favoritada pra ficar com estilização certa
     useEffect(() => {
+        
         const checkFavoriteStatus = async () => {
             try{
                 const response = await fetch(`http://localhost:9090/favorites/${idUser}`);
@@ -33,7 +33,7 @@ export default function StarFavorite({ idUser, idProperty, selected, width, heig
         };
 
         checkFavoriteStatus();
-    }, [idUser, idProperty]);
+    }, [idProperty]);
 
 
     const toggleStar = async () => {

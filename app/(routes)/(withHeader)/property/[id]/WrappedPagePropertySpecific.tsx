@@ -91,16 +91,16 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
     
     return (
         <>
-        {/* <ShowPhotos
-                            name={"images"}
-                            initialImages={
-                                property.imagesProperty
-                              }
-                        /> */}
+        
             <div style={{ width: "var(--width-page)" }}>
                 <article className="articleFirstContent">
                     <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                        <div style={{ width: "450px", height: "462px", backgroundColor: "black" }}></div>
+                        <ShowPhotos
+                                name={"images"}
+                                initialImages={
+                                    property.imagesProperty
+                                }
+                            />
                         <div style={{ display: "flex", flexDirection: "row", gap: "110px" }}>
                             {/* <div className="buttonIconDiv">
                                 <Button
@@ -112,7 +112,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                                     background="" />
                                 <Cubes width={30} height={30} color="var(--button-color)" />
                             </div> */}
-                            {props.user.role == "ROLE_EDITOR" || props.user.role =="ROLE_ADMIN" ?
+                            {props.user ?
 
                             <div className="buttonIconDiv">
                                 <Button
@@ -145,6 +145,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                     <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                         <PropertyPageDatasAdm
                             obj={{
+                                propertyId: propertyId,
                                 propertyType: property.propertyType,
                                 propertyCode: property.propertyCode,
                                 propertyFeature: property.propertyFeature,

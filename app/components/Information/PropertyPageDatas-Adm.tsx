@@ -11,7 +11,7 @@ import Sofa from "../IconsTSX/Sofa";
 import Rule from "../IconsTSX/Rule";
 import globalDatabaseNameConverter from "@/app/globalDatabaseNameConverter";
 
-export default function PropertyPageDatasAdm(props: {
+export default function PropertyPageDatasAdm(props: {usuario :any,
     obj: Omit<PropertySpecific, "isFurnished" | "additional" | "propertyDescription" |
         "promotionalPrice" | "actualPrice" | "taxes" | "price" | "id">
 }) {
@@ -30,7 +30,9 @@ export default function PropertyPageDatasAdm(props: {
                 }}>{props.obj.propertyType}</p>
                 <HorizontalLine size={100} />
                 <CategoryCardImovel text={props.obj.purpose || "N/A"}/>
-                <StarFavorite selected={false} width={30} height={30} color="var(--box-dark-red)" />
+                {props.usuario ?
+                <StarFavorite idProperty={props.obj.propertyId} selected={false} width={30} height={30} color="var(--box-dark-red)" />:""
+                }
                 <ShareProperty width={30} height={30} />
             </div>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "16px" }}>
