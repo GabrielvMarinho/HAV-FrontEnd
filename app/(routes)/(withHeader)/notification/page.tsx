@@ -22,9 +22,10 @@ export default function Notification() {
                         onChange={() => setNotificationStatus(!notificationStatus)} 
                     />
                 </div>
-                <Notificacao/>
-                <HorizontalLine size={890} color="#0F0F0F80" />
+                
+               
             </div>
+            <Notificacao/>
         </>
     );
 }
