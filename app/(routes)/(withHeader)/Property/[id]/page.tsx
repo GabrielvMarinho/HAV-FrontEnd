@@ -150,7 +150,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                             taxes: property.taxes,
                             PromotionalPrice: props.obj?.promotionalPrice
                         }} />
-                        <ProprietorAssociated proprietor={property.proprietor} WhatsappLink="ada" />
+                        <ProprietorAssociated proprietor={property.proprietor} WhatsappLink="https://web.whatsapp.com/" />
                     </div>
 
                 </article>
