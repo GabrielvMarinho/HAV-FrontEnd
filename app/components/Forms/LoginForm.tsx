@@ -18,7 +18,7 @@ export default function FormLogin() {
     const dispatch = useDispatch();
 
     const [errorLogin, setErrorLogin] = useState<string | null>(null);
-
+    
     const handleLogin = async (data: Login) => {
         const response = await dispatch<any>(loginUser(data.email, data.password));
         console.log(response)
@@ -55,7 +55,7 @@ export default function FormLogin() {
                 <InputTextLogin name="password" register={form.register} error={form.formState.errors["password" as keyof Login]} password={true} size="login" id="user" text="Senha" placeholder="Digite sua senha" icon={<Eye width="18" height="18" color="var(--text-light-red)" />} />
             </div>
 
-            <p className="EsqueceuSenha">Esqueceu a senha?</p>
+            <Link href="/forgotpassword" className="EsqueceuSenha">Esqueceu a senha?</Link>
             <div className="botao">
                 <Button type="submit" name="button" background="var(--button-color)" size="small" text="Entrar" />
             </div>

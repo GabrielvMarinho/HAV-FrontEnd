@@ -18,9 +18,9 @@ export default function UserReportsValidation() {
 
   // Dados para o gráfico horizontal no mesmo padrão
   const [userStats] = useState({
-    proprietarios: 893,
-    usuariosComuns: 1750,
-    bloqueados: 486
+    proprietarios: 2,
+    usuariosComuns: 3,
+    bloqueados: 1
   });
 
   // Calculando totais e porcentagens
@@ -65,7 +65,7 @@ export default function UserReportsValidation() {
         </div>
         <div className="users-data-row">
           <div className="users-data-box">
-            <h3 className="users-big-number">3.2 MIL</h3>
+            <h3 className="users-big-number">6</h3>
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
@@ -78,9 +78,10 @@ export default function UserReportsValidation() {
           </div>
         </section>
 
+
       {/* Seção de Novos Usuários (gráfico vertical) */}
       <section className="users-section">
-        <div className="data-TitleRight">
+      <div className="data-TitleRight">
           <SideTitle tag={"h2"} text={"DADOS RECENTES"} />
         </div>
         <div className="reports-graphTitleRight">
@@ -95,25 +96,15 @@ export default function UserReportsValidation() {
               scaleType="default"
             />
           </div>
-          </div>
           <div className="users-data-box">
             <h3 className="users-big-number">123</h3>
             <p className="users-small-text">
-              65% usuários comuns sem propriedade à venda
+            65% usuários comuns sem propriedade á venda
             </p>
           </div>
-          <div className="users-data-row">
-            <div className="users-graph-container">
-              <div className="placeholder-graph">Gráfico</div>
-            </div>
-            <div className="users-data-box">
-              <h3 className="users-big-number">123</h3>
-              <p className="users-small-text">
-                65% usuários comuns sem propriedade á venda
-              </p>
-            </div>
           </div>
         </section>
+        
 
       {/* Seção de Visitas (gráfico vertical) */}
       <section className="users-section">

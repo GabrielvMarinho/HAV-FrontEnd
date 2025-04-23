@@ -544,6 +544,13 @@ background-color: var(--text-white);
     text-align: center;
     background-color: var(--login-container-red);
 }
+.successContainerLogin{
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: var(--border-box);
+    text-align: center;
+    background-color: var(--login-container-green);
+}
 .ErrorLogin{
     color: var(--text-white);
     font-size: var(--text-s);

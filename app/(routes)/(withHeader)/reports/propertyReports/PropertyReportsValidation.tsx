@@ -16,9 +16,9 @@ export default function PropertyReportsValidation() {
   const [visitasData] = useState([95000, 10000, 50000, 17000, 16000, 10000]);
 
   const [userStats] = useState({
-    proprietarios: 893,
-    usuariosComuns: 1750,
-    bloqueados: 486
+    proprietarios: 2,
+    usuariosComuns: 3,
+    bloqueados: 1
   });
 
   const totalUsers = userStats.proprietarios + userStats.usuariosComuns + userStats.bloqueados;
@@ -61,7 +61,7 @@ export default function PropertyReportsValidation() {
           </div>
           <div className="users-data-row">
             <div className="users-data-box">
-              <h3 className="users-big-number">3.2</h3>
+              <h3 className="users-big-number">6</h3>
               <p className="users-small-text">Desde 2025</p>
             </div>
             <div className="users-graph-container">
@@ -125,21 +125,6 @@ export default function PropertyReportsValidation() {
                 <h3 className="info-big-number">1.2 MIL</h3>
                 <p className="info-small-text">37% conversados por Whatsapp</p>
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="users-section">
-          <div className="reports-graphTitle">
-            <p>IMÓVEIS</p>
-          </div>
-          <div className="users-data-row">
-            <div className="users-data-box">
-              <h3 className="users-big-number">3.2 MIL</h3>
-              <p className="users-small-text">Desde 2025</p>
-            </div>
-            <div className="users-graph-container">
-              <div className="placeholder-graph">Gráfico</div>
             </div>
           </div>
         </section>

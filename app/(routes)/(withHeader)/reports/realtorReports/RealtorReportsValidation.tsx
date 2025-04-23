@@ -21,9 +21,9 @@ export default function RealtorReportsValidation() {
 
   // Dados para o gráfico horizontal no mesmo padrão
   const [userStats] = useState({
-    proprietarios: 893,
-    usuariosComuns: 1750,
-    bloqueados: 486
+    proprietarios: 2,
+    usuariosComuns: 3,
+    bloqueados: 1
   });
 
   // Calculando totais e porcentagens
@@ -67,7 +67,7 @@ export default function RealtorReportsValidation() {
         </div>
         <div className="users-data-row">
           <div className="users-data-box">
-            <h3 className="users-big-number">421</h3>
+            <h3 className="users-big-number">6</h3>
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
@@ -86,7 +86,7 @@ export default function RealtorReportsValidation() {
         </div>
         <div className="users-data-row">
           <div className="users-data-box">
-            <h3 className="users-big-number">421</h3>
+            <h3 className="users-big-number">6</h3>
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
