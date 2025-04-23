@@ -169,7 +169,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                             PromotionalPrice: props.obj?.promotionalPrice
                         }} />
                         {props.user.role == "ROLE_EDITOR" || props.user.role == "ROLE_ADMIN" ?
-                            <ProprietorAssociated proprietor={property.proprietor} WhatsappLink="ada" />
+                            <ProprietorAssociated proprietor={property.proprietor} WhatsappLink="https://web.whatsapp.com/" />
                             :
                             <NewScheduleModal propertyId={String(propertyId)} />
 
