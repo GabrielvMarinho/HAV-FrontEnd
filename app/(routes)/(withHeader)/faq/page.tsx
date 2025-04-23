@@ -8,16 +8,16 @@ import HavLogo from "@/app/components/IconsTSX/HavLogoLight";
 import Button from "@/app/components/Inputs/Button";
 import AuthGuard from "@/app/context/AuthGuard";
 import HeaderCustomer from "@/app/components/Header/HeaderCustomer";
+import ChatBot from "@/app/components/Chatbot/ChatBot";
 
 export default function page() {
-    
 
-    /
 
     return (
         <>
         {/* <AuthGuard requiredRole="CUSTOMER"> */}
             <Title tag={"h1"} text={"Perguntas Frequentes"} />
+
             <div className="navSubtitle">
                 <p>
                     Aqui você encontra respostas rápidas e práticas para as dúvidas mais comuns sobre nossos produtos e serviços.

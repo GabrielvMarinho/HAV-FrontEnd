@@ -8,7 +8,7 @@ import globalDatabaseNameConverter from "@/app/globalDatabaseNameConverter";
 import getPropertiesMap from "@/app/apiCalls/Property/getPropertiesMap";
 import getPropertiesMapFavorite from "@/app/apiCalls/Property/getPropertiesMapFavorite";
 
-export default function MapSearchResult(props: {height? :string, width? :string, favorite? :boolean; addressSpecific? :any}) {
+export default function MapSearchResult(props: {cards? :any; height? :string, width? :string, favorite? :boolean; addressSpecific? :any}) {
     const mapRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -26,7 +26,22 @@ export default function MapSearchResult(props: {height? :string, width? :string,
             const fetchAndUpdateMap = async function(){
                 var data;
                 //fetch
-                if(props.addressSpecific){
+                if (props.cards) {
+                    console.log("cards recebidos:", props.cards);
+                  
+                    const addresses = props.cards.map((property) => ({
+                        city: property.city,
+                        street: property.street,
+                        propertyNumber: property.propertyNumber,
+                        state: property.state,
+
+                      }));
+
+                    console.log("Endereços:", addresses);
+                  
+                    data = props.cards;
+                  }
+                else if(props.addressSpecific){
                     console.log("address", props.addressSpecific)
                     data = [props.addressSpecific]
                 }
