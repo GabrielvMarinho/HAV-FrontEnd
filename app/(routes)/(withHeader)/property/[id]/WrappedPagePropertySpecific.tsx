@@ -22,6 +22,8 @@ import GetSimilarThreeByPrice from "@/app/apiCalls/Property/GetSimilarThreeByPri
 import "@/app/GeneralPages.css"
 import "@/app/variables.css"
 import "@/public/Image/css/style.css"
+import ButtonUploadPhotos from "@/app/components/Inputs/buttonUploadPhotos";
+import ShowPhotos from "@/app/components/Information/ShowPhotos";
 
 export default function WrappedPagePropertySpecific(props: { obj?: PropertySpecific; user :any}) {
 
@@ -85,15 +87,27 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
     if (!property) {
         return <p>Carregando...</p>
     }
-
-    
-
+    console.log(property.imagesProperty)
     return (
         <>
-            <div style={{ width: "var(--width-page)" }}>
+        
+            <div style={{marginInline:"auto", maxWidth: "var(--width-page)" }}>
                 <article className="articleFirstContent">
                     <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                        <div style={{ width: "450px", height: "462px", backgroundColor: "black" }}></div>
+                        {property.imagesProperty.length>1 ? 
+                        <ShowPhotos
+                        name={"images"}
+                        initialImages={
+                            property.imagesProperty
+                        }
+                    />
+                    :
+                    <img
+                    style={{width: "33vw", height: "28vw"}}
+                        src="/Image/fotoSemPropriedade.png"
+                    ></img>
+                    }
+                        
                         <div style={{ display: "flex", flexDirection: "row", gap: "110px" }}>
                             {/* <div className="buttonIconDiv">
                                 <Button
@@ -105,10 +119,11 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                                     background="" />
                                 <Cubes width={30} height={30} color="var(--button-color)" />
                             </div> */}
-                            {props.user.role == "ROLE_EDITOR" || props.user.role =="ROLE_ADMIN" ?
+                            {props.user ?
 
                             <div className="buttonIconDiv">
                                 <Button
+                                onClick={() =>{window.location.href="/manage/properties/edit/4"}}
                                     type="button"
                                     size="large"
                                     text="gerenciar"
@@ -137,6 +152,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                     <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                         <PropertyPageDatasAdm
                             obj={{
+                                propertyId: propertyId,
                                 propertyType: property.propertyType,
                                 propertyCode: property.propertyCode,
                                 propertyFeature: property.propertyFeature,

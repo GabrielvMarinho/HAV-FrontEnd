@@ -17,7 +17,7 @@ export default async function (
     }
 
     const data = await response.json();
-
+    console.log(data)
     const {address, taxes, propertyFeature, additionals, propertyStatus, realtorPropertySpecific, ...rest } = data;
 
     const property: PropertySpecific = {

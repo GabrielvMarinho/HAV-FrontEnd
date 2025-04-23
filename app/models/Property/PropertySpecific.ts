@@ -14,6 +14,8 @@ interface PropertySpecific {
         areaProperty: number;
         isFurnished: boolean;
     };
+    propertyId: string;
+
     propertyStatus: string;
     additionals: AdditionalsPropertySpecific[];
     propertyCode: string;
@@ -23,6 +25,9 @@ interface PropertySpecific {
     purpose: string; // venda, vendaPromocao, locacao
     propertyDescription: string,
     propertyType: string;
+
+    imagesProperty: string[];
+
     realtorPropertySpecific: realtorPropertySpecific[];
     price: number; //botei esse pra ver se ta funcionando (sim)
 }

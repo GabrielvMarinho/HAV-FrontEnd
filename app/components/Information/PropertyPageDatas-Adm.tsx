@@ -9,8 +9,9 @@ import Shower from "../IconsTSX/Shower";
 import Garage from "../IconsTSX/Garage";
 import Sofa from "../IconsTSX/Sofa";
 import Rule from "../IconsTSX/Rule";
+import globalDatabaseNameConverter from "@/app/globalDatabaseNameConverter";
 
-export default function PropertyPageDatasAdm(props: {
+export default function PropertyPageDatasAdm(props: {usuario :any,
     obj: Omit<PropertySpecific, "isFurnished" | "additional" | "propertyDescription" |
         "promotionalPrice" | "actualPrice" | "taxes" | "price" | "id">
 }) {
@@ -18,7 +19,8 @@ export default function PropertyPageDatasAdm(props: {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "left", gap: "10px" }}>
             <p className="idProperty">cód: {props.obj.propertyCode}</p>
             <p className="addressProperty">
-                {props.obj.address?.neighborhood} - {props.obj.address?.city} - {props.obj.address?.state}</p>
+                
+                {globalDatabaseNameConverter[props.obj.address?.neighborhood]} - {globalDatabaseNameConverter[props.obj.address?.city]} - {globalDatabaseNameConverter[props.obj.address?.state]}</p>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "15px" }}>
                 <p style={{
                     fontSize: "var(--text-xl)",
@@ -26,9 +28,14 @@ export default function PropertyPageDatasAdm(props: {
                     color: "var(--text-dark-red)",
                     textTransform: "uppercase"
                 }}>{props.obj.propertyType}</p>
-                <HorizontalLine size={100} />
+                <div
+                    style={{ width: "5vw", backgroundColor: "#B23F52" }}
+                    className="horizontalLine"
+                    ></div>
                 <CategoryCardImovel text={props.obj.purpose || "N/A"}/>
-                <StarFavorite selected={false} width={30} height={30} color="var(--box-dark-red)" />
+                {props.usuario ?
+                <StarFavorite idProperty={props.obj.propertyId} selected={false} width={30} height={30} color="var(--box-dark-red)" />:""
+                }
                 <ShareProperty width={30} height={30} />
             </div>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "16px" }}>

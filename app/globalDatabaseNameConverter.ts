@@ -8,7 +8,7 @@ export default {
     "apartamento":"Apartamento",
     "casa": "Casa",
     "terreno": "Terreno",
-    //estados
+    //estado
     "sc": "Santa Catarina",
     "pr": "Paraná",
     "rs": "Rio Grande do Sul",
@@ -35,8 +35,6 @@ export default {
     "boa_vista": "Boa Vista",
     "braco_ribeirao_cavalo": "Braço Ribeirão Cavalo",
     "centenario": "Centenário",
-
-    //ta errado o centro, troquei para teste
     "centro": "Centro",
     "chico_de_paulo": "Chico de Paulo",
     "czerniewicz": "Czerniewicz",

@@ -66,8 +66,8 @@
     --text-xxl: 40px;
 
     /* ALINHAMENTO COM O HEADER*/
-    --width-page: 78vw;
-}
+    --width-page: clamp(320px, 78vw, 1366px);
+  }
 [data-theme="lightPallete"]{
     --bg-color: #F2EBE3;
     --button-color: #B23F52;
