@@ -6,9 +6,10 @@ export const createChat = (chatData: { token: any; data: any; }) => async (dispa
 
         const res = await fetch(`http://localhost:9090/api/chats/single`, {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${chatData.token}`
+                // Authorization: `Bearer ${chatData.token}`,
             },
             body: JSON.stringify(chatData.data)
         })
@@ -28,9 +29,10 @@ export const getUsersChat = (chatData: { token: any; }) => async (dispatch: (arg
 
         const res = await fetch(`http://localhost:9090/api/chats/user`, {
             method: "GET",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${chatData.token}`
+                // Authorization: `Bearer ${chatData.token}`,
             },
 
         })

@@ -13,7 +13,7 @@ import "./css/style.css"
 import { currentUser, searchUser } from "@/app/redux/Auth/action";
 import { useDispatch, useSelector } from "react-redux";
 import { createChat, getUsersChat } from "@/app/redux/Chat/action";
-import { createMessage, getAllMessage } from "@/app/redux/Message/action";
+import { createMessage, fetchUnreadCounts, getAllMessage } from "@/app/redux/Message/action";
 import SockJS from "sockjs-client";
 import { over } from "stompjs";
 
@@ -28,6 +28,13 @@ export default function Chat() {
     const [stompClient, setStompClient] = useState(null);
     const [isConnected, setIsConnected] = useState(false);
     const [messages, setMessages] = useState([]);
+    const unreadCounts = useSelector((state) => state.message.unreadCounts);
+
+    useEffect(() => {
+        if (token) {
+            dispatch(fetchUnreadCounts(token));
+        }
+    }, [auth.token, dispatch]);
 
     const handleSearch = (keyword) => {
         dispatch(searchUser({ keyword, token }))
@@ -162,7 +169,7 @@ export default function Chat() {
                     </div>
 
                     <div style={{ marginLeft: "10px" }}>
-                        <h2 style={{ fontWeight: "bolder", color: "var(--text-white)", marginLeft:"25px" }}>CONVERSAS</h2>
+                        <h2 style={{ fontWeight: "bolder", color: "var(--text-white)", marginLeft: "25px" }}>CONVERSAS</h2>
                     </div>
 
                     <div style={{
@@ -204,11 +211,12 @@ export default function Chat() {
                                 <div key={item.id} onClick={() => handleClickOnChatCard(item.id)}>
                                     {""}
                                     <hr />
-                                    <ChatCard name={item.full_name}
+                                    <ChatCard name={item.name}
                                         userImg={
                                             item.profile_picture ||
                                             "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
                                         }
+                                        unreadCount={unreadCounts?.find((unread) => unread.chatId === item.id)?.unreadCount || 0}
                                     />
                                     {""}
                                 </div>
@@ -227,14 +235,15 @@ export default function Chat() {
                                                     item.chat_image ||
                                                     "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
                                                 }
+                                                unreadCount={unreadCounts?.find((unread) => unread.chatId === item.id)?.unreadCount || 0}
                                             />
                                         ) : (
                                             <ChatCard
                                                 isChat={true}
                                                 name={
                                                     auth.reqUser?.id !== item.users[0]?.id
-                                                        ? item.users[0].full_name
-                                                        : item.users[1].full_name
+                                                        ? item.users[0].name
+                                                        : item.users[1].name
                                                 }
                                                 userImg={
                                                     auth.reqUser?.id !== item.users[0].id
@@ -243,6 +252,7 @@ export default function Chat() {
                                                         : item.users[1]?.profile_picture ||
                                                         "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
                                                 }
+                                                unreadCount={unreadCounts?.find((unread) => unread.chatId === item.id)?.unreadCount || 0}
                                             // notification={notifications.length}
                                             /* isNotification={
                                                 notification[0]?.chat?.id === item.id
@@ -333,8 +343,8 @@ export default function Chat() {
                                         }
                                         alt="" />
                                     <p>{currentChat && auth.reqUser?.id ===
-                                        currentChat.users[0].id ? currentChat.users[1].full_name :
-                                        currentChat.users[0].full_name}</p>
+                                        currentChat.users[0].id ? currentChat.users[1].name :
+                                        currentChat.users[0].name}</p>
                                 </div>
                                 <div style={{
                                     display: "flex", paddingTop: "0.75rem", paddingBottom: "0.75rem", marginLeft: "1rem",
