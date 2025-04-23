@@ -9,7 +9,11 @@ const initialValue = {
 export const messageReducer = (store = initialValue, { type, payload }) => {
 
     if (type === CREATE_NEW_MESSAGE) {
-        return { ...store, newMessage: payload }
+        return {
+            ...store,
+            newMessage: payload,
+            messages: [...store.messages, payload]  // <- Adiciona a nova mensagem
+        }
     } else if (type === GET_ALL_MESSAGE) {
         return { ...store, messages: payload }
     } else if (type === SET_UNREAD_COUNTS) {

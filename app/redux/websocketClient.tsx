@@ -3,7 +3,7 @@
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 
-let stompClient: Client | null = null;
+export let stompClient: Client | null = null;
 
 export const connectWebSocket = (onMessageReceived) => {
     if (!window.WebSocket) {

@@ -16,7 +16,7 @@ import { createChat, getUsersChat } from "@/app/redux/Chat/action";
 import { createMessage, fetchUnreadCounts, getAllMessage, markMessagesAsRead } from "@/app/redux/Message/action";
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
-import { connectWebSocket, sendMessageSocket, subscribeToChat } from "@/app/redux/websocketClient";
+import { connectWebSocket, sendMessageSocket, stompClient, subscribeToChat } from "@/app/redux/websocketClient";
 
 export default function Chat() {
 
@@ -26,7 +26,7 @@ export default function Chat() {
     const { auth, chat, message } = useSelector(store => store);
     const dispatch = useDispatch();
     const token = localStorage.getItem("token");
-    const [messages, setMessages] = useState([]);
+    // const [messages, setMessages] = useState([]);
     const unreadCounts = useSelector((state) => state.message.unreadCounts);
 
     useEffect(() => {
@@ -58,9 +58,9 @@ export default function Chat() {
         return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
     }
 
-    useEffect(() => {
-        setMessages(message.messages)
-    }, message.messages)
+    // useEffect(() => {
+    //     setMessages(message.messages)
+    // }, message.messages)
 
     useEffect(() => {
         if (currentChat?.id)
@@ -93,7 +93,7 @@ export default function Chat() {
 
     {/* Configuração do WebSocket */ }
 
-    const stompClient = useRef(null);
+    // const stompClient = useRef(null);
 
     useEffect(() => {
         if (!currentChat?.id) return;
@@ -112,21 +112,19 @@ export default function Chat() {
         };
     }, [currentChat?.id]);
 
-
-
     const handleCreateNewMessage = () => {
         const message = {
             chatId: currentChat.id,
             content: content,
             userId: auth.reqUser?.id
         };
-        
+
         if (stompClient?.connected) {
-            console.log("chegou aqui eu");
+            console.log("chegou aqui");
             sendMessageSocket(message);
         } else {
             console.warn("STOMP não conectado. Enviando via fetch como fallback.");
-            dispatch(createMessage({ token, data: { chatId: currentChat.id, content: content, } }))
+            dispatch(createMessage({ token, data: { chatId: currentChat.id, content: content } }));
         }
 
         setContent("");
