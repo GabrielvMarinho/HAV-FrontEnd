@@ -23,15 +23,11 @@ export default async function(
       const url = `http://localhost:9090/property/filter/card?page=${page}`
 
       if(purpose==="venda"){
-        console.log("é venda mesmo")
-        console.log(minPrice)
-        console.log(maxPrice)
-        console.log(InputFilterConfig.priceRangesSell.max)
         if(minPrice===null){
           minPrice=0
         }
         if(maxPrice===null || maxPrice ===InputFilterConfig.priceRangesSell.max){
-          console.log("igual")
+
           maxPrice = 100000000
         }
 
@@ -87,7 +83,6 @@ export default async function(
   
       
       const data = await response.json();
-      console.log(data)
       const properties: PropertySpecificCard[] = data.content.map((property: PropertySpecificCard) => ({
 
           id:property.id,
@@ -106,7 +101,6 @@ export default async function(
 
       }));
         
-      console.log(properties)
       return {properties: properties, totalPages: data.totalPages}
 
     }catch{

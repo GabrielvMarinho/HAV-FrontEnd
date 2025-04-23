@@ -6,7 +6,7 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Favorite() {
-    const { id: idUser } = useParams();
+    const { idUser } = useParams();
     const searchParams = useSearchParams();
 
     const [favorites, setFavorites] = useState([]);
@@ -22,23 +22,27 @@ export default function Favorite() {
                     credentials: "include"
                 });
 
-                if (!response.ok) throw new Error("Erro ao buscar favoritos");
+                if (!response.ok) {
+                    console.error("Erro na requisição:", response.status);
+                    throw new Error(`Erro ao buscar favoritos: ${response.statusText}`);
+                }
 
                 const data = await response.json();
+                console.log("Favoritos recebidos:", data);  // Verifique se chega aqui agora
+
                 const formattedProperty = data.content.map((property: any) => ({
                     ...property,
                     ...property.propertyFeatures,
                     ...property.address
-                }))
+                }));
 
                 setFavorites(formattedProperty);
                 setTotalPages(data.totalPages || 1);
-
-                console.log("Favoritos recebidos:", data);
             } catch (error) {
                 console.error("Erro ao buscar favoritos:", error);
             }
         };
+
 
         fetchFavorites();
     }, [idUser]);
@@ -68,7 +72,7 @@ export default function Favorite() {
             console.log("Parâmetros capturados:", propertyFeatures);
 
             try {
-                const { properties, totalPages } = await getByParamsPropertiesCard(
+                const { properties } = await getByParamsPropertiesCard(
                     params.propertyCode,
                     params.propertyType,
                     params.propertyStatus,
@@ -99,7 +103,6 @@ export default function Favorite() {
             <section style={{ marginTop: "80px" }}>
                 <FavoriteCardContainer
                     cards={favorites}
-                    totalPages={totalPages}
                     userId={idUser}
                 />
             </section>
