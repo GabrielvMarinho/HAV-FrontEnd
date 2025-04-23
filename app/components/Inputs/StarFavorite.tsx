@@ -4,7 +4,6 @@ import SelectedStar from "../IconsTSX/SelectedStar";
 import NotSelectedStar from "../IconsTSX/NotSelectedStar";
 import { favoriteProperty } from "@/app/apiCalls/Property/FavoriteProperty";
 import { unfavoriteProperty } from "@/app/apiCalls/Property/UnFavoriteProperty";
-import { tr } from "react-day-picker/locale";
 
 interface StarFavoriteProps {
     idProperty: any;
@@ -22,7 +21,7 @@ export default function StarFavorite({ idProperty, selected, width, height, colo
         
         const checkFavoriteStatus = async () => {
             try{
-                const response = await fetch(`http://localhost:9090/favorites/${idUser}`);
+                const response = await fetch(`http://localhost:9090/favorites/map`)
                 const data = await response.json();
 
                 const isPropertyFavorited = data.content.some((property: any) => property.id === idProperty);

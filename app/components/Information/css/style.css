@@ -135,6 +135,27 @@
     flex: 1;
 }
 
+.priceProperty{
+    color: var(--text-white);
+    font-size: 28px;
+    font-weight: 900;
+}
+
+.cityProperty{
+    color: var(--text-white);
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 1.12px;
+    text-transform: uppercase;
+}
+.neighborhoodProperty{
+    color: var(--text-white);
+    text-transform: uppercase;
+    font-size: 38px;
+    font-weight: 900;
+    letter-spacing: 2.66px;
+}
+
 .checkbox {
     all: unset;
     width: 20px;
@@ -516,6 +537,8 @@
     display: flex;
     flex-direction: column;
 }
+
+
 
 @media (width >1600px){
     .cardsContainer{

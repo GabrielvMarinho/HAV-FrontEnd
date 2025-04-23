@@ -43,8 +43,8 @@ export default function SliderContent(props: { items: PropertySpecificCard[] }) 
             <img src={`data:image/png;base64,${props.items[(page - 1 + props.items.length) % props.items.length]?.image}`} />
             <div className="highlightPropertyBox">
               <div>
-                <h3>{props.items[(page - 1 + props.items.length) % props.items.length]?.city}</h3>
-                <h2>{props.items[(page - 1 + props.items.length) % props.items.length]?.neighborhood}</h2>
+                <p className="cityProperty">{props.items[(page - 1 + props.items.length) % props.items.length]?.city}</p>
+                <p className="neighborhoodProperty">{props.items[(page - 1 + props.items.length) % props.items.length]?.neighborhood}</p>
               </div>
               <div style={{ display: "flex", gap: "15px" }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
@@ -76,7 +76,7 @@ export default function SliderContent(props: { items: PropertySpecificCard[] }) 
 
               </div>
               <div style={{ display: "flex", gap: "20px", justifyContent: "space-between" }}>
-                <h2>R${props.items[(page - 1 + props.items.length) % props.items.length]?.price}</h2>
+                <p className="priceProperty">R${props.items[(page - 1 + props.items.length) % props.items.length]?.price}</p>
                 <Button type={"button"} size={"large"}
                   background={"var(--button-color-reverse)"}
                   color={"var(--text-red-pink)"} text="SAIBA MAIS" />
@@ -92,8 +92,8 @@ export default function SliderContent(props: { items: PropertySpecificCard[] }) 
               <img src={`data:image/png;base64,${props.items[page]?.image}`} />
               <div className="highlightPropertyBox">
                 <div>
-                  <h3>{props.items[page]?.city}</h3>
-                  <h2>{props.items[page]?.neighborhood}</h2>
+                  <p className="cityProperty">{props.items[page]?.city}</p>
+                  <p className="neighborhoodProperty">{props.items[page]?.neighborhood}</p>
                 </div>
                 <div style={{ display: "flex", gap: "15px" }}>
                   <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
@@ -125,7 +125,7 @@ export default function SliderContent(props: { items: PropertySpecificCard[] }) 
 
                 </div>
                 <div style={{ display: "flex", gap: "20px", justifyContent: "space-between" }}>
-                  <h2>R${props.items[page]?.price}</h2>
+                  <p className="priceProperty">R${props.items[page]?.price}</p>
                   <Button type={"button"} size={"large"}
                     background={"var(--button-color-reverse)"} color={"var(--text-red-pink)"}
                     text="SAIBA MAIS" onClick={() => goToSpecificProperty(props.items[page]?.id)} />
@@ -142,8 +142,8 @@ export default function SliderContent(props: { items: PropertySpecificCard[] }) 
             <img src={`data:image/png;base64,${props.items[(page + 1 + props.items.length) % props.items.length]?.image}`} />
             <div className="highlightPropertyBox">
               <div>
-                <h3>{props.items[(page + 1 + props.items.length) % props.items.length]?.city}</h3>
-                <h2>{props.items[(page + 1 + props.items.length) % props.items.length]?.neighborhood}</h2>
+                <p className="cityProperty">{props.items[(page + 1 + props.items.length) % props.items.length]?.city}</p>
+                <p className="neighborhoodProperty">{props.items[(page + 1 + props.items.length) % props.items.length]?.neighborhood}</p>
               </div>
               <div style={{ display: "flex", gap: "15px" }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
@@ -175,7 +175,7 @@ export default function SliderContent(props: { items: PropertySpecificCard[] }) 
 
               </div>
               <div style={{ display: "flex", gap: "20px", justifyContent: "space-between" }}>
-                <h2>R${props.items[(page + 1 + props.items.length) % props.items.length]?.price}</h2>
+                <p className="priceProperty">R${props.items[(page + 1 + props.items.length) % props.items.length]?.price}</p>
                 <Button type={"button"} size={"large"} background={"var(--button-color-reverse)"} color={"var(--text-red-pink)"} text="SAIBA MAIS" />
               </div>
             </div>

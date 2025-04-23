@@ -5,6 +5,7 @@ import HeaderAdm from "@/app/components/Header/HeaderAdm";
 import ToggleButton from "@/app/components/Inputs/ToggleButton";
 import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 import Title from "@/app/components/NonInteractable/Title";
+import Notificacao from "@/app/components/Notification/Notification";
 import "./style/style.css";
 
 export default function Notification() {
@@ -21,7 +22,7 @@ export default function Notification() {
                         onChange={() => setNotificationStatus(!notificationStatus)} 
                     />
                 </div>
-                
+                <Notificacao/>
                 <HorizontalLine size={890} color="#0F0F0F80" />
             </div>
         </>

@@ -1,3 +1,10 @@
+interface ProprietorGetResponseDTO {
+    name: string;
+    email: string;
+    celphone: string;
+}
+
+
 interface PropertySpecific {
     id: number;
     address: {
@@ -29,5 +36,7 @@ interface PropertySpecific {
     imagesProperty: string[];
 
     realtorPropertySpecific: realtorPropertySpecific[];
+    proprietor: ProprietorGetResponseDTO;
+
     price: number; //botei esse pra ver se ta funcionando (sim)
 }
