@@ -4,7 +4,7 @@ import Button from "../Inputs/Button";
 
 export default function ProprietorDetails(props: { proprietor: ProprietorGetResponseDTO, WhatsappLink: string }) {
     const { proprietor, WhatsappLink } = props;
-
+    console.log("prop", proprietor)
     return (
         <div>
             <article style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "21px" }}>
@@ -16,7 +16,12 @@ export default function ProprietorDetails(props: { proprietor: ProprietorGetResp
                     <p className="realtorEmail">{proprietor.celphone ? `Telefone - ${proprietor.celphone}` : 'Telefone não informado'}</p>
 
                     <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "15px" }}>
+                        <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${proprietor.email}`} target="_blank">
+
+
                         <Button type="button" size="large" text="Mandar E-mail" hover="darkHover" color="" background="" />
+
+                        </a>
                         <p className="ou">OU</p>
                         <a href={WhatsappLink}>
                             <img src="/Image/whatsapp.png" alt="Whatsapp icon" />

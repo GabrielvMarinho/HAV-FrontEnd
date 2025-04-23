@@ -1,6 +1,5 @@
 "use client"
 import "../css/style.css"
-import RealtorAssociated from "@/app/components/Information/RealtorAssociated";
 import PropertyPageDatasAdm from "@/app/components/Information/PropertyPageDatas-Adm";
 import PropertyPrice from "@/app/components/NonInteractable/PropertyPrice";
 import OtherEnvironmentsProperty from "@/app/components/Information/OtherEnvironmentsProperty";
@@ -24,6 +23,8 @@ import "@/app/variables.css"
 import "@/public/Image/css/style.css"
 import ButtonUploadPhotos from "@/app/components/Inputs/buttonUploadPhotos";
 import ShowPhotos from "@/app/components/Information/ShowPhotos";
+import ProprietorDetails from "@/app/components/Information/ProprietorAssociated";
+import ProprietorAssociated from "@/app/components/Information/ProprietorAssociated";
 
 export default function WrappedPagePropertySpecific(props: { obj?: PropertySpecific; user :any}) {
 
@@ -87,7 +88,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
     if (!property) {
         return <p>Carregando...</p>
     }
-    console.log(property.imagesProperty)
+    console.log(property)
     return (
         <>
         
@@ -168,8 +169,8 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                             PromotionalPrice: props.obj?.promotionalPrice
                         }} />
                         {props.user.role == "ROLE_EDITOR" || props.user.role =="ROLE_ADMIN" ?
-                        <RealtorAssociated objPropertyList={{ realtorPropertySpecific: property?.realtorPropertySpecific ?? [] }} WhatsappLink="adad" />
-                        :
+                        <ProprietorAssociated proprietor={property.proprietor} WhatsappLink="ada" />
+                                                :
                         <NewScheduleModal propertyId={String(propertyId)} />
 
                         } 

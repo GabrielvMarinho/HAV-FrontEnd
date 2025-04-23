@@ -30,6 +30,7 @@ export default async function (
       propertyStatus,
       proprietor
     };
+    console.log("0----_", property)
 
     return property;
 
