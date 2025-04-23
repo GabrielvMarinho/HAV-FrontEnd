@@ -107,7 +107,6 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                         src="/Image/fotoSemPropriedade.png"
                     ></img>
                     }
-                    
                         
                         <div style={{ display: "flex", flexDirection: "row", gap: "110px" }}>
                             {/* <div className="buttonIconDiv">
