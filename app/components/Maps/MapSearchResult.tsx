@@ -10,7 +10,7 @@ import getPropertiesMapFavorite from "@/app/apiCalls/Property/getPropertiesMapFa
 
 export default function MapSearchResult(props: {height? :string, width? :string, favorite? :boolean; addressSpecific? :any}) {
     const mapRef = useRef<HTMLDivElement>(null);
-
+    console.log("addd", props.addressSpecific)
     useEffect(() => {
         const initMap = async () => {
             const loader = new Loader({
@@ -113,7 +113,7 @@ export default function MapSearchResult(props: {height? :string, width? :string,
     return (
         <div
             ref={mapRef}
-            style={{ marginBottom:"5px", marginTop:"5px", height: props.height, width: props.width }}
+            style={{ marginBottom:"5px", marginTop:"5px", height: props.height, width: props.width,  boxShadow: "0px 15px 50px rgba(0, 0, 0, 0.1)"  }}
         />
     );
 }

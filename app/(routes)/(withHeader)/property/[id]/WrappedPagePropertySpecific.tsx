@@ -25,6 +25,7 @@ import ButtonUploadPhotos from "@/app/components/Inputs/buttonUploadPhotos";
 import ShowPhotos from "@/app/components/Information/ShowPhotos";
 import ProprietorDetails from "@/app/components/Information/ProprietorAssociated";
 import ProprietorAssociated from "@/app/components/Information/ProprietorAssociated";
+import MapSearchResult from "@/app/components/Maps/MapSearchResult";
 
 export default function WrappedPagePropertySpecific(props: { obj?: PropertySpecific; user: any }) {
 
@@ -39,7 +40,9 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
             neighborhood: apiData.address?.neighborhood ?? "Não informado",
             city: apiData.address?.city ?? "Não informado",
             state: apiData.address?.state ?? "Não informado",
-            street: apiData.address?.street ?? "Não informado"
+            street: apiData.address?.street ?? "Não informado",
+            propertyNumber: apiData.address?.propertyNumber ?? "Não informado"
+
         },
         propertyFeature: {
             ...apiData.propertyFeature, // Mantém todos os dados que já existem no propertyFeature
@@ -62,7 +65,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
 
             try {
                 const response = await searchPropertyByIdSpecific(propertyId);
-
+                console.log("repos", response)
                 const formattedProperty = formatProperty(response);
 
                 setProperty(formattedProperty);
@@ -88,28 +91,28 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
     if (!property) {
         return <p>Carregando...</p>
     }
-    console.log(property)
+    console.log(props.user)
     return (
         <>
 
             <div style={{ marginInline: "auto", maxWidth: "var(--width-page)" }}>
                 <article className="articleFirstContent">
-                    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                        {property.imagesProperty?.length > 1 ?
-                            <ShowPhotos
-                                name={"images"}
-                                initialImages={
-                                    property.imagesProperty
-                                }
-                            />
-                            :
-                            <img
-                                style={{ width: "33vw", height: "28vw" }}
-                                src="/Image/fotoSemPropriedade.png"
-                            ></img>
+                    <div style={{ display: "flex", flexDirection: "column"}}>
+                        {property.imagesProperty.length>1 ? 
+                        <ShowPhotos
+                        name={"images"}
+                        initialImages={
+                            property.imagesProperty
                         }
-
-                        <div style={{ display: "flex", flexDirection: "row", gap: "110px" }}>
+                    />
+                    :
+                    <img
+                    style={{width: "33vw", height: "28vw"}}
+                        src="/Image/fotoSemPropriedade.png"
+                    ></img>
+                    }
+                        
+                        <div style={{ display: "flex", flexDirection: "row", gap: "110px", marginTop:"-2.5vw" }}>
                             {/* <div className="buttonIconDiv">
                                 <Button
                                     type="button"
@@ -120,7 +123,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                                     background="" />
                                 <Cubes width={30} height={30} color="var(--button-color)" />
                             </div> */}
-                            {props.user ?
+                            {props.user.role == "ROLE_EDITOR" || props.user.role =="ROLE_ADMIN" ?
 
                                 <div className="buttonIconDiv">
                                     <Button
@@ -150,7 +153,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                             <Balanca height={30} width={30} color="var(--button-color)" />
                         </div> */}
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+                    <div style={{ display: "flex", flexDirection: "column", justifyContent:"center", gap: "15px" }}>
                         <PropertyPageDatasAdm
                             obj={{
                                 propertyId: propertyId,
@@ -166,13 +169,24 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                             purpose: property.purpose,
                             ActualPrice: property.price,
                             taxes: property.taxes,
-                            PromotionalPrice: props.obj?.promotionalPrice
+                            PromotionalPrice: property.promotionalPrice
                         }} />
-                        {props.user.role == "ROLE_EDITOR" || props.user.role == "ROLE_ADMIN" ?
-                            <ProprietorAssociated proprietor={property.proprietor} WhatsappLink="https://web.whatsapp.com/" />
-                            :
-                            <NewScheduleModal propertyId={String(propertyId)} />
+                        {props.user.role == "ROLE_EDITOR" || props.user.role =="ROLE_ADMIN" || props.user.role =="ROLE_REALTOR" ?
 
+                        <ProprietorAssociated proprietor={property.proprietor} WhatsappLink="ada" />
+                                                :  
+                                                <div style={{margin:"10px"}}>
+                                                <Button size={"medium"} text="ACESSAR CHAT" hover="lightHover" color="var(--text-white)"
+                                                background="var(--box-red-pink)"
+                                                
+                                                />
+                                                </div>
+
+                        } 
+                        {props.user.role == "ROLE_EDITOR" || props.user.role =="ROLE_ADMIN" || props.user.role =="ROLE_REALTOR" || props.user.role =="ROLE_CUSTOMER" ?
+                        ""
+                        :
+                        <a href={"/login"} className="linkLogin">Faça login para realizar agendamentos e mais ações!</a>
                         }
                     </div>
 
@@ -181,12 +195,18 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
 
                 <article className="enviroments-interestPoint">
                     <OtherEnvironmentsProperty obj={{ additionals: property.additionals }} />
-                    <InterestPointsPropertySpecific text="pontos de interesse" />
+                    <NewScheduleModal propertyId={String(propertyId)} />
                 </article>
                 <DescriptionProperty obj={{ propertyDescription: property.propertyDescription }} />
                 <section className="sectionPriceProperty">
                     <HorizontalPropertySpecific />
-                    <div className="containerGraphic"></div>
+                    <MapSearchResult addressSpecific={{
+                        street:property.address.street,
+                        city:property.address.city,
+                        state:property.address.state,
+                        propertyNumber:property.address.propertyNumber}
+                    } width="32vw" height="25vw"
+                    />
                 </section>
                 <div style={{ display: "flex", justifyContent: "center", width: "100%", marginTop: "115px" }}>
                     <Title text="imóveis semelhantes" tag="h1" />
