@@ -66,7 +66,7 @@ export default async function({searchParams} :{searchParams: {
 
     return (
         <>
-            <SearchResult typeSearch="locacao" />
+            <SearchResult typeSearch={purpose} />
             <div className="cardsAndFilter">
                 <Filter 
                     size="medium" 
