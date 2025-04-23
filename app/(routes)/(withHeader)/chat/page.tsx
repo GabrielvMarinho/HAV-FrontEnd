@@ -13,7 +13,7 @@ import "./css/style.css"
 import { currentUser, searchUser } from "@/app/redux/Auth/action";
 import { useDispatch, useSelector } from "react-redux";
 import { createChat, getUsersChat } from "@/app/redux/Chat/action";
-import { createMessage, fetchUnreadCounts, getAllMessage } from "@/app/redux/Message/action";
+import { createMessage, fetchUnreadCounts, getAllMessage, markMessagesAsRead } from "@/app/redux/Message/action";
 import SockJS from "sockjs-client";
 import { over } from "stompjs";
 
@@ -50,7 +50,8 @@ export default function Chat() {
     }
 
     const handleCurrentChat = (item) => {
-        setCurrentChat(item)
+        setCurrentChat(item);
+        dispatch(markMessagesAsRead(item.id));
     }
 
     const connect = () => {

@@ -1,4 +1,4 @@
-import { CREATE_NEW_MESSAGE, GET_ALL_MESSAGE, SET_UNREAD_COUNTS } from "./actionType";
+import { CREATE_NEW_MESSAGE, GET_ALL_MESSAGE, MARK_MESSAGES_AS_READ, SET_UNREAD_COUNTS } from "./actionType";
 
 export const createMessage = (messageData) => async (dispatch) => {
 
@@ -9,7 +9,7 @@ export const createMessage = (messageData) => async (dispatch) => {
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                // Authorization: `Bearer ${messageData.token}`
+                Authorization: `Bearer ${messageData.token}`
             },
             body: JSON.stringify(messageData.data)
         })
@@ -64,3 +64,21 @@ export const fetchUnreadCounts = (token) => async (dispatch) => {
         console.log("Erro ao buscar contagens de mensagens não lidas", err);
     }
 }
+
+export const markMessagesAsRead = (chatId) => async (dispatch) => {
+    try {
+        const res = await fetch(`http://localhost:9090/api/messages/read/${chatId}`, {
+            method: "PUT",
+            credentials: "include",
+        });
+
+        if (res.ok) {
+            console.log(`Mensagens do chat ${chatId} marcadas como lidas.`);
+            dispatch({ type: MARK_MESSAGES_AS_READ, payload: chatId });
+        } else {
+            console.error("Erro ao marcar mensagens como lidas:", res.status);
+        }
+    } catch (error) {
+        console.error("Erro na requisição markMessagesAsRead:", error);
+    }
+};

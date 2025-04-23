@@ -32,7 +32,7 @@ export const getUsersChat = (chatData: { token: any; }) => async (dispatch: (arg
             credentials: "include",
             headers: {
                 "Content-Type": "application/json",
-                // Authorization: `Bearer ${chatData.token}`,
+                Authorization: `Bearer ${chatData.token}`,
             },
 
         })
