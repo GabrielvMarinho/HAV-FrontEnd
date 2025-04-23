@@ -28,7 +28,7 @@
     top: 55%; 
     transform: translateY(-50%); 
 }
-
+ 
 
 .logoFundo {
     position: absolute; 
@@ -146,7 +146,7 @@
     text-decoration: underline;
 }
 
-@media (max-width: 992px) {
+@media (min-width: 992px) {
     .logo {
         display: none; 
     }
@@ -181,5 +181,11 @@
         position: absolute;
         left: 0; 
         top: -20px;
+    }
+} 
+
+@media (width> 1800px){
+    .logo{
+        right: 5vw;
     }
 }

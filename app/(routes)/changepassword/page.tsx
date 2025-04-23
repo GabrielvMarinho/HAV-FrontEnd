@@ -38,7 +38,7 @@ export default function page(){
              </div>
 
             <div className="logoFundo">
-                <LogoFundo width="100%" height="850"/>
+                <LogoFundo width="900" height="1000"/>
             </div>
 
             <div className="logo"> 

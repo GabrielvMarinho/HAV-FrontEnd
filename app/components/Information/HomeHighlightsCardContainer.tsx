@@ -33,11 +33,11 @@ export default function HomeHighlightsCardContainer() {
 
   return (
     <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-      <NavBarAdm
+      {/* <NavBarAdm
         options={NavBarPath.purpose}
         onSelect={handleSelectPurpose}
         selected={purpose}
-      />
+      /> */}
       <div className="cardsContainer">
         {/* Aqui, substituímos props.cards por properties */}
         {properties.length > 0 ? (

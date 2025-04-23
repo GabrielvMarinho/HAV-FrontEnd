@@ -19,7 +19,8 @@
     height: 100vh;
 }
 .homeHiglightProperties{
-    height: 100vh;
+    height: fit-content;
+    margin-bottom: 250px;
     margin-top: 150px;
 }
 .homeHiglightProperties h2{
@@ -72,7 +73,6 @@
 }
 
 .highlightProperty{ 
-    margin-top: 20px;
     height: 350px;
     width: fit-content;
     color: var(--text-white);
@@ -93,5 +93,5 @@
     flex-direction: column;
     align-items: center;
     margin-top: 220px;
-    gap: 10vw;
+    gap: 5vw;
 }

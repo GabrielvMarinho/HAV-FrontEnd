@@ -51,7 +51,7 @@ export default async function Home() {
       <MainHomeInfo />
 
       <section className="highlightsCards">
-        <Title tag="h1" text="Imóveis em destaques" />
+        <Title tag="h1" text="Imóveis em Promoção" />
         <HomeHighlightsCardContainer />
       </section>
 

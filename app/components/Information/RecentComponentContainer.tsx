@@ -31,11 +31,11 @@ export default function PropertyFilterWrapper() {
 
   return (
     <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-      <NavBarAdm
+      {/* <NavBarAdm
         options={NavBarPath.purpose}
         onSelect={handleSelectPurpose}
         selected={purpose}
-      />
+      /> */}
       <SliderContentOfThree items={properties} />
     </div>
   );
