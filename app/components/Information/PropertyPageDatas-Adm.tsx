@@ -28,7 +28,10 @@ export default function PropertyPageDatasAdm(props: {usuario :any,
                     color: "var(--text-dark-red)",
                     textTransform: "uppercase"
                 }}>{props.obj.propertyType}</p>
-                <HorizontalLine size={100} />
+                <div
+                    style={{ width: "5vw", backgroundColor: "#B23F52" }}
+                    className="horizontalLine"
+                    ></div>
                 <CategoryCardImovel text={props.obj.purpose || "N/A"}/>
                 {props.usuario ?
                 <StarFavorite idProperty={props.obj.propertyId} selected={false} width={30} height={30} color="var(--box-dark-red)" />:""

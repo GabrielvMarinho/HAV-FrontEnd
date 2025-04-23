@@ -107,8 +107,8 @@
     object-fit: cover;
 }
 .previewImgPropertySpecific{
-    width: 30%;
-    height: 30%;
+    width: 100%;
+    height: 80%;
     object-fit: cover;
 }
 .hourLineOpacity{
@@ -168,6 +168,14 @@
 .photoArrowLeft{
     left: -35px;
     bottom: -60px;
+}
+.photoArrowLeftProperty{
+    left: -35px;
+    bottom: 0;
+}
+.photoArrowRightProperty{
+    right: -35px;
+    bottom: 0px;
 }
 .topContentModal{
     display: flex;
@@ -262,15 +270,21 @@
 .photoArrowRight{
     
     right: -35px;
-    bottom: -60px;;
+    bottom: -60px;
 }
 .photoArrow{
     position: absolute;
     background: transparent;
 }
 .photoArrowPropertySpecific{
-    background: transparent;
-
+    
+    padding: 10px;
+    border-radius: 100%;
+    top: 0;
+    height: fit-content;
+    margin-top: 40%;
+    background-color: var(--box-mid-dark-red);
+    position: absolute;
 }
 .subPreviewImg{
     width: 23%;
@@ -279,8 +293,8 @@
     aspect-ratio: 4/3;
 }
 .subPreviewImgPropertySpecific{
-    width: 10%;
-    margin: 1%;
+    width: 11.5%;
+    margin: 0.5%;
     object-fit: cover;
     aspect-ratio: 4/3;
 }
@@ -291,7 +305,7 @@
     border: 2px solid var(--box-white);
 }
 .markedImagePropertySpecific{
-    width: 10%;
+    width: 11.5%;
     margin: 0;
     scale: 1.05;
     border: 2px solid var(--box-white);

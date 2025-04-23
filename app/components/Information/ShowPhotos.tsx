@@ -266,37 +266,11 @@ export default function ShowPhotos<T>({
         setCurrentIndex((prev) => Math.min(prev + 1, preview.length - 1));
     };
 
-    const deleteIndex = () => {
-        setPreview((prev) => {
-            const newPreview = prev.filter((_, i) => i !== currentIndex);
-            const newIndex = Math.max(0, currentIndex - (currentIndex === prev.length - 1 ? 1 : 0));
-            setCurrentIndex(newIndex);
-            return newPreview;
-        });
-    };
-
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files;
-        if (files) {
-            const fileArray = Array.from(files);
-            fileArray.forEach((file) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    if (e.target?.result) {
-                        // Remove prefixo do base64 se for um DataURL (opcional)
-                        const base64 = (e.target.result as string).split(',')[1];
-                        setPreview((prev) => [...prev, base64]);
-                    }
-                };
-                reader.readAsDataURL(file);
-            });
-            event.target.value = '';
-        }
-    };
+   
 
     const getPreviewRange = () => {
         const total = preview.length;
-        const maxVisible = 4;
+        const maxVisible = 8;
 
         if (total <= maxVisible) return preview.map((_, i) => i);
 
@@ -312,11 +286,11 @@ export default function ShowPhotos<T>({
     };
 
     return (
-        <div style={{width:"300px", height:"300px"}}>
+        <div style={{position:"relative", width:"33vw", height:"33vw"}}>
             {preview.length > 0 && (
                 <>
                     <button
-                        className="photoArrowPropertySpecific photoArrowLeft"
+                        className="photoArrowPropertySpecific photoArrowLeftProperty"
                         type="button"
                         onClick={prevIndex}
                         disabled={currentIndex === 0}
@@ -324,7 +298,7 @@ export default function ShowPhotos<T>({
                         <ArrowBack width={23} height={23} color="var(--box-white)" />
                     </button>
                     <button
-                        className="mirrored photoArrowPropertySpecific photoArrowRight"
+                        className="mirrored photoArrowPropertySpecific photoArrowRightProperty"
                         type="button"
                         onClick={nextIndex}
                         disabled={currentIndex >= preview.length - 1}

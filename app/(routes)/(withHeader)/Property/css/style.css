@@ -3,7 +3,7 @@
 .articleFirstContent{
     display: flex;
     flex-direction: row;
-    gap: 83px;
+    gap: 5vw;
 }
 
 .buttonIconDiv{

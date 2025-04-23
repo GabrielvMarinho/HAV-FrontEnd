@@ -87,20 +87,27 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
     if (!property) {
         return <p>Carregando...</p>
     }
-
-    
+    console.log(property.imagesProperty)
     return (
         <>
         
-            <div style={{ width: "var(--width-page)" }}>
+            <div style={{marginInline:"auto", maxWidth: "var(--width-page)" }}>
                 <article className="articleFirstContent">
                     <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                        {property.imagesProperty.length>1 ? 
                         <ShowPhotos
-                                name={"images"}
-                                initialImages={
-                                    property.imagesProperty
-                                }
-                            />
+                        name={"images"}
+                        initialImages={
+                            property.imagesProperty
+                        }
+                    />
+                    :
+                    <img
+                    style={{width: "33vw", height: "28vw"}}
+                        src="/Image/fotoSemPropriedade.png"
+                    ></img>
+                    }
+                        
                         <div style={{ display: "flex", flexDirection: "row", gap: "110px" }}>
                             {/* <div className="buttonIconDiv">
                                 <Button
