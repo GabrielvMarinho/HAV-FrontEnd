@@ -134,16 +134,10 @@ export default function FAQPage() {
         </div>
       </div>
 
-      <div className="chatButtonContainer">
-        <Button
-          type="button"
-          size="large"
-          text="ACESSE O CHAT"
-          hover="darken"
-          color="white"
-          background="#B23F52"
-        />
-      </div>
+      <div className="chatButtonContainer" style={{ display: "flex", alignItems: "center" }}>
+            <Button type="button" size="large" text="ACESSE O CHAT" hover="darken" color="white" background="#B23F52"/>
+            <span className="orText">OU</span><img src="/Image/whatsapp.png" alt="Whatsapp icon" />
+            </div>
 
       <Footer />
     </>
