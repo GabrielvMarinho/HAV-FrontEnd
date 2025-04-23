@@ -23,23 +23,24 @@ const Notification = () => {
     const idUser = params.id;
     const [messages, setMessages] = useState<MessageDTO[]>([])
     useEffect(() => {
-        if (!idUser) return;
 
-        fetch(`http://localhost:9090/api/getNotifications`, {
-            method: "GET",
-            credentials: "include",
-        
-        })
-            .then(res => res.json())
-            .then((data: MessageDTO[]) => {
+        const fetchNotifications = async () => {
+            try{
+                const response = await fetch(`http://localhost:9090/api/getNotifications`, {
+                    method: "GET",
+                    credentials: "include",
                 
-                {/*Filtrando para aparecer só as mensagens não lidas*/ }
+                })
+                const data: MessageDTO[] = await response.json();
                 const mensagensNaoLidas = data.filter(m => m.read === false);
                 setMessages(Array.isArray(mensagensNaoLidas) ? mensagensNaoLidas : [])
-            }).catch(e => { 
-                console.log("Erro ao buscar notificações", e);
-            })
 
+            }catch(e){
+                console.log("ERRO AO BUSCAR NOTIFICAÇÕES:", e);
+            }
+        }
+        fetchNotifications()
+        
         const stompClient = new Client({
             webSocketFactory: () => new SockJS('http://localhost:9090/ws'),
             onConnect: () => {
