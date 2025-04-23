@@ -1,5 +1,4 @@
 export default function (encodedStr:any){
-  console.log("encodede", encodedStr)
   if(encodedStr == null){
     return null
   }

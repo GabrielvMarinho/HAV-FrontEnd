@@ -286,7 +286,11 @@ export default function ShowPhotos<T>({
     };
 
     return (
-        <div style={{position:"relative", width:"33vw", height:"33vw"}}>
+        <div style={{
+            position: "relative",
+            width: "clamp(200px, 33vw, 550px)",
+            height: "clamp(200px, 33vw, 550px)"
+          }}>
             {preview.length > 0 && (
                 <>
                     <button

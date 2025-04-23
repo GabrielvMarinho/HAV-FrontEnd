@@ -12,6 +12,8 @@ interface PropertySpecific {
         city: string;
         state: string;
         street: string;
+        propertyNumber: string;
+
     };
     propertyFeature: {
         bedRoom: number;
