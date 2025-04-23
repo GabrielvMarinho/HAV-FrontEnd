@@ -42,35 +42,35 @@ export default function PropertyReportsValidation() {
 
   return (
     <>
-      <Title tag={"h1"} text={"ESTATÍSTICAS E ANÁLISES"} />
-      <NavBarAdm options={NavBarPath.reports}/>
-
-      <div className="reports-page">
-        <div className="reports-container">
-          <div className="data-Title">
-            <SideTitle tag={"h1"} text={"DADOS TOTAIS"} />
-            <div className="reports-subtitle">
-              <p>EXPORTAR DADOS</p>
-            </div>
+    
+        <Title tag={"h1"} text={"ESTATÍSTICAS E ANÁLISES"} />
+        <NavBarAdm options={NavBarPath.reports}/>
+      <div className="reports-container">
+        <div className="data-Title">
+          <SideTitle tag={"h1"} text={"DADOS TOTAIS"} />
+          <div className="reports-subtitle">
+            <p>EXPORTAR DADOS</p>
           </div>
         </div>
+        </div>
 
-        <section className="users-section">
-          <div className="reports-graphTitle">
-            <p>IMÓVEIS</p>
+      {/* Seção de Usuários (gráfico horizontal) */}
+      <section className="users-section">
+        <div className="reports-graphTitle">
+          <p>USUÁRIOS</p>
+        </div>
+        <div className="users-data-row">
+          <div className="users-data-box">
+            <h3 className="users-big-number">6</h3>
+            <p className="users-small-text">Desde 2025</p>
           </div>
-          <div className="users-data-row">
-            <div className="users-data-box">
-              <h3 className="users-big-number">6</h3>
-              <p className="users-small-text">Desde 2025</p>
-            </div>
-            <div className="users-graph-container">
-              <HorizontalBarChart 
-                labels={horizontalLabels} 
-                data={horizontalData} 
-                backGroundColors={barColors} 
-              />            
-            </div>
+          <div className="users-graph-container">
+            <HorizontalBarChart 
+              labels={horizontalLabels} 
+              data={horizontalData} 
+              backGroundColors={barColors} 
+            />
+          </div>
           </div>
         </section>
 
@@ -204,7 +204,6 @@ export default function PropertyReportsValidation() {
             </table>
           </div>
         </section>
-      </div>
       </>
   );
 }
