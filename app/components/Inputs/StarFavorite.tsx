@@ -21,8 +21,12 @@ export default function StarFavorite({ idProperty, selected, width, height, colo
         
         const checkFavoriteStatus = async () => {
             try{
-                const response = await fetch(`http://localhost:9090/favorites/map`)
+                const response = await fetch(`http://localhost:9090/favorites/isFavorited/${idProperty}`,{
+                method: "GET",    
+                credentials: "include"
+                })
                 const data = await response.json();
+                setIsFavorite(data)
 
                 const isPropertyFavorited = data.content.some((property: any) => property.id === idProperty);
                 setIsFavorite(isPropertyFavorited);
@@ -39,16 +43,15 @@ export default function StarFavorite({ idProperty, selected, width, height, colo
         try {
             if (isFavorite) {
                 
-                await unfavoriteProperty(idUser, idProperty);
+                await unfavoriteProperty(idProperty);
                 console.log("Propriedade removida dos favoritos.");
                 setIsFavorite(false); 
                
             } else {
-                await favoriteProperty(idUser, idProperty);
+                await favoriteProperty(idProperty);
                 console.log("Propriedade favoritada.");
                 setIsFavorite(true); 
-            }
-            setIsFavorite(!isFavorite);
+            };
         } catch (error) {
             console.error("Erro ao favoritar/desfavoritar:", error);
         }
@@ -56,10 +59,10 @@ export default function StarFavorite({ idProperty, selected, width, height, colo
 
     return (
         <div onClick={toggleStar} style={{ cursor: "pointer" }}>
-            {!isFavorite ? (
-                <SelectedStar width={width} height={height} color={color} />
-            ) : (
+            {isFavorite ? (
                 <NotSelectedStar width={width} height={height} color={color} />
+            ) : (
+                <SelectedStar width={width} height={height} color={color} />
             )}
         </div>
     );
