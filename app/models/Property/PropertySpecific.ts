@@ -1,3 +1,10 @@
+interface ProprietorGetResponseDTO {
+    name: string;
+    email: string;
+    celphone: string;
+}
+
+
 interface PropertySpecific {
     id: number;
     address: {

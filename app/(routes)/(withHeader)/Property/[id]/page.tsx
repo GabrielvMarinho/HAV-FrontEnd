@@ -1,6 +1,6 @@
 "use client"
 import "../css/style.css"
-import RealtorAssociated from "@/app/components/Information/ProprietorAssociated";
+import ProprietorAssociated from "@/app/components/Information/ProprietorAssociated";
 import PropertyPageDatasAdm from "@/app/components/Information/PropertyPageDatas-Adm";
 import PropertyPrice from "@/app/components/NonInteractable/PropertyPrice";
 import OtherEnvironmentsProperty from "@/app/components/Information/OtherEnvironmentsProperty";
@@ -150,7 +150,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
                             taxes: property.taxes,
                             PromotionalPrice: props.obj?.promotionalPrice
                         }} />
-                        <RealtorAssociated objPropertyList={{ realtorPropertySpecific: property?.realtorPropertySpecific ?? [] }} WhatsappLink="adad" />
+                        <ProprietorAssociated proprietor={property.proprietor} WhatsappLink="ada" />
                     </div>
 
                 </article>
