@@ -84,6 +84,9 @@
 }
 
 .Taxes {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
     font-size: var(--text-s);
     font-weight: 800;
     line-height: 130%;

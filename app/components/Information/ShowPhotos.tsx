@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { FieldError, UseFormRegister, FieldValues } from "react-hook-form";
 import ArrowBack from "../IconsTSX/ArrowBack";
 import Trashcan from "../IconsTSX/Trashcan";
+import decodeDoubleBase64 from "@/app/utils/decodeDoubleBase64";
 
 /* export default function ButtonUploadPhotos<T>({
     name,
@@ -224,22 +225,17 @@ import Trashcan from "../IconsTSX/Trashcan";
     );
 } */
 
-export default function ButtonUploadPhotos<T>({
+export default function ShowPhotos<T>({
     name,
-    register,
-    error,
     initialImages = [],
     setValue
 }: {
     name: keyof T;
-    register?: UseFormRegister<T>;
-    error?: FieldError;
     initialImages?: string[];
     setValue?: (name: keyof T, value: any) => void;
 }) {
     const [preview, setPreview] = useState<string[]>([]);
     const [currentIndex, setCurrentIndex] = useState(0);
-
 
 
     useEffect(() => {
@@ -287,7 +283,9 @@ export default function ButtonUploadPhotos<T>({
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     if (e.target?.result) {
-                        setPreview((prev) => [...prev, e.target!.result as string]);
+                        // Remove prefixo do base64 se for um DataURL (opcional)
+                        const base64 = (e.target.result as string).split(',')[1];
+                        setPreview((prev) => [...prev, base64]);
                     }
                 };
                 reader.readAsDataURL(file);
@@ -295,31 +293,30 @@ export default function ButtonUploadPhotos<T>({
             event.target.value = '';
         }
     };
+
     const getPreviewRange = () => {
         const total = preview.length;
         const maxVisible = 4;
-    
+
         if (total <= maxVisible) return preview.map((_, i) => i);
-    
+
         let start = Math.max(0, currentIndex - Math.floor(maxVisible / 2));
         let end = start + maxVisible;
-    
+
         if (end > total) {
             end = total;
             start = end - maxVisible;
         }
-    
+
         return Array.from({ length: end - start }, (_, i) => i + start);
     };
+
     return (
-        <>
+        <div>
             {preview.length > 0 && (
                 <>
-                    <button className="trashcanPhoto" type="button" onClick={deleteIndex}>
-                        <Trashcan width={23} height={23} color="var(--box-white)" />
-                    </button>
                     <button
-                        className="photoArrow photoArrowLeft"
+                        className="photoArrowPropertySpecific photoArrowLeft"
                         type="button"
                         onClick={prevIndex}
                         disabled={currentIndex === 0}
@@ -327,7 +324,7 @@ export default function ButtonUploadPhotos<T>({
                         <ArrowBack width={23} height={23} color="var(--box-white)" />
                     </button>
                     <button
-                        className="mirrored photoArrow photoArrowRight"
+                        className="mirrored photoArrowPropertySpecific photoArrowRight"
                         type="button"
                         onClick={nextIndex}
                         disabled={currentIndex >= preview.length - 1}
@@ -335,40 +332,21 @@ export default function ButtonUploadPhotos<T>({
                         <ArrowBack width={23} height={23} color="var(--box-white)" />
                     </button>
 
-                    <img src={preview[currentIndex]} alt="Preview" className="previewImg" />
+                    <img src={decodeDoubleBase64(preview[currentIndex])} alt="Preview" className="previewImgPropertySpecific" />
 
                     <div style={{ display: 'flex' }}>
                         {getPreviewRange().map((i) => (
                             <img
                                 key={i}
                                 onClick={() => setCurrentIndex(i)}
-                                className={i === currentIndex ? 'markedImage subPreviewImg' : 'subPreviewImg'}
-                                src={preview[i]}
+                                className={i === currentIndex ? 'markedImagePropertySpecific subPreviewImgPropertySpecific' : 'subPreviewImgPropertySpecific'}
+                                src={decodeDoubleBase64(preview[i])}
                                 alt={`Preview ${i}`}
                             />
                         ))}
                     </div>
                 </>
             )}
-
-            <label htmlFor={`upload-${name}`} className="buttonUploadPhotoIcon" style={{ cursor: 'pointer' }}>
-                <MoreSignal width={30} height={22} color="var(--box-white)" />
-            </label>
-
-            <input
-                id={`upload-${name}`}
-                className="buttonUploadPhoto"
-                type="file"
-                multiple
-                accept="image/*"
-                {...(register ? register(name) : {})}
-                onChange={(e) => {
-                    handleFileChange(e);
-                }}
-                style={{ display: 'none' }}
-            />
-
-            {error && <p className="errorText">{error.message}</p>}
-        </>
+        </div>
     );
 }

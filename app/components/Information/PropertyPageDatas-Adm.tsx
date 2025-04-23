@@ -9,6 +9,7 @@ import Shower from "../IconsTSX/Shower";
 import Garage from "../IconsTSX/Garage";
 import Sofa from "../IconsTSX/Sofa";
 import Rule from "../IconsTSX/Rule";
+import globalDatabaseNameConverter from "@/app/globalDatabaseNameConverter";
 
 export default function PropertyPageDatasAdm(props: {
     obj: Omit<PropertySpecific, "isFurnished" | "additional" | "propertyDescription" |
@@ -18,7 +19,8 @@ export default function PropertyPageDatasAdm(props: {
         <div style={{ display: "flex", flexDirection: "column", alignItems: "left", gap: "10px" }}>
             <p className="idProperty">cód: {props.obj.propertyCode}</p>
             <p className="addressProperty">
-                {props.obj.address?.neighborhood} - {props.obj.address?.city} - {props.obj.address?.state}</p>
+                
+                {globalDatabaseNameConverter[props.obj.address?.neighborhood]} - {globalDatabaseNameConverter[props.obj.address?.city]} - {globalDatabaseNameConverter[props.obj.address?.state]}</p>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "15px" }}>
                 <p style={{
                     fontSize: "var(--text-xl)",

@@ -22,6 +22,8 @@ import GetSimilarThreeByPrice from "@/app/apiCalls/Property/GetSimilarThreeByPri
 import "@/app/GeneralPages.css"
 import "@/app/variables.css"
 import "@/public/Image/css/style.css"
+import ButtonUploadPhotos from "@/app/components/Inputs/buttonUploadPhotos";
+import ShowPhotos from "@/app/components/Information/ShowPhotos";
 
 export default function WrappedPagePropertySpecific(props: { obj?: PropertySpecific; user :any}) {
 
@@ -87,9 +89,14 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
     }
 
     
-
     return (
         <>
+        {/* <ShowPhotos
+                            name={"images"}
+                            initialImages={
+                                property.imagesProperty
+                              }
+                        /> */}
             <div style={{ width: "var(--width-page)" }}>
                 <article className="articleFirstContent">
                     <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -109,6 +116,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
 
                             <div className="buttonIconDiv">
                                 <Button
+                                onClick={() =>{window.location.href="/manage/properties/edit/4"}}
                                     type="button"
                                     size="large"
                                     text="gerenciar"
