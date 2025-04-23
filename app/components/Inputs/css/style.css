@@ -604,6 +604,16 @@ background-color: var(--text-white);
 }
 
 @media (width <992px) {
+    .searchResultLine{
+        height: 2px;
+        width: 50vw;
+        background-color: var(--button-color);
+        margin-top: 10px;
+        margin-left: 100px;
+    }
+    .buttonBuscaClaro{
+        margin-inline: auto;
+    }
     .actionButtons{
         flex-direction: row;
     }

@@ -370,3 +370,9 @@ section {
   height: 100% !important; /* Garante que o gráfico ocupe todo o container */
 }
 
+
+@media(width<992px){
+  .title{
+    gap: 10px;
+  }
+}

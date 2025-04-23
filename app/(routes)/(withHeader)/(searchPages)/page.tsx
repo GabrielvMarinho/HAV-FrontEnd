@@ -16,6 +16,7 @@ import SliderContentOfThree from "@/app/components/Information/SliderContentOfTh
 import HomeHighlightsCardContainer from "@/app/components/Information/HomeHighlightsCardContainer";
 import RecentComponentContainer from "@/app/components/Information/RecentComponentContainer"
 import { Chela_One } from "next/font/google";
+import CardContainer from "@/app/components/Information/CardContainer";
 
 export default async function Home() {
 
@@ -27,7 +28,9 @@ export default async function Home() {
       <section className="homeMainSection">
         <div className={"bannerHomeTitle"} style={{ display: "flex", alignItems: "center", marginBottom: "60px" }}>
           <h1 className="mainTitleHome">CONECTANDO VOCÊ AO SEU NOVO LAR</h1>
-          <HavLogoDark height={160} width={160} />
+          <div className="HavLogoMain">
+            <HavLogoDark height={160} width={160} />
+          </div>
         </div>
 
         <MainFilter />
@@ -37,10 +40,14 @@ export default async function Home() {
       {properties.length > 0 ?
         <>
           <section className="homeHiglightProperties">
-
             <h3>IMÓVEIS EM</h3>
             <h2>DESTAQUE</h2>
             <SliderPropertyHighlights items={properties} />
+          </section>
+          <section className="homeHiglightPropertiesMobile">
+            <h3>IMÓVEIS EM</h3>
+            <h2>DESTAQUE</h2>
+            <CardContainer cards={properties} totalPages={0}/>
           </section>
 
         </>
@@ -48,6 +55,7 @@ export default async function Home() {
       }
 
       <Title text="transformando sonhos em endereços" tag="h1" />
+
       <MainHomeInfo />
 
       <section className="highlightsCards">
