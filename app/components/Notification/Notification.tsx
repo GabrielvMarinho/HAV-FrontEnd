@@ -22,13 +22,17 @@ const Notification = () => {
     const params = useParams();
     const idUser = params.id;
     const [messages, setMessages] = useState<MessageDTO[]>([])
-
     useEffect(() => {
         if (!idUser) return;
 
-        fetch(`http://localhost:9090/api/getNotifications/${idUser}`)
+        fetch(`http://localhost:9090/api/getNotifications`, {
+            method: "GET",
+            credentials: "include",
+        
+        })
             .then(res => res.json())
             .then((data: MessageDTO[]) => {
+                
                 {/*Filtrando para aparecer só as mensagens não lidas*/ }
                 const mensagensNaoLidas = data.filter(m => m.read === false);
                 setMessages(Array.isArray(mensagensNaoLidas) ? mensagensNaoLidas : [])

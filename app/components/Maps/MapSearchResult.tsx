@@ -88,7 +88,6 @@ export default function MapSearchResult(props: {height? :string, width? :string,
                                         streetView.setPov({ heading: 0, pitch: 0 });
                                         streetView.setVisible(true);
                                     } else {
-                                        alert("Street View não está disponível nesse local 😕");
                                         map.setZoom(15);
                                         streetView.setVisible(false);
                                     }

@@ -15,13 +15,11 @@ export default function SchedulingCard(props: {usuario? :any, obj :Record<string
     const toggleModal = function(){
         setIsModalOpen(!isModalOpen)
     }
-    console.log("realtorPhoto", props.modalInfo.propertyPhoto)
-    console.log("realtorPhoto", decodeDoubleBase64(props.modalInfo.propertyPhoto))
-
     return(
         <div className="cardContainer">
-            <img
-                src={`${decodeDoubleBase64(props.modalInfo.propertyPhoto)}`} 
+            <img                     
+
+                src={decodeDoubleBase64(props.modalInfo.propertyPhoto) || "/Image/semFoto.png"} 
                 alt="imagem user"
                 className="mainImageContainer"/>     
 
@@ -44,10 +42,18 @@ export default function SchedulingCard(props: {usuario? :any, obj :Record<string
                 </div>
                 <div className="mainContentContainerBottom">
                     <div className="customerInfo">
+                        {photo?
                         <img
                         src={`data:image/png;base64,${photo}`} 
                         alt="imagem user"
                         className="imageContentInfo"/>
+                        : 
+                        <img
+                        src={"/Image/semFoto.png"} 
+                        alt="imagem user"
+                        className="imageContentInfo"/>
+                        }
+                        
                             
                         
                         <div className="textContentInfo">

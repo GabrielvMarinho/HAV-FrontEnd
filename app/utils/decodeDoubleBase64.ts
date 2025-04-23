@@ -1,4 +1,8 @@
 export default function (encodedStr:any){
+  console.log("encodede", encodedStr)
+  if(encodedStr == null){
+    return null
+  }
     try {
       // First decode the outer Base64 to get the actual Data URL
       const decodedStr = atob(encodedStr);

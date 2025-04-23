@@ -10,6 +10,7 @@ import './css/style.css';
 import "@/app/variables.css"
 import MapSearchResult from '../Maps/MapSearchResult';
 import decodeDoubleBase64 from '@/app/utils/decodeDoubleBase64';
+import globalDatabaseNameConverter from '@/app/globalDatabaseNameConverter';
 
 export default function ModalScheduling (props :{usuario? :any, obj :schedulesModalInfo, onClose :() =>void}) {
 
@@ -35,6 +36,8 @@ export default function ModalScheduling (props :{usuario? :any, obj :schedulesMo
         fetch();
         window.location.href=window.location.href
     }
+
+    console.log("asdasdasdccccccccc",decodeDoubleBase64(props.obj.propertyPhoto))
     return (
         <>
             <div className="containerModalScheduling">
@@ -42,7 +45,7 @@ export default function ModalScheduling (props :{usuario? :any, obj :schedulesMo
                     <XButton width={20} height={20} color='var(--box-red-pink)'/>
                 </div>
                     <img
-                    src={`${decodeDoubleBase64(props.obj.propertyPhoto)}`} 
+                        src={decodeDoubleBase64(props.obj.propertyPhoto) || "/Image/semFoto.png"} 
                         alt="imagem user"
                         className="imageMainContainer"/>     
                     
@@ -50,8 +53,8 @@ export default function ModalScheduling (props :{usuario? :any, obj :schedulesMo
                 <h2 className="idPropertyModalScheduling"> id: {props.obj.propertyCode} </h2>
 
                 <div className="informs gerais ">
-                    <h2 className="cityName"> {props.obj.city} </h2>
-                    <h2 className="neighborhoodName"> {props.obj.neighborhood} </h2>
+                    <h2 className="cityName"> {globalDatabaseNameConverter[props.obj.city]} </h2>
+                    <h2 className="neighborhoodName"> {globalDatabaseNameConverter[props.obj.neighborhood]} </h2>
 
                     {/* desktop */}
                     <div className='containerPriceCategory'>
@@ -95,18 +98,35 @@ export default function ModalScheduling (props :{usuario? :any, obj :schedulesMo
 
                     <div className='informationsModalScheduling'>
                         <div className="realtorInformation">
-                        {props.usuario.role=="ROLE_REALTOR" ? 
-
+                        {props.usuario.role === "ROLE_REALTOR" ? (
+                        props.obj.customerPhoto ? (
                             <img
-                        src={`data:image/png;base64,${props.obj.customerPhoto}`} 
-                        alt="imagem user"
-                                className="circulo"/>    : 
-
-                                <img
-                        src={`data:image/png;base64,${props.obj.realtorPhoto}`} 
-                        alt="imagem user"
-                                className="circulo"/>
-                        }
+                            src={`data:image/png;base64,${props.obj.customerPhoto}`} 
+                            alt="imagem user"
+                            className="circulo"
+                            />
+                        ) : (
+                            <img
+                            src="/Image/semFoto.png" 
+                            alt="imagem user"
+                            className="circulo"
+                            />
+                        )
+                        ) : (
+                        props.obj.realtorPhoto ? (
+                            <img
+                            src={`data:image/png;base64,${props.obj.realtorPhoto}`} 
+                            alt="imagem user"
+                            className="circulo"
+                            />
+                        ) : (
+                            <img
+                            src="/Image/semFoto.png" 
+                            alt="imagem user"
+                            className="circulo"
+                            />
+                        )
+                        )}
                             <div className='informationsrealtor'>
                                     {props.usuario.role=="ROLE_REALTOR" ? 
                                     <>                                 
