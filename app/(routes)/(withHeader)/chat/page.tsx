@@ -8,14 +8,15 @@ import QuadradoMais from "@/app/components/IconsTSX/QuadradoMais";
 import SearchIcon from "@/app/components/IconsTSX/SearchIcon";
 import SmileEmoji from "@/app/components/IconsTSX/smileEmoji";
 import MessageCard from "@/app/components/MessageCard/MessageCard";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./css/style.css"
 import { currentUser, searchUser } from "@/app/redux/Auth/action";
 import { useDispatch, useSelector } from "react-redux";
 import { createChat, getUsersChat } from "@/app/redux/Chat/action";
 import { createMessage, fetchUnreadCounts, getAllMessage, markMessagesAsRead } from "@/app/redux/Message/action";
 import SockJS from "sockjs-client";
-import { over } from "stompjs";
+import { Client } from "@stomp/stompjs";
+import { connectWebSocket, sendMessageSocket, subscribeToChat } from "@/app/redux/websocketClient";
 
 export default function Chat() {
 
@@ -25,8 +26,6 @@ export default function Chat() {
     const { auth, chat, message } = useSelector(store => store);
     const dispatch = useDispatch();
     const token = localStorage.getItem("token");
-    const [stompClient, setStompClient] = useState(null);
-    const [isConnected, setIsConnected] = useState(false);
     const [messages, setMessages] = useState([]);
     const unreadCounts = useSelector((state) => state.message.unreadCounts);
 
@@ -45,76 +44,19 @@ export default function Chat() {
         setQuerys("")
     };
 
-    const handleCreateNewMessage = () => {
+    {/*const handleCreateNewMessage = () => {
         dispatch(createMessage({ token, data: { chatId: currentChat.id, content: content, } }))
-    }
+    }*/}
 
     const handleCurrentChat = (item) => {
         setCurrentChat(item);
         dispatch(markMessagesAsRead(item.id));
     }
 
-    const connect = () => {
-        const sock = new SockJS("http://localhost:9090/ws");
-        const temp = over(sock);
-        setStompClient(temp);
-
-        const headers = {
-            Authorization: `Bearer ${token}`,
-            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN")
-        }
-
-        temp.connect(headers, onConnect, onError);
-    }
-
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) {
-            return parts.pop()?.split(";").shift();
-        }
-    }
-
     function formatTime(dateString) {
         const date = new Date(dateString);
         return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
     }
-
-    const onError = (error) => {
-        console.log("no error", error)
-    }
-
-    const onConnect = () => {
-        setIsConnected(true);
-    }
-
-    useEffect(() => {
-        if (message.newMessage && stompClient) {
-            setMessages([...messages, message.newMessage])
-            stompClient?.send("/app/message", {}, JSON.stringify(message.newMessage));
-        }
-    }, message.newMessage)
-
-    const onMessageReceive = (payload) => {
-        console.log("receive message", JSON.parse(payload.body))
-        const receivedMessage = JSON.parse(payload.body);
-        setMessages([...messages, receivedMessage]);
-    }
-
-    useEffect(() => {
-        if (isConnected && stompClient && auth.reqUser && currentChat) {
-            const subscription = stompClient.subscribe(`/group/${currentChat.id}`, onMessageReceive);
-
-            return () => {
-                subscription.unsubscribe();
-            }
-        }
-    })
-
-
-    useEffect(() => {
-        connect();
-    }, [])
 
     useEffect(() => {
         setMessages(message.messages)
@@ -149,6 +91,48 @@ export default function Chat() {
         }
     }, []);
 
+    {/* Configuração do WebSocket */ }
+
+    const stompClient = useRef(null);
+
+    useEffect(() => {
+        if (!currentChat?.id) return;
+
+        connectWebSocket((msg) => {
+            dispatch({ type: "CREATE_NEW_MESSAGE", payload: msg });
+        });
+
+        const subscription = subscribeToChat(currentChat.id, (msg) => {
+            dispatch({ type: "CREATE_NEW_MESSAGE", payload: msg });
+        });
+
+        return () => {
+            subscription?.unsubscribe();
+            if (stompClient?.connected) stompClient.deactivate();
+        };
+    }, [currentChat?.id]);
+
+
+
+    const handleCreateNewMessage = () => {
+        const message = {
+            chatId: currentChat.id,
+            content: content,
+            userId: auth.reqUser?.id
+        };
+        
+        if (stompClient?.connected) {
+            console.log("chegou aqui eu");
+            sendMessageSocket(message);
+        } else {
+            console.warn("STOMP não conectado. Enviando via fetch como fallback.");
+            dispatch(createMessage({ token, data: { chatId: currentChat.id, content: content, } }))
+        }
+
+        setContent("");
+    };
+
+    {/* Término Configuração do WebSocket */ }
 
     return (
         <>
@@ -405,7 +389,7 @@ export default function Chat() {
                                     onKeyPress={(e) => {
                                         if (e.key === "Enter") {
                                             handleCreateNewMessage();
-                                            setContent("")
+                                            // setContent("")
                                         }
                                     }} />
                                 <div style={{
