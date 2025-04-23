@@ -18,7 +18,9 @@ export default function RealtorAssociated(props: { objPropertyList?: Pick<Proper
                                 <HorizontalLine size={203} />
                             </div>
                             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "15px" }}>
+                            <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${realtor.email}`} target="_blank">
                                 <Button type="button" size="large" text="Mandar E-mail" hover="darkHover" color="" background="" />
+                            </a>
                                 <p className="ou">OU</p>
                                 <a href={props.WhatsappLink}>
                                     <img src="/Image/whatsapp.png" alt="Whatsapp icon" />
