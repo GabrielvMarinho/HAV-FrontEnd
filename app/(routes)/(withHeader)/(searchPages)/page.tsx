@@ -60,7 +60,6 @@ export default async function Home() {
         <RecentComponentContainer />
       </section>
 
-      <Footer />
 
 
     </>

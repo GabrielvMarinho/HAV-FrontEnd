@@ -48,7 +48,6 @@ export default function contactus() {
                 
                 <ContactUsForm customerId={customerId}/>
            </div>
-        <Footer />
         </>
     );
 }

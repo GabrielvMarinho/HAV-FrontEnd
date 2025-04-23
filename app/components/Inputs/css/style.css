@@ -325,13 +325,7 @@ summary {
     background-color: transparent;
 }
 
-.footer{
-    background-color: var(--box-mid-dark-red);
-    color: var(--text-white);
-    width: 100%;
-    height: 373px;
-    margin-top: auto;
-}
+
 .titleFooter{
     font-size: var(--text-ml);
     font-weight: 700;

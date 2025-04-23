@@ -20,9 +20,9 @@ export default function FAQPage() {
         </p>
       </div>
 
-      <div className="searchBar" style={{ width: "60%" }}>
+      {/* <div className="searchBar" style={{ width: "60%" }}>
         <SearchBarDesktop placeholder="Busca:" />
-      </div>
+      </div> */}
 
       <div className="searchAndBoxesContainer">
         {/* CAIXA DE VENDA */}
@@ -134,12 +134,11 @@ export default function FAQPage() {
         </div>
       </div>
 
-      <div className="chatButtonContainer" style={{ display: "flex", alignItems: "center" }}>
+      {/* <div className="chatButtonContainer" style={{ display: "flex", alignItems: "center" }}>
             <Button type="button" size="large" text="ACESSE O CHAT" hover="darken" color="white" background="#B23F52"/>
             <span className="orText">OU</span><img src="/Image/whatsapp.png" alt="Whatsapp icon" />
-            </div>
+            </div> */}
 
-      <Footer />
     </>
   );
 }

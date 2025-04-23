@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode"
 import { cookies } from "next/headers"
 import ThemeToggle from "../../components/Theme/ToggleTheme"
 import InitTheme from "../../components/Theme/InitTheme"
-import { Footer } from "react-day-picker"
+import Footer from "@/app/components/Footer/Footer"
 
 
 export const metadata = {
