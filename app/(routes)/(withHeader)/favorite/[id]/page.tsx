@@ -17,7 +17,7 @@ export default function Favorite() {
 
         const fetchFavorites = async () => {
             try {
-                const response = await fetch(`http://localhost:9090/favorites/map`, {
+                const response = await fetch(`http://localhost:9090/favorites`, {
                     method: "GET",
                     credentials: "include"
                 });

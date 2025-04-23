@@ -21,7 +21,7 @@ export default function StarFavorite({ idUser, idProperty, selected, width, heig
     useEffect(() => {
         const checkFavoriteStatus = async () => {
             try{
-                const response = await fetch(`http://localhost:9090/favorites/${idUser}`);
+                const response = await fetch(`http://localhost:9090/favorites/map`)
                 const data = await response.json();
 
                 const isPropertyFavorited = data.content.some((property: any) => property.id === idProperty);

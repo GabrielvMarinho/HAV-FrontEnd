@@ -24,5 +24,7 @@ interface PropertySpecific {
     propertyDescription: string,
     propertyType: string;
     realtorPropertySpecific: realtorPropertySpecific[];
+    proprietor: ProprietorGetResponseDTO;
+
     price: number; //botei esse pra ver se ta funcionando (sim)
 }

@@ -1,6 +1,6 @@
 "use client"
 import "../css/style.css"
-import RealtorAssociated from "@/app/components/Information/RealtorAssociated";
+import RealtorAssociated from "@/app/components/Information/ProprietorAssociated";
 import PropertyPageDatasAdm from "@/app/components/Information/PropertyPageDatas-Adm";
 import PropertyPrice from "@/app/components/NonInteractable/PropertyPrice";
 import OtherEnvironmentsProperty from "@/app/components/Information/OtherEnvironmentsProperty";
@@ -51,6 +51,7 @@ export default function PropertySpecific(props: { obj: PropertySpecific; }) {
             ...apiData.additional,
             additional: apiData.additional?.name ?? "Não informado"
         },
+        
     });
 
 

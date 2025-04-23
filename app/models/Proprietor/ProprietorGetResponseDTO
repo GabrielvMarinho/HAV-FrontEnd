@@ -1,0 +1,5 @@
+interface ProprietorGetResponseDTO {
+    name: string;
+    email: String
+    celphone: String
+}
