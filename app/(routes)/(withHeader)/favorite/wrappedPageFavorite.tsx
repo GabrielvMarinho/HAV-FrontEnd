@@ -33,15 +33,16 @@ export default function WrappedPageFavorite(props:{usuario:any}) {
                     if (!response.ok) throw new Error("Erro ao buscar favoritos");
     
                     const data = await response.json();
-                    const formattedProperty = data.content.map((property : any) => ({
+                    console.log(data);
+                    const formattedProperty = data.map((property : any) => ({
                         ...property,
                         ...property.propertyFeatures,
                         ...property.address
                     }))
-        
+                    
                     setFavorites(formattedProperty);
-                    setTotalPages(data.totalPages || 1);
-    
+                    setTotalPages(1);
+                    console.log("favorites:", favorites);
                 } catch (error) {
                     console.error("Erro ao buscar favoritos:", error);
                 }
@@ -84,8 +85,6 @@ export default function WrappedPageFavorite(props:{usuario:any}) {
                 <section style={{ marginTop: "80px" }}>
                     <FavoriteCardContainer
                         cards={favorites}
-                        totalPages={totalPages}
-                        userId={idUser}
                     />
                 </section>
             </>
