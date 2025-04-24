@@ -35,11 +35,11 @@ export default function HomeHighlightsCardContainer() {
 
   return (
     <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-      <NavBarAdm
+      {/* <NavBarAdm
         options={NavBarPath.purpose}
         onSelect={handleSelectPurpose}
         selected={purpose}
-      />
+      /> */}
       <div className="cardsContainer">
         {properties.length > 0 ? (
           properties.map((card) => (
