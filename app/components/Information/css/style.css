@@ -355,7 +355,7 @@
 }
 
 #realtorNameVertical {
-    color: black;
+    color: var(--text-black);
     font-size: var(--text-sm);
     text-transform: uppercase;
     font-weight: 700;
