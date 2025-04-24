@@ -67,11 +67,14 @@
   align-items: center;
   padding: 15px 16px;
 }
-
+.menuContent label{
+  color: var(--text-black);
+}
 .IconProfile{
   display: flex;
   gap: 35px;
 }
+
 
 .menuTextWrapper {
   display: flex;
@@ -97,7 +100,7 @@
 
 .hamburgerMenu a {
   text-decoration: none;
-  color: black;
+  color: var(--text-black);
   font-weight: 500;
 }
 

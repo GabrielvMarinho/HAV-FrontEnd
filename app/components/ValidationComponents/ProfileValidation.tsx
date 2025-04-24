@@ -20,7 +20,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
             <div className="hamburgerMenu">
             <ul>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/notification">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -34,7 +34,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                 </a>
                 </li>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/chat">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -48,7 +48,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                 </a>
                 </li>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/manage/admins">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -62,7 +62,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                 </a>
                 </li>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/configuration">
                     <div className="menuContent">
                             <div className="IconProfile">
@@ -75,7 +75,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                         </div>
                 </a>
                 </li>
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
             </ul>
             </div>
             <div className="logoutButton">
@@ -89,7 +89,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
             <div className="hamburgerMenu">
             <ul>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/notification">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -103,7 +103,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                 </a>
                 </li>
                 <li className="menuItem">
-                    <HorizontalLine size={500} color="#0F0F0F80" />
+                    <HorizontalLine size={500} color="var(--text-black)" />
                     <a href="/chat">
                         <div className="menuContent">
                             <div className="IconProfile">
@@ -117,7 +117,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                     </a>
                 </li>
                 <li className="menuItem">
-                    <HorizontalLine size={500} color="#0F0F0F80" />
+                    <HorizontalLine size={500} color="var(--text-black)" />
                     <a href="/favorite">
                         <div className="menuContent">
                             <div className="IconProfile">
@@ -131,7 +131,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                     </a>
                 </li>
                 <li className="menuItem">
-                    <HorizontalLine size={500} color="#0F0F0F80" />
+                    <HorizontalLine size={500} color="var(--text-black)" />
                     <a href="/manage/proprietors">
                         <div className="menuContent">
                             <div className="IconProfile">
@@ -145,7 +145,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                     </a>
                 </li>
                 <li className="menuItem">
-                    <HorizontalLine size={500} color="#0F0F0F80" />
+                    <HorizontalLine size={500} color="var(--text-black)" />
                     <a href="/configuration">
                         <div className="menuContent">
                                 <div className="IconProfile">
@@ -158,7 +158,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                         </div>
                     </a>
                 </li>
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
             </ul>
             </div>
             <div className="logoutButton">
@@ -172,7 +172,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
             <div className="hamburgerMenu">
             <ul>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/notification">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -186,7 +186,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                 </a>
                 </li>
                 <li className="menuItem">
-                    <HorizontalLine size={500} color="#0F0F0F80" />
+                    <HorizontalLine size={500} color="var(--text-black)" />
                     <a href="/chat">
                         <div className="menuContent">
                             <div className="IconProfile">
@@ -200,7 +200,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                     </a>
                 </li>
                 <li className="menuItem">
-                    <HorizontalLine size={500} color="#0F0F0F80" />
+                    <HorizontalLine size={500} color="var(--text-black)" />
                     <a href="/favorite">
                         <div className="menuContent">
                             <div className="IconProfile">
@@ -214,7 +214,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                     </a>
                 </li>
                 <li className="menuItem">
-                    <HorizontalLine size={500} color="#0F0F0F80" />
+                    <HorizontalLine size={500} color="var(--text-black)" />
                     <a href="/calendar">
                         <div className="menuContent">
                             <div className="IconProfile">
@@ -228,7 +228,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                     </a>
                 </li>
                 <li className="menuItem">
-                    <HorizontalLine size={500} color="#0F0F0F80" />
+                    <HorizontalLine size={500} color="var(--text-black)" />
                     <a href="/configuration">
                         <div className="menuContent">
                                 <div className="IconProfile">
@@ -241,7 +241,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                         </div>
                     </a>
                 </li>
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
             </ul>
             </div>
             <div className="logoutButton">
@@ -256,7 +256,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
             <div className="hamburgerMenu">
             <ul>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/notification">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -270,7 +270,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                 </a>
                 </li>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/chat">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -284,7 +284,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                 </a>
                 </li>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/favorite">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -298,7 +298,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                 </a>
                 </li>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/configuration">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -311,7 +311,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                     </div>
                 </a>
                 </li>
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
             </ul>
             </div>
             <div className="logoutButton">

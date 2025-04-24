@@ -10,6 +10,7 @@ import { SignUpValidator } from "@/app/Validators/SignUpValidator";
 import { useDispatch } from "react-redux";
 import { SignUpFetch } from "@/app/redux/Auth/action";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function SignUpForm(){
 
@@ -55,14 +56,11 @@ export default function SignUpForm(){
                 <InputTextLogin password={true} name="password" register={form.register} error={form.formState.errors["password" as keyof SignUpValidator]} size="login" id="user" text="Senha" placeholder="Digite sua senha" icon={<Eye width="18" height="18" color="var(--text-light-red)"/>}/>
                 <InputTextLogin password={true} name="confirmPassword" register={form.register} error={form.formState.errors["confirmPassword" as keyof SignUpValidator]} size="login" id="user" text="Confirmar senha" placeholder="Digite sua senha" icon={<Eye width="18"  height="18" color="var(--text-light-red)"/>}/>
                 </div>
-                    <div className="botao">
+                    <div className="botao" style={{marginBottom:"15px"}}>
                         <Button name="button" size="small" text="Entrar" /> 
                     </div>
-                    <div className="containerGoogle">
-                        <p className="ou">ou</p>
-                        <img className={"Google"} src="/Image/Google.png"/>
-                    </div>
-                    <p className="naoPossuiConta"> Já possui Conta? <p className="cadastrarConta"> Entrar </p></p>
+                    
+                    <p className="naoPossuiConta"> Já possui Conta? <Link href="/login" className="cadastrarConta"> Entrar </Link></p>
                 </form>
     );
 }
