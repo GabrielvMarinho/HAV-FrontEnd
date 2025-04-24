@@ -8,7 +8,10 @@
     background: var(--box-mid-dark-red);
     width: 100%;
     min-width: 100vw; 
-    height:34,56vh;
+    height:fit-content;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    margin-top: 50px;
     min-height: 150px;
     display: flex;
     flex-direction: row;
@@ -60,8 +63,9 @@
 @media(max-width: 992px){
     .footer{
         flex-direction: column;
-        height: 829px;
+        height: fit-content;
         align-items: flex-start;
+        gap: 40px;
     }
     .firstArticle-footer{
         order: 2;

@@ -104,11 +104,6 @@
     width: 100%;
     margin-bottom: 50px;
   }
-
-  .users-graph-container {
-    flex: 1;
-    min-width: 0; /* Isso evita que o flex item estoure o container */
-  }
   
   .users-data-box{
     background: var(--box-red-pink);
@@ -204,12 +199,6 @@ section {
     font-size: 18px;
     font-weight: 600;
     line-height: 18px;
-  }
-  
-  .users-graph-container {
-    flex: 1;
-    border-radius: 8px;
-    padding: 1rem;
   }
   
   .placeholder-graph {
@@ -328,4 +317,62 @@ section {
   font-weight: 600;
   background-color: var(--box-red-pink);
   margin: 60px 0px; 
+}
+
+.users-data-row {
+  align-items: flex-start; /* Alinha os itens no topo */
+}
+
+.users-data-box, .info-data-box {
+  align-items: flex-start; /* Alinha conteúdo à esquerda */
+  justify-content: flex-start; /* Cola conteúdo no topo */
+  margin: 0; /* Remove margens inconsistentes */
+}
+
+.users-big-number, .info-big-number {
+  margin: 0; /* Remove margens negativas */
+  text-align: left; /* Força alinhamento à esquerda */
+}
+
+.users-small-text, .info-small-text {
+  text-align: left; /* Força alinhamento à esquerda */
+  width: 100%; /* Garante que o texto ocupe toda a largura */
+}
+
+.reports-graphTitle p {
+  text-align: left; /* Títulos alinhados à esquerda */
+  padding-left: 0;
+}
+
+.reports-graphTitleRight p {
+  text-align: right; /* Títulos alinhados à direita */
+  margin-right: 0;
+}
+
+.users-data-row {
+  align-items: center; /* Alinha verticalmente no centro */
+}
+
+.users-data-box {
+  margin: 0; /* Remove qualquer margem que possa estar desalinhando */
+  align-self: center; /* Garante alinhamento mesmo se o conteúdo for menor */
+}
+
+.users-graph-container {
+  flex: 1;
+  border-radius: 8px;
+  padding: 1rem;
+  min-width: 0px;
+}
+
+/* Opcional: se precisar ajustar especificamente o VerticalBarChart */
+.users-graph-container .vertical-chart {
+  height: 100% !important; /* Garante que o gráfico ocupe todo o container */
+}
+
+
+@media(width<992px){
+  .title{
+    gap: 10px;
+  }
 }

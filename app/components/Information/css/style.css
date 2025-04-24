@@ -135,6 +135,27 @@
     flex: 1;
 }
 
+.priceProperty{
+    color: var(--text-white);
+    font-size: 28px;
+    font-weight: 900;
+}
+
+.cityProperty{
+    color: var(--text-white);
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 1.12px;
+    text-transform: uppercase;
+}
+.neighborhoodProperty{
+    color: var(--text-white);
+    text-transform: uppercase;
+    font-size: 38px;
+    font-weight: 900;
+    letter-spacing: 2.66px;
+}
+
 .checkbox {
     all: unset;
     width: 20px;
@@ -250,7 +271,7 @@
     justify-content: center;
     text-align: center;
     /* height: 100%; */
-    gap: 37vh;
+    gap: 18vw;
 }
 
 .mainHomeInfoSubContainer {
@@ -260,7 +281,7 @@
     flex-direction: row;
     height: fit-content;
     align-items: center;
-    gap: 38vh;
+    gap: 18vw;
     position: relative;
     color: var(--bg-color);
 }
@@ -334,7 +355,7 @@
 }
 
 #realtorNameVertical {
-    color: black;
+    color: var(--text-black);
     font-size: var(--text-sm);
     text-transform: uppercase;
     font-weight: 700;
@@ -517,6 +538,8 @@
     flex-direction: column;
 }
 
+
+
 @media (width >1600px){
     .cardsContainer{
         width: 1200px;
@@ -556,12 +579,13 @@
         height: 65vh; 
         min-height: 250px; 
         flex-direction: column;
-        /* gap: 0; */
+        gap: 200px;
     }
 
     .mainHomeInfoSubContainer{
         margin-top: -70px;
-        margin-bottom: 40px
+        margin-bottom: 40px;
+        gap: 200px;
     }
 
     .textBehind{
@@ -577,6 +601,10 @@
         /* gap: 0; */
         margin-top: -70px;
         margin-bottom: 40px
+    }
+    .mainHomeInfoContainer {
+        width: 100%;
+        min-width: 100vw;
     }
   
     .titleModal{

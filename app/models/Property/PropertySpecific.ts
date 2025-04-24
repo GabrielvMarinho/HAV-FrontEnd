@@ -1,3 +1,12 @@
+interface ProprietorGetResponseDTO {
+    image: string;
+
+    name: string;
+    email: string;
+    celphone: string;
+}
+
+
 interface PropertySpecific {
     id: number;
     address: {
@@ -5,6 +14,8 @@ interface PropertySpecific {
         city: string;
         state: string;
         street: string;
+        propertyNumber: string;
+
     };
     propertyFeature: {
         bedRoom: number;
@@ -14,6 +25,8 @@ interface PropertySpecific {
         areaProperty: number;
         isFurnished: boolean;
     };
+    propertyId: string;
+
     propertyStatus: string;
     additionals: AdditionalsPropertySpecific[];
     propertyCode: string;
@@ -23,6 +36,11 @@ interface PropertySpecific {
     purpose: string; // venda, vendaPromocao, locacao
     propertyDescription: string,
     propertyType: string;
+
+    imagesProperty: string[];
+
     realtorPropertySpecific: realtorPropertySpecific[];
+    proprietor: ProprietorGetResponseDTO;
+
     price: number; //botei esse pra ver se ta funcionando (sim)
 }

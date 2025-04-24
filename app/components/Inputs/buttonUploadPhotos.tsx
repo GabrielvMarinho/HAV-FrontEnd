@@ -295,7 +295,22 @@ export default function ButtonUploadPhotos<T>({
             event.target.value = '';
         }
     };
-
+    const getPreviewRange = () => {
+        const total = preview.length;
+        const maxVisible = 4;
+    
+        if (total <= maxVisible) return preview.map((_, i) => i);
+    
+        let start = Math.max(0, currentIndex - Math.floor(maxVisible / 2));
+        let end = start + maxVisible;
+    
+        if (end > total) {
+            end = total;
+            start = end - maxVisible;
+        }
+    
+        return Array.from({ length: end - start }, (_, i) => i + start);
+    };
     return (
         <>
             {preview.length > 0 && (
@@ -323,24 +338,15 @@ export default function ButtonUploadPhotos<T>({
                     <img src={preview[currentIndex]} alt="Preview" className="previewImg" />
 
                     <div style={{ display: 'flex' }}>
-                        {preview
-                            .slice(Math.max(0, currentIndex - 2), currentIndex + 3)
-                            .map((image, index) => {
-                                const absoluteIndex = index + Math.max(0, currentIndex - 2);
-                                return (
-                                    <img
-                                        key={absoluteIndex}
-                                        onClick={() => setCurrentIndex(absoluteIndex)}
-                                        className={
-                                            absoluteIndex === currentIndex
-                                                ? 'markedImage subPreviewImg'
-                                                : 'subPreviewImg'
-                                        }
-                                        src={image}
-                                        alt={`Preview ${absoluteIndex}`}
-                                    />
-                                );
-                            })}
+                        {getPreviewRange().map((i) => (
+                            <img
+                                key={i}
+                                onClick={() => setCurrentIndex(i)}
+                                className={i === currentIndex ? 'markedImage subPreviewImg' : 'subPreviewImg'}
+                                src={preview[i]}
+                                alt={`Preview ${i}`}
+                            />
+                        ))}
                     </div>
                 </>
             )}

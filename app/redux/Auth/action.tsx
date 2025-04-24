@@ -8,11 +8,10 @@ export const loginUser = (email: string, password: string) => async (dispatch) =
     try {
         const response = await fetch(url, {
             method: "POST",
-            credentials:"include",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
-            credentials: "include",
             body: JSON.stringify({ email: email, password: password }),
         });
 
@@ -42,18 +41,17 @@ export const loginUser = (email: string, password: string) => async (dispatch) =
     }
 };
 
-export const  SignUpFetch = async (name: string, email: string, password: string) => {
+export const SignUpFetch = async (name: string, email: string, password: string) => {
 
     const url = "http://localhost:9090/auth/signup";
 
     try {
         const response = await fetch(url, {
             method: "POST",
-            credentials:"include",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
-            credentials: "include",
             body: JSON.stringify({ name: name, email: email, password: password }),
         });
 
@@ -86,6 +84,7 @@ export const currentUser = (token) => async (dispatch) => {
     try {
         const res = await fetch(`http://localhost:9090/api/usersecurity/profile`, {
             method: "GET",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`

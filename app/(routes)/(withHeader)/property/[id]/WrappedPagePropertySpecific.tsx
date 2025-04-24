@@ -1,6 +1,5 @@
 "use client"
 import "../css/style.css"
-import RealtorAssociated from "@/app/components/Information/RealtorAssociated";
 import PropertyPageDatasAdm from "@/app/components/Information/PropertyPageDatas-Adm";
 import PropertyPrice from "@/app/components/NonInteractable/PropertyPrice";
 import OtherEnvironmentsProperty from "@/app/components/Information/OtherEnvironmentsProperty";
@@ -22,8 +21,13 @@ import GetSimilarThreeByPrice from "@/app/apiCalls/Property/GetSimilarThreeByPri
 import "@/app/GeneralPages.css"
 import "@/app/variables.css"
 import "@/public/Image/css/style.css"
+import ButtonUploadPhotos from "@/app/components/Inputs/buttonUploadPhotos";
+import ShowPhotos from "@/app/components/Information/ShowPhotos";
+import ProprietorDetails from "@/app/components/Information/ProprietorAssociated";
+import ProprietorAssociated from "@/app/components/Information/ProprietorAssociated";
+import MapSearchResult from "@/app/components/Maps/MapSearchResult";
 
-export default function WrappedPagePropertySpecific(props: { obj?: PropertySpecific; user :any}) {
+export default function WrappedPagePropertySpecific(props: { obj?: PropertySpecific; user: any }) {
 
     const { id } = useParams(); // Pegando o ID da URL
     const propertyId = props.obj?.id ?? id; // Prioriza props.obj.id, mas usa o ID da URL se necessário
@@ -36,7 +40,9 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
             neighborhood: apiData.address?.neighborhood ?? "Não informado",
             city: apiData.address?.city ?? "Não informado",
             state: apiData.address?.state ?? "Não informado",
-            street: apiData.address?.street ?? "Não informado"
+            street: apiData.address?.street ?? "Não informado",
+            propertyNumber: apiData.address?.propertyNumber ?? "Não informado"
+
         },
         propertyFeature: {
             ...apiData.propertyFeature, // Mantém todos os dados que já existem no propertyFeature
@@ -59,7 +65,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
 
             try {
                 const response = await searchPropertyByIdSpecific(propertyId);
-
+                console.log("repos", response)
                 const formattedProperty = formatProperty(response);
 
                 setProperty(formattedProperty);
@@ -83,18 +89,30 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
     }, [])
 
     if (!property) {
-        return <p>Carregando...</p>
+        return <p style={{marginBottom:"100vh"}}>Carregando...</p>
     }
-
-    
-
+    console.log(props.user)
     return (
         <>
-            <div style={{ width: "var(--width-page)" }}>
+
+            <div style={{ marginInline: "auto", maxWidth: "var(--width-page)" }}>
                 <article className="articleFirstContent">
-                    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                        <div style={{ width: "450px", height: "462px", backgroundColor: "black" }}></div>
-                        <div style={{ display: "flex", flexDirection: "row", gap: "110px" }}>
+                    <div style={{ display: "flex", flexDirection: "column"}}>
+                        {property.imagesProperty.length>1 ? 
+                        <ShowPhotos
+                        name={"images"}
+                        initialImages={
+                            property.imagesProperty
+                        }
+                    />
+                    :
+                    <img
+                    style={{width: "33vw", height: "28vw"}}
+                        src="/Image/fotoSemPropriedade.png"
+                    ></img>
+                    }
+                        
+                        <div style={{ display: "flex", flexDirection: "row", gap: "110px", marginTop:"-2.5vw" }}>
                             {/* <div className="buttonIconDiv">
                                 <Button
                                     type="button"
@@ -107,17 +125,18 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                             </div> */}
                             {props.user.role == "ROLE_EDITOR" || props.user.role =="ROLE_ADMIN" ?
 
-                            <div className="buttonIconDiv">
-                                <Button
-                                    type="button"
-                                    size="large"
-                                    text="gerenciar"
-                                    hover="darkHover"
-                                    color=""
-                                    background="" />
-                                                                    <Gear height={30} width={30} color="var(--button-color)" />
-                            </div>
-                            :""
+                                <div className="buttonIconDiv">
+                                    <Button
+                                        onClick={() => { window.location.href = "/manage/properties/edit/4" }}
+                                        type="button"
+                                        size="large"
+                                        text="gerenciar"
+                                        hover="darkHover"
+                                        color=""
+                                        background="" />
+                                    <Gear height={30} width={30} color="var(--button-color)" />
+                                </div>
+                                : ""
 
                             }
 
@@ -134,9 +153,10 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                             <Balanca height={30} width={30} color="var(--button-color)" />
                         </div> */}
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+                    <div style={{ display: "flex", flexDirection: "column", justifyContent:"center", gap: "15px" }}>
                         <PropertyPageDatasAdm
                             obj={{
+                                propertyId: propertyId,
                                 propertyType: property.propertyType,
                                 propertyCode: property.propertyCode,
                                 propertyFeature: property.propertyFeature,
@@ -149,27 +169,44 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                             purpose: property.purpose,
                             ActualPrice: property.price,
                             taxes: property.taxes,
-                            PromotionalPrice: props.obj?.promotionalPrice
+                            PromotionalPrice: property.promotionalPrice
                         }} />
-                        {props.user.role == "ROLE_EDITOR" || props.user.role =="ROLE_ADMIN" ?
-                        <RealtorAssociated objPropertyList={{ realtorPropertySpecific: property?.realtorPropertySpecific ?? [] }} WhatsappLink="adad" />
-                        :
-                        <NewScheduleModal propertyId={String(propertyId)} />
+                        {props.user.role == "ROLE_EDITOR" || props.user.role =="ROLE_ADMIN" || props.user.role =="ROLE_REALTOR" ?
+
+                        <ProprietorAssociated proprietor={property.proprietor} WhatsappLink="ada" />
+                                                :  
+                                                <div style={{margin:"10px"}}>
+                                                <Button size={"medium"} text="ACESSAR CHAT" hover="lightHover" color="var(--text-white)"
+                                                background="var(--box-red-pink)"
+                                                
+                                                />
+                                                </div>
 
                         } 
+                        {props.user.role == "ROLE_EDITOR" || props.user.role =="ROLE_ADMIN" || props.user.role =="ROLE_REALTOR" || props.user.role =="ROLE_CUSTOMER" ?
+                        ""
+                        :
+                        <a href={"/login"} className="linkLogin">Faça login para realizar agendamentos e mais ações!</a>
+                        }
                     </div>
 
                 </article>
-                
+
 
                 <article className="enviroments-interestPoint">
                     <OtherEnvironmentsProperty obj={{ additionals: property.additionals }} />
-                    <InterestPointsPropertySpecific text="pontos de interesse" />
+                    <NewScheduleModal propertyId={String(propertyId)} />
                 </article>
                 <DescriptionProperty obj={{ propertyDescription: property.propertyDescription }} />
                 <section className="sectionPriceProperty">
                     <HorizontalPropertySpecific />
-                    <div className="containerGraphic"></div>
+                    <MapSearchResult addressSpecific={{
+                        street:property.address.street,
+                        city:property.address.city,
+                        state:property.address.state,
+                        propertyNumber:property.address.propertyNumber}
+                    } width="32vw" height="25vw"
+                    />
                 </section>
                 <div style={{ display: "flex", justifyContent: "center", width: "100%", marginTop: "115px" }}>
                     <Title text="imóveis semelhantes" tag="h1" />
@@ -178,10 +215,10 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                     similarProperties
                 } />
             </div>
-            
+
             <div style={{ margin: "200px 0 100px 0" }}>
                 <RealterAssociatedVertical objPropertyList={{ realtorPropertySpecific: property?.realtorPropertySpecific ?? [] }}
-                    WhatsappLink="aaadw"
+                    WhatsappLink="https://web.whatsapp.com"
                     InstagramLink="https://www.instagram.com/accounts/login/?next=%2Fnathanj.oao%2F&source=omni_redirect" />
             </div>
         </>
