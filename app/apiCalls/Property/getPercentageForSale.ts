@@ -1,10 +1,12 @@
-const BASE_URL = "http://localhost:9090/property"
+
 
 export default async function(){
+    const BASE_URL = "http://localhost:9090/property/getPercentageForSale"
     try{
-        const response = await fetch(`${BASE_URL}/getPercentageForSale`)
+        const response = await fetch(BASE_URL,{
+            credentials: "include"
+        })
         if(!response.ok) throw new Error("Erro ao buscar a porcentagem de propriedades a venda") 
-        console.log("Resposta da api",response);
         return await response.json();
     }catch(e){
         console.log(e);

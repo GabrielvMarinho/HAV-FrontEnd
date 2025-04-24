@@ -5,7 +5,6 @@ export default async function () {
             credentials: "include"
         });
         const data = await response.json();
-        console.log("Resposta da api", data);
         return data; // aqui retorna apenas a quantidade
         
     } catch (e) {
