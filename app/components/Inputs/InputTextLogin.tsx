@@ -14,6 +14,7 @@ export default function InputTextLogin<T>({
     register,
     error,
     icon,  // Prop para passar o ícone
+
 }: {
 
     password?: boolean;
@@ -26,6 +27,7 @@ export default function InputTextLogin<T>({
     register?: UseFormRegister<T>;
     error?: FieldError;
     icon?: React.ReactNode;  // Definindo o tipo para ícone
+
 }) {
     const [showPassword, setShowPassword] = useState(false);
 

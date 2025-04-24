@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SignUpValidator } from "@/app/Validators/SignUpValidator";
 import { useDispatch } from "react-redux";
 import { SignUpFetch } from "@/app/redux/Auth/action";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function SignUpForm(){
@@ -42,6 +42,7 @@ export default function SignUpForm(){
                 setErrorLogin(response.message);
             }
     }
+    
     return(
             <form className="loginForm" onSubmit={form.handleSubmit(handleSignUp)}>
                 {errorLogin ?
