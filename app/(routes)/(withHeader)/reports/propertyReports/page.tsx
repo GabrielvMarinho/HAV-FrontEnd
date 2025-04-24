@@ -1,5 +1,5 @@
 import AuthGuard from "@/app/context/AuthGuard";
-import PropertyReportsValidation from "./propertyReportsValidation";
+import PropertyReportsValidation from "./PropertyReportsValidation";
 
 export default function ReportsPage() {
   return (
