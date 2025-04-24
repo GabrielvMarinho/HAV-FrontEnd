@@ -150,7 +150,7 @@ export default function HeaderRealtor() {
                             <Bell width={17} height={17} color={"var(--text-white)"} />]} />
                     </div>
                     <div onClick={() => {LogoutFetch()}}>
-                        <Link  href={"/"}>Logout</Link>
+                        <Link  href={"/login"}>Logout</Link>
                     </div>
                 </div>
                 {/* <Language width={30} height={30} color="" /> */}
