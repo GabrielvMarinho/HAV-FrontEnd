@@ -187,6 +187,20 @@ export default function Chat() {
 
     {/* Término Configuração do WebSocket */ }
 
+    {/* Testando criar conversa chat atráves botão */ }
+    useEffect(() => {
+        const selectedChatId = localStorage.getItem("selectedChatId");
+
+        if (selectedChatId && chat.chats.length > 0) {
+            const foundChat = chat.chats.find(c => c.id == selectedChatId);
+            if (foundChat) {
+                setCurrentChat(foundChat);
+                dispatch(markMessagesAsRead(foundChat.id));
+                localStorage.removeItem("selectedChatId"); // Limpa o ID após carregar
+            }
+        }
+    }, [chat.chats]);
+
     return (
         <>
             <div className="relative" style={{

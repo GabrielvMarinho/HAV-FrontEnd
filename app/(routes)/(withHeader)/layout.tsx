@@ -7,6 +7,7 @@ import { cookies } from "next/headers"
 import ThemeToggle from "../../components/Theme/ToggleTheme"
 import InitTheme from "../../components/Theme/InitTheme"
 import Footer from "@/app/components/Footer/Footer"
+import { ReduxProvider } from "@/app/redux/providers"
 
 
 export const metadata = {
@@ -32,10 +33,12 @@ export default async function RootLayout({
 
   return (
     <>
-    <InitTheme/>
-    <HeadersAll usuario={usuario}/>
-    {children}
-    <Footer/>
+      <InitTheme />
+      <HeadersAll usuario={usuario} />
+      <ReduxProvider>
+        {children}
+      </ReduxProvider>
+      <Footer />
     </>
   );
 }

@@ -17,6 +17,7 @@ export const createChat = (chatData: { token: any; data: any; }) => async (dispa
         const data = await res.json();
         console.log("create chat", data)
         dispatch({ type: CREATE_CHAT, payload: data })
+        return { payload: data };
 
     } catch (error) {
         console.log("catch error", error)

@@ -26,6 +26,9 @@ import ShowPhotos from "@/app/components/Information/ShowPhotos";
 import ProprietorDetails from "@/app/components/Information/ProprietorAssociated";
 import ProprietorAssociated from "@/app/components/Information/ProprietorAssociated";
 import MapSearchResult from "@/app/components/Maps/MapSearchResult";
+import { createChat } from "@/app/redux/Chat/action";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 export default function WrappedPagePropertySpecific(props: { obj?: PropertySpecific; user: any }) {
 
@@ -89,30 +92,93 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
     }, [])
 
     if (!property) {
-        return <p style={{marginBottom:"100vh"}}>Carregando...</p>
+        return <p style={{ marginBottom: "100vh" }}>Carregando...</p>
     }
     console.log(props.user)
+
+    const dispatch = useDispatch();
+    const router = useRouter();
+
+    const handleAccessChat = async () => {
+        console.log("Botão clicado");
+
+        const token = localStorage.getItem("token");
+        const realtorId = property.realtorPropertySpecific[0]?.id;
+
+        if (!realtorId) {
+            console.warn("Realtor ID não encontrado.");
+            return;
+        }
+
+        try {
+            const res = await fetch(`http://localhost:9090/api/chats/existing?userId2=${realtorId}`, {
+                method: "GET",
+                credentials: "include", // JWT via cookie
+            });
+
+            let chat;
+
+            if (res.ok) {
+                try {
+                    chat = await res.json();
+                    console.log("Chat existente:", chat);
+
+                    if (!chat) {
+                        console.log("Chat não encontrado na resposta, criando novo chat...");
+                        const chatData = {
+                            token,
+                            data: { userId: realtorId },
+                        };
+
+                        const created = await dispatch(createChat(chatData));
+                        chat = created?.payload || null;
+                    }
+
+                } catch (jsonError) {
+                    console.error("Erro ao converter resposta existente em JSON:", jsonError);
+                }
+            } else {
+                console.log("Erro ao buscar chat, tentando criar novo...");
+                const chatData = {
+                    token,
+                    data: { userId: realtorId },
+                };
+
+                const created = await dispatch(createChat(chatData));
+                chat = created?.payload || null;
+            }
+
+            if (chat) {
+                localStorage.setItem("selectedChatId", chat.id);
+                router.push("/chat");
+            }
+
+        } catch (error) {
+            console.error("Erro ao acessar ou criar chat:", error);
+        }
+    };
+
     return (
         <>
 
             <div style={{ marginInline: "auto", maxWidth: "var(--width-page)" }}>
                 <article className="articleFirstContent">
-                    <div style={{ display: "flex", flexDirection: "column"}}>
-                        {property.imagesProperty.length>1 ? 
-                        <ShowPhotos
-                        name={"images"}
-                        initialImages={
-                            property.imagesProperty
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                        {property.imagesProperty.length > 1 ?
+                            <ShowPhotos
+                                name={"images"}
+                                initialImages={
+                                    property.imagesProperty
+                                }
+                            />
+                            :
+                            <img
+                                style={{ width: "33vw", height: "28vw" }}
+                                src="/Image/fotoSemPropriedade.png"
+                            ></img>
                         }
-                    />
-                    :
-                    <img
-                    style={{width: "33vw", height: "28vw"}}
-                        src="/Image/fotoSemPropriedade.png"
-                    ></img>
-                    }
-                        
-                        <div style={{ display: "flex", flexDirection: "row", gap: "110px", marginTop:"-2.5vw" }}>
+
+                        <div style={{ display: "flex", flexDirection: "row", gap: "110px", marginTop: "-2.5vw" }}>
                             {/* <div className="buttonIconDiv">
                                 <Button
                                     type="button"
@@ -123,7 +189,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                                     background="" />
                                 <Cubes width={30} height={30} color="var(--button-color)" />
                             </div> */}
-                            {props.user.role == "ROLE_EDITOR" || props.user.role =="ROLE_ADMIN" ?
+                            {props.user.role == "ROLE_EDITOR" || props.user.role == "ROLE_ADMIN" ?
 
                                 <div className="buttonIconDiv">
                                     <Button
@@ -153,7 +219,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                             <Balanca height={30} width={30} color="var(--button-color)" />
                         </div> */}
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column", justifyContent:"center", gap: "15px" }}>
+                    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: "15px" }}>
                         <PropertyPageDatasAdm
                             obj={{
                                 propertyId: propertyId,
@@ -171,22 +237,21 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                             taxes: property.taxes,
                             PromotionalPrice: property.promotionalPrice
                         }} />
-                        {props.user.role == "ROLE_EDITOR" || props.user.role =="ROLE_ADMIN" || props.user.role =="ROLE_REALTOR" ?
+                        {props.user.role == "ROLE_EDITOR" || props.user.role == "ROLE_ADMIN" || props.user.role == "ROLE_REALTOR" ?
 
-                        <ProprietorAssociated proprietor={property.proprietor} WhatsappLink="ada" />
-                                                :  
-                                                <div style={{margin:"10px"}}>
-                                                <Button size={"medium"} text="ACESSAR CHAT" hover="lightHover" color="var(--text-white)"
-                                                background="var(--box-red-pink)"
-                                                
-                                                />
-                                                </div>
+                            <ProprietorAssociated proprietor={property.proprietor} WhatsappLink="ada" />
+                            :
+                            <div style={{ margin: "10px" }}>
+                                <Button size={"medium"} text="ACESSAR CHAT" hover="lightHover" color="var(--text-white)"
+                                    background="var(--box-red-pink)" onClick={handleAccessChat}
+                                />
+                            </div>
 
-                        } 
-                        {props.user.role == "ROLE_EDITOR" || props.user.role =="ROLE_ADMIN" || props.user.role =="ROLE_REALTOR" || props.user.role =="ROLE_CUSTOMER" ?
-                        ""
-                        :
-                        <a href={"/login"} className="linkLogin">Faça login para realizar agendamentos e mais ações!</a>
+                        }
+                        {props.user.role == "ROLE_EDITOR" || props.user.role == "ROLE_ADMIN" || props.user.role == "ROLE_REALTOR" || props.user.role == "ROLE_CUSTOMER" ?
+                            ""
+                            :
+                            <a href={"/login"} className="linkLogin">Faça login para realizar agendamentos e mais ações!</a>
                         }
                     </div>
 
@@ -201,10 +266,11 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                 <section className="sectionPriceProperty">
                     <HorizontalPropertySpecific />
                     <MapSearchResult addressSpecific={{
-                        street:property.address.street,
-                        city:property.address.city,
-                        state:property.address.state,
-                        propertyNumber:property.address.propertyNumber}
+                        street: property.address.street,
+                        city: property.address.city,
+                        state: property.address.state,
+                        propertyNumber: property.address.propertyNumber
+                    }
                     } width="32vw" height="25vw"
                     />
                 </section>
