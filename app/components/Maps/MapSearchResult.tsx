@@ -52,9 +52,10 @@ export default function MapSearchResult(props: {cards? :any; height? :string, wi
                 }
                 
                 console.log("data", data)
-                addresses = data.map(item => 
-                    `${item.street}, ${item.propertyNumber}, ${globalDatabaseNameConverter[item.city]}, ${globalDatabaseNameConverter[item.state]}`
-                );
+                addresses = data.map(item => ({
+                    id: item.id, // Include the ID
+                    address: `${item.street}, ${item.propertyNumber}, ${globalDatabaseNameConverter[item.city]}, ${globalDatabaseNameConverter[item.state]}`
+                  }));
                 console.log("add", addresses)
                 //update map
                 const map = new Map(mapRef.current as HTMLElement, {
@@ -65,7 +66,7 @@ export default function MapSearchResult(props: {cards? :any; height? :string, wi
     
                 const streetView = map.getStreetView();
                 const streetViewService = new google.maps.StreetViewService();
-                for (const address of addresses) {
+                for (const { id, address } of addresses) {
                     geocoder.geocode({ address }, (results, status) => {
                         if (status === "OK" && results && results[0]) {
                             const result = results[0];
@@ -79,18 +80,31 @@ export default function MapSearchResult(props: {cards? :any; height? :string, wi
                             });
     
                             const infoWindow = new google.maps.InfoWindow({
-                                content: `<div style="font-size: 14px;">${result.formatted_address}</div>`
-                            });
+                                content: `
+                                  <div style="font-size: 14px; min-width: 200px;">
+                                    ${result.formatted_address}
+                                    ${(props.cards || props.favorite) ? `
+                                      <button onclick="window.location.href='/property/${id}'" 
+                                              style="background: #2563eb; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-top: 8px; width: 100%;">
+                                        Ver Detalhes
+                                      </button>
+                                    ` : ''}
+                                  </div>
+                                `
+                              });
     
                             // Mouse over -> abre a caixinha
                             marker.addListener("mouseover", () => {
-                                infoWindow.open(map, marker);
+                                if(infoWindow.isOpen){
+                                    infoWindow.close();
+
+                                }else{
+                                    infoWindow.open(map, marker);
+
+                                }
                             });
     
-                            // Mouse out -> fecha a caixinha
-                            marker.addListener("mouseout", () => {
-                                infoWindow.close();
-                            });
+                            
     
                             // Clique -> abre street view
                             marker.addListener("click", () => {

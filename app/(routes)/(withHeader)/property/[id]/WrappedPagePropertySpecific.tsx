@@ -107,7 +107,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                     />
                     :
                     <img
-                    style={{width: "33vw", height: "28vw"}}
+                    style={{width: "33vw", height: "28vw", marginBottom:"3.5vw"}}
                         src="/Image/fotoSemPropriedade.png"
                     ></img>
                     }

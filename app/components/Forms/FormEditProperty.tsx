@@ -302,7 +302,7 @@ export default function FormEditProperty(props: { id: any, objectData: any }) {
                         />
 
                     </div>
-                    <h3>CARACTERÍSTICAS DO IMÓVEL</h3>
+                    <h3 style={{marginTop:"110px"}}>CARACTERÍSTICAS DO IMÓVEL</h3>
                     <div className="propertyFormGroup">
                         {!isLand == true ?
                             <>

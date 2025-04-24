@@ -3,43 +3,77 @@
 import "../style/style.css";
 import Title from "@/app/components/NonInteractable/Title";
 import SideTitle from "@/app/components/NonInteractable/SideTitle";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import HorizontalBarChart from "@/app/components/BarChart/HorizontalBarChart";
 import VerticalBarChart from "@/app/components/BarChart/VerticalBarChart";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
-
+import getQuantityCustomer from "@/app/apiCalls/Customer/getQuantityCustomer";
+import getPercentageCustomer from "@/app/apiCalls/Customer/getPercentageCustomer";
+import getPercentageProprietors from "@/app/apiCalls/Proprietor/getPercentageProprietors";
+import getPercentageArchived from "@/app/apiCalls/User/getPercentageArchived";
+import getQuantityProprietor from "@/app/apiCalls/Proprietor/getQuantityProprietor";
+import getQuantityArchived from "@/app/apiCalls/User/getQuantityArchived";
 
 export default function UserReportsValidation() {
   // Dados para os gráficos verticais (mantidos como no seu exemplo)
   const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN'];
   const [novosUsuariosData] = useState([25, 50, 30, 60, 45, 75]);
   const [visitasData] = useState([95000, 10000, 50000, 17000, 16000, 10000]);
+  const [totaCustomers, setTotalCustomers] = useState(0);
+  const [percentageCustomers, setPercentageCustomers] = useState(0);
+  const [percentageProp, setPercentageProp] = useState(0);
+  const [percentageArchived, setPercentageArchived] = useState(0);
+  const [getQuantityProprietors, setGetQuantityProprietor] = useState(0);
+  const [getQuantityArchiveds, setgetQuantityArchived] = useState(0);
+
+  useEffect(() => {
+    async function fetchData(){
+      try{
+        const totalCustomers = await getQuantityCustomer();
+        setTotalCustomers(totalCustomers);
+
+        const percentageCustomers = await getPercentageCustomer();
+        setPercentageCustomers(percentageCustomers)
+
+        const percentageProps = await getPercentageProprietors()
+        setPercentageProp(percentageProps)
+
+        const percentageArchived = await getPercentageArchived()
+        setPercentageArchived(percentageArchived)
+
+        const getQuantityProprietors = await getQuantityProprietor()
+        setGetQuantityProprietor(getQuantityProprietors)
+
+        const getQuantityArchiveds = await getQuantityArchived()
+        setgetQuantityArchived(getQuantityArchiveds)
+
+      }catch(e){
+        console.log(e);
+      }
+    }
+    fetchData()
+  }, [])
 
   // Dados para o gráfico horizontal no mesmo padrão
   const [userStats] = useState({
-    proprietarios: 2,
-    usuariosComuns: 3,
-    bloqueados: 1
+
+    bloqueados: 0
   });
 
   // Calculando totais e porcentagens
-  const totalUsers = userStats.proprietarios + userStats.usuariosComuns + userStats.bloqueados;
-  const percentageProprietors = Math.round((userStats.proprietarios / totalUsers) * 100);
-  const percentageCustomers = Math.round((userStats.usuariosComuns / totalUsers) * 100);
-  const percentageBlocked = Math.round((userStats.bloqueados / totalUsers) * 100);
 
   // Preparando dados para o gráfico horizontal
   const horizontalLabels = [
-    `${percentageProprietors}% PROPRIETÁRIOS`,
+    `${percentageProp}% PROPRIETÁRIOS`,
     `${percentageCustomers}% USUÁRIOS COMUNS`,
-    `${percentageBlocked}% BLOQUEADOS`
+    `${percentageArchived}% ARQUIVADOS`
   ];
 
   const horizontalData = [
-    userStats.proprietarios,
-    userStats.usuariosComuns,
-    userStats.bloqueados
+    getQuantityProprietors,
+    totaCustomers,
+    getQuantityArchiveds
   ];
 
   const barColors = ["#B23F52"];
@@ -65,7 +99,7 @@ export default function UserReportsValidation() {
         </div>
         <div className="users-data-row">
           <div className="users-data-box">
-            <h3 className="users-big-number">6</h3>
+            <h3 className="users-big-number">{totaCustomers}</h3>
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
