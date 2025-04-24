@@ -9,11 +9,31 @@ import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 import { useEffect, useState } from "react";
 import VerticalBarChart from "@/app/components/BarChart/VerticalBarChart";
 import AuthGuard from "@/app/context/AuthGuard";
+import getAllRegistredNumber from "@/app/apiCalls/Property/getAllRegistredNumber";
+import getPercentageForSale from "@/app/apiCalls/Property/getPercentageForSale";
 
 export default function PropertyReportsValidation() {
   const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN'];
   const [novosUsuariosData] = useState([25, 50, 30, 60, 45, 75]);
   const [visitasData] = useState([95000, 10000, 50000, 17000, 16000, 10000]);
+  const [quantityProperty, setQuantityProperty] = useState(0)
+  const [percentageSale, setPercentageSale] = useState(0);
+
+  useEffect(() =>{
+    async function fetchData() {
+        try{
+          const quantity = await getAllRegistredNumber();
+          setQuantityProperty(quantity);
+          
+          const percentageForSale = await getPercentageForSale();
+          setPercentageSale(percentageForSale)
+        }catch(e){
+          console.log(e);
+        }
+        
+    }
+    fetchData()
+  }, [])
 
   const [userStats] = useState({
     proprietarios: 2,
@@ -27,9 +47,9 @@ export default function PropertyReportsValidation() {
   const percentageBlocked = Math.round((userStats.bloqueados / totalUsers) * 100);
 
   const horizontalLabels = [
-    `${percentageProprietors}% PROPRIETÁRIOS`,
-    `${percentageCustomers}% USUÁRIOS COMUNS`,
-    `${percentageBlocked}% BLOQUEADOS`
+    `${percentageSale}% VENDA`,
+    `${percentageCustomers}%LOCAÇÃO`,
+    `${percentageBlocked}%ARQUIVADOS`
   ];
 
   const horizontalData = [
@@ -61,7 +81,7 @@ export default function PropertyReportsValidation() {
         </div>
         <div className="users-data-row">
           <div className="users-data-box">
-            <h3 className="users-big-number">6</h3>
+            <p className="users-big-number">{quantityProperty}</p>
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">
