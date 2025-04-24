@@ -35,14 +35,14 @@ import {
       if (scaleType === 'thousands') {
         return {
           beginAtZero: true,
-          max: 100000,
+          max: 30,
           ticks: {
             callback: (value: number) => {
               const ticks = {
                 0: '0',
-                20000: '20k',
-                60000: '60k',
-                100000: '100k'
+                10: '10',
+                20: '20',
+                30: '30'
               };
               return ticks[value as keyof typeof ticks] || '';
             },
@@ -52,11 +52,11 @@ import {
               weight: '700',
             },
             // Define os valores específicos com espaçamento proporcional
-            values: [0, 20000, 60000, 100000],
+            values: [0, 10, 20, 30],
           },
           grid: {
             color: (ctx: any) => {
-              const showLinesAt = [0, 20000, 60000, 100000];
+              const showLinesAt = [0, 10, 20, 30];
               return showLinesAt.includes(ctx.tick.value) 
                 ? 'rgba(179, 63, 82, 0.2)'
                 : 'transparent';
@@ -65,7 +65,7 @@ import {
           },
           // Ajuste para espaçamento proporcional
           afterBuildTicks: (scale: any) => {
-            scale.ticks = [0, 20000, 60000, 100000].map(value => ({ value }));
+            scale.ticks = [0, 10, 20, 30  ].map(value => ({ value }));
             return;
           }
         };
@@ -73,9 +73,9 @@ import {
         // Configuração padrão 0-25-50-75
         return {
           beginAtZero: true,
-          max: 75,
+          max: 20,
           ticks: {
-            stepSize: 25,
+            stepSize: 5,
             color: '#B23F52',
             font: {
               size: 13,
@@ -84,7 +84,7 @@ import {
           },
           grid: {
             color: (ctx: any) => {
-              const showLinesAt = [0, 25, 50, 75];
+              const showLinesAt = [0, 5, 10, 15, 20];
               return showLinesAt.includes(ctx.tick.value)
                 ? 'rgba(179, 63, 82, 0.2)'
                 : 'transparent';

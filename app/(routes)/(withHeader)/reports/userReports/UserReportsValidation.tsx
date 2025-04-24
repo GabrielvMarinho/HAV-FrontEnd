@@ -13,14 +13,14 @@ import NavBarAdm from "@/app/components/Header/NavBarAdm";
 export default function UserReportsValidation() {
   // Dados para os gráficos verticais (mantidos como no seu exemplo)
   const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN'];
-  const [novosUsuariosData] = useState([25, 50, 30, 60, 45, 75]);
-  const [visitasData] = useState([95000, 10000, 50000, 17000, 16000, 10000]);
+  const [novosUsuariosData] = useState([1, 2, 2, 1, 0, 0]);
+  const [visitasData] = useState([0, 0, 0, 3, 0, 0]);
 
   // Dados para o gráfico horizontal no mesmo padrão
   const [userStats] = useState({
     proprietarios: 2,
-    usuariosComuns: 3,
-    bloqueados: 1
+    usuariosComuns: 4,
+    bloqueados: 0
   });
 
   // Calculando totais e porcentagens
@@ -97,9 +97,9 @@ export default function UserReportsValidation() {
             />
           </div>
           <div className="users-data-box">
-            <h3 className="users-big-number">123</h3>
+            <h3 className="users-big-number">6</h3>
             <p className="users-small-text">
-            65% usuários comuns sem propriedade á venda
+            75% usuários comuns sem propriedade á venda
             </p>
           </div>
           </div>
@@ -121,9 +121,9 @@ export default function UserReportsValidation() {
             />
           </div>
           <div className="users-data-box">
-            <h3 className="users-big-number">143.2 MIL</h3>
+            <h3 className="users-big-number">3</h3>
             <p className="users-small-text">
-              40% feitas por usuários sem uma conta
+              33% feitas por usuários sem uma conta
             </p>
           </div>
           </div>
