@@ -97,7 +97,7 @@ export default function Chat() {
 
     {/* Configuração do WebSocket */ }
 
-    useEffect(() => {
+    /* useEffect(() => {
         if (!currentChat?.id) return;
 
         console.log("🔄 Tentando conectar ao WebSocket para o chat:", currentChat.id);
@@ -113,7 +113,62 @@ export default function Chat() {
                 console.log("🧹 WebSocket desconectado");
             }
         };
-    }, [currentChat?.id]);
+    }, [currentChat?.id]); */
+
+
+    useEffect(() => {
+        if (!currentChat?.id || !auth.reqUser?.id) return;
+
+        console.log("🔄 Tentando conectar ao WebSocket para o chat:", currentChat.id);
+        console.log("🔄 Verificando auth.reqUser?.id:", auth.reqUser?.id);
+
+        connectWebSocket(
+            currentChat.id,
+            (msg) => {
+                console.log("🧠 Dispatch de mensagem recebida:", msg);
+                dispatch({ type: "CREATE_NEW_MESSAGE", payload: msg });
+            },
+            auth.reqUser?.id,
+            auth.token,
+            dispatch
+        );
+
+        return () => {
+            if (stompClient?.connected) {
+                stompClient.deactivate();
+                console.log("🧹 WebSocket desconectado");
+            }
+        };
+    }, [currentChat?.id, auth.reqUser?.id, auth.token, dispatch]);
+
+    /* const userChats = useSelector((state) => state.chat.chats);
+
+    useEffect(() => {
+        if (!auth.reqUser?.id || !auth.token || userChats.length === 0) return;
+
+        const chatIds = userChats.map(chat => chat.id); // lista de todos os chats
+
+        connectWebSocket(
+            chatIds,
+            (msg) => {
+                console.log("🧠 Dispatch de mensagem recebida:", msg);
+                dispatch({ type: "CREATE_NEW_MESSAGE", payload: msg });
+            },
+            currentChat?.id,
+            auth.reqUser?.id,
+            auth.token,
+            dispatch
+        );
+
+        return () => {
+            if (stompClient?.connected) {
+                stompClient.deactivate();
+                console.log("🧹 WebSocket desconectado");
+            }
+        };
+    }, [auth.reqUser?.id, auth.token, currentChat?.id, userChats.length, dispatch]); */
+
+
 
     const handleCreateNewMessage = () => {
         const message = {
