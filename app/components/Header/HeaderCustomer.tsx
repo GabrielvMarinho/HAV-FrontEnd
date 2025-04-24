@@ -32,7 +32,6 @@ export default function HeaderCustomer() {
         async function fetch(){
             const data = await Logout()
             console.log("logout", data)
-            window.location.href = window.location.href
         }
         fetch()
     }
@@ -67,7 +66,7 @@ export default function HeaderCustomer() {
                     <img
                     style={{width:"28px", height:"28px"}}
                     src="/Image/LogoClaraMobile.png"></img>
-                    <Language width={32} height={32} color="" />
+                    {/* <Language width={32} height={32} color="" /> */}
                 </div>
                     <div onClick={() =>{setMobileOpen(false)}}>
                         <Hamburger width={32} height={32} color=""></Hamburger>
@@ -154,7 +153,7 @@ export default function HeaderCustomer() {
 
                     </div>
                     <div onClick={() => {LogoutFetch()}}>
-                        <Link  href={"/"}>Logout</Link>
+                        <Link  href={"/login"}>Logout</Link>
                     </div>
                     
                 </div>
