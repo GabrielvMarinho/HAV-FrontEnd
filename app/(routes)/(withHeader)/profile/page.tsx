@@ -22,19 +22,7 @@ export default async function ProfilePage() {
     <>
       <Title tag={"h1"} text={"perfil"} />
       <div className="profileContainer">
-        <div className="profileHeader">
-        <div className="imgPerson">
-            <ButtonUploadPhoto
-              name="profileImage"
-              // register={form.register}
-              // error={form.formState.errors.profileImage}
-            />
-        </div>
-          <div className="profileInfo">
-            <p className="personName">{usuario?.name}</p>
-            <p className="userType">Cliente</p>
-          </div>
-        </div>
+        
         <ProfileValidation usuario={usuario}/>
       </div>
     </>

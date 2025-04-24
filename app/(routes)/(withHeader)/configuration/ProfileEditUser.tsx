@@ -306,46 +306,16 @@ export default function ProfileEditUser(props: {role: string}) {
           <div className="menuColumn">
             <h3 className="columnTitle">PREFERÊNCIAS</h3>
             <ul className="menuList">
-            <HorizontalLine size={500} color="var(--hour-gray)" />
+            <HorizontalLine size={450} color="var(--hour-gray)" />
 
-              <div className="menuContent">              
+              <div className="menuContent" style={{ display:"flex", justifyContent:"space-between", width:"40%"}}>              
                 <label>TEMA</label>
                 <ToggleTheme isToggled={toggleStates.tema} onChange={() => handleToggle("tema")}/>
               </div>
-              <MenuItem
-                label="IDIOMA"
-                isToggled={toggleStates.idioma}
-                onToggle={() => handleToggle("idioma")}
-              />
-              <MenuItem
-                label="AUTENTICAÇÃO 2 FATORES"
-                isToggled={toggleStates.autenticacao2Fatores}
-                onToggle={() => handleToggle("autenticacao2Fatores")}
-              />
+              
             </ul>
           </div>
 
-          <div className="menuColumn">
-            <h3 className="columnTitle">ACESSIBILIDADE</h3>
-            <ul className="menuList">
-              <MenuItem
-                label="LIBRAS"
-                isToggled={toggleStates.libras}
-                onToggle={() => handleToggle("libras")}
-              />
-              <MenuItem
-                label="LEITOR DE TELA"
-                isToggled={toggleStates.leitorTela}
-                onToggle={() => handleToggle("leitorTela")}
-              />
-
-              <MenuItem
-                label="TAMANHO FONTE"
-                isToggled={toggleStates.tamanhoFonte}
-                onToggle={() => handleToggle("tamanhoFonte")}
-              />
-            </ul>
-          </div>
         </div>
       </div>
 
