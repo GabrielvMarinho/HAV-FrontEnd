@@ -41,13 +41,17 @@ export default async function Home() {
       {properties.length > 0 ?
         <>
           <section className="homeHiglightProperties">
-            <h3>IMÓVEIS EM</h3>
-            <h2>DESTAQUE</h2>
+            <div style={{margin:"20px"}}>
+              <h3>IMÓVEIS EM</h3>
+              <h2>DESTAQUE</h2>
+            </div>
             <SliderPropertyHighlights items={properties} />
           </section>
           <section className="homeHiglightPropertiesMobile">
-            <h3>IMÓVEIS EM</h3>
-            <h2>DESTAQUE</h2>
+            <div style={{margin:"20px"}}>
+              <h3>IMÓVEIS EM</h3>
+              <h2>DESTAQUE</h2>
+            </div>
             <CardContainer cards={properties} totalPages={0}/>
           </section>
 
