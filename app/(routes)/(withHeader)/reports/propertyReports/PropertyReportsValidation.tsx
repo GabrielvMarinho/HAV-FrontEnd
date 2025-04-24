@@ -11,6 +11,11 @@ import VerticalBarChart from "@/app/components/BarChart/VerticalBarChart";
 import AuthGuard from "@/app/context/AuthGuard";
 import getAllRegistredNumber from "@/app/apiCalls/Property/getAllRegistredNumber";
 import getPercentageForSale from "@/app/apiCalls/Property/getPercentageForSale";
+import getPercentageRent from "@/app/apiCalls/Property/getRentPercentage";
+import getPercentageArchived from "@/app/apiCalls/Property/getPercentageArchived";
+import getTotalArchivedProperties from "@/app/apiCalls/Property/getTotalArchivedProperties";
+import getTotalForSaleProperties from "@/app/apiCalls/Property/getTotalForSaleProperties";
+import getTotalRentProperties from "@/app/apiCalls/Property/getTotalRentProperties";
 
 export default function PropertyReportsValidation() {
   const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN'];
@@ -18,7 +23,12 @@ export default function PropertyReportsValidation() {
   const [visitasData] = useState([0, 0, 0, 3, 0, 0]);
   const [quantityProperty, setQuantityProperty] = useState(0)
   const [percentageSale, setPercentageSale] = useState(0);
-
+  const [percentageRent, setPercentageRent] = useState(0);
+  const [percentageArchived, setPercentageArchived] = useState(0);
+  const [totalRent, setTotalRent] = useState(0);
+  const [totalSale, setTotalSale] = useState(0);
+  const [totalArchived, setTotalArchived] = useState(0);
+  
   useEffect(() =>{
     async function fetchData() {
         try{
@@ -27,6 +37,22 @@ export default function PropertyReportsValidation() {
           
           const percentageForSale = await getPercentageForSale();
           setPercentageSale(percentageForSale)
+          
+          const percentageForRent = await getPercentageRent();
+          setPercentageRent(percentageForRent);
+
+          const percentageArchived = await getPercentageArchived();
+          setPercentageArchived(percentageArchived)
+
+          const totalForSale = await getTotalForSaleProperties();
+          setTotalSale(totalForSale);
+
+          const totalForRent = await getTotalRentProperties();
+          setTotalRent(totalForRent);
+
+          const totalForArchived = await getTotalArchivedProperties()
+          setTotalArchived(totalForArchived);
+
         }catch(e){
           console.log(e);
         }
@@ -41,21 +67,17 @@ export default function PropertyReportsValidation() {
     bloqueados: 0
   });
 
-  const totalUsers = userStats.proprietarios + userStats.usuariosComuns + userStats.bloqueados;
-  const percentageProprietors = Math.round((userStats.proprietarios / totalUsers) * 100);
-  const percentageCustomers = Math.round((userStats.usuariosComuns / totalUsers) * 100);
-  const percentageBlocked = Math.round((userStats.bloqueados / totalUsers) * 100);
 
   const horizontalLabels = [
     `${percentageSale}% VENDA`,
-    `${percentageCustomers}%LOCAÇÃO`,
-    `${percentageBlocked}%ARQUIVADOS`
+    `${percentageRent}% LOCAÇÃO`,
+    `${percentageArchived}% ARQUIVADOS`
   ];
 
   const horizontalData = [
-    userStats.proprietarios,
-    userStats.usuariosComuns,
-    userStats.bloqueados
+    totalSale,
+    totalRent,
+    totalArchived  
   ];
 
   const barColors = ["#B23F52"];
@@ -77,7 +99,7 @@ export default function PropertyReportsValidation() {
       {/* Seção de Usuários (gráfico horizontal) */}
       <section className="users-section">
         <div className="reports-graphTitle">
-          <p>USUÁRIOS</p>
+          <p>IMÓVEIS</p>
         </div>
         <div className="users-data-row">
           <div className="users-data-box">

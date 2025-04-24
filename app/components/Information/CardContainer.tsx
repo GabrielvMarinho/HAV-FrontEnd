@@ -9,9 +9,10 @@ export default function CardContainer(props: { cards: PropertySpecificCard[], to
         <>
             <div>
                 <div className="cardsContainer">
-                    {(props.cards ?? []).map((card) => (
-                        <CardImovel obj={card} idUser={0} />
+                    {Array.isArray(props.cards) && props.cards.map((card) => (
+                        <CardImovel key={card.id} obj={card} idUser={0} />
                     ))}
+
                 </div>
                 <PageManager totalPages={props.totalPages} />
             </div>
