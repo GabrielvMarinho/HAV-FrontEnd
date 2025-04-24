@@ -1,30 +1,31 @@
 {/* Configuração WebSocket */ }
 
-import { Client } from "@stomp/stompjs";
+/* import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 
 export let stompClient: Client | null = null;
 
-export const connectWebSocket = (onMessageReceived) => {
+export const connectWebSocket = (chatId, onMessageReceived) => {
     if (!window.WebSocket) {
         console.error("Este navegador não suporta WebSocket.");
         return;
     }
+
     const socket = new SockJS("http://localhost:9090/ws-chat");
     stompClient = new Client({
         webSocketFactory: () => socket,
         reconnectDelay: 5000,
         onConnect: () => {
             console.log("Conectado ao WebSocket");
+            stompClient.subscribe(`/topic/chat/${chatId}`, (message) => {
+                const body = JSON.parse(message.body);
+                onMessageReceived(body);
+            });
         },
         onStompError: (frame) => {
             console.error("Erro STOMP", frame);
         },
     });
-
-    stompClient.onConnect = () => {
-        console.log("WebSocket conectado");
-    };
 
     stompClient.activate();
 };
@@ -39,7 +40,7 @@ export const subscribeToChat = (chatId, onMessageReceived) => {
 };
 
 export const sendMessageSocket = (message) => {
-    console.log("messagem que será enviada para o back", message);
+    
     if (stompClient && stompClient.connected) {
         stompClient.publish({
             destination: "/app/chat/send",
@@ -47,5 +48,50 @@ export const sendMessageSocket = (message) => {
         });
     } else {
         console.error("WebSocket não conectado");
+    }
+};*/
+
+import { Client } from "@stomp/stompjs";
+import SockJS from "sockjs-client";
+
+export let stompClient: Client | null = null;
+
+export const connectWebSocket = (chatId, onMessageReceived) => {
+    if (!window.WebSocket) {
+        console.error("Este navegador não suporta WebSocket.");
+        return;
+    }
+
+    const socket = new SockJS("http://localhost:9090/ws-chat");
+
+    stompClient = new Client({
+        webSocketFactory: () => socket,
+        reconnectDelay: 5000,
+        onConnect: () => {
+            console.log("✅ WebSocket conectado");
+
+            stompClient.subscribe(`/topic/chat/${chatId}`, (message) => {
+                const body = JSON.parse(message.body);
+                console.log("📩 Nova mensagem recebida via WebSocket:", body);
+                onMessageReceived(body);
+            });
+        },
+        onStompError: (frame) => {
+            console.error("Erro STOMP:", frame);
+        },
+    });
+
+    stompClient.activate();
+};
+
+export const sendMessageSocket = (message) => {
+    if (stompClient && stompClient.connected) {
+        console.log("📤 Enviando mensagem via WebSocket:", message);
+        stompClient.publish({
+            destination: "/app/chat/send",
+            body: JSON.stringify(message),
+        });
+    } else {
+        console.error("❌ WebSocket não conectado ao enviar mensagem");
     }
 };

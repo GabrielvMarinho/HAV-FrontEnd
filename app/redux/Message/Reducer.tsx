@@ -9,10 +9,11 @@ const initialValue = {
 export const messageReducer = (store = initialValue, { type, payload }) => {
 
     if (type === CREATE_NEW_MESSAGE) {
+        console.log("Nova mensagem recebida via WebSocket:", payload);
         return {
             ...store,
             newMessage: payload,
-            messages: [...store.messages, payload]  // <- Adiciona a nova mensagem
+            messages: [...store.messages, payload]
         }
     } else if (type === GET_ALL_MESSAGE) {
         return { ...store, messages: payload }

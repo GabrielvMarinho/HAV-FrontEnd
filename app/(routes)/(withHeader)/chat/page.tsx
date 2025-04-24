@@ -23,11 +23,15 @@ export default function Chat() {
     const [querys, setQuerys] = useState("");
     const [currentChat, setCurrentChat] = useState(false);
     const [content, setContent] = useState("");
-    const { auth, chat, message } = useSelector(store => store);
+    // const { auth, chat, message } = useSelector(store => store);
     const dispatch = useDispatch();
     const token = localStorage.getItem("token");
     // const [messages, setMessages] = useState([]);
     const unreadCounts = useSelector((state) => state.message.unreadCounts);
+    const auth = useSelector(state => state.auth);
+    const chat = useSelector(state => state.chat);
+    const messages = useSelector(state => state.message.messages);
+
 
     useEffect(() => {
         if (token) {
@@ -65,7 +69,7 @@ export default function Chat() {
     useEffect(() => {
         if (currentChat?.id)
             dispatch(getAllMessage({ chatId: currentChat.id, token }))
-    }, [currentChat, message.newMessage])
+    }, [currentChat])
 
     useEffect(() => {
         dispatch(getUsersChat({ token }))
@@ -93,22 +97,21 @@ export default function Chat() {
 
     {/* Configuração do WebSocket */ }
 
-    // const stompClient = useRef(null);
-
     useEffect(() => {
         if (!currentChat?.id) return;
 
-        connectWebSocket((msg) => {
-            dispatch({ type: "CREATE_NEW_MESSAGE", payload: msg });
-        });
+        console.log("🔄 Tentando conectar ao WebSocket para o chat:", currentChat.id);
 
-        const subscription = subscribeToChat(currentChat.id, (msg) => {
+        connectWebSocket(currentChat.id, (msg) => {
+            console.log("🧠 Dispatch de mensagem recebida:", msg);
             dispatch({ type: "CREATE_NEW_MESSAGE", payload: msg });
         });
 
         return () => {
-            subscription?.unsubscribe();
-            if (stompClient?.connected) stompClient.deactivate();
+            if (stompClient?.connected) {
+                stompClient.deactivate();
+                console.log("🧹 WebSocket desconectado");
+            }
         };
     }, [currentChat?.id]);
 
@@ -120,7 +123,6 @@ export default function Chat() {
         };
 
         if (stompClient?.connected) {
-            console.log("chegou aqui");
             sendMessageSocket(message);
         } else {
             console.warn("STOMP não conectado. Enviando via fetch como fallback.");
@@ -347,12 +349,20 @@ export default function Chat() {
                                 marginTop: "6rem", overflowY: "scroll", paddingRight: "2.5rem", paddingLeft: "2.5rem",
 
                             }}>
-                                {
+                                {/* {
                                     message.messages.length > 0 && message.messages?.map((item) =>
                                         <MessageCard isSentMessage={item.user?.id === auth.reqUser?.id}
                                             content={item.content} currentTime={formatTime(item.createdAt)}
                                         />)
-                                }
+                                } */}
+                                {messages.length > 0 && messages.map((item) => (
+                                    <MessageCard
+                                        key={item.id} // importante para performance
+                                        isSentMessage={item.user?.id === auth.reqUser?.id}
+                                        content={item.content}
+                                        currentTime={formatTime(item.createdAt)}
+                                    />
+                                ))}
                             </div>
                         </div>
 
