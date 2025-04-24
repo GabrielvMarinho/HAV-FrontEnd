@@ -14,17 +14,6 @@ export default function Notification() {
     return (
         <>
             <Title tag={"h1"} text={"NOTIFICAÇÕES"} />
-            <div className="notification-container">                
-                <div className="notification-status">
-                    <span className="status-label">Status notificações</span>
-                    <ToggleButton 
-                        toggled={notificationStatus} 
-                        onChange={() => setNotificationStatus(!notificationStatus)} 
-                    />
-                </div>
-                
-               
-            </div>
             <Notificacao/>
         </>
     );

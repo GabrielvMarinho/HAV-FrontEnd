@@ -87,7 +87,7 @@ export default async function page({ searchParams }: {
             archived={false}
             context="admin"
             size="large"
-            titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
+            titles={["cpf", "nome", "email", "celular", "objetivo"]}
             data={customers}
             totalPages={totalPages}
           />

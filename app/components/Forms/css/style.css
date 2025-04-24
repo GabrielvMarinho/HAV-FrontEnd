@@ -184,9 +184,9 @@
 }
 .topContentModal p{
     font-size: var(--text-m);
-    font-weight: 600;
     color: var(--text-white);
 }
+
 .modalNewScheduleBig{
     display: flex;
     flex-direction: column;
