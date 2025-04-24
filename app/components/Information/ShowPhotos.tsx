@@ -299,7 +299,7 @@ export default function ShowPhotos<T>({
                         onClick={prevIndex}
                         disabled={currentIndex === 0}
                     >
-                        <ArrowBack width={23} height={23} color="var(--box-white)" />
+                        <ArrowBack width={20} height={20} color="var(--box-white)" />
                     </button>
                     <button
                         className="mirrored photoArrowPropertySpecific photoArrowRightProperty"
@@ -307,7 +307,7 @@ export default function ShowPhotos<T>({
                         onClick={nextIndex}
                         disabled={currentIndex >= preview.length - 1}
                     >
-                        <ArrowBack width={23} height={23} color="var(--box-white)" />
+                        <ArrowBack width={20} height={20} color="var(--box-white)" />
                     </button>
 
                     <img src={decodeDoubleBase64(preview[currentIndex])} alt="Preview" className="previewImgPropertySpecific" />

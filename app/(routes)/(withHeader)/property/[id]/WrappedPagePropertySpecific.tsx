@@ -89,7 +89,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
     }, [])
 
     if (!property) {
-        return <p>Carregando...</p>
+        return <p style={{marginBottom:"100vh"}}>Carregando...</p>
     }
     console.log(props.user)
     return (

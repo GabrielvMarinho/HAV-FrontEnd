@@ -11,7 +11,7 @@
     height:fit-content;
     padding-top: 70px;
     padding-bottom: 70px;
-
+    margin-top: 50px;
     min-height: 150px;
     display: flex;
     flex-direction: row;
