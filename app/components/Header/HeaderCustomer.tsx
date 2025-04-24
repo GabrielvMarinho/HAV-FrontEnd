@@ -54,7 +54,7 @@ export default function HeaderCustomer() {
                     <img
                     style={{width:"28px", height:"28px"}}
                     src="/Image/LogoClaraMobile.png"></img>
-                    <Language width={32} height={32} color="" />
+                    {/* <Language width={32} height={32} color="" /> */}
                     </div>
                         <div onClick={() =>{setMobileOpen(true)}}>
                             <Hamburger width={32} height={32} color=""></Hamburger>
@@ -159,7 +159,7 @@ export default function HeaderCustomer() {
                     
                 </div>
 
-                <Language width={30} height={30} color="" />
+                {/* <Language width={30} height={30} color="" /> */}
             </div>
 
 
