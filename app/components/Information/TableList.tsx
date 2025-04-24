@@ -15,12 +15,19 @@ import ArchiveOut from '../IconsTSX/archiveOut';
 import ArrowBack from '../IconsTSX/ArrowBack';
 import PageManager from '../Inputs/PageManager';
 import React from 'react';
+import getByParamsRealtors from '@/app/apiCalls/Realtor/getByParamsRealtors';
 
 
 export default function TableList(props: {totalPages :number; changeArchivedStatus :(ids: string[]) => Promise<void>; deleteFunction: (ids: string[]) => Promise<void>; archived :boolean; context :string; size :string, titles :string[], data :any[]}){
 
     
-    
+    // useEffect(() => {
+    //     const fetch  = async () => {
+    //         const response = await getByParamsRealtors(undefined, undefined, undefined, undefined, undefined, false, 0);
+    //         console.log(response);
+    //     }
+    //     fetch();
+    // }, []);
     
     const confirmDelete = async () => {
         const selectedIds = JSON.parse(localStorage.getItem('selectedManage') || "[]");
@@ -30,6 +37,8 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
             setIsDeleteModalOpen(false);
 
         }
+        window.location.reload();
+
     };
 
 
@@ -43,7 +52,6 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
     }
     const notArchiveRoute = function(){
         router.push(window.location.pathname.replace(/\/archived$/, ""));
-
     }
     //EDIT RELATED
     const editFunction = function(){
@@ -82,6 +90,8 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
             setIsArchiveModalOpen(false);
 
         }
+
+        window.location.reload();
     }
 
     //GRAPHS RELATED
@@ -165,7 +175,7 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
                             {Object.entries(obj).slice(1).map(([key, value]) => (
                                     <td key = {key}>
                                         <div>
-                                            {key === "price" ? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value}
+                                            {key === "price" ? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value==null?"----":value}
                                         </div>
                                     </td>
 
@@ -201,7 +211,7 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
                 
                 <Modal content={
                     <div className="containerModal">
-                        <h1 className="titleModal">DESEJA DESARQUIVAR? </h1>
+                        <h1 className="titleModal">DESEJA ARQUIVAR? </h1>
                         <p className="descModal"> Ao confirmar, os dados arquivados serão desarquivados.</p>
                     </div>
                 } id="archiveModal" isOpen={isArchiveModalOpen} onClose={() => setIsArchiveModalOpen(false)} onConfirm={changeArchivedStatus} />

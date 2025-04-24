@@ -88,9 +88,7 @@ export default function Chat() {
         if (userStorage) {
             try {
                 const user = JSON.parse(userStorage);
-                console.log("Usuário logado:", user);
             } catch (error) {
-                console.log("Erro ao fazer parse do user:", error);
             }
         }
     }, []);

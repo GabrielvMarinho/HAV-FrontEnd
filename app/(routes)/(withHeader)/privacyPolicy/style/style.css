@@ -16,7 +16,7 @@
   align-items: flex-start; /* Alinha o conteúdo ao topo */
   width: 62.063rem;
   height: 79.875rem;
-  padding-bottom: 60px; /* Garantir que o conteúdo não fique atrás do footer */
+  padding-bottom: 170px; /* Garantir que o conteúdo não fique atrás do footer */
 }
 
 .privacy-policy-container p {
@@ -32,13 +32,13 @@
 
 .privacy-policy-text {
   width: 57.938rem;
-  height: 68.75rem;
+  height: 73.75rem;
   background-color: var(--FundoCor, #F2EBE3);
   box-shadow: 0px 15px 40px 8px rgba(0, 0, 0, 0.10);
   padding: 3.125rem 2.5rem 0.3rem 2.5rem;
   border-radius: 15px;
   margin: 0 25px;
-  line-height: 28px
+  line-height: 28px;
 }
 
 .privacy-policy-container h1 {
@@ -58,4 +58,9 @@
 
 section {
   margin-bottom: 25px;
+}
+@media(width<992px){
+  .title{
+    gap: 10px;
+  }
 }

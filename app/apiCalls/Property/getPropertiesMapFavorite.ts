@@ -2,9 +2,8 @@ import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilte
 
 
 export default async function(
-  id: string
     ) {
-      const url = `http://localhost:9090/favorites/map/${id}`
+      const url = `http://localhost:9090/favorites/map`
 
       
     try{

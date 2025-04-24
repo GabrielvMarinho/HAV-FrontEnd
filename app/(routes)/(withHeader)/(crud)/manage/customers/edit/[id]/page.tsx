@@ -1,21 +1,16 @@
-"use client"
 import FormEditAdm from "@/app/components/Forms/FormEditAdm";
 import FormEditCustomer from "@/app/components/Forms/FormEditCustomer";
 import AuthGuard from "@/app/context/AuthGuard";
 
-import { useParams } from "next/navigation";
+import WrappedPageEditCustomer from "./wrappedPage";
 
-export default function PropertyPage() {
-  
-  const params = useParams();
-  
-  const id = params.id ?? 0;
+export default function PropagepertyPage() {
 
 
 
   return (
-    <AuthGuard requiredRole="ROLE_ADMIN"> 
-      <FormEditCustomer id={id}/>
+    <AuthGuard requiredRole="ROLE_EDITOR">
+      <WrappedPageEditCustomer/>
     </AuthGuard>
     
     );

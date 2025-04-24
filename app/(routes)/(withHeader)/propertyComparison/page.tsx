@@ -19,7 +19,6 @@ export default async function propertyComparison({ searchParams }: {
     if(propertyOne){
         try {
             const response = await searchPropertyByIdSpecific(parseInt(propertyOne));
-            console.log("Resposta completa da API:", response);
 
         } catch (error) {
             console.log("Erro ao buscar propriedade:", error);
@@ -43,7 +42,6 @@ export default async function propertyComparison({ searchParams }: {
                 <h2 className="textPropertyComparison"> Adicionar Imóvel </h2>
             </div>
         </div>
-        <Footer/>
         </>
     )
   }

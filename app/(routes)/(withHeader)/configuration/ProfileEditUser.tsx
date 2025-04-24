@@ -21,9 +21,12 @@ import ToggleButton from "@/app/components/Inputs/ToggleButton";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 import NonEditableInputText from "@/app/components/Inputs/NonEditableInputText";
 import { newCustomer } from "@/app/Validators/CustomerValidator";
+import UserConfigurationDtoForm from "@/app/Validators/UserConfigurationDtoForm";
+import editUserConfigurationInfo from "@/app/apiCalls/User/editUserConfigurationInfo";
+import ToggleTheme from "@/app/components/Theme/ToggleTheme";
+import Button from "@/app/components/Inputs/Button";
+import getUserConfigurationInfo from "@/app/apiCalls/User/getUserConfigurationInfo";
 
-export default function FormEditCustomer(props: { id: any }) {
-  const [customer, setCustomer] = useState<CustomerEditDto | null>(null);
 
 export default function ProfileEditUser(props: {role: string}) {
   const [user, setUser] = useState<UserConfigurationDto | null>(null);
@@ -65,12 +68,10 @@ export default function ProfileEditUser(props: {role: string}) {
   };
 
   function onSubmit(data: UserConfigurationDto) {
-    console.log(data)
     if (Object.keys(form.formState.errors).length > 0) {
       console.error("Erros no formulário:", form.formState.errors);
       return;
     }
-    console.log(data)
     setUserData(data)
     setIsModalOpen(true);
   };
@@ -79,7 +80,7 @@ export default function ProfileEditUser(props: {role: string}) {
   const handleConfirmEdit = async () => {
     try {
       await editUserConfigurationInfo(userData);
-      // router.back();
+
     } catch (err) {
       console.error("Erro ao editar cliente:", err);
     } finally {
@@ -180,7 +181,6 @@ export default function ProfileEditUser(props: {role: string}) {
         <InputText
           key={textFields.cellphone.id}
           name={textFields.cellphone.name}
-          defaultValue={customer?.cellphone ?? ""}
           register={form.register}
           error={form.formState.errors.celphone}
           size={textFields.cellphone.size}
@@ -310,7 +310,7 @@ export default function ProfileEditUser(props: {role: string}) {
 
               <div className="menuContent">              
                 <label>TEMA</label>
-                <ThemeToggle isToggled={toggleStates.tema} onChange={() => handleToggle("tema")}/>
+                <ToggleTheme isToggled={toggleStates.tema} onChange={() => handleToggle("tema")}/>
               </div>
               <MenuItem
                 label="IDIOMA"

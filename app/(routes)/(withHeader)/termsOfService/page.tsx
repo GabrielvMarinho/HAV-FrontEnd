@@ -72,7 +72,6 @@ export default function page() {
           </section>
         </div>
       </div>
-      <Footer/>
     </>
   );
 }

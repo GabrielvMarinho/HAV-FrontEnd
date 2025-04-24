@@ -11,6 +11,7 @@ import ModalScheduling from "@/app/components/Modal/ModalScheduling";
 import AuthGuard from "@/app/context/AuthGuard";
 import HeaderCustomer from "@/app/components/Header/HeaderCustomer";
 import HeaderRealtor from "@/app/components/Header/HeaderRealtor";
+import findUserOnCookie from "@/app/utils/findUserOnCookie";
 
 export default async function schedulingHistory({searchParams}: {searchParams:{
     page?: string;
@@ -18,13 +19,13 @@ export default async function schedulingHistory({searchParams}: {searchParams:{
     status?: string;
 
 }}){
-    const realtorId = "1"
-    const customerId = "3"
+    
 
     const params = await searchParams;
     const {page=0, data=null, status=null} = params
 
-
+    const usuario = await findUserOnCookie();
+    
     return(
         <> 
             <Title tag="h1" text="Histórico" /> 
@@ -53,8 +54,7 @@ export default async function schedulingHistory({searchParams}: {searchParams:{
             </div>
             </div>
             
-            <TableListHistory data={data} status={status} page={page} id={customerId} for={"customer"} titles={["Data/Hora", "Corretor", "Finalidade", "tipo imovel", "status" ]} />
-            <Footer/>
+            <TableListHistory data={data} status={status} page={page}  for={usuario.role == "ROLE_REALTOR" ? "realtor" : "user"} titles={["Data/Hora", "Corretor", "Finalidade", "tipo imovel", "status" ]} />
         </>
     )
 }

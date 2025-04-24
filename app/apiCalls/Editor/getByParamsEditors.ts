@@ -1,3 +1,4 @@
+import findTokenOnCookie from "@/app/utils/findTokenOnCookie";
 
 export default async function(
 
@@ -13,6 +14,7 @@ export default async function(
     totalPages: number;
 
   }>{
+    const token = await findTokenOnCookie();
 
     const url = "http://localhost:9090/editor/filter";
     try{
@@ -21,6 +23,7 @@ export default async function(
       credentials:"include",
       headers: {
         "Content-Type": "application/json", // Garante que está enviando JSON
+        "Cookie": `token=${token}`
       },
       body:JSON.stringify({
         "cpf":cpf===""?null:cpf, 

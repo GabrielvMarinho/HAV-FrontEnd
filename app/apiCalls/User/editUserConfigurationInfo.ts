@@ -1,3 +1,4 @@
+import findTokenOnCookie from "@/app/utils/findTokenOnCookie";
 import { UserConfigurationDtoForm } from "@/app/Validators/UserConfigurationDtoForm";
 
 export default async function editUserConfigurationInfo(form: UserConfigurationDtoForm) {
@@ -17,6 +18,7 @@ export default async function editUserConfigurationInfo(form: UserConfigurationD
             neighborhood: form.neighborhood
         }
     }))
+    
     const response = await fetch(`http://localhost:9090/users/configuration`, {
         method: "PUT",
         headers: {

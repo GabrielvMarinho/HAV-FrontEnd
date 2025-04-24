@@ -1,5 +1,5 @@
-export async function favoriteProperty(idUser: number, idProperty: number): Promise<Response> {
-    const url = `http://localhost:9090/favorites/favoritar/${idUser}/${idProperty}`;
+export async function favoriteProperty(idProperty: number): Promise<Response> {
+    const url = `http://localhost:9090/favorites/favoritar/${idProperty}`;
     try {
         const response = await fetch(url, {
             method: "POST", 
@@ -8,7 +8,6 @@ export async function favoriteProperty(idUser: number, idProperty: number): Prom
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                userId: idUser,
                 propertyId: idProperty
             })
         });

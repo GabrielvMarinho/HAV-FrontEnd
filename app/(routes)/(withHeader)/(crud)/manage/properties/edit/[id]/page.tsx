@@ -1,5 +1,4 @@
 
-
 import searchPropertyById from "@/app/apiCalls/Property/searchPropertyById";
 import FormEditProperty from "@/app/components/Forms/FormEditProperty";
 import AuthGuard from "@/app/context/AuthGuard";

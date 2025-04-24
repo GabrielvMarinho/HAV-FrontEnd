@@ -9,10 +9,7 @@ export const editEditorOrAdm = z.object({
         .regex(/^\d{10}$/, { message: "* 10 dígitos" }),
     cellphone: z.string().min(1, { message: "* Campo obrigatório" })
         .regex(/^\d{11}$/, { message: "* 11 dígitos" }),
-    cpf: z.string().min(11, { message: "* CPF deve ter 11 dígitos" })
-        .max(11, { message: "* CPF deve ter 11 dígitos" })
-        .regex(/^\d{11}$/, { message: "* CPF deve conter apenas números" }),
-
+    
     cep: z.string().min(1, { message: "* Campo obrigatório" })
         .regex(/^\d{8}$/, { message: "* 8 dígitos numéricos" }),
     street: z.string().min(1, { message: "* Campo obrigatório" }),

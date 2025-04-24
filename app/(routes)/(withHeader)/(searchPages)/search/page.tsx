@@ -36,7 +36,6 @@ export default async function({searchParams} :{searchParams: {
     const {properties, totalPages} = await getByParamsProperties(propertyCode, propertyType, propertyStatus, 
         minPrice, maxPrice, false, page, bedRoom, bathRoom, garageSpace, suite, purpose)
 
-    console.log(properties.length)
     return (
         <>
         <SearchResult typeSearch="locacao"/>

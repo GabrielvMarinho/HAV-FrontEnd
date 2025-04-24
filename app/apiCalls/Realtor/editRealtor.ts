@@ -9,7 +9,6 @@ export default async function editRealtor(id: any, formData: { [key: string]: Fo
 
     form.append("realtor", new Blob([JSON.stringify({
       name: formData?.name,
-      cpf: formData?.cpf,
       email: formData?.email,
       cellphone: formData?.cellphone,
       phoneNumber: formData?.phoneNumber,

@@ -1,4 +1,3 @@
-"use client"
 import searchPropertyById from "@/app/apiCalls/Property/searchPropertyById";
 import FormEditAdm from "@/app/components/Forms/FormEditAdm";
 import FormEditCustomer from "@/app/components/Forms/FormEditCustomer";
@@ -7,19 +6,11 @@ import AuthGuard from "@/app/context/AuthGuard";
 
 import { useParams } from "next/navigation";
 import { useState } from "react";
-
+import WrappedPageEditEditor from "./wrappedPage";
 export default function PropertyPage() {
-  
-  const params = useParams();
-  
-  const id = params.id ?? 0;
-  
-    
 
   return (
-    <AuthGuard requiredRole="ROLE_ADMIN"> 
-      <FormEditEditor id={id} />
-    </AuthGuard>
+    <WrappedPageEditEditor/>
     );
 
 }

@@ -64,7 +64,6 @@ export default async function editCustomer(id: number, formData: { [key: string]
   // Adiciona o JSON do customer
   form.append("customer", new Blob([JSON.stringify({
     name: formData.name,
-    cpf: formData.cpf,
     doc: formData.doc,
     phoneNumber: formData.phoneNumber,
     cellphone: formData.cellphone,
@@ -102,14 +101,14 @@ export default async function editCustomer(id: number, formData: { [key: string]
     form.append("newImage", imageBlob, file.name);
   }
 
-  console.log("Dados enviados:");
   for (let pair of form.entries()) {
     console.log(pair[0], pair[1]);
   }
 
   const response = await fetch(url, {
     method: "PUT",
-    body: form
+    body: form,
+    credentials: "include"
   });
 
   if (!response.ok) {

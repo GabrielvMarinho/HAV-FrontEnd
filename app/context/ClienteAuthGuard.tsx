@@ -1,6 +1,6 @@
 'use client';
 // app/components/client-auth-guard.tsx
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
 
@@ -16,28 +16,39 @@ export default function ClientAuthGuard({
   requiredRole?: string;
 }) {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    
-    if (!initialToken) {
-      router.push('/login');
-      return;
-    }
-    try {
-      const decoded = jwtDecode(initialToken);
-      const userRole = decoded.role;
-      console.log(userRole)
-      console.log(requiredRole)
-
-      if (requiredRole && 
-          roleHierarchy.indexOf(userRole) < roleHierarchy.indexOf(requiredRole)) {
-        router.push('/unauthorized');
+    const checkAuth = async () => {
+      if (!initialToken) {
+        router.push('/login');
+        return;
       }
-    } catch (error) {
-      console.log(error)
-      router.push('/login');
-    }
+      try {
+        const decoded = jwtDecode(initialToken);
+        const userRole = decoded.role;
+
+        if (requiredRole && 
+            roleHierarchy.indexOf(userRole) < roleHierarchy.indexOf(requiredRole)) {
+          router.push('/unauthorized');
+          return;
+        }
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+        router.push('/login');
+      }
+    };
+
+    checkAuth();
   }, [requiredRole, router, initialToken]);
+
+  if (isLoading) {
+    return (
+      <>
+      </>
+    );
+  }
 
   return <>{children}</>;
 }

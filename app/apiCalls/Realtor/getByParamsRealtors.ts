@@ -1,4 +1,6 @@
 import page from "@/app/(routes)/(withHeader)/(crud)/manage/admins/page";
+import findTokenOnCookie from "@/app/utils/findTokenOnCookie";
+import findUserOnCookie from "@/app/utils/findUserOnCookie";
 
 export default async function(
 
@@ -14,14 +16,19 @@ export default async function(
     totalPages: number;
 
   }>{
+    const token = await findTokenOnCookie();
+
     console.log(page)
-    const url = `/realtor/filter?page=${page}`;
+    const url = `http://localhost:9090/realtor/filter?page=${page}`;
    
     try{
     const response = await fetch(url,{
       method:"POST",
       headers: {
         "Content-Type": "application/json", // Garante que está enviando JSON
+        'Cookie': `token=${token}`, // manually attach cookie here
+
+
       },
       body:JSON.stringify({
         "cpf":cpf, 

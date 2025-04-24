@@ -4,26 +4,29 @@ import SelectedStar from "../IconsTSX/SelectedStar";
 import NotSelectedStar from "../IconsTSX/NotSelectedStar";
 import { favoriteProperty } from "@/app/apiCalls/Property/FavoriteProperty";
 import { unfavoriteProperty } from "@/app/apiCalls/Property/UnFavoriteProperty";
-import { tr } from "react-day-picker/locale";
 
 interface StarFavoriteProps {
-    idUser: number;
-    idProperty: number;
+    idProperty: any;
     selected: boolean; // Esse valor pode não estar atualizado corretamente ao carregar a página
     width: number;
     height: number;
     color: string;
 }
 
-export default function StarFavorite({ idUser, idProperty, selected, width, height, color }: StarFavoriteProps) {
+export default function StarFavorite({ idProperty, selected, width, height, color }: StarFavoriteProps) {
     const [isFavorite, setIsFavorite] = useState(selected);
 
     //verificar se já está favoritada pra ficar com estilização certa
     useEffect(() => {
+        
         const checkFavoriteStatus = async () => {
             try{
-                const response = await fetch(`http://localhost:9090/favorites/${idUser}`);
+                const response = await fetch(`http://localhost:9090/favorites/isFavorited/${idProperty}`,{
+                method: "GET",    
+                credentials: "include"
+                })
                 const data = await response.json();
+                setIsFavorite(data)
 
                 const isPropertyFavorited = data.content.some((property: any) => property.id === idProperty);
                 setIsFavorite(isPropertyFavorited);
@@ -33,23 +36,22 @@ export default function StarFavorite({ idUser, idProperty, selected, width, heig
         };
 
         checkFavoriteStatus();
-    }, [idUser, idProperty]);
+    }, [idProperty]);
 
 
     const toggleStar = async () => {
         try {
             if (isFavorite) {
                 
-                await unfavoriteProperty(idUser, idProperty);
+                await unfavoriteProperty(idProperty);
                 console.log("Propriedade removida dos favoritos.");
                 setIsFavorite(false); 
                
             } else {
-                await favoriteProperty(idUser, idProperty);
+                await favoriteProperty(idProperty);
                 console.log("Propriedade favoritada.");
                 setIsFavorite(true); 
-            }
-            setIsFavorite(!isFavorite);
+            };
         } catch (error) {
             console.error("Erro ao favoritar/desfavoritar:", error);
         }
@@ -57,10 +59,10 @@ export default function StarFavorite({ idUser, idProperty, selected, width, heig
 
     return (
         <div onClick={toggleStar} style={{ cursor: "pointer" }}>
-            {!isFavorite ? (
-                <SelectedStar width={width} height={height} color={color} />
-            ) : (
+            {isFavorite ? (
                 <NotSelectedStar width={width} height={height} color={color} />
+            ) : (
+                <SelectedStar width={width} height={height} color={color} />
             )}
         </div>
     );

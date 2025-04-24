@@ -22,19 +22,24 @@ const Notification = () => {
     const params = useParams();
     const idUser = params.id;
     const [messages, setMessages] = useState<MessageDTO[]>([])
-
     useEffect(() => {
-        if (!idUser) return;
 
-        fetch(`http://localhost:9090/api/getNotifications/${idUser}`)
-            .then(res => res.json())
-            .then((data: MessageDTO[]) => {
-                {/*Filtrando para aparecer só as mensagens não lidas*/ }
+        const fetchNotifications = async () => {
+            try {
+                const response = await fetch(`http://localhost:9090/api/getNotifications`, {
+                    method: "GET",
+                    credentials: "include",
+
+                })
+                const data: MessageDTO[] = await response.json();
                 const mensagensNaoLidas = data.filter(m => m.read === false);
                 setMessages(Array.isArray(mensagensNaoLidas) ? mensagensNaoLidas : [])
-            }).catch(e => { 
-                console.log("Erro ao buscar notificações", e);
-            })
+
+            } catch (e) {
+                console.log("ERRO AO BUSCAR NOTIFICAÇÕES:", e);
+            }
+        }
+        fetchNotifications()
 
         const stompClient = new Client({
             webSocketFactory: () => new SockJS('http://localhost:9090/ws'),
@@ -82,50 +87,52 @@ const Notification = () => {
                 <p>Por enquanto não há mensagens</p>
             ) : (
                 <ul className='boxNotification'>
-                    <HorizontalLine size={930} color='#0F0F0F ' />
+
                     {messages.map((message, index) => (
-                        <li key={index} style={{ display: 'flex', flexDirection: 'column' }}>
+                        <li key={index} className='cu'>
+                            <HorizontalLine size={930} color='#0F0F0F' />
                             <section className='containerNotification'>
                                 <div className='groupInfos'>
 
-                                    
                                     <div className='bola'></div>
                                     <div className='containerMesagemTitulos'>
-                                        
+
                                         <div className='conatinerTitulos'>
                                             <p className='identificator'>{message.title}</p>
                                             <p>{message.content}</p>
                                         </div>
-                                        
+
                                         <div className='conatinerCorpoMensagem'>
-                                            <label className='newMessageLabel'>titulo</label>
+
 
                                             <div className='iconMensagem' onClick={async () => {
-                                                    const sucesso = await readNotification({ id: message.id });
-                                                    if (sucesso) {
-                                                        setMessages(prevMessages =>
-                                                            prevMessages.filter(msg => msg.id != message.id)
-                                                        );
-                                                    }
-                                                }}>
-                                            
-                                            <Trash width={20} height={20} color={'var(--text-red-pink)'}/>
+                                                const sucesso = await readNotification({ id: message.id });
+                                                if (sucesso) {
+                                                    setMessages(prevMessages =>
+                                                        prevMessages.filter(msg => msg.id != message.id)
+                                                    );
+                                                }
+                                            }}>
+
+                                                <Trash width={30} height={30} color={'var(--text-red-pink)'} />
                                             </div>
 
                                             <span style={{ fontSize: '0.85rem', color: '#666' }}>
-                                            {message.timestamp &&
-                                                new Date(message.timestamp).toLocaleString('pt-BR', {
-                                                    day: '2-digit',
-                                                    month: '2-digit',
-                                                    year: 'numeric',
-                                                    hour: '2-digit',
-                                                    minute: '2-digit'
-                                                })}
-                                        </span>
+                                                {message.timestamp &&
+                                                    new Date(message.timestamp).toLocaleString('pt-BR', {
+                                                        day: '2-digit',
+                                                        month: '2-digit',
+                                                        year: 'numeric',
+                                                        hour: '2-digit',
+                                                        minute: '2-digit'
+                                                    })}
+                                            </span>
                                         </div>
+
+
                                     </div>
                                 </div>
-                               
+
                             </section>
                             <HorizontalLine size={930} color='#0F0F0F ' />
                         </li>
