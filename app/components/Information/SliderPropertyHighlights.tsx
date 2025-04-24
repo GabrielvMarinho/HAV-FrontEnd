@@ -12,6 +12,8 @@ import Bed from "../IconsTSX/Bed";
 import Garage from "../IconsTSX/Garage";
 import Rule from "../IconsTSX/Rule";
 import Sofa from "../IconsTSX/Sofa";
+import decodeDoubleBase64 from "@/app/utils/decodeDoubleBase64";
+import globalDatabaseNameConverter from "@/app/globalDatabaseNameConverter";
 
 export default function SliderContent(props: { items: PropertySpecificCard[] }) {
 
@@ -30,7 +32,7 @@ export default function SliderContent(props: { items: PropertySpecificCard[] }) 
     console.log(id)
     router.push(`/property/${id}`)
   }
-
+  console.log("items",               decodeDoubleBase64(props.items[page]?.mainImage))
   return (
     <>
       <div className="sliderContent">
@@ -40,11 +42,17 @@ export default function SliderContent(props: { items: PropertySpecificCard[] }) 
         </button>
         <div className="sliderHidden sliderItemHiddenLeft">
           <div className="highlightProperty">
-            <img src={`data:image/png;base64,${props.items[(page - 1 + props.items.length) % props.items.length]?.image}`} />
+            {props.items[(page - 1 + props.items.length) % props.items.length]?.mainImage ?
+            <img src={`${decodeDoubleBase64(props.items[(page - 1 + props.items.length) % props.items.length]?.mainImage)}`} />
+
+            :
+            <img src="/Image/fotoSemPropriedade.png"/>
+
+            }
             <div className="highlightPropertyBox">
               <div>
-                <p className="cityProperty">{props.items[(page - 1 + props.items.length) % props.items.length]?.city}</p>
-                <p className="neighborhoodProperty">{props.items[(page - 1 + props.items.length) % props.items.length]?.neighborhood}</p>
+                <p className="cityProperty">{globalDatabaseNameConverter[props.items[(page - 1 + props.items.length) % props.items.length]?.city]}</p>
+                <p className="neighborhoodProperty">{globalDatabaseNameConverter[props.items[(page - 1 + props.items.length) % props.items.length]?.neighborhood]}</p>
               </div>
               <div style={{ display: "flex", gap: "15px" }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
@@ -89,11 +97,17 @@ export default function SliderContent(props: { items: PropertySpecificCard[] }) 
         <div className="sliderContentMain">
           <div className="slider-item">
             <div className="highlightProperty">
-              <img src={`data:image/png;base64,${props.items[page]?.image}`} />
+            {props.items[page]?.mainImage ?
+              <img src={`${decodeDoubleBase64(props.items[page]?.mainImage)}`} />
+
+            :
+            <img src="/Image/fotoSemPropriedade.png"/>
+
+            }
               <div className="highlightPropertyBox">
                 <div>
-                  <p className="cityProperty">{props.items[page]?.city}</p>
-                  <p className="neighborhoodProperty">{props.items[page]?.neighborhood}</p>
+                  <p className="cityProperty">{globalDatabaseNameConverter[props.items[page]?.city]}</p>
+                  <p className="neighborhoodProperty">{globalDatabaseNameConverter[props.items[page]?.neighborhood]}</p>
                 </div>
                 <div style={{ display: "flex", gap: "15px" }}>
                   <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
@@ -139,11 +153,17 @@ export default function SliderContent(props: { items: PropertySpecificCard[] }) 
 
         <div className="sliderHidden sliderItemHiddenRight">
           <div className="highlightProperty">
-            <img src={`data:image/png;base64,${props.items[(page + 1 + props.items.length) % props.items.length]?.image}`} />
+          {props.items[(page + 1 + props.items.length) % props.items.length]?.mainImage ?
+            <img src={`${decodeDoubleBase64(props.items[(page + 1 + props.items.length) % props.items.length]?.mainImage)}`} />
+
+            :
+            <img src="/Image/fotoSemPropriedade.png"/>
+
+            }
             <div className="highlightPropertyBox">
               <div>
-                <p className="cityProperty">{props.items[(page + 1 + props.items.length) % props.items.length]?.city}</p>
-                <p className="neighborhoodProperty">{props.items[(page + 1 + props.items.length) % props.items.length]?.neighborhood}</p>
+                <p className="cityProperty">{globalDatabaseNameConverter[props.items[(page + 1 + props.items.length) % props.items.length]?.city]}</p>
+                <p className="neighborhoodProperty">{globalDatabaseNameConverter[props.items[(page + 1 + props.items.length) % props.items.length]?.neighborhood]}</p>
               </div>
               <div style={{ display: "flex", gap: "15px" }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>

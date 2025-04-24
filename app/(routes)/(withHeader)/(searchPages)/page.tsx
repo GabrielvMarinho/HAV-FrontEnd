@@ -22,6 +22,7 @@ export default async function Home() {
 
   const mostRecentProperties = await GetMostRecentProperties()
   const properties = await GetRandomPropertiesHighlightRandom()
+  console.log("properties", properties)
   return (
     <>
       <img className={"bannerHome"} src="/Image/BannerHome.png" />
