@@ -23,7 +23,8 @@ export default function FormChangePassword() {
     });
 
     
-    
+    const [password, setPassword] = useState<string>("");
+
       const handleChangePassword = async (data: ChangePassword) => {
         if (!token) {
             setErrorMessage("Token inválido ou ausente.");
@@ -39,9 +40,20 @@ export default function FormChangePassword() {
             window.location.href = "/login"
         }
     };
-    console.log(password)
+    const formValues = form.watch()
+
+    useEffect(() => {
+        console.log("password", formValues.password)
+        if (formValues.password) {
+            setPassword(formValues.password);
+        } else {
+            setPassword("");
+        }
+    }, [formValues]);
     return (
+        
         <form className="loginForm" onSubmit={form.handleSubmit(handleChangePassword)}>
+
             {errorMessage && (
                 <div className="errorContainerLogin">
                     <h3 className="ErrorLogin">{errorMessage}</h3>
@@ -51,18 +63,23 @@ export default function FormChangePassword() {
             
 
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
+                <div style={{position:"relative", display:"flex"}}>
+                    <InputTextLogin
+                        name="password"
+                        register={form.register}
+                        error={form.formState.errors.password}
+                        size="login"
+                        password={true}
+                        id="password"
+                        text="Nova senha"
+                        placeholder="Digite sua nova senha"
+                        icon={<Eye width="18" height="18" color="var(--text-light-red)" />}
+                    />
+                    <div style={{position:"absolute", right:0,}}>
+                            <PasswordValidator password={password}></PasswordValidator>
+                    </div>
+                </div>
 
-                <InputTextLogin
-                    name="password"
-                    register={form.register}
-                    error={form.formState.errors.password}
-                    size="login"
-                    password={true}
-                    id="password"
-                    text="Nova senha"
-                    placeholder="Digite sua nova senha"
-                    icon={<Eye width="18" height="18" color="var(--text-light-red)" />}
-                />
 
                 <InputTextLogin
                     name="confirmPassword"

@@ -6,7 +6,7 @@ interface PasswordValidatorProps {
 
 const PasswordValidator: React.FC<PasswordValidatorProps> = ({ password }) => {
   const [show, setShow] = useState(false);
-
+  
   const checks = [
     {
       label: 'Mínimo 7 caracteres',
@@ -28,20 +28,18 @@ const PasswordValidator: React.FC<PasswordValidatorProps> = ({ password }) => {
 
   return (
     <div 
-      className="relative inline-block"
-      onMouseEnter={() => setShow(true)}
-      onMouseLeave={() => setShow(false)}
+      style={{position:"relative", cursor:"pointer"}}
+      onMouseDown={() => setShow(!show)}
     >
-      <span className="text-blue-600 cursor-pointer underline">Ver regras de senha</span>
-
+      <img src='/Image/simbolo-de-informacao.png' width={15} height={15}/>
       {show && (
-        <div className="absolute z-10 w-64 mt-2 p-4 bg-white rounded-2xl shadow-lg border border-gray-200">
-          <h4 className="text-sm font-semibold mb-2">Sua senha precisa de:</h4>
-          <ul className="space-y-1 text-sm">
+        <div  style={{position:"absolute", top:"-0px", left:"30px", backgroundColor:"var(--box-red-pink)", width:"fit-content", padding:"10px", borderRadius:"10px",}}        >
+          <h4 style={{fontSize:"var(--text-s)", color:"var(--text-white)", marginBottom:"5px"}}>Sua senha precisa de:</h4>
+          <ul className="space-y-1 text-sm" style={{width:"fit-content"}}>
             {checks.map((check, idx) => (
-              <li key={idx} className={`flex items-center gap-2 ${check.valid ? 'text-green-600' : 'text-red-500'}`}>
-                <span>{check.valid ? '✅' : '❌'}</span>
-                <span>{check.label}</span>
+              <li style={{all:"unset", display:"flex"}} key={idx} className={`flex items-center gap-2 ${check.valid ? 'text-green-600' : 'text-red-500'}`}>
+                <span >{check.valid ? '✅' : '❌'}</span>
+                <span style={{ color:"var(--text-white)", fontSize:"var(--text-s)", width:"fit-content", textWrap:"nowrap"}}>{check.label}</span>
               </li>
             ))}
           </ul>
