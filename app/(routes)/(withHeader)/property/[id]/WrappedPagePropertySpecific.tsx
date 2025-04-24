@@ -155,6 +155,9 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", justifyContent:"center", gap: "15px" }}>
                         <PropertyPageDatasAdm
+                        usuario={
+                            1
+                        }
                             obj={{
                                 propertyId: propertyId,
                                 propertyType: property.propertyType,

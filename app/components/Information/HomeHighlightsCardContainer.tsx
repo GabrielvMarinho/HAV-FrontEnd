@@ -9,6 +9,7 @@ import { NavBarPath } from "../globalFormsConfig/navBarPaths";
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import { useEffect, useState } from "react";
 
+
 const fetchFunctions = {
   LOCAÇÃO: GetHighlightedHomeLease,
   VENDA: GetHiglightedHomeSell,
