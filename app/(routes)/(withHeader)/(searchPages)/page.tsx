@@ -22,6 +22,7 @@ export default async function Home() {
 
   const mostRecentProperties = await GetMostRecentProperties()
   const properties = await GetRandomPropertiesHighlightRandom()
+  console.log("properties", properties)
   return (
     <>
       <img className={"bannerHome"} src="/Image/BannerHome.png" />
@@ -40,13 +41,17 @@ export default async function Home() {
       {properties.length > 0 ?
         <>
           <section className="homeHiglightProperties">
-            <h3>IMÓVEIS EM</h3>
-            <h2>DESTAQUE</h2>
+            <div style={{margin:"20px"}}>
+              <h3>IMÓVEIS EM</h3>
+              <h2>DESTAQUE</h2>
+            </div>
             <SliderPropertyHighlights items={properties} />
           </section>
           <section className="homeHiglightPropertiesMobile">
-            <h3>IMÓVEIS EM</h3>
-            <h2>DESTAQUE</h2>
+            <div style={{margin:"20px"}}>
+              <h3>IMÓVEIS EM</h3>
+              <h2>DESTAQUE</h2>
+            </div>
             <CardContainer cards={properties} totalPages={0}/>
           </section>
 
@@ -59,7 +64,7 @@ export default async function Home() {
       <MainHomeInfo />
 
       <section className="highlightsCards">
-        <Title tag="h1" text="Imóveis em destaques" />
+        <Title tag="h1" text="Imóveis em Promoção" />
         <HomeHighlightsCardContainer />
       </section>
 

@@ -88,6 +88,10 @@ export default async function(
           id:property.id,
           neighborhood:property.address.neighborhood,
           city:property.address.city,
+          street:property.address.street,
+          state:property.address.state,
+          propertyNumber:property.address.propertyNumber,
+
           bedRoom:property.propertyFeatures.bedRoom,
           bathRoom:property.propertyFeatures.bathRoom,
           livingRoom:property.propertyFeatures.livingRoom,

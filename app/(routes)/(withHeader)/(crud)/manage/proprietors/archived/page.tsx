@@ -49,7 +49,7 @@ export default async function page({searchParams}: {searchParams: {
       <>
         <AuthGuard requiredRole="ROLE_EDITOR">
             <Title tag="h1" text="Proprietários Arquivados" />
-            <SearchBar placeholder="Busca:" />
+            {/* <SearchBar placeholder="Busca:" /> */}
             <div className="containerFilterListAction">
               <Filter
                 size="medium"

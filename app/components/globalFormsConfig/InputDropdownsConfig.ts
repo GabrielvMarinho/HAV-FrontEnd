@@ -326,7 +326,6 @@ export const dropdownFields = {
         id: "visualization",
         options: [
             ["card", "Card"],
-            ["list", "Lista"],
             ["map", "Mapa"]
         ]
     },

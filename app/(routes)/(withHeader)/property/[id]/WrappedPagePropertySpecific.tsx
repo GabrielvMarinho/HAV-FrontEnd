@@ -173,7 +173,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                             />
                             :
                             <img
-                                style={{ width: "33vw", height: "28vw" }}
+                                style={{ width: "33vw", height: "28vw", marginBottom: "3.5vw" }}
                                 src="/Image/fotoSemPropriedade.png"
                             ></img>
                         }
@@ -221,6 +221,9 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                     </div>
                     <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: "15px" }}>
                         <PropertyPageDatasAdm
+                            usuario={
+                                1
+                            }
                             obj={{
                                 propertyId: propertyId,
                                 propertyType: property.propertyType,

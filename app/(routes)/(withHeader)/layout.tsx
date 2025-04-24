@@ -6,6 +6,8 @@ import { jwtDecode } from "jwt-decode"
 import { cookies } from "next/headers"
 import ThemeToggle from "../../components/Theme/ToggleTheme"
 import InitTheme from "../../components/Theme/InitTheme"
+
+import ChatBot from "@/app/components/Chatbot/ChatBot"
 import Footer from "@/app/components/Footer/Footer"
 import { ReduxProvider } from "@/app/redux/providers"
 

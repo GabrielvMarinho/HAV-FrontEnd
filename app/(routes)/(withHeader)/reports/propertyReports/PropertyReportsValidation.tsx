@@ -9,11 +9,57 @@ import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 import { useEffect, useState } from "react";
 import VerticalBarChart from "@/app/components/BarChart/VerticalBarChart";
 import AuthGuard from "@/app/context/AuthGuard";
+import getAllRegistredNumber from "@/app/apiCalls/Property/getAllRegistredNumber";
+import getPercentageForSale from "@/app/apiCalls/Property/getPercentageForSale";
+import getPercentageRent from "@/app/apiCalls/Property/getRentPercentage";
+import getPercentageArchived from "@/app/apiCalls/Property/getPercentageArchived";
+import getTotalArchivedProperties from "@/app/apiCalls/Property/getTotalArchivedProperties";
+import getTotalForSaleProperties from "@/app/apiCalls/Property/getTotalForSaleProperties";
+import getTotalRentProperties from "@/app/apiCalls/Property/getTotalRentProperties";
 
 export default function PropertyReportsValidation() {
   const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN'];
   const [novosUsuariosData] = useState([25, 50, 30, 60, 45, 75]);
   const [visitasData] = useState([95000, 10000, 50000, 17000, 16000, 10000]);
+  const [quantityProperty, setQuantityProperty] = useState(0)
+  const [percentageSale, setPercentageSale] = useState(0);
+  const [percentageRent, setPercentageRent] = useState(0);
+  const [percentageArchived, setPercentageArchived] = useState(0);
+  const [totalRent, setTotalRent] = useState(0);
+  const [totalSale, setTotalSale] = useState(0);
+  const [totalArchived, setTotalArchived] = useState(0);
+  
+  useEffect(() =>{
+    async function fetchData() {
+        try{
+          const quantity = await getAllRegistredNumber();
+          setQuantityProperty(quantity);
+          
+          const percentageForSale = await getPercentageForSale();
+          setPercentageSale(percentageForSale)
+          
+          const percentageForRent = await getPercentageRent();
+          setPercentageRent(percentageForRent);
+
+          const percentageArchived = await getPercentageArchived();
+          setPercentageArchived(percentageArchived)
+
+          const totalForSale = await getTotalForSaleProperties();
+          setTotalSale(totalForSale);
+
+          const totalForRent = await getTotalRentProperties();
+          setTotalRent(totalForRent);
+
+          const totalForArchived = await getTotalArchivedProperties()
+          setTotalArchived(totalForArchived);
+
+        }catch(e){
+          console.log(e);
+        }
+        
+    }
+    fetchData()
+  }, [])
 
   const [userStats] = useState({
     proprietarios: 2,
@@ -21,21 +67,17 @@ export default function PropertyReportsValidation() {
     bloqueados: 1
   });
 
-  const totalUsers = userStats.proprietarios + userStats.usuariosComuns + userStats.bloqueados;
-  const percentageProprietors = Math.round((userStats.proprietarios / totalUsers) * 100);
-  const percentageCustomers = Math.round((userStats.usuariosComuns / totalUsers) * 100);
-  const percentageBlocked = Math.round((userStats.bloqueados / totalUsers) * 100);
 
   const horizontalLabels = [
-    `${percentageProprietors}% PROPRIETÁRIOS`,
-    `${percentageCustomers}% USUÁRIOS COMUNS`,
-    `${percentageBlocked}% BLOQUEADOS`
+    `${percentageSale}% VENDA`,
+    `${percentageRent}% LOCAÇÃO`,
+    `${percentageArchived}% ARQUIVADOS`
   ];
 
   const horizontalData = [
-    userStats.proprietarios,
-    userStats.usuariosComuns,
-    userStats.bloqueados
+    totalSale,
+    totalRent,
+    totalArchived  
   ];
 
   const barColors = ["#B23F52"];
@@ -57,11 +99,11 @@ export default function PropertyReportsValidation() {
       {/* Seção de Usuários (gráfico horizontal) */}
       <section className="users-section">
         <div className="reports-graphTitle">
-          <p>USUÁRIOS</p>
+          <p>IMÓVEIS</p>
         </div>
         <div className="users-data-row">
           <div className="users-data-box">
-            <h3 className="users-big-number">6</h3>
+            <p className="users-big-number">{quantityProperty}</p>
             <p className="users-small-text">Desde 2025</p>
           </div>
           <div className="users-graph-container">

@@ -140,7 +140,7 @@ body:has(.overlay) {
 }
 
 .informationsModalScheduling{
-    width: 95%;
+    width: 88%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

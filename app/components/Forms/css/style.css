@@ -319,6 +319,7 @@
     border-radius: 1.864px;
     /*background-color: black;*/
     position: relative;
+    border: 1px solid var(--box-white);
 }
 .imgProperty{
     margin-bottom: 100px;

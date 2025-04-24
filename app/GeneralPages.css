@@ -16,14 +16,13 @@
 }
 
 .homeMainSection{
-    height: 100vh;
+    height: 90vh;
 }
 .homeHiglightPropertiesMobile{
     display: none;
 }
 .homeHiglightProperties{
-    height: 100vh;
-    margin-top: 150px;
+    height: fit-content;
 }
 .homeHiglightProperties h2, .homeHiglightPropertiesMobile h2{
     font-size: var(--text-xl);
@@ -35,6 +34,7 @@
     font-weight: 100;
 }
 .sliderContent{
+    margin-bottom: 150px;
     display: flex;
     gap: 10px;
 }
@@ -50,8 +50,7 @@
 .sliderItemHiddenRight{
     position: absolute;
     right: 0;
-
-    margin-right: -50%;
+    margin-right: clamp(-700px, -60vw, -1000px);
 }
   
 .sliderHidden{
@@ -65,6 +64,7 @@
     flex-direction: column;
     gap:20px;
     width: 37vw;
+    max-width: 500px;
     background-color: var(--box-red-pink);
 }
 
@@ -75,7 +75,6 @@
 }
 
 .highlightProperty{ 
-    margin-top: 20px;
     height: 350px;
     width: fit-content;
     color: var(--text-white);
@@ -87,17 +86,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 250px;
-    gap: 70px;
+    margin-top: 150px;
 }
 
 .recentProperties{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 220px;
+    margin-top: 150px;
     margin-bottom: 220px;
-    gap: 70px;
 }
 @media(max-width:992px){
     .highlightsCards{
