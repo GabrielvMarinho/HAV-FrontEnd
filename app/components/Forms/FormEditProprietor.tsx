@@ -26,7 +26,7 @@ export default function FormEditProprietor(props: { id: any }) {
     const [imageId, setImageId] = useState<number | undefined>();
 
     const form = useForm<EditProprietor>({
-        resolver: zodResolver(newUser),
+        resolver: zodResolver(EditProprietor),
         mode: "onTouched",
     });
 
@@ -67,7 +67,7 @@ export default function FormEditProprietor(props: { id: any }) {
         console.log(proprietor)
         if (proprietor) {
             form.reset({
-                doc: proprietor.doc,
+                // doc: proprietor.doc,
                 name: proprietor.name,
                 email: proprietor.email,
                 cellphone: proprietor?.cellphone,

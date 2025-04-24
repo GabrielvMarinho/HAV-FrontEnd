@@ -1,4 +1,6 @@
 interface ProprietorGetResponseDTO {
+    image: string;
+
     name: string;
     email: string;
     celphone: string;

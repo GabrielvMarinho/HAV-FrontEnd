@@ -91,9 +91,9 @@ export default function HeaderEditor() {
                 <div className="HeaderOptions">
                     <Link href={"/"}>Início</Link>
 
-                    <Link href={"/aboutus"}>Sobre Nós</Link>
                     <Link href={"/login"}>Login</Link>
                     <Link href={"/aboutus"}>Sobre nós</Link>
+                    
                     <Link  href={"/signup"}>Cadastro</Link>
                 </div>
                 <Language width={30} height={30} color="" />
