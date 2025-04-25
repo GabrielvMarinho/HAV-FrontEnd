@@ -32,6 +32,7 @@ export default function SliderContent(props: { items: PropertySpecificCard[] }) 
     console.log(id)
     router.push(`/property/${id}`)
   }
+  console.log("items",               decodeDoubleBase64(props.items[page]?.mainImage))
   return (
     <>
       <div className="sliderContent">

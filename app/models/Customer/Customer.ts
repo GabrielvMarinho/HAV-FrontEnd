@@ -3,7 +3,6 @@ export interface Customer {
     cpf: string;
     name: string;
     email: string;
-    cellphone: string;
-    status: boolean;
-    statusText?: string;
+    cellphone: number;
+    status: string;
 }

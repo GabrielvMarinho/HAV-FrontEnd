@@ -398,7 +398,7 @@ export default function NewScheduleModal(props :{propertyId :string}){
         return(
             <div className="modalNewScheduleBig">
                 <div className="topContentModal">
-                    <p style={{fontWeight: 900}}>SUA VISITA FOI AGENDADA!</p>
+                    <p>DADOS DO CORRETOR</p>
                 </div>
             </div>
         )

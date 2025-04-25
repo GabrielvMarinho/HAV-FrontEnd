@@ -14,8 +14,7 @@ export default async function(
     bathRoom?: boolean,
     garageSpace?: boolean,
     suite?: boolean,
-    purpose?: string,
-    neighborhood?: string
+    purpose?: string
 
     ): Promise<{
       properties: PropertySpecificCard[];
@@ -48,10 +47,6 @@ export default async function(
         "propertyType":propertyType===""?null:propertyType,
         "propertyStatus":propertyStatus===""?null:propertyStatus,
         "archived":archived,
-        "address":{
-          "neighborhood":neighborhood,
-        },
-        
         "propertyFeatures":{
           "bedRoom":bedRoom,
           "bathRoom":bathRoom,
@@ -81,9 +76,6 @@ export default async function(
             "bathRoom":bathRoom,
             "garageSpace":garageSpace,
             "suite":suite
-          },
-          "address":{
-            "neighborhood":neighborhood,
           }
           
         })

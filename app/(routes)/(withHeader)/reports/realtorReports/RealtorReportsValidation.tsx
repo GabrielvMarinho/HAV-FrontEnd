@@ -16,14 +16,14 @@ import AuthGuard from "@/app/context/AuthGuard";
 export default function RealtorReportsValidation() {
   // Dados para os gráficos verticais (mantidos como no seu exemplo)
   const meses = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN'];
-  const [novosCorretoresData] = useState([1, 0, 2, 3, 0, 0]);
-  const [visitasData] = useState([0, 0, 0, 3, 0, 0]);
+  const [novosUsuariosData] = useState([25, 50, 30, 60, 45, 75]);
+  const [visitasData] = useState([95000, 10000, 50000, 17000, 16000, 10000]);
 
   // Dados para o gráfico horizontal no mesmo padrão
   const [userStats] = useState({
     proprietarios: 2,
-    usuariosComuns: 4,
-    bloqueados: 0
+    usuariosComuns: 3,
+    bloqueados: 1
   });
 
   // Calculando totais e porcentagens
@@ -110,13 +110,13 @@ export default function RealtorReportsValidation() {
           <div className="users-graph-container">
           <VerticalBarChart 
               months={meses}
-              values={novosCorretoresData}
-              title="Novos Corretores por Mês"
+              values={novosUsuariosData}
+              title="Novos Usuários por Mês"
               scaleType="default"
             />
           </div>
           <div className="users-data-box">
-            <h3 className="users-big-number">6</h3>
+            <h3 className="users-big-number">21</h3>
             <p className="users-small-text">
               100% se manteram ativos desde então
             </p>
@@ -126,7 +126,7 @@ export default function RealtorReportsValidation() {
 
       <section className="users-section">
         <div className="reports-graphTitleRight">
-          <p>VISITAS AO SITE</p>
+          <p>VISIATAS AO SITE</p>
         </div>
         <div className="users-data-row">
           <div className="users-graph-container">
@@ -140,9 +140,9 @@ export default function RealtorReportsValidation() {
             </div>
           </div>
           <div className="users-data-box">
-            <h3 className="users-big-number">3</h3>
+            <h3 className="users-big-number">123</h3>
             <p className="users-small-text">
-              33% agendamentos para imóvel de moradia
+              93% agendamentos para imóvel de moradia
             </p>
           </div>
           </div>

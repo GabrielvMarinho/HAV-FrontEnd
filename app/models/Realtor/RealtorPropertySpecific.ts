@@ -4,5 +4,4 @@ interface realtorPropertySpecific {
     email: String
     creci: string;
     phoneNumber: String
-    img?: any
 }

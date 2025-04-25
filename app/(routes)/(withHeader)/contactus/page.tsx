@@ -25,23 +25,23 @@ export default function contactus() {
                     <div className="containerIcons">
                         <div className="containerIconText">
                             <MarcadorDeMapa width="32" height="32" color="var(--box-yello-light)"/>
-                            <h2 className="text"> R. marechal  da silva, 1232 - Centro, Jaraguá do sul - SC </h2>
+                            <h2 className="text"> smosinwinwi ciwnwçwswsidn ucusbcubcu</h2>
                         </div>
                         <div className="containerIconText">
                             <Envelope width="32" height="32" color="var(--box-yello-light)"/>
-                            <h2 className="text" > havimob@gmail.com </h2>
+                            <h2 className="text" > smosinwinwi ciwnwçwswsidn ucusbcubcu </h2>
                         </div>
                         <div className="containerIconText">
                             <Cellphone width="32" height="32" color="var(--box-yello-light)"/>
-                            <h2 className="text"> (47) 3643-2763 </h2>
+                            <h2 className="text"> smosinwinwi ciwnwçwswsidn ucusbcubcu </h2>
                         </div>
                         <div className="containerIconText">
                             <Cellphone width="32" height="32" color="var(--box-yello-light)"/>
-                            <h2 className="text"> (47) 1823-3753 </h2>
+                            <h2 className="text"> smosinwinwi ciwnwçwswsidn ucusbcubcu </h2>
                         </div>
                         <div className="containerIconText">
                             <Cellphone width="32" height="32" color="var(--box-yello-light)"/>
-                            <h2 className="text"> (47) 1823-3753 </h2>
+                            <h2 className="text"> smosinwinwi ciwnwçwswsidn ucusbcubcu </h2>
                         </div>
                     </div>
                 </div>
