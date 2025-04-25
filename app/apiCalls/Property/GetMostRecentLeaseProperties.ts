@@ -10,6 +10,9 @@ export default async function getMostRecentLeaseProperties() {
         id: property.id,
         neighborhood: property.address.neighborhood,
         city: property.address.city,
+        street: property.address.street,
+        state: property.address.state,
+        propertyNumber: property.address.propertyNumber,
         bedRoom: property.propertyFeatures.bedRoom,
         bathRoom: property.propertyFeatures.bathRoom,
         suite: property.propertyFeatures.suite,
@@ -20,6 +23,8 @@ export default async function getMostRecentLeaseProperties() {
         promotionalPrice: property.promotionalPrice,
         price: property.price,
         purpose: property.purpose,
+        mainImage: property.mainImage,
+
       }));
   
       return properties;

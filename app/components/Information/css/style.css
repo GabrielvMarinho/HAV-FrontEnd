@@ -3,7 +3,10 @@
 .tableListData {
     width: 65vw;
 }
-
+.items-container{
+    display: flex;
+    gap: 30px;
+}
 .tableListLine {
     width: 66vw;
     opacity: 0.5;

@@ -268,6 +268,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                 <DescriptionProperty obj={{ propertyDescription: property.propertyDescription }} />
                 <section className="sectionPriceProperty">
                     <HorizontalPropertySpecific />
+                    
                     <MapSearchResult addressSpecific={{
                         street: property.address.street,
                         city: property.address.city,
@@ -287,8 +288,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
 
             <div style={{ margin: "200px 0 100px 0" }}>
                 <RealterAssociatedVertical objPropertyList={{ realtorPropertySpecific: property?.realtorPropertySpecific ?? [] }}
-                    WhatsappLink="https://web.whatsapp.com"
-                    InstagramLink="https://www.instagram.com/accounts/login/?next=%2Fnathanj.oao%2F&source=omni_redirect" />
+                />
             </div>
         </>
     );

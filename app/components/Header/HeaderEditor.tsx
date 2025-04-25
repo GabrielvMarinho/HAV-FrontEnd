@@ -29,8 +29,8 @@ export default function HeaderEditor() {
         setOpenDropdownId((prev) => (prev === id ? null : id)); // Close if already open, otherwise open
     };
 
-    const LogoutFetch = function(){
-        async function fetch(){
+    const LogoutFetch = function () {
+        async function fetch() {
             const data = await Logout()
             console.log("logout", data)
         }
@@ -47,19 +47,19 @@ export default function HeaderEditor() {
 
 
         <>
-        <div className="headerSpace"></div>
+            <div className="headerSpace"></div>
 
-        <header className="headerContainerMobile">
-            
-            {mobileOpen==false ?
-                <div style={{display:"flex",  justifyContent:"space-between", width:"100%"}}>
-                    <div style={{display:"flex", gap:"10px", alignItems:"center"}}>
-                    <img
-                    style={{width:"28px", height:"28px"}}
-                    src="/Image/LogoClaraMobile.png"></img>
-                    {/* <Language width={32} height={32} color="" /> */}
-                    </div>
-                        <div onClick={() =>{setMobileOpen(true)}}>
+            <header className="headerContainerMobile">
+
+                {mobileOpen == false ?
+                    <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                        <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                            <img
+                                style={{ width: "28px", height: "28px" }}
+                                src="/Image/LogoClaraMobile.png"></img>
+                            {/* <Language width={32} height={32} color="" /> */}
+                        </div>
+                        <div onClick={() => { setMobileOpen(true) }}>
                             <Hamburger width={32} height={32} color=""></Hamburger>
                         </div>
                 </div> 
@@ -75,42 +75,67 @@ export default function HeaderEditor() {
                     <div onClick={() =>{setMobileOpen(false)}}>
                         <Hamburger width={32} height={32} color=""></Hamburger>
                     </div>
-            </div>   
-            <div>
-                <div style={{width:"100%", height:"1px", backgroundColor:"var(--text-white)", marginTop:"20px"}}></div>
-                <div style={{display:"flex", justifyContent:"space-between", marginTop:"20px", marginBottom:"10px"}}>
-                    <Link className="linkHeaderMobile" href={"/"}>Início</Link>
-                    <Link className="linkHeaderMobile" href={"/search?purpose=venda"}>Compra</Link>
-                </div>
-                <div style={{display:"flex", justifyContent:"space-between", marginTop:"20px", marginBottom:"10px"}}>
-                    <Link className="linkHeaderMobile" href={"/profile"}>Perfil</Link>
-                    <Link className="linkHeaderMobile" href={"/search?purpose=locacao"}>Locação</Link>
-                </div>
-                <div style={{display:"flex", justifyContent:"space-between", marginTop:"20px", marginBottom:"10px"}}>
-                    <Link className="linkHeaderMobile" href={"/favorites"}>Favoritos</Link>
-                    <Link className="linkHeaderMobile" href={"/aboutus"}>Sobre nós</Link>
-                </div>
-                <div style={{display:"flex", justifyContent:"space-between", marginTop:"20px", marginBottom:"10px"}}>
-                    <Link className="linkHeaderMobile" href={"/notification"}>Notificações</Link>
-                    <Link className="linkHeaderMobile" href={"/"} onClick={() =>{LogoutFetch()}}>Logout</Link>
-                </div>
-                    
+                    :
+                    <>
+                        <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
+                            <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                                <img
+                                    style={{ width: "28px", height: "28px" }}
+                                    src="/Image/LogoClaraMobile.png"></img>
+                                <Language width={32} height={32} color="" />
+                            </div>
+                            <div onClick={() => { setMobileOpen(false) }}>
+                                <Hamburger width={32} height={32} color=""></Hamburger>
+                            </div>
+                        </div>
+                        <div>
+                            <div style={{ width: "100%", height: "1px", backgroundColor: "var(--text-white)", marginTop: "20px" }}></div>
+                            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "20px", marginBottom: "10px" }}>
+                                <Link className="linkHeaderMobile" href={"/"}>Início</Link>
+                                <Link className="linkHeaderMobile" href={"/search?purpose=venda"}>Compra</Link>
+                            </div>
+                            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "20px", marginBottom: "10px" }}>
+                                <Link className="linkHeaderMobile" href={"/profile"}>Perfil</Link>
+                                <Link className="linkHeaderMobile" href={"/search?purpose=locacao"}>Locação</Link>
+                            </div>
+                            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "20px", marginBottom: "10px" }}>
+                                <Link className="linkHeaderMobile" href={"/favorites"}>Favoritos</Link>
+                                <Link className="linkHeaderMobile" href={"/aboutus"}>Sobre nós</Link>
+                            </div>
+                            <div style={{ display: "flex", justifyContent: "space-between", marginTop: "20px", marginBottom: "10px" }}>
+                                <Link className="linkHeaderMobile" href={"/notification"}>Notificações</Link>
+                                <Link className="linkHeaderMobile" href={"/"} onClick={() => { LogoutFetch() }}>Logout</Link>
+                            </div>
 
 
-            </div>
-            </>
-        }
-                       
-        </header>
-        <header className="headerContainer">
+
+                        </div>
+                    </>
+                }
+
+            </header>
+            <header className="headerContainer">
 
 
-            <HavLogo width={25} height={25} color={"#111111"} />
+                <Link href={"/"}>
+                    <HavLogo width={25} height={25} color={"#111111"}></HavLogo>
+                </Link>
+                <div style={{ display: "flex", gap: "30px" }}>
+                    <div className="HeaderOptions">
 
-            <div style={{ display: "flex", gap: "30px" }}>
-                <div className="HeaderOptions">
+                        <Link href={"/"}>Início</Link>
 
-                    <Link href={"/"}>Início</Link>
+                        <div onClick={() => toggleDropdown(1)}>
+                            <HeaderOptions
+                                isOpen={openDropdownId === 1}
+                                close={() => setOpenDropdownId(null)}
+                                title={"Imóveis"}
+                                options={["Compra", "Locação"]}
+                                optionsLinks={["/search?purpose=venda", "/search?purpose=locacao"]}
+                                optionsIcons=
+                                {[<Money width={17} height={17} color={"var(--text-white)"} />,
+                                <Range width={17} height={17} color={"var(--text-white)"} />]} />
+                        </div>
 
                     <div onClick={() => toggleDropdown(1)}>
                         <HeaderOptions
@@ -158,15 +183,14 @@ export default function HeaderEditor() {
                     <div onClick={() => {LogoutFetch()}}>
                         <Link  href={"/login"}>Logout</Link>
                     </div>
+                    {/* <Language width={30} height={30} color="" /> */}
                 </div>
-                {/* <Language width={30} height={30} color="" /> */}
-            </div>
 
 
-            {/* <section className="headerMobile">
+                {/* <section className="headerMobile">
                 <Hamburger width={32} height={32} color="" />
             </section> */}
-        </header>
+            </header>
         </>
     );
 }

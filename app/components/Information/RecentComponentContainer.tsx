@@ -20,6 +20,8 @@ export default function PropertyFilterWrapper() {
     async function fetchProperties() {
       const response = await fetchFunctions[purpose]();
       setProperties(response);
+      console.log("itens", response)
+
     }
 
     fetchProperties();
