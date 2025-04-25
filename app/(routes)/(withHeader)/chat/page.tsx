@@ -208,7 +208,7 @@ export default function Chat() {
                 height: "90vh", gap: "20px"
             }}>
                 <div style={{
-                    width: "35%", backgroundColor: "var(--text-red-pink)", marginTop: "24px", borderRadius: "15px"
+                    width: "35%", backgroundColor: "var(--text-red-pink)", borderRadius: "15px"
                 }}>
                     <div style={{ display: "flex", width: "100%", margin: "10px" }}>
 
@@ -221,7 +221,7 @@ export default function Chat() {
                     </div>
 
                     <div style={{ marginLeft: "10px" }}>
-                        <h2 style={{ fontWeight: "bolder", color: "var(--text-white)", marginLeft: "25px" }}>CONVERSAS</h2>
+                        <h2 style={{ fontWeight: "bolder", color: "var(--text-white)", textAlign: "center" }}>CONVERSAS</h2>
                     </div>
 
                     <div style={{
@@ -374,12 +374,12 @@ export default function Chat() {
                         width: "70%", position: "relative"
                     }}>
                         <div style={{
-                            width: "100%", position: "absolute", top: "0", backgroundColor: "var(--text-red-pink)"
+                            width: "100%", position: "absolute", top: "0", backgroundColor: "var(--text-red-pink)", borderRadius: "15px"
                         }}>
                             <div style={{ display: "flex", justifyContent: "space-between" }}>
                                 <div style={{
                                     display: "flex", paddingTop: "0.75rem", paddingBottom: "0.75rem", marginLeft: "1rem",
-                                    paddingLeft: "0.75rem", paddingRight: "0.75rem", alignItems: "center"
+                                    paddingLeft: "0.75rem", paddingRight: "0.75rem", alignItems: "center", gap: "10px"
 
                                 }}>
                                     <img
@@ -394,13 +394,15 @@ export default function Chat() {
                                                 "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
                                         }
                                         alt="" />
-                                    <p>{currentChat && auth.reqUser?.id ===
+                                    <p style={{
+                                        color: "var(--text-white)"
+                                    }}>{currentChat && auth.reqUser?.id ===
                                         currentChat.users[0].id ? currentChat.users[1].name :
                                         currentChat.users[0].name}</p>
                                 </div>
                                 <div style={{
                                     display: "flex", paddingTop: "0.75rem", paddingBottom: "0.75rem", marginLeft: "1rem",
-                                    paddingLeft: "0.75rem", paddingRight: "0.75rem", alignItems: "center"
+                                    paddingLeft: "0.75rem", paddingRight: "0.75rem", alignItems: "center", gap: "5px"
 
                                 }}>
                                     <SearchIcon width={20} height={20} color="var(--text-white)" />
@@ -437,7 +439,7 @@ export default function Chat() {
                         <div style={{
                             backgroundColor: "var(--text-red-pink)", position: "absolute", width: "100%",
                             bottom: "0", fontSize: "1.5rem", fontWeight: "2rem", paddingTop: "0.75rem",
-                            paddingBottom: "0.75rem"
+                            paddingBottom: "0.75rem", borderRadius: "15px"
                         }}>
                             <div style={{
                                 display: "flex", justifyContent: "space-between", alignItems: "center",

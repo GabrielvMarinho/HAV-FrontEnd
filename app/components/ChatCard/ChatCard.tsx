@@ -61,7 +61,7 @@ export default function ChatCard({ name, userImg, unreadCount }) {
                     alt={`${name}'s profile`}
                 />
             </div>
-            <div style={{ paddingLeft: "1.25rem", width: "80%" }}>
+            <div style={{ paddingLeft: "1.25rem", width: "80%", display: "flex", gap: "50px" }}>
                 <div style={{
                     display: "flex",
                     justifyContent: "space-between",
@@ -71,17 +71,18 @@ export default function ChatCard({ name, userImg, unreadCount }) {
                         fontSize: "1.125rem",
                         lineHeight: "1.75rem"
                     }}>{name}</p>
+                    {/*  
                     <p style={{
                         fontSize: "0.875rem",
                         lineHeight: "1.25rem"
-                    }}>Timestamp</p>
+                    }}>Timestamp</p>*/}
                 </div>
                 <div style={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "space-between"
                 }}>
-                    <p>message...</p>
+                    {/* <p>message...</p> */}
                     {unreadCount > 0 && (
                         <div style={{ display: "flex", alignItems: "center", marginLeft: "0.5rem" }}>
                             <p style={{
