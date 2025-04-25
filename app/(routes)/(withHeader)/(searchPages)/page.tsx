@@ -73,6 +73,8 @@ export default async function Home() {
         <Title tag="h1" text="Imóveis adicionados recentemente" />
         <RecentComponentContainer />
       </section>
+      
+      <Footer/>
 
 
 

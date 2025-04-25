@@ -30,5 +30,6 @@ export default async function page() {
 
     return( 
         <WrappedPagePropertySpecific user={user}></WrappedPagePropertySpecific>
+        
     );
 }

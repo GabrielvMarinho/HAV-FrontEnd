@@ -139,6 +139,7 @@ export default function FAQPage() {
             <span className="orText">OU</span><img src="/Image/whatsapp.png" alt="Whatsapp icon" />
             </div> */}
 
+            <Footer/>
     </>
   );
 }

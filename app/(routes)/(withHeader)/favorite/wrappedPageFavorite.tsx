@@ -13,6 +13,7 @@ import Button from "@/app/components/Inputs/Button";
 import ButtonBackAPoint from "@/app/components/Inputs/ButtonBackAPoint";
 import StarIcon from "@/app/components/IconsTSX/StarIcon";
 import MapSearchResult from "@/app/components/Maps/MapSearchResult";
+import Footer from "@/app/components/Footer/Footer";
 
 
 export default function WrappedPageFavorite(props: { usuario: any }) {
@@ -145,7 +146,7 @@ export default function WrappedPageFavorite(props: { usuario: any }) {
 
                 </div>
 
-
+                <Footer/>
 
 
 

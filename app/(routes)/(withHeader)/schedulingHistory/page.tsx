@@ -55,6 +55,8 @@ export default async function schedulingHistory({searchParams}: {searchParams:{
             </div>
             
             <TableListHistory data={data} status={status} page={page}  for={usuario.role == "ROLE_REALTOR" ? "realtor" : "user"} titles={["Data/Hora", "Corretor", "Finalidade", "tipo imovel", "status" ]} />
+         
+            <Footer/>
         </>
     )
 }

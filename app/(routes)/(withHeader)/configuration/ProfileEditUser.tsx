@@ -27,6 +27,7 @@ import Button from "@/app/components/Inputs/Button";
 import getUserConfigurationInfo from "@/app/apiCalls/User/getUserConfigurationInfo";
 import { UserConfigurationDtoForm } from "@/app/Validators/UserConfigurationDtoForm";
 import "./css/style.css"
+import Footer from "@/app/components/Footer/Footer";
 
 
 export default function ProfileEditUser(props: { role: string }) {
@@ -326,6 +327,8 @@ export default function ProfileEditUser(props: { role: string }) {
       </div>
 
       <ConfirmationModal />
+      
+      <Footer/>
     </>
   );
 }

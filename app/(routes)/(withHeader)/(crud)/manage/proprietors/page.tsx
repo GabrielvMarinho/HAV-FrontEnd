@@ -11,6 +11,7 @@ import changeArchivedStatusProprietor from "@/app/apiCalls/Proprietor/changeArch
 import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 import AuthGuard from "@/app/context/AuthGuard";
+import TableListNotReports from "@/app/components/Information/TableListNotReports";
 
 
 export default async function page({ searchParams }: {
@@ -68,7 +69,7 @@ export default async function page({ searchParams }: {
               inputChooseQuantites={[]}
 
             />
-            <TableList changeArchivedStatus = {changeArchivedStatusProprietor} deleteFunction={deleteProprietorList} archived={false} context="admin" size="large" titles={["cpf/cnpj", "nome", "email", "n. imóveis", "objetivo"]}
+            <TableListNotReports changeArchivedStatus = {changeArchivedStatusProprietor} deleteFunction={deleteProprietorList} archived={false} context="admin" size="large" titles={["cpf/cnpj", "nome", "email", "n. imóveis", "objetivo"]}
               data={proprietors} totalPages={totalPages} />
           </div>
         </AuthGuard>

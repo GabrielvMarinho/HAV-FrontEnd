@@ -17,6 +17,7 @@ import { createMessage, fetchUnreadCounts, getAllMessage, markMessagesAsRead } f
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
 import { connectWebSocket, sendMessageSocket, stompClient, subscribeToChat } from "@/app/redux/websocketClient";
+import Footer from "@/app/components/Footer/Footer";
 
 export default function Chat() {
 
@@ -482,6 +483,8 @@ export default function Chat() {
                 }
 
             </div >
+        
+        <Footer/>
 
         </>
     )

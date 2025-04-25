@@ -13,6 +13,7 @@ import StarIcon from "@/app/components/IconsTSX/StarIcon";
 import Definition from "@/app/components/IconsTSX/Definitions";
 import ProfileValidation from "@/app/components/ValidationComponents/ProfileValidation";
 import findUserOnCookie from "@/app/utils/findUserOnCookie";
+import Footer from "@/app/components/Footer/Footer";
 
 export default async function ProfilePage() {
 
@@ -25,6 +26,8 @@ export default async function ProfilePage() {
         
         <ProfileValidation usuario={usuario}/>
       </div>
+
+       <Footer/>
     </>
   );
 }
