@@ -3,10 +3,12 @@
 .tableListData {
     width: 65vw;
 }
-.items-container{
+
+.items-container {
     display: flex;
     gap: 30px;
 }
+
 .tableListLine {
     width: 66vw;
     opacity: 0.5;
@@ -15,16 +17,19 @@
 
 }
 
-.next-button, .back-button{
+.next-button,
+.back-button {
     height: fit-content;
 }
-.cardContainer{
+
+.cardContainer {
     max-width: fit-content;
     display: flex;
     background-color: var(--box-white);
     border-radius: var(--mborder-box);
 }
-.mainImageContainer{
+
+.mainImageContainer {
     background-color: black;
     border-top-left-radius: var(--mborder-box);
     border-bottom-left-radius: var(--mborder-box);
@@ -33,36 +38,41 @@
 
 }
 
-.customerInfo{
+.customerInfo {
     height: 100%;
     gap: 10px;
     justify-content: left;
     align-items: center;
     display: flex;
 }
-.textContentInfo{
+
+.textContentInfo {
     display: flex;
     flex-direction: column;
 }
-.textContentInfo .name{
+
+.textContentInfo .name {
     color: var(--text-dark-red);
 
     font-size: var(--text-s);
     font-weight: 700;
 }
-.textContentInfo .phone{
+
+.textContentInfo .phone {
     color: var(--text-dark-red);
 
     font-size: var(--text-xs);
     font-weight: 300;
 }
-.mainContentContainer{
+
+.mainContentContainer {
     padding: 15px;
     display: flex;
     flex-direction: column;
     gap: 5%;
 }
-.styleCustomerInfo{
+
+.styleCustomerInfo {
     margin-bottom: 10px;
     width: 30px;
     height: 1px;
@@ -70,7 +80,7 @@
 }
 
 
-.mainContentContainerBottom{
+.mainContentContainerBottom {
     gap: 30px;
     display: flex;
     height: 55%;
@@ -78,34 +88,40 @@
     justify-content: space-between;
 
 }
-.mainContentContainerTop .addressData .city{
+
+.mainContentContainerTop .addressData .city {
     font-weight: var(--text-xs);
     color: var(--text-dark-red);
 }
-.mainContentContainerTop .addressData .neighborhood{
+
+.mainContentContainerTop .addressData .neighborhood {
     font-weight: var(--text-m);
     font-weight: 800;
     color: var(--text-dark-red);
 
 }
-.mainContentContainerTop .hour{
+
+.mainContentContainerTop .hour {
     color: var(--text-dark-red);
     font-size: var(--text-s);
     font-weight: 400;
 }
-.mainContentContainerTop{
+
+.mainContentContainerTop {
     display: flex;
     height: fit-content;
     align-items: end;
     justify-content: space-between;
 }
-.imageContentInfo{
+
+.imageContentInfo {
     background-color: black;
     width: 40px;
     height: 40px;
     border-radius: 100%;
 }
-.marginSelectBox{
+
+.marginSelectBox {
     margin-inline: 15px;
     margin-right: 25px;
 
@@ -138,20 +154,21 @@
     flex: 1;
 }
 
-.priceProperty{
+.priceProperty {
     color: var(--text-white);
     font-size: 28px;
     font-weight: 900;
 }
 
-.cityProperty{
+.cityProperty {
     color: var(--text-white);
     font-weight: 400;
     font-size: 16px;
     letter-spacing: 1.12px;
     text-transform: uppercase;
 }
-.neighborhoodProperty{
+
+.neighborhoodProperty {
     color: var(--text-white);
     text-transform: uppercase;
     font-size: 38px;
@@ -249,7 +266,7 @@
     font-weight: 500;
 }
 
-.realtorCreci{
+.realtorCreci {
     font-size: var(--text-s);
     color: var(--text-light-red);
     font-weight: 800;
@@ -374,14 +391,14 @@
     font-weight: 500;
 }
 
-.titleModal{
+.titleModal {
     color: var(--text-white);
     margin-bottom: 20px;
     font-weight: 800;
-    font-size: var( --text-l);
+    font-size: var(--text-l);
 }
 
-.containerModal{
+.containerModal {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -389,8 +406,9 @@
     align-items: center;
 }
 
-.descModal{
-    max-width:400px; /* Define uma largura máxima */
+.descModal {
+    max-width: 400px;
+    /* Define uma largura máxima */
     word-wrap: break-word;
     color: var(--text-white-opacity-85);
     font-weight: 500;
@@ -431,38 +449,39 @@
     font-weight: 500;
 }
 
-.divDescriptionProperty{
+.divDescriptionProperty {
     display: flex;
     flex-direction: column;
     gap: 30px;
     margin-top: 60px;
 }
-.isFurnishedText{
+
+.isFurnishedText {
     color: var(--box-dark-red-option);
     font-size: var(--text-ml);
     font-weight: 500;
 }
 
-.containerNoRegistration{
+.containerNoRegistration {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 30px;
 }
 
-.containerTitleNoRegistration{
+.containerTitleNoRegistration {
     font-size: var(--text-xl);
     color: var(--text--mid-dark-red);
     font-weight: 800;
 }
 
-.textNoRegistration{
+.textNoRegistration {
     font-size: var(--text-sl);
     color: var(--box-dark-red-option);
     font-weight: 600;
 }
 
-.containerTextNoRegistration{
+.containerTextNoRegistration {
     display: flex;
     text-align: center;
     width: 300px;
@@ -478,7 +497,8 @@
     font-size: var(--text-s);
 } */
 
-.containerStatusScheduling, .containerStatusSchedulingSmaller {
+.containerStatusScheduling,
+.containerStatusSchedulingSmaller {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -489,7 +509,8 @@
     font-size: var(--text-s);
     color: var(--text-white);
 }
-.containerStatusSchedulingSmaller{
+
+.containerStatusSchedulingSmaller {
     width: 80px;
     height: 25px;
     font-size: var(--text-xs);
@@ -511,34 +532,37 @@
     background-color: var(--box-white-gray);
 }
 
-.cardsContainer{
+.cardsContainer {
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
 }
+
 .modal {
     position: sticky;
-    top: 100px; /* Distância inicial do topo */
+    top: 100px;
+    /* Distância inicial do topo */
     width: 80%;
     width: fit-content;
     height: fit-content;
     background: white;
     padding: 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  }
-.cardsAndFilter{
+}
+
+.cardsAndFilter {
     display: flex;
     gap: 40px;
     margin-top: 60px;
 }
 
-.buttonsSearch{
+.buttonsSearch {
     display: flex;
     gap: 15px;
     margin-bottom: 30px;
 }
 
-.buttonsAndCards{
+.buttonsAndCards {
     width: 60vw;
     display: flex;
     flex-direction: column;
@@ -546,28 +570,32 @@
 
 
 
-@media (width >1600px){
-    .cardsContainer{
+@media (width >1600px) {
+    .cardsContainer {
         width: 1200px;
     }
 }
-@media (width <=1600px){
-    .cardsContainer{
+
+@media (width <=1600px) {
+    .cardsContainer {
         width: 880px;
     }
 }
-@media (width <1200px){
-    .cardsContainer{
+
+@media (width <1200px) {
+    .cardsContainer {
         width: 570px;
     }
 }
-@media (width <900px){
-    .cardsContainer{
+
+@media (width <900px) {
+    .cardsContainer {
         width: 270px;
     }
 }
-@media (width <650px){
-    .cardsAndFilter{
+
+@media (width <650px) {
+    .cardsAndFilter {
         align-items: center;
 
         flex-direction: column;
@@ -576,59 +604,60 @@
 
 
 @media (width < 992px) {
-    .divDescriptionPropertySpecific{
+    .divDescriptionPropertySpecific {
         align-items: center;
     }
 
     .mainHomeInfoContainer {
         background: var(--box-mid-dark-red);
-        height: 65vh; 
-        min-height: 250px; 
+        height: 65vh;
+        min-height: 250px;
         flex-direction: column;
         gap: 200px;
     }
 
-    .mainHomeInfoSubContainer{
+    .mainHomeInfoSubContainer {
         margin-top: -70px;
         margin-bottom: 40px;
         gap: 200px;
     }
 
-    .textBehind{
+    .textBehind {
         width: 150px;
-        text-wrap: wrap ;
+        text-wrap: wrap;
     }
 
     .mainHomeInfoContainer {
         background: var(--box-mid-dark-red);
-        height: 65vh; 
-        min-height: 250px; 
+        height: 65vh;
+        min-height: 250px;
         flex-direction: column;
         /* gap: 0; */
         margin-top: -70px;
         margin-bottom: 40px
     }
+
     .mainHomeInfoContainer {
         width: 100%;
         min-width: 100vw;
     }
-  
-    .titleModal{
+
+    .titleModal {
         font-size: var(--text-m);
     }
 
-    .containerTitleNoRegistration{
+    .containerTitleNoRegistration {
         font-size: var(--text-l);
         color: var(--text--mid-dark-red);
         font-weight: 800;
     }
 
-    .textNoRegistration{
+    .textNoRegistration {
         font-size: var(--text-s);
         color: var(--box-dark-red-option);
     }
 
-    .containerTextNoRegistration{
+    .containerTextNoRegistration {
         width: 250px;
     }
 

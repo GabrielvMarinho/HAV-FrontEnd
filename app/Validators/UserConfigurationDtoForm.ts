@@ -1,4 +1,4 @@
- 
+
 import { z } from "zod";
 
 const UserConfigurationDtoForm = z.object({
@@ -19,6 +19,7 @@ const UserConfigurationDtoForm = z.object({
   state: z.string().nullable(),
   city: z.string().nullable(),
   neighborhood: z.string().nullable(),
+  image: z.any().optional().nullable()
 });
 export type UserConfigurationDtoForm = z.infer<typeof UserConfigurationDtoForm>;
 

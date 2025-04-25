@@ -13,33 +13,37 @@
     gap: 30px;
     justify-content: center;
 }
-.addProprietorsRealtors{
+
+.addProprietorsRealtors {
     display: flex;
     gap: 10px;
 
     flex-direction: column;
 }
-.chooseReponsible{
+
+.chooseReponsible {
     width: fit-content;
     padding: 10px;
     padding-inline: 25px;
     border-radius: var(--border-box);
 
-    background-color: var( --box-white-25);
+    background-color: var(--box-white-25);
 }
-.subtitleResponsibles{
+
+.subtitleResponsibles {
     font-size: var(--text-s);
     font-weight: 400;
     color: var(--text-white-opacity-85);
 }
 
-.proprietorsContainer{
+.proprietorsContainer {
     all: unset;
     display: flex;
     flex-direction: column;
 }
-.realtorsContainer{
-    overflow-y: auto;        
+
+.realtorsContainer {
+    overflow-y: auto;
     display: flex;
     height: 60px;
     gap: 15px;
@@ -47,22 +51,27 @@
     flex-direction: column;
     scrollbar-color: #e2e2e2 #f1f1f100;
 }
-  
-.realtorsContainer div h3, .proprietorsContainer h3{
+
+.realtorsContainer div h3,
+.proprietorsContainer h3 {
     all: unset !important;
     font-weight: 600 !important;
     font-size: var(--text-sm) !important;
     color: var(--text-white) !important;
 }
-.realtorsContainer div p, .proprietorsContainer p{
+
+.realtorsContainer div p,
+.proprietorsContainer p {
     all: unset;
     font-size: var(--text-s);
     color: var(--text-white);
 }
-.customerBox{
+
+.customerBox {
     background-color: var(--box-realtor-non-available)
 }
-.propertyForm{
+
+.propertyForm {
     max-width: 1000px;
     display: flex;
     gap: 5%;
@@ -70,29 +79,34 @@
     padding: 60px;
     border-radius: var(--border-box);
 }
-.propertyForm .propertyFormGroup{
+
+.propertyForm .propertyFormGroup {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
 }
 
-.propertyForm h3, .propertyForm h2{
+.propertyForm h3,
+.propertyForm h2 {
     font-size: var(--text-sm);
     margin-bottom: 20px;
     color: var(--text-white);
 }
-.propertyForm h3{
+
+.propertyForm h3 {
     margin-top: 50px;
 
 }
-.propertyForm #smallerSection{
-   
+
+.propertyForm #smallerSection {
+
 
     width: 45%;
 }
-.propertyForm #biggerSection{
-    
-    width: 50% ;
+
+.propertyForm #biggerSection {
+
+    width: 50%;
 }
 
 .inputArticle {
@@ -101,93 +115,111 @@
     width: 500px;
     gap: 17px;
 }
-.previewImg{
+
+.previewImg {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
-.previewImgPropertySpecific{
+
+.previewImgPropertySpecific {
     width: 100%;
     height: 80%;
     object-fit: cover;
 }
-.hourLineOpacity{
+
+.hourLineOpacity {
     opacity: 0.2;
 }
-.hourLine, .hourLineOpacity{
+
+.hourLine,
+.hourLineOpacity {
     width: 500px;
     height: 1px;
     background-color: var(--hour-gray);
 }
-.hourLineCustomer, .hourLineCustomer{
+
+.hourLineCustomer,
+.hourLineCustomer {
     width: 500px;
     height: 1px;
     background-color: var(--box-red-pink);
 }
-.hourContentCustomer{
+
+.hourContentCustomer {
     color: var(--box-red-pink);
 }
+
 .hourButton:hover {
-    
+
     cursor: pointer;
 }
-.hourButtonContainer{
+
+.hourButtonContainer {
     display: flex;
     flex-direction: column;
     max-height: 500px;
     overflow-y: scroll;
     padding-right: 20px;
-    scrollbar-color: #888888 #f1f1f100/* Cor da barra e do fundo */
+    scrollbar-color: #888888 #f1f1f100
+        /* Cor da barra e do fundo */
 }
 
-.hourButton{
+.hourButton {
     all: unset;
 }
-.hourButtonSelect{
+
+.hourButtonSelect {
     all: unset;
     background-color: var(--box-realtor-available) !important;
 }
 
-.hourContent{
+.hourContent {
     margin-top: 2px;
-    margin-bottom:20px;
+    margin-bottom: 20px;
     font-weight: 500;
     font-size: var(--text-sm);
-    color:  var(--hour-gray);
+    color: var(--hour-gray);
 }
-.trashcanPhoto{
+
+.trashcanPhoto {
     border-radius: 100%;
     right: 15px;
     top: 15px;
-    width:39px;
+    width: 39px;
     height: 39px;
     position: absolute;
     background-color: var(--box-dark-red-option);
-    padding:8px;
+    padding: 8px;
 }
-.photoArrowLeft{
+
+.photoArrowLeft {
     left: -35px;
     bottom: -60px;
 }
-.photoArrowLeftProperty{
+
+.photoArrowLeftProperty {
     left: -35px;
     bottom: 0;
 }
-.photoArrowRightProperty{
+
+.photoArrowRightProperty {
     right: -35px;
     bottom: 0px;
 }
-.topContentModal{
+
+.topContentModal {
     display: flex;
     height: 10%;
     justify-content: space-between;
 }
-.topContentModal p{
+
+.topContentModal p {
     font-size: var(--text-m);
     color: var(--text-white);
 }
 
-.modalNewScheduleBig{
+.modalNewScheduleBig {
     display: flex;
     flex-direction: column;
     width: 300px;
@@ -196,19 +228,22 @@
     padding: 30px;
     border-radius: var(--xborder-box);
 }
-.bottomContentModal{
-    
+
+.bottomContentModal {
+
     display: flex;
     gap: 25px;
     justify-content: space-around;
     align-items: center;
 }
-.bottomContentModalData label{
+
+.bottomContentModalData label {
     font-size: var(--text-m);
     color: var(--text-white);
     font-weight: 600;
 }
-.bottomContentModalData p{
+
+.bottomContentModalData p {
     font-size: var(--text-s);
     font-weight: 200;
     color: var(--text-white);
@@ -216,18 +251,21 @@
     text-wrap: wrap;
 
 }
-.bottomContentModalData{
+
+.bottomContentModalData {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
-.modalNewScheduleBigContent{
+
+.modalNewScheduleBigContent {
     display: flex;
     flex-direction: column;
-    gap:25px;
+    gap: 25px;
     flex-grow: 1;
 }
-.modalNewSchedule{
+
+.modalNewSchedule {
     width: 200px;
     height: 150px;
     margin-bottom: 50px;
@@ -241,11 +279,13 @@
     gap: 20px;
 
 }
-.realtorsList div p{
+
+.realtorsList div p {
     font-size: var(--text-m);
     color: var(--text-white);
 }
-.realtorsList{
+
+.realtorsList {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -254,11 +294,13 @@
     scrollbar-color: var(--box-white) transparent;
     padding-right: 20px;
 }
-.datesList div p{
+
+.datesList div p {
     font-size: var(--text-m);
     color: var(--text-white);
 }
-.datesList{
+
+.datesList {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -267,17 +309,20 @@
     scrollbar-color: var(--box-white) transparent;
     padding-right: 20px;
 }
-.photoArrowRight{
-    
+
+.photoArrowRight {
+
     right: -35px;
     bottom: -60px;
 }
-.photoArrow{
+
+.photoArrow {
     position: absolute;
     background: transparent;
 }
-.photoArrowPropertySpecific{
-    
+
+.photoArrowPropertySpecific {
+
     padding: 8px;
     border-radius: 100%;
     top: 0;
@@ -288,32 +333,37 @@
     height: 38px;
     position: absolute;
 }
-.subPreviewImg{
+
+.subPreviewImg {
     width: 23%;
     margin: 1%;
     object-fit: cover;
     aspect-ratio: 4/3;
 }
-.subPreviewImgPropertySpecific{
+
+.subPreviewImgPropertySpecific {
     width: 11.5%;
     margin: 0.5%;
     object-fit: cover;
     aspect-ratio: 4/3;
 }
-.markedImage{
+
+.markedImage {
     width: 23%;
     margin: 0;
     scale: 1.05;
     border: 2px solid var(--box-white);
 }
-.markedImagePropertySpecific{
+
+.markedImagePropertySpecific {
     width: 11.5%;
     margin: 0;
     scale: 1.05;
     border: 2px solid var(--box-white);
 }
 
-.imgPerson, .imgProperty {
+.imgPerson,
+.imgProperty {
     width: 400px;
     height: 300px;
     border-radius: 1.864px;
@@ -321,16 +371,18 @@
     position: relative;
     border: 1px solid var(--box-white);
 }
-.imgProperty{
+
+.imgProperty {
     margin-bottom: 100px;
 }
 
-.articleDataForm{
+.articleDataForm {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-.divButtonsAceptCancelForms{
+
+.divButtonsAceptCancelForms {
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -338,24 +390,24 @@
     margin-top: 50px;
 }
 
-.inputArticleMobile{
+.inputArticleMobile {
     display: none;
 }
 
 .divInputs {
     display: "flex";
-    flex-direction: "row"; 
+    flex-direction: "row";
     gap: "15px";
 }
 
-.titleModal{
+.titleModal {
     color: var(--text-white);
     margin-bottom: 20px;
     font-weight: 800;
-    font-size: var( --text-l);
+    font-size: var(--text-l);
 }
 
-.containerModal{
+.containerModal {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -363,35 +415,38 @@
     align-items: center;
 }
 
-.descModal{
-    max-width:400px; /* Define uma largura máxima */
+.descModal {
+    max-width: 400px;
+    /* Define uma largura máxima */
     word-wrap: break-word;
     color: var(--text-white-opacity-85);
     font-weight: 500;
 }
 
 
-@media(max-width: 992px){
+@media(max-width: 992px) {
 
-    .ownerForm{
+    .ownerForm {
         width: 305px;
         height: 1450px;
         flex-direction: column;
         gap: 40px;
         margin: 0 auto;
     }
-    
-    .inputArticleDesktop{
+
+    .inputArticleDesktop {
         display: none;
     }
 
-    .inputArticle{
+    .inputArticle {
         flex-direction: column;
         align-items: center;
         gap: 15px;
         margin-top: 40px;
     }
-    .imgPerson, .imgProperty {
+
+    .imgPerson,
+    .imgProperty {
         width: 210px;
         height: 209px;
         border-radius: 1.864px;
@@ -400,8 +455,8 @@
         align-items: flex-end;
         justify-content: flex-end;
     }
-    
-    .divButtonsAceptCancelForms{
+
+    .divButtonsAceptCancelForms {
         display: flex;
         flex-direction: row;
         gap: 10px;
@@ -409,11 +464,11 @@
         margin-top: 40px;
     }
 
-    .divInputs{
-        flex-direction: "column"; 
+    .divInputs {
+        flex-direction: "column";
     }
 
-    .titleModal{
+    .titleModal {
         font-size: var(--text-m);
     }
 

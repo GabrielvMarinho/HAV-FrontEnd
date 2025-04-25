@@ -15,7 +15,7 @@ import { saveConfig } from "@/app/Validators/ProfileConfigValidator";
 import editCustomer from "@/app/apiCalls/Customer/editCustomer";
 import searchCustomerById from "@/app/apiCalls/Customer/searchCustomerById";
 import "@/app/variables.css";
-import "@/app/(routes)/(withHeader)/configuration/style/style.css";
+// import "@/app/(routes)/(withHeader)/configuration/style/style.css";
 import HorizontalLine from "@/app/components/NonInteractable/HorizontalLine";
 import ToggleButton from "@/app/components/Inputs/ToggleButton";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
@@ -26,9 +26,10 @@ import ToggleTheme from "@/app/components/Theme/ToggleTheme";
 import Button from "@/app/components/Inputs/Button";
 import getUserConfigurationInfo from "@/app/apiCalls/User/getUserConfigurationInfo";
 import { UserConfigurationDtoForm } from "@/app/Validators/UserConfigurationDtoForm";
+import "./css/style.css"
 
 
-export default function ProfileEditUser(props: {role: string}) {
+export default function ProfileEditUser(props: { role: string }) {
   const [user, setUser] = useState<UserConfigurationDto | null>(null);
   const [userData, setUserData] = useState<UserConfigurationDto | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -75,7 +76,7 @@ export default function ProfileEditUser(props: {role: string}) {
     setUserData(data)
     setIsModalOpen(true);
   };
-  
+
 
   const handleConfirmEdit = async () => {
     try {
@@ -112,23 +113,28 @@ export default function ProfileEditUser(props: {role: string}) {
 
   // Componente ProfileSection interno
   const ProfileSection = () => (
-    <section className="profileSection">
+    <section style={{ display: "flex", flexDirection: "column", gap: "15px" }} >
       <div className="imgPerson">
         <ButtonUploadPhoto
-          name="profileImage"
+          name={"image"}
           register={form.register}
-          error={form.formState.errors.profileImage}
+          error={form.formState.errors["image" as keyof UserConfigurationDtoForm]}
+          initialImageUrl={user?.imageBase64}
+          setValue={form.setValue}
+          onDeleteImage={() => {
+            setUser(prev => ({ ...prev, imageBase64: undefined }));
+          }}
         />
       </div>
       <div>
         <p className="personName">{user?.name || "Carregando..."}</p>
 
-        <p className="userType">{props.role=="ROLE_ADMIN" ? "Administrador" : ""}</p>
-        <p className="userType">{props.role=="ROLE_REALTOR" ? "Corretor" : ""}</p>
-        <p className="userType">{props.role=="ROLE_EDITOR" ? "Editor" : ""}</p>
-        <p className="userType">{props.role=="ROLE_CUSTOMER" ? "Cliente" : ""}</p>
+        <p className="userType">{props.role == "ROLE_ADMIN" ? "Administrador" : ""}</p>
+        <p className="userType">{props.role == "ROLE_REALTOR" ? "Corretor" : ""}</p>
+        <p className="userType">{props.role == "ROLE_EDITOR" ? "Editor" : ""}</p>
+        <p className="userType">{props.role == "ROLE_CUSTOMER" ? "Cliente" : ""}</p>
       </div>
-      
+
     </section>
   );
 
@@ -263,8 +269,8 @@ export default function ProfileEditUser(props: {role: string}) {
         />
       </div>
       <Button type="submit" size={"small"} text="Confirmar" hover="lightHover" color="var(--box-red-pink)"
-                            background="var(--text-white)"
-                            />
+        background="var(--text-white)"
+      />
     </article>
   );
 
@@ -306,13 +312,13 @@ export default function ProfileEditUser(props: {role: string}) {
           <div className="menuColumn">
             <h3 className="columnTitle">PREFERÊNCIAS</h3>
             <ul className="menuList">
-            <HorizontalLine size={450} color="var(--hour-gray)" />
+              <HorizontalLine size={450} color="var(--hour-gray)" />
 
-              <div className="menuContent" style={{ display:"flex", justifyContent:"space-between", width:"40%"}}>              
+              <div className="menuContent" style={{ display: "flex", justifyContent: "space-between", width: "40%" }}>
                 <label>TEMA</label>
-                <ToggleTheme isToggled={toggleStates.tema} onChange={() => handleToggle("tema")}/>
+                <ToggleTheme isToggled={toggleStates.tema} onChange={() => handleToggle("tema")} />
               </div>
-              
+
             </ul>
           </div>
 

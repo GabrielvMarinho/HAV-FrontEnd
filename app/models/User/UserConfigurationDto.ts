@@ -1,9 +1,9 @@
 interface UserConfigurationDto {
-    doc:string;
+    doc: string;
     cpf: string;
     name: string;
     email: string;
-    celphone: string;
+    cellphone: string;
     phoneNumber: string;
     cep: string;
     street: string;
@@ -12,4 +12,5 @@ interface UserConfigurationDto {
     state: string;
     city: string;
     neighborhood: string;
+    imageBase64?: string;
 }
