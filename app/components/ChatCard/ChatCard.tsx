@@ -56,12 +56,12 @@ export default function ChatCard({ name, userImg, unreadCount }) {
         }}>
             <div style={{ width: "20%" }}>
                 <img
-                    style={{ borderRadius: "100%", width: "3rem", height: "3rem" }}
+                    style={{ borderRadius: "100%", width: "3.5rem", height: "3.5rem" }}
                     src={userImg}
                     alt={`${name}'s profile`}
                 />
             </div>
-            <div style={{ paddingLeft: "1.25rem", width: "80%", display: "flex", gap: "50px" }}>
+            <div style={{ width: "80%", display: "flex", gap: "50px" }}>
                 <div style={{
                     display: "flex",
                     justifyContent: "space-between",
@@ -69,7 +69,7 @@ export default function ChatCard({ name, userImg, unreadCount }) {
                 }}>
                     <p style={{
                         fontSize: "1.125rem",
-                        lineHeight: "1.75rem"
+                        lineHeight: "1.75rem", color: "var(--text-white)", fontWeight: "500"
                     }}>{name}</p>
                     {/*  
                     <p style={{
