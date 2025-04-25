@@ -17,6 +17,7 @@ import HomeHighlightsCardContainer from "@/app/components/Information/HomeHighli
 import RecentComponentContainer from "@/app/components/Information/RecentComponentContainer"
 import { Chela_One } from "next/font/google";
 import CardContainer from "@/app/components/Information/CardContainer";
+import MapSearchResult from "@/app/components/Maps/MapSearchResult";
 
 export default async function Home() {
 
@@ -24,6 +25,7 @@ export default async function Home() {
   console.log("properties", properties)
   return (
     <>
+    
       <img className={"bannerHome"} src="/Image/BannerHome.png" />
       <section className="homeMainSection">
         <div className={"bannerHomeTitle"} style={{ display: "flex", alignItems: "center", marginBottom: "60px" }}>
