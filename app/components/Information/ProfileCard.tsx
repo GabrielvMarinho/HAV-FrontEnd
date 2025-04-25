@@ -7,8 +7,8 @@ export default function ProfileCard(
 
     return (
         <div className="card">
-            <Image src="/image/perfilmage.png" alt="Profile" width={100} height={100} className="profileImage" />
-            <p className="name">{props.name.toUpperCase()}</p>
+            <Image src="/image/kauani.png" alt="Profile" width={100} height={100} className="profileImage" />
+            <p className="name">{props.name}</p>
             <div className="socialIcons">
             </div>
         </div>

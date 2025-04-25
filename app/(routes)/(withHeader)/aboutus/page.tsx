@@ -149,7 +149,7 @@ export default function page() {
                         </h2>
                     </div>
                     <div>
-                        <ProfileCard name={"KAUANI DA SILVA"}/>
+                        <ProfileCard name={"Kauani da Silva"}/>
                     </div>
                 </div>
 
@@ -160,8 +160,8 @@ export default function page() {
                         </h2>
                     </div>
                     <div className="cardsGroup">
-                        <ProfileCard name={"KAUANI DA SILVA"}/>
-                        <ProfileCard name={"KAUANI DA SILVA"} />
+                        <ProfileCard name={"Kauani da Silva"}/>
+                        <ProfileCard name={"Kauani da Silva"} />
                     </div>
                 </div>
 
@@ -172,9 +172,9 @@ export default function page() {
                         </h2>
                     </div>
                     <div className="cardsGroup">
-                        <ProfileCard name={"KAUANI DA SILVA"}/>
-                        <ProfileCard name={"KAUANI DA SILVA"} />
-                        <ProfileCard name={"KAUANI DA SILVA"}/>
+                        <ProfileCard name={"Kauani da Silva"}/>
+                        <ProfileCard name={"Kauani da Silva"} />
+                        <ProfileCard name={"Kauani da Silva"}/>
                     </div>
                 </div>
 
@@ -185,10 +185,10 @@ export default function page() {
                         </h2>
                     </div>
                     <div className="cardsGroup">
-                        <ProfileCard name={"KAUANI DA SILVA"} />
-                        <ProfileCard name={"KAUANI DA SILVA"}  />
-                        <ProfileCard name={"KAUANI DA SILVA"} />
-                        <ProfileCard name={"KAUANI DA SILVA"}  />
+                        <ProfileCard name={"Kauani da Silva"} />
+                        <ProfileCard name={"Kauani da Silva"}  />
+                        <ProfileCard name={"Kauani da Silva"} />
+                        <ProfileCard name={"Kauani da Silva"}  />
                     </div>
                 </div>
             </div>
