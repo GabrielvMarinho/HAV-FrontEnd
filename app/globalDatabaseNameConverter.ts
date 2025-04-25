@@ -8,6 +8,7 @@ export default {
     "apartamento":"Apartamento",
     "casa": "Casa",
     "terreno": "Terreno",
+    
     //estado
     "sc": "Santa Catarina",
     "pr": "Paraná",

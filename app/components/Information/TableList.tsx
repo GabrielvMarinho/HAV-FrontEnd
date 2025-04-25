@@ -96,7 +96,7 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
 
     //GRAPHS RELATED
     const graphFunction = function(){
-        router.push(`${window.location.pathname}/graphs`);
+        router.push(`${window.location.pathname}/reports`);
     }
 
     //RESETING THE LOCAL STORAGE
