@@ -20,6 +20,8 @@ export default async function getMostRecentLeaseProperties() {
         promotionalPrice: property.promotionalPrice,
         price: property.price,
         purpose: property.purpose,
+        mainImage: property.mainImage,
+
       }));
   
       return properties;

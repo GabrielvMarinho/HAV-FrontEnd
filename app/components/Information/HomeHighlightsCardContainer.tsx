@@ -23,6 +23,8 @@ export default function HomeHighlightsCardContainer() {
     async function fetchProperties() {
       const response = await fetchFunctions[purpose]();
       setProperties(response);  
+      console.log("itensCerto", response)
+
     }
 
     fetchProperties();
