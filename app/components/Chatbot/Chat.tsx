@@ -104,7 +104,7 @@ export default function Chat({ onClose }: ChatProps) {
             switch (userInput.trim()) {
                 case "1":
                     botText = "Ótimo! Te redirecionando para a página de Imóveis...";
-                    redirectPath = "/produtos";
+                    redirectPath = "/search?purpose=venda";
                     break;
                 case "2":
                     botText = "Suporte:\n1. FAQ\n2. Fale Conosco";
