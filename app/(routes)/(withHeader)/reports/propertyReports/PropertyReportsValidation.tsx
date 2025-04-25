@@ -90,9 +90,9 @@ export default function PropertyReportsValidation() {
       <div className="reports-container">
         <div className="data-Title">
           <SideTitle tag={"h1"} text={"DADOS TOTAIS"} />
-          <div className="reports-subtitle">
+          {/* <div className="reports-subtitle">
             <p>EXPORTAR DADOS</p>
-          </div>
+          </div> */}
         </div>
         </div>
 
