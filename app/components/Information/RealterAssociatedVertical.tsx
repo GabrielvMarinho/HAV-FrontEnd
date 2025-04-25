@@ -10,24 +10,27 @@ export default function RealterAssociatedVertical(props: {
             {props.objPropertyList?.realtorPropertySpecific?.length ? (
                 props.objPropertyList.realtorPropertySpecific.map((realtor, index) => (
                     <article key={index} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "21px" }}>
-                        {realtor?.img ? (
+                        {realtor.img ?
+                                <img 
+                                src={`data:image/png;base64,${realtor.img}`} 
+                                style={{ width: "200px", height:"200px", objectFit:"cover"}}
+                                >
+                                </img>
+                        : 
+
                             <img
-                                src={`${decodeDoubleBase64(realtor.img)}`}
-                                alt="imagem do corretor"
-                                style={{display: "block", width: "200px", height: "200px" }}
+                            src="/Image/fotoSemPropriedade.png" 
+                            alt="imagem user"
+                            style={{ width: "200px", height:"200px", objectFit:"cover"}}
+
                             />
-                        ) : (
-                            <img
-                                src={"/Image/fotoSemPropriedade.png"}
-                                alt="imagem do corretor"
-                                style={{display: "block", width: "200px", height: "200px"  }}
-                            />
-                        )}
+
+                        }
                         <div style={{ display: "flex", alignItems: "left", flexDirection: "column", gap: "9px" }}>
                             <p id="realtorNameVertical">{realtor.name}</p>
                             <div style={{ display: "flex", flexDirection: "row", gap: "10px", alignItems: "center" }}>
 
-                                <p id="realtorNumberVertical">{realtor.phoneNumber}</p>
+                                <p id="realtorNumberVertical">Telefone - {realtor.phoneNumber}</p>
                             </div>
                             <div style={{ display: "flex", flexDirection: "row", gap: "10px", alignItems: "center" }}>
 
