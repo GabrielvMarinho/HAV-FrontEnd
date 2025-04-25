@@ -157,6 +157,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
             console.error("Erro ao acessar ou criar chat:", error);
         }
     };
+    console.log("property ", property)
 
     return (
         <>

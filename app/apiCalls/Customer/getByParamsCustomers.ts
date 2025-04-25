@@ -1,3 +1,4 @@
+import { Customer } from "@/app/models/Customer/Customer";
 import findTokenOnCookie from "@/app/utils/findTokenOnCookie";
 
 export default async function(
@@ -43,7 +44,7 @@ export default async function(
     
     
       const data = await response.json();
-    
+      console.log("data", data)
       const customers: Customer[] = data.content.map((customer: Customer) => customer);
       return {customers: customers, totalPages: data.totalPages}
 

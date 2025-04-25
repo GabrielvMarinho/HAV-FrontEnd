@@ -23,7 +23,7 @@ export default function selectHour(props :{usuario :any; day: Date; ids :Record<
 
     if(!props.day){
         return(
-            <h3>selecione um dia</h3>
+            <></>
         )
     }
     const date = new Date()
@@ -33,7 +33,6 @@ export default function selectHour(props :{usuario :any; day: Date; ids :Record<
         props.day.getDate() < date.getDate()) {
       return(
         <div style={{display:"flex", flexDirection:"column", alignItems:"center", gap:"10px"}}>
-        <h3>{props.day.toLocaleString()}</h3>
         <div className="hourButtonContainer">
           {Array.from({ length: 12 }, (_, i) => {
             const hour = i + 8;
@@ -107,7 +106,6 @@ export default function selectHour(props :{usuario :any; day: Date; ids :Record<
     
       return (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px" }}>
-          <h3>{props.day.toLocaleString()}</h3>
           <div className="hourButtonContainer">
             {Array.from({ length: 12 * 2 }, (_, i) => {
               const hour = 8 + Math.floor(i / 2);
