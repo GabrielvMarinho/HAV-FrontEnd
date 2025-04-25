@@ -21,7 +21,10 @@ import { Customer } from '@/app/models/Customer/Customer';
 
 export default function TableList(props: { totalPages: number; changeArchivedStatus: (ids: string[]) => Promise<void>; deleteFunction: (ids: string[]) => Promise<void>; archived: boolean; context: string; size: string, titles: string[], data: any[] }) {
 
-
+    const updatedData = props.data.map(item => {
+        const { status, ...rest } = item; // remove status using destructuring
+        return rest;
+      });
     // useEffect(() => {
     //     const fetch  = async () => {
     //         const response = await getByParamsRealtors(undefined, undefined, undefined, undefined, undefined, false, 0);
@@ -161,7 +164,7 @@ export default function TableList(props: { totalPages: number; changeArchivedSta
                     </thead>
 
                     <tbody>
-                        {props.data && props.data.map((obj, index) =>
+                        {updatedData && updatedData.map((obj, index) =>
 
                             <React.Fragment key={Object.values(obj)[0] || index}>
                                 <div className='tableListLine'></div>
