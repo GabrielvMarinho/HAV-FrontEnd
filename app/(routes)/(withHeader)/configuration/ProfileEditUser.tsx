@@ -21,11 +21,11 @@ import ToggleButton from "@/app/components/Inputs/ToggleButton";
 import { textFields } from "@/app/components/globalFormsConfig/InputTextConfig";
 import NonEditableInputText from "@/app/components/Inputs/NonEditableInputText";
 import { newCustomer } from "@/app/Validators/CustomerValidator";
-import UserConfigurationDtoForm from "@/app/Validators/UserConfigurationDtoForm";
 import editUserConfigurationInfo from "@/app/apiCalls/User/editUserConfigurationInfo";
 import ToggleTheme from "@/app/components/Theme/ToggleTheme";
 import Button from "@/app/components/Inputs/Button";
 import getUserConfigurationInfo from "@/app/apiCalls/User/getUserConfigurationInfo";
+import { UserConfigurationDtoForm } from "@/app/Validators/UserConfigurationDtoForm";
 
 
 export default function ProfileEditUser(props: {role: string}) {

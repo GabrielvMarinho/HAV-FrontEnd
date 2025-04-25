@@ -37,6 +37,9 @@ export default async function RootLayout({
     <>
       <InitTheme />
       <HeadersAll usuario={usuario} />
+      {usuario.role === "ROLE_CUSTOMER" &&
+        <ChatBot/> 
+      }
       <ReduxProvider>
         {children}
       </ReduxProvider>
