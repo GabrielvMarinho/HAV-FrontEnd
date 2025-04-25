@@ -268,6 +268,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                 <DescriptionProperty obj={{ propertyDescription: property.propertyDescription }} />
                 <section className="sectionPriceProperty">
                     <HorizontalPropertySpecific />
+                    
                     <MapSearchResult addressSpecific={{
                         street: property.address.street,
                         city: property.address.city,
