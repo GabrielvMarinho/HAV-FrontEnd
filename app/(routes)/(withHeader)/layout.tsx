@@ -9,6 +9,7 @@ import InitTheme from "../../components/Theme/InitTheme"
 
 import ChatBot from "@/app/components/Chatbot/ChatBot"
 import Footer from "@/app/components/Footer/Footer"
+import { ReduxProvider } from "@/app/redux/providers"
 
 
 export const metadata = {
@@ -34,11 +35,12 @@ export default async function RootLayout({
 
   return (
     <>
-    <InitTheme/>
-    <HeadersAll usuario={usuario}/>
-    {usuario?.role === "ROLE_CUSTOMER" && <ChatBot />}  
-    {children}
-    <Footer/>
+      <InitTheme />
+      <HeadersAll usuario={usuario} />
+      <ReduxProvider>
+        {children}
+      </ReduxProvider>
+      <Footer />
     </>
   );
 }
