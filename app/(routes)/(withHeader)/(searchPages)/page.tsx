@@ -20,7 +20,6 @@ import CardContainer from "@/app/components/Information/CardContainer";
 
 export default async function Home() {
 
-  const mostRecentProperties = await GetMostRecentProperties()
   const properties = await GetRandomPropertiesHighlightRandom()
   console.log("properties", properties)
   return (

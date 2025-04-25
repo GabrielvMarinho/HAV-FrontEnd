@@ -3,7 +3,7 @@
     import TapeTopCardImovel from "../IconsTSX/TapeTopCardImovel";
 
     export default function TapeCardImovel(props: {text :string}) {
-        if(props.text ==null || props.text ==undefined || props.text =="comum" ){
+        if(props.text ==null || props.text ==undefined || props.text =="disponivel" ){
             return (
                 <>
                 </>
