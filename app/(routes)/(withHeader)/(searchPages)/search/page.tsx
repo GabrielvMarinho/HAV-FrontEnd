@@ -31,7 +31,9 @@ export default async function({searchParams} :{searchParams: {
     garageSpace?: boolean,
     suite?: boolean,
     purpose?: string,
+    neighborhood?: string
     visualization: string
+    
 }}){
     
     const {
@@ -47,6 +49,8 @@ export default async function({searchParams} :{searchParams: {
         suite = null,
         purpose = null,
         visualization = "card", // valor padrão
+        neighborhood = null
+
     } = searchParams;
     
     const { properties, totalPages } = await getByParamsProperties(
@@ -61,7 +65,8 @@ export default async function({searchParams} :{searchParams: {
         bathRoom,
         garageSpace,
         suite,
-        purpose
+        purpose,
+        neighborhood,
     );
 
     return (
