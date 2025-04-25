@@ -23,7 +23,11 @@
                         alignItems: "center",
                         fontSize: "13px"
                     }}>
-                    <p style={{color: "var(--text-white)"}}>{props.text?.toUpperCase()}</p>
+                        {props.text =="promocao"?
+                    <p style={{color: "var(--text-white)"}}>PROMOÇÃO</p>
+:                    <p style={{color: "var(--text-white)"}}>{props.text?.toUpperCase()}</p>
+
+                        }
                 </div>
             </div>
         );
