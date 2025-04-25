@@ -80,7 +80,7 @@ As seguintes tecnologias e APIs externas foram utilizadas no desenvolvimento des
 O diagrama de classes do banco de dados representa a estrutura das entidades que compõem o sistema e como elas se relacionam. Ele foi desenvolvido para mapear as tabelas do banco de dados de forma clara e compreensível, facilitando a gestão das informações e a interação entre as diferentes partes do sistema.
 
 
-![img.png](img.png)
+![Diagrama de classe](https://i.imgur.com/P9AOllC.png)
 
 # Instalação
 
