@@ -14,7 +14,8 @@ export default async function(
     bathRoom?: boolean,
     garageSpace?: boolean,
     suite?: boolean,
-    purpose?: string
+    purpose?: string,
+    neighborhood?: string
 
     ): Promise<{
       properties: PropertySpecificCard[];
@@ -23,15 +24,11 @@ export default async function(
       const url = `http://localhost:9090/property/filter/card?page=${page}`
 
       if(purpose==="venda"){
-        console.log("é venda mesmo")
-        console.log(minPrice)
-        console.log(maxPrice)
-        console.log(InputFilterConfig.priceRangesSell.max)
         if(minPrice===null){
           minPrice=0
         }
         if(maxPrice===null || maxPrice ===InputFilterConfig.priceRangesSell.max){
-          console.log("igual")
+
           maxPrice = 100000000
         }
 
@@ -51,6 +48,10 @@ export default async function(
         "propertyType":propertyType===""?null:propertyType,
         "propertyStatus":propertyStatus===""?null:propertyStatus,
         "archived":archived,
+        "address":{
+          "neighborhood":neighborhood,
+        },
+        
         "propertyFeatures":{
           "bedRoom":bedRoom,
           "bathRoom":bathRoom,
@@ -80,6 +81,9 @@ export default async function(
             "bathRoom":bathRoom,
             "garageSpace":garageSpace,
             "suite":suite
+          },
+          "address":{
+            "neighborhood":neighborhood,
           }
           
         })
@@ -87,12 +91,15 @@ export default async function(
   
       
       const data = await response.json();
-      console.log(data)
       const properties: PropertySpecificCard[] = data.content.map((property: PropertySpecificCard) => ({
 
           id:property.id,
           neighborhood:property.address.neighborhood,
           city:property.address.city,
+          street:property.address.street,
+          state:property.address.state,
+          propertyNumber:property.address.propertyNumber,
+
           bedRoom:property.propertyFeatures.bedRoom,
           bathRoom:property.propertyFeatures.bathRoom,
           livingRoom:property.propertyFeatures.livingRoom,
@@ -106,7 +113,6 @@ export default async function(
 
       }));
         
-      console.log(properties)
       return {properties: properties, totalPages: data.totalPages}
 
     }catch{

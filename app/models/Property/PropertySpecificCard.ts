@@ -8,6 +8,9 @@
 interface PropertySpecificCard {
     id: number;
     propertyStatus: string;
+    propertyNumber: string;
+    street: string,
+    state: string,
     propertyType: string;
     promotionalPrice: number;
     area: number;

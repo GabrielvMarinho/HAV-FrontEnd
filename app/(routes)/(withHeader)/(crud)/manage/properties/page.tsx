@@ -59,7 +59,7 @@ export default async function page({searchParams}: {searchParams: {
         <>
           <AuthGuard requiredRole="ROLE_EDITOR"> 
             <Title tag="h1" text="Imóveis"/>
-            <SearchBar placeholder="Busca:"/>   
+            {/* <SearchBar placeholder="Busca:"/>    */}
             <div className="containerFilterListAction">
                 <Filter 
                 size="medium" 
@@ -69,7 +69,7 @@ export default async function page({searchParams}: {searchParams: {
                 inputChooseQuantites={[]}
 
                 />
-                <TableList deleteFunction ={deletePropertyList} changeArchivedStatus = {changeArchivedStatusProperty} archived={false} context="admin" size="large" titles={["id imóvel", "preço",  "tipo imóvel", "finalidade", "status"]} 
+                <TableList deleteFunction ={deletePropertyList} changeArchivedStatus = {changeArchivedStatusProperty} archived={false} context="admin" size="large" titles={["codigo", "preço",  "tipo imóvel", "finalidade", "status"]} 
                 data={properties} totalPages={totalPages}/>
             </div>
           </AuthGuard>

@@ -59,3 +59,9 @@
 section {
   margin-bottom: 25px;
 }
+
+@media(width<992px){
+  .title{
+    gap: 10px;
+  }
+}

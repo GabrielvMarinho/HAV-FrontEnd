@@ -8,26 +8,36 @@ import QuadradoMais from "@/app/components/IconsTSX/QuadradoMais";
 import SearchIcon from "@/app/components/IconsTSX/SearchIcon";
 import SmileEmoji from "@/app/components/IconsTSX/smileEmoji";
 import MessageCard from "@/app/components/MessageCard/MessageCard";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./css/style.css"
 import { currentUser, searchUser } from "@/app/redux/Auth/action";
 import { useDispatch, useSelector } from "react-redux";
 import { createChat, getUsersChat } from "@/app/redux/Chat/action";
-import { createMessage, getAllMessage } from "@/app/redux/Message/action";
+import { createMessage, fetchUnreadCounts, getAllMessage, markMessagesAsRead } from "@/app/redux/Message/action";
 import SockJS from "sockjs-client";
-import { over } from "stompjs";
+import { Client } from "@stomp/stompjs";
+import { connectWebSocket, sendMessageSocket, stompClient, subscribeToChat } from "@/app/redux/websocketClient";
 
 export default function Chat() {
 
     const [querys, setQuerys] = useState("");
     const [currentChat, setCurrentChat] = useState(false);
     const [content, setContent] = useState("");
-    const { auth, chat, message } = useSelector(store => store);
+    // const { auth, chat, message } = useSelector(store => store);
     const dispatch = useDispatch();
     const token = localStorage.getItem("token");
-    const [stompClient, setStompClient] = useState(null);
-    const [isConnected, setIsConnected] = useState(false);
-    const [messages, setMessages] = useState([]);
+    // const [messages, setMessages] = useState([]);
+    const unreadCounts = useSelector((state) => state.message.unreadCounts);
+    const auth = useSelector(state => state.auth);
+    const chat = useSelector(state => state.chat);
+    const messages = useSelector(state => state.message.messages);
+
+
+    useEffect(() => {
+        if (token) {
+            dispatch(fetchUnreadCounts(token));
+        }
+    }, [auth.token, dispatch]);
 
     const handleSearch = (keyword) => {
         dispatch(searchUser({ keyword, token }))
@@ -38,33 +48,13 @@ export default function Chat() {
         setQuerys("")
     };
 
-    const handleCreateNewMessage = () => {
+    {/*const handleCreateNewMessage = () => {
         dispatch(createMessage({ token, data: { chatId: currentChat.id, content: content, } }))
-    }
+    }*/}
 
     const handleCurrentChat = (item) => {
-        setCurrentChat(item)
-    }
-
-    const connect = () => {
-        const sock = new SockJS("http://localhost:9090/ws");
-        const temp = over(sock);
-        setStompClient(temp);
-
-        const headers = {
-            Authorization: `Bearer ${token}`,
-            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN")
-        }
-
-        temp.connect(headers, onConnect, onError);
-    }
-
-    function getCookie(name) {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) {
-            return parts.pop()?.split(";").shift();
-        }
+        setCurrentChat(item);
+        dispatch(markMessagesAsRead(item.id));
     }
 
     function formatTime(dateString) {
@@ -72,49 +62,14 @@ export default function Chat() {
         return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
     }
 
-    const onError = (error) => {
-        console.log("no error", error)
-    }
-
-    const onConnect = () => {
-        setIsConnected(true);
-    }
-
-    useEffect(() => {
-        if (message.newMessage && stompClient) {
-            setMessages([...messages, message.newMessage])
-            stompClient?.send("/app/message", {}, JSON.stringify(message.newMessage));
-        }
-    }, message.newMessage)
-
-    const onMessageReceive = (payload) => {
-        const receivedMessage = JSON.parse(payload.body);
-        setMessages([...messages, receivedMessage]);
-    }
-
-    useEffect(() => {
-        if (isConnected && stompClient && auth.reqUser && currentChat) {
-            const subscription = stompClient.subscribe(`/group/${currentChat.id}`, onMessageReceive);
-
-            return () => {
-                subscription.unsubscribe();
-            }
-        }
-    })
-
-
-    useEffect(() => {
-        connect();
-    }, [])
-
-    useEffect(() => {
-        setMessages(message.messages)
-    }, message.messages)
+    // useEffect(() => {
+    //     setMessages(message.messages)
+    // }, message.messages)
 
     useEffect(() => {
         if (currentChat?.id)
             dispatch(getAllMessage({ chatId: currentChat.id, token }))
-    }, [currentChat, message.newMessage])
+    }, [currentChat])
 
     useEffect(() => {
         dispatch(getUsersChat({ token }))
@@ -138,6 +93,113 @@ export default function Chat() {
         }
     }, []);
 
+    {/* Configuração do WebSocket */ }
+
+    /* useEffect(() => {
+        if (!currentChat?.id) return;
+
+        console.log("🔄 Tentando conectar ao WebSocket para o chat:", currentChat.id);
+
+        connectWebSocket(currentChat.id, (msg) => {
+            console.log("🧠 Dispatch de mensagem recebida:", msg);
+            dispatch({ type: "CREATE_NEW_MESSAGE", payload: msg });
+        });
+
+        return () => {
+            if (stompClient?.connected) {
+                stompClient.deactivate();
+                console.log("🧹 WebSocket desconectado");
+            }
+        };
+    }, [currentChat?.id]); */
+
+
+    useEffect(() => {
+        if (!currentChat?.id || !auth.reqUser?.id) return;
+
+        console.log("🔄 Tentando conectar ao WebSocket para o chat:", currentChat.id);
+        console.log("🔄 Verificando auth.reqUser?.id:", auth.reqUser?.id);
+
+        connectWebSocket(
+            currentChat.id,
+            (msg) => {
+                console.log("🧠 Dispatch de mensagem recebida:", msg);
+                dispatch({ type: "CREATE_NEW_MESSAGE", payload: msg });
+            },
+            auth.reqUser?.id,
+            auth.token,
+            dispatch
+        );
+
+        return () => {
+            if (stompClient?.connected) {
+                stompClient.deactivate();
+                console.log("🧹 WebSocket desconectado");
+            }
+        };
+    }, [currentChat?.id, auth.reqUser?.id, auth.token, dispatch]);
+
+    /* const userChats = useSelector((state) => state.chat.chats);
+
+    useEffect(() => {
+        if (!auth.reqUser?.id || !auth.token || userChats.length === 0) return;
+
+        const chatIds = userChats.map(chat => chat.id); // lista de todos os chats
+
+        connectWebSocket(
+            chatIds,
+            (msg) => {
+                console.log("🧠 Dispatch de mensagem recebida:", msg);
+                dispatch({ type: "CREATE_NEW_MESSAGE", payload: msg });
+            },
+            currentChat?.id,
+            auth.reqUser?.id,
+            auth.token,
+            dispatch
+        );
+
+        return () => {
+            if (stompClient?.connected) {
+                stompClient.deactivate();
+                console.log("🧹 WebSocket desconectado");
+            }
+        };
+    }, [auth.reqUser?.id, auth.token, currentChat?.id, userChats.length, dispatch]); */
+
+
+
+    const handleCreateNewMessage = () => {
+        const message = {
+            chatId: currentChat.id,
+            content: content,
+            userId: auth.reqUser?.id
+        };
+
+        if (stompClient?.connected) {
+            sendMessageSocket(message);
+        } else {
+            console.warn("STOMP não conectado. Enviando via fetch como fallback.");
+            dispatch(createMessage({ token, data: { chatId: currentChat.id, content: content } }));
+        }
+
+        setContent("");
+    };
+
+    {/* Término Configuração do WebSocket */ }
+
+    {/* Testando criar conversa chat atráves botão */ }
+    useEffect(() => {
+        const selectedChatId = localStorage.getItem("selectedChatId");
+
+        if (selectedChatId && chat.chats.length > 0) {
+            const foundChat = chat.chats.find(c => c.id == selectedChatId);
+            if (foundChat) {
+                setCurrentChat(foundChat);
+                dispatch(markMessagesAsRead(foundChat.id));
+                localStorage.removeItem("selectedChatId"); // Limpa o ID após carregar
+            }
+        }
+    }, [chat.chats]);
 
     return (
         <>
@@ -159,7 +221,7 @@ export default function Chat() {
                     </div>
 
                     <div style={{ marginLeft: "10px" }}>
-                        <h2 style={{ fontWeight: "bolder", color: "var(--text-white)", marginLeft:"25px" }}>CONVERSAS</h2>
+                        <h2 style={{ fontWeight: "bolder", color: "var(--text-white)", marginLeft: "25px" }}>CONVERSAS</h2>
                     </div>
 
                     <div style={{
@@ -201,11 +263,12 @@ export default function Chat() {
                                 <div key={item.id} onClick={() => handleClickOnChatCard(item.id)}>
                                     {""}
                                     <hr />
-                                    <ChatCard name={item.full_name}
+                                    <ChatCard name={item.name}
                                         userImg={
                                             item.profile_picture ||
                                             "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
                                         }
+                                        unreadCount={unreadCounts?.find((unread) => unread.chatId === item.id)?.unreadCount || 0}
                                     />
                                     {""}
                                 </div>
@@ -224,14 +287,15 @@ export default function Chat() {
                                                     item.chat_image ||
                                                     "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
                                                 }
+                                                unreadCount={unreadCounts?.find((unread) => unread.chatId === item.id)?.unreadCount || 0}
                                             />
                                         ) : (
                                             <ChatCard
                                                 isChat={true}
                                                 name={
                                                     auth.reqUser?.id !== item.users[0]?.id
-                                                        ? item.users[0].full_name
-                                                        : item.users[1].full_name
+                                                        ? item.users[0].name
+                                                        : item.users[1].name
                                                 }
                                                 userImg={
                                                     auth.reqUser?.id !== item.users[0].id
@@ -240,6 +304,7 @@ export default function Chat() {
                                                         : item.users[1]?.profile_picture ||
                                                         "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_640.png"
                                                 }
+                                                unreadCount={unreadCounts?.find((unread) => unread.chatId === item.id)?.unreadCount || 0}
                                             // notification={notifications.length}
                                             /* isNotification={
                                                 notification[0]?.chat?.id === item.id
@@ -330,8 +395,8 @@ export default function Chat() {
                                         }
                                         alt="" />
                                     <p>{currentChat && auth.reqUser?.id ===
-                                        currentChat.users[0].id ? currentChat.users[1].full_name :
-                                        currentChat.users[0].full_name}</p>
+                                        currentChat.users[0].id ? currentChat.users[1].name :
+                                        currentChat.users[0].name}</p>
                                 </div>
                                 <div style={{
                                     display: "flex", paddingTop: "0.75rem", paddingBottom: "0.75rem", marginLeft: "1rem",
@@ -351,12 +416,20 @@ export default function Chat() {
                                 marginTop: "6rem", overflowY: "scroll", paddingRight: "2.5rem", paddingLeft: "2.5rem",
 
                             }}>
-                                {
+                                {/* {
                                     message.messages.length > 0 && message.messages?.map((item) =>
                                         <MessageCard isSentMessage={item.user?.id === auth.reqUser?.id}
                                             content={item.content} currentTime={formatTime(item.createdAt)}
                                         />)
-                                }
+                                } */}
+                                {messages.length > 0 && messages.map((item) => (
+                                    <MessageCard
+                                        key={item.id} // importante para performance
+                                        isSentMessage={item.user?.id === auth.reqUser?.id}
+                                        content={item.content}
+                                        currentTime={formatTime(item.createdAt)}
+                                    />
+                                ))}
                             </div>
                         </div>
 
@@ -391,7 +464,7 @@ export default function Chat() {
                                     onKeyPress={(e) => {
                                         if (e.key === "Enter") {
                                             handleCreateNewMessage();
-                                            setContent("")
+                                            // setContent("")
                                         }
                                     }} />
                                 <div style={{

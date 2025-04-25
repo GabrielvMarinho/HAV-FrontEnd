@@ -149,7 +149,7 @@ export default function page() {
                         </h2>
                     </div>
                     <div>
-                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
+                        <ProfileCard name={"KAUANI DA SILVA"}/>
                     </div>
                 </div>
 
@@ -160,8 +160,8 @@ export default function page() {
                         </h2>
                     </div>
                     <div className="cardsGroup">
-                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
-                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
+                        <ProfileCard name={"KAUANI DA SILVA"}/>
+                        <ProfileCard name={"KAUANI DA SILVA"} />
                     </div>
                 </div>
 
@@ -172,9 +172,9 @@ export default function page() {
                         </h2>
                     </div>
                     <div className="cardsGroup">
-                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
-                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
-                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
+                        <ProfileCard name={"KAUANI DA SILVA"}/>
+                        <ProfileCard name={"KAUANI DA SILVA"} />
+                        <ProfileCard name={"KAUANI DA SILVA"}/>
                     </div>
                 </div>
 
@@ -185,15 +185,14 @@ export default function page() {
                         </h2>
                     </div>
                     <div className="cardsGroup">
-                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
-                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
-                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
-                        <ProfileCard name={"KAUANI DA SILVA"} whatsappLink="asd" instagramLink="sad" />
+                        <ProfileCard name={"KAUANI DA SILVA"} />
+                        <ProfileCard name={"KAUANI DA SILVA"}  />
+                        <ProfileCard name={"KAUANI DA SILVA"} />
+                        <ProfileCard name={"KAUANI DA SILVA"}  />
                     </div>
                 </div>
             </div>
 
-            <Footer />
         </>
     )
 }

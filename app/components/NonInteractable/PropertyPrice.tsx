@@ -7,12 +7,12 @@ export default function Price(props: {obj: Pick<PropertySpecific, "PromotionalPr
         style: "currency",
         currency: "BRL"
     }).format(value);
-
+    console.log("obj", props.obj)
     return (
         <div className="Price" style={{ display: "flex", flexDirection: "column" }}>
-            {props.obj.purpose === "vendaPromocao" && (
+            {props.obj.PromotionalPrice >0? 
                 <p className='PromotionalPrice'>{formatCurrency(props.obj.PromotionalPrice)}</p>
-            )}
+            :""}
             <h1 className='ActualPrice'>{formatCurrency(props.obj.ActualPrice)}</h1>
             <p className='Taxes'>
                 {props.obj.taxes.iptu? 

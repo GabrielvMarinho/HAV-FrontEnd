@@ -20,6 +20,8 @@ export default function PropertyFilterWrapper() {
     async function fetchProperties() {
       const response = await fetchFunctions[purpose]();
       setProperties(response);
+      console.log("itens", response)
+
     }
 
     fetchProperties();
@@ -31,11 +33,11 @@ export default function PropertyFilterWrapper() {
 
   return (
     <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-      <NavBarAdm
+      {/* <NavBarAdm
         options={NavBarPath.purpose}
         onSelect={handleSelectPurpose}
         selected={purpose}
-      />
+      /> */}
       <SliderContentOfThree items={properties} />
     </div>
   );

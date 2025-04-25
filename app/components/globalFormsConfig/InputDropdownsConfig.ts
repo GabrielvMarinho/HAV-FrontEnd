@@ -130,7 +130,7 @@ export const dropdownFields = {
         id: "purpose",
         options: [
             ["venda", "Venda"],
-            ["locacao", "Locação"],
+            ["aluguel", "aluguel"],
             ["misto", "Misto"]
 
         ]
@@ -141,7 +141,7 @@ export const dropdownFields = {
         text: "Status",
         id: "status",
         options: [
-            ["comum", "Comum"],
+            ["disponivel", "disponivel"],
             ["lancamento", "Lançamento"],
             ["promocao", "Promoção"]
         ]
@@ -326,7 +326,6 @@ export const dropdownFields = {
         id: "visualization",
         options: [
             ["card", "Card"],
-            ["list", "Lista"],
             ["map", "Mapa"]
         ]
     },

@@ -46,6 +46,7 @@ export default async function getHighlightedProperties() {
                 } catch (err) {
                     console.warn(`Erro ao carregar imagem do imóvel ${property.id}:`, err);
                 }
+                console.log("data", data)
 
                 return {
                     id: property.id,
@@ -58,9 +59,13 @@ export default async function getHighlightedProperties() {
                     garageSpace: property.propertyFeatures.garageSpace,
                     area: property.area,
                     propertyStatus: property.propertyStatus,
+                    street: property.address.street,
+                    state: property.address.state,
+                    propertyNumber: property.address.propertyNumber,
                     promotionalPrice: property.promotionalPrice,
                     price: property.price,
                     purpose: property.purpose,
+                    mainImage: property.mainImage,
                     mainPage: property.mainPage // seta a URL da imagem
                 };
             })

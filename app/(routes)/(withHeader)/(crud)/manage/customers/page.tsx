@@ -67,7 +67,7 @@ export default async function page({ searchParams }: {
     <AuthGuard requiredRole="ROLE_EDITOR">
         <Title tag="h1" text="Usuários Comuns" />
         <NavBarAdm options={NavBarPath.users} /> 
-        <SearchBar placeholder="Busca:" />
+        {/* <SearchBar placeholder="Busca:" /> */}
         <div className="containerFilterListAction">
           <Filter
             size="medium"
@@ -87,7 +87,7 @@ export default async function page({ searchParams }: {
             archived={false}
             context="admin"
             size="large"
-            titles={["cpf", "nome", "email", "n. imóveis", "objetivo"]}
+            titles={["cpf", "nome", "email", "telefone", "status"]}
             data={customers}
             totalPages={totalPages}
           />

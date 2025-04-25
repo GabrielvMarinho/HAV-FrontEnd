@@ -54,7 +54,7 @@ export default async function page({searchParams}: {searchParams: {
         </div>
 
         <div className="searchBarChooseRealtor">
-          <SearchBar placeholder="Busca:" />
+          {/* <SearchBar placeholder="Busca:" /> */}
         </div>
 
         <div className="containerFilterListAction">

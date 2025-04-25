@@ -2,8 +2,10 @@
 
 .articleFirstContent{
     display: flex;
+    width: fit-content;
+    margin-inline: auto;
     flex-direction: row;
-    gap: 5vw;
+    gap: clamp(50px, 5vw, 80px);
 }
 
 .buttonIconDiv{
@@ -12,10 +14,18 @@
     align-items: center;
     gap: 8px
 }
-
+.linkLogin{
+    margin-top: 8px;
+    font-size: 12px;
+    display: flex;
+    color: var(--box-dark-red-option);
+    justify-content: end;
+    text-decoration: underline;
+}
 .enviroments-interestPoint{
     margin-top: 40px;
     display: flex;
+    justify-content: space-between;
     flex-direction: row;
     gap: 223px;
 }
@@ -37,6 +47,7 @@
     display: flex;
     flex-direction: row;
     gap: 22px;
+    justify-content: center;
     margin-top: 150px;
 }
 

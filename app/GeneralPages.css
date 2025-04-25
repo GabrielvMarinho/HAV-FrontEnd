@@ -16,22 +16,25 @@
 }
 
 .homeMainSection{
-    height: 100vh;
+    height: 90vh;
+}
+.homeHiglightPropertiesMobile{
+    display: none;
 }
 .homeHiglightProperties{
-    height: 100vh;
-    margin-top: 150px;
+    height: fit-content;
 }
-.homeHiglightProperties h2{
+.homeHiglightProperties h2, .homeHiglightPropertiesMobile h2{
     font-size: var(--text-xl);
     font-weight: 700;
     color: var(--box-mid-dark-red);
 }
-.homeHiglightProperties h3{
+.homeHiglightProperties h3, .homeHiglightPropertiesMobile h3{
     font-size: var(--text-m);
     font-weight: 100;
 }
 .sliderContent{
+    margin-bottom: 150px;
     display: flex;
     gap: 10px;
 }
@@ -47,8 +50,7 @@
 .sliderItemHiddenRight{
     position: absolute;
     right: 0;
-
-    margin-right: -50%;
+    margin-right: clamp(-700px, -60vw, -1000px);
 }
   
 .sliderHidden{
@@ -61,7 +63,8 @@
     display: flex;
     flex-direction: column;
     gap:20px;
-    width: 450px;
+    width: 37vw;
+    max-width: 500px;
     background-color: var(--box-red-pink);
 }
 
@@ -72,7 +75,6 @@
 }
 
 .highlightProperty{ 
-    margin-top: 20px;
     height: 350px;
     width: fit-content;
     color: var(--text-white);
@@ -84,15 +86,54 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 250px;
-    gap: 70px;
+    margin-top: 150px;
 }
 
 .recentProperties{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 220px;
+    margin-top: 150px;
     margin-bottom: 220px;
-    gap: 70px;
+}
+@media(max-width:992px){
+    .highlightsCards{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+        gap: 0;
+    }
+    .recentProperties{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 50px;
+        gap: 0;
+    }
+    .homeHiglightProperties{
+        display: none;
+    }
+    .homeHiglightPropertiesMobile{
+        margin-top: 20px;
+        margin-bottom: 50px;
+        display: flex;
+        flex-direction: column;
+    }
+    .mainTitleHome{
+        font-size: var(--text-xl);
+        color: var(--text-red-pink);
+        width: 500px;
+        margin-right: 20px;
+        font-weight: 900;
+        
+        text-align: center;
+    }
+    
+}
+@media(max-width:700px){
+
+    .HavLogoMain{
+        display: none;
+    }
 }

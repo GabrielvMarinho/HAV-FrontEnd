@@ -1,14 +1,33 @@
 import "./css/style.css";
 import HorizontalLine from "../NonInteractable/HorizontalLine";
 import Button from "../Inputs/Button";
+import decodeDoubleBase64 from "@/app/utils/decodeDoubleBase64";
 
 export default function ProprietorDetails(props: { proprietor: ProprietorGetResponseDTO, WhatsappLink: string }) {
     const { proprietor, WhatsappLink } = props;
     console.log("prop", proprietor)
     return (
         <div>
-            <article style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "21px" }}>
-                <div style={{ width: "160px", height: "160px", backgroundColor: "black" }}></div>
+            <article style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "21px", marginTop:"20px" }}>
+                    {proprietor.image ?
+                                <img 
+                                src={`data:image/png;base64,${props.proprietor.image}`} 
+                                style={{ width: "120px", height:"120px", objectFit:"cover"}}
+                                >
+                                </img>
+                        : 
+
+                            <img
+                            src="/Image/fotoSemPropriedade.png" 
+                            alt="imagem user"
+                            style={{ width: "120px", height:"120px", objectFit:"cover"}}
+
+                            />
+
+                        }
+                
+                            
+                    
                 <div style={{ display: "flex", alignItems: "left", flexDirection: "column", gap: "9px" }}>
                     <p className="realtorName">{proprietor.name}</p>
                     <p className="realtorEmail">{`Email - ${proprietor.email}`}</p>

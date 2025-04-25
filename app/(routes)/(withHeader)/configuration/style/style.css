@@ -182,7 +182,7 @@
   
   .columnTitle {
     font-weight: 500;
-    color: var(--text-dark);
+    color: var(--text-black);
     margin-bottom: 25px;
     font-size: var(--text-sm);
     text-transform: uppercase;
@@ -207,6 +207,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 16px;
+  }
+  .menuContent label, .menuContent span{
+    color: var(--text-black);
   }
   
   .menuTextWrapper {

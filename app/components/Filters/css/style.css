@@ -149,6 +149,18 @@
 }
 
 @media (width< 992px){
+  .moreFilter{
+    display: none;
+  }
+  .subSection{
+    display: none;
+  }
+  .mainSection{
+    display: flex;
+    gap: 2vw;
+    flex-direction: column;
+    max-width: fit-content;
+  }
     .searchInput{
         padding: 12px;
         padding-inline: 15px;

@@ -8,9 +8,9 @@ import globalDatabaseNameConverter from "@/app/globalDatabaseNameConverter";
 import getPropertiesMap from "@/app/apiCalls/Property/getPropertiesMap";
 import getPropertiesMapFavorite from "@/app/apiCalls/Property/getPropertiesMapFavorite";
 
-export default function MapSearchResult(props: {height? :string, width? :string, favorite? :boolean; addressSpecific? :any}) {
+export default function MapSearchResult(props: {cards? :any; height? :string, width? :string, favorite? :boolean; addressSpecific? :any}) {
     const mapRef = useRef<HTMLDivElement>(null);
-
+    console.log("addd", props.addressSpecific)
     useEffect(() => {
         const initMap = async () => {
             const loader = new Loader({
@@ -26,7 +26,22 @@ export default function MapSearchResult(props: {height? :string, width? :string,
             const fetchAndUpdateMap = async function(){
                 var data;
                 //fetch
-                if(props.addressSpecific){
+                if (props.cards) {
+                    console.log("cards recebidos:", props.cards);
+                  
+                    const addresses = props.cards.map((property) => ({
+                        city: property.city,
+                        street: property.street,
+                        propertyNumber: property.propertyNumber,
+                        state: property.state,
+
+                      }));
+
+                    console.log("Endereços:", addresses);
+                  
+                    data = props.cards;
+                  }
+                else if(props.addressSpecific){
                     console.log("address", props.addressSpecific)
                     data = [props.addressSpecific]
                 }
@@ -37,9 +52,10 @@ export default function MapSearchResult(props: {height? :string, width? :string,
                 }
                 
                 console.log("data", data)
-                addresses = data.map(item => 
-                    `${item.street}, ${item.propertyNumber}, ${globalDatabaseNameConverter[item.city]}, ${globalDatabaseNameConverter[item.state]}`
-                );
+                addresses = data.map(item => ({
+                    id: item.id, // Include the ID
+                    address: `${item.street}, ${item.propertyNumber}, ${globalDatabaseNameConverter[item.city]}, ${globalDatabaseNameConverter[item.state]}`
+                  }));
                 console.log("add", addresses)
                 //update map
                 const map = new Map(mapRef.current as HTMLElement, {
@@ -50,7 +66,7 @@ export default function MapSearchResult(props: {height? :string, width? :string,
     
                 const streetView = map.getStreetView();
                 const streetViewService = new google.maps.StreetViewService();
-                for (const address of addresses) {
+                for (const { id, address } of addresses) {
                     geocoder.geocode({ address }, (results, status) => {
                         if (status === "OK" && results && results[0]) {
                             const result = results[0];
@@ -64,18 +80,31 @@ export default function MapSearchResult(props: {height? :string, width? :string,
                             });
     
                             const infoWindow = new google.maps.InfoWindow({
-                                content: `<div style="font-size: 14px;">${result.formatted_address}</div>`
-                            });
+                                content: `
+                                  <div style="font-size: 14px; min-width: 200px;">
+                                    ${result.formatted_address}
+                                    ${(props.cards || props.favorite) ? `
+                                      <button onclick="window.location.href='/property/${id}'" 
+                                              style="background: #2563eb; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; margin-top: 8px; width: 100%;">
+                                        Ver Detalhes
+                                      </button>
+                                    ` : ''}
+                                  </div>
+                                `
+                              });
     
                             // Mouse over -> abre a caixinha
                             marker.addListener("mouseover", () => {
-                                infoWindow.open(map, marker);
+                                if(infoWindow.isOpen){
+                                    infoWindow.close();
+
+                                }else{
+                                    infoWindow.open(map, marker);
+
+                                }
                             });
     
-                            // Mouse out -> fecha a caixinha
-                            marker.addListener("mouseout", () => {
-                                infoWindow.close();
-                            });
+                            
     
                             // Clique -> abre street view
                             marker.addListener("click", () => {
@@ -113,7 +142,7 @@ export default function MapSearchResult(props: {height? :string, width? :string,
     return (
         <div
             ref={mapRef}
-            style={{ marginBottom:"5px", marginTop:"5px", height: props.height, width: props.width }}
+            style={{ marginBottom:"5px", marginTop:"5px", height: props.height, width: props.width,  boxShadow: "0px 15px 50px rgba(0, 0, 0, 0.1)"  }}
         />
     );
 }

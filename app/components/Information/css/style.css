@@ -3,7 +3,10 @@
 .tableListData {
     width: 65vw;
 }
-
+.items-container{
+    display: flex;
+    gap: 30px;
+}
 .tableListLine {
     width: 66vw;
     opacity: 0.5;
@@ -271,7 +274,7 @@
     justify-content: center;
     text-align: center;
     /* height: 100%; */
-    gap: 37vh;
+    gap: 18vw;
 }
 
 .mainHomeInfoSubContainer {
@@ -281,7 +284,7 @@
     flex-direction: row;
     height: fit-content;
     align-items: center;
-    gap: 38vh;
+    gap: 18vw;
     position: relative;
     color: var(--bg-color);
 }
@@ -312,6 +315,7 @@
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
     z-index: 1;
+    width: 180px;
 }
 
 .icone {
@@ -355,7 +359,7 @@
 }
 
 #realtorNameVertical {
-    color: black;
+    color: var(--text-black);
     font-size: var(--text-sm);
     text-transform: uppercase;
     font-weight: 700;
@@ -516,7 +520,8 @@
     position: sticky;
     top: 100px; /* Distância inicial do topo */
     width: 80%;
-    max-height: 10vh;
+    width: fit-content;
+    height: fit-content;
     background: white;
     padding: 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -534,6 +539,7 @@
 }
 
 .buttonsAndCards{
+    width: 60vw;
     display: flex;
     flex-direction: column;
 }
@@ -579,12 +585,13 @@
         height: 65vh; 
         min-height: 250px; 
         flex-direction: column;
-        /* gap: 0; */
+        gap: 200px;
     }
 
     .mainHomeInfoSubContainer{
         margin-top: -70px;
-        margin-bottom: 40px
+        margin-bottom: 40px;
+        gap: 200px;
     }
 
     .textBehind{
@@ -600,6 +607,10 @@
         /* gap: 0; */
         margin-top: -70px;
         margin-bottom: 40px
+    }
+    .mainHomeInfoContainer {
+        width: 100%;
+        min-width: 100vw;
     }
   
     .titleModal{

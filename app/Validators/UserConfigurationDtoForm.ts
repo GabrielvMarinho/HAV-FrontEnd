@@ -20,5 +20,5 @@ const UserConfigurationDtoForm = z.object({
   city: z.string().nullable(),
   neighborhood: z.string().nullable(),
 });
+export type UserConfigurationDtoForm = z.infer<typeof UserConfigurationDtoForm>;
 
-export default UserConfigurationDtoForm; 

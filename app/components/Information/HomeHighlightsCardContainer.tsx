@@ -9,6 +9,7 @@ import { NavBarPath } from "../globalFormsConfig/navBarPaths";
 import NavBarAdm from "@/app/components/Header/NavBarAdm";
 import { useEffect, useState } from "react";
 
+
 const fetchFunctions = {
   LOCAÇÃO: GetHighlightedHomeLease,
   VENDA: GetHiglightedHomeSell,
@@ -22,6 +23,8 @@ export default function HomeHighlightsCardContainer() {
     async function fetchProperties() {
       const response = await fetchFunctions[purpose]();
       setProperties(response);  
+      console.log("itensCerto", response)
+
     }
 
     fetchProperties();
@@ -35,11 +38,11 @@ export default function HomeHighlightsCardContainer() {
 
   return (
     <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-      <NavBarAdm
+      {/* <NavBarAdm
         options={NavBarPath.purpose}
         onSelect={handleSelectPurpose}
         selected={purpose}
-      />
+      /> */}
       <div className="cardsContainer">
         {properties.length > 0 ? (
           properties.map((card) => (

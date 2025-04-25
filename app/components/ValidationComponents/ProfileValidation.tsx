@@ -11,16 +11,22 @@ import User from "../IconsTSX/User";
 import Calendar from "../IconsTSX/Calendar";
 
 export default async function ProfileValidation(props: { usuario: any}) {
-
+        console.log("user", props.usuario)
         return (
             <>
             <AuthGuard requiredRole="ROLE_CUSTOMER">
             {props.usuario.role == "ROLE_ADMIN" && (
             <div className="menuContainer">
+                <div style={{marginRight:"20px"}}>
+                    <p style={{fontSize:"var(--text-m)", color:"var(--text-black)", fontWeight:"600"}}>{props.usuario.email}</p>
+                    <p style={{marginTop:"3px", fontSize:"var(--text-sm)", textAlign:"right"}}>ADMINISTRADOR</p>
+                </div>
             <div className="hamburgerMenu">
             <ul>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                    
+
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/notification">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -34,7 +40,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                 </a>
                 </li>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/chat">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -48,7 +54,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                 </a>
                 </li>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/manage/admins">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -62,7 +68,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                 </a>
                 </li>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/configuration">
                     <div className="menuContent">
                             <div className="IconProfile">
@@ -75,21 +81,24 @@ export default async function ProfileValidation(props: { usuario: any}) {
                         </div>
                 </a>
                 </li>
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
             </ul>
             </div>
-            <div className="logoutButton">
-                <Button type="button" size="large" text="SAIR" hover="darken" color="white" background="#B23F52" />
-            </div>
+           
             </div>
             )}
             
             {props.usuario.role == "ROLE_EDITOR" && (
             <div className="menuContainer">
+                <div style={{marginRight:"20px"}}>
+                    <p style={{fontSize:"var(--text-m)", color:"var(--text-black)", fontWeight:"600"}}>{props.usuario.email}</p>
+                    <p style={{marginTop:"3px", fontSize:"var(--text-sm)", textAlign:"right"}}>EDITOR</p>
+                </div>
             <div className="hamburgerMenu">
+                
             <ul>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/notification">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -103,7 +112,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                 </a>
                 </li>
                 <li className="menuItem">
-                    <HorizontalLine size={500} color="#0F0F0F80" />
+                    <HorizontalLine size={500} color="var(--text-black)" />
                     <a href="/chat">
                         <div className="menuContent">
                             <div className="IconProfile">
@@ -117,7 +126,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                     </a>
                 </li>
                 <li className="menuItem">
-                    <HorizontalLine size={500} color="#0F0F0F80" />
+                    <HorizontalLine size={500} color="var(--text-black)" />
                     <a href="/favorite">
                         <div className="menuContent">
                             <div className="IconProfile">
@@ -131,7 +140,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                     </a>
                 </li>
                 <li className="menuItem">
-                    <HorizontalLine size={500} color="#0F0F0F80" />
+                    <HorizontalLine size={500} color="var(--text-black)" />
                     <a href="/manage/proprietors">
                         <div className="menuContent">
                             <div className="IconProfile">
@@ -145,7 +154,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                     </a>
                 </li>
                 <li className="menuItem">
-                    <HorizontalLine size={500} color="#0F0F0F80" />
+                    <HorizontalLine size={500} color="var(--text-black)" />
                     <a href="/configuration">
                         <div className="menuContent">
                                 <div className="IconProfile">
@@ -158,21 +167,23 @@ export default async function ProfileValidation(props: { usuario: any}) {
                         </div>
                     </a>
                 </li>
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
             </ul>
             </div>
-            <div className="logoutButton">
-                <Button type="button" size="large" text="SAIR" hover="darken" color="white" background="#B23F52" />
-            </div>
+            
             </div>
             )}
 
             {props.usuario.role == "ROLE_REALTOR" && (
             <div className="menuContainer">
+                <div style={{marginRight:"20px"}}>
+                    <p style={{fontSize:"var(--text-m)", color:"var(--text-black)", fontWeight:"600"}}>{props.usuario.email}</p>
+                    <p style={{marginTop:"3px", fontSize:"var(--text-sm)", textAlign:"right"}}>ADMINISTRADOR</p>
+                </div>
             <div className="hamburgerMenu">
             <ul>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/notification">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -186,7 +197,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                 </a>
                 </li>
                 <li className="menuItem">
-                    <HorizontalLine size={500} color="#0F0F0F80" />
+                    <HorizontalLine size={500} color="var(--text-black)" />
                     <a href="/chat">
                         <div className="menuContent">
                             <div className="IconProfile">
@@ -200,7 +211,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                     </a>
                 </li>
                 <li className="menuItem">
-                    <HorizontalLine size={500} color="#0F0F0F80" />
+                    <HorizontalLine size={500} color="var(--text-black)" />
                     <a href="/favorite">
                         <div className="menuContent">
                             <div className="IconProfile">
@@ -214,7 +225,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                     </a>
                 </li>
                 <li className="menuItem">
-                    <HorizontalLine size={500} color="#0F0F0F80" />
+                    <HorizontalLine size={500} color="var(--text-black)" />
                     <a href="/calendar">
                         <div className="menuContent">
                             <div className="IconProfile">
@@ -228,7 +239,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                     </a>
                 </li>
                 <li className="menuItem">
-                    <HorizontalLine size={500} color="#0F0F0F80" />
+                    <HorizontalLine size={500} color="var(--text-black)" />
                     <a href="/configuration">
                         <div className="menuContent">
                                 <div className="IconProfile">
@@ -241,12 +252,10 @@ export default async function ProfileValidation(props: { usuario: any}) {
                         </div>
                     </a>
                 </li>
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
             </ul>
             </div>
-            <div className="logoutButton">
-                <Button type="button" size="large" text="SAIR" hover="darken" color="white" background="#B23F52" />
-            </div>
+          
             </div>
             )}
 
@@ -256,7 +265,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
             <div className="hamburgerMenu">
             <ul>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/notification">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -270,7 +279,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                 </a>
                 </li>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/chat">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -284,7 +293,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                 </a>
                 </li>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/favorite">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -298,7 +307,7 @@ export default async function ProfileValidation(props: { usuario: any}) {
                 </a>
                 </li>
                 <li className="menuItem">
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
                 <a href="/configuration">
                     <div className="menuContent">
                         <div className="IconProfile">
@@ -311,12 +320,10 @@ export default async function ProfileValidation(props: { usuario: any}) {
                     </div>
                 </a>
                 </li>
-                <HorizontalLine size={500} color="#0F0F0F80" />
+                <HorizontalLine size={500} color="var(--text-black)" />
             </ul>
             </div>
-            <div className="logoutButton">
-            <Button type="button" size="large" text="SAIR" hover="darken" color="white" background="#B23F52" />
-            </div>
+            
             </div>
             )}
 

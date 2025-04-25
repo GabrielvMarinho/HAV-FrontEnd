@@ -1,4 +1,6 @@
 interface ProprietorGetResponseDTO {
+    image: string;
+
     name: string;
     email: string;
     celphone: string;
@@ -12,6 +14,8 @@ interface PropertySpecific {
         city: string;
         state: string;
         street: string;
+        propertyNumber: string;
+
     };
     propertyFeature: {
         bedRoom: number;

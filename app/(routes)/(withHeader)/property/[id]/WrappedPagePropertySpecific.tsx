@@ -25,8 +25,12 @@ import ButtonUploadPhotos from "@/app/components/Inputs/buttonUploadPhotos";
 import ShowPhotos from "@/app/components/Information/ShowPhotos";
 import ProprietorDetails from "@/app/components/Information/ProprietorAssociated";
 import ProprietorAssociated from "@/app/components/Information/ProprietorAssociated";
+import MapSearchResult from "@/app/components/Maps/MapSearchResult";
+import { createChat } from "@/app/redux/Chat/action";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
-export default function WrappedPagePropertySpecific(props: { obj?: PropertySpecific; user :any}) {
+export default function WrappedPagePropertySpecific(props: { obj?: PropertySpecific; user: any }) {
 
     const { id } = useParams(); // Pegando o ID da URL
     const propertyId = props.obj?.id ?? id; // Prioriza props.obj.id, mas usa o ID da URL se necessário
@@ -39,7 +43,9 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
             neighborhood: apiData.address?.neighborhood ?? "Não informado",
             city: apiData.address?.city ?? "Não informado",
             state: apiData.address?.state ?? "Não informado",
-            street: apiData.address?.street ?? "Não informado"
+            street: apiData.address?.street ?? "Não informado",
+            propertyNumber: apiData.address?.propertyNumber ?? "Não informado"
+
         },
         propertyFeature: {
             ...apiData.propertyFeature, // Mantém todos os dados que já existem no propertyFeature
@@ -62,7 +68,7 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
 
             try {
                 const response = await searchPropertyByIdSpecific(propertyId);
-
+                console.log("repos", response)
                 const formattedProperty = formatProperty(response);
 
                 setProperty(formattedProperty);
@@ -86,30 +92,94 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
     }, [])
 
     if (!property) {
-        return <p>Carregando...</p>
+        return <p style={{ marginBottom: "100vh" }}>Carregando...</p>
     }
-    console.log(property)
+    console.log(props.user)
+
+    const dispatch = useDispatch();
+    const router = useRouter();
+
+    const handleAccessChat = async () => {
+        console.log("Botão clicado");
+
+        const token = localStorage.getItem("token");
+        const realtorId = property.realtorPropertySpecific[0]?.id;
+
+        if (!realtorId) {
+            console.warn("Realtor ID não encontrado.");
+            return;
+        }
+
+        try {
+            const res = await fetch(`http://localhost:9090/api/chats/existing?userId2=${realtorId}`, {
+                method: "GET",
+                credentials: "include", // JWT via cookie
+            });
+
+            let chat;
+
+            if (res.ok) {
+                try {
+                    chat = await res.json();
+                    console.log("Chat existente:", chat);
+
+                    if (!chat) {
+                        console.log("Chat não encontrado na resposta, criando novo chat...");
+                        const chatData = {
+                            token,
+                            data: { userId: realtorId },
+                        };
+
+                        const created = await dispatch(createChat(chatData));
+                        chat = created?.payload || null;
+                    }
+
+                } catch (jsonError) {
+                    console.error("Erro ao converter resposta existente em JSON:", jsonError);
+                }
+            } else {
+                console.log("Erro ao buscar chat, tentando criar novo...");
+                const chatData = {
+                    token,
+                    data: { userId: realtorId },
+                };
+
+                const created = await dispatch(createChat(chatData));
+                chat = created?.payload || null;
+            }
+
+            if (chat) {
+                localStorage.setItem("selectedChatId", chat.id);
+                router.push("/chat");
+            }
+
+        } catch (error) {
+            console.error("Erro ao acessar ou criar chat:", error);
+        }
+    };
+    console.log("property ", property)
+
     return (
         <>
-        
-            <div style={{marginInline:"auto", maxWidth: "var(--width-page)" }}>
+
+            <div style={{ marginInline: "auto", maxWidth: "var(--width-page)" }}>
                 <article className="articleFirstContent">
-                    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                        {property.imagesProperty.length>1 ? 
-                        <ShowPhotos
-                        name={"images"}
-                        initialImages={
-                            property.imagesProperty
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                        {property.imagesProperty.length > 1 ?
+                            <ShowPhotos
+                                name={"images"}
+                                initialImages={
+                                    property.imagesProperty
+                                }
+                            />
+                            :
+                            <img
+                                style={{ width: "33vw", height: "28vw", marginBottom: "3.5vw" }}
+                                src="/Image/fotoSemPropriedade.png"
+                            ></img>
                         }
-                    />
-                    :
-                    <img
-                    style={{width: "33vw", height: "28vw"}}
-                        src="/Image/fotoSemPropriedade.png"
-                    ></img>
-                    }
-                        
-                        <div style={{ display: "flex", flexDirection: "row", gap: "110px" }}>
+
+                        <div style={{ display: "flex", flexDirection: "row", gap: "110px", marginTop: "-2.5vw" }}>
                             {/* <div className="buttonIconDiv">
                                 <Button
                                     type="button"
@@ -120,20 +190,20 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                                     background="" />
                                 <Cubes width={30} height={30} color="var(--button-color)" />
                             </div> */}
-                            {props.user ?
+                            {props.user.role == "ROLE_EDITOR" || props.user.role == "ROLE_ADMIN" ?
 
-                            <div className="buttonIconDiv">
-                                <Button
-                                onClick={() =>{window.location.href="/manage/properties/edit/4"}}
-                                    type="button"
-                                    size="large"
-                                    text="gerenciar"
-                                    hover="darkHover"
-                                    color=""
-                                    background="" />
-                                                                    <Gear height={30} width={30} color="var(--button-color)" />
-                            </div>
-                            :""
+                                <div className="buttonIconDiv">
+                                    <Button
+                                        onClick={() => { window.location.href = "/manage/properties/edit/4" }}
+                                        type="button"
+                                        size="large"
+                                        text="gerenciar"
+                                        hover="darkHover"
+                                        color=""
+                                        background="" />
+                                    <Gear height={30} width={30} color="var(--button-color)" />
+                                </div>
+                                : ""
 
                             }
 
@@ -150,8 +220,11 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                             <Balanca height={30} width={30} color="var(--button-color)" />
                         </div> */}
                     </div>
-                    <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+                    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", gap: "15px" }}>
                         <PropertyPageDatasAdm
+                            usuario={
+                                1
+                            }
                             obj={{
                                 propertyId: propertyId,
                                 propertyType: property.propertyType,
@@ -166,27 +239,45 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                             purpose: property.purpose,
                             ActualPrice: property.price,
                             taxes: property.taxes,
-                            PromotionalPrice: props.obj?.promotionalPrice
+                            PromotionalPrice: property.promotionalPrice
                         }} />
-                        {props.user.role == "ROLE_EDITOR" || props.user.role =="ROLE_ADMIN" ?
-                        <ProprietorAssociated proprietor={property.proprietor} WhatsappLink="ada" />
-                                                :
-                        <NewScheduleModal propertyId={String(propertyId)} />
+                        {props.user.role == "ROLE_EDITOR" || props.user.role == "ROLE_ADMIN" || props.user.role == "ROLE_REALTOR" ?
 
-                        } 
+                            <ProprietorAssociated proprietor={property.proprietor} WhatsappLink="ada" />
+                            :
+                            <div style={{ margin: "10px" }}>
+                                <Button size={"medium"} text="ACESSAR CHAT" hover="lightHover" color="var(--text-white)"
+                                    background="var(--box-red-pink)" onClick={handleAccessChat}
+                                />
+                            </div>
+
+                        }
+                        {props.user.role == "ROLE_EDITOR" || props.user.role == "ROLE_ADMIN" || props.user.role == "ROLE_REALTOR" || props.user.role == "ROLE_CUSTOMER" ?
+                            ""
+                            :
+                            <a href={"/login"} className="linkLogin">Faça login para realizar agendamentos e mais ações!</a>
+                        }
                     </div>
 
                 </article>
-                
+
 
                 <article className="enviroments-interestPoint">
                     <OtherEnvironmentsProperty obj={{ additionals: property.additionals }} />
-                    <InterestPointsPropertySpecific text="pontos de interesse" />
+                    <NewScheduleModal propertyId={String(propertyId)} />
                 </article>
                 <DescriptionProperty obj={{ propertyDescription: property.propertyDescription }} />
                 <section className="sectionPriceProperty">
                     <HorizontalPropertySpecific />
-                    <div className="containerGraphic"></div>
+                    
+                    <MapSearchResult addressSpecific={{
+                        street: property.address.street,
+                        city: property.address.city,
+                        state: property.address.state,
+                        propertyNumber: property.address.propertyNumber
+                    }
+                    } width="32vw" height="25vw"
+                    />
                 </section>
                 <div style={{ display: "flex", justifyContent: "center", width: "100%", marginTop: "115px" }}>
                     <Title text="imóveis semelhantes" tag="h1" />
@@ -195,11 +286,10 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                     similarProperties
                 } />
             </div>
-            
+
             <div style={{ margin: "200px 0 100px 0" }}>
                 <RealterAssociatedVertical objPropertyList={{ realtorPropertySpecific: property?.realtorPropertySpecific ?? [] }}
-                    WhatsappLink="aaadw"
-                    InstagramLink="https://www.instagram.com/accounts/login/?next=%2Fnathanj.oao%2F&source=omni_redirect" />
+                />
             </div>
         </>
     );

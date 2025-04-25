@@ -16,6 +16,8 @@ import CategoryCardImovel from "../Information/CategoryCardImovel";
 import globalDatabaseNameConverter from "@/app/globalDatabaseNameConverter";
 import Rule from "../IconsTSX/Rule";
 import decodeDoubleBase64 from "@/app/utils/decodeDoubleBase64";
+import Modal from "../Modal/Modal";
+import MapSearchResult from "../Maps/MapSearchResult";
 
 interface CardImovelProps {
     obj: PropertySpecificCard | null;
@@ -26,12 +28,12 @@ export default function CardImovel({ obj, idUser }: CardImovelProps) {
 
 
 
-
+    const [modalMap, setModalMap] = useState(false)
 
     const router = useRouter();
     function goToSpecificProperty(id: number | undefined) {
         console.log(id)
-        router.push (`/Property/${id}`)
+        router.push (`/property/${id}`)
     }
 
     return (
@@ -118,7 +120,22 @@ export default function CardImovel({ obj, idUser }: CardImovelProps) {
                         hover="lightHover" type="button" onClick={() => goToSpecificProperty(obj?.id)} />
                     <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                         <StarFavorite idUser={idUser} idProperty={obj?.id} width={27} height={27} color="#FFFF" selected={false} />
-                        <MarcadorDeMapa width={22} height={22} color="" />
+                        <div onClick={() =>{setModalMap(true)}}>
+                            <MarcadorDeMapa width={22} height={22} color="" />
+                        </div>
+                        
+                        <Modal id="modalMap" onClose={() =>{setModalMap(false)}} isOpen={modalMap} content={
+                            <div>
+                            <MapSearchResult addressSpecific={{
+                                city:obj?.city,
+                                street: obj?.street,
+                                propertyNumber: obj?.propertyNumber,
+                                state: obj?.state
+                            }} width="30vw" height="25vw"></MapSearchResult>
+                            </div>
+                        }
+                        ></Modal>
+                        
                     </div>
                 </article>
             </section>

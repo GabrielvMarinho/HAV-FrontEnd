@@ -96,7 +96,7 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
 
     //GRAPHS RELATED
     const graphFunction = function(){
-        router.push(`${window.location.pathname}/graphs`);
+        router.push(`${window.location.pathname}/reports`);
     }
 
     //RESETING THE LOCAL STORAGE
@@ -200,7 +200,7 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
                 <ActionButton onClick={archiveRoute}  className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={Folder}  />
                 <ActionButton onClick={addFunction} className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={MoreSignal} />
                 <ActionButton onClick={selected.length==1?editFunction:""} className={`${selected.length==1?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Pencil}  />
-                <ActionButton onClick={selected.length>0?openDeleteModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Trashcan} />
+                {/* <ActionButton onClick={selected.length>0?openDeleteModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Trashcan} /> */}
                 <ActionButton onClick={selected.length>0?openArchiveModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={ArchiveIn}  />
                 <Modal content={
                     <div className="containerModal">
@@ -212,7 +212,7 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
                 <Modal content={
                     <div className="containerModal">
                         <h1 className="titleModal">DESEJA ARQUIVAR? </h1>
-                        <p className="descModal"> Ao confirmar, os dados arquivados serão desarquivados.</p>
+                        <p className="descModal"> Ao confirmar, os dados desarquivados serão arquivados.</p>
                     </div>
                 } id="archiveModal" isOpen={isArchiveModalOpen} onClose={() => setIsArchiveModalOpen(false)} onConfirm={changeArchivedStatus} />
 
@@ -221,7 +221,7 @@ export default function TableList(props: {totalPages :number; changeArchivedStat
             <>
                 <ActionButton onClick={notArchiveRoute}  className={`${selected.length==0?"darkHover actionButtonHover":"nonClickableButton"} changeRouteButton `} Icon={ArrowBack}  />
                 <ActionButton onClick={selected.length==1?editFunction:""} className={`${selected.length==1?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Pencil}  />
-                <ActionButton onClick={selected.length>0?openDeleteModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Trashcan} />
+                {/* <ActionButton onClick={selected.length>0?openDeleteModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={Trashcan} /> */}
                 <ActionButton onClick={selected.length>0?openArchiveModal:""} className={`${selected.length>0?"darkHover actionButtonHover":"nonClickableButton"} actionSelectedButton `} Icon={ArchiveOut}  />
                 
                 <Modal content={

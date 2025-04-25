@@ -517,7 +517,6 @@ export default function calendar(props: {usuario: any}){
             </div>
             
                 
-            <Footer/>
         </>
     )
 }

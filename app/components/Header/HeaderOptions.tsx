@@ -4,11 +4,14 @@ import './css/style.css';
 import { ReactNode, useEffect } from "react";
 import '../.././variables.css';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 
 export default function HeaderOptions(props :{close :() => void; isOpen: boolean; options :string[], optionsLinks :string[], optionsIcons :ReactNode[], title :string}){
     
     return (
+        
+
         <div className="headerOptionContainer ">
             <div className="headerOptionContainerTitle"style={{display: "flex", gap: "5px"}}>
 

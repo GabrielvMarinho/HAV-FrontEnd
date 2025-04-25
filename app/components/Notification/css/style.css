@@ -1,7 +1,7 @@
 .boxNotification{
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
     list-style-type: none;
 }
 .identificator{
@@ -23,8 +23,7 @@
     flex-direction: row;
     align-items: center;
     width: 890px;
-    padding-bottom: 20px;
-    padding-left: 20px;
+    padding: 20px;
 }
 .groupInfos{
     display: flex;
@@ -50,6 +49,7 @@
 .iconMensagem{
     display: flex;
     justify-content: end;
+    align-items: center;
 }
 
 .conatinerTitulos{

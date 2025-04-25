@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import './css/style.css';
 import { FieldError, UseFormRegister } from "react-hook-form";
+import PasswordValidator from '@/app/Validators/PasswordValidator';
 
 export default function InputTextLogin<T>({
     password,
@@ -14,6 +15,7 @@ export default function InputTextLogin<T>({
     register,
     error,
     icon,  // Prop para passar o ícone
+
 }: {
 
     password?: boolean;
@@ -26,6 +28,7 @@ export default function InputTextLogin<T>({
     register?: UseFormRegister<T>;
     error?: FieldError;
     icon?: React.ReactNode;  // Definindo o tipo para ícone
+
 }) {
     const [showPassword, setShowPassword] = useState(false);
 
@@ -47,6 +50,7 @@ export default function InputTextLogin<T>({
                     defaultValue={defaultValue}
                 />
                 {icon && <div onClick={password?()=>{toggleSee()}:()=>{}}className={`inputIcon ${password?"pointer":""}`}>{icon}</div>} 
+                
             </div>
             {error && <p className="errorText">{error.message}</p>}
         </div>
