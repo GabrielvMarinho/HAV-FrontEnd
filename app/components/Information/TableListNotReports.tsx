@@ -19,7 +19,7 @@ import getByParamsRealtors from '@/app/apiCalls/Realtor/getByParamsRealtors';
 import { Customer } from '@/app/models/Customer/Customer';
 
 
-export default function TableList(props: { totalPages: number; changeArchivedStatus: (ids: string[]) => Promise<void>; deleteFunction: (ids: string[]) => Promise<void>; archived: boolean; context: string; size: string, titles: string[], data: any[] }) {
+export default function TableListNotReports(props: { totalPages: number; changeArchivedStatus: (ids: string[]) => Promise<void>; deleteFunction: (ids: string[]) => Promise<void>; archived: boolean; context: string; size: string, titles: string[], data: any[] }) {
 
 
     // useEffect(() => {
@@ -96,9 +96,9 @@ export default function TableList(props: { totalPages: number; changeArchivedSta
     }
 
     //GRAPHS RELATED
-    const graphFunction = function () {
-        router.push(`/reports/userReports`);
-    }
+    // const graphFunction = function () {
+    //     router.push(`/reports/userReports`);
+    // }
 
     //RESETING THE LOCAL STORAGE
     const pathname = usePathname();
@@ -161,40 +161,53 @@ export default function TableList(props: { totalPages: number; changeArchivedSta
                     </thead>
 
                     <tbody>
-                {props.data && props.data.map((obj, index) =>
+                        {props.data && props.data.map((obj, index) =>
 
-                    <React.Fragment key={Object.values(obj)[0] || index}>
-                        <div className='tableListLine'></div>
+                            <React.Fragment key={Object.values(obj)[0] || index}>
+                                <div className='tableListLine'></div>
 
-                        <tr className={selected.includes(Object.values(obj)[0])?"selectedRow tableRows":"tableRows"}>
-                            <td style={{all: "unset", margin:"3px"}}>
-                                <div className='marginSelectBox'>
-                                
-
-                                <input
-                                className='checkbox'
-                                    type="checkbox"
-                                    checked={selected.includes(Object.values(obj)[0])}
-                                    onChange={() => handleSelect(Object.values(obj)[0])}
-                                />
+                                <tr className={selected.includes(Object.values(obj)[0]) ? "selectedRow tableRows" : "tableRows"}>
+                                    <td style={{ all: "unset", margin: "3px" }}>
+                                        <div className='marginSelectBox'>
 
 
-                                </div>
-                            </td>
-                            {Object.entries(obj).slice(1).map(([key, value]) => (
-                                    <td key = {key}>
-                                        <div>
-                                            {key === "price" ? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value==null?"----":value}
+                                            <input
+                                                className='checkbox'
+                                                type="checkbox"
+                                                checked={selected.includes(Object.values(obj)[0])}
+                                                onChange={() => handleSelect(Object.values(obj)[0])}
+                                            />
+
+
                                         </div>
                                     </td>
+                                    {/* {Object.entries(obj).slice(1).map(([key, value]) => (
+                                        <td key={key}>
+                                            <div>
+                                                {key === "price" ? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value == null ? "----" : value}
+                                            </div>
+                                        </td>
 
-                                ))}
-                        </tr>
-                        </React.Fragment>
+                                    ))} */}
+                                    {props.titles.map((title) => {
+                                        const key = titleToKeyMap[title]; // pega o campo real do objeto
+                                        const value = obj[key];
 
-                    )}
-            
-            </tbody>
+                                        return (
+                                            <td key={title}>
+                                                <div>
+                                                    {value == null ? "----" : value}
+                                                </div>
+                                            </td>
+                                        );
+                                    })}
+
+                                </tr>
+                            </React.Fragment>
+
+                        )}
+
+                    </tbody>
 
                 </table>
                 <PageManager totalPages={props.totalPages}></PageManager>
@@ -202,10 +215,6 @@ export default function TableList(props: { totalPages: number; changeArchivedSta
             <div className="actionButtons">
                 {props.archived === false ? (
                     <>
-                        {props.context === 'admin' ? (
-                            <ActionButton onClick={graphFunction} className={`${selected.length == 0 ? "darkHover actionButtonHover" : "nonClickableButton"} changeRouteButton `} Icon={Graphic} />
-
-                        ) : ("")}
                         <ActionButton onClick={archiveRoute} className={`${selected.length == 0 ? "darkHover actionButtonHover" : "nonClickableButton"} changeRouteButton `} Icon={Folder} />
                         <ActionButton onClick={addFunction} className={`${selected.length == 0 ? "darkHover actionButtonHover" : "nonClickableButton"} changeRouteButton `} Icon={MoreSignal} />
                         <ActionButton onClick={selected.length == 1 ? editFunction : ""} className={`${selected.length == 1 ? "darkHover actionButtonHover" : "nonClickableButton"} actionSelectedButton `} Icon={Pencil} />

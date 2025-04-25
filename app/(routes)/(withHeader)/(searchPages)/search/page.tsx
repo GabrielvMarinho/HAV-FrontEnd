@@ -1,6 +1,7 @@
 import getByParamsProperties from "@/app/apiCalls/Property/getByParamsPropertiesCard";
 import getPropertiesMap from "@/app/apiCalls/Property/getPropertiesMap";
 import Filter from "@/app/components/Filters/Filter";
+import Footer from "@/app/components/Footer/Footer";
 import HeaderFavoritesPage from "@/app/components/Header/HeaderFavoritesPage";
 import CardContainer from "@/app/components/Information/CardContainer";
 import FavoriteCardContainer from "@/app/components/Information/FavoriteCardContainer";
@@ -119,6 +120,8 @@ export default async function({searchParams} :{searchParams: {
                     )}
                 </div>
             </div>
+            
+            <Footer/>
         </>
     );
 }

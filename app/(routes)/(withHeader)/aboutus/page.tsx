@@ -144,37 +144,37 @@ export default function page() {
             <div className="containerProfiles">
                 <div className="cardProfileUnique">
                     <div>
-                        <h2 className="cardTitle">
+                        <h2 className="titlesProfiles">
                             SÓCIO DIRETOR
                         </h2>
                     </div>
                     <div>
-                        <ProfileCard name={"KAUANI DA SILVA"}/>
+                        <ProfileCard name={"Kauani da Silva"}/>
                     </div>
                 </div>
 
                 <div className="cardProfile">
                     <div>
-                        <h2>
+                        <h2 className="titlesProfiles">
                             GERENTES
                         </h2>
                     </div>
                     <div className="cardsGroup">
-                        <ProfileCard name={"KAUANI DA SILVA"}/>
-                        <ProfileCard name={"KAUANI DA SILVA"} />
+                        <ProfileCard name={"Kauani da Silva"}/>
+                        <ProfileCard name={"Kauani da Silva"} />
                     </div>
                 </div>
 
                 <div className="cardProfile">
                     <div>
-                        <h2>
+                        <h2 className="titlesProfiles">
                             COORDENADORES
                         </h2>
                     </div>
                     <div className="cardsGroup">
-                        <ProfileCard name={"KAUANI DA SILVA"}/>
-                        <ProfileCard name={"KAUANI DA SILVA"} />
-                        <ProfileCard name={"KAUANI DA SILVA"}/>
+                        <ProfileCard name={"Kauani da Silva"}/>
+                        <ProfileCard name={"Kauani da Silva"} />
+                        <ProfileCard name={"Kauani da Silva"}/>
                     </div>
                 </div>
 
@@ -185,14 +185,15 @@ export default function page() {
                         </h2>
                     </div>
                     <div className="cardsGroup">
-                        <ProfileCard name={"KAUANI DA SILVA"} />
-                        <ProfileCard name={"KAUANI DA SILVA"}  />
-                        <ProfileCard name={"KAUANI DA SILVA"} />
-                        <ProfileCard name={"KAUANI DA SILVA"}  />
+                        <ProfileCard name={"Kauani da Silva"} />
+                        <ProfileCard name={"Kauani da Silva"}  />
+                        <ProfileCard name={"Kauani da Silva"} />
+                        <ProfileCard name={"Kauani da Silva"}  />
                     </div>
                 </div>
             </div>
 
+            <Footer/>
         </>
     )
 }

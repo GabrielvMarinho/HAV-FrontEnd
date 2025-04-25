@@ -42,6 +42,8 @@ export default async function propertyComparison({ searchParams }: {
                 <h2 className="textPropertyComparison"> Adicionar Imóvel </h2>
             </div>
         </div>
+        
+         <Footer/>
         </>
     )
   }

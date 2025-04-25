@@ -12,6 +12,7 @@ import changeArchivedStatusEditor from "@/app/apiCalls/Editor/changeArchivedStat
 import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilterConfig";
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 import AuthGuard from "@/app/context/AuthGuard";
+import TableListNotReports from "@/app/components/Information/TableListNotReports";
 
 
 
@@ -58,7 +59,7 @@ export default async function page({searchParams}: {searchParams: {
               inputChooseQuantites={[]}
 
               />
-              <TableList changeArchivedStatus = {changeArchivedStatusEditor}  deleteFunction={deleteEditorList} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
+              <TableListNotReports changeArchivedStatus = {changeArchivedStatusEditor}  deleteFunction={deleteEditorList} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
               data={editors} totalPages={totalPages}/>
           </div>
         </AuthGuard>

@@ -29,6 +29,7 @@ import MapSearchResult from "@/app/components/Maps/MapSearchResult";
 import { createChat } from "@/app/redux/Chat/action";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import Footer from "@/app/components/Footer/Footer";
 
 export default function WrappedPagePropertySpecific(props: { obj?: PropertySpecific; user: any }) {
 
@@ -291,6 +292,8 @@ export default function WrappedPagePropertySpecific(props: { obj?: PropertySpeci
                 <RealterAssociatedVertical objPropertyList={{ realtorPropertySpecific: property?.realtorPropertySpecific ?? [] }}
                 />
             </div>
+            
+            <Footer/>
         </>
     );
 }

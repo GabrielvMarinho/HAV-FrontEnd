@@ -16,6 +16,7 @@ import { InputFilterConfig } from "@/app/components/globalFormsConfig/InputFilte
 import { NavBarPath } from "@/app/components/globalFormsConfig/navBarPaths";
 import AuthGuard from "@/app/context/AuthGuard";
 import { cookies } from "next/headers";
+import TableListNotReports from "@/app/components/Information/TableListNotReports";
 
 
 export default async function page({ searchParams }: {
@@ -58,7 +59,7 @@ export default async function page({ searchParams }: {
                   inputsDropdown={[]}
                   inputPriceRanges={[]}
                   />
-                  <TableList changeArchivedStatus = {changeArchivedStatusAdm} deleteFunction={deleteByListAdm} type={"user"} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
+                  <TableListNotReports changeArchivedStatus = {changeArchivedStatusAdm} deleteFunction={deleteByListAdm} type={"user"} archived={false} context="admin" size="large" titles={["cpf", "nome",  "email", "celular", "telefone"]} 
                   data={admins} totalPages={totalPages}/>
               </div>
           </AuthGuard>
