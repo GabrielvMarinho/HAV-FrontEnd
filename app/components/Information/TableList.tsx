@@ -161,53 +161,40 @@ export default function TableList(props: { totalPages: number; changeArchivedSta
                     </thead>
 
                     <tbody>
-                        {props.data && props.data.map((obj, index) =>
+                {props.data && props.data.map((obj, index) =>
 
-                            <React.Fragment key={Object.values(obj)[0] || index}>
-                                <div className='tableListLine'></div>
+                    <React.Fragment key={Object.values(obj)[0] || index}>
+                        <div className='tableListLine'></div>
 
-                                <tr className={selected.includes(Object.values(obj)[0]) ? "selectedRow tableRows" : "tableRows"}>
-                                    <td style={{ all: "unset", margin: "3px" }}>
-                                        <div className='marginSelectBox'>
+                        <tr className={selected.includes(Object.values(obj)[0])?"selectedRow tableRows":"tableRows"}>
+                            <td style={{all: "unset", margin:"3px"}}>
+                                <div className='marginSelectBox'>
+                                
+
+                                <input
+                                className='checkbox'
+                                    type="checkbox"
+                                    checked={selected.includes(Object.values(obj)[0])}
+                                    onChange={() => handleSelect(Object.values(obj)[0])}
+                                />
 
 
-                                            <input
-                                                className='checkbox'
-                                                type="checkbox"
-                                                checked={selected.includes(Object.values(obj)[0])}
-                                                onChange={() => handleSelect(Object.values(obj)[0])}
-                                            />
-
-
+                                </div>
+                            </td>
+                            {Object.entries(obj).slice(1).map(([key, value]) => (
+                                    <td key = {key}>
+                                        <div>
+                                            {key === "price" ? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value==null?"----":value}
                                         </div>
                                     </td>
-                                    {/* {Object.entries(obj).slice(1).map(([key, value]) => (
-                                        <td key={key}>
-                                            <div>
-                                                {key === "price" ? `R$${value.toLocaleString('en-US').replace(/,/g, '.')}` : value == null ? "----" : value}
-                                            </div>
-                                        </td>
 
-                                    ))} */}
-                                    {props.titles.map((title) => {
-                                        const key = titleToKeyMap[title]; // pega o campo real do objeto
-                                        const value = obj[key];
+                                ))}
+                        </tr>
+                        </React.Fragment>
 
-                                        return (
-                                            <td key={title}>
-                                                <div>
-                                                    {value == null ? "----" : value}
-                                                </div>
-                                            </td>
-                                        );
-                                    })}
-
-                                </tr>
-                            </React.Fragment>
-
-                        )}
-
-                    </tbody>
+                    )}
+            
+            </tbody>
 
                 </table>
                 <PageManager totalPages={props.totalPages}></PageManager>
