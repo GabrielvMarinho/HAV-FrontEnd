@@ -4,15 +4,16 @@ import decodeDoubleBase64 from "@/app/utils/decodeDoubleBase64";
 export default function RealterAssociatedVertical(props: {
     objPropertyList: Pick<PropertySpecific, "realtorPropertySpecific">;
 }) {
+    console.log("realtor", props.objPropertyList)
     return (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "20px" }}>
             <p id="realtor">CORRETOR (A) RESPONSÁVEL</p>
             {props.objPropertyList?.realtorPropertySpecific?.length ? (
                 props.objPropertyList.realtorPropertySpecific.map((realtor, index) => (
                     <article key={index} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "21px" }}>
-                        {realtor.img ?
+                        {realtor.image ?
                                 <img 
-                                src={`data:image/png;base64,${realtor.img}`} 
+                                src={`data:image/png;base64,${realtor.image}`} 
                                 style={{ width: "200px", height:"200px", objectFit:"cover"}}
                                 >
                                 </img>
